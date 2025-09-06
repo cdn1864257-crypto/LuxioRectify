@@ -16,8 +16,10 @@ export function ProductGrid({ title, subtitle, products, id, className = '' }: P
   const { t } = useLanguage();
 
   const handleAddToCart = (product: Product) => {
+    console.log('Adding to cart:', product);
     addToCart(product);
     showToast(`${product.name} ${t('itemAddedToCart')}`, 'success');
+    console.log('Cart after adding:', product);
   };
 
   return (
@@ -77,9 +79,10 @@ export function ProductGrid({ title, subtitle, products, id, className = '' }: P
                 )}
                 <button 
                   onClick={() => handleAddToCart(product)}
-                  className="w-full bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors"
+                  className="w-full bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors transform hover:scale-105 active:scale-95"
                   data-testid={`button-add-to-cart-${product.id}`}
                 >
+                  <i className="fas fa-shopping-cart mr-2"></i>
                   {t('addToCart')}
                 </button>
               </div>

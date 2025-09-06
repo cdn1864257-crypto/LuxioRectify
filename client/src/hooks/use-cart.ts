@@ -10,6 +10,9 @@ export function useCart() {
   }, []);
 
   const addToCart = (product: Product) => {
+    console.log('useCart addToCart called with:', product);
+    console.log('Current cart state:', cart);
+    
     const existingItem = cart.find(item => item.id === product.id);
     
     let newCart: CartItem[];
@@ -29,6 +32,7 @@ export function useCart() {
       }];
     }
     
+    console.log('New cart after adding:', newCart);
     setCart(newCart);
     saveCart(newCart);
   };
