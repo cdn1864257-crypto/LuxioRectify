@@ -1,0 +1,98 @@
+Agent – Créer site e-commerce statique “Luxio” (rectification MaxelPay)
+
+Créer un site e-commerce 100 % statique HTML/CSS/JS, sans serveur côté Replit. Tout traitement serveur est externalisé : Firebase Auth pour login, MaxelPay via redirection.
+
+
+---
+
+Produits
+
+Smartphones : iPhone 15/16, Samsung Galaxy S25, OnePlus 13, Google Pixel 10 Pro, Xiaomi 15 Ultra, Huawei Pura 80 Ultra. Modèles/couleurs, prix barré + promo 15‑22%, caractéristiques mises en avant.
+
+Montres connectées : Apple Watch, Galaxy Watch, Whoop, Oura Ring, réduction 28‑37%.
+
+Sneakers / mode : Crocs, Air Jordan, Yeezy, New Balance, réduction 17%, livraison gratuite.
+
+Gadgets maison : robots aspirateurs, purificateurs, domotique, réduction 13%, livraison gratuite.
+
+Mobilité urbaine : trottinettes et vélos électriques, réduction 13%, livraison gratuite.
+
+
+
+---
+
+Fonctionnalités
+
+Login / Signup via Firebase Auth
+
+Panier et récapitulatif côté client (localStorage)
+
+Avis clients statiques (JSON)
+
+Multilangue : FR, PL, ES, PT, IT, HU, EN (selon IP)
+
+Responsive mobile/desktop
+
+Paiements : MaxelPay via redirection actif, PayU / Transak / Guardarian “Coming Soon”
+
+Prévoir emplacement clés publiques
+
+
+
+---
+
+Panier & Checkout
+
+Ajouter au panier même si non connecté, badge dynamique, notifications toast, ne pas ouvrir automatiquement
+
+Paiement → si non connecté rediriger vers checkout statique, sinon vers checkout
+
+Checkout : formulaire (nom, prénom, adresse, ville, pays, téléphone), référence commande (localStorage), récapitulatif panier, livraison, paiement MaxelPay
+
+Redirection MaxelPay : générer URL avec merchant ID, montant, devise, référence, description. Notifications toast après retour de MaxelPay et mise à jour historique (localStorage)
+
+Options PayU et Transak visibles mais “Coming Soon”
+
+Section “Paiement sécurisé – Vos avantages”
+
+Statistiques : clients satisfaits, commandes complétées
+
+Section partenaires / logos
+
+
+
+---
+
+Espace client
+
+Profil utilisateur + bouton “Déconnexion”
+
+Historique commandes (localStorage) avec statut payé
+
+Mini-menu : recherche produit, panier, commandes, changer mot de passe
+
+Notifications pour panier et alertes
+
+UI dynamique via onAuthStateChanged, masquer login
+
+
+
+---
+
+CSS / Responsive
+
+Corriger débordements et mise en page
+
+Flexbox, grid et media queries
+
+
+
+---
+
+Images & UX
+
+Images libres de droit pour produits (Pixabay, Unsplash, Pexels)
+
+Notifications claires, interface intuitive et responsive
+
+Historique commandes réel via localStorage
