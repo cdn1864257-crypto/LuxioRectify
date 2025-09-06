@@ -8,9 +8,10 @@ import { Language } from '../lib/translations';
 
 interface HeaderProps {
   onToggleCart: () => void;
+  onToggleProfile: () => void;
 }
 
-export function Header({ onToggleCart }: HeaderProps) {
+export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
   const { user, logout } = useAuth();
   const { itemCount } = useCart();
   const { language, changeLanguage, t } = useLanguage();
@@ -134,18 +135,16 @@ export function Header({ onToggleCart }: HeaderProps) {
                   </div>
                 ) : (
                   <div className="flex items-center space-x-4" data-testid="user-profile">
-                    <div className="flex items-center space-x-2">
+                    <button
+                      onClick={onToggleProfile}
+                      className="flex items-center space-x-2 hover:bg-muted rounded-lg px-3 py-2 transition-colors"
+                      data-testid="button-profile"
+                    >
                       <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium">
                         <span data-testid="user-initials">{user.initials}</span>
                       </div>
                       <span className="hidden md:inline text-sm" data-testid="user-name">{user.displayName || user.email}</span>
-                    </div>
-                    <button 
-                      onClick={handleLogout}
-                      className="text-sm text-muted-foreground hover:text-destructive transition-colors"
-                      data-testid="button-logout"
-                    >
-                      <i className="fas fa-sign-out-alt"></i>
+                      <i className="fas fa-chevron-down text-xs"></i>
                     </button>
                   </div>
                 )}

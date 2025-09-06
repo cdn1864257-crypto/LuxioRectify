@@ -9,6 +9,7 @@ import { Footer } from '../components/Footer';
 import { CartSidebar } from '../components/CartSidebar';
 import { CheckoutModal } from '../components/CheckoutModal';
 import { ToastNotifications } from '../components/ToastNotifications';
+import { UserProfile } from '../components/UserProfile';
 import { useAuth } from '../hooks/use-auth';
 import { useLanguage } from '../hooks/use-language';
 import { getProductsByCategory } from '../lib/products';
@@ -19,10 +20,14 @@ export default function Home() {
   const { t } = useLanguage();
   const [cartOpen, setCartOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const handleProceedToCheckout = () => {
     if (!user) {
+      // Redirect to static checkout for non-logged users
       showToast(t('loginRequired'), 'info');
+      setCartOpen(false);
+      setCheckoutOpen(true); // Allow checkout without login as per specs
       return;
     }
     setCartOpen(false);
@@ -31,7 +36,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header onToggleCart={() => setCartOpen(!cartOpen)} />
+      <Header 
+        onToggleCart={() => setCartOpen(!cartOpen)} 
+        onToggleProfile={() => setProfileOpen(!profileOpen)}
+      />
       <main>
         <Hero />
         <StatsSection />
@@ -87,6 +95,11 @@ export default function Home() {
       <CheckoutModal
         isOpen={checkoutOpen}
         onClose={() => setCheckoutOpen(false)}
+      />
+      
+      <UserProfile
+        isOpen={profileOpen}
+        onClose={() => setProfileOpen(false)}
       />
       
       <ToastNotifications />
