@@ -70,6 +70,29 @@ export interface Translations {
   loginRequired: string;
   paymentSuccessful: string;
   loggedOut: string;
+  
+  // Additional translations
+  searchPlaceholder: string;
+  selectCountry: string;
+  happyCustomers: string;
+  satisfactionRate: string;
+  ordersCompleted: string;
+  customerSupport: string;
+  whatCustomersSay: string;
+  realReviews: string;
+  verifiedPurchase: string;
+  securePaymentAdvantages: string;
+  multiplePaymentOptions: string;
+  bankLevelSecurity: string;
+  paymentMethods: string;
+  securityFeatures: string;
+  trustedBy: string;
+  sslEncryption: string;
+  pciCompliant: string;
+  fraudProtection: string;
+  moneyBackGuarantee: string;
+  active: string;
+  comingSoon: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -142,7 +165,30 @@ export const translations: Record<Language, Translations> = {
     orderPlaced: 'Order placed successfully!',
     loginRequired: 'Please login to continue checkout',
     paymentSuccessful: 'Payment successful! Order confirmed.',
-    loggedOut: 'Logged out successfully'
+    loggedOut: 'Logged out successfully',
+    
+    // Additional translations
+    searchPlaceholder: 'Search products...',
+    selectCountry: 'Select Country',
+    happyCustomers: 'Happy Customers',
+    satisfactionRate: 'Satisfaction Rate',
+    ordersCompleted: 'Orders Completed',
+    customerSupport: 'Customer Support',
+    whatCustomersSay: 'What Our Customers Say',
+    realReviews: 'Real reviews from verified purchases',
+    verifiedPurchase: 'Verified Purchase',
+    securePaymentAdvantages: 'Secure Payment - Your Advantages',
+    multiplePaymentOptions: 'Multiple payment options with bank-level security',
+    bankLevelSecurity: 'Bank-level security',
+    paymentMethods: 'Payment Methods',
+    securityFeatures: 'Security Features',
+    trustedBy: 'Trusted by leading payment providers',
+    sslEncryption: 'SSL 256-bit encryption',
+    pciCompliant: 'PCI DSS compliant processing',
+    fraudProtection: 'Fraud protection guaranteed',
+    moneyBackGuarantee: '30-day money back guarantee',
+    active: 'Active',
+    comingSoon: 'Coming Soon'
   },
   
   fr: {
@@ -214,7 +260,30 @@ export const translations: Record<Language, Translations> = {
     orderPlaced: 'Commande passée avec succès!',
     loginRequired: 'Veuillez vous connecter pour continuer',
     paymentSuccessful: 'Paiement réussi! Commande confirmée.',
-    loggedOut: 'Déconnexion réussie'
+    loggedOut: 'Déconnexion réussie',
+    
+    // Additional translations
+    searchPlaceholder: 'Rechercher des produits...',
+    selectCountry: 'Sélectionner le pays',
+    happyCustomers: 'Clients satisfaits',
+    satisfactionRate: 'Taux de satisfaction',
+    ordersCompleted: 'Commandes réalisées',
+    customerSupport: 'Support client',
+    whatCustomersSay: 'Ce que disent nos clients',
+    realReviews: 'Avis réels d\'achats vérifiés',
+    verifiedPurchase: 'Achat vérifié',
+    securePaymentAdvantages: 'Paiement sécurisé - Vos avantages',
+    multiplePaymentOptions: 'Plusieurs options de paiement avec sécurité bancaire',
+    bankLevelSecurity: 'Sécurité de niveau bancaire',
+    paymentMethods: 'Modes de paiement',
+    securityFeatures: 'Fonctionnalités de sécurité',
+    trustedBy: 'Approuvé par les principaux fournisseurs de paiement',
+    sslEncryption: 'Chiffrement SSL 256 bits',
+    pciCompliant: 'Traitement conforme PCI DSS',
+    fraudProtection: 'Protection contre la fraude garantie',
+    moneyBackGuarantee: 'Garantie de remboursement 30 jours',
+    active: 'Actif',
+    comingSoon: 'Bientôt disponible'
   },
   
   pl: {
@@ -269,7 +338,30 @@ export const translations: Record<Language, Translations> = {
     orderPlaced: 'Zamówienie złożone pomyślnie!',
     loginRequired: 'Zaloguj się, aby kontynuować',
     paymentSuccessful: 'Płatność udana! Zamówienie potwierdzone.',
-    loggedOut: 'Wylogowano pomyślnie'
+    loggedOut: 'Wylogowano pomyślnie',
+    
+    // Additional translations
+    searchPlaceholder: 'Szukaj produktów...',
+    selectCountry: 'Wybierz kraj',
+    happyCustomers: 'Zadowoleni klienci',
+    satisfactionRate: 'Wskaźnik zadowolenia',
+    ordersCompleted: 'Zamówienia zrealizowane',
+    customerSupport: 'Obsługa klienta',
+    whatCustomersSay: 'Co mówią nasi klienci',
+    realReviews: 'Prawdziwe opinie ze zweryfikowanych zakupów',
+    verifiedPurchase: 'Zweryfikowany zakup',
+    securePaymentAdvantages: 'Bezpieczne płatności - Twoje korzyści',
+    multiplePaymentOptions: 'Wiele opcji płatności z bezpieczeństwem bankowym',
+    bankLevelSecurity: 'Bezpieczeństwo bankowe',
+    paymentMethods: 'Metody płatności',
+    securityFeatures: 'Funkcje bezpieczeństwa',
+    trustedBy: 'Zaufany przez wiodących dostawców płatności',
+    sslEncryption: 'Szyfrowanie SSL 256-bit',
+    pciCompliant: 'Przetwarzanie zgodne z PCI DSS',
+    fraudProtection: 'Gwarantowana ochrona przed oszustwami',
+    moneyBackGuarantee: '30-dniowa gwarancja zwrotu pieniędzy',
+    active: 'Aktywny',
+    comingSoon: 'Wkrótce'
   },
   
   es: {
@@ -324,7 +416,30 @@ export const translations: Record<Language, Translations> = {
     orderPlaced: '¡Pedido realizado con éxito!',
     loginRequired: 'Inicia sesión para continuar',
     paymentSuccessful: '¡Pago exitoso! Pedido confirmado.',
-    loggedOut: 'Sesión cerrada correctamente'
+    loggedOut: 'Sesión cerrada correctamente',
+    
+    // Additional translations
+    searchPlaceholder: 'Buscar productos...',
+    selectCountry: 'Seleccionar país',
+    happyCustomers: 'Clientes felices',
+    satisfactionRate: 'Tasa de satisfacción',
+    ordersCompleted: 'Pedidos completados',
+    customerSupport: 'Atención al cliente',
+    whatCustomersSay: 'Lo que dicen nuestros clientes',
+    realReviews: 'Reseñas reales de compras verificadas',
+    verifiedPurchase: 'Compra verificada',
+    securePaymentAdvantages: 'Pago seguro - Tus ventajas',
+    multiplePaymentOptions: 'Múltiples opciones de pago con seguridad bancaria',
+    bankLevelSecurity: 'Seguridad de nivel bancario',
+    paymentMethods: 'Métodos de pago',
+    securityFeatures: 'Características de seguridad',
+    trustedBy: 'Confiado por proveedores de pago líderes',
+    sslEncryption: 'Cifrado SSL de 256 bits',
+    pciCompliant: 'Procesamiento compatible con PCI DSS',
+    fraudProtection: 'Protección contra fraudes garantizada',
+    moneyBackGuarantee: 'Garantía de devolución de 30 días',
+    active: 'Activo',
+    comingSoon: 'Próximamente'
   },
   
   pt: {
@@ -379,7 +494,30 @@ export const translations: Record<Language, Translations> = {
     orderPlaced: 'Pedido realizado com sucesso!',
     loginRequired: 'Entre para continuar a compra',
     paymentSuccessful: 'Pagamento bem-sucedido! Pedido confirmado.',
-    loggedOut: 'Sessão terminada com sucesso'
+    loggedOut: 'Sessão terminada com sucesso',
+    
+    // Additional translations
+    searchPlaceholder: 'Pesquisar produtos...',
+    selectCountry: 'Selecionar país',
+    happyCustomers: 'Clientes felizes',
+    satisfactionRate: 'Taxa de satisfação',
+    ordersCompleted: 'Pedidos concluídos',
+    customerSupport: 'Suporte ao cliente',
+    whatCustomersSay: 'O que dizem nossos clientes',
+    realReviews: 'Avaliações reais de compras verificadas',
+    verifiedPurchase: 'Compra verificada',
+    securePaymentAdvantages: 'Pagamento seguro - Suas vantagens',
+    multiplePaymentOptions: 'Múltiplas opções de pagamento com segurança bancária',
+    bankLevelSecurity: 'Segurança de nível bancário',
+    paymentMethods: 'Métodos de pagamento',
+    securityFeatures: 'Recursos de segurança',
+    trustedBy: 'Confiável por fornecedores de pagamento líderes',
+    sslEncryption: 'Criptografia SSL de 256 bits',
+    pciCompliant: 'Processamento compatível com PCI DSS',
+    fraudProtection: 'Proteção contra fraudes garantida',
+    moneyBackGuarantee: 'Garantia de devolução de 30 dias',
+    active: 'Ativo',
+    comingSoon: 'Em breve'
   },
   
   it: {
@@ -434,7 +572,30 @@ export const translations: Record<Language, Translations> = {
     orderPlaced: 'Ordine effettuato con successo!',
     loginRequired: 'Accedi per continuare il checkout',
     paymentSuccessful: 'Pagamento riuscito! Ordine confermato.',
-    loggedOut: 'Disconnesso con successo'
+    loggedOut: 'Disconnesso con successo',
+    
+    // Additional translations
+    searchPlaceholder: 'Cerca prodotti...',
+    selectCountry: 'Seleziona paese',
+    happyCustomers: 'Clienti felici',
+    satisfactionRate: 'Tasso di soddisfazione',
+    ordersCompleted: 'Ordini completati',
+    customerSupport: 'Assistenza clienti',
+    whatCustomersSay: 'Cosa dicono i nostri clienti',
+    realReviews: 'Recensioni reali da acquisti verificati',
+    verifiedPurchase: 'Acquisto verificato',
+    securePaymentAdvantages: 'Pagamento sicuro - I tuoi vantaggi',
+    multiplePaymentOptions: 'Opzioni di pagamento multiple con sicurezza bancaria',
+    bankLevelSecurity: 'Sicurezza di livello bancario',
+    paymentMethods: 'Metodi di pagamento',
+    securityFeatures: 'Caratteristiche di sicurezza',
+    trustedBy: 'Fidato dai principali fornitori di pagamento',
+    sslEncryption: 'Crittografia SSL a 256 bit',
+    pciCompliant: 'Elaborazione conforme PCI DSS',
+    fraudProtection: 'Protezione dalle frodi garantita',
+    moneyBackGuarantee: 'Garanzia di rimborso di 30 giorni',
+    active: 'Attivo',
+    comingSoon: 'Prossimamente'
   },
   
   hu: {
@@ -489,7 +650,30 @@ export const translations: Record<Language, Translations> = {
     orderPlaced: 'Rendelés sikeresen leadva!',
     loginRequired: 'Jelentkezz be a folytatáshoz',
     paymentSuccessful: 'Sikeres fizetés! Rendelés megerősítve.',
-    loggedOut: 'Sikeresen kijelentkezett'
+    loggedOut: 'Sikeresen kijelentkezett',
+    
+    // Additional translations
+    searchPlaceholder: 'Termékek keresése...',
+    selectCountry: 'Ország kiválasztása',
+    happyCustomers: 'Elégedett ügyfelek',
+    satisfactionRate: 'Elégedettségi arány',
+    ordersCompleted: 'Teljesített rendelések',
+    customerSupport: 'Ügyfélszolgálat',
+    whatCustomersSay: 'Mit mondanak ügyfeleink',
+    realReviews: 'Valódi értékelések ellenőrzött vásárlásoktól',
+    verifiedPurchase: 'Ellenőrzött vásárlás',
+    securePaymentAdvantages: 'Biztonságos fizetés - Az Ön előnyei',
+    multiplePaymentOptions: 'Több fizetési lehetőség banki szintű biztonsággal',
+    bankLevelSecurity: 'Banki szintű biztonság',
+    paymentMethods: 'Fizetési módok',
+    securityFeatures: 'Biztonsági funkciók',
+    trustedBy: 'Megbízható vezető fizetési szolgáltatók által',
+    sslEncryption: 'SSL 256 bites titkosítás',
+    pciCompliant: 'PCI DSS megfelelő feldolgozás',
+    fraudProtection: 'Garantált csalásvédelem',
+    moneyBackGuarantee: '30 napos pénzvisszafizetesi garancia',
+    active: 'Aktív',
+    comingSoon: 'Hamarosan'
   }
 };
 

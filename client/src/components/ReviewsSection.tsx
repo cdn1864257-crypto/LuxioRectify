@@ -1,4 +1,7 @@
+import { useLanguage } from '../hooks/use-language';
+
 export function ReviewsSection() {
+  const { t } = useLanguage();
   const reviews = [
     {
       rating: 5,
@@ -24,8 +27,8 @@ export function ReviewsSection() {
     <section className="py-16" data-testid="reviews-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">What Our Customers Say</h2>
-          <p className="text-muted-foreground">Real reviews from verified purchases</p>
+          <h2 className="text-3xl font-bold mb-4">{t('whatCustomersSay')}</h2>
+          <p className="text-muted-foreground">{t('realReviews')}</p>
         </div>
         
         <div className="grid md:grid-cols-3 gap-8">
@@ -48,7 +51,7 @@ export function ReviewsSection() {
                 </div>
                 <div className="ml-3">
                   <div className="font-medium" data-testid={`review-author-${index}`}>{review.author}</div>
-                  <div className="text-sm text-muted-foreground">Verified Purchase</div>
+                  <div className="text-sm text-muted-foreground">{t('verifiedPurchase')}</div>
                 </div>
               </div>
             </div>

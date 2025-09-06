@@ -142,7 +142,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                   required
                   data-testid="input-country"
                 >
-                  <option value="">Select Country</option>
+                  <option value="">{t('selectCountry')}</option>
                   <option value="FR">France</option>
                   <option value="PL">Poland</option>
                   <option value="ES">Spain</option>

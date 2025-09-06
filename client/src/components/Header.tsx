@@ -85,7 +85,7 @@ export function Header({ onToggleCart }: HeaderProps) {
               <div className="relative w-full">
                 <input 
                   type="text" 
-                  placeholder="Search products..." 
+                  placeholder={t('searchPlaceholder')} 
                   className="w-full pl-10 pr-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
                   data-testid="search-input"
                 />

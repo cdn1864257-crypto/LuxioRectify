@@ -1,9 +1,13 @@
+import { useLanguage } from '../hooks/use-language';
+
 export function StatsSection() {
+  const { t } = useLanguage();
+  
   const stats = [
-    { value: '150K+', label: 'Happy Customers' },
-    { value: '98%', label: 'Satisfaction Rate' },
-    { value: '50K+', label: 'Orders Completed' },
-    { value: '24/7', label: 'Customer Support' }
+    { value: '150K+', label: t('happyCustomers') },
+    { value: '98%', label: t('satisfactionRate') },
+    { value: '50K+', label: t('ordersCompleted') },
+    { value: '24/7', label: t('customerSupport') }
   ];
 
   return (
