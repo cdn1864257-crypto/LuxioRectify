@@ -176,7 +176,7 @@ export function Header({ onToggleCart }: HeaderProps) {
         open={authModal.open}
         mode={authModal.mode}
         onClose={() => setAuthModal(prev => ({ ...prev, open: false }))}
-        onSwitchMode={(mode) => setAuthModal(prev => ({ ...prev, mode }))}
+        onSwitchMode={(mode: 'login' | 'signup') => setAuthModal(prev => ({ ...prev, mode }))}
       />
     </>
   );
