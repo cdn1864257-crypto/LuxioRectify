@@ -16,10 +16,8 @@ export function ProductGrid({ title, subtitle, products, id, className = '' }: P
   const { t } = useLanguage();
 
   const handleAddToCart = (product: Product) => {
-    console.log('Adding to cart:', product);
     addToCart(product);
     showToast(`${product.name} ${t('itemAddedToCart')}`, 'success');
-    console.log('Cart after adding:', product);
   };
 
   return (

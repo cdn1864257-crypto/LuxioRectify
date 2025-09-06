@@ -11,8 +11,6 @@ interface CartSidebarProps {
 export function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebarProps) {
   const { cart, updateQuantity, removeFromCart, total } = useCart();
   const { t } = useLanguage();
-  
-  console.log('CartSidebar render - cart:', cart, 'cart.length:', cart.length);
 
   const handleRemoveItem = (productId: string) => {
     removeFromCart(productId);
