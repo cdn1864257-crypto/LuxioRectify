@@ -3,8 +3,8 @@ import { useAuth } from '../hooks/use-auth';
 import { useCart } from '../hooks/use-cart';
 import { useLanguage } from '../hooks/use-language';
 import { AuthModal } from './AuthModal';
+import { LanguageSelector } from './LanguageSelector';
 import { showToast } from './ToastNotifications';
-import { Language } from '../lib/translations';
 
 interface HeaderProps {
   onToggleCart: () => void;
@@ -14,7 +14,7 @@ interface HeaderProps {
 export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
   const { user, logout } = useAuth();
   const { itemCount } = useCart();
-  const { language, changeLanguage, t } = useLanguage();
+  const { t } = useLanguage();
   const [authModal, setAuthModal] = useState<{ open: boolean; mode: 'login' | 'signup' }>({
     open: false,
     mode: 'login'
@@ -97,22 +97,7 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
             {/* Right Side Actions */}
             <div className="flex items-center space-x-4">
               {/* Language Selector */}
-              <div className="relative">
-                <select 
-                  value={language}
-                  onChange={(e) => changeLanguage(e.target.value as Language)}
-                  className="bg-transparent border border-border rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                  data-testid="language-selector"
-                >
-                  <option value="en">EN</option>
-                  <option value="fr">FR</option>
-                  <option value="pl">PL</option>
-                  <option value="es">ES</option>
-                  <option value="pt">PT</option>
-                  <option value="it">IT</option>
-                  <option value="hu">HU</option>
-                </select>
-              </div>
+              <LanguageSelector />
               
               {/* User Menu */}
               <div className="flex items-center space-x-4">

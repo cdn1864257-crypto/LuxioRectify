@@ -1,4 +1,4 @@
-export type Language = 'en' | 'fr' | 'pl' | 'es' | 'pt' | 'it' | 'hu';
+export type Language = 'en' | 'fr' | 'es' | 'pt' | 'pl';
 
 export interface Translations {
   // Navigation
@@ -43,18 +43,47 @@ export interface Translations {
   shoppingCart: string;
   cartEmpty: string;
   cartTotal: string;
+  removeItem: string;
+  updateQuantity: string;
   
-  // Checkout
+  // Checkout Form
   checkout: string;
   shippingInfo: string;
   firstName: string;
   lastName: string;
+  fullNameField: string;
   address: string;
+  completeAddress: string;
   city: string;
   country: string;
   phone: string;
   paymentMethod: string;
   orderSummary: string;
+  orderNumber: string;
+  
+  // Payment Methods
+  bankTransfer: string;
+  prepaidTickets: string;
+  maxelPay: string;
+  selectPaymentMethod: string;
+  bankTransferTitle: string;
+  bankTransferDescription: string;
+  ibanLabel: string;
+  bicLabel: string;
+  transferReference: string;
+  transferInstructions: string;
+  prepaidTicketsTitle: string;
+  prepaidTicketsDescription: string;
+  ticketCode: string;
+  addTicketCode: string;
+  removeTicketCode: string;
+  sendTicketCodes: string;
+  
+  // Order Confirmation
+  paymentInstructions: string;
+  orderReceived: string;
+  emailConfirmation: string;
+  deliveryTime: string;
   
   // Auth
   email: string;
@@ -70,29 +99,65 @@ export interface Translations {
   loginRequired: string;
   paymentSuccessful: string;
   loggedOut: string;
+  fillRequiredFields: string;
+  invalidEmail: string;
+  invalidPhone: string;
+  ticketCodeSent: string;
   
-  // Additional translations
+  // Search & Filters
   searchPlaceholder: string;
   selectCountry: string;
+  
+  // Stats
   happyCustomers: string;
   satisfactionRate: string;
   ordersCompleted: string;
   customerSupport: string;
+  
+  // Reviews
   whatCustomersSay: string;
   realReviews: string;
   verifiedPurchase: string;
-  securePaymentAdvantages: string;
-  multiplePaymentOptions: string;
-  bankLevelSecurity: string;
-  paymentMethods: string;
-  securityFeatures: string;
-  trustedBy: string;
-  sslEncryption: string;
-  pciCompliant: string;
-  fraudProtection: string;
-  moneyBackGuarantee: string;
+  
+  // Footer Links
+  legalNotice: string;
+  privacyPolicy: string;
+  termsOfService: string;
+  contact: string;
+  
+  // Legal Pages Content
+  legalNoticeTitle: string;
+  legalNoticeContent: string;
+  privacyPolicyTitle: string;
+  privacyPolicyContent: string;
+  termsOfServiceTitle: string;
+  termsOfServiceContent: string;
+  contactTitle: string;
+  contactContent: string;
+  
+  // Product Details
+  productDetails: string;
+  specifications: string;
+  inStock: string;
+  outOfStock: string;
+  addedToCart: string;
+  
+  // Status
   active: string;
   comingSoon: string;
+  new: string;
+  sale: string;
+  
+  // Common Phrases
+  backToHome: string;
+  pageNotFound: string;
+  loading: string;
+  error: string;
+  retry: string;
+  close: string;
+  save: string;
+  cancel: string;
+  confirm: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -139,18 +204,47 @@ export const translations: Record<Language, Translations> = {
     shoppingCart: 'Shopping Cart',
     cartEmpty: 'Your cart is empty',
     cartTotal: 'Cart Total',
+    removeItem: 'Remove Item',
+    updateQuantity: 'Update Quantity',
     
-    // Checkout
+    // Checkout Form
     checkout: 'Checkout',
     shippingInfo: 'Shipping Information',
     firstName: 'First Name',
     lastName: 'Last Name',
+    fullNameField: 'Full Name',
     address: 'Address',
+    completeAddress: 'Complete Address',
     city: 'City',
     country: 'Country',
     phone: 'Phone Number',
     paymentMethod: 'Payment Method',
     orderSummary: 'Order Summary',
+    orderNumber: 'Order Number',
+    
+    // Payment Methods
+    bankTransfer: 'Bank Transfer',
+    prepaidTickets: 'Prepaid Tickets',
+    maxelPay: 'MaxelPay',
+    selectPaymentMethod: 'Select Payment Method',
+    bankTransferTitle: 'Bank Transfer',
+    bankTransferDescription: 'Transfer the amount to our bank account',
+    ibanLabel: 'IBAN',
+    bicLabel: 'BIC',
+    transferReference: 'Transfer Reference',
+    transferInstructions: 'Use your order number as transfer reference',
+    prepaidTicketsTitle: 'Prepaid Tickets (Transcash & PCS)',
+    prepaidTicketsDescription: 'Send us your prepaid ticket codes',
+    ticketCode: 'Ticket Code',
+    addTicketCode: 'Add Ticket Code',
+    removeTicketCode: 'Remove Code',
+    sendTicketCodes: 'Send Ticket Codes',
+    
+    // Order Confirmation
+    paymentInstructions: 'After receiving payment, you will receive an email confirmation. Your order will be delivered within 24-48 hours.',
+    orderReceived: 'Order Received',
+    emailConfirmation: 'You will receive an email confirmation',
+    deliveryTime: 'Delivery within 24-48 hours',
     
     // Auth
     email: 'Email',
@@ -166,29 +260,65 @@ export const translations: Record<Language, Translations> = {
     loginRequired: 'Please login to continue checkout',
     paymentSuccessful: 'Payment successful! Order confirmed.',
     loggedOut: 'Logged out successfully',
+    fillRequiredFields: 'Please fill all required fields',
+    invalidEmail: 'Please enter a valid email address',
+    invalidPhone: 'Please enter a valid phone number',
+    ticketCodeSent: 'Ticket codes sent successfully',
     
-    // Additional translations
+    // Search & Filters
     searchPlaceholder: 'Search products...',
     selectCountry: 'Select Country',
+    
+    // Stats
     happyCustomers: 'Happy Customers',
     satisfactionRate: 'Satisfaction Rate',
     ordersCompleted: 'Orders Completed',
     customerSupport: 'Customer Support',
+    
+    // Reviews
     whatCustomersSay: 'What Our Customers Say',
     realReviews: 'Real reviews from verified purchases',
     verifiedPurchase: 'Verified Purchase',
-    securePaymentAdvantages: 'Secure Payment - Your Advantages',
-    multiplePaymentOptions: 'Multiple payment options with bank-level security',
-    bankLevelSecurity: 'Bank-level security',
-    paymentMethods: 'Payment Methods',
-    securityFeatures: 'Security Features',
-    trustedBy: 'Trusted by leading payment providers',
-    sslEncryption: 'SSL 256-bit encryption',
-    pciCompliant: 'PCI DSS compliant processing',
-    fraudProtection: 'Fraud protection guaranteed',
-    moneyBackGuarantee: '30-day money back guarantee',
+    
+    // Footer Links
+    legalNotice: 'Legal Notice',
+    privacyPolicy: 'Privacy Policy',
+    termsOfService: 'Terms of Service',
+    contact: 'Contact',
+    
+    // Legal Pages Content
+    legalNoticeTitle: 'Legal Notice',
+    legalNoticeContent: 'Luxio is an online store specializing in electronic products. Headquarters: [generic address]. Publication manager: [generic name]. Hosting: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
+    privacyPolicyTitle: 'Privacy Policy',
+    privacyPolicyContent: 'We only collect data necessary for order processing (name, address, email, phone). This information is never resold and can be deleted upon request via our contact email.',
+    termsOfServiceTitle: 'Terms of Service',
+    termsOfServiceContent: 'Prices are in euros including VAT. Accepted payments: bank transfer, Transcash/PCS prepaid tickets, MaxelPay. Orders are shipped within 24-48 hours after payment confirmation. Any complaint must be addressed to our contact email.',
+    contactTitle: 'Contact',
+    contactContent: 'For any questions: support@luxio-store.com',
+    
+    // Product Details
+    productDetails: 'Product Details',
+    specifications: 'Specifications',
+    inStock: 'In Stock',
+    outOfStock: 'Out of Stock',
+    addedToCart: 'Added to Cart',
+    
+    // Status
     active: 'Active',
-    comingSoon: 'Coming Soon'
+    comingSoon: 'Coming Soon',
+    new: 'New',
+    sale: 'Sale',
+    
+    // Common Phrases
+    backToHome: 'Back to Home',
+    pageNotFound: 'Page Not Found',
+    loading: 'Loading...',
+    error: 'Error',
+    retry: 'Retry',
+    close: 'Close',
+    save: 'Save',
+    cancel: 'Cancel',
+    confirm: 'Confirm'
   },
   
   fr: {
@@ -234,18 +364,47 @@ export const translations: Record<Language, Translations> = {
     shoppingCart: 'Panier',
     cartEmpty: 'Votre panier est vide',
     cartTotal: 'Total du panier',
+    removeItem: 'Retirer l\'article',
+    updateQuantity: 'Modifier la quantité',
     
-    // Checkout
+    // Checkout Form
     checkout: 'Commande',
     shippingInfo: 'Informations de livraison',
     firstName: 'Prénom',
     lastName: 'Nom',
+    fullNameField: 'Nom complet',
     address: 'Adresse',
+    completeAddress: 'Adresse complète',
     city: 'Ville',
     country: 'Pays',
     phone: 'Téléphone',
     paymentMethod: 'Mode de paiement',
     orderSummary: 'Résumé de commande',
+    orderNumber: 'Numéro de commande',
+    
+    // Payment Methods
+    bankTransfer: 'Virement bancaire',
+    prepaidTickets: 'Tickets prépayés',
+    maxelPay: 'MaxelPay',
+    selectPaymentMethod: 'Choisir le mode de paiement',
+    bankTransferTitle: 'Virement bancaire',
+    bankTransferDescription: 'Transférez le montant sur notre compte bancaire',
+    ibanLabel: 'IBAN',
+    bicLabel: 'BIC',
+    transferReference: 'Référence du virement',
+    transferInstructions: 'Utilisez votre numéro de commande comme référence',
+    prepaidTicketsTitle: 'Tickets prépayés (Transcash & PCS)',
+    prepaidTicketsDescription: 'Envoyez-nous vos codes de tickets prépayés',
+    ticketCode: 'Code ticket',
+    addTicketCode: 'Ajouter un code',
+    removeTicketCode: 'Supprimer le code',
+    sendTicketCodes: 'Envoyer les codes',
+    
+    // Order Confirmation
+    paymentInstructions: 'Après réception du paiement, vous recevrez une confirmation par email. Votre commande sera livrée sous 24-48 h.',
+    orderReceived: 'Commande reçue',
+    emailConfirmation: 'Vous recevrez une confirmation par email',
+    deliveryTime: 'Livraison sous 24-48 heures',
     
     // Auth
     email: 'Email',
@@ -261,115 +420,76 @@ export const translations: Record<Language, Translations> = {
     loginRequired: 'Veuillez vous connecter pour continuer',
     paymentSuccessful: 'Paiement réussi! Commande confirmée.',
     loggedOut: 'Déconnexion réussie',
+    fillRequiredFields: 'Veuillez remplir tous les champs obligatoires',
+    invalidEmail: 'Veuillez saisir une adresse email valide',
+    invalidPhone: 'Veuillez saisir un numéro de téléphone valide',
+    ticketCodeSent: 'Codes tickets envoyés avec succès',
     
-    // Additional translations
+    // Search & Filters
     searchPlaceholder: 'Rechercher des produits...',
     selectCountry: 'Sélectionner le pays',
+    
+    // Stats
     happyCustomers: 'Clients satisfaits',
     satisfactionRate: 'Taux de satisfaction',
     ordersCompleted: 'Commandes réalisées',
     customerSupport: 'Support client',
+    
+    // Reviews
     whatCustomersSay: 'Ce que disent nos clients',
     realReviews: 'Avis réels d\'achats vérifiés',
     verifiedPurchase: 'Achat vérifié',
-    securePaymentAdvantages: 'Paiement sécurisé - Vos avantages',
-    multiplePaymentOptions: 'Plusieurs options de paiement avec sécurité bancaire',
-    bankLevelSecurity: 'Sécurité de niveau bancaire',
-    paymentMethods: 'Modes de paiement',
-    securityFeatures: 'Fonctionnalités de sécurité',
-    trustedBy: 'Approuvé par les principaux fournisseurs de paiement',
-    sslEncryption: 'Chiffrement SSL 256 bits',
-    pciCompliant: 'Traitement conforme PCI DSS',
-    fraudProtection: 'Protection contre la fraude garantie',
-    moneyBackGuarantee: 'Garantie de remboursement 30 jours',
-    active: 'Actif',
-    comingSoon: 'Bientôt disponible'
-  },
-  
-  pl: {
-    smartphones: 'Smartfony',
-    watches: 'Zegarki',
-    sneakers: 'Buty',
-    gadgets: 'Gadżety',
-    mobility: 'Mobilność',
-    addToCart: 'Dodaj do koszyka',
-    login: 'Zaloguj się',
-    signup: 'Zarejestruj się',
-    logout: 'Wyloguj',
-    proceedToCheckout: 'Przejdź do kasy',
-    placeOrder: 'Złóż zamówienie',
-    continueShopping: 'Kontynuuj zakupy',
-    price: 'Cena',
-    quantity: 'Ilość',
-    total: 'Łącznie',
-    subtotal: 'Suma częściowa',
-    shipping: 'Dostawa',
-    free: 'Darmowa',
-    discount: 'Zniżka',
-    heroTitle: 'Technologia premium w niezbijanej cenie',
-    heroSubtitle: 'Odkryj najnowsze smartfony, smartwatche, buty i gadżety ze zniżkami do 37%',
-    shopNow: 'Kup teraz',
-    viewDeals: 'Zobacz oferty',
-    latestSmartphones: 'Najnowsze smartfony',
-    smartWatchesFitness: 'Smartwatche i trackery fitness',
-    premiumSneakers: 'Buty premium i moda',
-    smartHomeGadgets: 'Inteligentne gadżety domowe',
-    urbanMobility: 'Rozwiązania mobilności miejskiej',
-    shoppingCart: 'Koszyk',
-    cartEmpty: 'Twój koszyk jest pusty',
-    cartTotal: 'Suma koszyka',
-    checkout: 'Kasa',
-    shippingInfo: 'Informacje o dostawie',
-    firstName: 'Imię',
-    lastName: 'Nazwisko',
-    address: 'Adres',
-    city: 'Miasto',
-    country: 'Kraj',
-    phone: 'Telefon',
-    paymentMethod: 'Metoda płatności',
-    orderSummary: 'Podsumowanie zamówienia',
-    email: 'Email',
-    password: 'Hasło',
-    fullName: 'Pełne imię',
-    dontHaveAccount: 'Nie masz konta?',
-    alreadyHaveAccount: 'Masz już konto?',
-    itemAddedToCart: 'Dodano do koszyka!',
-    itemRemovedFromCart: 'Usunięto z koszyka',
-    orderPlaced: 'Zamówienie złożone pomyślnie!',
-    loginRequired: 'Zaloguj się, aby kontynuować',
-    paymentSuccessful: 'Płatność udana! Zamówienie potwierdzone.',
-    loggedOut: 'Wylogowano pomyślnie',
     
-    // Additional translations
-    searchPlaceholder: 'Szukaj produktów...',
-    selectCountry: 'Wybierz kraj',
-    happyCustomers: 'Zadowoleni klienci',
-    satisfactionRate: 'Wskaźnik zadowolenia',
-    ordersCompleted: 'Zamówienia zrealizowane',
-    customerSupport: 'Obsługa klienta',
-    whatCustomersSay: 'Co mówią nasi klienci',
-    realReviews: 'Prawdziwe opinie ze zweryfikowanych zakupów',
-    verifiedPurchase: 'Zweryfikowany zakup',
-    securePaymentAdvantages: 'Bezpieczne płatności - Twoje korzyści',
-    multiplePaymentOptions: 'Wiele opcji płatności z bezpieczeństwem bankowym',
-    bankLevelSecurity: 'Bezpieczeństwo bankowe',
-    paymentMethods: 'Metody płatności',
-    securityFeatures: 'Funkcje bezpieczeństwa',
-    trustedBy: 'Zaufany przez wiodących dostawców płatności',
-    sslEncryption: 'Szyfrowanie SSL 256-bit',
-    pciCompliant: 'Przetwarzanie zgodne z PCI DSS',
-    fraudProtection: 'Gwarantowana ochrona przed oszustwami',
-    moneyBackGuarantee: '30-dniowa gwarancja zwrotu pieniędzy',
-    active: 'Aktywny',
-    comingSoon: 'Wkrótce'
+    // Footer Links
+    legalNotice: 'Mentions légales',
+    privacyPolicy: 'Politique de confidentialité',
+    termsOfService: 'Conditions générales de vente',
+    contact: 'Contact',
+    
+    // Legal Pages Content
+    legalNoticeTitle: 'Mentions légales',
+    legalNoticeContent: 'Luxio est une boutique en ligne spécialisée dans les produits électroniques. Siège social : [adresse générique]. Responsable de publication : [nom générique]. Hébergement : Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
+    privacyPolicyTitle: 'Politique de confidentialité',
+    privacyPolicyContent: 'Nous collectons uniquement les données nécessaires au traitement des commandes (nom, adresse, email, téléphone). Ces informations ne sont jamais revendues et peuvent être supprimées sur demande via notre email de contact.',
+    termsOfServiceTitle: 'Conditions générales de vente',
+    termsOfServiceContent: 'Les prix sont en euros TTC. Paiements acceptés : virement bancaire, tickets prépayés Transcash/PCS, MaxelPay. Les commandes sont expédiées sous 24-48 h après confirmation du paiement. Toute réclamation doit être adressée à notre email de contact.',
+    contactTitle: 'Contact',
+    contactContent: 'Pour toute question : support@luxio-store.com',
+    
+    // Product Details
+    productDetails: 'Détails du produit',
+    specifications: 'Spécifications',
+    inStock: 'En stock',
+    outOfStock: 'Rupture de stock',
+    addedToCart: 'Ajouté au panier',
+    
+    // Status
+    active: 'Actif',
+    comingSoon: 'Bientôt disponible',
+    new: 'Nouveau',
+    sale: 'Promotion',
+    
+    // Common Phrases
+    backToHome: 'Retour à l\'accueil',
+    pageNotFound: 'Page non trouvée',
+    loading: 'Chargement...',
+    error: 'Erreur',
+    retry: 'Réessayer',
+    close: 'Fermer',
+    save: 'Enregistrer',
+    cancel: 'Annuler',
+    confirm: 'Confirmer'
   },
   
   es: {
+    // Navigation
     smartphones: 'Smartphones',
     watches: 'Relojes',
     sneakers: 'Zapatillas',
     gadgets: 'Gadgets',
     mobility: 'Movilidad',
+    
+    // Actions
     addToCart: 'Añadir al carrito',
     login: 'Iniciar sesión',
     signup: 'Registrarse',
@@ -377,6 +497,8 @@ export const translations: Record<Language, Translations> = {
     proceedToCheckout: 'Proceder al pago',
     placeOrder: 'Realizar pedido',
     continueShopping: 'Seguir comprando',
+    
+    // Common
     price: 'Precio',
     quantity: 'Cantidad',
     total: 'Total',
@@ -384,70 +506,150 @@ export const translations: Record<Language, Translations> = {
     shipping: 'Envío',
     free: 'Gratis',
     discount: 'Descuento',
+    
+    // Hero section
     heroTitle: 'Tecnología premium a precios inmejorables',
     heroSubtitle: 'Descubre los últimos smartphones, smartwatches, zapatillas y gadgets con descuentos de hasta 37%',
     shopNow: 'Comprar ahora',
     viewDeals: 'Ver ofertas',
+    
+    // Categories
     latestSmartphones: 'Últimos smartphones',
     smartWatchesFitness: 'Relojes inteligentes y fitness',
     premiumSneakers: 'Zapatillas premium y moda',
     smartHomeGadgets: 'Gadgets inteligentes para el hogar',
     urbanMobility: 'Soluciones de movilidad urbana',
+    
+    // Cart
     shoppingCart: 'Carrito de compras',
     cartEmpty: 'Tu carrito está vacío',
     cartTotal: 'Total del carrito',
+    removeItem: 'Eliminar artículo',
+    updateQuantity: 'Actualizar cantidad',
+    
+    // Checkout Form
     checkout: 'Pagar',
     shippingInfo: 'Información de envío',
     firstName: 'Nombre',
     lastName: 'Apellido',
+    fullNameField: 'Nombre completo',
     address: 'Dirección',
+    completeAddress: 'Dirección completa',
     city: 'Ciudad',
     country: 'País',
     phone: 'Teléfono',
     paymentMethod: 'Método de pago',
     orderSummary: 'Resumen del pedido',
+    orderNumber: 'Número de pedido',
+    
+    // Payment Methods
+    bankTransfer: 'Transferencia bancaria',
+    prepaidTickets: 'Tickets prepagados',
+    maxelPay: 'MaxelPay',
+    selectPaymentMethod: 'Seleccionar método de pago',
+    bankTransferTitle: 'Transferencia bancaria',
+    bankTransferDescription: 'Transfiere el importe a nuestra cuenta bancaria',
+    ibanLabel: 'IBAN',
+    bicLabel: 'BIC',
+    transferReference: 'Referencia de transferencia',
+    transferInstructions: 'Usa tu número de pedido como referencia',
+    prepaidTicketsTitle: 'Tickets prepagados (Transcash & PCS)',
+    prepaidTicketsDescription: 'Envíanos tus códigos de tickets prepagados',
+    ticketCode: 'Código de ticket',
+    addTicketCode: 'Añadir código',
+    removeTicketCode: 'Eliminar código',
+    sendTicketCodes: 'Enviar códigos',
+    
+    // Order Confirmation
+    paymentInstructions: 'Después de recibir el pago, recibirás una confirmación por email. Tu pedido será entregado en 24-48 horas.',
+    orderReceived: 'Pedido recibido',
+    emailConfirmation: 'Recibirás una confirmación por email',
+    deliveryTime: 'Entrega en 24-48 horas',
+    
+    // Auth
     email: 'Email',
     password: 'Contraseña',
     fullName: 'Nombre completo',
     dontHaveAccount: '¿No tienes cuenta?',
     alreadyHaveAccount: '¿Ya tienes cuenta?',
+    
+    // Messages
     itemAddedToCart: '¡Producto añadido al carrito!',
     itemRemovedFromCart: 'Producto eliminado del carrito',
     orderPlaced: '¡Pedido realizado con éxito!',
     loginRequired: 'Inicia sesión para continuar',
     paymentSuccessful: '¡Pago exitoso! Pedido confirmado.',
     loggedOut: 'Sesión cerrada correctamente',
+    fillRequiredFields: 'Por favor, completa todos los campos obligatorios',
+    invalidEmail: 'Por favor, introduce un email válido',
+    invalidPhone: 'Por favor, introduce un teléfono válido',
+    ticketCodeSent: 'Códigos de tickets enviados correctamente',
     
-    // Additional translations
+    // Search & Filters
     searchPlaceholder: 'Buscar productos...',
     selectCountry: 'Seleccionar país',
+    
+    // Stats
     happyCustomers: 'Clientes felices',
     satisfactionRate: 'Tasa de satisfacción',
     ordersCompleted: 'Pedidos completados',
     customerSupport: 'Atención al cliente',
+    
+    // Reviews
     whatCustomersSay: 'Lo que dicen nuestros clientes',
     realReviews: 'Reseñas reales de compras verificadas',
     verifiedPurchase: 'Compra verificada',
-    securePaymentAdvantages: 'Pago seguro - Tus ventajas',
-    multiplePaymentOptions: 'Múltiples opciones de pago con seguridad bancaria',
-    bankLevelSecurity: 'Seguridad de nivel bancario',
-    paymentMethods: 'Métodos de pago',
-    securityFeatures: 'Características de seguridad',
-    trustedBy: 'Confiado por proveedores de pago líderes',
-    sslEncryption: 'Cifrado SSL de 256 bits',
-    pciCompliant: 'Procesamiento compatible con PCI DSS',
-    fraudProtection: 'Protección contra fraudes garantizada',
-    moneyBackGuarantee: 'Garantía de devolución de 30 días',
+    
+    // Footer Links
+    legalNotice: 'Aviso legal',
+    privacyPolicy: 'Política de privacidad',
+    termsOfService: 'Términos de servicio',
+    contact: 'Contacto',
+    
+    // Legal Pages Content
+    legalNoticeTitle: 'Aviso legal',
+    legalNoticeContent: 'Luxio es una tienda online especializada en productos electrónicos. Sede social: [dirección genérica]. Responsable de publicación: [nombre genérico]. Hosting: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
+    privacyPolicyTitle: 'Política de privacidad',
+    privacyPolicyContent: 'Solo recopilamos los datos necesarios para el procesamiento de pedidos (nombre, dirección, email, teléfono). Esta información nunca se revende y puede ser eliminada bajo petición a través de nuestro email de contacto.',
+    termsOfServiceTitle: 'Términos de servicio',
+    termsOfServiceContent: 'Los precios están en euros con IVA incluido. Pagos aceptados: transferencia bancaria, tickets prepagados Transcash/PCS, MaxelPay. Los pedidos se envían en 24-48 horas tras confirmación del pago. Cualquier reclamación debe dirigirse a nuestro email de contacto.',
+    contactTitle: 'Contacto',
+    contactContent: 'Para cualquier pregunta: support@luxio-store.com',
+    
+    // Product Details
+    productDetails: 'Detalles del producto',
+    specifications: 'Especificaciones',
+    inStock: 'En stock',
+    outOfStock: 'Agotado',
+    addedToCart: 'Añadido al carrito',
+    
+    // Status
     active: 'Activo',
-    comingSoon: 'Próximamente'
+    comingSoon: 'Próximamente',
+    new: 'Nuevo',
+    sale: 'Oferta',
+    
+    // Common Phrases
+    backToHome: 'Volver al inicio',
+    pageNotFound: 'Página no encontrada',
+    loading: 'Cargando...',
+    error: 'Error',
+    retry: 'Reintentar',
+    close: 'Cerrar',
+    save: 'Guardar',
+    cancel: 'Cancelar',
+    confirm: 'Confirmar'
   },
   
   pt: {
+    // Navigation
     smartphones: 'Smartphones',
     watches: 'Relógios',
     sneakers: 'Ténis',
     gadgets: 'Gadgets',
     mobility: 'Mobilidade',
+    
+    // Actions
     addToCart: 'Adicionar ao carrinho',
     login: 'Entrar',
     signup: 'Registar',
@@ -455,6 +657,8 @@ export const translations: Record<Language, Translations> = {
     proceedToCheckout: 'Finalizar compra',
     placeOrder: 'Fazer pedido',
     continueShopping: 'Continuar comprando',
+    
+    // Common
     price: 'Preço',
     quantity: 'Quantidade',
     total: 'Total',
@@ -462,241 +666,323 @@ export const translations: Record<Language, Translations> = {
     shipping: 'Envio',
     free: 'Grátis',
     discount: 'Desconto',
+    
+    // Hero section
     heroTitle: 'Tecnologia premium a preços imbatíveis',
     heroSubtitle: 'Descubra os mais recentes smartphones, smartwatches, ténis e gadgets com descontos até 37%',
     shopNow: 'Comprar agora',
     viewDeals: 'Ver ofertas',
+    
+    // Categories
     latestSmartphones: 'Últimos smartphones',
     smartWatchesFitness: 'Relógios inteligentes e fitness',
     premiumSneakers: 'Ténis premium e moda',
     smartHomeGadgets: 'Gadgets inteligentes para casa',
     urbanMobility: 'Soluções de mobilidade urbana',
+    
+    // Cart
     shoppingCart: 'Carrinho de compras',
     cartEmpty: 'O seu carrinho está vazio',
     cartTotal: 'Total do carrinho',
+    removeItem: 'Remover item',
+    updateQuantity: 'Atualizar quantidade',
+    
+    // Checkout Form
     checkout: 'Finalizar',
     shippingInfo: 'Informações de envio',
     firstName: 'Nome',
     lastName: 'Apelido',
+    fullNameField: 'Nome completo',
     address: 'Morada',
+    completeAddress: 'Morada completa',
     city: 'Cidade',
     country: 'País',
     phone: 'Telefone',
     paymentMethod: 'Método de pagamento',
     orderSummary: 'Resumo do pedido',
+    orderNumber: 'Número do pedido',
+    
+    // Payment Methods
+    bankTransfer: 'Transferência bancária',
+    prepaidTickets: 'Tickets pré-pagos',
+    maxelPay: 'MaxelPay',
+    selectPaymentMethod: 'Selecionar método de pagamento',
+    bankTransferTitle: 'Transferência bancária',
+    bankTransferDescription: 'Transfira o valor para a nossa conta bancária',
+    ibanLabel: 'IBAN',
+    bicLabel: 'BIC',
+    transferReference: 'Referência da transferência',
+    transferInstructions: 'Use o seu número de pedido como referência',
+    prepaidTicketsTitle: 'Tickets pré-pagos (Transcash & PCS)',
+    prepaidTicketsDescription: 'Envie-nos os seus códigos de tickets pré-pagos',
+    ticketCode: 'Código do ticket',
+    addTicketCode: 'Adicionar código',
+    removeTicketCode: 'Remover código',
+    sendTicketCodes: 'Enviar códigos',
+    
+    // Order Confirmation
+    paymentInstructions: 'Após receber o pagamento, receberá uma confirmação por email. O seu pedido será entregue em 24-48 horas.',
+    orderReceived: 'Pedido recebido',
+    emailConfirmation: 'Receberá uma confirmação por email',
+    deliveryTime: 'Entrega em 24-48 horas',
+    
+    // Auth
     email: 'Email',
     password: 'Palavra-passe',
     fullName: 'Nome completo',
     dontHaveAccount: 'Não tem conta?',
     alreadyHaveAccount: 'Já tem conta?',
+    
+    // Messages
     itemAddedToCart: 'Item adicionado ao carrinho!',
     itemRemovedFromCart: 'Item removido do carrinho',
     orderPlaced: 'Pedido realizado com sucesso!',
     loginRequired: 'Entre para continuar a compra',
     paymentSuccessful: 'Pagamento bem-sucedido! Pedido confirmado.',
     loggedOut: 'Sessão terminada com sucesso',
+    fillRequiredFields: 'Por favor, preencha todos os campos obrigatórios',
+    invalidEmail: 'Por favor, introduza um email válido',
+    invalidPhone: 'Por favor, introduza um telefone válido',
+    ticketCodeSent: 'Códigos de tickets enviados com sucesso',
     
-    // Additional translations
+    // Search & Filters
     searchPlaceholder: 'Pesquisar produtos...',
     selectCountry: 'Selecionar país',
+    
+    // Stats
     happyCustomers: 'Clientes felizes',
     satisfactionRate: 'Taxa de satisfação',
     ordersCompleted: 'Pedidos concluídos',
     customerSupport: 'Suporte ao cliente',
+    
+    // Reviews
     whatCustomersSay: 'O que dizem nossos clientes',
     realReviews: 'Avaliações reais de compras verificadas',
     verifiedPurchase: 'Compra verificada',
-    securePaymentAdvantages: 'Pagamento seguro - Suas vantagens',
-    multiplePaymentOptions: 'Múltiplas opções de pagamento com segurança bancária',
-    bankLevelSecurity: 'Segurança de nível bancário',
-    paymentMethods: 'Métodos de pagamento',
-    securityFeatures: 'Recursos de segurança',
-    trustedBy: 'Confiável por fornecedores de pagamento líderes',
-    sslEncryption: 'Criptografia SSL de 256 bits',
-    pciCompliant: 'Processamento compatível com PCI DSS',
-    fraudProtection: 'Proteção contra fraudes garantida',
-    moneyBackGuarantee: 'Garantia de devolução de 30 dias',
+    
+    // Footer Links
+    legalNotice: 'Aviso legal',
+    privacyPolicy: 'Política de privacidade',
+    termsOfService: 'Termos de serviço',
+    contact: 'Contacto',
+    
+    // Legal Pages Content
+    legalNoticeTitle: 'Aviso legal',
+    legalNoticeContent: 'Luxio é uma loja online especializada em produtos eletrónicos. Sede: [morada genérica]. Responsável pela publicação: [nome genérico]. Alojamento: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
+    privacyPolicyTitle: 'Política de privacidade',
+    privacyPolicyContent: 'Recolhemos apenas os dados necessários para o processamento de pedidos (nome, morada, email, telefone). Esta informação nunca é revendida e pode ser eliminada mediante pedido através do nosso email de contacto.',
+    termsOfServiceTitle: 'Termos de serviço',
+    termsOfServiceContent: 'Os preços estão em euros com IVA incluído. Pagamentos aceites: transferência bancária, tickets pré-pagos Transcash/PCS, MaxelPay. Os pedidos são enviados em 24-48 horas após confirmação do pagamento. Qualquer reclamação deve ser dirigida ao nosso email de contacto.',
+    contactTitle: 'Contacto',
+    contactContent: 'Para qualquer questão: support@luxio-store.com',
+    
+    // Product Details
+    productDetails: 'Detalhes do produto',
+    specifications: 'Especificações',
+    inStock: 'Em stock',
+    outOfStock: 'Esgotado',
+    addedToCart: 'Adicionado ao carrinho',
+    
+    // Status
     active: 'Ativo',
-    comingSoon: 'Em breve'
-  },
-  
-  it: {
-    smartphones: 'Smartphone',
-    watches: 'Orologi',
-    sneakers: 'Sneaker',
-    gadgets: 'Gadget',
-    mobility: 'Mobilità',
-    addToCart: 'Aggiungi al carrello',
-    login: 'Accedi',
-    signup: 'Registrati',
-    logout: 'Esci',
-    proceedToCheckout: 'Procedi al checkout',
-    placeOrder: 'Effettua ordine',
-    continueShopping: 'Continua shopping',
-    price: 'Prezzo',
-    quantity: 'Quantità',
-    total: 'Totale',
-    subtotal: 'Subtotale',
-    shipping: 'Spedizione',
-    free: 'Gratuita',
-    discount: 'Sconto',
-    heroTitle: 'Tecnologia premium a prezzi imbattibili',
-    heroSubtitle: 'Scopri gli ultimi smartphone, smartwatch, sneaker e gadget con sconti fino al 37%',
-    shopNow: 'Acquista ora',
-    viewDeals: 'Vedi offerte',
-    latestSmartphones: 'Ultimi smartphone',
-    smartWatchesFitness: 'Smartwatch e fitness tracker',
-    premiumSneakers: 'Sneaker premium e moda',
-    smartHomeGadgets: 'Gadget intelligenti per la casa',
-    urbanMobility: 'Soluzioni di mobilità urbana',
-    shoppingCart: 'Carrello',
-    cartEmpty: 'Il tuo carrello è vuoto',
-    cartTotal: 'Totale carrello',
-    checkout: 'Checkout',
-    shippingInfo: 'Informazioni spedizione',
-    firstName: 'Nome',
-    lastName: 'Cognome',
-    address: 'Indirizzo',
-    city: 'Città',
-    country: 'Paese',
-    phone: 'Telefono',
-    paymentMethod: 'Metodo di pagamento',
-    orderSummary: 'Riepilogo ordine',
-    email: 'Email',
-    password: 'Password',
-    fullName: 'Nome completo',
-    dontHaveAccount: 'Non hai un account?',
-    alreadyHaveAccount: 'Hai già un account?',
-    itemAddedToCart: 'Articolo aggiunto al carrello!',
-    itemRemovedFromCart: 'Articolo rimosso dal carrello',
-    orderPlaced: 'Ordine effettuato con successo!',
-    loginRequired: 'Accedi per continuare il checkout',
-    paymentSuccessful: 'Pagamento riuscito! Ordine confermato.',
-    loggedOut: 'Disconnesso con successo',
+    comingSoon: 'Em breve',
+    new: 'Novo',
+    sale: 'Promoção',
     
-    // Additional translations
-    searchPlaceholder: 'Cerca prodotti...',
-    selectCountry: 'Seleziona paese',
-    happyCustomers: 'Clienti felici',
-    satisfactionRate: 'Tasso di soddisfazione',
-    ordersCompleted: 'Ordini completati',
-    customerSupport: 'Assistenza clienti',
-    whatCustomersSay: 'Cosa dicono i nostri clienti',
-    realReviews: 'Recensioni reali da acquisti verificati',
-    verifiedPurchase: 'Acquisto verificato',
-    securePaymentAdvantages: 'Pagamento sicuro - I tuoi vantaggi',
-    multiplePaymentOptions: 'Opzioni di pagamento multiple con sicurezza bancaria',
-    bankLevelSecurity: 'Sicurezza di livello bancario',
-    paymentMethods: 'Metodi di pagamento',
-    securityFeatures: 'Caratteristiche di sicurezza',
-    trustedBy: 'Fidato dai principali fornitori di pagamento',
-    sslEncryption: 'Crittografia SSL a 256 bit',
-    pciCompliant: 'Elaborazione conforme PCI DSS',
-    fraudProtection: 'Protezione dalle frodi garantita',
-    moneyBackGuarantee: 'Garanzia di rimborso di 30 giorni',
-    active: 'Attivo',
-    comingSoon: 'Prossimamente'
+    // Common Phrases
+    backToHome: 'Voltar ao início',
+    pageNotFound: 'Página não encontrada',
+    loading: 'A carregar...',
+    error: 'Erro',
+    retry: 'Tentar novamente',
+    close: 'Fechar',
+    save: 'Guardar',
+    cancel: 'Cancelar',
+    confirm: 'Confirmar'
   },
   
-  hu: {
-    smartphones: 'Okostelefonok',
-    watches: 'Órák',
-    sneakers: 'Tornacipők',
-    gadgets: 'Kütyük',
-    mobility: 'Mobilitás',
-    addToCart: 'Kosárba',
-    login: 'Bejelentkezés',
-    signup: 'Regisztráció',
-    logout: 'Kijelentkezés',
-    proceedToCheckout: 'Tovább a fizetéshez',
-    placeOrder: 'Rendelés leadása',
-    continueShopping: 'Vásárlás folytatása',
-    price: 'Ár',
-    quantity: 'Mennyiség',
-    total: 'Összesen',
-    subtotal: 'Részösszeg',
-    shipping: 'Szállítás',
-    free: 'Ingyenes',
-    discount: 'Kedvezmény',
-    heroTitle: 'Prémium technológia verhetetlen áron',
-    heroSubtitle: 'Fedezd fel a legújabb okostelefonokat, okosórákat, tornacipőket és kütyüket akár 37% kedvezménnyel',
-    shopNow: 'Vásárlás most',
-    viewDeals: 'Ajánlatok megtekintése',
-    latestSmartphones: 'Legújabb okostelefonok',
-    smartWatchesFitness: 'Okosórák és fitness trackerek',
-    premiumSneakers: 'Prémium tornacipők és divat',
-    smartHomeGadgets: 'Okos otthon kütyük',
-    urbanMobility: 'Városi mobilitási megoldások',
-    shoppingCart: 'Bevásárlókosár',
-    cartEmpty: 'A kosár üres',
-    cartTotal: 'Kosár összege',
-    checkout: 'Fizetés',
-    shippingInfo: 'Szállítási információk',
-    firstName: 'Keresztnév',
-    lastName: 'Vezetéknév',
-    address: 'Cím',
-    city: 'Város',
-    country: 'Ország',
+  pl: {
+    // Navigation
+    smartphones: 'Smartfony',
+    watches: 'Zegarki',
+    sneakers: 'Buty',
+    gadgets: 'Gadżety',
+    mobility: 'Mobilność',
+    
+    // Actions
+    addToCart: 'Dodaj do koszyka',
+    login: 'Zaloguj się',
+    signup: 'Zarejestruj się',
+    logout: 'Wyloguj',
+    proceedToCheckout: 'Przejdź do kasy',
+    placeOrder: 'Złóż zamówienie',
+    continueShopping: 'Kontynuuj zakupy',
+    
+    // Common
+    price: 'Cena',
+    quantity: 'Ilość',
+    total: 'Łącznie',
+    subtotal: 'Suma częściowa',
+    shipping: 'Dostawa',
+    free: 'Darmowa',
+    discount: 'Zniżka',
+    
+    // Hero section
+    heroTitle: 'Technologia premium w niezbijanej cenie',
+    heroSubtitle: 'Odkryj najnowsze smartfony, smartwatche, buty i gadżety ze zniżkami do 37%',
+    shopNow: 'Kup teraz',
+    viewDeals: 'Zobacz oferty',
+    
+    // Categories
+    latestSmartphones: 'Najnowsze smartfony',
+    smartWatchesFitness: 'Smartwatche i trackery fitness',
+    premiumSneakers: 'Buty premium i moda',
+    smartHomeGadgets: 'Inteligentne gadżety domowe',
+    urbanMobility: 'Rozwiązania mobilności miejskiej',
+    
+    // Cart
+    shoppingCart: 'Koszyk',
+    cartEmpty: 'Twój koszyk jest pusty',
+    cartTotal: 'Suma koszyka',
+    removeItem: 'Usuń przedmiot',
+    updateQuantity: 'Zaktualizuj ilość',
+    
+    // Checkout Form
+    checkout: 'Kasa',
+    shippingInfo: 'Informacje o dostawie',
+    firstName: 'Imię',
+    lastName: 'Nazwisko',
+    fullNameField: 'Pełne imię',
+    address: 'Adres',
+    completeAddress: 'Pełny adres',
+    city: 'Miasto',
+    country: 'Kraj',
     phone: 'Telefon',
-    paymentMethod: 'Fizetési mód',
-    orderSummary: 'Rendelés összesítő',
-    email: 'Email',
-    password: 'Jelszó',
-    fullName: 'Teljes név',
-    dontHaveAccount: 'Nincs még fiókod?',
-    alreadyHaveAccount: 'Van már fiókod?',
-    itemAddedToCart: 'Termék hozzáadva a kosárhoz!',
-    itemRemovedFromCart: 'Termék eltávolítva a kosárból',
-    orderPlaced: 'Rendelés sikeresen leadva!',
-    loginRequired: 'Jelentkezz be a folytatáshoz',
-    paymentSuccessful: 'Sikeres fizetés! Rendelés megerősítve.',
-    loggedOut: 'Sikeresen kijelentkezett',
+    paymentMethod: 'Metoda płatności',
+    orderSummary: 'Podsumowanie zamówienia',
+    orderNumber: 'Numer zamówienia',
     
-    // Additional translations
-    searchPlaceholder: 'Termékek keresése...',
-    selectCountry: 'Ország kiválasztása',
-    happyCustomers: 'Elégedett ügyfelek',
-    satisfactionRate: 'Elégedettségi arány',
-    ordersCompleted: 'Teljesített rendelések',
-    customerSupport: 'Ügyfélszolgálat',
-    whatCustomersSay: 'Mit mondanak ügyfeleink',
-    realReviews: 'Valódi értékelések ellenőrzött vásárlásoktól',
-    verifiedPurchase: 'Ellenőrzött vásárlás',
-    securePaymentAdvantages: 'Biztonságos fizetés - Az Ön előnyei',
-    multiplePaymentOptions: 'Több fizetési lehetőség banki szintű biztonsággal',
-    bankLevelSecurity: 'Banki szintű biztonság',
-    paymentMethods: 'Fizetési módok',
-    securityFeatures: 'Biztonsági funkciók',
-    trustedBy: 'Megbízható vezető fizetési szolgáltatók által',
-    sslEncryption: 'SSL 256 bites titkosítás',
-    pciCompliant: 'PCI DSS megfelelő feldolgozás',
-    fraudProtection: 'Garantált csalásvédelem',
-    moneyBackGuarantee: '30 napos pénzvisszafizetesi garancia',
-    active: 'Aktív',
-    comingSoon: 'Hamarosan'
+    // Payment Methods
+    bankTransfer: 'Przelew bankowy',
+    prepaidTickets: 'Karty przedpłacone',
+    maxelPay: 'MaxelPay',
+    selectPaymentMethod: 'Wybierz metodę płatności',
+    bankTransferTitle: 'Przelew bankowy',
+    bankTransferDescription: 'Przelej kwotę na nasze konto bankowe',
+    ibanLabel: 'IBAN',
+    bicLabel: 'BIC',
+    transferReference: 'Tytuł przelewu',
+    transferInstructions: 'Użyj numeru zamówienia jako tytułu przelewu',
+    prepaidTicketsTitle: 'Karty przedpłacone (Transcash & PCS)',
+    prepaidTicketsDescription: 'Prześlij nam kody swoich kart przedpłaconych',
+    ticketCode: 'Kod karty',
+    addTicketCode: 'Dodaj kod',
+    removeTicketCode: 'Usuń kod',
+    sendTicketCodes: 'Wyślij kody',
+    
+    // Order Confirmation
+    paymentInstructions: 'Po otrzymaniu płatności otrzymasz potwierdzenie przez email. Twoje zamówienie zostanie dostarczone w ciągu 24-48 godzin.',
+    orderReceived: 'Zamówienie otrzymane',
+    emailConfirmation: 'Otrzymasz potwierdzenie przez email',
+    deliveryTime: 'Dostawa w ciągu 24-48 godzin',
+    
+    // Auth
+    email: 'Email',
+    password: 'Hasło',
+    fullName: 'Pełne imię',
+    dontHaveAccount: 'Nie masz konta?',
+    alreadyHaveAccount: 'Masz już konto?',
+    
+    // Messages
+    itemAddedToCart: 'Dodano do koszyka!',
+    itemRemovedFromCart: 'Usunięto z koszyka',
+    orderPlaced: 'Zamówienie złożone pomyślnie!',
+    loginRequired: 'Zaloguj się, aby kontynuować',
+    paymentSuccessful: 'Płatność udana! Zamówienie potwierdzone.',
+    loggedOut: 'Wylogowano pomyślnie',
+    fillRequiredFields: 'Proszę wypełnić wszystkie wymagane pola',
+    invalidEmail: 'Proszę wprowadzić poprawny adres email',
+    invalidPhone: 'Proszę wprowadzić poprawny numer telefonu',
+    ticketCodeSent: 'Kody kart wysłane pomyślnie',
+    
+    // Search & Filters
+    searchPlaceholder: 'Szukaj produktów...',
+    selectCountry: 'Wybierz kraj',
+    
+    // Stats
+    happyCustomers: 'Zadowoleni klienci',
+    satisfactionRate: 'Wskaźnik zadowolenia',
+    ordersCompleted: 'Zamówienia zrealizowane',
+    customerSupport: 'Obsługa klienta',
+    
+    // Reviews
+    whatCustomersSay: 'Co mówią nasi klienci',
+    realReviews: 'Prawdziwe opinie ze zweryfikowanych zakupów',
+    verifiedPurchase: 'Zweryfikowany zakup',
+    
+    // Footer Links
+    legalNotice: 'Informacje prawne',
+    privacyPolicy: 'Polityka prywatności',
+    termsOfService: 'Warunki usługi',
+    contact: 'Kontakt',
+    
+    // Legal Pages Content
+    legalNoticeTitle: 'Informacje prawne',
+    legalNoticeContent: 'Luxio to sklep internetowy specjalizujący się w produktach elektronicznych. Siedziba: [adres ogólny]. Odpowiedzialny za publikację: [nazwa ogólna]. Hosting: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
+    privacyPolicyTitle: 'Polityka prywatności',
+    privacyPolicyContent: 'Zbieramy tylko dane niezbędne do realizacji zamówień (imię, adres, email, telefon). Te informacje nigdy nie są odsprzedawane i mogą być usunięte na żądanie przez nasz email kontaktowy.',
+    termsOfServiceTitle: 'Warunki usługi',
+    termsOfServiceContent: 'Ceny podane są w euro z VAT. Akceptowane płatności: przelew bankowy, karty przedpłacone Transcash/PCS, MaxelPay. Zamówienia są wysyłane w ciągu 24-48 godzin po potwierdzeniu płatności. Wszelkie reklamacje należy kierować na nasz email kontaktowy.',
+    contactTitle: 'Kontakt',
+    contactContent: 'W przypadku pytań: support@luxio-store.com',
+    
+    // Product Details
+    productDetails: 'Szczegóły produktu',
+    specifications: 'Specyfikacje',
+    inStock: 'Na stanie',
+    outOfStock: 'Brak na stanie',
+    addedToCart: 'Dodano do koszyka',
+    
+    // Status
+    active: 'Aktywny',
+    comingSoon: 'Wkrótce',
+    new: 'Nowy',
+    sale: 'Wyprzedaż',
+    
+    // Common Phrases
+    backToHome: 'Powrót do strony głównej',
+    pageNotFound: 'Strona nie znaleziona',
+    loading: 'Ładowanie...',
+    error: 'Błąd',
+    retry: 'Spróbuj ponownie',
+    close: 'Zamknij',
+    save: 'Zapisz',
+    cancel: 'Anuluj',
+    confirm: 'Potwierdź'
   }
 };
 
-export const detectLanguage = (): Language => {
-  // Try to detect from URL parameter
+export function detectLanguage(): Language {
+  // Check URL parameter
   const urlParams = new URLSearchParams(window.location.search);
-  const urlLang = urlParams.get('lang') as Language;
-  if (urlLang && translations[urlLang]) {
-    return urlLang;
+  const langParam = urlParams.get('lang') as Language;
+  if (langParam && ['en', 'fr', 'es', 'pt', 'pl'].includes(langParam)) {
+    return langParam;
   }
-  
-  // Try to detect from localStorage
+
+  // Check localStorage
   const storedLang = localStorage.getItem('luxio-language') as Language;
-  if (storedLang && translations[storedLang]) {
+  if (storedLang && ['en', 'fr', 'es', 'pt', 'pl'].includes(storedLang)) {
     return storedLang;
   }
-  
-  // Try to detect from browser language
-  const browserLang = navigator.language.split('-')[0] as Language;
-  if (browserLang && translations[browserLang]) {
-    return browserLang;
-  }
-  
+
+  // Check browser language
+  const browserLang = navigator.language.toLowerCase();
+  if (browserLang.startsWith('fr')) return 'fr';
+  if (browserLang.startsWith('es')) return 'es';
+  if (browserLang.startsWith('pt')) return 'pt';
+  if (browserLang.startsWith('pl')) return 'pl';
+
   // Default to English
   return 'en';
-};
+}
