@@ -130,7 +130,8 @@ export function TestimonialsCarousel() {
     }
   ];
   
-  const maxIndex = Math.max(0, testimonials.length - itemsPerView);
+  const totalSlides = Math.ceil(testimonials.length / itemsPerView);
+  const maxIndex = totalSlides - 1;
 
   useEffect(() => {
     if (currentIndex > maxIndex) {
@@ -165,7 +166,7 @@ export function TestimonialsCarousel() {
   };
 
   return (
-    <section className="py-16" data-testid="testimonials-carousel">
+    <section className="py-16 bg-background" data-testid="testimonials-carousel">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4" data-testid="testimonials-title">
@@ -181,58 +182,68 @@ export function TestimonialsCarousel() {
             <div 
               className="flex transition-transform duration-500 ease-in-out"
               style={{ 
-                transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
-                width: `${(testimonials.length * 100) / itemsPerView}%`
+                transform: `translateX(-${currentIndex * 100}%)`
               }}
               data-testid="carousel-track"
             >
-              {testimonials.map((testimonial, index) => (
+              {Array.from({ length: totalSlides }).map((_, slideIndex) => (
                 <div 
-                  key={`${testimonial.name}-${index}`}
-                  className="flex-shrink-0 px-3"
-                  style={{ width: `${100 / testimonials.length}%` }}
-                  data-testid={`testimonial-${index}`}
+                  key={slideIndex}
+                  className="w-full flex-shrink-0 grid gap-4"
+                  style={{
+                    gridTemplateColumns: `repeat(${itemsPerView}, 1fr)`
+                  }}
                 >
-                  <div className="bg-card border border-border rounded-lg p-6 shadow-sm h-full">
-                    <div className="flex items-center mb-4">
-                      <div className="flex text-yellow-400" data-testid={`rating-${index}`}>
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                          </svg>
-                        ))}
-                      </div>
-                      <span className="text-sm text-slate-600 dark:text-slate-300 ml-2">
-                        {testimonial.rating}.0
-                      </span>
-                    </div>
-                    
-                    <p 
-                      className="text-slate-700 dark:text-slate-300 mb-4 text-sm leading-relaxed" 
-                      data-testid={`testimonial-text-${index}`}
-                    >
-                      "{testimonial.text}"
-                    </p>
-                    
-                    <div className="flex items-center">
-                      <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium">
-                        {testimonial.avatar}
-                      </div>
-                      <div className="ml-3">
-                        <div className="font-medium text-sm" data-testid={`author-${index}`}>
-                          {testimonial.name}
-                        </div>
-                        {testimonial.verified && (
-                          <div className="text-xs text-green-600 dark:text-green-400 flex items-center">
-                            <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                            </svg>
-                            {t('verifiedPurchase')}
+                  {testimonials
+                    .slice(slideIndex * itemsPerView, (slideIndex + 1) * itemsPerView)
+                    .map((testimonial, index) => (
+                      <div 
+                        key={`${testimonial.name}-${slideIndex}-${index}`}
+                        className="px-2"
+                        data-testid={`testimonial-${slideIndex * itemsPerView + index}`}
+                      >
+                        <div className="bg-card border border-border rounded-lg p-6 shadow-sm h-full">
+                          <div className="flex items-center mb-4">
+                            <div className="flex text-yellow-400" data-testid={`rating-${slideIndex * itemsPerView + index}`}>
+                              {[...Array(testimonial.rating)].map((_, i) => (
+                                <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                                </svg>
+                              ))}
+                            </div>
+                            <span className="text-sm text-slate-600 dark:text-slate-300 ml-2">
+                              {testimonial.rating}.0
+                            </span>
                           </div>
-                        )}
+                          
+                          <p 
+                            className="text-slate-700 dark:text-slate-300 mb-4 text-sm leading-relaxed" 
+                            data-testid={`testimonial-text-${slideIndex * itemsPerView + index}`}
+                          >
+                            "{testimonial.text}"
+                          </p>
+                          
+                          <div className="flex items-center">
+                            <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium">
+                              {testimonial.avatar}
+                            </div>
+                            <div className="ml-3">
+                              <div className="font-medium text-sm" data-testid={`author-${slideIndex * itemsPerView + index}`}>
+                                {testimonial.name}
+                              </div>
+                              {testimonial.verified && (
+                                <div className="text-xs text-green-600 dark:text-green-400 flex items-center">
+                                  <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                  </svg>
+                                  {t('verifiedPurchase')}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
+                    ))}
                 </div>
               ))}
             </div>
@@ -262,7 +273,7 @@ export function TestimonialsCarousel() {
         </div>
 
         <div className="flex justify-center mt-8 space-x-2" data-testid="dots-indicator">
-          {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+          {Array.from({ length: totalSlides }).map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
