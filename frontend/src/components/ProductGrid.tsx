@@ -25,7 +25,7 @@ export function ProductGrid({ title, subtitle, products, id, className = '' }: P
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4" data-testid="section-title">{title}</h2>
-          <p className="text-muted-foreground" data-testid="section-subtitle">{subtitle}</p>
+          <p className="text-slate-600 dark:text-slate-300" data-testid="section-subtitle">{subtitle}</p>
         </div>
         
         <div className={`grid gap-6 ${
@@ -56,7 +56,7 @@ export function ProductGrid({ title, subtitle, products, id, className = '' }: P
                     </span>
                   )}
                 </div>
-                <div className="text-sm text-muted-foreground mb-2" data-testid={`product-description-${product.id}`}>
+                <div className="text-sm text-slate-600 dark:text-slate-300 mb-2" data-testid={`product-description-${product.id}`}>
                   {product.description}
                 </div>
                 <div className="flex items-center space-x-2 mb-3">
@@ -64,7 +64,7 @@ export function ProductGrid({ title, subtitle, products, id, className = '' }: P
                     €{product.price}
                   </span>
                   {product.originalPrice && (
-                    <span className="text-sm line-through text-muted-foreground" data-testid={`product-original-price-${product.id}`}>
+                    <span className="text-sm line-through text-slate-500 dark:text-slate-400" data-testid={`product-original-price-${product.id}`}>
                       €{product.originalPrice}
                     </span>
                   )}

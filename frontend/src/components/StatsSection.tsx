@@ -19,7 +19,7 @@ export function StatsSection() {
               <div className="text-3xl font-bold text-primary" data-testid={`stat-value-${index}`}>
                 {stat.value}
               </div>
-              <div className="text-muted-foreground" data-testid={`stat-label-${index}`}>
+              <div className="text-slate-700 dark:text-slate-300 font-medium" data-testid={`stat-label-${index}`}>
                 {stat.label}
               </div>
             </div>

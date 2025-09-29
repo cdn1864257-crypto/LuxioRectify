@@ -28,7 +28,7 @@ export function ReviewsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">{t('whatCustomersSay')}</h2>
-          <p className="text-muted-foreground">{t('realReviews')}</p>
+          <p className="text-slate-600 dark:text-slate-300">{t('realReviews')}</p>
         </div>
         
         <div className="grid md:grid-cols-3 gap-8">
@@ -40,9 +40,9 @@ export function ReviewsSection() {
                     <i key={i} className="fas fa-star"></i>
                   ))}
                 </div>
-                <span className="text-sm text-muted-foreground ml-2">{review.rating}.0</span>
+                <span className="text-sm text-slate-600 dark:text-slate-300 ml-2">{review.rating}.0</span>
               </div>
-              <p className="text-muted-foreground mb-4" data-testid={`review-text-${index}`}>
+              <p className="text-slate-700 dark:text-slate-300 mb-4" data-testid={`review-text-${index}`}>
                 "{review.text}"
               </p>
               <div className="flex items-center">
@@ -51,7 +51,7 @@ export function ReviewsSection() {
                 </div>
                 <div className="ml-3">
                   <div className="font-medium" data-testid={`review-author-${index}`}>{review.author}</div>
-                  <div className="text-sm text-muted-foreground">{t('verifiedPurchase')}</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-300">{t('verifiedPurchase')}</div>
                 </div>
               </div>
             </div>
