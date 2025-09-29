@@ -4,7 +4,6 @@ import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { AuthModal } from './AuthModal';
 import { LanguageSelector } from './LanguageSelector';
-import { showToast } from './ToastNotifications';
 
 interface HeaderProps {
   onToggleCart: () => void;
@@ -12,7 +11,7 @@ interface HeaderProps {
 }
 
 export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const { itemCount } = useCart();
   const { t } = useLanguage();
   const [authModal, setAuthModal] = useState<{ open: boolean; mode: 'login' | 'signup' }>({

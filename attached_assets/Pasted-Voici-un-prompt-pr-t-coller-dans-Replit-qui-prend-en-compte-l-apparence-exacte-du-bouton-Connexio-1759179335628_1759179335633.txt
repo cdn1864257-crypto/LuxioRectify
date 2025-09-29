@@ -1,0 +1,78 @@
+Voici un prompt prêt à coller dans Replit qui prend en compte l’apparence exacte du bouton “Connexion” visible dans ton header (d’après la capture d’écran) : bords arrondis, contour discret, police fine, etc.
+Le but est de donner la même base de style aux boutons “Acheter maintenant” et “Voir les offres”, mais avec des couleurs adaptées à leur rôle.
+
+
+---
+
+Prompt Replit – Harmonisation des boutons
+
+Corrige la page d’accueil de mon projet full-stack JavaScript Luxio :
+
+🎯 Objectif principal
+
+Unifier le style des boutons “Acheter maintenant” et “Voir les offres” avec celui du bouton “Connexion” du header.
+
+Garder la même forme, padding, radius et police que le bouton Connexion, mais adapter les couleurs.
+
+
+Détails de style
+
+Base (commune aux 3 boutons) :
+
+Bord arrondi identique (border-radius comme le bouton Connexion).
+
+Hauteur, padding et typographie identiques.
+
+Légère ombre ou bordure fine (1px solid déjà présente sur Connexion).
+
+
+Acheter maintenant (bouton primaire) :
+
+Couleur de fond : bleu vif proche du thème (#007bff par ex.) ou dégradé léger.
+
+Texte blanc.
+
+Hover : bleu légèrement plus foncé, transition 0.2s.
+
+
+Voir les offres (bouton secondaire) :
+
+Fond transparent avec bordure de la couleur primaire.
+
+Texte couleur primaire (le même bleu).
+
+Hover : fond bleu clair translucide + texte blanc.
+
+
+S’assurer que ces deux boutons sont parfaitement lisibles sur le fond de la section.
+
+
+Autres corrections déjà demandées
+
+1. Texte sous le header : rendre le texte “Technologie premium…” lisible (fond plus contrasté ou texte plus sombre, padding).
+
+
+2. Carrousel avis clients : réduire la longueur, ajouter loop infini ou répéter les avis pour éviter le vide.
+
+
+3. Image principale (hero) : remplacer l’image “Good evening…” par une photo de smartphone premium (public/images/hero-smartphone.jpg, alt correct).
+
+
+
+Fichiers à modifier
+
+Frontend : src/components/Hero.jsx (ou HeroSection.js), src/components/Testimonials.jsx, et le fichier CSS/SCSS global ou du composant (global.css ou équivalent).
+
+Vérifier que les classes du bouton Connexion sont bien importées ou factorisées pour réutiliser le même style (par ex. une classe utilitaire .btn).
+
+
+Déploiement
+
+Redémarrer le serveur backend (npm run server ou npm start) et le frontend (npm run dev) pour voir le résultat.
+
+
+
+---
+
+💡 Astuce : Si Replit demande une référence au style du bouton Connexion, récupère directement sa classe CSS (ex. .header-login-btn) et applique-la comme base (@extend ou className commun) aux deux nouveaux boutons.
+
