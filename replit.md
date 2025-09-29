@@ -8,6 +8,15 @@ Luxio is a static e-commerce platform built with React and TypeScript, featuring
 
 Preferred communication style: Simple, everyday language.
 
+## Replit Setup (September 29, 2025)
+
+This project has been configured to run on Replit:
+
+- **Development**: Frontend runs on port 5000 using Vite dev server (`npm run dev`)
+- **Production Build**: Frontend builds to `/dist` folder (`npm run build`)
+- **Production Serve**: Uses `serve` to host static files on port 5000 (`npm run start`)
+- **Deployment**: Configured for Replit's autoscale deployment (static site)
+
 ## System Architecture
 
 ### Frontend Architecture
