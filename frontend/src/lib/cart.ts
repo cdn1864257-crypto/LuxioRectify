@@ -32,7 +32,6 @@ export interface Order {
 const CART_STORAGE_KEY = 'luxio-cart';
 const ORDERS_STORAGE_KEY = 'luxio-orders';
 const MAX_QUANTITY_PER_ITEM = 99;
-const CART_VERSION = '1.0'; // For future compatibility
 
 export const loadCart = (): CartItem[] => {
   try {

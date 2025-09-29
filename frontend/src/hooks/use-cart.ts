@@ -24,8 +24,13 @@ export function useCart() {
         id: product.id,
         name: product.name,
         price: product.price,
+        originalPrice: product.originalPrice,
+        discount: product.discount,
         quantity: 1,
-        image: product.image
+        image: product.image,
+        description: product.description,
+        features: product.features,
+        category: product.category
       }];
     }
     

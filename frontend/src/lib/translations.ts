@@ -158,6 +158,18 @@ export interface Translations {
   save: string;
   cancel: string;
   confirm: string;
+  
+  // Additional Payment Fields
+  emailAddress: string;
+  
+  // Testimonials
+  testimonials: Array<{
+    name: string;
+    avatar: string;
+    rating: number;
+    text: string;
+    verified: boolean;
+  }>;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -318,7 +330,70 @@ export const translations: Record<Language, Translations> = {
     close: 'Close',
     save: 'Save',
     cancel: 'Cancel',
-    confirm: 'Confirm'
+    confirm: 'Confirm',
+    
+    // Additional Payment Fields
+    emailAddress: 'Email Address',
+    
+    // Testimonials
+    testimonials: [
+      {
+        name: 'Sarah Johnson',
+        avatar: 'SJ',
+        rating: 5,
+        text: 'Amazing shopping experience! Got my iPhone 15 Pro with 20% off and it arrived the next day. Luxio\'s customer service is exceptional.',
+        verified: true
+      },
+      {
+        name: 'Michael Chen',
+        avatar: 'MC',
+        rating: 5,
+        text: 'The Apple Watch Ultra 2 I ordered exceeded my expectations. Great quality, fast delivery, and excellent packaging protection.',
+        verified: true
+      },
+      {
+        name: 'Emma Rodriguez',
+        avatar: 'ER',
+        rating: 5,
+        text: 'Love my new Air Jordan sneakers! Perfect fit, authentic quality, and the discount made it such a great deal.',
+        verified: true
+      },
+      {
+        name: 'David Thompson',
+        avatar: 'DT',
+        rating: 5,
+        text: 'The smart home gadgets work perfectly together. Easy setup and the prices on Luxio are unbeatable.',
+        verified: true
+      },
+      {
+        name: 'Lisa Martinez',
+        avatar: 'LM',
+        rating: 5,
+        text: 'Electric scooter arrived perfectly assembled and ready to ride. Great build quality and smooth checkout process.',
+        verified: true
+      },
+      {
+        name: 'James Wilson',
+        avatar: 'JW',
+        rating: 5,
+        text: 'Fantastic experience with my Galaxy S24 Ultra purchase. Premium packaging and lightning-fast shipping to my doorstep.',
+        verified: true
+      },
+      {
+        name: 'Rachel Kim',
+        avatar: 'RK',
+        rating: 5,
+        text: 'The Garmin watch is perfect for my fitness goals. Luxio offers the best prices and their payment system is secure.',
+        verified: true
+      },
+      {
+        name: 'Alex Foster',
+        avatar: 'AF',
+        rating: 5,
+        text: 'Outstanding product quality and customer care. My smart speaker setup was effortless thanks to their detailed guides.',
+        verified: true
+      }
+    ]
   },
   
   fr: {
@@ -478,7 +553,70 @@ export const translations: Record<Language, Translations> = {
     close: 'Fermer',
     save: 'Enregistrer',
     cancel: 'Annuler',
-    confirm: 'Confirmer'
+    confirm: 'Confirmer',
+    
+    // Additional Payment Fields
+    emailAddress: 'Adresse email',
+    
+    // Testimonials
+    testimonials: [
+      {
+        name: 'Marie Dubois',
+        avatar: 'MD',
+        rating: 5,
+        text: 'Expérience d\'achat fantastique ! Mon iPhone 15 Pro commandé avec 20% de réduction est arrivé le lendemain. Service client exceptionnel.',
+        verified: true
+      },
+      {
+        name: 'Pierre Martin',
+        avatar: 'PM',
+        rating: 5,
+        text: 'L\'Apple Watch Ultra 2 dépasse toutes mes attentes. Qualité premium, livraison rapide et emballage soigné.',
+        verified: true
+      },
+      {
+        name: 'Sophie Leclerc',
+        avatar: 'SL',
+        rating: 5,
+        text: 'Mes nouvelles Air Jordan sont parfaites ! Taille idéale, qualité authentique et le prix était imbattable.',
+        verified: true
+      },
+      {
+        name: 'Thomas Moreau',
+        avatar: 'TM',
+        rating: 5,
+        text: 'Les objets connectés fonctionnent parfaitement ensemble. Installation facile et les prix Luxio sont imbattables.',
+        verified: true
+      },
+      {
+        name: 'Julie Bernard',
+        avatar: 'JB',
+        rating: 5,
+        text: 'Trottinette électrique livrée parfaitement assemblée et prête à utiliser. Excellente qualité et processus fluide.',
+        verified: true
+      },
+      {
+        name: 'Antoine Rousseau',
+        avatar: 'AR',
+        rating: 5,
+        text: 'Expérience fantastique avec mon Galaxy S24 Ultra. Emballage premium et livraison ultra-rapide à domicile.',
+        verified: true
+      },
+      {
+        name: 'Camille Petit',
+        avatar: 'CP',
+        rating: 5,
+        text: 'La montre Garmin est parfaite pour mes objectifs fitness. Luxio offre les meilleurs prix et un paiement sécurisé.',
+        verified: true
+      },
+      {
+        name: 'Maxime Girard',
+        avatar: 'MG',
+        rating: 5,
+        text: 'Qualité produit remarquable et service client au top. Installation de mon enceinte connectée simple grâce aux guides détaillés.',
+        verified: true
+      }
+    ]
   },
   
   es: {
@@ -638,7 +776,70 @@ export const translations: Record<Language, Translations> = {
     close: 'Cerrar',
     save: 'Guardar',
     cancel: 'Cancelar',
-    confirm: 'Confirmar'
+    confirm: 'Confirmar',
+    
+    // Additional Payment Fields
+    emailAddress: 'Dirección de email',
+    
+    // Testimonials
+    testimonials: [
+      {
+        name: 'María García',
+        avatar: 'MG',
+        rating: 5,
+        text: '¡Experiencia de compra increíble! Mi iPhone 15 Pro con 20% de descuento llegó al día siguiente. El servicio de Luxio es excepcional.',
+        verified: true
+      },
+      {
+        name: 'Carlos Rodríguez',
+        avatar: 'CR',
+        rating: 5,
+        text: 'El Apple Watch Ultra 2 superó todas mis expectativas. Excelente calidad, entrega rápida y empaque perfecto.',
+        verified: true
+      },
+      {
+        name: 'Ana Martínez',
+        avatar: 'AM',
+        rating: 5,
+        text: '¡Mis nuevas Air Jordan son perfectas! Talla ideal, calidad auténtica y el precio fue imbatible.',
+        verified: true
+      },
+      {
+        name: 'Diego López',
+        avatar: 'DL',
+        rating: 5,
+        text: 'Los gadgets inteligentes funcionan perfectamente juntos. Instalación fácil y los precios de Luxio son inmejorables.',
+        verified: true
+      },
+      {
+        name: 'Lucía Fernández',
+        avatar: 'LF',
+        rating: 5,
+        text: 'Scooter eléctrico llegó perfectamente ensamblado y listo para usar. Excelente calidad y proceso fluido.',
+        verified: true
+      },
+      {
+        name: 'Alejandro Ruiz',
+        avatar: 'AR',
+        rating: 5,
+        text: 'Experiencia fantástica con mi Galaxy S24 Ultra. Empaque premium y envío ultrarrápido a casa.',
+        verified: true
+      },
+      {
+        name: 'Isabel Torres',
+        avatar: 'IT',
+        rating: 5,
+        text: 'El reloj Garmin es perfecto para mis objetivos fitness. Luxio ofrece los mejores precios y pago seguro.',
+        verified: true
+      },
+      {
+        name: 'Manuel Castro',
+        avatar: 'MC',
+        rating: 5,
+        text: 'Calidad de producto excepcional y atención al cliente top. Mi altavoz inteligente fue fácil de instalar.',
+        verified: true
+      }
+    ]
   },
   
   pt: {

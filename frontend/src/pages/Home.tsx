@@ -3,8 +3,7 @@ import { Header } from '../components/Header';
 import { Hero } from '../components/Hero';
 import { StatsSection } from '../components/StatsSection';
 import { ProductGrid } from '../components/ProductGrid';
-import { SecurePaymentSection } from '../components/SecurePaymentSection';
-import { ReviewsSection } from '../components/ReviewsSection';
+import { TestimonialsCarousel } from '../components/TestimonialsCarousel';
 import { Footer } from '../components/Footer';
 import { CartSidebar } from '../components/CartSidebar';
 import { CheckoutModal } from '../components/CheckoutModal';
@@ -81,8 +80,7 @@ export default function Home() {
           products={getProductsByCategory('mobility')}
         />
         
-        <SecurePaymentSection />
-        <ReviewsSection />
+        <TestimonialsCarousel />
       </main>
       <Footer />
       

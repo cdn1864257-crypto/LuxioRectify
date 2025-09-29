@@ -1,0 +1,188 @@
+Compris !
+Voici donc un prompt révisé qui prépare tout le travail, mais laisse la mise en production sur Vercel en attente, afin que tu puisses inspecter le projet final avant le déploiement.
+Tu n’auras qu’à l’envoyer à ton IA builder.
+
+
+---
+
+Prompt à copier-coller :
+
+Tu es un architecte senior Frontend/Full-stack.
+Corrige, améliore et finalise le site Luxio (actuellement hébergé en développement sur Replit) disponible à l’adresse :
+https://071896cd-9a25-4e4a-b79e-ae9be9202bac-00-36bjm9lql9yvl.worf.replit.dev/
+
+
+---
+
+🎯 Objectif
+
+Préparer une version parfaitement fonctionnelle et prête pour déploiement sur Vercel, mais ne pas déployer.
+Je dois inspecter le code et tester le site final avant toute mise en ligne.
+
+
+---
+
+🏗️ Stack à conserver
+
+React + TypeScript + Tailwind CSS (SPA)
+
+Routing : wouter (scroll fluide)
+
+React Query + hooks pour l’état
+
+Panier LocalStorage (multi-articles, persistant)
+
+
+
+---
+
+🌍 Multilingue
+
+Sélecteur de langue par drapeaux uniquement.
+
+Langues : Anglais, Français, Espagnol, Portugais, Polonais.
+
+Traduire tout le contenu : sections, modales, formulaires, notifications, checkout.
+
+
+
+---
+
+🖼️ Design & Contenu
+
+Design moderne et premium, adapté à la vente de smartphones, montres et gadgets high-tech.
+
+Ajouter au moins 60 produits avec images libres de droits haute qualité (lazy-loading, optimisées).
+
+Corriger tout texte invisible/illisible.
+
+Supprimer la section “Paiement sécurisé – Vos avantages” de la page principale.
+
+
+
+---
+
+🛒 Panier & Checkout
+
+Panier LocalStorage avec ajout multiple, modification et suppression.
+
+Avant paiement : champs Nom complet, Adresse complète, Email, Téléphone obligatoires.
+
+Générer automatiquement un numéro de commande unique pour chaque transaction.
+
+Ce numéro est repris dans le récapitulatif et dans le formulaire d’envoi de tickets.
+
+
+
+---
+
+💳 Paiements externes
+
+1. Virement bancaire manuel
+
+Afficher IBAN + BIC + instructions.
+
+Le numéro de commande sert de motif de virement.
+
+Message :
+
+> “Après réception du paiement, vous recevrez une confirmation par email. Votre commande sera livrée sous 24-48 h.”
+
+
+
+
+
+2. Tickets prépayés (Transcash & PCS)
+
+Formulaire pour envoyer un ou plusieurs codes.
+
+Envoi automatique d’un email au propriétaire du site.
+
+Numéro de commande inséré d’office.
+
+
+
+3. MaxelPay (API publique)
+
+Intégrer un bouton/checkout simple côté front (ou via Serverless Function Vercel si nécessaire).
+
+
+
+
+
+---
+
+⚡ Footer minimaliste
+
+Inclure uniquement :
+
+Logo Luxio
+
+Mentions légales
+
+Politique de confidentialité
+
+Conditions générales de vente (CGV)
+
+Contact
+
+
+Textes à rédiger (et traduire en 5 langues)
+
+1️⃣ Mentions légales
+“Luxio est une boutique en ligne spécialisée dans les produits électroniques.
+Siège social : [adresse générique].
+Responsable de publication : [nom générique].
+Hébergement : Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.”
+
+2️⃣ Politique de confidentialité
+“Nous collectons uniquement les données nécessaires au traitement des commandes (nom, adresse, email, téléphone).
+Ces informations ne sont jamais revendues et peuvent être supprimées sur demande via notre email de contact.”
+
+3️⃣ Conditions générales de vente (CGV)
+“Les prix sont en euros TTC.
+Paiements acceptés : virement bancaire, tickets prépayés Transcash/PCS, MaxelPay.
+Les commandes sont expédiées sous 24-48 h après confirmation du paiement.
+Toute réclamation doit être adressée à notre email de contact.”
+
+4️⃣ Contact
+“Pour toute question : support@luxio-store.com”
+(configurer l’adresse email pour réception des formulaires et tickets).
+
+
+---
+
+🔍 Vérification
+
+Tester toutes les pages, boutons, liens et formulaires.
+
+Corriger chaque bug ou erreur console.
+
+Responsive complet (mobile, tablette, desktop).
+
+Optimiser performance (lazy-load images, code splitting, minification).
+
+
+
+---
+
+🚀 Livraison
+
+Fournir tout le code source parfaitement structuré et commenté.
+
+Inclure les fichiers prêts au déploiement (package.json, vercel.json, éventuel vite.config ou next.config).
+
+⚠️ Ne pas déployer sur Vercel : je dois d’abord inspecter et valider le projet.
+
+
+
+---
+
+💡 Résumé à mettre dans le README
+“Projet Luxio — E-commerce high-tech multilingue (EN/FR/ES/PT/PL), 60+ produits, design moderne, panier LocalStorage, paiements externes (virement, tickets, MaxelPay), footer minimaliste avec textes traduits, prêt pour inspection et déploiement ultérieur sur Vercel.”
+
+
+---
+
+✅ Consigne finale : livre un projet complet, testé, prêt à l’emploi, mais laisse le déploiement sur Vercel en attente jusqu’à ma validation.
+
