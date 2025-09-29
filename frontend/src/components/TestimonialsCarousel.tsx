@@ -2,19 +2,18 @@ import { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export function TestimonialsCarousel() {
-  const { t, getTestimonials } = useLanguage();
+  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(3);
 
-  // Update items per view based on screen size
   useEffect(() => {
     const updateItemsPerView = () => {
       if (window.innerWidth < 768) {
-        setItemsPerView(1); // Mobile: 1 item
+        setItemsPerView(1);
       } else if (window.innerWidth < 1024) {
-        setItemsPerView(2); // Tablet: 2 items
+        setItemsPerView(2);
       } else {
-        setItemsPerView(3); // Desktop: 3 items
+        setItemsPerView(3);
       }
     };
 
@@ -23,8 +22,7 @@ export function TestimonialsCarousel() {
     return () => window.removeEventListener('resize', updateItemsPerView);
   }, []);
 
-  // Fallback testimonials if not available in translations
-  const fallbackTestimonials = [
+  const testimonials = [
     {
       name: 'Sarah Johnson',
       avatar: 'SJ',
@@ -80,29 +78,72 @@ export function TestimonialsCarousel() {
       rating: 5,
       text: 'Outstanding product quality and customer care. My smart speaker setup was effortless thanks to their detailed guides.',
       verified: true
+    },
+    {
+      name: 'Sophie Laurent',
+      avatar: 'SL',
+      rating: 5,
+      text: 'My Nike Air Max arrived in perfect condition. The quality is top-notch and the price was incredibly competitive.',
+      verified: true
+    },
+    {
+      name: 'Tom Anderson',
+      avatar: 'TA',
+      rating: 5,
+      text: 'Bought a Samsung Galaxy Z Fold and couldn\'t be happier. Luxio made the whole process seamless from order to delivery.',
+      verified: true
+    },
+    {
+      name: 'Maria Santos',
+      avatar: 'MS',
+      rating: 5,
+      text: 'The Fitbit tracker I ordered works wonderfully. Great customer support and the free shipping was a nice bonus.',
+      verified: true
+    },
+    {
+      name: 'Chris Taylor',
+      avatar: 'CT',
+      rating: 5,
+      text: 'Amazing deals on tech products! Got a smart thermostat and security camera bundle at an incredible discount.',
+      verified: true
+    },
+    {
+      name: 'Nina Patel',
+      avatar: 'NP',
+      rating: 5,
+      text: 'The e-bike I purchased is fantastic. Luxio\'s team answered all my questions and the delivery was super fast.',
+      verified: true
+    },
+    {
+      name: 'Daniel Brown',
+      avatar: 'DB',
+      rating: 5,
+      text: 'Ordered Adidas sneakers and they fit perfectly! Authentic products, great prices, and excellent service overall.',
+      verified: true
+    },
+    {
+      name: 'Elena Popov',
+      avatar: 'EP',
+      rating: 5,
+      text: 'Very satisfied with my Google Pixel 8 Pro. The checkout was easy and my order arrived earlier than expected.',
+      verified: true
     }
   ];
-
-  // Get testimonials from translations, fallback to default
-  const translatedTestimonials = getTestimonials();
-  const testimonials = translatedTestimonials.length > 0 ? translatedTestimonials : fallbackTestimonials;
   
   const maxIndex = Math.max(0, testimonials.length - itemsPerView);
 
-  // Reset index when items per view changes
   useEffect(() => {
     if (currentIndex > maxIndex) {
       setCurrentIndex(0);
     }
   }, [itemsPerView, currentIndex, maxIndex]);
 
-  // Auto-scroll functionality
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => 
         prevIndex >= maxIndex ? 0 : prevIndex + 1
       );
-    }, 4000); // Change slide every 4 seconds
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [maxIndex]);
@@ -136,7 +177,6 @@ export function TestimonialsCarousel() {
         </div>
         
         <div className="relative">
-          {/* Carousel container */}
           <div className="overflow-hidden" data-testid="carousel-container">
             <div 
               className="flex transition-transform duration-500 ease-in-out"
@@ -154,11 +194,12 @@ export function TestimonialsCarousel() {
                   data-testid={`testimonial-${index}`}
                 >
                   <div className="bg-card border border-border rounded-lg p-6 shadow-sm h-full">
-                    {/* Star rating */}
                     <div className="flex items-center mb-4">
                       <div className="flex text-yellow-400" data-testid={`rating-${index}`}>
                         {[...Array(testimonial.rating)].map((_, i) => (
-                          <i key={i} className="fas fa-star text-sm"></i>
+                          <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                          </svg>
                         ))}
                       </div>
                       <span className="text-sm text-slate-600 dark:text-slate-300 ml-2">
@@ -166,7 +207,6 @@ export function TestimonialsCarousel() {
                       </span>
                     </div>
                     
-                    {/* Testimonial text */}
                     <p 
                       className="text-slate-700 dark:text-slate-300 mb-4 text-sm leading-relaxed" 
                       data-testid={`testimonial-text-${index}`}
@@ -174,7 +214,6 @@ export function TestimonialsCarousel() {
                       "{testimonial.text}"
                     </p>
                     
-                    {/* Author info */}
                     <div className="flex items-center">
                       <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-medium">
                         {testimonial.avatar}
@@ -185,7 +224,9 @@ export function TestimonialsCarousel() {
                         </div>
                         {testimonial.verified && (
                           <div className="text-xs text-green-600 dark:text-green-400 flex items-center">
-                            <i className="fas fa-check-circle mr-1"></i>
+                            <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
                             {t('verifiedPurchase')}
                           </div>
                         )}
@@ -197,14 +238,15 @@ export function TestimonialsCarousel() {
             </div>
           </div>
 
-          {/* Navigation arrows */}
           <button
             onClick={prevSlide}
             className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white dark:bg-slate-800 rounded-full p-2 shadow-lg border border-border hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors z-10"
             data-testid="prev-button"
             aria-label="Previous testimonials"
           >
-            <i className="fas fa-chevron-left text-slate-600 dark:text-slate-400"></i>
+            <svg className="w-6 h-6 text-slate-600 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
           </button>
           
           <button
@@ -213,11 +255,12 @@ export function TestimonialsCarousel() {
             data-testid="next-button"
             aria-label="Next testimonials"
           >
-            <i className="fas fa-chevron-right text-slate-600 dark:text-slate-400"></i>
+            <svg className="w-6 h-6 text-slate-600 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
           </button>
         </div>
 
-        {/* Dots indicator */}
         <div className="flex justify-center mt-8 space-x-2" data-testid="dots-indicator">
           {Array.from({ length: maxIndex + 1 }).map((_, index) => (
             <button
@@ -234,9 +277,10 @@ export function TestimonialsCarousel() {
           ))}
         </div>
 
-        {/* Mobile swipe hint */}
         <div className="text-center mt-4 text-xs text-slate-500 dark:text-slate-400 md:hidden">
-          <i className="fas fa-hand-point-left mr-1"></i>
+          <svg className="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+          </svg>
           Swipe to navigate
         </div>
       </div>
