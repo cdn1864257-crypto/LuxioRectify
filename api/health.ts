@@ -14,7 +14,7 @@ interface VercelResponse {
   end: (chunk?: any) => void;
 }
 
-export default function handler(req: VercelRequest, res: VercelResponse) {
+function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') {
     res.setHeader('Allow', ['GET']);
     return res.status(405).end(`Method ${req.method} Not Allowed`);
@@ -26,3 +26,5 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     timestamp: new Date().toISOString()
   });
 }
+
+export default handler;

@@ -23,7 +23,7 @@ interface User {
 // Simuler une base de données en mémoire pour l'exemple
 let users: User[] = [];
 
-export default function handler(req: VercelRequest, res: VercelResponse) {
+function handler(req: VercelRequest, res: VercelResponse) {
   const { method } = req;
 
   switch (method) {
@@ -55,3 +55,5 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
       res.status(405).end(`Method ${method} Not Allowed`);
   }
 }
+
+export default handler;
