@@ -7,7 +7,9 @@ const languageFlags = {
   fr: '🇫🇷', 
   es: '🇪🇸',
   pt: '🇵🇹',
-  pl: '🇵🇱'
+  pl: '🇵🇱',
+  it: '🇮🇹',
+  hu: '🇭🇺'
 } as const;
 
 const languageNames = {
@@ -15,7 +17,9 @@ const languageNames = {
   fr: 'Français',
   es: 'Español', 
   pt: 'Português',
-  pl: 'Polski'
+  pl: 'Polski',
+  it: 'Italiano',
+  hu: 'Magyar'
 } as const;
 
 export function LanguageSelector() {

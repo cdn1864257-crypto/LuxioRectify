@@ -7,6 +7,10 @@ export function useLanguage() {
   useEffect(() => {
     const detectedLang = detectLanguage();
     setLanguage(detectedLang);
+    // Save detected language to localStorage if not already there
+    if (!localStorage.getItem('luxio-language')) {
+      localStorage.setItem('luxio-language', detectedLang);
+    }
   }, []);
 
   const changeLanguage = (lang: Language) => {
@@ -15,7 +19,8 @@ export function useLanguage() {
   };
 
   const t = (key: keyof typeof translations.en): string => {
-    const value = translations[language][key] || translations.en[key];
+    const dict = translations[language] ?? translations.en;
+    const value = dict[key] ?? translations.en[key];
     if (typeof value === 'string') {
       return value;
     }
@@ -24,7 +29,8 @@ export function useLanguage() {
   };
 
   const getTestimonials = () => {
-    const value = translations[language].testimonials || translations.en.testimonials;
+    const dict = translations[language] ?? translations.en;
+    const value = dict.testimonials ?? translations.en.testimonials;
     return Array.isArray(value) ? value : [];
   };
 

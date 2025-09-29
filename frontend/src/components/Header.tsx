@@ -34,9 +34,9 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex items-center space-x-4">
-              <div className="text-2xl font-bold text-primary" data-testid="logo">Luxio</div>
-              <nav className="hidden md:flex space-x-8">
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <div className="text-xl sm:text-2xl font-bold text-primary" data-testid="logo">Luxio</div>
+              <nav className="hidden md:flex space-x-4 lg:space-x-8">
                 <button 
                   onClick={() => scrollToSection('smartphones')}
                   className="text-muted-foreground hover:text-primary transition-colors"
@@ -76,7 +76,7 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
             </div>
             
             {/* Search Bar */}
-            <div className="hidden lg:flex flex-1 max-w-lg mx-8">
+            <div className="hidden xl:flex flex-1 max-w-lg mx-4 lg:mx-8">
               <div className="relative w-full">
                 <input 
                   type="text" 
@@ -89,29 +89,22 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
             </div>
             
             {/* Right Side Actions */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
               {/* Language Selector */}
-              <LanguageSelector />
+              <div className="hidden sm:block">
+                <LanguageSelector />
+              </div>
               
               {/* User Menu */}
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
                 {!user ? (
-                  <div className="flex space-x-2" data-testid="auth-buttons">
-                    <button 
-                      onClick={() => setAuthModal({ open: true, mode: 'login' })}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                      data-testid="button-login"
-                    >
-                      {t('login')}
-                    </button>
-                    <button 
-                      onClick={() => setAuthModal({ open: true, mode: 'signup' })}
-                      className="bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm hover:bg-primary/90 transition-colors"
-                      data-testid="button-signup"
-                    >
-                      {t('signup')}
-                    </button>
-                  </div>
+                  <button 
+                    onClick={() => setAuthModal({ open: true, mode: 'login' })}
+                    className="bg-primary text-primary-foreground px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm hover:bg-primary/90 transition-colors whitespace-nowrap"
+                    data-testid="button-login"
+                  >
+                    {t('login')}
+                  </button>
                 ) : (
                   <div className="flex items-center space-x-4" data-testid="user-profile">
                     <button
@@ -132,10 +125,10 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
               {/* Cart */}
               <button 
                 onClick={onToggleCart}
-                className="relative p-2 hover:bg-muted rounded-full transition-colors"
+                className="relative p-1.5 sm:p-2 hover:bg-muted rounded-full transition-colors"
                 data-testid="button-cart"
               >
-                <i className="fas fa-shopping-cart text-lg"></i>
+                <i className="fas fa-shopping-cart text-base sm:text-lg"></i>
                 {itemCount > 0 && (
                   <span 
                     className="absolute -top-2 -right-2 bg-accent text-accent-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center cart-badge"

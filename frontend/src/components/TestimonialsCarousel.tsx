@@ -4,6 +4,24 @@ import { useLanguage } from '../hooks/use-language';
 export function TestimonialsCarousel() {
   const { t, getTestimonials } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsPerView, setItemsPerView] = useState(3);
+
+  // Update items per view based on screen size
+  useEffect(() => {
+    const updateItemsPerView = () => {
+      if (window.innerWidth < 768) {
+        setItemsPerView(1); // Mobile: 1 item
+      } else if (window.innerWidth < 1024) {
+        setItemsPerView(2); // Tablet: 2 items
+      } else {
+        setItemsPerView(3); // Desktop: 3 items
+      }
+    };
+
+    updateItemsPerView();
+    window.addEventListener('resize', updateItemsPerView);
+    return () => window.removeEventListener('resize', updateItemsPerView);
+  }, []);
 
   // Fallback testimonials if not available in translations
   const fallbackTestimonials = [
@@ -69,8 +87,14 @@ export function TestimonialsCarousel() {
   const translatedTestimonials = getTestimonials();
   const testimonials = translatedTestimonials.length > 0 ? translatedTestimonials : fallbackTestimonials;
   
-  const itemsPerView = 3;
   const maxIndex = Math.max(0, testimonials.length - itemsPerView);
+
+  // Reset index when items per view changes
+  useEffect(() => {
+    if (currentIndex > maxIndex) {
+      setCurrentIndex(0);
+    }
+  }, [itemsPerView, currentIndex, maxIndex]);
 
   // Auto-scroll functionality
   useEffect(() => {
