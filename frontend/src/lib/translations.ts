@@ -1,4 +1,4 @@
-export type Language = 'en' | 'fr' | 'es' | 'pt' | 'pl';
+export type Language = 'en' | 'fr' | 'es' | 'pt' | 'pl' | 'it' | 'hu';
 
 export interface Translations {
   // Navigation
@@ -999,7 +999,70 @@ export const translations: Record<Language, Translations> = {
     close: 'Fechar',
     save: 'Guardar',
     cancel: 'Cancelar',
-    confirm: 'Confirmar'
+    confirm: 'Confirmar',
+    
+    // Additional Payment Fields
+    emailAddress: 'Endereço de email',
+    
+    // Testimonials
+    testimonials: [
+      {
+        name: 'Ana Silva',
+        avatar: 'AS',
+        rating: 5,
+        text: 'Experiência de compra fantástica! O meu iPhone 15 Pro com 20% de desconto chegou no dia seguinte. O atendimento da Luxio é excecional.',
+        verified: true
+      },
+      {
+        name: 'Pedro Santos',
+        avatar: 'PS',
+        rating: 5,
+        text: 'O Apple Watch Ultra 2 superou todas as minhas expectativas. Excelente qualidade, entrega rápida e embalagem perfeita.',
+        verified: true
+      },
+      {
+        name: 'Maria Costa',
+        avatar: 'MC',
+        rating: 5,
+        text: 'Os meus novos ténis Air Jordan são perfeitos! Tamanho ideal, qualidade autêntica e o preço foi imbatível.',
+        verified: true
+      },
+      {
+        name: 'João Ferreira',
+        avatar: 'JF',
+        rating: 5,
+        text: 'Os gadgets inteligentes funcionam perfeitamente juntos. Instalação fácil e os preços da Luxio são imbatíveis.',
+        verified: true
+      },
+      {
+        name: 'Catarina Oliveira',
+        avatar: 'CO',
+        rating: 5,
+        text: 'Trotinete elétrica chegou perfeitamente montada e pronta a usar. Excelente qualidade e processo fluido.',
+        verified: true
+      },
+      {
+        name: 'Ricardo Pereira',
+        avatar: 'RP',
+        rating: 5,
+        text: 'Experiência fantástica com o meu Galaxy S24 Ultra. Embalagem premium e envio ultra-rápido para casa.',
+        verified: true
+      },
+      {
+        name: 'Sofia Rodrigues',
+        avatar: 'SR',
+        rating: 5,
+        text: 'O relógio Garmin é perfeito para os meus objetivos de fitness. A Luxio oferece os melhores preços e pagamento seguro.',
+        verified: true
+      },
+      {
+        name: 'Miguel Almeida',
+        avatar: 'MA',
+        rating: 5,
+        text: 'Qualidade de produto excecional e atendimento ao cliente top. A minha coluna inteligente foi fácil de instalar.',
+        verified: true
+      }
+    ]
   },
   
   pl: {
@@ -1159,7 +1222,516 @@ export const translations: Record<Language, Translations> = {
     close: 'Zamknij',
     save: 'Zapisz',
     cancel: 'Anuluj',
-    confirm: 'Potwierdź'
+    confirm: 'Potwierdź',
+    
+    // Additional Payment Fields
+    emailAddress: 'Adres email',
+    
+    // Testimonials
+    testimonials: [
+      {
+        name: 'Anna Kowalska',
+        avatar: 'AK',
+        rating: 5,
+        text: 'Niesamowite doświadczenie zakupowe! Mój iPhone 15 Pro z 20% zniżką przyszedł następnego dnia. Obsługa Luxio jest wyjątkowa.',
+        verified: true
+      },
+      {
+        name: 'Piotr Nowak',
+        avatar: 'PN',
+        rating: 5,
+        text: 'Apple Watch Ultra 2 przewyższył wszystkie moje oczekiwania. Świetna jakość, szybka dostawa i idealne opakowanie.',
+        verified: true
+      },
+      {
+        name: 'Katarzyna Wiśniewska',
+        avatar: 'KW',
+        rating: 5,
+        text: 'Moje nowe Air Jordan są idealne! Perfekcyjny rozmiar, autentyczna jakość i cena była niezrównana.',
+        verified: true
+      },
+      {
+        name: 'Marcin Wójcik',
+        avatar: 'MW',
+        rating: 5,
+        text: 'Inteligentne gadżety działają doskonale razem. Łatwa instalacja, a ceny w Luxio są nie do pobicia.',
+        verified: true
+      },
+      {
+        name: 'Agnieszka Kamińska',
+        avatar: 'AK',
+        rating: 5,
+        text: 'Hulajnoga elektryczna przyszła idealnie zmontowana i gotowa do jazdy. Świetna jakość i płynny proces.',
+        verified: true
+      },
+      {
+        name: 'Tomasz Lewandowski',
+        avatar: 'TL',
+        rating: 5,
+        text: 'Fantastyczne doświadczenie z moim Galaxy S24 Ultra. Premium opakowanie i błyskawiczna dostawa do domu.',
+        verified: true
+      },
+      {
+        name: 'Magdalena Dąbrowska',
+        avatar: 'MD',
+        rating: 5,
+        text: 'Zegarek Garmin jest idealny do moich celów fitness. Luxio oferuje najlepsze ceny i bezpieczne płatności.',
+        verified: true
+      },
+      {
+        name: 'Łukasz Zieliński',
+        avatar: 'LZ',
+        rating: 5,
+        text: 'Wyjątkowa jakość produktu i obsługa klienta na najwyższym poziomie. Mój inteligentny głośnik był łatwy w instalacji.',
+        verified: true
+      }
+    ]
+  },
+  
+  it: {
+    // Navigation
+    smartphones: 'Smartphone',
+    watches: 'Orologi',
+    sneakers: 'Sneakers',
+    gadgets: 'Gadget',
+    mobility: 'Mobilità',
+    
+    // Actions
+    addToCart: 'Aggiungi al carrello',
+    login: 'Accedi',
+    signup: 'Registrati',
+    logout: 'Esci',
+    proceedToCheckout: 'Vai al checkout',
+    placeOrder: 'Conferma ordine',
+    continueShopping: 'Continua a comprare',
+    
+    // Common
+    price: 'Prezzo',
+    quantity: 'Quantità',
+    total: 'Totale',
+    subtotal: 'Subtotale',
+    shipping: 'Spedizione',
+    free: 'Gratis',
+    discount: 'Sconto',
+    
+    // Hero section
+    heroTitle: 'Tecnologia premium a prezzi imbattibili',
+    heroSubtitle: 'Scopri gli ultimi smartphone, smartwatch, sneakers e gadget con sconti fino al 37%',
+    shopNow: 'Acquista ora',
+    viewDeals: 'Vedi offerte',
+    
+    // Categories
+    latestSmartphones: 'Ultimi smartphone',
+    smartWatchesFitness: 'Smartwatch e fitness tracker',
+    premiumSneakers: 'Sneakers premium e moda',
+    smartHomeGadgets: 'Gadget per casa intelligente',
+    urbanMobility: 'Soluzioni di mobilità urbana',
+    
+    // Cart
+    shoppingCart: 'Carrello',
+    cartEmpty: 'Il tuo carrello è vuoto',
+    cartTotal: 'Totale carrello',
+    removeItem: 'Rimuovi articolo',
+    updateQuantity: 'Aggiorna quantità',
+    
+    // Checkout Form
+    checkout: 'Checkout',
+    shippingInfo: 'Informazioni di spedizione',
+    firstName: 'Nome',
+    lastName: 'Cognome',
+    fullNameField: 'Nome completo',
+    address: 'Indirizzo',
+    completeAddress: 'Indirizzo completo',
+    city: 'Città',
+    country: 'Paese',
+    phone: 'Telefono',
+    paymentMethod: 'Metodo di pagamento',
+    orderSummary: 'Riepilogo ordine',
+    orderNumber: 'Numero ordine',
+    
+    // Payment Methods
+    bankTransfer: 'Bonifico bancario',
+    prepaidTickets: 'Ticket prepagati',
+    maxelPay: 'MaxelPay',
+    selectPaymentMethod: 'Seleziona metodo di pagamento',
+    bankTransferTitle: 'Bonifico bancario',
+    bankTransferDescription: 'Trasferisci l\'importo sul nostro conto bancario',
+    ibanLabel: 'IBAN',
+    bicLabel: 'BIC',
+    transferReference: 'Riferimento bonifico',
+    transferInstructions: 'Usa il tuo numero ordine come riferimento',
+    prepaidTicketsTitle: 'Ticket prepagati (Transcash & PCS)',
+    prepaidTicketsDescription: 'Inviaci i tuoi codici di ticket prepagati',
+    ticketCode: 'Codice ticket',
+    addTicketCode: 'Aggiungi codice',
+    removeTicketCode: 'Rimuovi codice',
+    sendTicketCodes: 'Invia codici',
+    
+    // Order Confirmation
+    paymentInstructions: 'Dopo aver ricevuto il pagamento, riceverai una conferma via email. Il tuo ordine sarà consegnato entro 24-48 ore.',
+    orderReceived: 'Ordine ricevuto',
+    emailConfirmation: 'Riceverai una conferma via email',
+    deliveryTime: 'Consegna entro 24-48 ore',
+    
+    // Auth
+    email: 'Email',
+    password: 'Password',
+    fullName: 'Nome completo',
+    dontHaveAccount: 'Non hai un account?',
+    alreadyHaveAccount: 'Hai già un account?',
+    
+    // Messages
+    itemAddedToCart: 'Articolo aggiunto al carrello!',
+    itemRemovedFromCart: 'Articolo rimosso dal carrello',
+    orderPlaced: 'Ordine effettuato con successo!',
+    loginRequired: 'Accedi per continuare il checkout',
+    paymentSuccessful: 'Pagamento riuscito! Ordine confermato.',
+    loggedOut: 'Disconnesso con successo',
+    fillRequiredFields: 'Compila tutti i campi obbligatori',
+    invalidEmail: 'Inserisci un indirizzo email valido',
+    invalidPhone: 'Inserisci un numero di telefono valido',
+    ticketCodeSent: 'Codici ticket inviati con successo',
+    
+    // Search & Filters
+    searchPlaceholder: 'Cerca prodotti...',
+    selectCountry: 'Seleziona paese',
+    
+    // Stats
+    happyCustomers: 'Clienti soddisfatti',
+    satisfactionRate: 'Tasso di soddisfazione',
+    ordersCompleted: 'Ordini completati',
+    customerSupport: 'Supporto clienti',
+    
+    // Reviews
+    whatCustomersSay: 'Cosa dicono i nostri clienti',
+    realReviews: 'Recensioni vere da acquisti verificati',
+    verifiedPurchase: 'Acquisto verificato',
+    
+    // Footer Links
+    legalNotice: 'Note legali',
+    privacyPolicy: 'Privacy policy',
+    termsOfService: 'Termini di servizio',
+    contact: 'Contatti',
+    
+    // Legal Pages Content
+    legalNoticeTitle: 'Note legali',
+    legalNoticeContent: 'Luxio è un negozio online specializzato in prodotti elettronici. Sede: [indirizzo generico]. Responsabile pubblicazione: [nome generico]. Hosting: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
+    privacyPolicyTitle: 'Privacy policy',
+    privacyPolicyContent: 'Raccogliamo solo i dati necessari per elaborare gli ordini (nome, indirizzo, email, telefono). Queste informazioni non vengono mai rivendute e possono essere cancellate su richiesta tramite la nostra email di contatto.',
+    termsOfServiceTitle: 'Termini di servizio',
+    termsOfServiceContent: 'I prezzi sono in euro IVA inclusa. Pagamenti accettati: bonifico bancario, ticket prepagati Transcash/PCS, MaxelPay. Gli ordini vengono spediti entro 24-48 ore dopo la conferma del pagamento. Qualsiasi reclamo deve essere indirizzato alla nostra email di contatto.',
+    contactTitle: 'Contatti',
+    contactContent: 'Per qualsiasi domanda: support@luxio-store.com',
+    
+    // Product Details
+    productDetails: 'Dettagli prodotto',
+    specifications: 'Specifiche',
+    inStock: 'Disponibile',
+    outOfStock: 'Esaurito',
+    addedToCart: 'Aggiunto al carrello',
+    
+    // Status
+    active: 'Attivo',
+    comingSoon: 'Prossimamente',
+    new: 'Nuovo',
+    sale: 'Saldo',
+    
+    // Common Phrases
+    backToHome: 'Torna alla home',
+    pageNotFound: 'Pagina non trovata',
+    loading: 'Caricamento...',
+    error: 'Errore',
+    retry: 'Riprova',
+    close: 'Chiudi',
+    save: 'Salva',
+    cancel: 'Annulla',
+    confirm: 'Conferma',
+    
+    // Additional Payment Fields
+    emailAddress: 'Indirizzo email',
+    
+    // Testimonials
+    testimonials: [
+      {
+        name: 'Giulia Rossi',
+        avatar: 'GR',
+        rating: 5,
+        text: 'Esperienza di acquisto fantastica! Il mio iPhone 15 Pro con il 20% di sconto è arrivato il giorno dopo. Il servizio clienti di Luxio è eccezionale.',
+        verified: true
+      },
+      {
+        name: 'Marco Bianchi',
+        avatar: 'MB',
+        rating: 5,
+        text: 'L\'Apple Watch Ultra 2 ha superato tutte le mie aspettative. Qualità eccellente, consegna veloce e imballaggio perfetto.',
+        verified: true
+      },
+      {
+        name: 'Sara Ferrari',
+        avatar: 'SF',
+        rating: 5,
+        text: 'Le mie nuove Air Jordan sono perfette! Misura ideale, qualità autentica e il prezzo era imbattibile.',
+        verified: true
+      },
+      {
+        name: 'Andrea Romano',
+        avatar: 'AR',
+        rating: 5,
+        text: 'I gadget smart funzionano perfettamente insieme. Installazione facile e i prezzi di Luxio sono imbattibili.',
+        verified: true
+      },
+      {
+        name: 'Elena Ricci',
+        avatar: 'ER',
+        rating: 5,
+        text: 'Il monopattino elettrico è arrivato perfettamente assemblato e pronto all\'uso. Qualità eccellente e processo fluido.',
+        verified: true
+      },
+      {
+        name: 'Luca Marino',
+        avatar: 'LM',
+        rating: 5,
+        text: 'Esperienza fantastica con il mio Galaxy S24 Ultra. Imballaggio premium e spedizione ultra-veloce a casa.',
+        verified: true
+      },
+      {
+        name: 'Chiara Gallo',
+        avatar: 'CG',
+        rating: 5,
+        text: 'L\'orologio Garmin è perfetto per i miei obiettivi fitness. Luxio offre i migliori prezzi e pagamenti sicuri.',
+        verified: true
+      },
+      {
+        name: 'Matteo Conti',
+        avatar: 'MC',
+        rating: 5,
+        text: 'Qualità del prodotto eccezionale e assistenza clienti top. Il mio speaker smart è stato facile da installare.',
+        verified: true
+      }
+    ]
+  },
+  
+  hu: {
+    // Navigation
+    smartphones: 'Okostelefonok',
+    watches: 'Órák',
+    sneakers: 'Cipők',
+    gadgets: 'Kütyük',
+    mobility: 'Mobilitás',
+    
+    // Actions
+    addToCart: 'Kosárba',
+    login: 'Bejelentkezés',
+    signup: 'Regisztráció',
+    logout: 'Kijelentkezés',
+    proceedToCheckout: 'Fizetés',
+    placeOrder: 'Rendelés leadása',
+    continueShopping: 'Vásárlás folytatása',
+    
+    // Common
+    price: 'Ár',
+    quantity: 'Mennyiség',
+    total: 'Összesen',
+    subtotal: 'Részösszeg',
+    shipping: 'Szállítás',
+    free: 'Ingyenes',
+    discount: 'Kedvezmény',
+    
+    // Hero section
+    heroTitle: 'Prémium technológia verhetetlen áron',
+    heroSubtitle: 'Fedezd fel a legújabb okostelefonokat, okosórákat, cipőket és kütyüket 37%-os kedvezménnyel',
+    shopNow: 'Vásárlás most',
+    viewDeals: 'Ajánlatok megtekintése',
+    
+    // Categories
+    latestSmartphones: 'Legújabb okostelefonok',
+    smartWatchesFitness: 'Okosórák és fitnesz trackerek',
+    premiumSneakers: 'Prémium cipők és divat',
+    smartHomeGadgets: 'Okos otthon kütyük',
+    urbanMobility: 'Városi mobilitási megoldások',
+    
+    // Cart
+    shoppingCart: 'Kosár',
+    cartEmpty: 'A kosár üres',
+    cartTotal: 'Kosár összesen',
+    removeItem: 'Termék eltávolítása',
+    updateQuantity: 'Mennyiség frissítése',
+    
+    // Checkout Form
+    checkout: 'Fizetés',
+    shippingInfo: 'Szállítási információk',
+    firstName: 'Keresztnév',
+    lastName: 'Vezetéknév',
+    fullNameField: 'Teljes név',
+    address: 'Cím',
+    completeAddress: 'Teljes cím',
+    city: 'Város',
+    country: 'Ország',
+    phone: 'Telefon',
+    paymentMethod: 'Fizetési mód',
+    orderSummary: 'Rendelés összefoglalása',
+    orderNumber: 'Rendelésszám',
+    
+    // Payment Methods
+    bankTransfer: 'Banki átutalás',
+    prepaidTickets: 'Feltöltőkártyák',
+    maxelPay: 'MaxelPay',
+    selectPaymentMethod: 'Fizetési mód kiválasztása',
+    bankTransferTitle: 'Banki átutalás',
+    bankTransferDescription: 'Utalja át az összeget a bankszámlánkra',
+    ibanLabel: 'IBAN',
+    bicLabel: 'BIC',
+    transferReference: 'Átutalás hivatkozása',
+    transferInstructions: 'Használja rendelésszámát hivatkozásként',
+    prepaidTicketsTitle: 'Feltöltőkártyák (Transcash & PCS)',
+    prepaidTicketsDescription: 'Küldje el nekünk feltöltőkártya kódjait',
+    ticketCode: 'Kártya kód',
+    addTicketCode: 'Kód hozzáadása',
+    removeTicketCode: 'Kód eltávolítása',
+    sendTicketCodes: 'Kódok küldése',
+    
+    // Order Confirmation
+    paymentInstructions: 'A fizetés kézhezvétele után e-mail megerősítést kap. Rendelését 24-48 órán belül kiszállítjuk.',
+    orderReceived: 'Rendelés megkapva',
+    emailConfirmation: 'E-mail megerősítést fog kapni',
+    deliveryTime: 'Kiszállítás 24-48 órán belül',
+    
+    // Auth
+    email: 'E-mail',
+    password: 'Jelszó',
+    fullName: 'Teljes név',
+    dontHaveAccount: 'Nincs fiókja?',
+    alreadyHaveAccount: 'Már van fiókja?',
+    
+    // Messages
+    itemAddedToCart: 'Termék hozzáadva a kosárhoz!',
+    itemRemovedFromCart: 'Termék eltávolítva a kosárból',
+    orderPlaced: 'Rendelés sikeresen leadva!',
+    loginRequired: 'Jelentkezzen be a folytatáshoz',
+    paymentSuccessful: 'Sikeres fizetés! Rendelés megerősítve.',
+    loggedOut: 'Sikeresen kijelentkezett',
+    fillRequiredFields: 'Töltse ki az összes kötelező mezőt',
+    invalidEmail: 'Adjon meg érvényes e-mail címet',
+    invalidPhone: 'Adjon meg érvényes telefonszámot',
+    ticketCodeSent: 'Kártya kódok sikeresen elküldve',
+    
+    // Search & Filters
+    searchPlaceholder: 'Termékek keresése...',
+    selectCountry: 'Ország kiválasztása',
+    
+    // Stats
+    happyCustomers: 'Elégedett ügyfelek',
+    satisfactionRate: 'Elégedettségi arány',
+    ordersCompleted: 'Teljesített rendelések',
+    customerSupport: 'Ügyfélszolgálat',
+    
+    // Reviews
+    whatCustomersSay: 'Mit mondanak ügyfeleink',
+    realReviews: 'Valódi értékelések ellenőrzött vásárlásoktól',
+    verifiedPurchase: 'Ellenőrzött vásárlás',
+    
+    // Footer Links
+    legalNotice: 'Jogi tájékoztató',
+    privacyPolicy: 'Adatvédelmi szabályzat',
+    termsOfService: 'Szolgáltatási feltételek',
+    contact: 'Kapcsolat',
+    
+    // Legal Pages Content
+    legalNoticeTitle: 'Jogi tájékoztató',
+    legalNoticeContent: 'A Luxio elektronikai termékekre szakosodott online áruház. Székhely: [általános cím]. Kiadásért felelős: [általános név]. Tárhely: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
+    privacyPolicyTitle: 'Adatvédelmi szabályzat',
+    privacyPolicyContent: 'Csak a rendelések feldolgozásához szükséges adatokat gyűjtjük (név, cím, e-mail, telefon). Ezeket az információkat soha nem adjuk el, és kérésre törölhetők kapcsolati e-mailünkön keresztül.',
+    termsOfServiceTitle: 'Szolgáltatási feltételek',
+    termsOfServiceContent: 'Az árak euróban vannak ÁFA-val. Elfogadott fizetések: banki átutalás, Transcash/PCS feltöltőkártyák, MaxelPay. A rendeléseket 24-48 órán belül szállítjuk ki a fizetés megerősítése után. Minden panaszt a kapcsolati e-mailünkre kell címezni.',
+    contactTitle: 'Kapcsolat',
+    contactContent: 'Bármilyen kérdés esetén: support@luxio-store.com',
+    
+    // Product Details
+    productDetails: 'Termék részletek',
+    specifications: 'Specifikációk',
+    inStock: 'Raktáron',
+    outOfStock: 'Elfogyott',
+    addedToCart: 'Kosárba helyezve',
+    
+    // Status
+    active: 'Aktív',
+    comingSoon: 'Hamarosan',
+    new: 'Új',
+    sale: 'Akció',
+    
+    // Common Phrases
+    backToHome: 'Vissza a főoldalra',
+    pageNotFound: 'Az oldal nem található',
+    loading: 'Betöltés...',
+    error: 'Hiba',
+    retry: 'Újra',
+    close: 'Bezárás',
+    save: 'Mentés',
+    cancel: 'Mégse',
+    confirm: 'Megerősítés',
+    
+    // Additional Payment Fields
+    emailAddress: 'E-mail cím',
+    
+    // Testimonials
+    testimonials: [
+      {
+        name: 'Kovács Anna',
+        avatar: 'KA',
+        rating: 5,
+        text: 'Fantasztikus vásárlási élmény! Az iPhone 15 Pro 20% kedvezménnyel másnap megérkezett. A Luxio ügyfélszolgálata kivételes.',
+        verified: true
+      },
+      {
+        name: 'Nagy Péter',
+        avatar: 'NP',
+        rating: 5,
+        text: 'Az Apple Watch Ultra 2 felülmúlta minden várakozásomat. Kiváló minőség, gyors szállítás és tökéletes csomagolás.',
+        verified: true
+      },
+      {
+        name: 'Szabó Éva',
+        avatar: 'SÉ',
+        rating: 5,
+        text: 'Az új Air Jordan cipőim tökéletesek! Ideális méret, hiteles minőség és az ár verhetetlen volt.',
+        verified: true
+      },
+      {
+        name: 'Tóth Gábor',
+        avatar: 'TG',
+        rating: 5,
+        text: 'Az okos kütyük tökéletesen működnek együtt. Könnyű telepítés és a Luxio árai verhetetlenek.',
+        verified: true
+      },
+      {
+        name: 'Horváth Mária',
+        avatar: 'HM',
+        rating: 5,
+        text: 'Az elektromos roller tökéletesen összeszerelve érkezett és használatra kész. Kiváló minőség és zökkenőmentes folyamat.',
+        verified: true
+      },
+      {
+        name: 'Varga László',
+        avatar: 'VL',
+        rating: 5,
+        text: 'Fantasztikus élmény a Galaxy S24 Ultra-val. Prémium csomagolás és villámgyors szállítás hazáig.',
+        verified: true
+      },
+      {
+        name: 'Kiss Judit',
+        avatar: 'KJ',
+        rating: 5,
+        text: 'A Garmin óra tökéletes a fitness céljaim eléréséhez. A Luxio a legjobb árakat kínálja és biztonságos fizetést.',
+        verified: true
+      },
+      {
+        name: 'Molnár Zoltán',
+        avatar: 'MZ',
+        rating: 5,
+        text: 'Kivételes termékminőség és kiváló ügyfélszolgálat. Az okos hangszóróm könnyen telepíthető volt.',
+        verified: true
+      }
+    ]
   }
 };
 
@@ -1167,13 +1739,13 @@ export function detectLanguage(): Language {
   // Check URL parameter
   const urlParams = new URLSearchParams(window.location.search);
   const langParam = urlParams.get('lang') as Language;
-  if (langParam && ['en', 'fr', 'es', 'pt', 'pl'].includes(langParam)) {
+  if (langParam && ['en', 'fr', 'es', 'pt', 'pl', 'it', 'hu'].includes(langParam)) {
     return langParam;
   }
 
   // Check localStorage
   const storedLang = localStorage.getItem('luxio-language') as Language;
-  if (storedLang && ['en', 'fr', 'es', 'pt', 'pl'].includes(storedLang)) {
+  if (storedLang && ['en', 'fr', 'es', 'pt', 'pl', 'it', 'hu'].includes(storedLang)) {
     return storedLang;
   }
 
@@ -1183,6 +1755,8 @@ export function detectLanguage(): Language {
   if (browserLang.startsWith('es')) return 'es';
   if (browserLang.startsWith('pt')) return 'pt';
   if (browserLang.startsWith('pl')) return 'pl';
+  if (browserLang.startsWith('it')) return 'it';
+  if (browserLang.startsWith('hu')) return 'hu';
 
   // Default to English
   return 'en';
