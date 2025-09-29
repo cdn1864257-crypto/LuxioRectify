@@ -14,13 +14,24 @@ export function useLanguage() {
     localStorage.setItem('luxio-language', lang);
   };
 
-  const t = (key: keyof typeof translations.en) => {
-    return translations[language][key] || translations.en[key];
+  const t = (key: keyof typeof translations.en): string => {
+    const value = translations[language][key] || translations.en[key];
+    if (typeof value === 'string') {
+      return value;
+    }
+    // For non-string values like testimonials array, return empty string
+    return '';
+  };
+
+  const getTestimonials = () => {
+    const value = translations[language].testimonials || translations.en.testimonials;
+    return Array.isArray(value) ? value : [];
   };
 
   return {
     language,
     changeLanguage,
+    getTestimonials,
     t
   };
 }

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLanguage } from '../hooks/use-language';
 
 export function TestimonialsCarousel() {
-  const { t } = useLanguage();
+  const { t, getTestimonials } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Fallback testimonials if not available in translations
@@ -65,8 +65,9 @@ export function TestimonialsCarousel() {
     }
   ];
 
-  // Try to get testimonials from translations, fallback to default
-  const testimonials = (t('testimonials' as any) || fallbackTestimonials) as typeof fallbackTestimonials;
+  // Get testimonials from translations, fallback to default
+  const translatedTestimonials = getTestimonials();
+  const testimonials = translatedTestimonials.length > 0 ? translatedTestimonials : fallbackTestimonials;
   
   const itemsPerView = 3;
   const maxIndex = Math.max(0, testimonials.length - itemsPerView);

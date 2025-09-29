@@ -20,12 +20,6 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
     mode: 'login'
   });
 
-  const handleLogout = async () => {
-    const result = await logout();
-    if (result.success) {
-      showToast(t('loggedOut'), 'info');
-    }
-  };
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
