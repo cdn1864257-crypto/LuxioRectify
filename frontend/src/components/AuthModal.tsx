@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../hooks/use-auth';
-import { useLanguage } from '../hooks/use-language';
+import { useLanguage } from '../contexts/LanguageContext';
 import { showToast } from './ToastNotifications';
 
 interface AuthModalProps {

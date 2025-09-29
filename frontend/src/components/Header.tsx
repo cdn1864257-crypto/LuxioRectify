@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../hooks/use-auth';
-import { useCart } from '../hooks/use-cart';
-import { useLanguage } from '../hooks/use-language';
+import { useCart } from '../contexts/CartContext';
+import { useLanguage } from '../contexts/LanguageContext';
 import { AuthModal } from './AuthModal';
 import { LanguageSelector } from './LanguageSelector';
 import { showToast } from './ToastNotifications';

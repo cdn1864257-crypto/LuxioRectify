@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Language } from '../lib/translations';
-import { useLanguage } from '../hooks/use-language';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const languageFlags = {
   en: '🇺🇸',

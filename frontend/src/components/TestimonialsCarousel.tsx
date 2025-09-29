@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLanguage } from '../hooks/use-language';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export function TestimonialsCarousel() {
   const { t, getTestimonials } = useLanguage();

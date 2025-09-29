@@ -1,4 +1,4 @@
-import { useLanguage } from '../hooks/use-language';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export function Hero() {
   const { t } = useLanguage();

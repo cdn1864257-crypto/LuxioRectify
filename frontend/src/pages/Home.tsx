@@ -10,7 +10,7 @@ import { CheckoutModal } from '../components/CheckoutModal';
 import { ToastNotifications } from '../components/ToastNotifications';
 import { UserProfile } from '../components/UserProfile';
 import { useAuth } from '../hooks/use-auth';
-import { useLanguage } from '../hooks/use-language';
+import { useLanguage } from '../contexts/LanguageContext';
 import { getProductsByCategory } from '../lib/products';
 import { showToast } from '../components/ToastNotifications';
 

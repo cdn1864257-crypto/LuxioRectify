@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLanguage } from '../hooks/use-language';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface LegalModalProps {
   isOpen: boolean;

@@ -392,6 +392,62 @@ export const translations: Record<Language, Translations> = {
         rating: 5,
         text: 'Outstanding product quality and customer care. My smart speaker setup was effortless thanks to their detailed guides.',
         verified: true
+      },
+      {
+        name: 'Jennifer Lee',
+        avatar: 'JL',
+        rating: 5,
+        text: 'The wireless earbuds I bought have incredible sound quality. Luxio always has the best deals on premium electronics!',
+        verified: true
+      },
+      {
+        name: 'Robert Taylor',
+        avatar: 'RT',
+        rating: 5,
+        text: 'Ordered a fitness tracker and it arrived in mint condition. Great customer service when I had questions about setup.',
+        verified: true
+      },
+      {
+        name: 'Amanda White',
+        avatar: 'AW',
+        rating: 5,
+        text: 'My electric bike purchase was seamless from start to finish. The discount made it an incredible value for the quality.',
+        verified: true
+      },
+      {
+        name: 'Christopher Brown',
+        avatar: 'CB',
+        rating: 5,
+        text: 'The tablet I purchased exceeded my expectations. Fast shipping, great price, and the product is exactly as described.',
+        verified: true
+      },
+      {
+        name: 'Michelle Davis',
+        avatar: 'MD',
+        rating: 5,
+        text: 'Luxio has become my go-to store for all tech purchases. Reliable, affordable, and always authentic products.',
+        verified: true
+      },
+      {
+        name: 'Daniel Anderson',
+        avatar: 'DA',
+        rating: 5,
+        text: 'The smart home bundle I bought works perfectly together. Installation was simple and customer support was very helpful.',
+        verified: true
+      },
+      {
+        name: 'Nicole Martinez',
+        avatar: 'NM',
+        rating: 5,
+        text: 'Received my new smartwatch within 48 hours. The packaging was excellent and the watch is absolutely beautiful!',
+        verified: true
+      },
+      {
+        name: 'Kevin Johnson',
+        avatar: 'KJ',
+        rating: 5,
+        text: 'Best online shopping experience I\'ve had. The website is easy to navigate and checkout was super quick and secure.',
+        verified: true
       }
     ]
   },
@@ -614,6 +670,62 @@ export const translations: Record<Language, Translations> = {
         avatar: 'MG',
         rating: 5,
         text: 'Qualité produit remarquable et service client au top. Installation de mon enceinte connectée simple grâce aux guides détaillés.',
+        verified: true
+      },
+      {
+        name: 'Isabelle Leroy',
+        avatar: 'IL',
+        rating: 5,
+        text: 'Les écouteurs sans fil que j\'ai achetés ont une qualité sonore incroyable. Luxio a toujours les meilleures offres sur l\'électronique premium !',
+        verified: true
+      },
+      {
+        name: 'François Dupont',
+        avatar: 'FD',
+        rating: 5,
+        text: 'J\'ai commandé un tracker fitness et il est arrivé en parfait état. Excellent service client quand j\'ai eu des questions sur la configuration.',
+        verified: true
+      },
+      {
+        name: 'Céline Blanc',
+        avatar: 'CB',
+        rating: 5,
+        text: 'Mon achat de vélo électrique s\'est déroulé sans accroc du début à la fin. La réduction en a fait une valeur incroyable pour la qualité.',
+        verified: true
+      },
+      {
+        name: 'Laurent Mercier',
+        avatar: 'LM',
+        rating: 5,
+        text: 'La tablette que j\'ai achetée a dépassé mes attentes. Livraison rapide, excellent prix et le produit est exactement comme décrit.',
+        verified: true
+      },
+      {
+        name: 'Valérie Simon',
+        avatar: 'VS',
+        rating: 5,
+        text: 'Luxio est devenu ma boutique préférée pour tous mes achats tech. Fiable, abordable et toujours des produits authentiques.',
+        verified: true
+      },
+      {
+        name: 'Nicolas Roux',
+        avatar: 'NR',
+        rating: 5,
+        text: 'Le pack maison connectée que j\'ai acheté fonctionne parfaitement. Installation simple et le support client était très utile.',
+        verified: true
+      },
+      {
+        name: 'Élise Fontaine',
+        avatar: 'EF',
+        rating: 5,
+        text: 'J\'ai reçu ma nouvelle montre connectée en 48 heures. L\'emballage était excellent et la montre est absolument magnifique !',
+        verified: true
+      },
+      {
+        name: 'Julien Garnier',
+        avatar: 'JG',
+        rating: 5,
+        text: 'Meilleure expérience d\'achat en ligne que j\'ai eue. Le site est facile à naviguer et le paiement était super rapide et sécurisé.',
         verified: true
       }
     ]
@@ -838,6 +950,62 @@ export const translations: Record<Language, Translations> = {
         rating: 5,
         text: 'Calidad de producto excepcional y atención al cliente top. Mi altavoz inteligente fue fácil de instalar.',
         verified: true
+      },
+      {
+        name: 'Carmen Sánchez',
+        avatar: 'CS',
+        rating: 5,
+        text: 'Los auriculares inalámbricos que compré tienen una calidad de sonido increíble. ¡Luxio siempre tiene las mejores ofertas!',
+        verified: true
+      },
+      {
+        name: 'Pablo Jiménez',
+        avatar: 'PJ',
+        rating: 5,
+        text: 'Pedí un rastreador fitness y llegó en perfecto estado. Excelente servicio al cliente cuando tuve preguntas.',
+        verified: true
+      },
+      {
+        name: 'Beatriz Moreno',
+        avatar: 'BM',
+        rating: 5,
+        text: 'Mi compra de bicicleta eléctrica fue perfecta de principio a fin. El descuento hizo que fuera un valor increíble.',
+        verified: true
+      },
+      {
+        name: 'Javier Romero',
+        avatar: 'JR',
+        rating: 5,
+        text: 'La tablet que compré superó mis expectativas. Envío rápido, buen precio y el producto es exactamente como se describe.',
+        verified: true
+      },
+      {
+        name: 'Sofía Navarro',
+        avatar: 'SN',
+        rating: 5,
+        text: 'Luxio se ha convertido en mi tienda favorita para todas mis compras tech. Fiable, asequible y siempre productos auténticos.',
+        verified: true
+      },
+      {
+        name: 'Ricardo Herrera',
+        avatar: 'RH',
+        rating: 5,
+        text: 'El paquete de hogar inteligente que compré funciona perfectamente. Instalación sencilla y el soporte fue muy útil.',
+        verified: true
+      },
+      {
+        name: 'Elena Vega',
+        avatar: 'EV',
+        rating: 5,
+        text: 'Recibí mi nuevo smartwatch en 48 horas. ¡El empaque era excelente y el reloj es absolutamente hermoso!',
+        verified: true
+      },
+      {
+        name: 'Andrés Delgado',
+        avatar: 'AD',
+        rating: 5,
+        text: 'La mejor experiencia de compra online que he tenido. El sitio es fácil de navegar y el pago fue rápido y seguro.',
+        verified: true
       }
     ]
   },
@@ -1060,6 +1228,62 @@ export const translations: Record<Language, Translations> = {
         avatar: 'MA',
         rating: 5,
         text: 'Qualidade de produto excecional e atendimento ao cliente top. A minha coluna inteligente foi fácil de instalar.',
+        verified: true
+      },
+      {
+        name: 'Beatriz Martins',
+        avatar: 'BM',
+        rating: 5,
+        text: 'Os auriculares sem fios que comprei têm uma qualidade de som incrível. A Luxio tem sempre as melhores ofertas!',
+        verified: true
+      },
+      {
+        name: 'Carlos Sousa',
+        avatar: 'CS',
+        rating: 5,
+        text: 'Encomendei um tracker fitness e chegou em perfeito estado. Excelente atendimento quando tive dúvidas.',
+        verified: true
+      },
+      {
+        name: 'Inês Gomes',
+        avatar: 'IG',
+        rating: 5,
+        text: 'A minha compra de bicicleta elétrica foi perfeita do início ao fim. O desconto tornou-a num valor incrível.',
+        verified: true
+      },
+      {
+        name: 'Tiago Carvalho',
+        avatar: 'TC',
+        rating: 5,
+        text: 'O tablet que comprei superou as minhas expectativas. Envio rápido, ótimo preço e o produto é exatamente como descrito.',
+        verified: true
+      },
+      {
+        name: 'Mariana Lopes',
+        avatar: 'ML',
+        rating: 5,
+        text: 'A Luxio tornou-se a minha loja favorita para todas as compras tech. Confiável, acessível e sempre produtos autênticos.',
+        verified: true
+      },
+      {
+        name: 'Bruno Dias',
+        avatar: 'BD',
+        rating: 5,
+        text: 'O pacote casa inteligente que comprei funciona perfeitamente. Instalação simples e o suporte foi muito útil.',
+        verified: true
+      },
+      {
+        name: 'Daniela Ribeiro',
+        avatar: 'DR',
+        rating: 5,
+        text: 'Recebi o meu novo smartwatch em 48 horas. A embalagem era excelente e o relógio é absolutamente lindo!',
+        verified: true
+      },
+      {
+        name: 'Fábio Correia',
+        avatar: 'FC',
+        rating: 5,
+        text: 'A melhor experiência de compra online que já tive. O site é fácil de navegar e o pagamento foi rápido e seguro.',
         verified: true
       }
     ]
@@ -1284,6 +1508,62 @@ export const translations: Record<Language, Translations> = {
         rating: 5,
         text: 'Wyjątkowa jakość produktu i obsługa klienta na najwyższym poziomie. Mój inteligentny głośnik był łatwy w instalacji.',
         verified: true
+      },
+      {
+        name: 'Joanna Szymańska',
+        avatar: 'JS',
+        rating: 5,
+        text: 'Słuchawki bezprzewodowe mają niesamowitą jakość dźwięku. Luxio zawsze ma najlepsze oferty!',
+        verified: true
+      },
+      {
+        name: 'Krzysztof Woźniak',
+        avatar: 'KW',
+        rating: 5,
+        text: 'Zamówiłem tracker fitness i przyszedł w idealnym stanie. Świetna obsługa gdy miałem pytania.',
+        verified: true
+      },
+      {
+        name: 'Ewa Kozłowska',
+        avatar: 'EK',
+        rating: 5,
+        text: 'Mój zakup roweru elektrycznego był idealny od początku do końca. Zniżka zrobiła z tego niesamowitą wartość.',
+        verified: true
+      },
+      {
+        name: 'Andrzej Jankowski',
+        avatar: 'AJ',
+        rating: 5,
+        text: 'Tablet przewyższył moje oczekiwania. Szybka dostawa, świetna cena i produkt jest dokładnie jak opisano.',
+        verified: true
+      },
+      {
+        name: 'Monika Pawlak',
+        avatar: 'MP',
+        rating: 5,
+        text: 'Luxio stało się moim ulubionym sklepem na wszystkie zakupy tech. Niezawodny, przystępny i zawsze autentyczne produkty.',
+        verified: true
+      },
+      {
+        name: 'Grzegorz Michalski',
+        avatar: 'GM',
+        rating: 5,
+        text: 'Pakiet smart home działa idealnie razem. Prosta instalacja i wsparcie było bardzo pomocne.',
+        verified: true
+      },
+      {
+        name: 'Aleksandra Król',
+        avatar: 'AK',
+        rating: 5,
+        text: 'Otrzymałam nowy smartwatch w 48 godzin. Opakowanie było doskonałe i zegarek jest absolutnie piękny!',
+        verified: true
+      },
+      {
+        name: 'Robert Piotrowski',
+        avatar: 'RP',
+        rating: 5,
+        text: 'Najlepsze doświadczenie zakupowe online. Strona jest łatwa w nawigacji a płatność była szybka i bezpieczna.',
+        verified: true
       }
     ]
   },
@@ -1507,6 +1787,62 @@ export const translations: Record<Language, Translations> = {
         rating: 5,
         text: 'Qualità del prodotto eccezionale e assistenza clienti top. Il mio speaker smart è stato facile da installare.',
         verified: true
+      },
+      {
+        name: 'Valentina Russo',
+        avatar: 'VR',
+        rating: 5,
+        text: 'Gli auricolari wireless che ho comprato hanno una qualità audio incredibile. Luxio ha sempre le migliori offerte!',
+        verified: true
+      },
+      {
+        name: 'Giuseppe Costa',
+        avatar: 'GC',
+        rating: 5,
+        text: 'Ho ordinato un fitness tracker ed è arrivato in perfette condizioni. Assistenza clienti eccellente quando ho avuto domande.',
+        verified: true
+      },
+      {
+        name: 'Francesca Colombo',
+        avatar: 'FC',
+        rating: 5,
+        text: 'Il mio acquisto di bicicletta elettrica è stato perfetto dall\'inizio alla fine. Lo sconto l\'ha resa un valore incredibile.',
+        verified: true
+      },
+      {
+        name: 'Alessandro Bruno',
+        avatar: 'AB',
+        rating: 5,
+        text: 'Il tablet che ho comprato ha superato le mie aspettative. Spedizione veloce, ottimo prezzo e il prodotto è esattamente come descritto.',
+        verified: true
+      },
+      {
+        name: 'Martina Esposito',
+        avatar: 'ME',
+        rating: 5,
+        text: 'Luxio è diventato il mio negozio preferito per tutti gli acquisti tech. Affidabile, conveniente e sempre prodotti autentici.',
+        verified: true
+      },
+      {
+        name: 'Federico Greco',
+        avatar: 'FG',
+        rating: 5,
+        text: 'Il pacchetto casa intelligente che ho comprato funziona perfettamente. Installazione semplice e il supporto è stato molto utile.',
+        verified: true
+      },
+      {
+        name: 'Silvia De Luca',
+        avatar: 'SDL',
+        rating: 5,
+        text: 'Ho ricevuto il mio nuovo smartwatch in 48 ore. L\'imballaggio era eccellente e l\'orologio è assolutamente bellissimo!',
+        verified: true
+      },
+      {
+        name: 'Davide Santoro',
+        avatar: 'DS',
+        rating: 5,
+        text: 'La migliore esperienza di acquisto online che ho avuto. Il sito è facile da navigare e il pagamento è stato veloce e sicuro.',
+        verified: true
       }
     ]
   },
@@ -1729,6 +2065,62 @@ export const translations: Record<Language, Translations> = {
         avatar: 'MZ',
         rating: 5,
         text: 'Kivételes termékminőség és kiváló ügyfélszolgálat. Az okos hangszóróm könnyen telepíthető volt.',
+        verified: true
+      },
+      {
+        name: 'Balogh Éva',
+        avatar: 'BÉ',
+        rating: 5,
+        text: 'A vezeték nélküli fülhallgatóm hihetetlen hangminőséggel rendelkezik. A Luxio mindig a legjobb ajánlatokat kínálja!',
+        verified: true
+      },
+      {
+        name: 'Farkas István',
+        avatar: 'FI',
+        rating: 5,
+        text: 'Rendeltem egy fitness trackert és tökéletes állapotban érkezett. Kiváló ügyfélszolgálat amikor kérdéseim voltak.',
+        verified: true
+      },
+      {
+        name: 'Lakatos Katalin',
+        avatar: 'LK',
+        rating: 5,
+        text: 'Az elektromos kerékpárom vásárlása tökéletes volt elejétől a végéig. A kedvezmény hihetetlen értéket jelentett.',
+        verified: true
+      },
+      {
+        name: 'Simon András',
+        avatar: 'SA',
+        rating: 5,
+        text: 'A tablet amit vettem felülmúlta a várakozásaimat. Gyors szállítás, remek ár és a termék pontosan olyan mint leírva.',
+        verified: true
+      },
+      {
+        name: 'Takács Orsolya',
+        avatar: 'TO',
+        rating: 5,
+        text: 'A Luxio lett a kedvenc boltom minden tech vásárláshoz. Megbízható, megfizethető és mindig hiteles termékek.',
+        verified: true
+      },
+      {
+        name: 'Németh Gábor',
+        avatar: 'NG',
+        rating: 5,
+        text: 'Az okos otthon csomag amit vettem tökéletesen működik együtt. Egyszerű telepítés és a támogatás nagyon hasznos volt.',
+        verified: true
+      },
+      {
+        name: 'Papp Renáta',
+        avatar: 'PR',
+        rating: 5,
+        text: 'Megkaptam az új okosórám 48 órán belül. A csomagolás kiváló volt és az óra abszolút gyönyörű!',
+        verified: true
+      },
+      {
+        name: 'Szilágyi Tamás',
+        avatar: 'ST',
+        rating: 5,
+        text: 'A legjobb online vásárlási élményem. A weboldal könnyen navigálható és a fizetés gyors és biztonságos volt.',
         verified: true
       }
     ]

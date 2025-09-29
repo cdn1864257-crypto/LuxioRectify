@@ -1,5 +1,5 @@
-import { useCart } from '../hooks/use-cart';
-import { useLanguage } from '../hooks/use-language';
+import { useCart } from '../contexts/CartContext';
+import { useLanguage } from '../contexts/LanguageContext';
 import { showToast } from './ToastNotifications';
 
 interface CartSidebarProps {
