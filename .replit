@@ -19,8 +19,8 @@ localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 39907
-externalPort = 3002
+localPort = 35911
+externalPort = 3000
 
 [env]
 PORT = "5000"
@@ -41,13 +41,13 @@ args = "Frontend"
 name = "Frontend"
 author = "agent"
 
+[workflows.workflow.metadata]
+outputType = "webview"
+
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd frontend && npm run dev"
 waitForPort = 5000
-
-[workflows.workflow.metadata]
-outputType = "webview"
 
 [agent]
 integrations = ["firebase_barebones_javascript==1.0.0", "javascript_mem_db==1.0.0"]

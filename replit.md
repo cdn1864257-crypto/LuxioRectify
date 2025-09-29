@@ -10,12 +10,14 @@ Preferred communication style: Simple, everyday language.
 
 ## Replit Setup (September 29, 2025)
 
-This project has been configured to run on Replit:
+This project has been successfully configured to run on Replit:
 
-- **Development**: Frontend runs on port 5000 using Vite dev server (`npm run dev`)
+- **Development**: Frontend runs on port 5000 using Vite dev server with allowedHosts enabled for Replit proxy
+- **Workflow**: "Frontend" workflow configured to run `cd frontend && npm run dev` on port 5000
 - **Production Build**: Frontend builds to `/dist` folder (`npm run build`)
 - **Production Serve**: Uses `serve` to host static files on port 5000 (`npm run start`)
 - **Deployment**: Configured for Replit's autoscale deployment (static site)
+- **TypeScript**: Added `vite-env.d.ts` for proper Vite environment variable typing
 
 ## System Architecture
 
