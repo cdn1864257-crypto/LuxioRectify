@@ -2,6 +2,7 @@ import { Product } from '../lib/products';
 import { useCart } from '../hooks/use-cart';
 import { useLanguage } from '../hooks/use-language';
 import { showToast } from './ToastNotifications';
+import { LazyImage } from './LazyImage';
 
 interface ProductGridProps {
   title: string;
@@ -39,7 +40,7 @@ export function ProductGrid({ title, subtitle, products, id, className = '' }: P
               className="product-card bg-card border border-border rounded-lg shadow-sm overflow-hidden hover:shadow-lg"
               data-testid={`product-card-${product.id}`}
             >
-              <img 
+              <LazyImage 
                 src={product.image}
                 alt={product.name}
                 className="w-full h-48 object-cover"
