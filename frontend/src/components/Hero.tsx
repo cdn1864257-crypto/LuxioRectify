@@ -1,4 +1,5 @@
 import { useLanguage } from '../contexts/LanguageContext';
+import iphone17ProImage from '@assets/iphone17 pro1_1759187408941.jpeg';
 
 export function Hero() {
   const { t } = useLanguage();
@@ -94,8 +95,8 @@ export function Hero() {
               
               <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/20 shadow-2xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1000&q=80" 
-                  alt="Premium smartphone collection - Latest technology devices" 
+                  src={iphone17ProImage} 
+                  alt="iPhone 17 Pro - Premium smartphone collection" 
                   className="w-full h-auto rounded-2xl shadow-2xl"
                   loading="eager"
                   data-testid="hero-image"
