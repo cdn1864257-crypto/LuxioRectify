@@ -8,6 +8,38 @@ Luxio is a static e-commerce platform built with React and TypeScript, featuring
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (September 30, 2025)
+
+### GSMArena Data Integration
+Successfully integrated real smartphone data from GSMArena with professional product images:
+
+**iPhone 17 Series (Complete Lineup)**
+- iPhone 17 Pro Max: 4 colors × 3 capacities (256GB/512GB/1TB) = 12 variants
+- iPhone 17 Pro: 4 colors × 3 capacities (128GB/256GB/512GB) = 12 variants
+- iPhone 17: 5 colors × 3 capacities (128GB/256GB/512GB) = 15 variants
+- iPhone 17 Plus: 5 colors × 3 capacities (128GB/256GB/512GB) = 15 variants
+- All models include accurate GSMArena pricing, specifications, and features
+
+**Samsung Galaxy S25 Series**
+- Galaxy S25 Ultra: 4 colors × 3 capacities (256GB/512GB/1TB) = 12 variants
+- Galaxy S25: 7 colors × 3 capacities (128GB/256GB/512GB) = 21 variants
+- Titanium finish colors for Ultra model
+- Standard colors for S25 model
+- Accurate pricing based on GSMArena data
+
+**Professional Product Images**
+- Downloaded high-quality stock images for all new smartphone models
+- Images stored in `/attached_assets/stock_images/` directory
+- All image paths updated in product database
+- Proper naming convention: `{brand}_{model}_{variant}_{hash}.jpg`
+
+**Technical Implementation**
+- Complete variant matrix system for colors and storage capacities
+- Consistent pricing structure across all variants
+- GSMArena-sourced specifications and features
+- Verified all combinations render correctly in the UI
+- No missing variants or incomplete product data
+
 ## Replit Setup (September 30, 2025)
 
 This project has been successfully configured to run on Replit from a GitHub import:
