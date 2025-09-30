@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { CheckCircle, XCircle, Info } from 'lucide-react';
 
 export interface Toast {
   id: string;
@@ -41,8 +42,19 @@ export function ToastNotifications() {
     };
   }, []);
 
+  const getIcon = (type: Toast['type']) => {
+    switch (type) {
+      case 'success':
+        return <CheckCircle className="h-5 w-5" />;
+      case 'error':
+        return <XCircle className="h-5 w-5" />;
+      case 'info':
+        return <Info className="h-5 w-5" />;
+    }
+  };
+
   return (
-    <div className="fixed top-4 right-4 z-50 space-y-2" data-testid="toast-container">
+    <div className="fixed top-20 right-4 z-50 space-y-2" data-testid="toast-container">
       {currentToasts.map((toast) => (
         <div
           key={toast.id}
@@ -53,7 +65,7 @@ export function ToastNotifications() {
           data-testid={`toast-${toast.type}`}
         >
           <div className="flex items-center space-x-3">
-            <i className={`fas ${toast.type === 'success' ? 'fa-check-circle' : 'fa-info-circle'}`}></i>
+            {getIcon(toast.type)}
             <span>{toast.message}</span>
           </div>
         </div>

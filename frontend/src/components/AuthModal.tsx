@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { X } from 'lucide-react';
 import { useAuth } from '../hooks/use-auth';
 import { useLanguage } from '../contexts/LanguageContext';
 import { showToast } from './ToastNotifications';
@@ -60,7 +61,7 @@ export function AuthModal({ open, mode, onClose, onSwitchMode }: AuthModalProps)
             className="text-muted-foreground hover:text-foreground"
             data-testid="button-close-auth"
           >
-            <i className="fas fa-times text-xl"></i>
+            <X className="h-5 w-5" />
           </button>
         </div>
         
