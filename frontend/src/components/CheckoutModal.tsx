@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X, CheckCircle, Building2, AlertTriangle, Info, Ticket, Plus, CreditCard, Package, Truck, Shield } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -30,6 +30,27 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
     country: '',
     phone: ''
   });
+
+  // Reset modal state when modal opens or closes
+  useEffect(() => {
+    if (!isOpen) {
+      // Reset all state when modal closes
+      setShowPaymentDetails(false);
+      setOrderReference('');
+      setLoading(false);
+      setPaymentMethod('bank-transfer');
+      setTicketCodes(['']);
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        address: '',
+        city: '',
+        country: '',
+        phone: ''
+      });
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
