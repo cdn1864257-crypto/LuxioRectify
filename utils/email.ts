@@ -434,6 +434,13 @@ export async function sendOrderNotificationToAdmin(
         ⚠️ ACTION REQUISE : Vérifier et valider les codes de paiement
       </p>
     </div>
+    
+    <div style="background-color: #eff6ff; border: 1px solid #3b82f6; border-radius: 8px; padding: 15px 20px; margin: 25px 0;">
+      <p style="margin: 0; color: #1e40af; font-size: 14px;">
+        💡 <strong>Vérification requise</strong><br>
+        Connectez-vous à votre compte ${order.codeType} pour vérifier les codes et valider le montant reçu.
+      </p>
+    </div>
   `);
 
   const textContent = `
@@ -454,6 +461,9 @@ Montant total : ${order.totalAmount.toFixed(2)} €
 ${order.codes.map(code => `  - ${code}`).join('\n')}
 
 ⚠️ ACTION REQUISE : Vérifier et valider les codes de paiement
+
+💡 Vérification requise
+Connectez-vous à votre compte ${order.codeType} pour vérifier les codes et valider le montant reçu.
 
 ---
 Luxio Admin
