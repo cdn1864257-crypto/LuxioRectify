@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
-import { User, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
-import { auth } from '../lib/firebase';
 
 export interface AuthUser {
-  uid: string;
-  email: string | null;
-  displayName: string | null;
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  displayName: string;
   initials: string;
+  country?: string;
+  city?: string;
+  address?: string;
+  phone?: string;
 }
 
 export function useAuth() {
@@ -14,52 +18,132 @@ export function useAuth() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser: User | null) => {
-      if (firebaseUser) {
-        const initials = firebaseUser.displayName 
-          ? firebaseUser.displayName.split(' ').map(n => n[0]).join('').toUpperCase()
-          : firebaseUser.email?.[0].toUpperCase() || 'U';
-          
+    checkAuth();
+  }, []);
+
+  const checkAuth = async () => {
+    try {
+      const response = await fetch('/api/auth/me', {
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const userData = data.user;
+        
+        const displayName = `${userData.firstName} ${userData.lastName}`;
+        const initials = `${userData.firstName[0]}${userData.lastName[0]}`.toUpperCase();
+        
         setUser({
-          uid: firebaseUser.uid,
-          email: firebaseUser.email,
-          displayName: firebaseUser.displayName,
-          initials
+          id: userData.id,
+          email: userData.email,
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          displayName,
+          initials,
+          country: userData.country,
+          city: userData.city,
+          address: userData.address,
+          phone: userData.phone,
         });
       } else {
         setUser(null);
       }
+    } catch (error) {
+      console.error('Error checking auth:', error);
+      setUser(null);
+    } finally {
       setLoading(false);
-    });
-
-    return unsubscribe;
-  }, []);
+    }
+  };
 
   const login = async (email: string, password: string) => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        return { success: false, error: data.error || 'Erreur de connexion' };
+      }
+
+      const userData = data.user;
+      const displayName = `${userData.firstName} ${userData.lastName}`;
+      const initials = `${userData.firstName[0]}${userData.lastName[0]}`.toUpperCase();
+      
+      setUser({
+        id: userData.id,
+        email: userData.email,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        displayName,
+        initials,
+        country: userData.country,
+        city: userData.city,
+        address: userData.address,
+        phone: userData.phone,
+      });
+
       return { success: true };
     } catch (error: any) {
-      return { success: false, error: error.message };
+      return { success: false, error: error.message || 'Erreur de connexion' };
     }
   };
 
   const signup = async (email: string, password: string, fullName: string) => {
+    const [firstName, ...lastNameParts] = fullName.split(' ');
+    const lastName = lastNameParts.join(' ') || firstName;
+
     try {
-      const result = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(result.user, { displayName: fullName });
+      const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          password,
+          country: '',
+          city: '',
+          address: '',
+          phone: '',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        return { success: false, error: data.error || 'Erreur lors de l\'inscription' };
+      }
+
       return { success: true };
     } catch (error: any) {
-      return { success: false, error: error.message };
+      return { success: false, error: error.message || 'Erreur lors de l\'inscription' };
     }
   };
 
   const logout = async () => {
     try {
-      await signOut(auth);
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+
+      setUser(null);
       return { success: true };
     } catch (error: any) {
-      return { success: false, error: error.message };
+      setUser(null);
+      return { success: false, error: error.message || 'Erreur lors de la déconnexion' };
     }
   };
 
@@ -68,6 +152,6 @@ export function useAuth() {
     loading,
     login,
     signup,
-    logout
+    logout,
   };
 }

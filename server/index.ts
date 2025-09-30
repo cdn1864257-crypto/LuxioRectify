@@ -6,12 +6,13 @@ import usersHandler from '../api/users.js';
 import signupHandler from '../api/auth/signup.js';
 import loginHandler from '../api/auth/login.js';
 import meHandler from '../api/auth/me.js';
+import logoutHandler from '../api/auth/logout.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-const PORT = parseInt(process.env.PORT || '5000', 10);
+const PORT = parseInt(process.env.BACKEND_PORT || '3001', 10);
 
 // Middleware
 app.use(express.json());
@@ -76,6 +77,7 @@ app.use('/api/users', convertVercelHandler(usersHandler));
 // Auth routes
 app.use('/api/auth/signup', convertVercelHandler(signupHandler));
 app.use('/api/auth/login', convertVercelHandler(loginHandler));
+app.use('/api/auth/logout', convertVercelHandler(logoutHandler));
 app.use('/api/auth/me', convertVercelHandler(meHandler));
 
 // Serve static files from frontend dist in production
@@ -97,7 +99,9 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on http://0.0.0.0:${PORT}`);
+app.listen(PORT, 'localhost', () => {
+  console.log(`Backend API Server running on http://localhost:${PORT}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`MongoDB URI configured: ${process.env.MONGODB_URI ? 'Yes' : 'No'}`);
+  console.log(`JWT Secret configured: ${process.env.JWT_SECRET ? 'Yes' : 'No'}`);
 });

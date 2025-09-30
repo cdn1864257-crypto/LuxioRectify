@@ -37,17 +37,13 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const { firstName, lastName, country, city, address, phone, email, password }: SignupData = req.body;
 
-    // Vérification que tous les champs sont remplis
-    if (!firstName || !lastName || !country || !city || !address || !phone || !email || !password) {
+    // Vérification que les champs obligatoires sont remplis
+    if (!firstName || !lastName || !email || !password) {
       return res.status(400).json({
-        error: 'Tous les champs sont obligatoires',
+        error: 'Les champs prénom, nom, email et mot de passe sont obligatoires',
         missing: {
           firstName: !firstName,
           lastName: !lastName,
-          country: !country,
-          city: !city,
-          address: !address,
-          phone: !phone,
           email: !email,
           password: !password
         }
@@ -92,10 +88,10 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const newUser = {
         firstName,
         lastName,
-        country,
-        city,
-        address,
-        phone,
+        country: country || '',
+        city: city || '',
+        address: address || '',
+        phone: phone || '',
         email: email.toLowerCase(),
         password: hashedPassword,
         createdAt: new Date(),
