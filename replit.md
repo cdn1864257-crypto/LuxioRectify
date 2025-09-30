@@ -8,7 +8,34 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (September 30, 2025)
 
-### MongoDB Atlas Authentication Migration (September 30, 2025 18:15 UTC - Latest) ✅
+### Replit Environment Setup (September 30, 2025 18:30 UTC - Latest) ✅
+Completed setup for Replit deployment environment:
+
+**Dependencies Installation**
+- ✅ Installed root project dependencies (`npm install`)
+- ✅ Installed frontend dependencies (`cd frontend && npm install`)
+- ✅ All packages from package.json properly installed
+
+**Workflow Configuration**
+- ✅ Created unified `start-dev.js` script that launches both backend and frontend
+- ✅ Backend runs on port 3001 (localhost) for API endpoints
+- ✅ Frontend runs on port 5000 (0.0.0.0) with Vite dev server
+- ✅ Configured workflow "Start application" to run both servers simultaneously
+- ✅ Frontend properly configured with `allowedHosts: true` in vite.config.ts
+- ✅ Vite proxy configured to forward `/api` requests to backend on port 3001
+
+**Deployment Configuration**
+- ✅ Configured autoscale deployment for static site hosting
+- ✅ Build command: `npm run build` (builds frontend to `dist` folder)
+- ✅ Start command: `npm run start` (serves static files on port 5000)
+
+**Project Structure**
+- `server/index.ts` - Express backend server with Vercel handler conversion
+- `api/` - Vercel serverless function handlers (auth endpoints)
+- `frontend/` - React/Vite frontend application
+- `start-dev.js` - Development startup script for both servers
+
+### MongoDB Atlas Authentication Migration (September 30, 2025 18:15 UTC) ✅
 Completed full migration from Firebase to MongoDB Atlas for user authentication:
 
 **Backend Configuration**
@@ -44,10 +71,6 @@ Completed full migration from Firebase to MongoDB Atlas for user authentication:
   updatedAt: Date
 }
 ```
-
-**Workflows**
-- Frontend: Vite dev server on port 5000 (0.0.0.0, webview)
-- Backend: Express API server on port 3001 (localhost, console)
 
 **Environment Variables Required**
 - `MONGODB_URI`: MongoDB Atlas connection string
