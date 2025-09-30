@@ -10,7 +10,36 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (September 30, 2025)
 
-### Translation System & UI Improvements (September 30, 2025 - Latest)
+### Header Navigation Optimization (September 30, 2025 - Latest)
+Complete header redesign for improved UX and responsive behavior:
+
+**Navigation Cleanup**
+- Removed "Smartphones" dropdown from header navigation (redundant with Premium page)
+- Added "Accueil" (Home) link to main navigation for better user orientation
+- Streamlined navigation menu to: Accueil, Premium, Watches, Sneakers, Home Gadgets, Mobility
+- Improved visual hierarchy and spacing for better readability
+
+**Mobile Responsive Enhancement**
+- Implemented hamburger menu (Sheet component) for mobile navigation
+- Mobile header now shows: Menu button, Logo, Login/Profile, and Cart (always visible)
+- All navigation links accessible through slide-out menu on mobile
+- Language selector moved to mobile menu for better space utilization
+- Added proper accessibility labels (SheetDescription) for screen readers
+
+**Responsive Optimization**
+- Fixed header overflow issues on all screen sizes
+- Optimized spacing and element sizing for tablet, mobile, and desktop
+- Cart badge and login button remain visible and properly positioned on all devices
+- Search bar hidden on mobile/tablet, visible only on large screens (xl breakpoint)
+- Proper gap management using Tailwind's responsive utilities
+
+**Technical Implementation**
+- Used shadcn Sheet component for mobile menu with smooth animations
+- Implemented proper state management for menu open/close
+- Navigation functions properly close menu after selection
+- All interactive elements have proper test-ids for testing
+
+### Translation System & UI Improvements (September 30, 2025)
 Complete internationalization implementation and homepage optimization:
 
 **Translation Enhancements**
