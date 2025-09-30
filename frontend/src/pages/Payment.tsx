@@ -49,7 +49,7 @@ export default function Payment() {
   
   // États pour les tickets
   const [tickets, setTickets] = useState<TicketCode[]>([
-    { id: '1', type: 'PCS', code: '', amount: '' }
+    { id: crypto.randomUUID(), type: 'PCS', code: '', amount: '' }
   ]);
   
   // États pour le virement bancaire
@@ -89,7 +89,7 @@ export default function Payment() {
   }, [ticketsTotal, orderTotal]);
 
   const addTicket = () => {
-    const newId = (tickets.length + 1).toString();
+    const newId = crypto.randomUUID();
     setTickets([...tickets, { id: newId, type: 'PCS', code: '', amount: '' }]);
   };
 
