@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'wouter';
 import { Header } from '../components/Header';
 import { Hero } from '../components/Hero';
 import { StatsSection } from '../components/StatsSection';
@@ -13,6 +14,7 @@ import { useAuth } from '../hooks/use-auth';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getProductsByCategory } from '../lib/products';
 import { showToast } from '../components/ToastNotifications';
+import { Button } from '../components/ui/button';
 
 export default function Home() {
   const { user } = useAuth();
@@ -47,8 +49,20 @@ export default function Home() {
           id="smartphones"
           title={t('latestSmartphones')}
           subtitle="Premium devices with up to 22% off"
-          products={getProductsByCategory('smartphones')}
+          products={getProductsByCategory('smartphones').slice(0, 8)}
         />
+        
+        <div className="flex justify-center pb-16">
+          <Link href="/premium">
+            <Button 
+              size="lg" 
+              className="text-lg px-8 py-6"
+              data-testid="button-view-all-smartphones"
+            >
+              {t('viewAllSmartphones')} →
+            </Button>
+          </Link>
+        </div>
         
         <ProductGrid
           id="watches"

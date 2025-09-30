@@ -45,6 +45,7 @@ export interface Translations {
   premiumSneakers: string;
   smartHomeGadgets: string;
   urbanMobility: string;
+  viewAllSmartphones: string;
   
   // Cart
   shoppingCart: string;
@@ -245,6 +246,7 @@ export const translations: Record<Language, Translations> = {
     premiumSneakers: 'Premium Sneakers & Fashion',
     smartHomeGadgets: 'Smart Home Gadgets',
     urbanMobility: 'Urban Mobility Solutions',
+    viewAllSmartphones: 'View All Smartphones',
     
     // Cart
     shoppingCart: 'Shopping Cart',
@@ -551,6 +553,7 @@ export const translations: Record<Language, Translations> = {
     premiumSneakers: 'Baskets premium et mode',
     smartHomeGadgets: 'Objets connectés maison',
     urbanMobility: 'Solutions de mobilité urbaine',
+    viewAllSmartphones: 'Voir tous les smartphones',
     
     // Cart
     shoppingCart: 'Panier',
@@ -857,6 +860,7 @@ export const translations: Record<Language, Translations> = {
     premiumSneakers: 'Zapatillas premium y moda',
     smartHomeGadgets: 'Gadgets inteligentes para el hogar',
     urbanMobility: 'Soluciones de movilidad urbana',
+    viewAllSmartphones: 'Ver todos los smartphones',
     
     // Cart
     shoppingCart: 'Carrito de compras',
@@ -1163,6 +1167,7 @@ export const translations: Record<Language, Translations> = {
     premiumSneakers: 'Ténis premium e moda',
     smartHomeGadgets: 'Gadgets inteligentes para casa',
     urbanMobility: 'Soluções de mobilidade urbana',
+    viewAllSmartphones: 'Ver todos os smartphones',
     
     // Cart
     shoppingCart: 'Carrinho de compras',
@@ -1469,6 +1474,7 @@ export const translations: Record<Language, Translations> = {
     premiumSneakers: 'Buty premium i moda',
     smartHomeGadgets: 'Inteligentne gadżety domowe',
     urbanMobility: 'Rozwiązania mobilności miejskiej',
+    viewAllSmartphones: 'Zobacz wszystkie smartfony',
     
     // Cart
     shoppingCart: 'Koszyk',
@@ -1775,6 +1781,7 @@ export const translations: Record<Language, Translations> = {
     premiumSneakers: 'Sneakers premium e moda',
     smartHomeGadgets: 'Gadget per casa intelligente',
     urbanMobility: 'Soluzioni di mobilità urbana',
+    viewAllSmartphones: 'Vedi tutti gli smartphone',
     
     // Cart
     shoppingCart: 'Carrello',
@@ -2081,6 +2088,7 @@ export const translations: Record<Language, Translations> = {
     premiumSneakers: 'Prémium cipők és divat',
     smartHomeGadgets: 'Okos otthon kütyük',
     urbanMobility: 'Városi mobilitási megoldások',
+    viewAllSmartphones: 'Összes okostelefon megtekintése',
     
     // Cart
     shoppingCart: 'Kosár',
