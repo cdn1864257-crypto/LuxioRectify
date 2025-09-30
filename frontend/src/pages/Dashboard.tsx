@@ -194,8 +194,8 @@ export default function Dashboard() {
       </main>
 
       <Footer />
-      <CartSidebar open={cartOpen} onClose={() => setCartOpen(false)} />
-      <UserProfile open={profileOpen} onClose={() => setProfileOpen(false)} />
+      <CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} onCheckout={() => {}} />
+      <UserProfile isOpen={profileOpen} onClose={() => setProfileOpen(false)} />
     </div>
   );
 }
