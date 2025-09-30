@@ -68,10 +68,20 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="lg:hidden shrink-0"
+                    className="lg:hidden shrink-0 relative group overflow-hidden rounded-xl hover:bg-primary/10 transition-all duration-300 hover:scale-105 active:scale-95"
                     data-testid="button-mobile-menu"
                   >
-                    <Menu className="h-5 w-5" />
+                    {/* Animated background gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    {/* Animated menu icon */}
+                    <div className="relative z-10 transition-transform duration-300 group-hover:rotate-90">
+                      <Menu className="h-5 w-5 text-foreground group-hover:text-primary transition-colors duration-300" />
+                    </div>
+                    
+                    {/* Subtle glow effect on hover */}
+                    <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 bg-primary/5 blur-sm transition-opacity duration-300" />
+                    
                     <span className="sr-only">Menu</span>
                   </Button>
                 </SheetTrigger>
