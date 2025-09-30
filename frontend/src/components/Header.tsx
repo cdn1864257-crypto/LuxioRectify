@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { useAuth } from '../hooks/use-auth';
+import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { AuthModal } from './AuthModal';
 import { LanguageSelector } from './LanguageSelector';
-import { ChevronDown, Search, ShoppingCart as ShoppingCartIcon, Menu } from 'lucide-react';
+import { ChevronDown, Search, ShoppingCart as ShoppingCartIcon, Menu, LayoutDashboard, LogOut } from 'lucide-react';
 import { Button } from './ui/button';
 import {
   Sheet,
@@ -22,7 +22,7 @@ interface HeaderProps {
 }
 
 export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { itemCount } = useCart();
   const { t } = useLanguage();
   const [location, navigate] = useLocation();
@@ -101,42 +101,87 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                     >
                       Accueil
                     </Link>
-                    <Link 
-                      href="/premium"
-                      className="text-base font-medium text-foreground hover:text-primary transition-colors py-2"
-                      data-testid="mobile-nav-premium"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Premium
-                    </Link>
-                    <button 
-                      onClick={() => scrollToSection('watches')}
-                      className="text-base font-medium text-foreground hover:text-primary transition-colors py-2 text-left"
-                      data-testid="mobile-nav-watches"
-                    >
-                      {t('watches')}
-                    </button>
-                    <button 
-                      onClick={() => scrollToSection('sneakers')}
-                      className="text-base font-medium text-foreground hover:text-primary transition-colors py-2 text-left"
-                      data-testid="mobile-nav-sneakers"
-                    >
-                      {t('sneakers')}
-                    </button>
-                    <button 
-                      onClick={() => scrollToSection('gadgets')}
-                      className="text-base font-medium text-foreground hover:text-primary transition-colors py-2 text-left"
-                      data-testid="mobile-nav-gadgets"
-                    >
-                      {t('gadgets')}
-                    </button>
-                    <button 
-                      onClick={() => scrollToSection('mobility')}
-                      className="text-base font-medium text-foreground hover:text-primary transition-colors py-2 text-left"
-                      data-testid="mobile-nav-mobility"
-                    >
-                      {t('mobility')}
-                    </button>
+                    
+                    {user ? (
+                      <>
+                        <Link 
+                          href="/dashboard"
+                          className="text-base font-medium text-foreground hover:text-primary transition-colors py-2"
+                          data-testid="mobile-nav-dashboard"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          <div className="flex items-center gap-2">
+                            <LayoutDashboard className="h-4 w-4" />
+                            Tableau de bord
+                          </div>
+                        </Link>
+                        <Link 
+                          href="/cart"
+                          className="text-base font-medium text-foreground hover:text-primary transition-colors py-2"
+                          data-testid="mobile-nav-cart"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          <div className="flex items-center gap-2">
+                            <ShoppingCartIcon className="h-4 w-4" />
+                            Panier
+                          </div>
+                        </Link>
+                        <button 
+                          onClick={async () => {
+                            await logout();
+                            setMobileMenuOpen(false);
+                            navigate('/');
+                          }}
+                          className="text-base font-medium text-foreground hover:text-destructive transition-colors py-2 text-left"
+                          data-testid="mobile-nav-logout"
+                        >
+                          <div className="flex items-center gap-2">
+                            <LogOut className="h-4 w-4" />
+                            Déconnexion
+                          </div>
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <Link 
+                          href="/premium"
+                          className="text-base font-medium text-foreground hover:text-primary transition-colors py-2"
+                          data-testid="mobile-nav-premium"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          Premium
+                        </Link>
+                        <button 
+                          onClick={() => scrollToSection('watches')}
+                          className="text-base font-medium text-foreground hover:text-primary transition-colors py-2 text-left"
+                          data-testid="mobile-nav-watches"
+                        >
+                          {t('watches')}
+                        </button>
+                        <button 
+                          onClick={() => scrollToSection('sneakers')}
+                          className="text-base font-medium text-foreground hover:text-primary transition-colors py-2 text-left"
+                          data-testid="mobile-nav-sneakers"
+                        >
+                          {t('sneakers')}
+                        </button>
+                        <button 
+                          onClick={() => scrollToSection('gadgets')}
+                          className="text-base font-medium text-foreground hover:text-primary transition-colors py-2 text-left"
+                          data-testid="mobile-nav-gadgets"
+                        >
+                          {t('gadgets')}
+                        </button>
+                        <button 
+                          onClick={() => scrollToSection('mobility')}
+                          className="text-base font-medium text-foreground hover:text-primary transition-colors py-2 text-left"
+                          data-testid="mobile-nav-mobility"
+                        >
+                          {t('mobility')}
+                        </button>
+                      </>
+                    )}
+                    
                     <div className="border-t border-border pt-4 mt-2">
                       <LanguageSelector />
                     </div>
@@ -158,41 +203,73 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                 >
                   Accueil
                 </Link>
-                <Link 
-                  href="/premium"
-                  className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
-                  data-testid="nav-premium"
-                >
-                  Premium
-                </Link>
-                <button 
-                  onClick={() => scrollToSection('watches')}
-                  className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
-                  data-testid="nav-watches"
-                >
-                  {t('watches')}
-                </button>
-                <button 
-                  onClick={() => scrollToSection('sneakers')}
-                  className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
-                  data-testid="nav-sneakers"
-                >
-                  {t('sneakers')}
-                </button>
-                <button 
-                  onClick={() => scrollToSection('gadgets')}
-                  className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
-                  data-testid="nav-gadgets"
-                >
-                  {t('gadgets')}
-                </button>
-                <button 
-                  onClick={() => scrollToSection('mobility')}
-                  className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
-                  data-testid="nav-mobility"
-                >
-                  {t('mobility')}
-                </button>
+                
+                {user ? (
+                  <>
+                    <Link 
+                      href="/dashboard"
+                      className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
+                      data-testid="nav-dashboard"
+                    >
+                      Tableau de bord
+                    </Link>
+                    <Link 
+                      href="/cart"
+                      className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
+                      data-testid="nav-cart"
+                    >
+                      Panier
+                    </Link>
+                    <button 
+                      onClick={async () => {
+                        await logout();
+                        navigate('/');
+                      }}
+                      className="text-sm xl:text-base text-muted-foreground hover:text-destructive transition-colors whitespace-nowrap"
+                      data-testid="nav-logout"
+                    >
+                      Déconnexion
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link 
+                      href="/premium"
+                      className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
+                      data-testid="nav-premium"
+                    >
+                      Premium
+                    </Link>
+                    <button 
+                      onClick={() => scrollToSection('watches')}
+                      className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
+                      data-testid="nav-watches"
+                    >
+                      {t('watches')}
+                    </button>
+                    <button 
+                      onClick={() => scrollToSection('sneakers')}
+                      className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
+                      data-testid="nav-sneakers"
+                    >
+                      {t('sneakers')}
+                    </button>
+                    <button 
+                      onClick={() => scrollToSection('gadgets')}
+                      className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
+                      data-testid="nav-gadgets"
+                    >
+                      {t('gadgets')}
+                    </button>
+                    <button 
+                      onClick={() => scrollToSection('mobility')}
+                      className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
+                      data-testid="nav-mobility"
+                    >
+                      {t('mobility')}
+                    </button>
+                  </>
+                )}
               </nav>
             </div>
 
