@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { X } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface LegalModalProps {
@@ -39,7 +40,7 @@ function LegalModal({ isOpen, onClose, type }: LegalModalProps) {
             className="text-muted-foreground hover:text-foreground"
             data-testid={`button-close-${type}`}
           >
-            <i className="fas fa-times text-xl"></i>
+            <X className="h-5 w-5" />
           </button>
         </div>
         <div className="prose prose-sm max-w-none" data-testid={`${type}-content`}>

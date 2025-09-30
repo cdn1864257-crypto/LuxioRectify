@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ShoppingCart } from 'lucide-react';
 import { Product, ProductVariant } from '../lib/products';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -132,10 +133,10 @@ function ProductCard({ product }: { product: Product }) {
         )}
         <button 
           onClick={handleAddToCart}
-          className="w-full bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors transform hover:scale-105 active:scale-95"
+          className="w-full bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
           data-testid={`button-add-to-cart-${product.id}`}
         >
-          <i className="fas fa-shopping-cart mr-2"></i>
+          <ShoppingCart className="h-4 w-4" />
           {t('addToCart')}
         </button>
       </div>

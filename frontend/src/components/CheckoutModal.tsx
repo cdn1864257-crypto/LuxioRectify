@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { X, CheckCircle, Building2, AlertTriangle, Info, Ticket, Plus, CreditCard } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { generateOrderReference, generateMaxelPayUrl, saveOrder, Order } from '../lib/cart';
@@ -129,7 +130,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
         <div className="bg-card rounded-lg shadow-xl max-w-2xl w-full p-6">
           <div className="text-center mb-6">
             <div className="text-green-600 text-5xl mb-4">
-              <i className="fas fa-check-circle"></i>
+              <CheckCircle className="h-16 w-16 mx-auto" />
             </div>
             <h2 className="text-2xl font-bold mb-2">{t('orderReceived')}</h2>
             <p className="text-lg">{t('orderNumber')}: <span className="font-mono bg-muted px-2 py-1 rounded">{orderReference}</span></p>
@@ -138,7 +139,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
           {paymentMethod === 'bank-transfer' && (
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center">
-                <i className="fas fa-university mr-2 text-blue-600"></i>
+                <Building2 className="h-5 w-5 mr-2 text-blue-600" />
                 {t('bankTransferTitle')}
               </h3>
               <div className="space-y-3">
@@ -162,7 +163,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                 </div>
                 <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded p-3">
                   <p className="text-sm">
-                    <i className="fas fa-exclamation-triangle mr-2 text-yellow-600"></i>
+                    <AlertTriangle className="h-4 w-4 mr-2 text-yellow-600 inline" />
                     {t('transferInstructions')}
                   </p>
                 </div>
@@ -172,7 +173,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
 
           <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 mb-6">
             <p className="text-sm text-green-800 dark:text-green-200">
-              <i className="fas fa-info-circle mr-2"></i>
+              <Info className="h-4 w-4 mr-2 inline" />
               {t('paymentInstructions')}
             </p>
           </div>
@@ -199,7 +200,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
             className="text-muted-foreground hover:text-foreground"
             data-testid="button-close-checkout"
           >
-            <i className="fas fa-times text-xl"></i>
+            <X className="h-5 w-5" />
           </button>
         </div>
         
@@ -344,7 +345,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                 />
                 <div className="flex-1">
                   <div className="flex items-center">
-                    <i className="fas fa-university mr-3 text-blue-600"></i>
+                    <Building2 className="h-5 w-5 mr-3 text-blue-600" />
                     <span className="font-medium">{t('bankTransfer')}</span>
                     <span className="ml-auto text-green-600 text-sm">{t('active')}</span>
                   </div>
@@ -364,7 +365,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                 />
                 <div className="flex-1">
                   <div className="flex items-center">
-                    <i className="fas fa-ticket-alt mr-3 text-orange-600"></i>
+                    <Ticket className="h-5 w-5 mr-3 text-orange-600" />
                     <span className="font-medium">{t('prepaidTicketsTitle')}</span>
                     <span className="ml-auto text-green-600 text-sm">{t('active')}</span>
                   </div>
@@ -393,7 +394,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                           className="px-3 py-2 text-destructive hover:bg-destructive/10 rounded-md"
                           data-testid={`button-remove-ticket-${index}`}
                         >
-                          <i className="fas fa-times"></i>
+                          <X className="h-4 w-4" />
                         </button>
                       )}
                     </div>
@@ -404,7 +405,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                     className="text-sm text-primary hover:underline"
                     data-testid="button-add-ticket-code"
                   >
-                    <i className="fas fa-plus mr-1"></i>
+                    <Plus className="h-4 w-4 mr-1" />
                     {t('addTicketCode')}
                   </button>
                 </div>
@@ -422,7 +423,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                 />
                 <div className="flex-1">
                   <div className="flex items-center">
-                    <i className="fas fa-credit-card mr-3 text-primary"></i>
+                    <CreditCard className="h-5 w-5 mr-3 text-primary" />
                     <span className="font-medium">{t('maxelPay')}</span>
                     <span className="ml-auto text-green-600 text-sm">{t('active')}</span>
                   </div>

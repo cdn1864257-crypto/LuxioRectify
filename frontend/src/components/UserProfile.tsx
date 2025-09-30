@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { X, ShoppingBag, LogOut } from 'lucide-react';
 import { useAuth } from '../hooks/use-auth';
 import { useLanguage } from '../contexts/LanguageContext';
 import { loadOrders, Order } from '../lib/cart';
@@ -31,7 +32,7 @@ export function UserProfile({ isOpen, onClose }: UserProfileProps) {
             className="text-muted-foreground hover:text-foreground"
             data-testid="button-close-profile"
           >
-            <i className="fas fa-times text-xl"></i>
+            <X className="h-5 w-5" />
           </button>
         </div>
         
@@ -125,7 +126,7 @@ export function UserProfile({ isOpen, onClose }: UserProfileProps) {
             <h3 className="text-lg font-semibold">Historique des commandes</h3>
             {orders.length === 0 ? (
               <div className="text-center py-12">
-                <i className="fas fa-shopping-bag text-6xl text-muted-foreground mb-4"></i>
+                <ShoppingBag className="h-24 w-24 text-muted-foreground mx-auto mb-4" />
                 <p className="text-muted-foreground">Aucune commande pour le moment</p>
               </div>
             ) : (
@@ -203,7 +204,7 @@ export function UserProfile({ isOpen, onClose }: UserProfileProps) {
                   className="bg-destructive text-destructive-foreground px-4 py-2 rounded-md hover:bg-destructive/90 transition-colors"
                   data-testid="button-logout-profile"
                 >
-                  <i className="fas fa-sign-out-alt mr-2"></i>
+                  <LogOut className="h-4 w-4 mr-2" />
                   {t('logout')}
                 </button>
               </div>

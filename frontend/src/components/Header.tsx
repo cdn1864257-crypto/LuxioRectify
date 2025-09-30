@@ -11,7 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Search, ShoppingCart as ShoppingCartIcon } from 'lucide-react';
 
 interface HeaderProps {
   onToggleCart: () => void;
@@ -126,7 +126,7 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                   className="w-full pl-10 pr-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
                   data-testid="search-input"
                 />
-                <i className="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"></i>
+                <Search className="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
               </div>
             </div>
             
@@ -158,7 +158,7 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                         <span data-testid="user-initials">{user.initials}</span>
                       </div>
                       <span className="hidden md:inline text-sm" data-testid="user-name">{user.displayName || user.email}</span>
-                      <i className="fas fa-chevron-down text-xs"></i>
+                      <ChevronDown className="h-3 w-3" />
                     </button>
                   </div>
                 )}
@@ -170,7 +170,7 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                 className="relative p-1.5 sm:p-2 hover:bg-muted rounded-full transition-colors"
                 data-testid="button-cart"
               >
-                <i className="fas fa-shopping-cart text-base sm:text-lg"></i>
+                <ShoppingCartIcon className="h-5 w-5" />
                 {itemCount > 0 && (
                   <span 
                     className="absolute -top-2 -right-2 bg-accent text-accent-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center cart-badge"
