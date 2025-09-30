@@ -26,6 +26,13 @@ The platform supports multiple languages (English, French, Polish, Spanish, Port
 ### Data Management
 Product and order data are managed client-side using a static product database, organized by categories. Local storage is used for cart persistence and order history. Extensive integration of real smartphone data from GSMArena, including variant matrices, accurate pricing, and professional images.
 
+#### Recent Catalog Updates (September 2025)
+Expanded smartphone catalog with 8 new models:
+- **Premium Segment**: Nothing Phone 3 ($799), Asus ROG Phone 8 Pro ($1,299), Sony Xperia 1 VI ($1,399)
+- **Mid-Range Segment**: Samsung Galaxy A55 5G ($350), Google Pixel 8a ($499), OnePlus 12R ($549), Realme GT 6 ($420), Motorola Edge 50 Pro ($377)
+
+All models include complete variant matrices with multiple colors and storage capacities, accurate 2025 pricing with discounts, and comprehensive technical specifications.
+
 ### Payment Processing
 External payment integration is handled via MaxelPay using a redirect-based flow, with an order reference system for tracking transactions.
 
