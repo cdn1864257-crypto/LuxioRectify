@@ -1,14 +1,13 @@
 import { useState, useMemo, useEffect } from 'react';
 import { products, type Product } from '../lib/products';
-import { useCart } from '../hooks/use-cart';
-import { useToast } from '../hooks/use-toast';
+import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { CartSidebar } from '../components/CartSidebar';
 import { CheckoutModal } from '../components/CheckoutModal';
 import { UserProfile } from '../components/UserProfile';
-import { ToastNotifications } from '../components/ToastNotifications';
+import { showToast } from '../components/ToastNotifications';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
@@ -27,7 +26,6 @@ const ITEMS_PER_PAGE = 12;
 export default function Premium() {
   const { t } = useLanguage();
   const { addToCart } = useCart();
-  const { toast } = useToast();
 
   // UI States
   const [cartOpen, setCartOpen] = useState(false);
@@ -232,10 +230,7 @@ export default function Premium() {
       });
     }, 2000);
 
-    toast({
-      title: t('itemAddedToCart'),
-      description: productToAdd.name,
-    });
+    showToast(`${productToAdd.name} - ${t('itemAddedToCart')}`, 'success');
   };
 
   const handlePageChange = (page: number) => {
@@ -552,8 +547,6 @@ export default function Premium() {
         isOpen={profileOpen}
         onClose={() => setProfileOpen(false)}
       />
-      
-      <ToastNotifications />
     </div>
   );
 }

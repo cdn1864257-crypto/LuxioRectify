@@ -37,7 +37,7 @@ function ProductCard({ product }: { product: Product }) {
       : product;
     
     addToCart(productToAdd);
-    showToast(`${product.name} ${t('itemAddedToCart')}`, 'success');
+    showToast(`${product.name} - ${t('itemAddedToCart')}`, 'success');
   };
 
   const colors = product.variants 

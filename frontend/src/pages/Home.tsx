@@ -8,7 +8,6 @@ import { TestimonialsCarousel } from '../components/TestimonialsCarousel';
 import { Footer } from '../components/Footer';
 import { CartSidebar } from '../components/CartSidebar';
 import { CheckoutModal } from '../components/CheckoutModal';
-import { ToastNotifications } from '../components/ToastNotifications';
 import { UserProfile } from '../components/UserProfile';
 import { useAuth } from '../hooks/use-auth';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -113,8 +112,6 @@ export default function Home() {
         isOpen={profileOpen}
         onClose={() => setProfileOpen(false)}
       />
-      
-      <ToastNotifications />
     </div>
   );
 }
