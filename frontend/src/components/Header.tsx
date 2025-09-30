@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { useAuth } from '../hooks/use-auth';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -22,6 +22,7 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
   const { user } = useAuth();
   const { itemCount } = useCart();
   const { t } = useLanguage();
+  const [, navigate] = useLocation();
   const [authModal, setAuthModal] = useState<{ open: boolean; mode: 'login' | 'signup' }>({
     open: false,
     mode: 'login'
@@ -53,23 +54,21 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                       data-testid="nav-smartphones"
                     >
                       {t('smartphones')}
-                      <ChevronDown className="w-4 h-4" />
+                      <ChevronDown className="w-4 h-4" aria-hidden="true" />
                     </button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start">
-                    <DropdownMenuItem asChild>
-                      <button 
-                        onClick={() => scrollToSection('smartphones')}
-                        className="w-full text-left cursor-pointer"
-                        data-testid="nav-smartphones-all"
-                      >
-                        {t('smartphones')}
-                      </button>
+                    <DropdownMenuItem 
+                      onSelect={() => scrollToSection('smartphones')}
+                      data-testid="nav-smartphones-all"
+                    >
+                      {t('smartphones')}
                     </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link href="/premium" className="cursor-pointer" data-testid="nav-premium">
-                        Premium
-                      </Link>
+                    <DropdownMenuItem 
+                      onSelect={() => navigate('/premium')}
+                      data-testid="nav-premium"
+                    >
+                      Premium
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
