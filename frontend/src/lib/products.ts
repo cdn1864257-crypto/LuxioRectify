@@ -1,3 +1,10 @@
+export interface ProductVariant {
+  color?: string;
+  capacity?: string;
+  price: number;
+  originalPrice: number;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -8,111 +15,35 @@ export interface Product {
   category: string;
   description: string;
   features: string[];
+  variants?: ProductVariant[];
+  hasVariants?: boolean;
 }
 
 export const products: Product[] = [
-  // === SMARTPHONES (29 products) ===
-  // iPhone 17 Pro - Argent
+  // === SMARTPHONES (21 products) ===
+  // iPhone 17 Pro with variants
   {
-    id: 'iphone-17-pro-silver-256gb',
-    name: 'iPhone 17 Pro (5G)',
-    price: 1354.32,
-    originalPrice: 1539.00,
-    discount: 12,
-    image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
-    category: 'smartphones',
-    description: '256GB, Argent',
-    features: ['5G connectivity', 'A18 Pro chip', 'Advanced camera system', 'Free shipping']
-  },
-  {
-    id: 'iphone-17-pro-silver-512gb',
-    name: 'iPhone 17 Pro (5G)',
-    price: 2524.23,
-    originalPrice: 2868.44,
-    discount: 12,
-    image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
-    category: 'smartphones',
-    description: '512GB, Argent',
-    features: ['5G connectivity', 'A18 Pro chip', 'Advanced camera system', 'Free shipping']
-  },
-  {
-    id: 'iphone-17-pro-silver-1024gb',
-    name: 'iPhone 17 Pro (5G)',
-    price: 1888.47,
-    originalPrice: 2145.99,
-    discount: 12,
-    image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
-    category: 'smartphones',
-    description: '1024GB, Argent',
-    features: ['5G connectivity', 'A18 Pro chip', 'Advanced camera system', 'Free shipping']
-  },
-  // iPhone 17 Pro - Bleu intense
-  {
-    id: 'iphone-17-pro-blue-256gb',
+    id: 'iphone-17-pro',
     name: 'iPhone 17 Pro (5G)',
     price: 1292.72,
     originalPrice: 1469.00,
     discount: 12,
     image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
     category: 'smartphones',
-    description: '256GB, Bleu intense',
-    features: ['5G connectivity', 'A18 Pro chip', 'Advanced camera system', 'Free shipping']
-  },
-  {
-    id: 'iphone-17-pro-blue-512gb',
-    name: 'iPhone 17 Pro (5G)',
-    price: 1460.80,
-    originalPrice: 1660.00,
-    discount: 12,
-    image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
-    category: 'smartphones',
-    description: '512GB, Bleu intense',
-    features: ['5G connectivity', 'A18 Pro chip', 'Advanced camera system', 'Free shipping']
-  },
-  {
-    id: 'iphone-17-pro-blue-1024gb',
-    name: 'iPhone 17 Pro (5G)',
-    price: 1838.98,
-    originalPrice: 2089.75,
-    discount: 12,
-    image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
-    category: 'smartphones',
-    description: '1024GB, Bleu intense',
-    features: ['5G connectivity', 'A18 Pro chip', 'Advanced camera system', 'Free shipping']
-  },
-  // iPhone 17 Pro - Orange Cosmique
-  {
-    id: 'iphone-17-pro-orange-256gb',
-    name: 'iPhone 17 Pro (5G)',
-    price: 1321.76,
-    originalPrice: 1502.00,
-    discount: 12,
-    image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
-    category: 'smartphones',
-    description: '256GB, Orange Cosmique',
-    features: ['5G connectivity', 'A18 Pro chip', 'Advanced camera system', 'Free shipping']
-  },
-  {
-    id: 'iphone-17-pro-orange-512gb',
-    name: 'iPhone 17 Pro (5G)',
-    price: 1678.60,
-    originalPrice: 1907.50,
-    discount: 12,
-    image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
-    category: 'smartphones',
-    description: '512GB, Orange Cosmique',
-    features: ['5G connectivity', 'A18 Pro chip', 'Advanced camera system', 'Free shipping']
-  },
-  {
-    id: 'iphone-17-pro-orange-1024gb',
-    name: 'iPhone 17 Pro (5G)',
-    price: 1945.50,
-    originalPrice: 2210.80,
-    discount: 12,
-    image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
-    category: 'smartphones',
-    description: '1024GB, Orange Cosmique',
-    features: ['5G connectivity', 'A18 Pro chip', 'Advanced camera system', 'Free shipping']
+    description: 'À partir de 256GB',
+    features: ['5G connectivity', 'A18 Pro chip', 'Advanced camera system', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Argent', capacity: '256GB', price: 1354.32, originalPrice: 1539.00 },
+      { color: 'Argent', capacity: '512GB', price: 2524.23, originalPrice: 2868.44 },
+      { color: 'Argent', capacity: '1024GB', price: 1888.47, originalPrice: 2145.99 },
+      { color: 'Bleu intense', capacity: '256GB', price: 1292.72, originalPrice: 1469.00 },
+      { color: 'Bleu intense', capacity: '512GB', price: 1460.80, originalPrice: 1660.00 },
+      { color: 'Bleu intense', capacity: '1024GB', price: 1838.98, originalPrice: 2089.75 },
+      { color: 'Orange Cosmique', capacity: '256GB', price: 1321.76, originalPrice: 1502.00 },
+      { color: 'Orange Cosmique', capacity: '512GB', price: 1678.60, originalPrice: 1907.50 },
+      { color: 'Orange Cosmique', capacity: '1024GB', price: 1945.50, originalPrice: 2210.80 },
+    ]
   },
   {
     id: 'iphone-15-pro-max',
