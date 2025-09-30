@@ -107,6 +107,26 @@ export interface Translations {
   // Search & Filters
   searchPlaceholder: string;
   selectCountry: string;
+  filterResults: string;
+  searchByModel: string;
+  allBrands: string;
+  allCapacities: string;
+  allColors: string;
+  resetFilters: string;
+  noProductsFound: string;
+  
+  // Premium Page
+  premiumSmartphones: string;
+  discoverLatest: string;
+  products: string;
+  upTo: string;
+  off: string;
+  variants: string;
+  available: string;
+  added: string;
+  addedSuccessfully: string;
+  previous: string;
+  next: string;
   
   // Stats
   happyCustomers: string;
@@ -280,6 +300,26 @@ export const translations: Record<Language, Translations> = {
     // Search & Filters
     searchPlaceholder: 'Search products...',
     selectCountry: 'Select Country',
+    filterResults: 'Filter Results',
+    searchByModel: 'Search by model...',
+    allBrands: 'All Brands',
+    allCapacities: 'All Capacities',
+    allColors: 'All Colors',
+    resetFilters: 'Reset Filters',
+    noProductsFound: 'No products found matching your filters',
+    
+    // Premium Page
+    premiumSmartphones: 'Premium Smartphones',
+    discoverLatest: 'Discover the latest flagship smartphones with exclusive discounts',
+    products: 'products',
+    upTo: 'Up to',
+    off: 'OFF',
+    variants: 'variants',
+    available: 'available',
+    added: 'Added',
+    addedSuccessfully: 'has been added to cart',
+    previous: 'Previous',
+    next: 'Next',
     
     // Stats
     happyCustomers: 'Happy Customers',
@@ -559,6 +599,26 @@ export const translations: Record<Language, Translations> = {
     // Search & Filters
     searchPlaceholder: 'Rechercher des produits...',
     selectCountry: 'Sélectionner le pays',
+    filterResults: 'Filtrer les résultats',
+    searchByModel: 'Rechercher par modèle...',
+    allBrands: 'Toutes les marques',
+    allCapacities: 'Toutes les capacités',
+    allColors: 'Toutes les couleurs',
+    resetFilters: 'Réinitialiser les filtres',
+    noProductsFound: 'Aucun produit ne correspond à vos filtres',
+    
+    // Premium Page
+    premiumSmartphones: 'Smartphones Premium',
+    discoverLatest: 'Découvrez les derniers smartphones flagship avec des réductions exclusives',
+    products: 'produits',
+    upTo: 'Jusqu\'à',
+    off: 'DE RÉDUCTION',
+    variants: 'variantes',
+    available: 'disponibles',
+    added: 'Ajouté',
+    addedSuccessfully: 'a été ajouté au panier',
+    previous: 'Précédent',
+    next: 'Suivant',
     
     // Stats
     happyCustomers: 'Clients satisfaits',
