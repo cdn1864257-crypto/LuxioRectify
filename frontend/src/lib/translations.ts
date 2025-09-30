@@ -50,12 +50,17 @@ export interface Translations {
   // Cart
   shoppingCart: string;
   cartEmpty: string;
+  cartEmptyDescription: string;
   cartTotal: string;
   removeItem: string;
   updateQuantity: string;
+  item: string;
+  items: string;
+  qty: string;
   
   // Checkout Form
   checkout: string;
+  checkoutSubtitle: string;
   shippingInfo: string;
   firstName: string;
   lastName: string;
@@ -73,6 +78,7 @@ export interface Translations {
   bankTransfer: string;
   prepaidTickets: string;
   maxelPay: string;
+  maxelPayDescription: string;
   selectPaymentMethod: string;
   bankTransferTitle: string;
   bankTransferDescription: string;
@@ -111,6 +117,9 @@ export interface Translations {
   invalidEmail: string;
   invalidPhone: string;
   ticketCodeSent: string;
+  enterTicketCode: string;
+  orderFailed: string;
+  redirectingToMaxelPay: string;
   
   // Search & Filters
   searchPlaceholder: string;
@@ -251,12 +260,17 @@ export const translations: Record<Language, Translations> = {
     // Cart
     shoppingCart: 'Shopping Cart',
     cartEmpty: 'Your cart is empty',
+    cartEmptyDescription: 'Discover our products and add them to your cart',
     cartTotal: 'Cart Total',
     removeItem: 'Remove Item',
     updateQuantity: 'Update Quantity',
+    item: 'item',
+    items: 'items',
+    qty: 'Qty',
     
     // Checkout Form
     checkout: 'Checkout',
+    checkoutSubtitle: 'Complete your order in a few simple steps',
     shippingInfo: 'Shipping Information',
     firstName: 'First Name',
     lastName: 'Last Name',
@@ -274,6 +288,7 @@ export const translations: Record<Language, Translations> = {
     bankTransfer: 'Bank Transfer',
     prepaidTickets: 'Prepaid Tickets',
     maxelPay: 'MaxelPay',
+    maxelPayDescription: 'Fast and secure online payment',
     selectPaymentMethod: 'Select Payment Method',
     bankTransferTitle: 'Bank Transfer',
     bankTransferDescription: 'Transfer the amount to our bank account',
@@ -312,6 +327,9 @@ export const translations: Record<Language, Translations> = {
     invalidEmail: 'Please enter a valid email address',
     invalidPhone: 'Please enter a valid phone number',
     ticketCodeSent: 'Ticket codes sent successfully',
+    enterTicketCode: 'Please enter at least one ticket code',
+    orderFailed: 'Order failed. Please try again.',
+    redirectingToMaxelPay: 'Redirecting to MaxelPay...',
     
     // Search & Filters
     searchPlaceholder: 'Search products...',
@@ -558,12 +576,17 @@ export const translations: Record<Language, Translations> = {
     // Cart
     shoppingCart: 'Panier',
     cartEmpty: 'Votre panier est vide',
+    cartEmptyDescription: 'Découvrez nos produits et ajoutez-les à votre panier',
     cartTotal: 'Total du panier',
     removeItem: 'Retirer l\'article',
     updateQuantity: 'Modifier la quantité',
+    item: 'article',
+    items: 'articles',
+    qty: 'Qté',
     
     // Checkout Form
     checkout: 'Commande',
+    checkoutSubtitle: 'Finalisez votre commande en quelques étapes',
     shippingInfo: 'Informations de livraison',
     firstName: 'Prénom',
     lastName: 'Nom',
@@ -581,6 +604,7 @@ export const translations: Record<Language, Translations> = {
     bankTransfer: 'Virement bancaire',
     prepaidTickets: 'Tickets prépayés',
     maxelPay: 'MaxelPay',
+    maxelPayDescription: 'Paiement en ligne rapide et sécurisé',
     selectPaymentMethod: 'Choisir le mode de paiement',
     bankTransferTitle: 'Virement bancaire',
     bankTransferDescription: 'Transférez le montant sur notre compte bancaire',
@@ -865,12 +889,17 @@ export const translations: Record<Language, Translations> = {
     // Cart
     shoppingCart: 'Carrito de compras',
     cartEmpty: 'Tu carrito está vacío',
+    cartEmptyDescription: 'Descubre nuestros productos y añádelos a tu carrito',
     cartTotal: 'Total del carrito',
     removeItem: 'Eliminar artículo',
     updateQuantity: 'Actualizar cantidad',
+    item: 'artículo',
+    items: 'artículos',
+    qty: 'Cant',
     
     // Checkout Form
     checkout: 'Pagar',
+    checkoutSubtitle: 'Completa tu pedido en pocos pasos',
     shippingInfo: 'Información de envío',
     firstName: 'Nombre',
     lastName: 'Apellido',
@@ -888,6 +917,7 @@ export const translations: Record<Language, Translations> = {
     bankTransfer: 'Transferencia bancaria',
     prepaidTickets: 'Tickets prepagados',
     maxelPay: 'MaxelPay',
+    maxelPayDescription: 'Pago en línea rápido y seguro',
     selectPaymentMethod: 'Seleccionar método de pago',
     bankTransferTitle: 'Transferencia bancaria',
     bankTransferDescription: 'Transfiere el importe a nuestra cuenta bancaria',
@@ -1172,12 +1202,17 @@ export const translations: Record<Language, Translations> = {
     // Cart
     shoppingCart: 'Carrinho de compras',
     cartEmpty: 'O seu carrinho está vazio',
+    cartEmptyDescription: 'Descubra os nossos produtos e adicione-os ao seu carrinho',
     cartTotal: 'Total do carrinho',
     removeItem: 'Remover item',
     updateQuantity: 'Atualizar quantidade',
+    item: 'item',
+    items: 'itens',
+    qty: 'Qtd',
     
     // Checkout Form
     checkout: 'Finalizar',
+    checkoutSubtitle: 'Complete o seu pedido em poucos passos',
     shippingInfo: 'Informações de envio',
     firstName: 'Nome',
     lastName: 'Apelido',
@@ -1195,6 +1230,7 @@ export const translations: Record<Language, Translations> = {
     bankTransfer: 'Transferência bancária',
     prepaidTickets: 'Tickets pré-pagos',
     maxelPay: 'MaxelPay',
+    maxelPayDescription: 'Pagamento online rápido e seguro',
     selectPaymentMethod: 'Selecionar método de pagamento',
     bankTransferTitle: 'Transferência bancária',
     bankTransferDescription: 'Transfira o valor para a nossa conta bancária',
@@ -1479,12 +1515,17 @@ export const translations: Record<Language, Translations> = {
     // Cart
     shoppingCart: 'Koszyk',
     cartEmpty: 'Twój koszyk jest pusty',
+    cartEmptyDescription: 'Odkryj nasze produkty i dodaj je do koszyka',
     cartTotal: 'Suma koszyka',
     removeItem: 'Usuń przedmiot',
     updateQuantity: 'Zaktualizuj ilość',
+    item: 'przedmiot',
+    items: 'przedmioty',
+    qty: 'Szt',
     
     // Checkout Form
     checkout: 'Kasa',
+    checkoutSubtitle: 'Dokończ swoje zamówienie w kilku krokach',
     shippingInfo: 'Informacje o dostawie',
     firstName: 'Imię',
     lastName: 'Nazwisko',
@@ -1502,6 +1543,7 @@ export const translations: Record<Language, Translations> = {
     bankTransfer: 'Przelew bankowy',
     prepaidTickets: 'Karty przedpłacone',
     maxelPay: 'MaxelPay',
+    maxelPayDescription: 'Szybka i bezpieczna płatność online',
     selectPaymentMethod: 'Wybierz metodę płatności',
     bankTransferTitle: 'Przelew bankowy',
     bankTransferDescription: 'Przelej kwotę na nasze konto bankowe',
@@ -1786,12 +1828,17 @@ export const translations: Record<Language, Translations> = {
     // Cart
     shoppingCart: 'Carrello',
     cartEmpty: 'Il tuo carrello è vuoto',
+    cartEmptyDescription: 'Scopri i nostri prodotti e aggiungili al carrello',
     cartTotal: 'Totale carrello',
     removeItem: 'Rimuovi articolo',
     updateQuantity: 'Aggiorna quantità',
+    item: 'articolo',
+    items: 'articoli',
+    qty: 'Qt',
     
     // Checkout Form
     checkout: 'Checkout',
+    checkoutSubtitle: 'Completa il tuo ordine in pochi passaggi',
     shippingInfo: 'Informazioni di spedizione',
     firstName: 'Nome',
     lastName: 'Cognome',
@@ -1809,6 +1856,7 @@ export const translations: Record<Language, Translations> = {
     bankTransfer: 'Bonifico bancario',
     prepaidTickets: 'Ticket prepagati',
     maxelPay: 'MaxelPay',
+    maxelPayDescription: 'Pagamento online veloce e sicuro',
     selectPaymentMethod: 'Seleziona metodo di pagamento',
     bankTransferTitle: 'Bonifico bancario',
     bankTransferDescription: 'Trasferisci l\'importo sul nostro conto bancario',
@@ -2093,12 +2141,17 @@ export const translations: Record<Language, Translations> = {
     // Cart
     shoppingCart: 'Kosár',
     cartEmpty: 'A kosár üres',
+    cartEmptyDescription: 'Fedezze fel termékeinket és adja hozzá őket a kosárhoz',
     cartTotal: 'Kosár összesen',
     removeItem: 'Termék eltávolítása',
     updateQuantity: 'Mennyiség frissítése',
+    item: 'termék',
+    items: 'termékek',
+    qty: 'Db',
     
     // Checkout Form
     checkout: 'Fizetés',
+    checkoutSubtitle: 'Végezze el rendelését néhány egyszerű lépésben',
     shippingInfo: 'Szállítási információk',
     firstName: 'Keresztnév',
     lastName: 'Vezetéknév',
@@ -2116,6 +2169,7 @@ export const translations: Record<Language, Translations> = {
     bankTransfer: 'Banki átutalás',
     prepaidTickets: 'Feltöltőkártyák',
     maxelPay: 'MaxelPay',
+    maxelPayDescription: 'Gyors és biztonságos online fizetés',
     selectPaymentMethod: 'Fizetési mód kiválasztása',
     bankTransferTitle: 'Banki átutalás',
     bankTransferDescription: 'Utalja át az összeget a bankszámlánkra',
