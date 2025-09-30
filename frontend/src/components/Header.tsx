@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'wouter';
 import { useAuth } from '../hooks/use-auth';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -34,7 +35,9 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center space-x-2 sm:space-x-4">
-              <div className="text-xl sm:text-2xl font-bold text-primary" data-testid="logo">Luxio</div>
+              <Link href="/" className="text-xl sm:text-2xl font-bold text-primary" data-testid="logo">
+                Luxio
+              </Link>
               <nav className="hidden md:flex space-x-4 lg:space-x-8">
                 <button 
                   onClick={() => scrollToSection('smartphones')}
@@ -43,6 +46,9 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                 >
                   {t('smartphones')}
                 </button>
+                <Link href="/premium" className="text-muted-foreground hover:text-primary transition-colors" data-testid="nav-premium">
+                  Premium
+                </Link>
                 <button 
                   onClick={() => scrollToSection('watches')}
                   className="text-muted-foreground hover:text-primary transition-colors"

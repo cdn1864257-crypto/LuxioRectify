@@ -498,10 +498,10 @@ export const products: Product[] = [
       { color: 'Silver Shadow', capacity: '512GB', price: 1099, originalPrice: 1199 },
     ]
   },
-  // Apple iPhone 16 Pro with variants
+  // iPhone 16 Pro with variants
   {
     id: 'iphone-16-pro',
-    name: 'Apple iPhone 16 Pro',
+    name: 'iPhone 16 Pro',
     price: 899,
     originalPrice: 999,
     discount: 10,
@@ -525,10 +525,10 @@ export const products: Product[] = [
       { color: 'Desert Titanium', capacity: '512GB', price: 1249, originalPrice: 1349 },
     ]
   },
-  // Apple iPhone 16 with variants
+  // iPhone 16 with variants
   {
     id: 'iphone-16',
-    name: 'Apple iPhone 16',
+    name: 'iPhone 16',
     price: 719,
     originalPrice: 799,
     discount: 10,
@@ -555,10 +555,10 @@ export const products: Product[] = [
       { color: 'Ultramarine', capacity: '512GB', price: 989, originalPrice: 1099 },
     ]
   },
-  // Apple iPhone 16 Plus with variants
+  // iPhone 16 Plus with variants
   {
     id: 'iphone-16-plus',
-    name: 'Apple iPhone 16 Plus',
+    name: 'iPhone 16 Plus',
     price: 809,
     originalPrice: 899,
     discount: 10,

@@ -3,6 +3,12 @@ import { products, type Product } from '../lib/products';
 import { useCart } from '../hooks/use-cart';
 import { useToast } from '../hooks/use-toast';
 import { useLanguage } from '../hooks/use-language';
+import { Header } from '../components/Header';
+import { Footer } from '../components/Footer';
+import { CartSidebar } from '../components/CartSidebar';
+import { CheckoutModal } from '../components/CheckoutModal';
+import { UserProfile } from '../components/UserProfile';
+import { ToastNotifications } from '../components/ToastNotifications';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
@@ -23,13 +29,21 @@ export default function Premium() {
   const { addToCart } = useCart();
   const { toast } = useToast();
 
+  // UI States
+  const [cartOpen, setCartOpen] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [addedToCart, setAddedToCart] = useState<Set<string>>(new Set());
+
   // Filters
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBrand, setSelectedBrand] = useState<string>('all');
   const [selectedCapacity, setSelectedCapacity] = useState<string>('all');
   const [selectedColor, setSelectedColor] = useState<string>('all');
   const [currentPage, setCurrentPage] = useState(1);
-  const [addedToCart, setAddedToCart] = useState<Set<string>>(new Set());
+
+  // Product variant selections (phoneId -> {capacity, color})
+  const [variantSelections, setVariantSelections] = useState<Record<string, { capacity?: string; color?: string }>>({});
 
   // Get all smartphones
   const smartphones = products.filter(p => p.category === 'smartphones');
@@ -122,8 +136,91 @@ export default function Premium() {
     setCurrentPage(1);
   }, [searchQuery, selectedBrand, selectedCapacity, selectedColor]);
 
+  // Get available colors for a phone given selected capacity
+  const getAvailableColors = (phone: Product, selectedCapacity?: string) => {
+    if (!phone.variants) return [];
+    const colorSet = new Set<string>();
+    phone.variants.forEach(variant => {
+      if (!selectedCapacity || variant.capacity === selectedCapacity) {
+        if (variant.color) {
+          colorSet.add(variant.color);
+        }
+      }
+    });
+    return Array.from(colorSet);
+  };
+
+  // Get available capacities for a phone given selected color
+  const getAvailableCapacities = (phone: Product, selectedColor?: string) => {
+    if (!phone.variants) return [];
+    const capacitySet = new Set<string>();
+    phone.variants.forEach(variant => {
+      if (!selectedColor || variant.color === selectedColor) {
+        if (variant.capacity) {
+          capacitySet.add(variant.capacity);
+        }
+      }
+    });
+    return Array.from(capacitySet).sort((a, b) => {
+      const aNum = parseInt(a);
+      const bNum = parseInt(b);
+      return aNum - bNum;
+    });
+  };
+
+  // Get the price for current variant selection
+  const getCurrentPrice = (phone: Product) => {
+    const selection = variantSelections[phone.id];
+    if (!selection || !phone.variants) {
+      return { price: phone.price, originalPrice: phone.originalPrice };
+    }
+
+    // Find matching variant
+    const variant = phone.variants.find(
+      v => v.capacity === selection.capacity && v.color === selection.color
+    );
+
+    if (variant) {
+      return { price: variant.price, originalPrice: variant.originalPrice };
+    }
+
+    return { price: phone.price, originalPrice: phone.originalPrice };
+  };
+
+  const handleCapacitySelect = (phoneId: string, capacity: string) => {
+    setVariantSelections(prev => ({
+      ...prev,
+      [phoneId]: { ...prev[phoneId], capacity }
+    }));
+  };
+
+  const handleColorSelect = (phoneId: string, color: string) => {
+    setVariantSelections(prev => ({
+      ...prev,
+      [phoneId]: { ...prev[phoneId], color }
+    }));
+  };
+
   const handleAddToCart = (phone: Product) => {
-    addToCart(phone);
+    const selection = variantSelections[phone.id];
+    
+    // Create product with selected variant
+    let productToAdd = { ...phone };
+    if (selection?.capacity && selection?.color) {
+      const variant = phone.variants?.find(
+        v => v.capacity === selection.capacity && v.color === selection.color
+      );
+      if (variant) {
+        productToAdd = {
+          ...phone,
+          price: variant.price,
+          originalPrice: variant.originalPrice,
+          name: `${phone.name} (${selection.capacity}, ${selection.color})`
+        };
+      }
+    }
+
+    addToCart(productToAdd);
 
     setAddedToCart(prev => new Set(prev).add(phone.id));
     
@@ -137,7 +234,7 @@ export default function Premium() {
 
     toast({
       title: t('addedToCart'),
-      description: `${phone.name} ${t('addedSuccessfully') || 'has been added to cart'}`,
+      description: `${productToAdd.name} ${t('addedSuccessfully') || 'has been added to cart'}`,
     });
   };
 
@@ -146,239 +243,317 @@ export default function Premium() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleProceedToCheckout = () => {
+    setCartOpen(false);
+    setCheckoutOpen(true);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
-      {/* Header */}
-      <div className="bg-slate-900 dark:bg-slate-950 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4" data-testid="text-premium-title">
-            {t('premiumSmartphones') || 'Premium Smartphones'}
-          </h1>
-          <p className="text-xl text-slate-300" data-testid="text-premium-subtitle">
-            {t('discoverLatest') || 'Discover the latest flagship smartphones with exclusive discounts'}
-          </p>
-          <div className="mt-6 flex items-center gap-4">
-            <Badge variant="secondary" className="text-lg px-4 py-2">
-              {filteredSmartphones.length} {t('products') || 'products'}
-            </Badge>
-            <Badge variant="destructive" className="text-lg px-4 py-2">
-              {t('upTo') || 'Up to'} 37% {t('off') || 'OFF'}
-            </Badge>
+    <div className="min-h-screen bg-background text-foreground">
+      <Header 
+        onToggleCart={() => setCartOpen(!cartOpen)} 
+        onToggleProfile={() => setProfileOpen(!profileOpen)}
+      />
+
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
+        {/* Header */}
+        <div className="bg-slate-900 dark:bg-slate-950 text-white py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4" data-testid="text-premium-title">
+              {t('premiumSmartphones') || 'Premium Smartphones'}
+            </h1>
+            <p className="text-xl text-slate-300" data-testid="text-premium-subtitle">
+              {t('discoverLatest') || 'Discover the latest flagship smartphones with exclusive discounts'}
+            </p>
+            <div className="mt-6 flex items-center gap-4">
+              <Badge variant="secondary" className="text-lg px-4 py-2">
+                {filteredSmartphones.length} {t('products') || 'products'}
+              </Badge>
+              <Badge variant="destructive" className="text-lg px-4 py-2">
+                {t('upTo') || 'Up to'} 37% {t('off') || 'OFF'}
+              </Badge>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Filters */}
-        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white">
-            {t('filterResults') || 'Filter Results'}
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Search */}
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-5 w-5" />
-              <Input
-                type="text"
-                placeholder={t('searchByModel') || 'Search by model...'}
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          {/* Filters */}
+          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 mb-8">
+            <h2 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white">
+              {t('filterResults') || 'Filter Results'}
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* Search */}
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-5 w-5" />
+                <Input
+                  type="text"
+                  placeholder={t('searchByModel') || 'Search by model...'}
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  className="pl-10"
+                  data-testid="input-search-model"
+                />
+              </div>
+
+              {/* Brand Filter */}
+              <Select value={selectedBrand} onValueChange={(value) => { setSelectedBrand(value); setCurrentPage(1); }}>
+                <SelectTrigger data-testid="select-brand-filter">
+                  <SelectValue placeholder={t('allBrands') || 'All Brands'} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">{t('allBrands') || 'All Brands'}</SelectItem>
+                  {brands.map(brand => (
+                    <SelectItem key={brand} value={brand}>{brand}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {/* Capacity Filter */}
+              <Select value={selectedCapacity} onValueChange={(value) => { setSelectedCapacity(value); setCurrentPage(1); }}>
+                <SelectTrigger data-testid="select-capacity-filter">
+                  <SelectValue placeholder={t('allCapacities') || 'All Capacities'} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">{t('allCapacities') || 'All Capacities'}</SelectItem>
+                  {capacities.map(capacity => (
+                    <SelectItem key={capacity} value={capacity}>{capacity}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {/* Color Filter */}
+              <Select value={selectedColor} onValueChange={(value) => { setSelectedColor(value); setCurrentPage(1); }}>
+                <SelectTrigger data-testid="select-color-filter">
+                  <SelectValue placeholder={t('allColors') || 'All Colors'} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">{t('allColors') || 'All Colors'}</SelectItem>
+                  {colors.map(color => (
+                    <SelectItem key={color} value={color}>{color}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          {/* Products Grid */}
+          {paginatedSmartphones.length > 0 ? (
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {paginatedSmartphones.map(phone => {
+                  const selection = variantSelections[phone.id] || {};
+                  const availableCapacities = getAvailableCapacities(phone, selection.color);
+                  const availableColors = getAvailableColors(phone, selection.capacity);
+                  const currentPrice = getCurrentPrice(phone);
+
+                  return (
+                    <Card key={phone.id} className="group hover:shadow-xl transition-all duration-300 flex flex-col" data-testid={`card-product-${phone.id}`}>
+                      <CardContent className="p-4 flex-1">
+                        {/* Product Image */}
+                        <div className="relative aspect-square mb-4 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800">
+                          <img
+                            src={phone.image}
+                            alt={phone.name}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            data-testid={`img-product-${phone.id}`}
+                          />
+                          {phone.discount && (
+                            <Badge className="absolute top-2 right-2 bg-red-500" data-testid={`badge-discount-${phone.id}`}>
+                              -{phone.discount}%
+                            </Badge>
+                          )}
+                        </div>
+
+                        {/* Product Info */}
+                        <div className="space-y-2">
+                          <h3 className="font-bold text-lg text-slate-900 dark:text-white line-clamp-2" data-testid={`text-name-${phone.id}`}>
+                            {phone.name}
+                          </h3>
+                          <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2" data-testid={`text-description-${phone.id}`}>
+                            {phone.description}
+                          </p>
+
+                          {/* Variant Selectors */}
+                          {phone.hasVariants && phone.variants && (
+                            <div className="space-y-3 mt-4">
+                              {/* Capacity Selector */}
+                              {availableCapacities.length > 0 && (
+                                <div>
+                                  <p className="text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                    {t('allCapacities') || 'Capacity'}:
+                                  </p>
+                                  <div className="flex flex-wrap gap-2">
+                                    {availableCapacities.map(capacity => (
+                                      <button
+                                        key={capacity}
+                                        onClick={() => handleCapacitySelect(phone.id, capacity)}
+                                        className={`px-3 py-1 text-xs rounded-md border transition-colors ${
+                                          selection.capacity === capacity
+                                            ? 'bg-primary text-primary-foreground border-primary'
+                                            : 'bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-600 hover:border-primary'
+                                        }`}
+                                        data-testid={`button-capacity-${phone.id}-${capacity}`}
+                                      >
+                                        {capacity}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+
+                              {/* Color Selector */}
+                              {availableColors.length > 0 && (
+                                <div>
+                                  <p className="text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                                    {t('allColors') || 'Color'}:
+                                  </p>
+                                  <div className="flex flex-wrap gap-2">
+                                    {availableColors.map(color => (
+                                      <button
+                                        key={color}
+                                        onClick={() => handleColorSelect(phone.id, color)}
+                                        className={`px-3 py-1 text-xs rounded-md border transition-colors ${
+                                          selection.color === color
+                                            ? 'bg-primary text-primary-foreground border-primary'
+                                            : 'bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-600 hover:border-primary'
+                                        }`}
+                                        data-testid={`button-color-${phone.id}-${color}`}
+                                      >
+                                        {color}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          )}
+
+                          {/* Price */}
+                          <div className="flex items-baseline gap-2 mt-4">
+                            <span className="text-2xl font-bold text-slate-900 dark:text-white" data-testid={`text-price-${phone.id}`}>
+                              €{currentPrice.price}
+                            </span>
+                            {currentPrice.originalPrice && (
+                              <span className="text-sm text-slate-500 line-through" data-testid={`text-original-price-${phone.id}`}>
+                                €{currentPrice.originalPrice}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </CardContent>
+                      
+                      <CardFooter className="p-4 pt-0">
+                        <Button
+                          onClick={() => handleAddToCart(phone)}
+                          className="w-full"
+                          variant={addedToCart.has(phone.id) ? "secondary" : "default"}
+                          data-testid={`button-add-to-cart-${phone.id}`}
+                        >
+                          {addedToCart.has(phone.id) ? (
+                            <>
+                              <Check className="w-4 h-4 mr-2" />
+                              {t('added') || 'Added'}
+                            </>
+                          ) : (
+                            <>
+                              <ShoppingCart className="w-4 h-4 mr-2" />
+                              {t('addToCart') || 'Add to Cart'}
+                            </>
+                          )}
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  );
+                })}
+              </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="mt-12 flex items-center justify-center gap-2">
+                  <Button
+                    variant="outline"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    data-testid="button-previous-page"
+                  >
+                    <ChevronLeft className="w-4 h-4 mr-2" />
+                    {t('previous') || 'Previous'}
+                  </Button>
+
+                  <div className="flex gap-2">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                      <Button
+                        key={page}
+                        variant={currentPage === page ? "default" : "outline"}
+                        onClick={() => handlePageChange(page)}
+                        className="min-w-[40px]"
+                        data-testid={`button-page-${page}`}
+                      >
+                        {page}
+                      </Button>
+                    ))}
+                  </div>
+
+                  <Button
+                    variant="outline"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    data-testid="button-next-page"
+                  >
+                    {t('next') || 'Next'}
+                    <ChevronRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="text-center py-16">
+              <p className="text-xl text-slate-600 dark:text-slate-400" data-testid="text-no-results">
+                {t('noProductsFound') || 'No products found matching your filters'}
+              </p>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedBrand('all');
+                  setSelectedCapacity('all');
+                  setSelectedColor('all');
                   setCurrentPage(1);
                 }}
-                className="pl-10"
-                data-testid="input-search-model"
-              />
+                className="mt-4"
+                data-testid="button-reset-filters"
+              >
+                {t('resetFilters') || 'Reset Filters'}
+              </Button>
             </div>
-
-            {/* Brand Filter */}
-            <Select value={selectedBrand} onValueChange={(value) => { setSelectedBrand(value); setCurrentPage(1); }}>
-              <SelectTrigger data-testid="select-brand-filter">
-                <SelectValue placeholder={t('allBrands') || 'All Brands'} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">{t('allBrands') || 'All Brands'}</SelectItem>
-                {brands.map(brand => (
-                  <SelectItem key={brand} value={brand}>{brand}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
-            {/* Capacity Filter */}
-            <Select value={selectedCapacity} onValueChange={(value) => { setSelectedCapacity(value); setCurrentPage(1); }}>
-              <SelectTrigger data-testid="select-capacity-filter">
-                <SelectValue placeholder={t('allCapacities') || 'All Capacities'} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">{t('allCapacities') || 'All Capacities'}</SelectItem>
-                {capacities.map(capacity => (
-                  <SelectItem key={capacity} value={capacity}>{capacity}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
-            {/* Color Filter */}
-            <Select value={selectedColor} onValueChange={(value) => { setSelectedColor(value); setCurrentPage(1); }}>
-              <SelectTrigger data-testid="select-color-filter">
-                <SelectValue placeholder={t('allColors') || 'All Colors'} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">{t('allColors') || 'All Colors'}</SelectItem>
-                {colors.map(color => (
-                  <SelectItem key={color} value={color}>{color}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          )}
         </div>
-
-        {/* Products Grid */}
-        {paginatedSmartphones.length > 0 ? (
-          <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {paginatedSmartphones.map(phone => (
-                <Card key={phone.id} className="group hover:shadow-xl transition-all duration-300" data-testid={`card-product-${phone.id}`}>
-                  <CardContent className="p-4">
-                    {/* Product Image */}
-                    <div className="relative aspect-square mb-4 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800">
-                      <img
-                        src={phone.image}
-                        alt={phone.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                        data-testid={`img-product-${phone.id}`}
-                      />
-                      {phone.discount && (
-                        <Badge className="absolute top-2 right-2 bg-red-500" data-testid={`badge-discount-${phone.id}`}>
-                          -{phone.discount}%
-                        </Badge>
-                      )}
-                    </div>
-
-                    {/* Product Info */}
-                    <div className="space-y-2">
-                      <h3 className="font-bold text-lg text-slate-900 dark:text-white line-clamp-2" data-testid={`text-name-${phone.id}`}>
-                        {phone.name}
-                      </h3>
-                      <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2" data-testid={`text-description-${phone.id}`}>
-                        {phone.description}
-                      </p>
-
-                      {/* Features */}
-                      <div className="flex flex-wrap gap-1">
-                        {phone.features?.slice(0, 2).map((feature, idx) => (
-                          <Badge key={idx} variant="outline" className="text-xs">
-                            {feature}
-                          </Badge>
-                        ))}
-                      </div>
-
-                      {/* Price */}
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-2xl font-bold text-slate-900 dark:text-white" data-testid={`text-price-${phone.id}`}>
-                          €{phone.price}
-                        </span>
-                        {phone.originalPrice && (
-                          <span className="text-sm text-slate-500 line-through" data-testid={`text-original-price-${phone.id}`}>
-                            €{phone.originalPrice}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Variants Info */}
-                      {phone.hasVariants && phone.variants && (
-                        <p className="text-xs text-slate-500">
-                          {phone.variants.length} {t('variants') || 'variants'} {t('available') || 'available'}
-                        </p>
-                      )}
-                    </div>
-                  </CardContent>
-                  
-                  <CardFooter className="p-4 pt-0">
-                    <Button
-                      onClick={() => handleAddToCart(phone)}
-                      className="w-full"
-                      variant={addedToCart.has(phone.id) ? "secondary" : "default"}
-                      data-testid={`button-add-to-cart-${phone.id}`}
-                    >
-                      {addedToCart.has(phone.id) ? (
-                        <>
-                          <Check className="w-4 h-4 mr-2" />
-                          {t('added') || 'Added'}
-                        </>
-                      ) : (
-                        <>
-                          <ShoppingCart className="w-4 h-4 mr-2" />
-                          {t('addToCart') || 'Add to Cart'}
-                        </>
-                      )}
-                    </Button>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-
-            {/* Pagination */}
-            {totalPages > 1 && (
-              <div className="mt-12 flex items-center justify-center gap-2">
-                <Button
-                  variant="outline"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                  data-testid="button-previous-page"
-                >
-                  <ChevronLeft className="w-4 h-4 mr-2" />
-                  {t('previous') || 'Previous'}
-                </Button>
-
-                <div className="flex gap-2">
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                    <Button
-                      key={page}
-                      variant={currentPage === page ? "default" : "outline"}
-                      onClick={() => handlePageChange(page)}
-                      className="min-w-[40px]"
-                      data-testid={`button-page-${page}`}
-                    >
-                      {page}
-                    </Button>
-                  ))}
-                </div>
-
-                <Button
-                  variant="outline"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                  data-testid="button-next-page"
-                >
-                  {t('next') || 'Next'}
-                  <ChevronRight className="w-4 h-4 ml-2" />
-                </Button>
-              </div>
-            )}
-          </>
-        ) : (
-          <div className="text-center py-16">
-            <p className="text-xl text-slate-600 dark:text-slate-400" data-testid="text-no-results">
-              {t('noProductsFound') || 'No products found matching your filters'}
-            </p>
-            <Button
-              variant="outline"
-              onClick={() => {
-                setSearchQuery('');
-                setSelectedBrand('all');
-                setSelectedCapacity('all');
-                setSelectedColor('all');
-                setCurrentPage(1);
-              }}
-              className="mt-4"
-              data-testid="button-reset-filters"
-            >
-              {t('resetFilters') || 'Reset Filters'}
-            </Button>
-          </div>
-        )}
       </div>
+
+      <Footer />
+      
+      <CartSidebar
+        isOpen={cartOpen}
+        onClose={() => setCartOpen(false)}
+        onCheckout={handleProceedToCheckout}
+      />
+      
+      <CheckoutModal
+        isOpen={checkoutOpen}
+        onClose={() => setCheckoutOpen(false)}
+      />
+      
+      <UserProfile
+        isOpen={profileOpen}
+        onClose={() => setProfileOpen(false)}
+      />
+      
+      <ToastNotifications />
     </div>
   );
 }

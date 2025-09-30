@@ -1,0 +1,98 @@
+Parfait 👍 Voici ton prompt final prêt à copier-coller :
+
+
+---
+
+Prompt final – Corrections page Premium
+
+Corrige la page Premium déjà existante :
+
+1. Navigation & header
+
+Ajouter Premium dans le menu header sous Smartphones, en plus du bouton Hero (Acheter maintenant).
+
+Afficher le même header que la page d’accueil (logo, menu, langue, panier).
+
+Le panier doit rester visible et se mettre à jour dynamiquement quand on ajoute un smartphone.
+
+
+2. Smartphones & centralisation
+
+Vérifier que tous les smartphones du site (anciens + importés depuis gsmarena.com) sont bien regroupés dans Premium.
+
+Supprimer les doublons : chaque modèle doit apparaître une seule fois.
+
+La page Premium doit devenir la référence unique pour tous les smartphones.
+
+
+3. Fiches produits
+
+Chaque smartphone doit avoir :
+
+Marque
+
+Modèle
+
+Prix
+
+Sélecteurs cliquables pour capacités et couleurs (pas juste du texte).
+
+Prix qui change selon la variante choisie.
+
+Bouton Ajouter au panier fonctionnel.
+
+
+
+4. Filtres & recherche
+
+Conserver la barre de recherche et les filtres (Marque, Modèle, Capacité, Couleur, Prix).
+
+Vérifier qu’ils fonctionnent correctement avec toutes les variantes.
+
+
+5. Traduction
+
+Corriger la traduction automatique (détection de la langue navigateur).
+
+Garder l’option de changer la langue manuellement depuis le header.
+
+Tous les textes de la page Premium doivent être traduits correctement.
+
+
+6. Fusion Apple → iPhone
+
+Supprimer complètement la marque Apple de Premium.
+
+Conserver uniquement iPhone comme marque.
+
+Vérifier modèle par modèle :
+
+Si un modèle Apple existe déjà sous iPhone → supprimer le doublon.
+
+Si un modèle Apple n’existe pas encore sous iPhone → le déplacer sous iPhone puis supprimer la version Apple.
+
+
+
+
+---
+
+👉 Résultat attendu :
+
+La page Premium est accessible depuis le Hero ET le header.
+
+Elle contient tous les smartphones du site (sans doublons).
+
+Les variantes sont sélectionnables et reliées au panier.
+
+Le panier est visible et mis à jour.
+
+La traduction automatique et manuelle fonctionne de nouveau.
+
+Les filtres sont propres et unifiés (seule la marque iPhone, pas Apple).
+
+
+
+---
+
+Veux-tu que je t’ajoute aussi une vérification automatique (script) pour empêcher que la marque Apple réapparaisse plus tard, même si de nouveaux modèles sont ajoutés ?
+
