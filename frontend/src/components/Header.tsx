@@ -5,6 +5,13 @@ import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { AuthModal } from './AuthModal';
 import { LanguageSelector } from './LanguageSelector';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu';
+import { ChevronDown } from 'lucide-react';
 
 interface HeaderProps {
   onToggleCart: () => void;
@@ -39,16 +46,33 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                 Luxio
               </Link>
               <nav className="hidden md:flex space-x-4 lg:space-x-8">
-                <button 
-                  onClick={() => scrollToSection('smartphones')}
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  data-testid="nav-smartphones"
-                >
-                  {t('smartphones')}
-                </button>
-                <Link href="/premium" className="text-muted-foreground hover:text-primary transition-colors" data-testid="nav-premium">
-                  Premium
-                </Link>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button 
+                      className="flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors"
+                      data-testid="nav-smartphones"
+                    >
+                      {t('smartphones')}
+                      <ChevronDown className="w-4 h-4" />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start">
+                    <DropdownMenuItem asChild>
+                      <button 
+                        onClick={() => scrollToSection('smartphones')}
+                        className="w-full text-left cursor-pointer"
+                        data-testid="nav-smartphones-all"
+                      >
+                        {t('smartphones')}
+                      </button>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/premium" className="cursor-pointer" data-testid="nav-premium">
+                        Premium
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
                 <button 
                   onClick={() => scrollToSection('watches')}
                   className="text-muted-foreground hover:text-primary transition-colors"
