@@ -31,6 +31,13 @@ export interface Translations {
   heroSubtitle: string;
   shopNow: string;
   viewDeals: string;
+  newCollectionAvailable: string;
+  freeShipping: string;
+  yearWarranty: string;
+  securePayment: string;
+  saveUpTo: string;
+  fastDelivery: string;
+  hoursGuaranteed: string;
   
   // Categories
   latestSmartphones: string;
@@ -224,6 +231,13 @@ export const translations: Record<Language, Translations> = {
     heroSubtitle: 'Discover the latest smartphones, smartwatches, sneakers, and gadgets with discounts up to 37% off',
     shopNow: 'Shop Now',
     viewDeals: 'View Deals',
+    newCollectionAvailable: 'New collection available',
+    freeShipping: 'Free shipping',
+    yearWarranty: '2 year warranty',
+    securePayment: 'Secure payment',
+    saveUpTo: 'Save up to',
+    fastDelivery: 'Fast delivery',
+    hoursGuaranteed: '24-48h guaranteed',
     
     // Categories
     latestSmartphones: 'Latest Smartphones',
@@ -523,6 +537,13 @@ export const translations: Record<Language, Translations> = {
     heroSubtitle: 'Découvrez les derniers smartphones, montres connectées, baskets et gadgets avec jusqu\'à 37% de réduction',
     shopNow: 'Acheter maintenant',
     viewDeals: 'Voir les offres',
+    newCollectionAvailable: 'Nouvelle collection disponible',
+    freeShipping: 'Livraison gratuite',
+    yearWarranty: 'Garantie 2 ans',
+    securePayment: 'Paiement sécurisé',
+    saveUpTo: 'Économisez jusqu\'à',
+    fastDelivery: 'Livraison rapide',
+    hoursGuaranteed: '24-48h garanties',
     
     // Categories
     latestSmartphones: 'Derniers smartphones',
@@ -822,6 +843,13 @@ export const translations: Record<Language, Translations> = {
     heroSubtitle: 'Descubre los últimos smartphones, smartwatches, zapatillas y gadgets con descuentos de hasta 37%',
     shopNow: 'Comprar ahora',
     viewDeals: 'Ver ofertas',
+    newCollectionAvailable: 'Nueva colección disponible',
+    freeShipping: 'Envío gratis',
+    yearWarranty: 'Garantía 2 años',
+    securePayment: 'Pago seguro',
+    saveUpTo: 'Ahorra hasta',
+    fastDelivery: 'Entrega rápida',
+    hoursGuaranteed: '24-48h garantizado',
     
     // Categories
     latestSmartphones: 'Últimos smartphones',
@@ -1121,6 +1149,13 @@ export const translations: Record<Language, Translations> = {
     heroSubtitle: 'Descubra os mais recentes smartphones, smartwatches, ténis e gadgets com descontos até 37%',
     shopNow: 'Comprar agora',
     viewDeals: 'Ver ofertas',
+    newCollectionAvailable: 'Nova coleção disponível',
+    freeShipping: 'Envio gratuito',
+    yearWarranty: 'Garantia de 2 anos',
+    securePayment: 'Pagamento seguro',
+    saveUpTo: 'Poupe até',
+    fastDelivery: 'Entrega rápida',
+    hoursGuaranteed: '24-48h garantidas',
     
     // Categories
     latestSmartphones: 'Últimos smartphones',
@@ -1420,6 +1455,13 @@ export const translations: Record<Language, Translations> = {
     heroSubtitle: 'Odkryj najnowsze smartfony, smartwatche, buty i gadżety ze zniżkami do 37%',
     shopNow: 'Kup teraz',
     viewDeals: 'Zobacz oferty',
+    newCollectionAvailable: 'Nowa kolekcja dostępna',
+    freeShipping: 'Darmowa dostawa',
+    yearWarranty: 'Gwarancja 2 lata',
+    securePayment: 'Bezpieczna płatność',
+    saveUpTo: 'Oszczędź do',
+    fastDelivery: 'Szybka dostawa',
+    hoursGuaranteed: '24-48h gwarantowane',
     
     // Categories
     latestSmartphones: 'Najnowsze smartfony',
@@ -1719,6 +1761,13 @@ export const translations: Record<Language, Translations> = {
     heroSubtitle: 'Scopri gli ultimi smartphone, smartwatch, sneakers e gadget con sconti fino al 37%',
     shopNow: 'Acquista ora',
     viewDeals: 'Vedi offerte',
+    newCollectionAvailable: 'Nuova collezione disponibile',
+    freeShipping: 'Spedizione gratuita',
+    yearWarranty: 'Garanzia 2 anni',
+    securePayment: 'Pagamento sicuro',
+    saveUpTo: 'Risparmia fino a',
+    fastDelivery: 'Consegna rapida',
+    hoursGuaranteed: '24-48h garantite',
     
     // Categories
     latestSmartphones: 'Ultimi smartphone',
@@ -2018,6 +2067,13 @@ export const translations: Record<Language, Translations> = {
     heroSubtitle: 'Fedezd fel a legújabb okostelefonokat, okosórákat, cipőket és kütyüket 37%-os kedvezménnyel',
     shopNow: 'Vásárlás most',
     viewDeals: 'Ajánlatok megtekintése',
+    newCollectionAvailable: 'Új kollekció elérhető',
+    freeShipping: 'Ingyenes szállítás',
+    yearWarranty: '2 év garancia',
+    securePayment: 'Biztonságos fizetés',
+    saveUpTo: 'Takarítson meg',
+    fastDelivery: 'Gyors szállítás',
+    hoursGuaranteed: '24-48 óra garantált',
     
     // Categories
     latestSmartphones: 'Legújabb okostelefonok',
