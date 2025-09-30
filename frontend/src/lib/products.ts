@@ -359,6 +359,122 @@ export const products: Product[] = [
       { color: 'Silver Chrome', capacity: '1TB', price: 1799, originalPrice: 1999 },
     ]
   },
+  // Google Pixel 9 Pro XL with variants (2024)
+  {
+    id: 'google-pixel-9-pro-xl',
+    name: 'Google Pixel 9 Pro XL',
+    price: 989,
+    originalPrice: 1099,
+    discount: 10,
+    image: '/attached_assets/smartphones/google-pixel-9-pro-xl.jpg',
+    category: 'smartphones',
+    description: 'From 128GB - 6.8" Super Actua Display',
+    features: ['Google Tensor G4', '6.8" LTPO OLED 120Hz', '50MP triple camera', '7 years updates', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Obsidian', capacity: '128GB', price: 989, originalPrice: 1099 },
+      { color: 'Obsidian', capacity: '256GB', price: 1079, originalPrice: 1199 },
+      { color: 'Obsidian', capacity: '512GB', price: 1259, originalPrice: 1399 },
+      { color: 'Obsidian', capacity: '1TB', price: 1529, originalPrice: 1699 },
+      { color: 'Porcelain', capacity: '128GB', price: 989, originalPrice: 1099 },
+      { color: 'Porcelain', capacity: '256GB', price: 1079, originalPrice: 1199 },
+      { color: 'Porcelain', capacity: '512GB', price: 1259, originalPrice: 1399 },
+      { color: 'Porcelain', capacity: '1TB', price: 1529, originalPrice: 1699 },
+      { color: 'Hazel', capacity: '128GB', price: 989, originalPrice: 1099 },
+      { color: 'Hazel', capacity: '256GB', price: 1079, originalPrice: 1199 },
+      { color: 'Hazel', capacity: '512GB', price: 1259, originalPrice: 1399 },
+      { color: 'Hazel', capacity: '1TB', price: 1529, originalPrice: 1699 },
+    ]
+  },
+  // Motorola Razr 50 Ultra with variants (2024)
+  {
+    id: 'motorola-razr-50-ultra',
+    name: 'Motorola Razr 50 Ultra',
+    price: 899,
+    originalPrice: 999,
+    discount: 10,
+    image: '/attached_assets/smartphones/motorola-razr-50-ultra.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - Flip Phone with 4.0" External Display',
+    features: ['Snapdragon 8s Gen 3', '6.9" Foldable AMOLED 165Hz', '50MP dual camera', 'IPX8 water resistance', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Midnight Blue', capacity: '256GB', price: 899, originalPrice: 999 },
+      { color: 'Midnight Blue', capacity: '512GB', price: 1049, originalPrice: 1149 },
+      { color: 'Spring Green', capacity: '256GB', price: 899, originalPrice: 999 },
+      { color: 'Spring Green', capacity: '512GB', price: 1049, originalPrice: 1149 },
+      { color: 'Hot Pink', capacity: '256GB', price: 899, originalPrice: 999 },
+      { color: 'Hot Pink', capacity: '512GB', price: 1049, originalPrice: 1149 },
+      { color: 'Peach Fuzz', capacity: '256GB', price: 899, originalPrice: 999 },
+      { color: 'Peach Fuzz', capacity: '512GB', price: 1049, originalPrice: 1149 },
+    ]
+  },
+  // Poco F6 Pro with variants (2024)
+  {
+    id: 'poco-f6-pro',
+    name: 'Poco F6 Pro',
+    price: 324,
+    originalPrice: 360,
+    discount: 10,
+    image: '/attached_assets/smartphones/poco-f6-pro.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - Flagship Killer',
+    features: ['Snapdragon 8 Gen 2', '6.67" WQHD+ AMOLED 120Hz', '50MP triple camera', '120W HyperCharge', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Black', capacity: '256GB', price: 324, originalPrice: 360 },
+      { color: 'Black', capacity: '512GB', price: 414, originalPrice: 460 },
+      { color: 'Black', capacity: '1TB', price: 540, originalPrice: 600 },
+      { color: 'White', capacity: '256GB', price: 324, originalPrice: 360 },
+      { color: 'White', capacity: '512GB', price: 414, originalPrice: 460 },
+      { color: 'White', capacity: '1TB', price: 540, originalPrice: 600 },
+    ]
+  },
+  // Oppo Find X7 Ultra with variants (2024)
+  {
+    id: 'oppo-find-x7-ultra',
+    name: 'Oppo Find X7 Ultra',
+    price: 752,
+    originalPrice: 836,
+    discount: 10,
+    image: '/attached_assets/smartphones/oppo-find-x7-ultra.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - Quad Main Camera System',
+    features: ['Snapdragon 8 Gen 3', '6.82" LTPO AMOLED 120Hz', '50MP quad camera', 'Hasselblad tuning', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Ocean Blue', capacity: '256GB', price: 752, originalPrice: 836 },
+      { color: 'Ocean Blue', capacity: '512GB', price: 896, originalPrice: 995 },
+      { color: 'Sepia Brown', capacity: '256GB', price: 752, originalPrice: 836 },
+      { color: 'Sepia Brown', capacity: '512GB', price: 896, originalPrice: 995 },
+      { color: 'Tailored Black', capacity: '256GB', price: 752, originalPrice: 836 },
+      { color: 'Tailored Black', capacity: '512GB', price: 896, originalPrice: 995 },
+    ]
+  },
+  // Vivo X100 Pro with variants (2024)
+  {
+    id: 'vivo-x100-pro',
+    name: 'Vivo X100 Pro',
+    price: 810,
+    originalPrice: 900,
+    discount: 10,
+    image: '/attached_assets/smartphones/vivo-x100-pro.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - ZEISS Optics',
+    features: ['Dimensity 9300', '6.78" LTPO AMOLED 120Hz', '50MP triple ZEISS', '100W fast charging', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Startrail Blue', capacity: '256GB', price: 810, originalPrice: 900 },
+      { color: 'Startrail Blue', capacity: '512GB', price: 945, originalPrice: 1050 },
+      { color: 'Startrail Blue', capacity: '1TB', price: 1080, originalPrice: 1200 },
+      { color: 'Sunset Orange', capacity: '256GB', price: 810, originalPrice: 900 },
+      { color: 'Sunset Orange', capacity: '512GB', price: 945, originalPrice: 1050 },
+      { color: 'Sunset Orange', capacity: '1TB', price: 1080, originalPrice: 1200 },
+      { color: 'Asteroid Black', capacity: '256GB', price: 810, originalPrice: 900 },
+      { color: 'Asteroid Black', capacity: '512GB', price: 945, originalPrice: 1050 },
+      { color: 'Asteroid Black', capacity: '1TB', price: 1080, originalPrice: 1200 },
+    ]
+  },
 
   // === SMARTWATCHES (16 products) ===
   {
