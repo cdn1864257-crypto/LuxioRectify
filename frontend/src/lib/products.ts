@@ -921,6 +921,140 @@ export const products: Product[] = [
     description: 'Action camera',
     features: ['5.3K video', 'HyperSmooth 6.0', 'Waterproof', 'Free delivery']
   },
+
+  // === URBAN MOBILITY (12 products) ===
+  {
+    id: 'xiaomi-electric-scooter-4-ultra',
+    name: 'Xiaomi Electric Scooter 4 Ultra',
+    price: 649,
+    originalPrice: 749,
+    discount: 13,
+    image: 'https://images.unsplash.com/photo-1559311320-36b8d171c6e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    category: 'mobility',
+    description: '70km range',
+    features: ['25 km/h max speed', '70km range', 'Dual braking system', 'Free shipping']
+  },
+  {
+    id: 'segway-ninebot-max-g2',
+    name: 'Segway Ninebot Max G2',
+    price: 799,
+    originalPrice: 899,
+    discount: 11,
+    image: 'https://images.unsplash.com/photo-1585748347325-d0f4db2f7b11?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    category: 'mobility',
+    description: '70km range',
+    features: ['30 km/h max speed', '70km range', 'Self-healing tires', 'Free shipping']
+  },
+  {
+    id: 'electric-bike-vanmoof-s5',
+    name: 'VanMoof S5 E-Bike',
+    price: 2299,
+    originalPrice: 2599,
+    discount: 12,
+    image: 'https://images.unsplash.com/photo-1571333250630-f0230c320b6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    category: 'mobility',
+    description: '150km range',
+    features: ['32 km/h assisted', '150km range', 'Anti-theft tracking', 'Free shipping']
+  },
+  {
+    id: 'cowboy-4-st-ebike',
+    name: 'Cowboy 4 ST E-Bike',
+    price: 2190,
+    originalPrice: 2490,
+    discount: 12,
+    image: 'https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    category: 'mobility',
+    description: '70km range',
+    features: ['25 km/h assisted', '70km range', 'Connected app', 'Free shipping']
+  },
+  {
+    id: 'ninebot-kickscooter-f2-pro',
+    name: 'Ninebot KickScooter F2 Pro',
+    price: 549,
+    originalPrice: 629,
+    discount: 13,
+    image: 'https://images.unsplash.com/photo-1598289431512-b97b0917affc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    category: 'mobility',
+    description: '55km range',
+    features: ['25 km/h max speed', '55km range', 'IPX5 water resistant', 'Free shipping']
+  },
+  {
+    id: 'super73-s2-ebike',
+    name: 'Super73 S2 E-Bike',
+    price: 2495,
+    originalPrice: 2795,
+    discount: 11,
+    image: 'https://images.unsplash.com/photo-1559911567-88ba57e5e15a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    category: 'mobility',
+    description: '120km range',
+    features: ['32 km/h max speed', '120km range', 'Retro design', 'Free shipping']
+  },
+  {
+    id: 'pure-air-pro-scooter',
+    name: 'Pure Air Pro Scooter',
+    price: 449,
+    originalPrice: 499,
+    discount: 10,
+    image: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    category: 'mobility',
+    description: '50km range',
+    features: ['25 km/h max speed', '50km range', 'Foldable design', 'Free shipping']
+  },
+  {
+    id: 'rad-power-bikes-radrunner-3',
+    name: 'Rad Power RadRunner 3',
+    price: 1899,
+    originalPrice: 2099,
+    discount: 10,
+    image: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    category: 'mobility',
+    description: '72km range',
+    features: ['32 km/h assisted', '72km range', 'Cargo ready', 'Free shipping']
+  },
+  {
+    id: 'xiaomi-mi-scooter-3-lite',
+    name: 'Xiaomi Mi Scooter 3 Lite',
+    price: 349,
+    originalPrice: 399,
+    discount: 13,
+    image: 'https://images.unsplash.com/photo-1600796603940-76c6c06c7fdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    category: 'mobility',
+    description: '20km range',
+    features: ['20 km/h max speed', '20km range', 'Lightweight 13kg', 'Free shipping']
+  },
+  {
+    id: 'tern-vektron-q9-folding',
+    name: 'Tern Vektron Q9 Folding',
+    price: 3299,
+    originalPrice: 3699,
+    discount: 11,
+    image: 'https://images.unsplash.com/photo-1544191696-102dbdaeefc0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    category: 'mobility',
+    description: '100km range',
+    features: ['25 km/h assisted', '100km range', 'Folds compact', 'Free shipping']
+  },
+  {
+    id: 'inokim-quick-4-super',
+    name: 'Inokim Quick 4 Super',
+    price: 1199,
+    originalPrice: 1349,
+    discount: 11,
+    image: 'https://images.unsplash.com/photo-1623312781503-2a24e03e0013?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    category: 'mobility',
+    description: '65km range',
+    features: ['30 km/h max speed', '65km range', 'Premium build', 'Free shipping']
+  },
+  {
+    id: 'gogoro-eeyo-1s-ebike',
+    name: 'Gogoro Eeyo 1S E-Bike',
+    price: 4299,
+    originalPrice: 4799,
+    discount: 10,
+    image: 'https://images.unsplash.com/photo-1617912734022-51e762ac8d18?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    category: 'mobility',
+    description: '90km range',
+    features: ['25 km/h assisted', '90km range', 'Carbon fiber frame', 'Free shipping']
+  },
 ];
 
 export function getProductsByCategory(category: string): Product[] {
