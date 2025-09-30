@@ -54,11 +54,11 @@ export function ToastNotifications() {
   };
 
   return (
-    <div className="fixed top-20 right-4 z-50 space-y-2" data-testid="toast-container">
+    <div className="fixed top-20 right-4 z-50 space-y-2 pointer-events-none" data-testid="toast-container">
       {currentToasts.map((toast) => (
         <div
           key={toast.id}
-          className={`toast p-4 rounded-lg shadow-lg text-white max-w-sm slide-in ${
+          className={`p-4 rounded-lg shadow-lg text-white max-w-sm slide-in pointer-events-auto ${
             toast.type === 'success' ? 'bg-green-500' : 
             toast.type === 'error' ? 'bg-red-500' : 'bg-blue-500'
           }`}
@@ -66,7 +66,7 @@ export function ToastNotifications() {
         >
           <div className="flex items-center space-x-3">
             {getIcon(toast.type)}
-            <span>{toast.message}</span>
+            <span className="font-medium">{toast.message}</span>
           </div>
         </div>
       ))}
