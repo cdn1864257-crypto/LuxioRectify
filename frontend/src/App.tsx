@@ -5,9 +5,14 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { CartProvider } from "./contexts/CartContext";
+import { AuthProvider } from "./contexts/AuthContext";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import { ToastNotifications } from "./components/ToastNotifications";
 import Home from "@/pages/Home";
 import Premium from "@/pages/Premium";
+import Dashboard from "@/pages/Dashboard";
+import Cart from "@/pages/Cart";
+import Payment from "@/pages/Payment";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -15,6 +20,21 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/premium" component={Premium} />
+      <Route path="/dashboard">
+        <ProtectedRoute>
+          <Dashboard />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/cart">
+        <ProtectedRoute>
+          <Cart />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/payment">
+        <ProtectedRoute>
+          <Payment />
+        </ProtectedRoute>
+      </Route>
       <Route component={NotFound} />
     </Switch>
   );
@@ -23,15 +43,17 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <LanguageProvider>
-        <CartProvider>
-          <TooltipProvider>
-            <Toaster />
-            <ToastNotifications />
-            <Router />
-          </TooltipProvider>
-        </CartProvider>
-      </LanguageProvider>
+      <AuthProvider>
+        <LanguageProvider>
+          <CartProvider>
+            <TooltipProvider>
+              <Toaster />
+              <ToastNotifications />
+              <Router />
+            </TooltipProvider>
+          </CartProvider>
+        </LanguageProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
