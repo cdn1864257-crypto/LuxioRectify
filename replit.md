@@ -6,6 +6,53 @@ Luxio is a static e-commerce platform built with React and TypeScript, designed 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (September 30, 2025)
+
+### MongoDB Atlas Authentication Migration (September 30, 2025 18:15 UTC - Latest) ✅
+Completed full migration from Firebase to MongoDB Atlas for user authentication:
+
+**Backend Configuration**
+- ✅ Created Express API server on port 3001 (localhost) for auth endpoints
+- ✅ Configured MongoDB Atlas connection with MongoClient (native driver)
+- ✅ Implemented JWT-based authentication with httpOnly cookies
+- ✅ Created API routes: `/api/auth/signup`, `/api/auth/login`, `/api/auth/logout`, `/api/auth/me`
+- ✅ Secured with environment variables: `MONGODB_URI` and `JWT_SECRET`
+- ✅ Password hashing with bcrypt (10 rounds)
+- ✅ JWT tokens valid for 7 days
+
+**Frontend Migration**
+- ✅ Completely removed Firebase dependencies (firebase package uninstalled)
+- ✅ Deleted firebase.ts configuration file
+- ✅ Rewrote use-auth.ts hook to use MongoDB API routes instead of Firebase
+- ✅ Configured Vite proxy to forward /api requests to backend (localhost:3001)
+- ✅ Updated SignupForm and LoginForm to work with new authentication system
+- ✅ User profile now displays MongoDB user data (firstName, lastName, email, etc.)
+
+**Database Schema (MongoDB Collection: users)**
+```javascript
+{
+  _id: ObjectId,
+  firstName: String,
+  lastName: String,
+  country: String (optional),
+  city: String (optional),
+  address: String (optional),
+  phone: String (optional),
+  email: String (unique, lowercase),
+  password: String (bcrypt hashed),
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+
+**Workflows**
+- Frontend: Vite dev server on port 5000 (0.0.0.0, webview)
+- Backend: Express API server on port 3001 (localhost, console)
+
+**Environment Variables Required**
+- `MONGODB_URI`: MongoDB Atlas connection string
+- `JWT_SECRET`: Secret key for JWT token signing (min 32 characters)
+
 ## System Architecture
 
 ### Frontend Architecture
@@ -18,7 +65,7 @@ The UI is organized into Layout (Header, Footer, Hero), Product (ProductGrid), C
 State is managed using React Query for server state, custom hooks (e.g., `use-cart`, `use-auth`), local storage for persistence (cart, order history), and React Context API for notifications.
 
 ### Authentication System
-Firebase Authentication is integrated for user registration, login, and session management, supporting email/password authentication and real-time auth state monitoring.
+MongoDB Atlas is used for user authentication with JWT-based session management. The system supports email/password registration and login, with secure password hashing using bcrypt. JWT tokens are stored in httpOnly cookies for security.
 
 ### Internationalization
 The platform supports multiple languages (English, French, Polish, Spanish, Portuguese, Italian, Hungarian) with dynamic switching, IP-based detection, and localized content.
@@ -41,7 +88,9 @@ The design focuses on a modern aesthetic, responsive behavior across devices (mo
 ## External Dependencies
 
 ### Authentication Services
-- **Firebase Authentication**: For user management and authentication.
+- **MongoDB Atlas**: For user data storage and authentication
+- **JWT (jsonwebtoken)**: For secure token-based authentication
+- **bcrypt**: For password hashing and verification
 
 ### Payment Processing
 - **MaxelPay**: Primary payment gateway.
