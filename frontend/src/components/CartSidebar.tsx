@@ -1,3 +1,4 @@
+import { X, ShoppingCart, Minus, Plus, Trash2 } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { showToast } from './ToastNotifications';
@@ -32,14 +33,14 @@ export function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebarProps) {
             className="text-muted-foreground hover:text-foreground"
             data-testid="button-close-cart"
           >
-            <i className="fas fa-times text-xl"></i>
+            <X className="h-5 w-5" />
           </button>
         </div>
         
         <div className="flex-1 overflow-y-auto p-6" data-testid="cart-items">
           {cart.length === 0 ? (
             <div className="text-center py-12" data-testid="empty-cart">
-              <i className="fas fa-shopping-cart text-6xl text-muted-foreground mb-4"></i>
+              <ShoppingCart className="h-24 w-24 text-muted-foreground mx-auto mb-4" />
               <p className="text-muted-foreground">{t('cartEmpty')}</p>
               <button 
                 onClick={onClose}
@@ -75,7 +76,7 @@ export function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebarProps) {
                       className="w-8 h-8 rounded-full border border-border flex items-center justify-center hover:bg-muted"
                       data-testid={`button-decrease-${item.id}`}
                     >
-                      <i className="fas fa-minus text-xs"></i>
+                      <Minus className="h-3 w-3" />
                     </button>
                     <span className="w-8 text-center" data-testid={`cart-item-quantity-${item.id}`}>{item.quantity}</span>
                     <button 
@@ -83,7 +84,7 @@ export function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebarProps) {
                       className="w-8 h-8 rounded-full border border-border flex items-center justify-center hover:bg-muted"
                       data-testid={`button-increase-${item.id}`}
                     >
-                      <i className="fas fa-plus text-xs"></i>
+                      <Plus className="h-3 w-3" />
                     </button>
                   </div>
                   <button 
@@ -91,7 +92,7 @@ export function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebarProps) {
                     className="text-destructive hover:text-destructive/80"
                     data-testid={`button-remove-${item.id}`}
                   >
-                    <i className="fas fa-trash text-sm"></i>
+                    <Trash2 className="h-4 w-4" />
                   </button>
                 </div>
               ))}
