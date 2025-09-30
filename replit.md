@@ -40,6 +40,46 @@ Successfully integrated real smartphone data from GSMArena with professional pro
 - Verified all combinations render correctly in the UI
 - No missing variants or incomplete product data
 
+### Additional Smartphone Brands Integration (September 30, 2025)
+Successfully added 5 new premium smartphone brands from 2024 with complete variant systems:
+
+**Google Pixel 9 Pro XL** (2024)
+- 3 colors (Obsidian, Porcelain, Hazel) × 4 capacities (128GB/256GB/512GB/1TB) = 12 variants
+- Google Tensor G4 chipset, 6.8" LTPO OLED 120Hz
+- 50MP triple camera system with 7 years of updates
+- Pricing from €989 to €1529
+
+**Motorola Razr 50 Ultra** (2024)
+- 4 colors (Midnight Blue, Spring Green, Hot Pink, Peach Fuzz) × 2 capacities (256GB/512GB) = 8 variants
+- Snapdragon 8s Gen 3, 6.9" foldable AMOLED 165Hz
+- Largest external display (4.0") on flip phone with IPX8 water resistance
+- Pricing from €899 to €1049
+
+**Poco F6 Pro** (2024)
+- 2 colors (Black, White) × 3 capacities (256GB/512GB/1TB) = 6 variants
+- Snapdragon 8 Gen 2, 6.67" WQHD+ AMOLED 120Hz
+- Flagship killer with 120W HyperCharge
+- Pricing from €324 to €540
+
+**Oppo Find X7 Ultra** (2024)
+- 3 colors (Ocean Blue, Sepia Brown, Tailored Black) × 2 capacities (256GB/512GB) = 6 variants
+- Snapdragon 8 Gen 3, 6.82" LTPO AMOLED 120Hz
+- Quad main camera system with Hasselblad tuning
+- Pricing from €752 to €896
+
+**Vivo X100 Pro** (2024)
+- 3 colors (Startrail Blue, Sunset Orange, Asteroid Black) × 3 capacities (256GB/512GB/1TB) = 9 variants
+- MediaTek Dimensity 9300, 6.78" LTPO AMOLED 120Hz
+- 50MP triple ZEISS camera system with 100W fast charging
+- Pricing from €810 to €1080
+
+**Implementation Notes:**
+- All models use the same variant matrix system as iPhone 17 series
+- Temporary image paths set to `/attached_assets/smartphones/*.jpg` (awaiting user-provided photos)
+- Total of 41 new product variants added across 5 brands
+- All specifications sourced from GSMArena and official manufacturer data
+- Pricing includes 10% discount applied across all variants
+
 ## Replit Setup (September 30, 2025)
 
 This project has been successfully configured to run on Replit from a GitHub import:
