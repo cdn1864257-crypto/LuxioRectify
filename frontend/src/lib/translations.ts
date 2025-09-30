@@ -898,6 +898,26 @@ export const translations: Record<Language, Translations> = {
     // Search & Filters
     searchPlaceholder: 'Buscar productos...',
     selectCountry: 'Seleccionar país',
+    filterResults: 'Filtrar resultados',
+    searchByModel: 'Buscar por modelo...',
+    allBrands: 'Todas las marcas',
+    allCapacities: 'Todas las capacidades',
+    allColors: 'Todos los colores',
+    resetFilters: 'Resetear filtros',
+    noProductsFound: 'No se encontraron productos que coincidan con tus filtros',
+    
+    // Premium Page
+    premiumSmartphones: 'Smartphones Premium',
+    discoverLatest: 'Descubre los últimos smartphones flagship con descuentos exclusivos',
+    products: 'productos',
+    upTo: 'Hasta',
+    off: 'DE DESCUENTO',
+    variants: 'variantes',
+    available: 'disponibles',
+    added: 'Añadido',
+    addedSuccessfully: 'ha sido añadido al carrito',
+    previous: 'Anterior',
+    next: 'Siguiente',
     
     // Stats
     happyCustomers: 'Clientes felices',
@@ -1177,6 +1197,26 @@ export const translations: Record<Language, Translations> = {
     // Search & Filters
     searchPlaceholder: 'Pesquisar produtos...',
     selectCountry: 'Selecionar país',
+    filterResults: 'Filtrar resultados',
+    searchByModel: 'Pesquisar por modelo...',
+    allBrands: 'Todas as marcas',
+    allCapacities: 'Todas as capacidades',
+    allColors: 'Todas as cores',
+    resetFilters: 'Limpar filtros',
+    noProductsFound: 'Nenhum produto encontrado que corresponda aos seus filtros',
+    
+    // Premium Page
+    premiumSmartphones: 'Smartphones Premium',
+    discoverLatest: 'Descubra os últimos smartphones flagship com descontos exclusivos',
+    products: 'produtos',
+    upTo: 'Até',
+    off: 'DE DESCONTO',
+    variants: 'variantes',
+    available: 'disponíveis',
+    added: 'Adicionado',
+    addedSuccessfully: 'foi adicionado ao carrinho',
+    previous: 'Anterior',
+    next: 'Seguinte',
     
     // Stats
     happyCustomers: 'Clientes felizes',
@@ -1456,6 +1496,26 @@ export const translations: Record<Language, Translations> = {
     // Search & Filters
     searchPlaceholder: 'Szukaj produktów...',
     selectCountry: 'Wybierz kraj',
+    filterResults: 'Filtruj wyniki',
+    searchByModel: 'Szukaj według modelu...',
+    allBrands: 'Wszystkie marki',
+    allCapacities: 'Wszystkie pojemności',
+    allColors: 'Wszystkie kolory',
+    resetFilters: 'Resetuj filtry',
+    noProductsFound: 'Nie znaleziono produktów pasujących do filtrów',
+    
+    // Premium Page
+    premiumSmartphones: 'Smartfony Premium',
+    discoverLatest: 'Odkryj najnowsze flagowe smartfony z ekskluzywnymi zniżkami',
+    products: 'produkty',
+    upTo: 'Do',
+    off: 'ZNIŻKI',
+    variants: 'warianty',
+    available: 'dostępne',
+    added: 'Dodano',
+    addedSuccessfully: 'został dodany do koszyka',
+    previous: 'Poprzedni',
+    next: 'Następny',
     
     // Stats
     happyCustomers: 'Zadowoleni klienci',
@@ -1735,6 +1795,26 @@ export const translations: Record<Language, Translations> = {
     // Search & Filters
     searchPlaceholder: 'Cerca prodotti...',
     selectCountry: 'Seleziona paese',
+    filterResults: 'Filtra risultati',
+    searchByModel: 'Cerca per modello...',
+    allBrands: 'Tutti i marchi',
+    allCapacities: 'Tutte le capacità',
+    allColors: 'Tutti i colori',
+    resetFilters: 'Reimposta filtri',
+    noProductsFound: 'Nessun prodotto trovato corrispondente ai filtri',
+    
+    // Premium Page
+    premiumSmartphones: 'Smartphone Premium',
+    discoverLatest: 'Scopri gli ultimi smartphone flagship con sconti esclusivi',
+    products: 'prodotti',
+    upTo: 'Fino a',
+    off: 'DI SCONTO',
+    variants: 'varianti',
+    available: 'disponibili',
+    added: 'Aggiunto',
+    addedSuccessfully: 'è stato aggiunto al carrello',
+    previous: 'Precedente',
+    next: 'Successivo',
     
     // Stats
     happyCustomers: 'Clienti soddisfatti',
@@ -2014,6 +2094,26 @@ export const translations: Record<Language, Translations> = {
     // Search & Filters
     searchPlaceholder: 'Termékek keresése...',
     selectCountry: 'Ország kiválasztása',
+    filterResults: 'Eredmények szűrése',
+    searchByModel: 'Keresés modell szerint...',
+    allBrands: 'Összes márka',
+    allCapacities: 'Összes kapacitás',
+    allColors: 'Összes szín',
+    resetFilters: 'Szűrők visszaállítása',
+    noProductsFound: 'Nem található a szűrőknek megfelelő termék',
+    
+    // Premium Page
+    premiumSmartphones: 'Prémium okostelefonok',
+    discoverLatest: 'Fedezze fel a legújabb zászlóshajó okostelefonokat exkluzív kedvezményekkel',
+    products: 'termékek',
+    upTo: 'Akár',
+    off: 'KEDVEZMÉNY',
+    variants: 'változatok',
+    available: 'elérhető',
+    added: 'Hozzáadva',
+    addedSuccessfully: 'hozzáadva a kosárhoz',
+    previous: 'Előző',
+    next: 'Következő',
     
     // Stats
     happyCustomers: 'Elégedett ügyfelek',

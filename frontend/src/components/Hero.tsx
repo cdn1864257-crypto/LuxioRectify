@@ -1,15 +1,9 @@
 import { useLanguage } from '../contexts/LanguageContext';
+import { Link } from 'wouter';
 import iphone17ProImage from '@assets/iphone17 pro1_1759187408941.jpeg';
 
 export function Hero() {
   const { t } = useLanguage();
-
-  const scrollToProducts = () => {
-    const element = document.getElementById('smartphones');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden" data-testid="hero-section">
@@ -44,8 +38,8 @@ export function Hero() {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <button 
-                onClick={scrollToProducts}
+              <Link 
+                href="/premium"
                 className="group bg-white text-slate-900 px-8 py-3.5 rounded-lg font-semibold hover:bg-white/90 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 flex items-center justify-center gap-2"
                 data-testid="button-shop-now"
               >
@@ -53,15 +47,15 @@ export function Hero() {
                 <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </button>
+              </Link>
               
-              <button 
-                onClick={scrollToProducts}
+              <Link 
+                href="/premium"
                 className="border-2 border-white/50 text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-white/10 hover:border-white transition-all duration-300 backdrop-blur-sm"
                 data-testid="button-view-deals"
               >
                 {t('viewDeals')}
-              </button>
+              </Link>
             </div>
 
             {/* Trust indicators */}
