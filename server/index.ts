@@ -3,6 +3,9 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import healthHandler from '../api/health.js';
 import usersHandler from '../api/users.js';
+import signupHandler from '../api/auth/signup.js';
+import loginHandler from '../api/auth/login.js';
+import meHandler from '../api/auth/me.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -69,6 +72,11 @@ const convertVercelHandler = (handler: any) => {
 // API routes
 app.use('/api/health', convertVercelHandler(healthHandler));
 app.use('/api/users', convertVercelHandler(usersHandler));
+
+// Auth routes
+app.use('/api/auth/signup', convertVercelHandler(signupHandler));
+app.use('/api/auth/login', convertVercelHandler(loginHandler));
+app.use('/api/auth/me', convertVercelHandler(meHandler));
 
 // Serve static files from frontend dist in production
 if (process.env.NODE_ENV === 'production') {
