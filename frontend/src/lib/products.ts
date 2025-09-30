@@ -990,6 +990,133 @@ export const products: Product[] = [
       { color: 'Frost Blue', capacity: '512GB', price: 432, originalPrice: 480 },
     ]
   },
+  // Sony Xperia 1 VII with variants
+  {
+    id: 'sony-xperia-1-vii',
+    name: 'Sony Xperia 1 VII',
+    price: 1349,
+    originalPrice: 1499,
+    discount: 10,
+    image: '/attached_assets/smartphones/sony-xperia-1-vii.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - 4K 120Hz Display',
+    features: ['Snapdragon 8 Elite', '6.5" 4K HDR OLED 120Hz', '52MP triple ZEISS', 'Pro camera features', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Black', capacity: '256GB', price: 1349, originalPrice: 1499 },
+      { color: 'Black', capacity: '512GB', price: 1529, originalPrice: 1699 },
+      { color: 'Black', capacity: '1TB', price: 1799, originalPrice: 1999 },
+      { color: 'Khaki Green', capacity: '256GB', price: 1349, originalPrice: 1499 },
+      { color: 'Khaki Green', capacity: '512GB', price: 1529, originalPrice: 1699 },
+      { color: 'Khaki Green', capacity: '1TB', price: 1799, originalPrice: 1999 },
+      { color: 'Platinum Silver', capacity: '256GB', price: 1349, originalPrice: 1499 },
+      { color: 'Platinum Silver', capacity: '512GB', price: 1529, originalPrice: 1699 },
+    ]
+  },
+  // Nothing Phone (3) with variants
+  {
+    id: 'nothing-phone-3',
+    name: 'Nothing Phone (3)',
+    price: 629,
+    originalPrice: 699,
+    discount: 10,
+    image: '/attached_assets/smartphones/nothing-phone-3.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - Glyph Interface',
+    features: ['Snapdragon 8 Gen 3', '6.7" LTPO OLED 120Hz', '50MP dual camera', 'Unique Glyph lights', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Black', capacity: '256GB', price: 629, originalPrice: 699 },
+      { color: 'Black', capacity: '512GB', price: 719, originalPrice: 799 },
+      { color: 'White', capacity: '256GB', price: 629, originalPrice: 699 },
+      { color: 'White', capacity: '512GB', price: 719, originalPrice: 799 },
+    ]
+  },
+  // OnePlus Nord 5 with variants
+  {
+    id: 'oneplus-nord-5',
+    name: 'OnePlus Nord 5',
+    price: 449,
+    originalPrice: 499,
+    discount: 10,
+    image: '/attached_assets/smartphones/oneplus-nord-5.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - Value Flagship',
+    features: ['Snapdragon 7+ Gen 3', '6.74" AMOLED 120Hz', '50MP dual camera', '5000mAh + 80W charging', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Aqua Surge', capacity: '256GB', price: 449, originalPrice: 499 },
+      { color: 'Aqua Surge', capacity: '512GB', price: 539, originalPrice: 599 },
+      { color: 'Misty Gray', capacity: '256GB', price: 449, originalPrice: 499 },
+      { color: 'Misty Gray', capacity: '512GB', price: 539, originalPrice: 599 },
+      { color: 'Nord Green', capacity: '256GB', price: 449, originalPrice: 499 },
+      { color: 'Nord Green', capacity: '512GB', price: 539, originalPrice: 599 },
+    ]
+  },
+  // Motorola Edge 60 Ultra with variants
+  {
+    id: 'motorola-edge-60-ultra',
+    name: 'Motorola Edge 60 Ultra',
+    price: 899,
+    originalPrice: 999,
+    discount: 10,
+    image: '/attached_assets/smartphones/motorola-edge-60-ultra.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - 6.7" Endless Edge Display',
+    features: ['Snapdragon 8 Gen 3', '6.7" pOLED 165Hz', '50MP triple camera', '4800mAh + 125W charging', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Eclipse Black', capacity: '256GB', price: 899, originalPrice: 999 },
+      { color: 'Eclipse Black', capacity: '512GB', price: 1079, originalPrice: 1199 },
+      { color: 'Eclipse Black', capacity: '1TB', price: 1259, originalPrice: 1399 },
+      { color: 'Interstellar Blue', capacity: '256GB', price: 899, originalPrice: 999 },
+      { color: 'Interstellar Blue', capacity: '512GB', price: 1079, originalPrice: 1199 },
+      { color: 'Smoky Quartz', capacity: '256GB', price: 899, originalPrice: 999 },
+      { color: 'Smoky Quartz', capacity: '512GB', price: 1079, originalPrice: 1199 },
+    ]
+  },
+  // Realme GT 7 Pro with variants
+  {
+    id: 'realme-gt-7-pro',
+    name: 'Realme GT 7 Pro',
+    price: 899,
+    originalPrice: 999,
+    discount: 10,
+    image: '/attached_assets/smartphones/realme-gt-7-pro.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - Galaxy Snap Camera',
+    features: ['Snapdragon 8 Elite', '50MP Sony IMX906', '6.78" LTPO AMOLED 120Hz', '6500mAh + 120W charging', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Galaxy Grey', capacity: '256GB', price: 899, originalPrice: 999 },
+      { color: 'Galaxy Grey', capacity: '512GB', price: 1079, originalPrice: 1199 },
+      { color: 'Galaxy Grey', capacity: '1TB', price: 1259, originalPrice: 1399 },
+      { color: 'Mars Orange', capacity: '256GB', price: 899, originalPrice: 999 },
+      { color: 'Mars Orange', capacity: '512GB', price: 1079, originalPrice: 1199 },
+      { color: 'Mars Orange', capacity: '1TB', price: 1259, originalPrice: 1399 },
+    ]
+  },
+  // Asus Zenfone 12 with variants
+  {
+    id: 'asus-zenfone-12',
+    name: 'Asus Zenfone 12',
+    price: 629,
+    originalPrice: 699,
+    discount: 10,
+    image: '/attached_assets/smartphones/asus-zenfone-12.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - Compact Flagship',
+    features: ['Snapdragon 8 Gen 3', '5.9" AMOLED 144Hz', '50MP triple camera', 'Compact & lightweight', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Midnight Black', capacity: '256GB', price: 629, originalPrice: 699 },
+      { color: 'Midnight Black', capacity: '512GB', price: 719, originalPrice: 799 },
+      { color: 'Horizon Silver', capacity: '256GB', price: 629, originalPrice: 699 },
+      { color: 'Horizon Silver', capacity: '512GB', price: 719, originalPrice: 799 },
+      { color: 'Aurora Green', capacity: '256GB', price: 629, originalPrice: 699 },
+      { color: 'Aurora Green', capacity: '512GB', price: 719, originalPrice: 799 },
+    ]
+  },
   // === GAMING SMARTPHONES ===
   // Asus ROG Phone 9 Pro with variants
   {
