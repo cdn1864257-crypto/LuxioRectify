@@ -72,36 +72,39 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const client = new MongoClient(mongoUri);
-    await client.connect();
     
-    const db = client.db('luxio');
-    const usersCollection = db.collection('users');
+    try {
+      await client.connect();
+      
+      const db = client.db('luxio');
+      const usersCollection = db.collection('users');
 
-    // Récupérer l'utilisateur depuis la base de données
-    const user = await usersCollection.findOne({ _id: new ObjectId(decoded.userId) });
-    
-    await client.close();
+      // Récupérer l'utilisateur depuis la base de données
+      const user = await usersCollection.findOne({ _id: new ObjectId(decoded.userId) });
 
-    if (!user) {
-      return res.status(404).json({ error: 'Utilisateur non trouvé' });
+      if (!user) {
+        return res.status(404).json({ error: 'Utilisateur non trouvé' });
+      }
+
+      // Retourner les infos utilisateur sans le mot de passe
+      const userResponse = {
+        id: user._id.toString(),
+        firstName: user.firstName,
+        lastName: user.lastName,
+        country: user.country,
+        city: user.city,
+        address: user.address,
+        phone: user.phone,
+        email: user.email,
+        createdAt: user.createdAt
+      };
+
+      return res.status(200).json({
+        user: userResponse
+      });
+    } finally {
+      await client.close();
     }
-
-    // Retourner les infos utilisateur sans le mot de passe
-    const userResponse = {
-      id: user._id.toString(),
-      firstName: user.firstName,
-      lastName: user.lastName,
-      country: user.country,
-      city: user.city,
-      address: user.address,
-      phone: user.phone,
-      email: user.email,
-      createdAt: user.createdAt
-    };
-
-    return res.status(200).json({
-      user: userResponse
-    });
 
   } catch (error) {
     console.error('Erreur lors de la récupération de l\'utilisateur:', error);

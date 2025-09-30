@@ -84,11 +84,6 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
         description: `Bienvenue ${data.user.firstName} !`,
       });
 
-      // Stocker le token si nécessaire (optionnel, le cookie est déjà géré)
-      if (data.token) {
-        localStorage.setItem('auth_token', data.token);
-      }
-
       // Réinitialiser le formulaire
       setFormData({
         email: "",

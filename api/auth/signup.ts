@@ -72,56 +72,58 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const client = new MongoClient(mongoUri);
-    await client.connect();
     
-    const db = client.db('luxio');
-    const usersCollection = db.collection('users');
+    try {
+      await client.connect();
+      
+      const db = client.db('luxio');
+      const usersCollection = db.collection('users');
 
-    // Vérifier si l'email existe déjà
-    const existingUser = await usersCollection.findOne({ email: email.toLowerCase() });
-    if (existingUser) {
+      // Vérifier si l'email existe déjà
+      const existingUser = await usersCollection.findOne({ email: email.toLowerCase() });
+      if (existingUser) {
+        return res.status(409).json({ error: 'Cet email est déjà utilisé' });
+      }
+
+      // Hashage du mot de passe avec bcrypt (10 rounds de salting)
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      // Création de l'utilisateur
+      const newUser = {
+        firstName,
+        lastName,
+        country,
+        city,
+        address,
+        phone,
+        email: email.toLowerCase(),
+        password: hashedPassword,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
+
+      const result = await usersCollection.insertOne(newUser);
+
+      // Retourner l'utilisateur sans le mot de passe
+      const userResponse = {
+        id: result.insertedId,
+        firstName,
+        lastName,
+        country,
+        city,
+        address,
+        phone,
+        email: email.toLowerCase(),
+        createdAt: newUser.createdAt
+      };
+
+      return res.status(201).json({
+        message: 'Inscription réussie',
+        user: userResponse
+      });
+    } finally {
       await client.close();
-      return res.status(409).json({ error: 'Cet email est déjà utilisé' });
     }
-
-    // Hashage du mot de passe avec bcrypt (10 rounds de salting)
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Création de l'utilisateur
-    const newUser = {
-      firstName,
-      lastName,
-      country,
-      city,
-      address,
-      phone,
-      email: email.toLowerCase(),
-      password: hashedPassword,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
-
-    const result = await usersCollection.insertOne(newUser);
-    
-    await client.close();
-
-    // Retourner l'utilisateur sans le mot de passe
-    const userResponse = {
-      id: result.insertedId,
-      firstName,
-      lastName,
-      country,
-      city,
-      address,
-      phone,
-      email: email.toLowerCase(),
-      createdAt: newUser.createdAt
-    };
-
-    return res.status(201).json({
-      message: 'Inscription réussie',
-      user: userResponse
-    });
 
   } catch (error) {
     console.error('Erreur lors de l\'inscription:', error);

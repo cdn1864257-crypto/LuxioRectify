@@ -45,28 +45,30 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const client = new MongoClient(mongoUri);
-    await client.connect();
+    let user: any;
     
-    const db = client.db('luxio');
-    const usersCollection = db.collection('users');
+    try {
+      await client.connect();
+      
+      const db = client.db('luxio');
+      const usersCollection = db.collection('users');
 
-    // Rechercher l'utilisateur par email
-    const user = await usersCollection.findOne({ email: email.toLowerCase() });
-    
-    if (!user) {
+      // Rechercher l'utilisateur par email
+      user = await usersCollection.findOne({ email: email.toLowerCase() });
+      
+      if (!user) {
+        return res.status(401).json({ error: 'Email ou mot de passe incorrect' });
+      }
+
+      // Vérifier le mot de passe
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      
+      if (!isPasswordValid) {
+        return res.status(401).json({ error: 'Email ou mot de passe incorrect' });
+      }
+    } finally {
       await client.close();
-      return res.status(401).json({ error: 'Email ou mot de passe incorrect' });
     }
-
-    // Vérifier le mot de passe
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    
-    if (!isPasswordValid) {
-      await client.close();
-      return res.status(401).json({ error: 'Email ou mot de passe incorrect' });
-    }
-
-    await client.close();
 
     // Générer le JWT
     const jwtSecret = process.env.JWT_SECRET;
@@ -109,8 +111,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
     return res.status(200).json({
       message: 'Connexion réussie',
-      user: userResponse,
-      token // Optionnel : pour usage client-side si nécessaire
+      user: userResponse
     });
 
   } catch (error) {
