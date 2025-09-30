@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import { Link } from 'wouter';
 import { products, type Product } from '../lib/products';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -19,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Search, ChevronLeft, ChevronRight, ShoppingCart, Check } from 'lucide-react';
+import { Search, ChevronLeft, ChevronRight, ShoppingCart, Check, ArrowLeft } from 'lucide-react';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -254,6 +255,16 @@ export default function Premium() {
         {/* Header */}
         <div className="bg-slate-900 dark:bg-slate-950 text-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Link href="/">
+              <Button
+                variant="ghost"
+                className="mb-6 text-white hover:bg-slate-800 hover:text-white -ml-2"
+                data-testid="button-back-to-home"
+              >
+                <ArrowLeft className="w-5 h-5 mr-2" />
+                {t('backToHome')}
+              </Button>
+            </Link>
             <h1 className="text-4xl md:text-5xl font-bold mb-4" data-testid="text-premium-title">
               {t('premiumSmartphones') || 'Premium Smartphones'}
             </h1>
