@@ -78,11 +78,9 @@ export default function Cart() {
                               <h3 className="font-semibold text-foreground line-clamp-1" data-testid={`text-product-name-${item.id}`}>
                                 {item.name}
                               </h3>
-                              {item.variant && (
-                                <p className="text-sm text-muted-foreground mt-1">
-                                  {item.variant}
-                                </p>
-                              )}
+                              <p className="text-sm text-muted-foreground mt-1 line-clamp-1">
+                                {item.category}
+                              </p>
                             </div>
                             <button
                               onClick={() => handleRemoveItem(item.id)}
