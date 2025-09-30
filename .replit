@@ -8,7 +8,7 @@ channel = "stable-24_05"
 [deployment]
 deploymentTarget = "autoscale"
 build = ["npm", "run", "build"]
-run = ["npm", "run", "start"]
+run = ["npx", "serve", "dist", "-s", "-p", "5000"]
 
 [[ports]]
 localPort = 4173
@@ -17,10 +17,6 @@ externalPort = 3001
 [[ports]]
 localPort = 5000
 externalPort = 80
-
-[[ports]]
-localPort = 33249
-externalPort = 5173
 
 [[ports]]
 localPort = 40849
@@ -37,6 +33,10 @@ externalPort = 3002
 [[ports]]
 localPort = 44179
 externalPort = 5000
+
+[[ports]]
+localPort = 44647
+externalPort = 3003
 
 [env]
 PORT = "5000"
