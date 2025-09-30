@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
@@ -32,6 +32,17 @@ export default function Payment() {
   const [paymentMethod, setPaymentMethod] = useState<string>('card');
   const [processing, setProcessing] = useState(false);
 
+  useEffect(() => {
+    if (!user) {
+      navigate('/?login=true');
+      return;
+    }
+    
+    if (cart.length === 0) {
+      navigate('/cart');
+    }
+  }, [user, cart, navigate]);
+
   const handlePayment = async () => {
     setProcessing(true);
     
@@ -42,13 +53,7 @@ export default function Payment() {
     }, 2000);
   };
 
-  if (!user) {
-    navigate('/?login=true');
-    return null;
-  }
-
-  if (cart.length === 0) {
-    navigate('/cart');
+  if (!user || cart.length === 0) {
     return null;
   }
 

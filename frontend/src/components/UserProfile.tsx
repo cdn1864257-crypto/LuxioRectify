@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { X, ShoppingBag, LogOut } from 'lucide-react';
-import { useAuth } from '../hooks/use-auth';
+import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { loadOrders, Order } from '../lib/cart';
 

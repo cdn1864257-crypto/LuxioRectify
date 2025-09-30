@@ -9,7 +9,7 @@ import { Footer } from '../components/Footer';
 import { CartSidebar } from '../components/CartSidebar';
 import { CheckoutModal } from '../components/CheckoutModal';
 import { UserProfile } from '../components/UserProfile';
-import { useAuth } from '../hooks/use-auth';
+import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getProductsByCategory } from '../lib/products';
 import { showToast } from '../components/ToastNotifications';
