@@ -7,6 +7,7 @@ import signupHandler from '../api/auth/signup.js';
 import loginHandler from '../api/auth/login.js';
 import meHandler from '../api/auth/me.js';
 import logoutHandler from '../api/auth/logout.js';
+import submitOrderHandler from '../api/payment/submit-order.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -79,6 +80,9 @@ app.use('/api/auth/signup', convertVercelHandler(signupHandler));
 app.use('/api/auth/login', convertVercelHandler(loginHandler));
 app.use('/api/auth/logout', convertVercelHandler(logoutHandler));
 app.use('/api/auth/me', convertVercelHandler(meHandler));
+
+// Payment routes
+app.use('/api/payment/submit-order', convertVercelHandler(submitOrderHandler));
 
 // Serve static files from frontend dist in production
 if (process.env.NODE_ENV === 'production') {

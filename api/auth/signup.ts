@@ -1,5 +1,6 @@
 import { MongoClient } from 'mongodb';
 import bcrypt from 'bcrypt';
+import { sendWelcomeEmail } from '../../utils/email.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -112,6 +113,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         email: email.toLowerCase(),
         createdAt: newUser.createdAt
       };
+
+      // Envoyer l'email de bienvenue (sans bloquer la réponse)
+      sendWelcomeEmail(email.toLowerCase(), firstName).catch((error: Error) => {
+        console.error('Erreur lors de l\'envoi de l\'email de bienvenue:', error);
+      });
 
       return res.status(201).json({
         message: 'Inscription réussie',

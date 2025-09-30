@@ -1,444 +1,380 @@
-# Luxio - Système d'Authentification MongoDB
+# Luxio - Plateforme E-Commerce Premium
 
-Ce projet utilise un système d'authentification complet avec MongoDB Atlas et JWT pour gérer les inscriptions et connexions des utilisateurs.
+Plateforme e-commerce moderne pour la vente de smartphones, smartwatches, sneakers et gadgets high-tech premium.
 
-## 📋 Table des matières
+## 🚀 Technologies
 
-- [Fonctionnalités](#fonctionnalités)
-- [Architecture](#architecture)
-- [Configuration MongoDB Atlas](#configuration-mongodb-atlas)
-- [Variables d'environnement](#variables-denvironnement)
-- [Installation locale](#installation-locale)
-- [Déploiement sur Vercel](#déploiement-sur-vercel)
-- [API Endpoints](#api-endpoints)
-- [Sécurité](#sécurité)
+### Frontend
+- **React 18** avec TypeScript
+- **Vite** pour le build et le développement
+- **Tailwind CSS** + shadcn/ui pour le design
+- **Wouter** pour le routing
+- **TanStack React Query** pour la gestion des données
 
-## ✨ Fonctionnalités
+### Backend
+- **Express.js** pour l'API REST
+- **MongoDB Atlas** pour la base de données
+- **JWT** pour l'authentification
+- **bcrypt** pour le hashage des mots de passe
+- **AWS SES** pour l'envoi d'emails transactionnels
 
-### Système d'inscription complet
-- Formulaire d'inscription avec tous les champs utilisateur
-- Validation côté client et serveur
-- Hashage sécurisé des mots de passe avec bcrypt (10 rounds)
-- Vérification de l'unicité de l'email
-- Stockage dans MongoDB Atlas
+## 📦 Installation
 
-### Système de connexion sécurisé
-- Authentification par email et mot de passe
-- Génération de JWT signé avec durée de validité (7 jours)
-- Cookie httpOnly et secure pour la session
-- Vérification du mot de passe avec bcrypt
+### Prérequis
+- Node.js 20+
+- npm ou yarn
+- Compte MongoDB Atlas
+- Compte AWS avec accès à SES
 
-### Protection des données
-- Mots de passe uniquement stockés hashés (jamais en clair)
-- JWT en cookie httpOnly pour éviter les attaques XSS
-- Cookies secure en production (HTTPS)
-- Validation stricte des données
-
-## 🏗 Architecture
-
-### Backend (API)
-
-```
-api/
-└── auth/
-    ├── signup.ts    # Endpoint d'inscription
-    ├── login.ts     # Endpoint de connexion
-    └── me.ts        # Endpoint pour récupérer l'utilisateur connecté
-```
-
-### Frontend (React)
-
-```
-frontend/src/components/
-├── SignupForm.tsx   # Formulaire d'inscription complet
-├── LoginForm.tsx    # Formulaire de connexion
-└── AuthModal.tsx    # Modal d'authentification (login/signup)
-```
-
-### Base de données MongoDB
-
-**Collection : `users`**
-
-```javascript
-{
-  _id: ObjectId,
-  firstName: String,      // Prénom
-  lastName: String,       // Nom
-  country: String,        // Pays
-  city: String,          // Ville
-  address: String,       // Adresse complète
-  phone: String,         // Téléphone
-  email: String,         // Email (unique, indexé)
-  password: String,      // Mot de passe hashé avec bcrypt
-  createdAt: Date,       // Date de création
-  updatedAt: Date        // Date de dernière modification
-}
-```
-
-## 🗄️ Configuration MongoDB Atlas
-
-### Étape 1 : Créer un compte gratuit
-
-1. Allez sur [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-2. Cliquez sur "Try Free" ou "Start Free"
-3. Créez un compte avec votre email ou connectez-vous avec Google/GitHub
-
-### Étape 2 : Créer un cluster gratuit (M0)
-
-1. Une fois connecté, cliquez sur "Create a New Cluster"
-2. Sélectionnez le plan **M0 Sandbox** (gratuit, 512 MB)
-3. Choisissez un provider cloud (AWS, Google Cloud, ou Azure)
-4. Sélectionnez la région la plus proche de vos utilisateurs
-5. Nommez votre cluster (ex: "luxio-cluster")
-6. Cliquez sur "Create Cluster" (création ~5-10 minutes)
-
-### Étape 3 : Configurer l'accès réseau
-
-1. Dans le menu latéral, cliquez sur "Network Access"
-2. Cliquez sur "Add IP Address"
-3. Sélectionnez "Allow Access from Anywhere" (0.0.0.0/0)
-   - ⚠️ En production, limitez aux IPs de vos serveurs
-4. Cliquez sur "Confirm"
-
-### Étape 4 : Créer un utilisateur de base de données
-
-1. Dans le menu latéral, cliquez sur "Database Access"
-2. Cliquez sur "Add New Database User"
-3. Méthode d'authentification : **Password**
-4. Remplissez :
-   - Username : `luxio_admin` (ou autre)
-   - Password : Générez un mot de passe sécurisé
-   - ⚠️ **Notez ce mot de passe !** Vous en aurez besoin
-5. Database User Privileges : **Read and write to any database**
-6. Cliquez sur "Add User"
-
-### Étape 5 : Récupérer l'URL de connexion
-
-1. Retournez sur "Database" dans le menu latéral
-2. Cliquez sur "Connect" sur votre cluster
-3. Sélectionnez "Connect your application"
-4. Driver : **Node.js**, Version : **5.5 or later**
-5. Copiez la chaîne de connexion :
-   ```
-   mongodb+srv://luxio_admin:<password>@cluster.mongodb.net/?retryWrites=true&w=majority
-   ```
-6. Remplacez `<password>` par le mot de passe de l'utilisateur
-7. Ajoutez le nom de la base de données après `.net/` :
-   ```
-   mongodb+srv://luxio_admin:VOTRE_PASSWORD@cluster.mongodb.net/luxio?retryWrites=true&w=majority
-   ```
-
-### Étape 6 : Créer un index sur l'email (optionnel mais recommandé)
-
-1. Dans "Database", cliquez sur "Browse Collections"
-2. Après la première inscription, sélectionnez la collection `users`
-3. Allez dans l'onglet "Indexes"
-4. Cliquez sur "Create Index"
-5. Ajoutez : `{ "email": 1 }` avec l'option `unique: true`
-
-## 🔑 Variables d'environnement
-
-### Pour Replit
-
-Les secrets sont déjà configurés dans Replit Secrets :
-- `MONGODB_URI` : URL de connexion MongoDB Atlas
-- `JWT_SECRET` : Clé secrète pour signer les JWT
-
-### Pour le développement local
-
-Créez un fichier `.env` à la racine du projet :
-
-```env
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/luxio?retryWrites=true&w=majority
-JWT_SECRET=votre_secret_jwt_minimum_32_caracteres_aleatoires
-NODE_ENV=development
-```
-
-Pour générer un JWT_SECRET sécurisé :
-```bash
-openssl rand -base64 32
-```
-
-Ou utilisez un générateur en ligne comme : https://randomkeygen.com/
-
-### Pour Vercel (déploiement)
-
-1. Allez sur [Vercel Dashboard](https://vercel.com)
-2. Sélectionnez votre projet
-3. Allez dans "Settings" > "Environment Variables"
-4. Ajoutez les variables :
-   - `MONGODB_URI` : Votre URL MongoDB Atlas
-   - `JWT_SECRET` : Votre clé secrète JWT
-   - `NODE_ENV` : `production`
-
-## 💻 Installation locale
+### Installation des dépendances
 
 ```bash
-# Cloner le projet
-git clone <votre-repo>
-cd luxio
-
-# Installer les dépendances
+# Dépendances root
 npm install
-cd frontend && npm install && cd ..
 
-# Créer le fichier .env avec vos variables
-# (voir section Variables d'environnement)
+# Dépendances frontend
+cd frontend && npm install
+```
 
-# Lancer le serveur de développement
+## ⚙️ Configuration
+
+### 1. Variables d'environnement
+
+Créez les variables d'environnement suivantes dans Replit Secrets ou dans un fichier `.env` :
+
+#### Base de données
+```bash
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/luxio
+JWT_SECRET=votre_secret_jwt_minimum_32_caracteres
+```
+
+#### Amazon SES (Envoi d'emails)
+```bash
+AWS_SES_ACCESS_KEY=votre_access_key_aws
+AWS_SES_SECRET_KEY=votre_secret_key_aws
+AWS_SES_REGION=us-east-1
+EMAIL_FROM=noreply@luxio-shop.com
+ADMIN_EMAIL=admin@luxio-shop.com
+```
+
+### 2. Configuration Amazon SES
+
+#### Étape 1 : Créer un compte AWS
+1. Créez un compte sur [AWS Console](https://aws.amazon.com/console/)
+2. Accédez au service **Amazon SES**
+
+#### Étape 2 : Vérifier votre adresse email (Mode Sandbox)
+
+En mode sandbox (par défaut), vous ne pouvez envoyer des emails qu'à des adresses vérifiées :
+
+1. Dans Amazon SES, allez dans **Verified identities**
+2. Cliquez sur **Create identity**
+3. Sélectionnez **Email address**
+4. Entrez votre email (ex: `noreply@luxio-shop.com`)
+5. Cliquez sur **Create identity**
+6. Vérifiez l'email reçu dans votre boîte mail
+
+**Note :** Répétez cette opération pour chaque adresse email de test.
+
+#### Étape 3 : Vérifier un domaine (Production)
+
+Pour envoyer des emails à n'importe quelle adresse :
+
+1. Dans **Verified identities**, cliquez sur **Create identity**
+2. Sélectionnez **Domain**
+3. Entrez votre domaine (ex: `luxio-shop.com`)
+4. Cochez **Generate DKIM settings**
+5. Suivez les instructions pour ajouter les enregistrements DNS :
+   - Ajoutez les enregistrements DKIM dans votre DNS
+   - Ajoutez l'enregistrement MX si nécessaire
+6. Attendez la validation (peut prendre 24-48h)
+
+#### Étape 4 : Sortir du mode Sandbox
+
+1. Dans le menu SES, allez dans **Account dashboard**
+2. Sous **Sending statistics**, cliquez sur **Request production access**
+3. Remplissez le formulaire :
+   - **Use case description** : Décrivez votre usage (ex: "E-commerce transactional emails for order confirmations and user notifications")
+   - **Website URL** : Votre site web
+   - **Email sending rate** : Estimez votre volume (ex: 100-500 emails/jour)
+4. Soumettez la demande (validation sous 24h généralement)
+
+#### Étape 5 : Créer des clés d'accès IAM
+
+1. Dans AWS Console, allez dans **IAM** (Identity and Access Management)
+2. Cliquez sur **Users** → **Create user**
+3. Nom d'utilisateur : `luxio-ses-sender`
+4. Cochez **Programmatic access**
+5. Permissions : Attachez la policy **AmazonSESFullAccess**
+6. Créez l'utilisateur et **sauvegardez les clés** :
+   - `Access Key ID` → `AWS_SES_ACCESS_KEY`
+   - `Secret Access Key` → `AWS_SES_SECRET_KEY`
+
+⚠️ **Important** : Sauvegardez ces clés immédiatement, elles ne seront plus accessibles après.
+
+#### Étape 6 : Configuration Replit/Vercel
+
+**Pour Replit :**
+1. Ouvrez le panneau **Secrets** (icône cadenas)
+2. Ajoutez chaque variable :
+   - `AWS_SES_ACCESS_KEY`
+   - `AWS_SES_SECRET_KEY`
+   - `AWS_SES_REGION` (ex: `us-east-1`)
+   - `EMAIL_FROM` (votre email vérifié)
+   - `ADMIN_EMAIL` (email de l'admin pour les notifications)
+
+**Pour Vercel :**
+```bash
+vercel env add AWS_SES_ACCESS_KEY
+vercel env add AWS_SES_SECRET_KEY
+vercel env add AWS_SES_REGION
+vercel env add EMAIL_FROM
+vercel env add ADMIN_EMAIL
+```
+
+### 3. Passer d'un email générique à un email professionnel
+
+#### Option 1 : Email générique (Gmail, Yahoo, etc.)
+
+Pour commencer rapidement en mode développement :
+```bash
+EMAIL_FROM=noreply@gmail.com
+```
+
+Limitations :
+- Doit être vérifié dans SES
+- Peut avoir des problèmes de délivrabilité
+- Moins professionnel
+
+#### Option 2 : Email avec domaine personnalisé (Recommandé)
+
+Une fois votre domaine vérifié dans SES :
+
+1. **Achetez un nom de domaine** (ex: `luxio-shop.com`)
+   - Chez Namecheap, GoDaddy, OVH, etc.
+
+2. **Configurez les DNS pour SES** (voir Étape 3 ci-dessus)
+
+3. **Utilisez votre domaine dans les emails :**
+   ```bash
+   EMAIL_FROM=contact@luxio-shop.com
+   ADMIN_EMAIL=admin@luxio-shop.com
+   ```
+
+Avantages :
+- Plus professionnel
+- Meilleure délivrabilité
+- Confiance des utilisateurs
+- Personnalisation complète
+
+## 🚀 Développement
+
+### Démarrer le serveur de développement
+
+```bash
+# Démarre backend (port 3001) + frontend (port 5000)
 npm run dev
 ```
 
-L'application sera accessible sur `http://localhost:5000`
+Le backend API sera disponible sur `http://localhost:3001`  
+Le frontend sera disponible sur `http://localhost:5000`
 
-## 🚀 Déploiement sur Vercel
+### Structure des emails
 
-### Méthode 1 : Via l'interface Vercel
+#### Email de bienvenue (Inscription)
+Envoyé automatiquement après une inscription réussie :
+- Sujet : "Bienvenue sur Luxio 🎉"
+- Contenu : Message de bienvenue personnalisé avec le prénom de l'utilisateur
+- CTA : Bouton "Découvrir nos offres"
 
-1. Connectez-vous sur [Vercel](https://vercel.com)
-2. Cliquez sur "New Project"
-3. Importez votre repository GitHub
-4. Configuration du projet :
-   - **Framework Preset** : Other
-   - **Root Directory** : `./`
-   - **Build Command** : `npm run build`
-   - **Output Directory** : `dist`
-5. Ajoutez les variables d'environnement (voir ci-dessus)
-6. Cliquez sur "Deploy"
+#### Email de confirmation de commande (Client)
+Envoyé après soumission du formulaire de paiement :
+- Récapitulatif du produit commandé
+- Montant total payé
+- Type de code de paiement (TransCash ou PCS)
+- Liste des codes fournis
+- Statut : En attente de validation
 
-### Méthode 2 : Via la CLI Vercel
+#### Email de notification (Admin)
+Envoyé en parallèle à l'administrateur :
+- Détails complets de la commande
+- Informations du client
+- Codes de paiement à valider
+- ID de commande pour suivi
 
+### API Endpoints
+
+#### Authentification
 ```bash
-# Installer Vercel CLI
-npm i -g vercel
-
-# Se connecter
-vercel login
-
-# Déployer
-vercel
-
-# Ajouter les secrets (première fois uniquement)
-vercel env add MONGODB_URI
-vercel env add JWT_SECRET
-
-# Redéployer en production
-vercel --prod
+POST /api/auth/signup       # Inscription
+POST /api/auth/login        # Connexion
+POST /api/auth/logout       # Déconnexion
+GET  /api/auth/me           # Récupérer l'utilisateur connecté
 ```
 
-## 🔌 API Endpoints
-
-### POST /api/auth/signup
-
-Inscription d'un nouvel utilisateur.
-
-**Body (JSON)** :
-```json
-{
-  "firstName": "Jean",
-  "lastName": "Dupont",
-  "country": "France",
-  "city": "Paris",
-  "address": "123 Rue de la République",
-  "phone": "+33 6 12 34 56 78",
-  "email": "jean.dupont@example.com",
-  "password": "motdepasse123"
-}
+#### Paiements
+```bash
+POST /api/payment/submit-order  # Soumettre une commande avec codes de paiement
 ```
 
-**Réponse succès (201)** :
-```json
-{
-  "message": "Inscription réussie",
-  "user": {
-    "id": "507f1f77bcf86cd799439011",
-    "firstName": "Jean",
-    "lastName": "Dupont",
-    "email": "jean.dupont@example.com",
-    ...
-  }
-}
-```
+### Exemple d'utilisation de l'API de paiement
 
-**Erreurs possibles** :
-- `400` : Champs manquants ou invalides
-- `409` : Email déjà utilisé
-- `500` : Erreur serveur
-
-### POST /api/auth/login
-
-Connexion d'un utilisateur existant.
-
-**Body (JSON)** :
-```json
-{
-  "email": "jean.dupont@example.com",
-  "password": "motdepasse123"
-}
-```
-
-**Réponse succès (200)** :
-```json
-{
-  "message": "Connexion réussie",
-  "user": {
-    "id": "507f1f77bcf86cd799439011",
-    "firstName": "Jean",
-    "lastName": "Dupont",
-    "email": "jean.dupont@example.com",
-    ...
+```typescript
+// Frontend - Soumettre une commande
+const response = await fetch('/api/payment/submit-order', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
   },
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-}
+  body: JSON.stringify({
+    customerEmail: 'client@example.com',
+    customerName: 'Jean Dupont',
+    productId: 'iphone-17-pro',
+    productName: 'iPhone 17 Pro',
+    productModel: '256GB Titanium',
+    productPrice: 1299.99,
+    totalAmount: 1299.99,
+    codeType: 'TransCash', // ou 'PCS'
+    codes: ['CODE123456', 'CODE789012']
+  })
+});
+
+const data = await response.json();
+console.log('Commande créée:', data.orderId);
 ```
 
-**Cookie défini** : `auth_token` (httpOnly, secure en production)
+### Tester l'envoi d'emails localement
 
-**Erreurs possibles** :
-- `400` : Email ou mot de passe manquant
-- `401` : Email ou mot de passe incorrect
-- `500` : Erreur serveur
+```typescript
+// Exemple dans un fichier de test
+import { sendWelcomeEmail, sendOrderConfirmationToCustomer } from './utils/email';
 
-### GET /api/auth/me
+// Test email de bienvenue
+await sendWelcomeEmail('test@example.com', 'Jean');
 
-Récupère les informations de l'utilisateur connecté.
-
-**Headers** :
-```
-Authorization: Bearer <token>
-```
-
-Ou cookie `auth_token` présent.
-
-**Réponse succès (200)** :
-```json
-{
-  "user": {
-    "id": "507f1f77bcf86cd799439011",
-    "firstName": "Jean",
-    "lastName": "Dupont",
-    "email": "jean.dupont@example.com",
-    "country": "France",
-    "city": "Paris",
-    "address": "123 Rue de la République",
-    "phone": "+33 6 12 34 56 78",
-    "createdAt": "2025-09-30T15:45:00.000Z"
-  }
-}
+// Test email de commande
+await sendOrderConfirmationToCustomer({
+  orderId: 'TEST-001',
+  customerEmail: 'test@example.com',
+  customerName: 'Jean Dupont',
+  productName: 'iPhone 17 Pro',
+  productModel: '256GB',
+  productPrice: 1299.99,
+  totalAmount: 1299.99,
+  codeType: 'TransCash',
+  codes: ['CODE123', 'CODE456']
+});
 ```
 
-**Erreurs possibles** :
-- `401` : Token manquant ou invalide
-- `404` : Utilisateur non trouvé
-- `500` : Erreur serveur
+## 📧 Fonctions d'envoi d'emails disponibles
+
+### `sendEmail(options)`
+Fonction générique pour envoyer un email :
+```typescript
+await sendEmail({
+  to: 'destinataire@example.com',
+  subject: 'Sujet de l\'email',
+  html: '<h1>Contenu HTML</h1>',
+  text: 'Contenu texte brut',
+  from: 'expediteur@luxio-shop.com' // Optionnel
+});
+```
+
+### `sendWelcomeEmail(userEmail, firstName)`
+Envoie l'email de bienvenue après inscription.
+
+### `sendOrderConfirmationToCustomer(orderDetails)`
+Envoie la confirmation de commande au client.
+
+### `sendOrderNotificationToAdmin(orderDetails)`
+Notifie l'admin d'une nouvelle commande.
 
 ## 🔒 Sécurité
 
-### Hashage des mots de passe
-- Utilisation de **bcrypt** avec 10 rounds de salting
-- Les mots de passe ne sont **jamais** stockés en clair
-- Impossible de récupérer le mot de passe original
-
-### JWT (JSON Web Tokens)
-- Tokens signés avec une clé secrète forte
-- Durée de validité : 7 jours
-- Stockés dans des cookies httpOnly pour éviter les attaques XSS
-- Cookies secure activés en production (HTTPS uniquement)
-
-### Validation des données
-- Validation côté client (React)
-- Validation côté serveur (API)
-- Vérification de l'unicité de l'email
-- Format email vérifié avec regex
-- Mot de passe minimum 6 caractères
-
 ### Bonnes pratiques
-- ✅ Pas de secrets dans le code
-- ✅ Variables d'environnement pour les clés sensibles
-- ✅ CORS configuré pour la production
-- ✅ Gestion appropriée des erreurs
-- ✅ Cookies httpOnly et secure
-- ✅ Connexion MongoDB avec authentification
+- ✅ Toutes les clés AWS stockées dans Secrets (jamais dans le code)
+- ✅ Mots de passe hashés avec bcrypt (10 rounds)
+- ✅ JWT avec httpOnly cookies
+- ✅ Validation des données côté backend
+- ✅ CORS configuré pour le développement
+- ✅ Emails avec fallback texte brut (anti-spam)
 
-## 🧪 Tests
-
-Pour tester l'API avec curl :
-
+### Ne jamais exposer
 ```bash
-# Inscription
-curl -X POST http://localhost:5000/api/auth/signup \
-  -H "Content-Type: application/json" \
-  -d '{
-    "firstName": "Test",
-    "lastName": "User",
-    "country": "France",
-    "city": "Paris",
-    "address": "123 Test Street",
-    "phone": "+33612345678",
-    "email": "test@example.com",
-    "password": "password123"
-  }'
+# ❌ JAMAIS dans le code
+const AWS_KEY = "AKIAIOSFODNN7EXAMPLE";
 
-# Connexion
-curl -X POST http://localhost:5000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -c cookies.txt \
-  -d '{
-    "email": "test@example.com",
-    "password": "password123"
-  }'
-
-# Vérifier l'utilisateur connecté
-curl -X GET http://localhost:5000/api/auth/me \
-  -b cookies.txt
+# ✅ TOUJOURS via variables d'environnement
+const AWS_KEY = process.env.AWS_SES_ACCESS_KEY;
 ```
 
-## 📝 Notes importantes
+## 🏗️ Build & Déploiement
 
-### MongoDB Atlas - Limites du plan gratuit (M0)
-- **Stockage** : 512 MB
-- **RAM** : Partagée
-- **Connexions simultanées** : 500
-- **Pas de sauvegardes automatiques** (pensez à exporter vos données régulièrement)
-- Suffisant pour développement et petits projets
+### Build pour production
+```bash
+npm run build
+```
 
-### Sécurité en production
-1. Limitez l'accès réseau aux IPs de vos serveurs uniquement
-2. Utilisez des mots de passe MongoDB très complexes
-3. Générez un JWT_SECRET avec au moins 32 caractères aléatoires
-4. Activez le HTTPS sur votre domaine
-5. Configurez un taux limite (rate limiting) sur les endpoints d'authentification
-6. Ajoutez une vérification d'email lors de l'inscription (optionnel)
-7. Implémentez une récupération de mot de passe (optionnel)
+Le build sera créé dans le dossier `dist/`.
 
-## 🆘 Support et dépannage
+### Démarrer en production
+```bash
+npm run start
+```
 
-### Erreur "Configuration MongoDB manquante"
-➡️ Vérifiez que `MONGODB_URI` est bien défini dans les secrets/variables d'environnement
+### Déploiement Vercel
+```bash
+vercel --prod
+```
 
-### Erreur "Configuration JWT manquante"
-➡️ Vérifiez que `JWT_SECRET` est bien défini dans les secrets/variables d'environnement
+Assurez-vous d'avoir configuré toutes les variables d'environnement dans Vercel Dashboard.
 
-### Impossible de se connecter à MongoDB
-➡️ Vérifiez :
-- L'URL de connexion est correcte
-- Le mot de passe ne contient pas de caractères spéciaux non encodés
-- L'accès réseau est autorisé (0.0.0.0/0 ou votre IP)
-- L'utilisateur a les permissions nécessaires
+## 🐛 Troubleshooting
 
-### "Email déjà utilisé"
-➡️ Normal : un email ne peut être associé qu'à un seul compte
+### Les emails ne sont pas envoyés
 
-### Token invalide ou expiré
-➡️ Le JWT a une durée de vie de 7 jours. Après expiration, l'utilisateur doit se reconnecter.
+1. **Vérifiez les variables d'environnement** :
+   ```bash
+   echo $AWS_SES_ACCESS_KEY
+   echo $EMAIL_FROM
+   ```
+
+2. **Vérifiez que l'email expéditeur est vérifié dans SES** :
+   - Mode sandbox : L'email `EMAIL_FROM` doit être vérifié
+   - Production : Votre domaine doit être vérifié
+
+3. **Consultez les logs** :
+   ```bash
+   # Vérifiez les erreurs dans les logs du backend
+   ```
+
+4. **Testez les credentials AWS** :
+   ```bash
+   # Utilisez AWS CLI pour tester
+   aws ses verify-email-identity --email-address test@example.com --region us-east-1
+   ```
+
+### Erreur "Email address not verified"
+
+Vous êtes en mode sandbox. Vérifiez toutes les adresses email dans SES ou demandez l'accès production.
+
+### Limite de taux dépassée
+
+SES a des limites d'envoi :
+- Mode sandbox : 200 emails/jour
+- Production : Dépend de votre demande (augmente progressivement)
 
 ## 📚 Ressources
 
-- [MongoDB Atlas Documentation](https://www.mongodb.com/docs/atlas/)
-- [JWT.io](https://jwt.io/) - Pour décoder et comprendre les JWT
-- [bcrypt Documentation](https://github.com/kelektiv/node.bcrypt.js)
-- [Vercel Documentation](https://vercel.com/docs)
+- [Documentation AWS SES](https://docs.aws.amazon.com/ses/)
+- [AWS SDK for JavaScript v3](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/)
+- [MongoDB Atlas](https://www.mongodb.com/atlas)
+- [Vite Documentation](https://vitejs.dev/)
+
+## 📝 License
+
+MIT
 
 ---
 
-**Développé avec ❤️ pour Luxio**
+**Luxio** - Votre boutique de smartphones et accessoires premium 🚀
