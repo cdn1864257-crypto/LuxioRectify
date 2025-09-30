@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { products, type Product } from '../lib/products';
 import { useCart } from '../hooks/use-cart';
 import { useToast } from '../hooks/use-toast';
@@ -118,9 +118,9 @@ export default function Premium() {
   }, [filteredSmartphones, currentPage]);
 
   // Reset page when filters change
-  useState(() => {
+  useEffect(() => {
     setCurrentPage(1);
-  });
+  }, [searchQuery, selectedBrand, selectedCapacity, selectedColor]);
 
   const handleAddToCart = (phone: Product) => {
     addToCart(phone);

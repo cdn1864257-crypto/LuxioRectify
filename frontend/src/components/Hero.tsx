@@ -1,4 +1,4 @@
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../hooks/use-language';
 import { Link } from 'wouter';
 import iphone17ProImage from '@assets/iphone17 pro1_1759187408941.jpeg';
 
