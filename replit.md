@@ -8,7 +8,41 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (September 30, 2025)
 
-### Replit Environment Setup (September 30, 2025 18:30 UTC - Latest) ✅
+### Dynamic Navigation & Protected Routes (September 30, 2025 19:30 UTC - Latest) ✅
+Implemented complete authentication flow with dynamic navigation and protected pages:
+
+**AuthContext Implementation**
+- ✅ Created centralized `AuthContext` (`frontend/src/contexts/AuthContext.tsx`) for global user state management
+- ✅ Replaced simple `use-auth` hook with context-based solution for better state management
+- ✅ Synchronized with MongoDB API endpoints (`/api/auth/login`, `/api/auth/signup`, `/api/auth/logout`, `/api/auth/me`)
+- ✅ Derived user display properties: `displayName`, `initials` from MongoDB user data
+- ✅ Automatic session restoration on app load via JWT cookie verification
+
+**Protected Routes System**
+- ✅ Created `ProtectedRoute` component (`frontend/src/components/ProtectedRoute.tsx`) to guard private pages
+- ✅ Redirects unauthenticated users to login with preserved target URL
+- ✅ Shows loading state during authentication check
+- ✅ Prevents unauthorized access to Dashboard, Cart, and Payment pages
+
+**New Protected Pages**
+- ✅ **Dashboard** (`frontend/src/pages/Dashboard.tsx`): Personalized user homepage with quick actions, recent orders, account stats
+- ✅ **Cart** (`frontend/src/pages/Cart.tsx`): Full shopping cart page with quantity management, item removal, checkout flow
+- ✅ **Payment** (`frontend/src/pages/Payment.tsx`): Secure payment page with multiple payment methods (card, PayPal, bank transfer)
+
+**Dynamic Navigation**
+- ✅ Updated Header (`frontend/src/components/Header.tsx`) with conditional navigation based on auth status:
+  - **Logged Out**: Accueil, Premium, Watches, Sneakers, Gadgets, Mobility, Login button
+  - **Logged In**: Accueil, Dashboard, Panier (Cart), Déconnexion (Logout)
+- ✅ Mobile and desktop navigation both support dynamic links
+- ✅ Logout functionality integrated in navigation menus
+
+**Application Structure**
+- ✅ Updated `App.tsx` with `AuthProvider` wrapping all routes
+- ✅ Protected routes wrapped with `ProtectedRoute` component
+- ✅ Fixed all components to use `AuthContext` instead of old `use-auth` hook
+- ✅ Navigation redirects implemented in `useEffect` to avoid React warnings
+
+### Replit Environment Setup (September 30, 2025 18:30 UTC) ✅
 Completed setup for Replit deployment environment:
 
 **Dependencies Installation**
@@ -85,7 +119,13 @@ The application uses React 18 with TypeScript, Vite for building, Wouter for rou
 The UI is organized into Layout (Header, Footer, Hero), Product (ProductGrid), Cart (CartSidebar), Authentication (AuthModal), Checkout (CheckoutModal), and general UI components from shadcn/ui.
 
 ### State Management
-State is managed using React Query for server state, custom hooks (e.g., `use-cart`, `use-auth`), local storage for persistence (cart, order history), and React Context API for notifications.
+State is managed using:
+- **React Query** for server state and API data fetching
+- **AuthContext** (`frontend/src/contexts/AuthContext.tsx`) for centralized user authentication state
+- **CartContext** for shopping cart state management
+- **LanguageContext** for internationalization
+- **Local Storage** for cart persistence and order history
+- **React Context API** for toast notifications
 
 ### Authentication System
 MongoDB Atlas is used for user authentication with JWT-based session management. The system supports email/password registration and login, with secure password hashing using bcrypt. JWT tokens are stored in httpOnly cookies for security.
