@@ -741,3 +741,7 @@ export const products: Product[] = [
     features: ['5.3K video', 'HyperSmooth 6.0', 'Waterproof', 'Free delivery']
   },
 ];
+
+export function getProductsByCategory(category: string): Product[] {
+  return products.filter(product => product.category === category);
+}
