@@ -475,6 +475,166 @@ export const products: Product[] = [
       { color: 'Asteroid Black', capacity: '1TB', price: 1080, originalPrice: 1200 },
     ]
   },
+  // Nothing Phone 3 with variants (2025)
+  {
+    id: 'nothing-phone-3',
+    name: 'Nothing Phone 3',
+    price: 719,
+    originalPrice: 799,
+    discount: 10,
+    image: '/attached_assets/smartphones/nothing-phone-3.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - Glyph Matrix LED Display',
+    features: ['Snapdragon 8s Gen 4', '6.67" AMOLED 120Hz', 'Triple 50MP cameras', 'Glyph Matrix (489 LEDs)', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Black', capacity: '256GB', price: 719, originalPrice: 799 },
+      { color: 'Black', capacity: '512GB', price: 809, originalPrice: 899 },
+      { color: 'White', capacity: '256GB', price: 719, originalPrice: 799 },
+      { color: 'White', capacity: '512GB', price: 809, originalPrice: 899 },
+    ]
+  },
+  // Asus ROG Phone 8 Pro with variants (2024)
+  {
+    id: 'asus-rog-phone-8-pro',
+    name: 'Asus ROG Phone 8 Pro',
+    price: 1169,
+    originalPrice: 1299,
+    discount: 10,
+    image: '/attached_assets/smartphones/asus-rog-phone-8-pro.jpg',
+    category: 'smartphones',
+    description: 'From 512GB - Ultimate Gaming Phone',
+    features: ['Snapdragon 8 Gen 3', '6.78" AMOLED 165Hz', '50MP gimbal camera', 'AirTrigger controls', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Phantom Black', capacity: '512GB', price: 1169, originalPrice: 1299 },
+      { color: 'Phantom Black', capacity: '1TB', price: 1439, originalPrice: 1599 },
+    ]
+  },
+  // Sony Xperia 1 VI with variants (2024)
+  {
+    id: 'sony-xperia-1-vi',
+    name: 'Sony Xperia 1 VI',
+    price: 1259,
+    originalPrice: 1399,
+    discount: 10,
+    image: '/attached_assets/smartphones/sony-xperia-1-vi.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - Pro Camera & Audio',
+    features: ['Snapdragon 8 Gen 3', '6.5" LTPO OLED 120Hz', '48MP Zeiss cameras', '3.5mm headphone jack', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Black', capacity: '256GB', price: 1259, originalPrice: 1399 },
+      { color: 'Black', capacity: '512GB', price: 1439, originalPrice: 1599 },
+      { color: 'Platinum Silver', capacity: '256GB', price: 1259, originalPrice: 1399 },
+      { color: 'Platinum Silver', capacity: '512GB', price: 1439, originalPrice: 1599 },
+    ]
+  },
+  // Samsung Galaxy A55 with variants (2024)
+  {
+    id: 'samsung-galaxy-a55',
+    name: 'Samsung Galaxy A55 5G',
+    price: 305,
+    originalPrice: 380,
+    discount: 20,
+    image: '/attached_assets/smartphones/samsung-galaxy-a55.jpg',
+    category: 'smartphones',
+    description: 'From 128GB - Premium Mid-Range',
+    features: ['Exynos 1480', '6.6" Super AMOLED 120Hz', '50MP OIS camera', 'IP67 water resistance', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Awesome Iceblue', capacity: '128GB', price: 305, originalPrice: 380 },
+      { color: 'Awesome Iceblue', capacity: '256GB', price: 360, originalPrice: 450 },
+      { color: 'Awesome Navy', capacity: '128GB', price: 305, originalPrice: 380 },
+      { color: 'Awesome Navy', capacity: '256GB', price: 360, originalPrice: 450 },
+      { color: 'Awesome Lilac', capacity: '128GB', price: 305, originalPrice: 380 },
+      { color: 'Awesome Lilac', capacity: '256GB', price: 360, originalPrice: 450 },
+      { color: 'Awesome Lemon', capacity: '128GB', price: 305, originalPrice: 380 },
+      { color: 'Awesome Lemon', capacity: '256GB', price: 360, originalPrice: 450 },
+    ]
+  },
+  // Google Pixel 8a with variants (2024)
+  {
+    id: 'google-pixel-8a',
+    name: 'Google Pixel 8a',
+    price: 449,
+    originalPrice: 499,
+    discount: 10,
+    image: '/attached_assets/smartphones/google-pixel-8a.jpg',
+    category: 'smartphones',
+    description: 'From 128GB - AI-Powered Camera',
+    features: ['Google Tensor G3', '6.1" OLED 120Hz', '64MP camera', '7 years of updates', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Obsidian', capacity: '128GB', price: 449, originalPrice: 499 },
+      { color: 'Obsidian', capacity: '256GB', price: 503, originalPrice: 559 },
+      { color: 'Porcelain', capacity: '128GB', price: 449, originalPrice: 499 },
+      { color: 'Porcelain', capacity: '256GB', price: 503, originalPrice: 559 },
+      { color: 'Bay', capacity: '128GB', price: 449, originalPrice: 499 },
+      { color: 'Bay', capacity: '256GB', price: 503, originalPrice: 559 },
+      { color: 'Aloe', capacity: '128GB', price: 449, originalPrice: 499 },
+      { color: 'Aloe', capacity: '256GB', price: 503, originalPrice: 559 },
+    ]
+  },
+  // OnePlus 12R with variants (2024)
+  {
+    id: 'oneplus-12r',
+    name: 'OnePlus 12R',
+    price: 449,
+    originalPrice: 499,
+    discount: 10,
+    image: '/attached_assets/smartphones/oneplus-12r.jpg',
+    category: 'smartphones',
+    description: 'From 128GB - Flagship Killer',
+    features: ['Snapdragon 8 Gen 2', '6.78" LTPO AMOLED 120Hz', 'Triple 50MP cameras', '5500mAh + 80W charging', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Cool Blue', capacity: '128GB', price: 449, originalPrice: 499 },
+      { color: 'Cool Blue', capacity: '256GB', price: 539, originalPrice: 599 },
+      { color: 'Iron Gray', capacity: '128GB', price: 449, originalPrice: 499 },
+      { color: 'Iron Gray', capacity: '256GB', price: 539, originalPrice: 599 },
+    ]
+  },
+  // Realme GT 6 with variants (2024)
+  {
+    id: 'realme-gt-6',
+    name: 'Realme GT 6',
+    price: 378,
+    originalPrice: 420,
+    discount: 10,
+    image: '/attached_assets/smartphones/realme-gt-6.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - Gaming Beast',
+    features: ['Snapdragon 8s Gen 3', '6.78" AMOLED 120Hz', '50MP Sony LYT-808 OIS', '5500mAh + 120W charging', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Fluid Silver', capacity: '256GB', price: 378, originalPrice: 420 },
+      { color: 'Fluid Silver', capacity: '512GB', price: 450, originalPrice: 500 },
+      { color: 'Razor Green', capacity: '256GB', price: 378, originalPrice: 420 },
+      { color: 'Razor Green', capacity: '512GB', price: 450, originalPrice: 500 },
+    ]
+  },
+  // Motorola Edge 50 Pro with variants (2024)
+  {
+    id: 'motorola-edge-50-pro',
+    name: 'Motorola Edge 50 Pro',
+    price: 305,
+    originalPrice: 335,
+    discount: 9,
+    image: '/attached_assets/smartphones/motorola-edge-50-pro.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - Ultra-Fast Charging',
+    features: ['Snapdragon 7 Gen 3', '6.7" pOLED 144Hz', '50MP OIS camera', '125W fast charging', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Luxe Lavender', capacity: '256GB', price: 305, originalPrice: 335 },
+      { color: 'Luxe Lavender', capacity: '512GB', price: 342, originalPrice: 380 },
+      { color: 'Black Beauty', capacity: '256GB', price: 305, originalPrice: 335 },
+      { color: 'Black Beauty', capacity: '512GB', price: 342, originalPrice: 380 },
+      { color: 'Moonlight Pearl', capacity: '256GB', price: 305, originalPrice: 335 },
+      { color: 'Moonlight Pearl', capacity: '512GB', price: 342, originalPrice: 380 },
+    ]
+  },
   // Samsung Galaxy S25+ with variants
   {
     id: 'samsung-s25-plus',
@@ -932,25 +1092,6 @@ export const products: Product[] = [
       { color: 'Ebony Black', capacity: '512GB', price: 1169, originalPrice: 1299 },
     ]
   },
-  // Realme GT 6 with variants
-  {
-    id: 'realme-gt-6',
-    name: 'Realme GT 6',
-    price: 378,
-    originalPrice: 420,
-    discount: 10,
-    image: '/attached_assets/smartphones/realme-gt-6.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6000 Nits Brightness',
-    features: ['Snapdragon 8s Gen 3', '50MP Sony LYT-808', '5500mAh + 120W charging', '6000 nits peak brightness', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Razor Green', capacity: '256GB', price: 378, originalPrice: 420 },
-      { color: 'Razor Green', capacity: '512GB', price: 450, originalPrice: 500 },
-      { color: 'Fluid Silver', capacity: '256GB', price: 378, originalPrice: 420 },
-      { color: 'Fluid Silver', capacity: '512GB', price: 450, originalPrice: 500 },
-    ]
-  },
   // Fairphone 6 with variants
   {
     id: 'fairphone-6',
@@ -1011,25 +1152,6 @@ export const products: Product[] = [
       { color: 'Khaki Green', capacity: '1TB', price: 1799, originalPrice: 1999 },
       { color: 'Platinum Silver', capacity: '256GB', price: 1349, originalPrice: 1499 },
       { color: 'Platinum Silver', capacity: '512GB', price: 1529, originalPrice: 1699 },
-    ]
-  },
-  // Nothing Phone (3) with variants
-  {
-    id: 'nothing-phone-3',
-    name: 'Nothing Phone (3)',
-    price: 629,
-    originalPrice: 699,
-    discount: 10,
-    image: '/attached_assets/smartphones/nothing-phone-3.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Glyph Interface',
-    features: ['Snapdragon 8 Gen 3', '6.7" LTPO OLED 120Hz', '50MP dual camera', 'Unique Glyph lights', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Black', capacity: '256GB', price: 629, originalPrice: 699 },
-      { color: 'Black', capacity: '512GB', price: 719, originalPrice: 799 },
-      { color: 'White', capacity: '256GB', price: 629, originalPrice: 699 },
-      { color: 'White', capacity: '512GB', price: 719, originalPrice: 799 },
     ]
   },
   // OnePlus Nord 5 with variants
