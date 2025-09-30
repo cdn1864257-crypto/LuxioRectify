@@ -22,7 +22,7 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
   const { user } = useAuth();
   const { itemCount } = useCart();
   const { t } = useLanguage();
-  const [, navigate] = useLocation();
+  const [location, navigate] = useLocation();
   const [authModal, setAuthModal] = useState<{ open: boolean; mode: 'login' | 'signup' }>({
     open: false,
     mode: 'login'
@@ -30,9 +30,22 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
 
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    // If we're not on the home page, navigate to home first
+    if (location !== '/') {
+      navigate('/');
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // Already on home page, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -64,14 +77,15 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                     >
                       {t('smartphones')}
                     </DropdownMenuItem>
-                    <DropdownMenuItem 
-                      onSelect={() => navigate('/premium')}
-                      data-testid="nav-premium"
-                    >
-                      Premium
-                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
+                <Link 
+                  href="/premium"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  data-testid="nav-premium"
+                >
+                  Premium
+                </Link>
                 <button 
                   onClick={() => scrollToSection('watches')}
                   className="text-muted-foreground hover:text-primary transition-colors"

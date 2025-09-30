@@ -49,13 +49,18 @@ export function Hero() {
                 </svg>
               </Link>
               
-              <Link 
-                href="/premium"
+              <button 
+                onClick={() => {
+                  const element = document.getElementById('smartphones');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
                 className="border-2 border-white/50 text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-white/10 hover:border-white transition-all duration-300 backdrop-blur-sm"
                 data-testid="button-view-deals"
               >
                 {t('viewDeals')}
-              </Link>
+              </button>
             </div>
 
             {/* Trust indicators */}
