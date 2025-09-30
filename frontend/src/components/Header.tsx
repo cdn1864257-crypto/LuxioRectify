@@ -61,14 +61,14 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 gap-4">
             {/* Left Section: Logo + Desktop Nav */}
-            <div className="flex items-center gap-4 lg:gap-6 flex-1 min-w-0">
-              {/* Mobile Menu - Only visible on small screens */}
+            <div className="flex items-center gap-4 xl:gap-6 flex-1 min-w-0">
+              {/* Mobile Menu - Visible on small and medium screens (up to lg breakpoint) */}
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger asChild>
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="md:hidden shrink-0"
+                    className="lg:hidden shrink-0"
                     data-testid="button-mobile-menu"
                   >
                     <Menu className="h-5 w-5" />
@@ -139,46 +139,46 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                 Luxio
               </Link>
 
-              {/* Desktop Navigation - Hidden on mobile */}
-              <nav className="hidden md:flex items-center gap-4 lg:gap-6">
+              {/* Desktop Navigation - Hidden on mobile and tablet, visible from lg breakpoint */}
+              <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
                 <Link 
                   href="/"
-                  className="text-sm lg:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
+                  className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
                   data-testid="nav-home"
                 >
                   Accueil
                 </Link>
                 <Link 
                   href="/premium"
-                  className="text-sm lg:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
+                  className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
                   data-testid="nav-premium"
                 >
                   Premium
                 </Link>
                 <button 
                   onClick={() => scrollToSection('watches')}
-                  className="text-sm lg:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
+                  className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
                   data-testid="nav-watches"
                 >
                   {t('watches')}
                 </button>
                 <button 
                   onClick={() => scrollToSection('sneakers')}
-                  className="text-sm lg:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
+                  className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
                   data-testid="nav-sneakers"
                 >
                   {t('sneakers')}
                 </button>
                 <button 
                   onClick={() => scrollToSection('gadgets')}
-                  className="text-sm lg:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
+                  className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
                   data-testid="nav-gadgets"
                 >
                   {t('gadgets')}
                 </button>
                 <button 
                   onClick={() => scrollToSection('mobility')}
-                  className="text-sm lg:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
+                  className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
                   data-testid="nav-mobility"
                 >
                   {t('mobility')}
@@ -201,8 +201,8 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
             
             {/* Right Section: Actions */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-              {/* Language Selector - Hidden on mobile */}
-              <div className="hidden md:block">
+              {/* Language Selector - Hidden on mobile and tablet, visible from lg breakpoint */}
+              <div className="hidden lg:block">
                 <LanguageSelector />
               </div>
               

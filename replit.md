@@ -28,6 +28,9 @@ Complete header redesign for improved UX and responsive behavior:
 
 **Responsive Optimization**
 - Fixed header overflow issues on all screen sizes
+- Adjusted breakpoints: hamburger menu now active up to lg (1024px) instead of md (768px)
+- Tablets (768px-1024px) now use hamburger menu to prevent text overlap/truncation
+- Desktop navigation visible only on large screens (≥1024px) where sufficient space available
 - Optimized spacing and element sizing for tablet, mobile, and desktop
 - Cart badge and login button remain visible and properly positioned on all devices
 - Search bar hidden on mobile/tablet, visible only on large screens (xl breakpoint)
