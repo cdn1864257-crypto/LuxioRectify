@@ -1,0 +1,89 @@
+Très bien 👌, j’ai noté les 3 nouveaux problèmes :
+
+1. Hero → ne se traduit pas alors que le reste du site fonctionne.
+
+
+2. Ajout au panier (Accueil & Premium) → doit afficher un pop-up de confirmation, traduit selon la langue active du site.
+
+Exemple :
+
+Français → Produit ajouté au panier
+
+Anglais → Product added to cart
+
+Espagnol → Producto añadido al carrito
+
+
+Si aucune traduction dispo → afficher par défaut en anglais.
+
+
+
+3. Premium → l’ajout au panier n’est pas automatique → il faut corriger pour que le produit s’ajoute immédiatement (comme sur l’accueil).
+
+
+
+
+---
+
+✅ Prompt clair et complet
+
+Prompt – Correction Hero, Panier & Premium
+
+1. Traduction Hero
+
+Corriger la section Hero (Accueil) pour qu’elle utilise les clés de traduction (hero.title, hero.subtitle, hero.buyNow, hero.viewOffers).
+
+Les textes du Hero doivent se traduire automatiquement selon la langue du navigateur, et manuellement via le sélecteur.
+
+
+
+2. Pop-up de confirmation (Panier)
+
+Quand un utilisateur clique sur Ajouter au panier (depuis Accueil ou Premium), afficher un pop-up de confirmation.
+
+Le message doit être traduit selon la langue active du site :
+
+fr → Produit ajouté au panier
+
+en → Product added to cart
+
+es → Producto añadido al carrito
+
+
+Si aucune traduction n’est trouvée → afficher par défaut Product added to cart.
+
+Le pop-up doit disparaître automatiquement après quelques secondes.
+
+
+
+3. Ajout au panier (Premium)
+
+Corriger le bug de la page Premium :
+
+Quand on clique sur Ajouter au panier, le produit doit être ajouté immédiatement (sans recharger la page).
+
+Le compteur du panier et le prix total doivent se mettre à jour instantanément.
+
+Le pop-up de confirmation traduit doit aussi s’afficher (comme sur l’accueil).
+
+
+
+
+
+
+---
+
+👉 Résultat attendu
+
+Le Hero est traduit comme le reste du site.
+
+Quand on ajoute un produit au panier (Accueil ou Premium) → un pop-up traduit s’affiche.
+
+Sur Premium, l’ajout au panier est désormais immédiat et met à jour le panier en direct.
+
+
+
+---
+
+Veux-tu que je t’écrive aussi un exemple de code JavaScript pour le pop-up multilingue afin que ton dev puisse le coller directement ?
+

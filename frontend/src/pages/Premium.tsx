@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { products, type Product } from '../lib/products';
 import { useCart } from '../hooks/use-cart';
 import { useToast } from '../hooks/use-toast';
-import { useLanguage } from '../hooks/use-language';
+import { useLanguage } from '../contexts/LanguageContext';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { CartSidebar } from '../components/CartSidebar';
@@ -233,8 +233,8 @@ export default function Premium() {
     }, 2000);
 
     toast({
-      title: t('addedToCart'),
-      description: `${productToAdd.name} ${t('addedSuccessfully') || 'has been added to cart'}`,
+      title: t('itemAddedToCart'),
+      description: productToAdd.name,
     });
   };
 
