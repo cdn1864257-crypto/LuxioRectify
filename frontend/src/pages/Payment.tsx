@@ -210,18 +210,54 @@ Montant: ${orderTotal.toFixed(2)} €`;
   };
 
   const handleMaxelPay = async () => {
+    if (!user) return;
+    
     setProcessing(true);
     
-    // Redirection vers MaxelPay (à implémenter avec vos vraies credentials)
-    setTimeout(() => {
-      clearCart();
+    try {
+      // Créer l'objet commande pour Maxelpay
+      const order = {
+        reference: orderReference,
+        items: cart,
+        total: orderTotal,
+        status: 'pending' as const,
+        date: new Date().toISOString(),
+        customerInfo: {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          address: user.address || '',
+          city: user.city || '',
+          country: user.country || '',
+          phone: user.phone || ''
+        }
+      };
+
+      // Générer l'URL Maxelpay
+      const { generateMaxelPayUrl, saveOrder } = await import('@/lib/cart');
+      saveOrder(order);
+      const paymentUrl = generateMaxelPayUrl(order);
+      
+      // Afficher la notification avant la redirection
       toast({
         title: "Redirection vers MaxelPay",
         description: "Vous allez être redirigé vers la plateforme de paiement sécurisée",
       });
+      
+      // Attendre un peu pour que l'utilisateur voie la notification
+      setTimeout(() => {
+        clearCart();
+        // Redirection vers Maxelpay
+        window.location.href = paymentUrl;
+      }, 1000);
+      
+    } catch (error) {
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue lors de la redirection vers MaxelPay",
+        variant: "destructive"
+      });
       setProcessing(false);
-      // window.location.href = generateMaxelPayUrl(...);
-    }, 1500);
+    }
   };
 
   const handlePayment = async () => {
