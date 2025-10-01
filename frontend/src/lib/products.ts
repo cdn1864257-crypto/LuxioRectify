@@ -1404,6 +1404,90 @@ export const products: Product[] = [
       { color: 'Jade Green', capacity: '512GB', price: 827, originalPrice: 1009 },
     ]
   },
+  // Samsung Galaxy A36 5G with variants
+  {
+    id: 'samsung-galaxy-a36',
+    name: 'Samsung Galaxy A36 5G',
+    price: 314,
+    originalPrice: 372,
+    discount: 16,
+    image: '/assets/stock_images/samsung_galaxy_s25_s_752fec1b.jpg',
+    category: 'smartphones',
+    description: 'From 128GB - 6.6" Super AMOLED',
+    features: ['Exynos 1380', '6.6" Super AMOLED 120Hz', '50MP triple camera', 'IP67 water resistance', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Awesome Navy', capacity: '128GB', price: 279, originalPrice: 330 },
+      { color: 'Awesome Navy', capacity: '256GB', price: 314, originalPrice: 372 },
+      { color: 'Awesome Lilac', capacity: '128GB', price: 279, originalPrice: 330 },
+      { color: 'Awesome Lilac', capacity: '256GB', price: 314, originalPrice: 372 },
+      { color: 'Awesome Mint', capacity: '128GB', price: 279, originalPrice: 330 },
+      { color: 'Awesome Mint', capacity: '256GB', price: 314, originalPrice: 372 },
+    ]
+  },
+  // Samsung Galaxy A26 5G with variants
+  {
+    id: 'samsung-galaxy-a26',
+    name: 'Samsung Galaxy A26 5G',
+    price: 248,
+    originalPrice: 306,
+    discount: 19,
+    image: '/assets/stock_images/samsung_galaxy_s25_n_037e580a.jpg',
+    category: 'smartphones',
+    description: 'From 128GB - 6.64" Super AMOLED',
+    features: ['Exynos 1280', '6.64" Super AMOLED 120Hz', '50MP dual camera', '5000mAh battery', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Black', capacity: '128GB', price: 223, originalPrice: 275 },
+      { color: 'Black', capacity: '256GB', price: 248, originalPrice: 306 },
+      { color: 'Light Blue', capacity: '128GB', price: 223, originalPrice: 275 },
+      { color: 'Light Blue', capacity: '256GB', price: 248, originalPrice: 306 },
+      { color: 'Light Violet', capacity: '128GB', price: 223, originalPrice: 275 },
+      { color: 'Light Violet', capacity: '256GB', price: 248, originalPrice: 306 },
+    ]
+  },
+  // Samsung Galaxy A16 with variants
+  {
+    id: 'samsung-galaxy-a16',
+    name: 'Samsung Galaxy A16',
+    price: 165,
+    originalPrice: 195,
+    discount: 15,
+    image: '/assets/stock_images/samsung_galaxy_s25_m_2d9917da.jpg',
+    category: 'smartphones',
+    description: 'From 128GB - 6.7" Super AMOLED',
+    features: ['Helio G99', '6.7" Super AMOLED 90Hz', '50MP triple camera', '5000mAh battery', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Black', capacity: '128GB', price: 165, originalPrice: 195 },
+      { color: 'Black', capacity: '256GB', price: 185, originalPrice: 220 },
+      { color: 'Blue', capacity: '128GB', price: 165, originalPrice: 195 },
+      { color: 'Blue', capacity: '256GB', price: 185, originalPrice: 220 },
+      { color: 'Gold', capacity: '128GB', price: 165, originalPrice: 195 },
+      { color: 'Gold', capacity: '256GB', price: 185, originalPrice: 220 },
+    ]
+  },
+  // Samsung Galaxy M15 5G with variants
+  {
+    id: 'samsung-galaxy-m15',
+    name: 'Samsung Galaxy M15 5G',
+    price: 140,
+    originalPrice: 165,
+    discount: 15,
+    image: '/assets/stock_images/samsung_galaxy_s25_u_89c8bb5f.jpg',
+    category: 'smartphones',
+    description: 'From 128GB - 6.5" Super AMOLED',
+    features: ['Dimensity 6100+', '6.5" Super AMOLED 90Hz', '50MP triple camera', '6000mAh battery', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Stone Gray', capacity: '128GB', price: 140, originalPrice: 165 },
+      { color: 'Stone Gray', capacity: '256GB', price: 158, originalPrice: 186 },
+      { color: 'Light Blue', capacity: '128GB', price: 140, originalPrice: 165 },
+      { color: 'Light Blue', capacity: '256GB', price: 158, originalPrice: 186 },
+      { color: 'Blue Black', capacity: '128GB', price: 140, originalPrice: 165 },
+      { color: 'Blue Black', capacity: '256GB', price: 158, originalPrice: 186 },
+    ]
+  },
 
   // === SMARTWATCHES (16 products) ===
   {
