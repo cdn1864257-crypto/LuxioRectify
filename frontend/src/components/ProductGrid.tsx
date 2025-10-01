@@ -82,7 +82,10 @@ function ProductCard({ product }: { product: Product }) {
                 className="w-full text-sm border border-border rounded px-2 py-1 bg-background"
                 value={selectedVariant?.color || ''}
                 onChange={(e) => {
-                  const variant = product.variants?.find(v => v.color === e.target.value && v.capacity === selectedVariant?.capacity);
+                  let variant = product.variants?.find(v => v.color === e.target.value && v.capacity === selectedVariant?.capacity);
+                  if (!variant) {
+                    variant = product.variants?.find(v => v.color === e.target.value);
+                  }
                   if (variant) setSelectedVariant(variant);
                 }}
                 data-testid={`select-color-${product.id}`}

@@ -28,8 +28,8 @@ export default defineConfig({
       },
     },
     fs: {
-      strict: true,
-      deny: ["**/.*"],
+      strict: false,
+      allow: ['..'],
     },
   },
 });
