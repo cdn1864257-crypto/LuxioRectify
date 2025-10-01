@@ -42,6 +42,15 @@ The design focuses on a modern aesthetic, responsive behavior across devices (mo
 ### Technical Implementations
 The project is configured for the Replit environment with a unified `start-dev.js` script to run both backend (Express on port 3001) and frontend (Vite dev server on port 5000). Vite is configured with `host: '0.0.0.0'` and `allowedHosts: true` for Replit proxy support, and an API proxy forwards `/api` requests to the backend. Autoscale deployment is configured for static site hosting.
 
+#### Product Image Management Strategy
+**Automated workflow for product variant images** (configured October 2025):
+- All product images are stored in the root `attached_assets/` folder
+- The `copy-images.js` script automatically syncs images to `frontend/public/attached_assets/` at startup
+- This script is integrated into `start-dev.js` and runs before servers start
+- **For future product additions**: Simply place images in `attached_assets/` and reference them in `frontend/src/lib/products.ts` as `/attached_assets/filename.jpg`
+- Images are automatically copied to the public folder on every server restart
+- Example: iPhone Air variants all use this pattern with images for Space Black, Cloud White, Sky Blue, and Light Gold colors
+
 ### Replit Environment Setup (October 2025)
 **Status**: ✅ Fully configured and running successfully in Replit environment.
 

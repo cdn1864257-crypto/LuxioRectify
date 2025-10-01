@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { spawn } from 'child_process';
+import { spawn, execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -8,6 +8,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 console.log('🚀 Starting development servers...\n');
+
+// Copy images from attached_assets to frontend/public before starting
+console.log('📸 Syncing product images...');
+try {
+  execSync('node copy-images.js', { cwd: __dirname, stdio: 'inherit' });
+} catch (error) {
+  console.error('⚠️  Warning: Failed to copy images:', error.message);
+}
+console.log();
 
 // Start backend server on port 3001
 console.log('📦 Starting backend API on port 3001...');
