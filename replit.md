@@ -28,6 +28,17 @@ Product and order data are managed client-side using a static product database, 
 
 #### Recent Catalog Updates
 
+**October 2025 - Premium Product Image Updates (Oct 1):**
+- Updated product variant images for 6 premium smartphone families:
+  - **Xiaomi 15**: Updated Black, White, and Green variants with new official images
+  - **Oppo Find X7 Ultra**: Updated main product image
+  - **Vivo X100 Pro**: Updated main product image
+  - **Sony Xperia 1 VI**: Updated Black, Platinum Silver, and added Red variant with images
+  - **Samsung Galaxy A55 5G**: Updated all color variants (Iceblue, Navy, Lilac, Lemon) with new images
+  - **Google Pixel 8a**: Updated Obsidian, Porcelain, and Bay variants with new images
+- All new images stored in `attached_assets/` and automatically synced to `frontend/public/attached_assets/`
+- Images verified and copied successfully via the automated `copy-images.js` workflow
+
 **October 2025 - Official Brand Images & New Models:**
 - Downloaded official product images from brand media kits and distributor catalogs
 - Updated Samsung Galaxy A16 5G and M15 5G with official images
