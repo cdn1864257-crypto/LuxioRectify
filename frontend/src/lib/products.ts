@@ -62,9 +62,9 @@ export const products: Product[] = [
     features: ['Apple A19 Pro chip', '6.3" LTPO OLED 120Hz', '48MP triple camera', 'Aluminum frame', 'Free shipping'],
     hasVariants: true,
     variants: [
-      { color: 'Silver', capacity: '256GB', price: 1539, originalPrice: 1899 },
-      { color: 'Silver', capacity: '512GB', price: 1799, originalPrice: 2199 },
-      { color: 'Silver', capacity: '1TB', price: 2099, originalPrice: 2499 },
+      { color: 'Silver', capacity: '256GB', price: 1539, originalPrice: 1899, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg' },
+      { color: 'Silver', capacity: '512GB', price: 1799, originalPrice: 2199, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg' },
+      { color: 'Silver', capacity: '1TB', price: 2099, originalPrice: 2499, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg' },
       { color: 'Cosmic Orange', capacity: '256GB', price: 1502, originalPrice: 1899, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg' },
       { color: 'Cosmic Orange', capacity: '512GB', price: 1799, originalPrice: 2199, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg' },
       { color: 'Cosmic Orange', capacity: '1TB', price: 2099, originalPrice: 2499, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg' },
