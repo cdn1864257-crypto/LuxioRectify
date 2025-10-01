@@ -42,7 +42,23 @@ export default function Premium() {
   const [currentPage, setCurrentPage] = useState(1);
 
   // Product variant selections (phoneId -> {capacity, color})
-  const [variantSelections, setVariantSelections] = useState<Record<string, { capacity?: string; color?: string }>>({});
+  const [variantSelections, setVariantSelections] = useState<Record<string, { capacity?: string; color?: string }>>(() => {
+    // Initialize with first variant for each product that has variants
+    const initialSelections: Record<string, { capacity?: string; color?: string }> = {};
+    const smartphones = products.filter(p => p.category === 'smartphones');
+    
+    smartphones.forEach(phone => {
+      if (phone.hasVariants && phone.variants && phone.variants.length > 0) {
+        const firstVariant = phone.variants[0];
+        initialSelections[phone.id] = {
+          capacity: firstVariant.capacity,
+          color: firstVariant.color
+        };
+      }
+    });
+    
+    return initialSelections;
+  });
 
   // Get all smartphones
   const smartphones = products.filter(p => p.category === 'smartphones');
