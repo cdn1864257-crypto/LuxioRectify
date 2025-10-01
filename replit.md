@@ -26,7 +26,19 @@ The platform supports multiple languages (English, French, Polish, Spanish, Port
 ### Data Management
 Product and order data are managed client-side using a static product database, organized by categories. Local storage is used for cart persistence and order history. Extensive integration of real smartphone data from GSMArena, including variant matrices, accurate pricing, and professional images.
 
-#### Recent Catalog Updates (September 2025)
+#### Recent Catalog Updates
+
+**October 2025 - Official Brand Images & New Models:**
+- Downloaded official product images from brand media kits and distributor catalogs
+- Updated Samsung Galaxy A16 5G and M15 5G with official images
+- Fixed Samsung Galaxy A16 5G specs (corrected to Dimensity 6300 chipset for proper 5G support)
+- Added 2 new gaming flagship models:
+  - **Motorola Edge 60 Pro** ($599) - Snapdragon 8 Gen 3, Sony LYTIA 700C camera system
+  - **Lenovo Legion Phone Duel 2** ($549) - Dual cooling system, pop-up camera
+- Corrected all product image paths to use standardized `/attached_assets/stock_images/` format
+- Total catalog: **69 premium smartphone models** with official imagery
+
+**September 2025 - Initial Expansion:**
 Expanded smartphone catalog with 8 new models:
 - **Premium Segment**: Nothing Phone 3 ($799), Asus ROG Phone 8 Pro ($1,299), Sony Xperia 1 VI ($1,399)
 - **Mid-Range Segment**: Samsung Galaxy A55 5G ($350), Google Pixel 8a ($499), OnePlus 12R ($549), Realme GT 6 ($420), Motorola Edge 50 Pro ($377)
