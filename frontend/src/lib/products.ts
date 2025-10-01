@@ -43,10 +43,10 @@ export const products: Product[] = [
       { color: 'Cosmic Orange', capacity: '512GB', price: 2052, originalPrice: 2499, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg' },
       { color: 'Cosmic Orange', capacity: '1TB', price: 2333, originalPrice: 2799, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg' },
       { color: 'Cosmic Orange', capacity: '2TB', price: 2918, originalPrice: 3499, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg' },
-      { color: 'Deep Blue', capacity: '256GB', price: 1736, originalPrice: 2099, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense (2)_1759314214762.jpg' },
-      { color: 'Deep Blue', capacity: '512GB', price: 2052, originalPrice: 2499, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense (2)_1759314214762.jpg' },
-      { color: 'Deep Blue', capacity: '1TB', price: 2332, originalPrice: 2799, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense (2)_1759314214762.jpg' },
-      { color: 'Deep Blue', capacity: '2TB', price: 2863, originalPrice: 3499, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense (2)_1759314214762.jpg' },
+      { color: 'Deep Blue', capacity: '256GB', price: 1736, originalPrice: 2099, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg' },
+      { color: 'Deep Blue', capacity: '512GB', price: 2052, originalPrice: 2499, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg' },
+      { color: 'Deep Blue', capacity: '1TB', price: 2332, originalPrice: 2799, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg' },
+      { color: 'Deep Blue', capacity: '2TB', price: 2863, originalPrice: 3499, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg' },
     ]
   },
   // iPhone 17 Pro with variants (Pixmania data)
@@ -68,9 +68,9 @@ export const products: Product[] = [
       { color: 'Cosmic Orange', capacity: '256GB', price: 1502, originalPrice: 1899, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg' },
       { color: 'Cosmic Orange', capacity: '512GB', price: 1799, originalPrice: 2199, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg' },
       { color: 'Cosmic Orange', capacity: '1TB', price: 2099, originalPrice: 2499, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg' },
-      { color: 'Deep Blue', capacity: '256GB', price: 1469, originalPrice: 1899, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense (2)_1759314214762.jpg' },
-      { color: 'Deep Blue', capacity: '512GB', price: 1799, originalPrice: 2199, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense (2)_1759314214762.jpg' },
-      { color: 'Deep Blue', capacity: '1TB', price: 2099, originalPrice: 2499, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense (2)_1759314214762.jpg' },
+      { color: 'Deep Blue', capacity: '256GB', price: 1469, originalPrice: 1899, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg' },
+      { color: 'Deep Blue', capacity: '512GB', price: 1799, originalPrice: 2199, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg' },
+      { color: 'Deep Blue', capacity: '1TB', price: 2099, originalPrice: 2499, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg' },
     ]
   },
   // iPhone Air with variants
