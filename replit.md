@@ -42,6 +42,19 @@ The design focuses on a modern aesthetic, responsive behavior across devices (mo
 ### Technical Implementations
 The project is configured for the Replit environment with a unified `start-dev.js` script to run both backend (Express on port 3001) and frontend (Vite dev server on port 5000). Vite is configured with `host: '0.0.0.0'` and `allowedHosts: true` for Replit proxy support, and an API proxy forwards `/api` requests to the backend. Autoscale deployment is configured for static site hosting.
 
+### Replit Environment Setup (October 2025)
+**Development Workflow**: The "Start application" workflow runs `node start-dev.js` which:
+- Starts the Express backend API on port 3001 (localhost)
+- Starts the Vite frontend dev server on port 5000 (0.0.0.0)
+- Frontend proxies `/api` requests to the backend
+
+**Environment Variables Required**:
+- `MONGODB_URI` (optional): MongoDB connection string for user authentication features
+- `JWT_SECRET` (optional): Secret key for JWT token signing
+- `DATABASE_URL` (configured): PostgreSQL database (currently not used, Drizzle config present)
+
+**Note**: Authentication features (signup/login) require MongoDB configuration. The app works without authentication for browsing and shopping cart functionality.
+
 ## External Dependencies
 
 ### Authentication Services
