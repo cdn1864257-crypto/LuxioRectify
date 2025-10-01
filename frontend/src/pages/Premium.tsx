@@ -356,6 +356,19 @@ export default function Premium() {
                   const availableCapacities = getAvailableCapacities(phone, selection.color);
                   const availableColors = getAvailableColors(phone, selection.capacity);
                   const currentPrice = getCurrentPrice(phone);
+                  
+                  // Get current image based on selected color
+                  const getCurrentImage = () => {
+                    if (selection.color && phone.variants) {
+                      const variantWithImage = phone.variants.find(v => v.color === selection.color && v.image);
+                      if (variantWithImage?.image) {
+                        return variantWithImage.image;
+                      }
+                    }
+                    return phone.image;
+                  };
+                  
+                  const currentImage = getCurrentImage();
 
                   return (
                     <Card key={phone.id} className="group hover:shadow-xl transition-all duration-300 flex flex-col" data-testid={`card-product-${phone.id}`}>
@@ -363,7 +376,7 @@ export default function Premium() {
                         {/* Product Image */}
                         <div className="relative aspect-square mb-4 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800">
                           <img
-                            src={phone.image}
+                            src={currentImage}
                             alt={phone.name}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                             data-testid={`img-product-${phone.id}`}

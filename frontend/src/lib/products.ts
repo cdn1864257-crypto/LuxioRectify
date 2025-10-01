@@ -3,6 +3,7 @@ export interface ProductVariant {
   capacity?: string;
   price: number;
   originalPrice: number;
+  image?: string;
 }
 
 export interface Product {

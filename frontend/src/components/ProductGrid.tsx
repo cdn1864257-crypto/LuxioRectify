@@ -26,6 +26,8 @@ function ProductCard({ product }: { product: Product }) {
   const currentDiscount = currentOriginalPrice && currentPrice 
     ? Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100)
     : product.discount;
+  
+  const currentImage = selectedVariant?.image || product.image;
 
   const handleAddToCart = () => {
     const productToAdd = selectedVariant
@@ -55,7 +57,7 @@ function ProductCard({ product }: { product: Product }) {
       data-testid={`product-card-${product.id}`}
     >
       <LazyImage 
-        src={product.image}
+        src={currentImage}
         alt={product.name}
         className="w-full h-48 object-cover"
         data-testid={`product-image-${product.id}`}
