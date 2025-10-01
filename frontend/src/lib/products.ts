@@ -95,9 +95,9 @@ export const products: Product[] = [
       { color: 'Light Gold', capacity: '256GB', price: 999, originalPrice: 1199 },
       { color: 'Light Gold', capacity: '512GB', price: 1199, originalPrice: 1399 },
       { color: 'Light Gold', capacity: '1TB', price: 1499, originalPrice: 1699 },
-      { color: 'Sky Blue', capacity: '256GB', price: 999, originalPrice: 1199 },
-      { color: 'Sky Blue', capacity: '512GB', price: 1199, originalPrice: 1399 },
-      { color: 'Sky Blue', capacity: '1TB', price: 1499, originalPrice: 1699 },
+      { color: 'Sky Blue', capacity: '256GB', price: 999, originalPrice: 1199, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Bleu-ciel_1759318428193.jpg' },
+      { color: 'Sky Blue', capacity: '512GB', price: 1199, originalPrice: 1399, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Bleu-ciel_1759318428193.jpg' },
+      { color: 'Sky Blue', capacity: '1TB', price: 1499, originalPrice: 1699, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Bleu-ciel_1759318428193.jpg' },
     ]
   },
   // iPhone 17 with variants (Pixmania data)
