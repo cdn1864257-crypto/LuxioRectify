@@ -54,23 +54,24 @@ The project is configured for the Replit environment with a unified `start-dev.j
 ### Replit Environment Setup (October 2025)
 **Status**: ✅ Fully configured and running successfully in Replit environment.
 
-**GitHub Import Completed**: October 1, 2025
-- ✅ Fresh clone successfully configured for Replit
-- ✅ All dependencies installed and verified (root + frontend: 418 packages)
-- ✅ Workflow configured and running (`node start-dev.js`)
-- ✅ Build process tested and working (592KB JS, 97KB CSS)
-- ✅ Production deployment tested with `serve` package
-- ✅ Application fully functional
+**Latest GitHub Import**: October 1, 2025 (Fresh Clone)
+- ✅ Fresh clone successfully configured for Replit environment
+- ✅ Frontend dependencies installed (418 packages in frontend/)
+- ✅ Workflow configured with webview output on port 5000
+- ✅ Build process tested and working (600KB JS, 97KB CSS)
+- ✅ Deployment configuration verified (autoscale)
+- ✅ Application fully functional and tested
 
 **Development Workflow**: The "Start application" workflow runs `node start-dev.js` which:
-- Starts the Express backend API on port 3001 (localhost)
-- Starts the Vite frontend dev server on port 5000 (0.0.0.0)
-- Frontend proxies `/api` requests to the backend
+- Copies product images from `attached_assets/` to `frontend/public/attached_assets/`
+- Starts the Express backend API on port 3001 (localhost only)
+- Starts the Vite frontend dev server on port 5000 (0.0.0.0 with allowedHosts: true)
+- Frontend configured to proxy `/api` requests to the backend
 - Both servers start automatically with proper logging
 
-**Frontend Dependencies**: Dependencies installed in both directories:
-- Root: `npm install` ✅ Completed (packages already installed)
-- Frontend: `cd frontend && npm install` ✅ Completed (418 packages, freshly installed)
+**Dependencies Status**:
+- Root: npm packages already installed from original setup
+- Frontend: `npm install` completed successfully (418 packages freshly installed)
 
 **Environment Variables Required**:
 - `MONGODB_URI` (optional): MongoDB connection string for user authentication features
@@ -82,7 +83,7 @@ The project is configured for the Replit environment with a unified `start-dev.j
 **Deployment Configuration**: ✅ Autoscale deployment configured with:
 - Build: `npm run build` (builds frontend to `dist` folder)
 - Run: `npm run start` (serves static files from `dist` on port 5000)
-- Build verified successful: 583KB JS bundle, 97KB CSS, assets included
+- Build verified successful: 600.45KB JS bundle, 97.22KB CSS, assets included
 
 **Verified Working Features**:
 - ✅ Frontend loads correctly with hero section and navigation
