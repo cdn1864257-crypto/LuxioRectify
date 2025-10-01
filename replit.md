@@ -48,12 +48,20 @@ The project is configured for the Replit environment with a unified `start-dev.j
 - Starts the Vite frontend dev server on port 5000 (0.0.0.0)
 - Frontend proxies `/api` requests to the backend
 
+**Frontend Dependencies**: Dependencies must be installed in both root and frontend directories:
+- Root: `npm install` (already done via Replit)
+- Frontend: `cd frontend && npm install` (completed during setup)
+
 **Environment Variables Required**:
 - `MONGODB_URI` (optional): MongoDB connection string for user authentication features
 - `JWT_SECRET` (optional): Secret key for JWT token signing
 - `DATABASE_URL` (configured): PostgreSQL database (currently not used, Drizzle config present)
 
 **Note**: Authentication features (signup/login) require MongoDB configuration. The app works without authentication for browsing and shopping cart functionality.
+
+**Deployment Configuration**: Autoscale deployment configured with:
+- Build: `npm run build` (builds frontend to `dist` folder)
+- Run: `npm run start` (serves static files from `dist` on port 5000)
 
 ## External Dependencies
 
