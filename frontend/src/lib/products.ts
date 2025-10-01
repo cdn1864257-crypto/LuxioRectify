@@ -86,9 +86,9 @@ export const products: Product[] = [
     features: ['Apple A19 Pro chip', '6.5" LTPO OLED 120Hz', '48MP camera', '5.6mm thickness', 'Free shipping'],
     hasVariants: true,
     variants: [
-      { color: 'Space Black', capacity: '256GB', price: 999, originalPrice: 1199 },
-      { color: 'Space Black', capacity: '512GB', price: 1199, originalPrice: 1399 },
-      { color: 'Space Black', capacity: '1TB', price: 1499, originalPrice: 1699 },
+      { color: 'Space Black', capacity: '256GB', price: 999, originalPrice: 1199, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Noir-sideral_1759322561021.jpg' },
+      { color: 'Space Black', capacity: '512GB', price: 1199, originalPrice: 1399, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Noir-sideral_1759322561021.jpg' },
+      { color: 'Space Black', capacity: '1TB', price: 1499, originalPrice: 1699, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Noir-sideral_1759322561021.jpg' },
       { color: 'Cloud White', capacity: '256GB', price: 999, originalPrice: 1199, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Blanc-nuage_1759322404982.jpg' },
       { color: 'Cloud White', capacity: '512GB', price: 1199, originalPrice: 1399, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Blanc-nuage_1759322404982.jpg' },
       { color: 'Cloud White', capacity: '1TB', price: 1499, originalPrice: 1699, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Blanc-nuage_1759322404982.jpg' },
