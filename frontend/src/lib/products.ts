@@ -1338,6 +1338,72 @@ export const products: Product[] = [
       { color: 'Flare', capacity: '512GB', price: 629, originalPrice: 699 },
     ]
   },
+  // Xiaomi 14T with variants
+  {
+    id: 'xiaomi-14t',
+    name: 'Xiaomi 14T',
+    price: 372,
+    originalPrice: 537,
+    discount: 31,
+    image: '/assets/stock_images/xiaomi_15_standard_s_12e3b53c.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - 6.67" AMOLED Display',
+    features: ['Dimensity 8300 Ultra', '50MP Leica triple camera', '5000mAh + 67W charging', 'IP68', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Titan Black', capacity: '256GB', price: 372, originalPrice: 537 },
+      { color: 'Titan Black', capacity: '512GB', price: 445, originalPrice: 645 },
+      { color: 'Titan Blue', capacity: '256GB', price: 372, originalPrice: 537 },
+      { color: 'Titan Blue', capacity: '512GB', price: 445, originalPrice: 645 },
+      { color: 'Titan Gray', capacity: '256GB', price: 372, originalPrice: 537 },
+      { color: 'Titan Gray', capacity: '512GB', price: 445, originalPrice: 645 },
+    ]
+  },
+  // Xiaomi 14T Pro with variants
+  {
+    id: 'xiaomi-14t-pro',
+    name: 'Xiaomi 14T Pro',
+    price: 496,
+    originalPrice: 661,
+    discount: 25,
+    image: '/assets/stock_images/premium_smartphones__d234c20f.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - 6.67" AMOLED 144Hz',
+    features: ['Dimensity 9300+', '50MP Leica triple camera', '5000mAh + 120W charging', 'IP68', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Titan Black', capacity: '256GB', price: 496, originalPrice: 661 },
+      { color: 'Titan Black', capacity: '512GB', price: 661, originalPrice: 744 },
+      { color: 'Titan Black', capacity: '1TB', price: 744, originalPrice: 826 },
+      { color: 'Titan Blue', capacity: '256GB', price: 496, originalPrice: 661 },
+      { color: 'Titan Blue', capacity: '512GB', price: 661, originalPrice: 744 },
+      { color: 'Titan Blue', capacity: '1TB', price: 744, originalPrice: 826 },
+      { color: 'Titan Gray', capacity: '256GB', price: 496, originalPrice: 661 },
+      { color: 'Titan Gray', capacity: '512GB', price: 661, originalPrice: 744 },
+      { color: 'Titan Gray', capacity: '1TB', price: 744, originalPrice: 826 },
+    ]
+  },
+  // Xiaomi 14 with variants
+  {
+    id: 'xiaomi-14',
+    name: 'Xiaomi 14',
+    price: 744,
+    originalPrice: 909,
+    discount: 18,
+    image: '/assets/stock_images/premium_smartphones__b651af0a.jpg',
+    category: 'smartphones',
+    description: 'From 256GB - 6.36" LTPO AMOLED',
+    features: ['Snapdragon 8 Gen 3', 'Triple 50MP Leica', '4610mAh + 90W charging', 'IP68', 'Free shipping'],
+    hasVariants: true,
+    variants: [
+      { color: 'Black', capacity: '256GB', price: 744, originalPrice: 909 },
+      { color: 'Black', capacity: '512GB', price: 827, originalPrice: 1009 },
+      { color: 'White', capacity: '256GB', price: 744, originalPrice: 909 },
+      { color: 'White', capacity: '512GB', price: 827, originalPrice: 1009 },
+      { color: 'Jade Green', capacity: '256GB', price: 744, originalPrice: 909 },
+      { color: 'Jade Green', capacity: '512GB', price: 827, originalPrice: 1009 },
+    ]
+  },
 
   // === SMARTWATCHES (16 products) ===
   {
