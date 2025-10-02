@@ -244,33 +244,6 @@ export const products: Product[] = [
       { color: 'Blue Shadow', capacity: '512GB', price: 1049, originalPrice: 1249, image: '/attached_assets/Smartphone-Samsung-Galaxy-Z-Flip7-6-9-5G-Nano-SIM-256-Go-Bleu-nuit_1759328351454.jpg' },
     ]
   },
-  // Google Pixel 10 Pro XL with variants
-  {
-    id: 'google-pixel-10-pro-xl',
-    name: 'Google Pixel 10 Pro XL',
-    price: 989,
-    originalPrice: 1099,
-    discount: 10,
-    image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Jade_1759420333911.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.8" Super Actua Display',
-    features: ['Google Tensor G5', '6.8" LTPO OLED 120Hz', '50MP + 48MP cameras', '7 years updates', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Jade', capacity: '256GB', price: 989, originalPrice: 1099, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Jade_1759420333911.jpg' },
-      { color: 'Jade', capacity: '512GB', price: 1169, originalPrice: 1299, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Jade_1759420333911.jpg' },
-      { color: 'Jade', capacity: '1TB', price: 1439, originalPrice: 1599, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Jade_1759420333911.jpg' },
-      { color: 'Porcelain', capacity: '256GB', price: 989, originalPrice: 1099, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Porcelaine_1759420349227.jpg' },
-      { color: 'Porcelain', capacity: '512GB', price: 1169, originalPrice: 1299, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Porcelaine_1759420349227.jpg' },
-      { color: 'Porcelain', capacity: '1TB', price: 1439, originalPrice: 1599, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Porcelaine_1759420349227.jpg' },
-      { color: 'Volcanic Black', capacity: '256GB', price: 989, originalPrice: 1099, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Noir-Volcanique_1759420363687.jpg' },
-      { color: 'Volcanic Black', capacity: '512GB', price: 1169, originalPrice: 1299, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Noir-Volcanique_1759420363687.jpg' },
-      { color: 'Volcanic Black', capacity: '1TB', price: 1439, originalPrice: 1599, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Noir-Volcanique_1759420363687.jpg' },
-      { color: 'Quartz Grey', capacity: '256GB', price: 989, originalPrice: 1099, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Quartz-Gris_1759420378392.jpg' },
-      { color: 'Quartz Grey', capacity: '512GB', price: 1169, originalPrice: 1299, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Quartz-Gris_1759420378392.jpg' },
-      { color: 'Quartz Grey', capacity: '1TB', price: 1439, originalPrice: 1599, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Quartz-Gris_1759420378392.jpg' },
-    ]
-  },
   // OnePlus 13 with variants
   {
     id: 'oneplus-13',
