@@ -83,9 +83,10 @@ The project is configured for the Replit environment with a unified `start-dev.j
 - ✅ Workflow configured with webview output on port 5000
 - ✅ Vite dev server properly configured for Replit proxy (host: 0.0.0.0, allowedHosts: true)
 - ✅ Backend API running on port 3001 (localhost)
-- ✅ Deployment configuration verified (autoscale deployment ready)
+- ✅ Deployment configuration set up (autoscale deployment ready)
 - ✅ Application fully functional and tested with screenshot verification
 - ✅ Import completed successfully - Ready for use!
+- ⚠️ MongoDB authentication not configured (optional for basic browsing)
 
 **Development Workflow**: The "Start application" workflow runs `node start-dev.js` which:
 - Copies product images from `attached_assets/` to `frontend/public/attached_assets/`
