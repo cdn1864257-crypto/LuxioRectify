@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { Link, useLocation } from 'wouter';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CartSidebar } from '@/components/CartSidebar';
@@ -40,6 +41,7 @@ interface TicketCode {
 export default function Payment() {
   const { user } = useAuth();
   const { cart, total, clearCart } = useCart();
+  const { t } = useLanguage();
   const [, navigate] = useLocation();
   const [cartOpen, setCartOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -125,24 +127,24 @@ export default function Payment() {
   };
 
   const copyBankDetails = async () => {
-    const bankInfo = `Bénéficiaire: Matt Luxio
+    const bankInfo = `${t.beneficiary}: Matt Luxio
 IBAN: ES61 1563 2626 3832 6870 7364
 BIC: NTSBESM1XXX
-Référence: ${orderReference}
-Montant: ${orderTotal.toFixed(2)} €`;
+${t.referenceRequired}: ${orderReference}
+${t.amount}: ${orderTotal.toFixed(2)} €`;
 
     try {
       await navigator.clipboard.writeText(bankInfo);
       setCopied(true);
       toast({
-        title: "Copié !",
-        description: "Les informations bancaires ont été copiées dans le presse-papier",
+        title: t.copied,
+        description: t.copyBankDetails,
       });
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       toast({
-        title: "Erreur",
-        description: "Impossible de copier les informations",
+        title: t.error,
+        description: t.error,
         variant: "destructive"
       });
     }
@@ -154,8 +156,8 @@ Montant: ${orderTotal.toFixed(2)} €`;
     
     if (validTickets.length === 0) {
       toast({
-        title: "Erreur",
-        description: "Veuillez remplir au moins un ticket avec un code et un montant",
+        title: t.error,
+        description: t.ticketPaymentInstructions,
         variant: "destructive"
       });
       return;
@@ -163,8 +165,8 @@ Montant: ${orderTotal.toFixed(2)} €`;
 
     if (!isTicketAmountValid) {
       toast({
-        title: "Montant insuffisant",
-        description: `Le total des tickets (${ticketsTotal.toFixed(2)} €) est inférieur au montant de la commande (${orderTotal.toFixed(2)} €)`,
+        title: t.insufficientAmount,
+        description: `${t.ticketsTotal} ${ticketsTotal.toFixed(2)} € < ${t.requiredAmount} ${orderTotal.toFixed(2)} €`,
         variant: "destructive"
       });
       return;
@@ -183,7 +185,7 @@ Montant: ${orderTotal.toFixed(2)} €`;
         customerPhone: shippingAddress.phone,
         productId: cart[0].id,
         productName: cart.map(item => `${item.name} x${item.quantity}`).join(', '),
-        productModel: cart.length > 1 ? `${cart.length} articles` : '',
+        productModel: cart.length > 1 ? `${cart.length} ${cart.length > 1 ? t.items : t.item}` : '',
         productPrice: total,
         totalAmount: orderTotal,
         codeType: validTickets[0].type,
@@ -201,17 +203,17 @@ Montant: ${orderTotal.toFixed(2)} €`;
       if (response.ok) {
         clearCart();
         toast({
-          title: "Commande envoyée !",
-          description: `Votre commande #${result.orderId} a été envoyée. Vous recevrez un email de confirmation.`,
+          title: t.orderSent,
+          description: `${t.orderNumber} #${result.orderId}. ${t.orderConfirmationEmail}`,
         });
         setTimeout(() => navigate('/dashboard'), 2000);
       } else {
-        throw new Error(result.error || 'Erreur lors de l\'envoi');
+        throw new Error(result.error || t.error);
       }
     } catch (error) {
       toast({
-        title: "Erreur",
-        description: error instanceof Error ? error.message : "Une erreur est survenue",
+        title: t.error,
+        description: error instanceof Error ? error.message : t.error,
         variant: "destructive"
       });
     } finally {
@@ -226,8 +228,8 @@ Montant: ${orderTotal.toFixed(2)} €`;
     setTimeout(() => {
       clearCart();
       toast({
-        title: "Commande enregistrée",
-        description: `Commande #${orderReference} - Effectuez le virement avec la référence indiquée`,
+        title: t.orderRegistered,
+        description: `${t.orderNumber} #${orderReference} - ${t.completeTransferWithReference}`,
       });
       setProcessing(false);
     }, 1500);
@@ -267,8 +269,8 @@ Montant: ${orderTotal.toFixed(2)} €`;
       
       // Afficher la notification avant la redirection
       toast({
-        title: "Redirection vers MaxelPay",
-        description: "Vous allez être redirigé vers la plateforme de paiement sécurisée",
+        title: "MaxelPay",
+        description: t.redirectingToMaxelPayDescription,
       });
       
       // Attendre un peu pour que l'utilisateur voie la notification
@@ -280,8 +282,8 @@ Montant: ${orderTotal.toFixed(2)} €`;
       
     } catch (error) {
       toast({
-        title: "Erreur",
-        description: "Une erreur est survenue lors de la redirection vers MaxelPay",
+        title: t.error,
+        description: t.error,
         variant: "destructive"
       });
       setProcessing(false);
@@ -312,14 +314,14 @@ Montant: ${orderTotal.toFixed(2)} €`;
             <Link href="/cart">
               <Button variant="ghost" className="mb-4" data-testid="button-back-to-cart">
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Retour au panier
+                {t.backToCart}
               </Button>
             </Link>
             <h1 className="text-3xl font-bold text-foreground mb-2" data-testid="text-payment-title">
-              Paiement sécurisé
+              {t.securedPayment}
             </h1>
             <p className="text-muted-foreground">
-              Choisissez votre méthode de paiement préférée
+              {t.choosePaymentMethod}
             </p>
           </div>
 
@@ -329,10 +331,10 @@ Montant: ${orderTotal.toFixed(2)} €`;
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Lock className="h-5 w-5 text-primary" />
-                    Méthode de paiement
+                    {t.paymentMethod}
                   </CardTitle>
                   <CardDescription>
-                    Toutes les transactions sont sécurisées et cryptées
+                    {t.allTransactionsSecured}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -353,9 +355,9 @@ Montant: ${orderTotal.toFixed(2)} €`;
                           <Label htmlFor="tickets" className="flex-1 flex items-center justify-between cursor-pointer">
                             <div className="flex items-center gap-3">
                               <Ticket className="h-5 w-5 text-primary" />
-                              <span className="font-medium">Tickets PCS / TransCash</span>
+                              <span className="font-medium">{t.ticketsPCS}</span>
                             </div>
-                            <Badge variant="secondary">Immédiat</Badge>
+                            <Badge variant="secondary">{t.immediate}</Badge>
                           </Label>
                         </div>
 
@@ -365,17 +367,17 @@ Montant: ${orderTotal.toFixed(2)} €`;
                             <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-4">
                               <h4 className="font-semibold text-sm mb-3 flex items-center gap-2">
                                 <AlertCircle className="h-4 w-4" />
-                                Instructions pour le paiement par tickets
+                                {t.ticketInstructionsTitle}
                               </h4>
                               <ul className="text-xs space-y-1.5 text-muted-foreground mb-3">
-                                <li>• <strong>Sélectionnez le type</strong> : PCS ou TransCash</li>
-                                <li>• <strong>Code du ticket</strong> : Saisissez le code à 16 chiffres (ex: 1234 5678 9012 3456)</li>
-                                <li>• <strong>Montant disponible</strong> : Indiquez le solde exact de chaque ticket en euros</li>
-                                <li>• <strong>Multi-tickets</strong> : Ajoutez autant de tickets que nécessaire pour atteindre le montant requis</li>
-                                <li>• <strong>Validation</strong> : Le bouton "Payer" s'active automatiquement quand le total ≥ montant de la commande</li>
+                                <li>• {t.ticketInstructionSelectType}</li>
+                                <li>• {t.ticketInstructionCode}</li>
+                                <li>• {t.ticketInstructionAmount}</li>
+                                <li>• {t.ticketInstructionMulti}</li>
+                                <li>• {t.ticketInstructionValidation}</li>
                               </ul>
                               <div className="mt-3 pt-3 border-t border-blue-200 dark:border-blue-800">
-                                <p className="text-xs mb-2 font-medium">Vous n'avez pas de tickets ?</p>
+                                <p className="text-xs mb-2 font-medium">{t.dontHaveTickets}</p>
                                 <a 
                                   href="https://www.recharge.com" 
                                   target="_blank" 
@@ -383,14 +385,14 @@ Montant: ${orderTotal.toFixed(2)} €`;
                                   className="inline-flex items-center gap-1 text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium"
                                   data-testid="link-recharge"
                                 >
-                                  Acheter des tickets PCS/TransCash sur Recharge.com →
+                                  {t.buyTickets} →
                                 </a>
                               </div>
                             </div>
                             {tickets.map((ticket, index) => (
                               <div key={ticket.id} className="space-y-2 p-3 bg-muted/50 rounded-lg">
                                 <div className="flex items-center justify-between mb-2">
-                                  <span className="text-sm font-medium">Ticket {index + 1}</span>
+                                  <span className="text-sm font-medium">{t.ticket} {index + 1}</span>
                                   {tickets.length > 1 && (
                                     <Button
                                       type="button"
@@ -417,7 +419,7 @@ Montant: ${orderTotal.toFixed(2)} €`;
                                     </SelectContent>
                                   </Select>
                                   <Input
-                                    placeholder="Code du ticket"
+                                    placeholder={t.ticketCodePlaceholder}
                                     value={ticket.code}
                                     onChange={(e) => updateTicket(ticket.id, 'code', e.target.value)}
                                     className="sm:col-span-1"
@@ -425,7 +427,7 @@ Montant: ${orderTotal.toFixed(2)} €`;
                                   />
                                   <Input
                                     type="number"
-                                    placeholder="Montant (€)"
+                                    placeholder={t.ticketAmountPlaceholder}
                                     value={ticket.amount}
                                     onChange={(e) => updateTicket(ticket.id, 'amount', e.target.value)}
                                     min="0"
@@ -444,18 +446,18 @@ Montant: ${orderTotal.toFixed(2)} €`;
                               data-testid="button-add-ticket"
                             >
                               <Plus className="h-4 w-4 mr-2" />
-                              Ajouter un ticket
+                              {t.addTicket}
                             </Button>
 
                             <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
                               <div className="flex items-center justify-between mb-2">
-                                <span className="text-sm font-medium">Total des tickets :</span>
+                                <span className="text-sm font-medium">{t.ticketsTotal}</span>
                                 <span className="text-lg font-bold" data-testid="text-tickets-total">
                                   {ticketsTotal.toFixed(2)} €
                                 </span>
                               </div>
                               <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium">Montant requis :</span>
+                                <span className="text-sm font-medium">{t.requiredAmount}</span>
                                 <span className="text-lg font-bold text-primary">
                                   {orderTotal.toFixed(2)} €
                                 </span>
@@ -463,13 +465,13 @@ Montant: ${orderTotal.toFixed(2)} €`;
                               {!isTicketAmountValid && ticketsTotal > 0 && (
                                 <div className="mt-3 flex items-center gap-2 text-sm text-destructive">
                                   <AlertCircle className="h-4 w-4" />
-                                  <span>Montant insuffisant ({(orderTotal - ticketsTotal).toFixed(2)} € manquant)</span>
+                                  <span>{t.insufficientAmount} ({(orderTotal - ticketsTotal).toFixed(2)} € {t.missingAmount})</span>
                                 </div>
                               )}
                               {isTicketAmountValid && (
                                 <div className="mt-3 flex items-center gap-2 text-sm text-green-600">
                                   <CheckCircle2 className="h-4 w-4" />
-                                  <span>Montant validé !</span>
+                                  <span>{t.amountValidated}</span>
                                 </div>
                               )}
                             </div>
@@ -492,9 +494,9 @@ Montant: ${orderTotal.toFixed(2)} €`;
                           <Label htmlFor="bank" className="flex-1 flex items-center justify-between cursor-pointer">
                             <div className="flex items-center gap-3">
                               <Building2 className="h-5 w-5 text-primary" />
-                              <span className="font-medium">Virement bancaire</span>
+                              <span className="font-medium">{t.bankTransfer}</span>
                             </div>
-                            <Badge variant="secondary">2-3 jours</Badge>
+                            <Badge variant="secondary">{t.days23}</Badge>
                           </Label>
                         </div>
 
@@ -504,19 +506,19 @@ Montant: ${orderTotal.toFixed(2)} €`;
                             <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-4">
                               <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
                                 <AlertCircle className="h-4 w-4" />
-                                Instructions pour le virement bancaire
+                                {t.bankTransferInstructionsTitle}
                               </h4>
                               <ul className="text-xs space-y-1 text-muted-foreground">
-                                <li>• Effectuez un virement vers le compte indiqué ci-dessous</li>
-                                <li>• ⚠️ IMPORTANT : Indiquez OBLIGATOIREMENT la référence de commande</li>
-                                <li>• Le montant doit correspondre exactement à celui indiqué</li>
-                                <li>• Votre commande sera traitée après réception du virement (2-3 jours)</li>
-                                <li>• Vous recevrez un email de confirmation après validation</li>
+                                <li>• {t.bankTransferInstruction1}</li>
+                                <li>• {t.bankTransferInstruction2}</li>
+                                <li>• {t.bankTransferInstruction3}</li>
+                                <li>• {t.bankTransferInstruction4}</li>
+                                <li>• {t.bankTransferInstruction5}</li>
                               </ul>
                             </div>
                             <div className="bg-muted/50 rounded-lg p-4 space-y-3">
                               <div>
-                                <Label className="text-xs text-muted-foreground">Bénéficiaire</Label>
+                                <Label className="text-xs text-muted-foreground">{t.beneficiary}</Label>
                                 <p className="font-semibold mt-1">Matt Luxio</p>
                               </div>
                               <div>
@@ -528,13 +530,13 @@ Montant: ${orderTotal.toFixed(2)} €`;
                                 <p className="font-mono text-sm font-semibold mt-1">NTSBESM1XXX</p>
                               </div>
                               <div>
-                                <Label className="text-xs text-muted-foreground">Référence (OBLIGATOIRE)</Label>
+                                <Label className="text-xs text-muted-foreground">{t.referenceRequired}</Label>
                                 <p className="font-mono text-lg font-bold text-primary mt-1" data-testid="text-order-reference">
                                   {orderReference}
                                 </p>
                               </div>
                               <div>
-                                <Label className="text-xs text-muted-foreground">Montant</Label>
+                                <Label className="text-xs text-muted-foreground">{t.amount}</Label>
                                 <p className="text-2xl font-bold mt-1">{orderTotal.toFixed(2)} €</p>
                               </div>
                               <Button
@@ -547,18 +549,18 @@ Montant: ${orderTotal.toFixed(2)} €`;
                                 {copied ? (
                                   <>
                                     <Check className="h-4 w-4 mr-2 text-green-600" />
-                                    Copié !
+                                    {t.copied}
                                   </>
                                 ) : (
                                   <>
                                     <Copy className="h-4 w-4 mr-2" />
-                                    Copier toutes les informations
+                                    {t.copyBankDetails}
                                   </>
                                 )}
                               </Button>
                               <div className="mt-3 p-3 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg">
                                 <p className="text-xs text-amber-900 dark:text-amber-100">
-                                  ⚠️ Important : N'oubliez pas d'indiquer la référence <strong>{orderReference}</strong> lors de votre virement
+                                  ⚠️ {t.referenceRequired}: <strong>{orderReference}</strong>
                                 </p>
                               </div>
                             </div>
@@ -581,9 +583,9 @@ Montant: ${orderTotal.toFixed(2)} €`;
                           <Label htmlFor="maxelpay" className="flex-1 flex items-center justify-between cursor-pointer">
                             <div className="flex items-center gap-3">
                               <Wallet className="h-5 w-5 text-primary" />
-                              <span className="font-medium">MaxelPay (Crypto & Cartes)</span>
+                              <span className="font-medium">MaxelPay</span>
                             </div>
-                            <Badge>Recommandé</Badge>
+                            <Badge>{t.recommended}</Badge>
                           </Label>
                         </div>
                         
@@ -593,18 +595,18 @@ Montant: ${orderTotal.toFixed(2)} €`;
                             <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
                               <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
                                 <AlertCircle className="h-4 w-4" />
-                                Instructions pour MaxelPay
+                                {t.maxelPayInstructionsTitle}
                               </h4>
                               <ul className="text-xs space-y-1 text-muted-foreground mb-3">
-                                <li>• Paiement instantané et sécurisé par cryptomonnaies ou carte bancaire</li>
-                                <li>• Vous serez redirigé vers la plateforme MaxelPay</li>
-                                <li>• Accepte : Bitcoin, Ethereum, USDT, Visa, Mastercard</li>
-                                <li>• Votre commande sera confirmée immédiatement après paiement</li>
-                                <li>• Transaction sécurisée avec cryptage SSL 256 bits</li>
+                                <li>• {t.maxelPayInstruction1}</li>
+                                <li>• {t.maxelPayInstruction2}</li>
+                                <li>• {t.maxelPayInstruction3}</li>
+                                <li>• {t.maxelPayInstruction4}</li>
+                                <li>• {t.maxelPayInstruction5}</li>
                               </ul>
                               <div className="flex items-center gap-2 text-xs text-green-600 dark:text-green-400">
                                 <CheckCircle2 className="h-4 w-4" />
-                                <span className="font-medium">Méthode recommandée pour un traitement rapide</span>
+                                <span className="font-medium">{t.maxelPayRecommendation}</span>
                               </div>
                             </div>
                           </div>
@@ -616,9 +618,9 @@ Montant: ${orderTotal.toFixed(2)} €`;
                   <div className="mt-6 p-4 bg-muted/50 rounded-lg flex items-start gap-3">
                     <Shield className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                     <div>
-                      <p className="text-sm font-medium">Paiement 100% sécurisé</p>
+                      <p className="text-sm font-medium">{t.payment100Secure}</p>
                       <p className="text-sm text-muted-foreground mt-1">
-                        Vos informations de paiement sont cryptées et sécurisées. Nous ne stockons jamais vos données bancaires.
+                        {t.paymentInfoEncrypted}
                       </p>
                     </div>
                   </div>
@@ -628,7 +630,7 @@ Montant: ${orderTotal.toFixed(2)} €`;
               <Card>
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                    <CardTitle>Adresse de livraison</CardTitle>
+                    <CardTitle>{t.shippingAddress}</CardTitle>
                     {!isEditingAddress && (
                       <Button 
                         variant="outline" 
@@ -636,7 +638,7 @@ Montant: ${orderTotal.toFixed(2)} €`;
                         onClick={() => setIsEditingAddress(true)}
                         data-testid="button-edit-address"
                       >
-                        Modifier
+                        {t.editAddress}
                       </Button>
                     )}
                   </div>
@@ -645,54 +647,54 @@ Montant: ${orderTotal.toFixed(2)} €`;
                   {isEditingAddress ? (
                     <div className="space-y-4">
                       <div>
-                        <Label htmlFor="fullName">Nom complet</Label>
+                        <Label htmlFor="fullName">{t.fullName}</Label>
                         <Input
                           id="fullName"
                           value={shippingAddress.fullName}
                           onChange={(e) => setShippingAddress({ ...shippingAddress, fullName: e.target.value })}
-                          placeholder="Prénom Nom"
+                          placeholder={t.fullName}
                           data-testid="input-shipping-fullname"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="address">Adresse complète</Label>
+                        <Label htmlFor="address">{t.completeAddress}</Label>
                         <Input
                           id="address"
                           value={shippingAddress.address}
                           onChange={(e) => setShippingAddress({ ...shippingAddress, address: e.target.value })}
-                          placeholder="Numéro et nom de rue"
+                          placeholder={t.address}
                           data-testid="input-shipping-address"
                         />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <Label htmlFor="city">Ville</Label>
+                          <Label htmlFor="city">{t.city}</Label>
                           <Input
                             id="city"
                             value={shippingAddress.city}
                             onChange={(e) => setShippingAddress({ ...shippingAddress, city: e.target.value })}
-                            placeholder="Ville"
+                            placeholder={t.city}
                             data-testid="input-shipping-city"
                           />
                         </div>
                         <div>
-                          <Label htmlFor="country">Pays</Label>
+                          <Label htmlFor="country">{t.country}</Label>
                           <Input
                             id="country"
                             value={shippingAddress.country}
                             onChange={(e) => setShippingAddress({ ...shippingAddress, country: e.target.value })}
-                            placeholder="Pays"
+                            placeholder={t.country}
                             data-testid="input-shipping-country"
                           />
                         </div>
                       </div>
                       <div>
-                        <Label htmlFor="phone">Téléphone</Label>
+                        <Label htmlFor="phone">{t.phone}</Label>
                         <Input
                           id="phone"
                           value={shippingAddress.phone}
                           onChange={(e) => setShippingAddress({ ...shippingAddress, phone: e.target.value })}
-                          placeholder="+33 6 12 34 56 78"
+                          placeholder={t.phone}
                           data-testid="input-shipping-phone"
                         />
                       </div>
@@ -703,7 +705,7 @@ Montant: ${orderTotal.toFixed(2)} €`;
                           className="flex-1"
                           data-testid="button-save-address"
                         >
-                          Enregistrer
+                          {t.saveAddress}
                         </Button>
                         <Button 
                           variant="outline" 
@@ -720,7 +722,7 @@ Montant: ${orderTotal.toFixed(2)} €`;
                           className="flex-1"
                           data-testid="button-cancel-address"
                         >
-                          Annuler
+                          {t.cancel}
                         </Button>
                       </div>
                     </div>
@@ -743,7 +745,7 @@ Montant: ${orderTotal.toFixed(2)} €`;
             <div className="lg:col-span-1">
               <Card className="sticky top-24">
                 <CardHeader>
-                  <CardTitle>Récapitulatif</CardTitle>
+                  <CardTitle>{t.orderSummary}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-3">
@@ -761,15 +763,15 @@ Montant: ${orderTotal.toFixed(2)} €`;
 
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Sous-total</span>
+                      <span className="text-muted-foreground">{t.subtotal}</span>
                       <span className="font-medium">{total.toFixed(2)} €</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Livraison</span>
-                      <span className="font-medium text-green-600">Gratuite</span>
+                      <span className="text-muted-foreground">{t.shipping}</span>
+                      <span className="font-medium text-green-600">{t.free}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">TVA (20%)</span>
+                      <span className="text-muted-foreground">{t.vat}</span>
                       <span className="font-medium">{(total * 0.2).toFixed(2)} €</span>
                     </div>
                   </div>
@@ -777,7 +779,7 @@ Montant: ${orderTotal.toFixed(2)} €`;
                   <Separator />
 
                   <div className="flex justify-between pt-2">
-                    <span className="text-lg font-semibold">Total</span>
+                    <span className="text-lg font-semibold">{t.total}</span>
                     <span className="text-2xl font-bold text-primary" data-testid="text-total">
                       {orderTotal.toFixed(2)} €
                     </span>
@@ -793,18 +795,18 @@ Montant: ${orderTotal.toFixed(2)} €`;
                     {processing ? (
                       <>
                         <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                        Traitement...
+                        {t.loading}
                       </>
                     ) : (
                       <>
                         <CheckCircle2 className="h-5 w-5 mr-2" />
-                        {paymentMethod === 'tickets' ? 'Envoyer les codes' : 'Confirmer le paiement'}
+                        {t.payNow}
                       </>
                     )}
                   </Button>
 
                   <p className="text-xs text-center text-muted-foreground">
-                    En confirmant, vous acceptez nos conditions générales de vente
+                    {t.termsOfService}
                   </p>
                 </CardContent>
               </Card>

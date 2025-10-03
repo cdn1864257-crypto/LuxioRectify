@@ -252,6 +252,13 @@ export interface Translations {
   completeTransferWithReference: string;
   redirectingToMaxelPayDescription: string;
   missingAmount: string;
+  maxelPayInstructionsTitle: string;
+  maxelPayInstruction1: string;
+  maxelPayInstruction2: string;
+  maxelPayInstruction3: string;
+  maxelPayInstruction4: string;
+  maxelPayInstruction5: string;
+  maxelPayRecommendation: string;
   
   // Dashboard
   hello: string;
@@ -536,6 +543,13 @@ export const translations: Record<Language, Translations> = {
     completeTransferWithReference: 'Complete the transfer with the indicated reference',
     redirectingToMaxelPayDescription: 'You will be redirected to the secure payment platform',
     missingAmount: 'missing',
+    maxelPayInstructionsTitle: 'MaxelPay Instructions',
+    maxelPayInstruction1: 'Instant and secure payment by cryptocurrency or bank card',
+    maxelPayInstruction2: 'You will be redirected to the MaxelPay platform',
+    maxelPayInstruction3: 'Accepts: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    maxelPayInstruction4: 'Your order will be confirmed immediately after payment',
+    maxelPayInstruction5: 'Secure transaction with 256-bit SSL encryption',
+    maxelPayRecommendation: 'Recommended method for fast processing',
     
     // Dashboard
     hello: 'Hello',
@@ -926,6 +940,13 @@ export const translations: Record<Language, Translations> = {
     completeTransferWithReference: 'Effectuez le virement avec la référence indiquée',
     redirectingToMaxelPayDescription: 'Vous allez être redirigé vers la plateforme de paiement sécurisée',
     missingAmount: 'manquant',
+    maxelPayInstructionsTitle: 'Instructions pour MaxelPay',
+    maxelPayInstruction1: 'Paiement instantané et sécurisé par cryptomonnaies ou carte bancaire',
+    maxelPayInstruction2: 'Vous serez redirigé vers la plateforme MaxelPay',
+    maxelPayInstruction3: 'Accepte : Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    maxelPayInstruction4: 'Votre commande sera confirmée immédiatement après paiement',
+    maxelPayInstruction5: 'Transaction sécurisée avec cryptage SSL 256 bits',
+    maxelPayRecommendation: 'Méthode recommandée pour un traitement rapide',
     
     // Dashboard
     hello: 'Bonjour',
@@ -1316,6 +1337,13 @@ export const translations: Record<Language, Translations> = {
     completeTransferWithReference: 'Complete la transferencia con la referencia indicada',
     redirectingToMaxelPayDescription: 'Será redirigido a la plataforma de pago segura',
     missingAmount: 'faltante',
+    maxelPayInstructionsTitle: 'Instrucciones para MaxelPay',
+    maxelPayInstruction1: 'Pago instantáneo y seguro por criptomonedas o tarjeta bancaria',
+    maxelPayInstruction2: 'Será redirigido a la plataforma MaxelPay',
+    maxelPayInstruction3: 'Acepta: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    maxelPayInstruction4: 'Su pedido será confirmado inmediatamente después del pago',
+    maxelPayInstruction5: 'Transacción segura con encriptación SSL de 256 bits',
+    maxelPayRecommendation: 'Método recomendado para procesamiento rápido',
     
     // Dashboard
     hello: 'Hola',
@@ -1706,6 +1734,13 @@ export const translations: Record<Language, Translations> = {
     completeTransferWithReference: 'Complete a transferência com a referência indicada',
     redirectingToMaxelPayDescription: 'Será redirecionado para a plataforma de pagamento segura',
     missingAmount: 'em falta',
+    maxelPayInstructionsTitle: 'Instruções para MaxelPay',
+    maxelPayInstruction1: 'Pagamento instantâneo e seguro por criptomoedas ou cartão bancário',
+    maxelPayInstruction2: 'Você será redirecionado para a plataforma MaxelPay',
+    maxelPayInstruction3: 'Aceita: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    maxelPayInstruction4: 'Seu pedido será confirmado imediatamente após o pagamento',
+    maxelPayInstruction5: 'Transação segura com criptografia SSL de 256 bits',
+    maxelPayRecommendation: 'Método recomendado para processamento rápido',
     
     // Dashboard
     hello: 'Olá',
@@ -2096,6 +2131,13 @@ export const translations: Record<Language, Translations> = {
     completeTransferWithReference: 'Wykonaj przelew z podanym numerem referencyjnym',
     redirectingToMaxelPayDescription: 'Zostaniesz przekierowany na bezpieczną platformę płatności',
     missingAmount: 'brakuje',
+    maxelPayInstructionsTitle: 'Instrukcje MaxelPay',
+    maxelPayInstruction1: 'Natychmiastowa i bezpieczna płatność kryptowalutą lub kartą bankową',
+    maxelPayInstruction2: 'Zostaniesz przekierowany na platformę MaxelPay',
+    maxelPayInstruction3: 'Akceptuje: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    maxelPayInstruction4: 'Twoje zamówienie zostanie potwierdzone natychmiast po płatności',
+    maxelPayInstruction5: 'Bezpieczna transakcja z szyfrowaniem SSL 256-bit',
+    maxelPayRecommendation: 'Zalecana metoda szybkiego przetwarzania',
     
     // Dashboard
     hello: 'Cześć',
@@ -2486,6 +2528,13 @@ export const translations: Record<Language, Translations> = {
     completeTransferWithReference: 'Completa il bonifico con il riferimento indicato',
     redirectingToMaxelPayDescription: 'Sarai reindirizzato alla piattaforma di pagamento sicura',
     missingAmount: 'mancante',
+    maxelPayInstructionsTitle: 'Istruzioni MaxelPay',
+    maxelPayInstruction1: 'Pagamento istantaneo e sicuro tramite criptovaluta o carta bancaria',
+    maxelPayInstruction2: 'Verrai reindirizzato alla piattaforma MaxelPay',
+    maxelPayInstruction3: 'Accetta: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    maxelPayInstruction4: 'Il tuo ordine sarà confermato immediatamente dopo il pagamento',
+    maxelPayInstruction5: 'Transazione sicura con crittografia SSL a 256 bit',
+    maxelPayRecommendation: 'Metodo consigliato per elaborazione rapida',
     
     // Dashboard
     hello: 'Ciao',
@@ -2876,6 +2925,13 @@ export const translations: Record<Language, Translations> = {
     completeTransferWithReference: 'Végezze el az átutalást a megadott hivatkozással',
     redirectingToMaxelPayDescription: 'Átirányítjuk a biztonságos fizetési platformra',
     missingAmount: 'hiányzik',
+    maxelPayInstructionsTitle: 'MaxelPay utasítások',
+    maxelPayInstruction1: 'Azonnali és biztonságos fizetés kriptovalutával vagy bankkártyával',
+    maxelPayInstruction2: 'Átirányításra kerül a MaxelPay platformra',
+    maxelPayInstruction3: 'Elfogad: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    maxelPayInstruction4: 'Rendelése azonnal megerősítésre kerül fizetés után',
+    maxelPayInstruction5: 'Biztonságos tranzakció 256 bites SSL titkosítással',
+    maxelPayRecommendation: 'Ajánlott módszer a gyors feldolgozáshoz',
     
     // Dashboard
     hello: 'Helló',

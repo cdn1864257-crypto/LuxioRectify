@@ -1,4 +1,5 @@
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
@@ -20,6 +21,7 @@ import { UserProfile } from '@/components/UserProfile';
 
 export default function Dashboard() {
   const { user } = useAuth();
+  const { t } = useLanguage();
   const [cartOpen, setCartOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
@@ -34,10 +36,10 @@ export default function Dashboard() {
           
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-foreground mb-2" data-testid="text-dashboard-greeting">
-              Bonjour, {user.firstName} 👋
+              {t.hello}, {user.firstName} 👋
             </h1>
             <p className="text-muted-foreground">
-              Bienvenue dans votre espace personnel Luxio
+              {t.welcomePersonalSpace}
             </p>
           </div>
 
@@ -45,14 +47,14 @@ export default function Dashboard() {
             <Card className="border-primary/20 hover:border-primary/40 transition-colors" data-testid="card-total-orders">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  Commandes totales
+                  {t.totalOrders}
                 </CardTitle>
                 <ShoppingBag className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">0</div>
                 <p className="text-xs text-muted-foreground">
-                  Aucune commande pour le moment
+                  {t.noOrdersYet}
                 </p>
               </CardContent>
             </Card>
@@ -60,14 +62,14 @@ export default function Dashboard() {
             <Card className="border-primary/20 hover:border-primary/40 transition-colors" data-testid="card-pending-orders">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  En cours
+                  {t.inProgress}
                 </CardTitle>
                 <Clock className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">0</div>
                 <p className="text-xs text-muted-foreground">
-                  Commandes en traitement
+                  {t.ordersProcessing}
                 </p>
               </CardContent>
             </Card>
@@ -75,14 +77,14 @@ export default function Dashboard() {
             <Card className="border-primary/20 hover:border-primary/40 transition-colors" data-testid="card-delivered-orders">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  Livrées
+                  {t.delivered}
                 </CardTitle>
                 <Package className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">0</div>
                 <p className="text-xs text-muted-foreground">
-                  Commandes reçues
+                  {t.ordersReceived}
                 </p>
               </CardContent>
             </Card>
@@ -90,14 +92,14 @@ export default function Dashboard() {
             <Card className="border-primary/20 hover:border-primary/40 transition-colors" data-testid="card-total-spent">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  Total dépensé
+                  {t.totalSpent}
                 </CardTitle>
                 <CreditCard className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">0 €</div>
                 <p className="text-xs text-muted-foreground">
-                  Montant total
+                  {t.totalAmount}
                 </p>
               </CardContent>
             </Card>
@@ -108,20 +110,20 @@ export default function Dashboard() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Package className="h-5 w-5" />
-                  Historique des commandes
+                  {t.orderHistory}
                 </CardTitle>
                 <CardDescription>
-                  Vos dernières commandes et leur statut
+                  {t.latestOrdersStatus}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col items-center justify-center py-12 text-center">
                   <Package className="h-16 w-16 text-muted-foreground/50 mb-4" />
                   <h3 className="text-lg font-semibold text-foreground mb-2">
-                    Aucune commande
+                    {t.noOrders}
                   </h3>
                   <p className="text-sm text-muted-foreground max-w-sm">
-                    Vous n'avez pas encore passé de commande. Découvrez notre catalogue de produits premium !
+                    {t.noOrdersDescription}
                   </p>
                 </div>
               </CardContent>
@@ -131,7 +133,7 @@ export default function Dashboard() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <User className="h-5 w-5" />
-                  Informations personnelles
+                  {t.personalInfo}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
