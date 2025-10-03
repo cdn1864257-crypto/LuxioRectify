@@ -1295,6 +1295,17 @@ export const products: Product[] = [
     features: ['12-day battery', 'Health monitoring', 'Always-on display', 'Free shipping']
   },
   {
+    id: 'xiaomi-watch-s4',
+    name: 'Xiaomi Watch S4',
+    price: 128,
+    originalPrice: 160,
+    discount: 20,
+    image: '/attached_assets/Montre-connectee-Xiaomi-Watch-S4-Bluetooth-Noir_1759483363254.jpg',
+    category: 'watches',
+    description: '46mm, Bluetooth',
+    features: ['15-day battery', 'Rotating crown', '150+ sports modes', 'Free shipping']
+  },
+  {
     id: 'oura-ring-gen3',
     name: 'Oura Ring Gen3',
     price: 299,
