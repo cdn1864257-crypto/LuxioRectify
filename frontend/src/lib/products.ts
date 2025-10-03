@@ -1453,15 +1453,15 @@ export const products: Product[] = [
 
   // === GADGETS (12 products) ===
   {
-    id: 'smart-robot-vacuum-pro',
-    name: 'Smart Robot Vacuum Pro',
-    price: 449,
-    originalPrice: 549,
-    discount: 18,
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    id: 'roborock-s8-pro-ultra',
+    name: 'Roborock S8 Pro Ultra',
+    price: 1299,
+    originalPrice: 1599,
+    discount: 19,
+    image: 'https://images.unsplash.com/photo-1631822481648-4a6f77850f4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
     category: 'gadgets',
-    description: 'Auto-mapping, App Control',
-    features: ['LiDAR navigation', 'Self-emptying', 'App control', 'Free delivery']
+    description: 'Station auto-vidante, Lavage sonic',
+    features: ['Navigation LiDAR 3D', 'Aspiration 6000Pa', 'Station tout-en-un', 'Livraison gratuite']
   },
   {
     id: 'dyson-air-purifier-tp07',
