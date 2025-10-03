@@ -396,3 +396,113 @@ Luxio Admin
     text: textContent,
   });
 }
+
+interface BankTransferDetails {
+  orderId: string;
+  customerEmail: string;
+  customerName: string;
+  totalAmount: number;
+  bankName: string;
+  iban: string;
+  bic: string;
+  reference: string;
+}
+
+export async function sendBankTransferEmail(
+  details: BankTransferDetails
+): Promise<boolean> {
+  const htmlContent = getEmailLayout(`
+    <h2 style="color: #1e3a8a; margin-top: 0;">Confirmation de paiement par virement</h2>
+    <p>Bonjour <strong>${details.customerName}</strong>,</p>
+    <p>
+      Merci pour votre commande <strong>#${details.orderId}</strong>. 
+      Pour finaliser votre achat, veuillez effectuer un virement bancaire en suivant les instructions ci-dessous.
+    </p>
+    
+    <div style="background-color: #eff6ff; border: 2px solid #3b82f6; border-radius: 8px; padding: 25px; margin: 25px 0;">
+      <h3 style="margin-top: 0; color: #1e40af; font-size: 18px;">🏦 Informations bancaires</h3>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="padding: 10px 0; color: #6b7280; font-weight: 500;">Bénéficiaire :</td>
+          <td style="padding: 10px 0; font-weight: 700; color: #111827;">
+            ${details.bankName}
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 10px 0; color: #6b7280; font-weight: 500;">IBAN :</td>
+          <td style="padding: 10px 0; font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">
+            ${details.iban}
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 10px 0; color: #6b7280; font-weight: 500;">BIC :</td>
+          <td style="padding: 10px 0; font-family: 'Courier New', monospace; font-weight: 700; color: #1e40af;">
+            ${details.bic}
+          </td>
+        </tr>
+        <tr style="border-top: 2px solid #e5e7eb;">
+          <td style="padding: 12px 0; color: #6b7280; font-weight: 500;">Montant :</td>
+          <td style="padding: 12px 0; font-size: 24px; font-weight: 700; color: #059669;">
+            ${details.totalAmount.toFixed(2)} €
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 10px 0; color: #6b7280; font-weight: 500;">Référence :</td>
+          <td style="padding: 10px 0; font-family: 'Courier New', monospace; font-weight: 700; color: #dc2626;">
+            ${details.reference}
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px 20px; margin: 25px 0;">
+      <p style="margin: 0; color: #92400e;">
+        ⚠️ <strong>Important :</strong> N'oubliez pas d'indiquer la référence <strong>${details.reference}</strong> dans le motif de votre virement pour faciliter le traitement de votre commande.
+      </p>
+    </div>
+
+    <div style="background-color: #f0fdf4; border: 1px solid #10b981; border-radius: 8px; padding: 15px 20px; margin: 25px 0;">
+      <p style="margin: 0; color: #065f46;">
+        ✅ <strong>Après réception de votre virement</strong><br>
+        Votre commande sera traitée sous 24-48h et vous recevrez un email de confirmation d'expédition.
+      </p>
+    </div>
+
+    <p style="color: #6b7280; font-size: 14px;">
+      En cas de question concernant votre commande, n'hésitez pas à nous contacter.
+    </p>
+  `);
+
+  const textContent = `
+Confirmation de paiement par virement
+
+Bonjour ${details.customerName},
+
+Merci pour votre commande #${details.orderId}. 
+Pour finaliser votre achat, veuillez effectuer un virement bancaire en suivant les instructions ci-dessous.
+
+--- Informations bancaires ---
+Bénéficiaire : ${details.bankName}
+IBAN : ${details.iban}
+BIC : ${details.bic}
+Montant : ${details.totalAmount.toFixed(2)} €
+Référence : ${details.reference}
+
+⚠️ Important : N'oubliez pas d'indiquer la référence ${details.reference} dans le motif de votre virement pour faciliter le traitement de votre commande.
+
+✅ Après réception de votre virement
+Votre commande sera traitée sous 24-48h et vous recevrez un email de confirmation d'expédition.
+
+En cas de question concernant votre commande, n'hésitez pas à nous contacter.
+
+---
+Luxio - Votre boutique de smartphones et accessoires premium
+  `.trim();
+
+  return sendEmail({
+    to: details.customerEmail,
+    subject: `Virement bancaire - Commande #${details.orderId} - Luxio`,
+    html: htmlContent,
+    text: textContent,
+  });
+}
