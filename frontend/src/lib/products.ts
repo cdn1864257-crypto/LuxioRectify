@@ -1423,7 +1423,7 @@ export const products: Product[] = [
     price: 169,
     originalPrice: 199,
     discount: 15,
-    image: '/attached_assets/stock_images/on_cloudstratus_3_ma_525f8950.jpg',
+    image: '/attached_assets/jd_759309_b_1759490336917.jpeg',
     category: 'sneakers',
     description: 'Maximalist running',
     features: ['CloudTec cushioning', 'Swiss engineering', 'Premium comfort', 'Free shipping']
@@ -1434,7 +1434,7 @@ export const products: Product[] = [
     price: 139,
     originalPrice: 169,
     discount: 18,
-    image: '/attached_assets/stock_images/hoka_clifton_9_neutr_d9c4322b.jpg',
+    image: '/attached_assets/hoka-clifton-9-stardust-electric-cobalt_1759490355458.jpg',
     category: 'sneakers',
     description: 'Neutral running',
     features: ['Maximum cushioning', 'Lightweight', 'Everyday comfort', 'Free shipping']
