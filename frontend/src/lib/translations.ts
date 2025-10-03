@@ -102,9 +102,38 @@ export interface Translations {
   // Auth
   email: string;
   password: string;
+  confirmPassword: string;
   fullName: string;
   dontHaveAccount: string;
   alreadyHaveAccount: string;
+  loggingIn: string;
+  signingUp: string;
+  loginSuccess: string;
+  signupSuccess: string;
+  loginError: string;
+  signupError: string;
+  welcomeBack: string;
+  welcome: string;
+  emailRequired: string;
+  passwordRequired: string;
+  emailInvalid: string;
+  passwordMinLength: string;
+  passwordsDontMatch: string;
+  firstNameRequired: string;
+  lastNameRequired: string;
+  countryRequired: string;
+  cityRequired: string;
+  addressRequired: string;
+  phoneRequired: string;
+  validationError: string;
+  fixErrors: string;
+  emailPlaceholder: string;
+  firstNamePlaceholder: string;
+  lastNamePlaceholder: string;
+  countryPlaceholder: string;
+  cityPlaceholder: string;
+  addressPlaceholder: string;
+  phonePlaceholder: string;
   
   // Messages
   itemAddedToCart: string;
@@ -393,9 +422,38 @@ export const translations: Record<Language, Translations> = {
     // Auth
     email: 'Email',
     password: 'Password',
+    confirmPassword: 'Confirm Password',
     fullName: 'Full Name',
     dontHaveAccount: "Don't have an account?",
     alreadyHaveAccount: 'Already have an account?',
+    loggingIn: 'Logging in...',
+    signingUp: 'Signing up...',
+    loginSuccess: 'Login successful!',
+    signupSuccess: 'Sign up successful!',
+    loginError: 'Login error',
+    signupError: 'Sign up error',
+    welcomeBack: 'Welcome back',
+    welcome: 'Welcome to Luxio! You are now logged in.',
+    emailRequired: 'Email is required',
+    passwordRequired: 'Password is required',
+    emailInvalid: 'Invalid email format',
+    passwordMinLength: 'Password must be at least 6 characters',
+    passwordsDontMatch: 'Passwords do not match',
+    firstNameRequired: 'First name is required',
+    lastNameRequired: 'Last name is required',
+    countryRequired: 'Country is required',
+    cityRequired: 'City is required',
+    addressRequired: 'Address is required',
+    phoneRequired: 'Phone number is required',
+    validationError: 'Validation error',
+    fixErrors: 'Please correct the errors in the form',
+    emailPlaceholder: 'your@email.com',
+    firstNamePlaceholder: 'John',
+    lastNamePlaceholder: 'Doe',
+    countryPlaceholder: 'United States',
+    cityPlaceholder: 'New York',
+    addressPlaceholder: '123 Main Street',
+    phonePlaceholder: '+1 234 567 8900',
     
     // Messages
     itemAddedToCart: 'Item added to cart!',
@@ -790,9 +848,38 @@ export const translations: Record<Language, Translations> = {
     // Auth
     email: 'Email',
     password: 'Mot de passe',
+    confirmPassword: 'Confirmer le mot de passe',
     fullName: 'Nom complet',
-    dontHaveAccount: 'Pas encore de compte?',
-    alreadyHaveAccount: 'Déjà un compte?',
+    dontHaveAccount: 'Pas encore de compte ?',
+    alreadyHaveAccount: 'Vous avez déjà un compte ?',
+    loggingIn: 'Connexion en cours...',
+    signingUp: 'Inscription en cours...',
+    loginSuccess: 'Connexion réussie !',
+    signupSuccess: 'Inscription réussie !',
+    loginError: 'Erreur de connexion',
+    signupError: 'Erreur',
+    welcomeBack: 'Bienvenue',
+    welcome: 'Bienvenue sur Luxio ! Vous êtes maintenant connecté.',
+    emailRequired: 'L\'email est obligatoire',
+    passwordRequired: 'Le mot de passe est obligatoire',
+    emailInvalid: 'Format email invalide',
+    passwordMinLength: 'Le mot de passe doit contenir au moins 6 caractères',
+    passwordsDontMatch: 'Les mots de passe ne correspondent pas',
+    firstNameRequired: 'Le prénom est obligatoire',
+    lastNameRequired: 'Le nom est obligatoire',
+    countryRequired: 'Le pays est obligatoire',
+    cityRequired: 'La ville est obligatoire',
+    addressRequired: 'L\'adresse est obligatoire',
+    phoneRequired: 'Le téléphone est obligatoire',
+    validationError: 'Erreur de validation',
+    fixErrors: 'Veuillez corriger les erreurs dans le formulaire',
+    emailPlaceholder: 'votre@email.com',
+    firstNamePlaceholder: 'Jean',
+    lastNamePlaceholder: 'Dupont',
+    countryPlaceholder: 'France',
+    cityPlaceholder: 'Paris',
+    addressPlaceholder: '123 Rue de la Paix',
+    phonePlaceholder: '+33 1 23 45 67 89',
     
     // Messages
     itemAddedToCart: 'Article ajouté au panier!',
@@ -1187,9 +1274,38 @@ export const translations: Record<Language, Translations> = {
     // Auth
     email: 'Email',
     password: 'Contraseña',
+    confirmPassword: 'Confirmar contraseña',
     fullName: 'Nombre completo',
     dontHaveAccount: '¿No tienes cuenta?',
     alreadyHaveAccount: '¿Ya tienes cuenta?',
+    loggingIn: 'Iniciando sesión...',
+    signingUp: 'Registrando...',
+    loginSuccess: '¡Inicio de sesión exitoso!',
+    signupSuccess: '¡Registro exitoso!',
+    loginError: 'Error de inicio de sesión',
+    signupError: 'Error',
+    welcomeBack: 'Bienvenido',
+    welcome: '¡Bienvenido a Luxio! Ahora estás conectado.',
+    emailRequired: 'El email es obligatorio',
+    passwordRequired: 'La contraseña es obligatoria',
+    emailInvalid: 'Formato de email inválido',
+    passwordMinLength: 'La contraseña debe tener al menos 6 caracteres',
+    passwordsDontMatch: 'Las contraseñas no coinciden',
+    firstNameRequired: 'El nombre es obligatorio',
+    lastNameRequired: 'El apellido es obligatorio',
+    countryRequired: 'El país es obligatorio',
+    cityRequired: 'La ciudad es obligatoria',
+    addressRequired: 'La dirección es obligatoria',
+    phoneRequired: 'El teléfono es obligatorio',
+    validationError: 'Error de validación',
+    fixErrors: 'Por favor corrige los errores en el formulario',
+    emailPlaceholder: 'tu@email.com',
+    firstNamePlaceholder: 'Juan',
+    lastNamePlaceholder: 'García',
+    countryPlaceholder: 'España',
+    cityPlaceholder: 'Madrid',
+    addressPlaceholder: 'Calle Principal 123',
+    phonePlaceholder: '+34 912 34 56 78',
     
     // Messages
     itemAddedToCart: '¡Producto añadido al carrito!',
@@ -1584,9 +1700,38 @@ export const translations: Record<Language, Translations> = {
     // Auth
     email: 'Email',
     password: 'Palavra-passe',
+    confirmPassword: 'Confirmar palavra-passe',
     fullName: 'Nome completo',
     dontHaveAccount: 'Não tem conta?',
     alreadyHaveAccount: 'Já tem conta?',
+    loggingIn: 'Entrando...',
+    signingUp: 'Registrando...',
+    loginSuccess: 'Login bem-sucedido!',
+    signupSuccess: 'Registro bem-sucedido!',
+    loginError: 'Erro de login',
+    signupError: 'Erro',
+    welcomeBack: 'Bem-vindo',
+    welcome: 'Bem-vindo ao Luxio! Você está agora conectado.',
+    emailRequired: 'O email é obrigatório',
+    passwordRequired: 'A palavra-passe é obrigatória',
+    emailInvalid: 'Formato de email inválido',
+    passwordMinLength: 'A palavra-passe deve ter pelo menos 6 caracteres',
+    passwordsDontMatch: 'As palavras-passe não correspondem',
+    firstNameRequired: 'O primeiro nome é obrigatório',
+    lastNameRequired: 'O sobrenome é obrigatório',
+    countryRequired: 'O país é obrigatório',
+    cityRequired: 'A cidade é obrigatória',
+    addressRequired: 'O endereço é obrigatório',
+    phoneRequired: 'O telefone é obrigatório',
+    validationError: 'Erro de validação',
+    fixErrors: 'Por favor, corrija os erros no formulário',
+    emailPlaceholder: 'seu@email.com',
+    firstNamePlaceholder: 'João',
+    lastNamePlaceholder: 'Silva',
+    countryPlaceholder: 'Portugal',
+    cityPlaceholder: 'Lisboa',
+    addressPlaceholder: 'Rua Principal 123',
+    phonePlaceholder: '+351 21 123 4567',
     
     // Messages
     itemAddedToCart: 'Item adicionado ao carrinho!',
@@ -1981,9 +2126,38 @@ export const translations: Record<Language, Translations> = {
     // Auth
     email: 'Email',
     password: 'Hasło',
+    confirmPassword: 'Potwierdź hasło',
     fullName: 'Pełne imię',
     dontHaveAccount: 'Nie masz konta?',
     alreadyHaveAccount: 'Masz już konto?',
+    loggingIn: 'Logowanie...',
+    signingUp: 'Rejestracja...',
+    loginSuccess: 'Logowanie udane!',
+    signupSuccess: 'Rejestracja udana!',
+    loginError: 'Błąd logowania',
+    signupError: 'Błąd',
+    welcomeBack: 'Witaj ponownie',
+    welcome: 'Witaj w Luxio! Jesteś teraz zalogowany.',
+    emailRequired: 'Email jest wymagany',
+    passwordRequired: 'Hasło jest wymagane',
+    emailInvalid: 'Nieprawidłowy format email',
+    passwordMinLength: 'Hasło musi mieć co najmniej 6 znaków',
+    passwordsDontMatch: 'Hasła nie pasują do siebie',
+    firstNameRequired: 'Imię jest wymagane',
+    lastNameRequired: 'Nazwisko jest wymagane',
+    countryRequired: 'Kraj jest wymagany',
+    cityRequired: 'Miasto jest wymagane',
+    addressRequired: 'Adres jest wymagany',
+    phoneRequired: 'Telefon jest wymagany',
+    validationError: 'Błąd walidacji',
+    fixErrors: 'Proszę poprawić błędy w formularzu',
+    emailPlaceholder: 'twoj@email.com',
+    firstNamePlaceholder: 'Jan',
+    lastNamePlaceholder: 'Kowalski',
+    countryPlaceholder: 'Polska',
+    cityPlaceholder: 'Warszawa',
+    addressPlaceholder: 'ul. Główna 123',
+    phonePlaceholder: '+48 22 123 45 67',
     
     // Messages
     itemAddedToCart: 'Dodano do koszyka!',
@@ -2378,9 +2552,38 @@ export const translations: Record<Language, Translations> = {
     // Auth
     email: 'Email',
     password: 'Password',
+    confirmPassword: 'Conferma password',
     fullName: 'Nome completo',
     dontHaveAccount: 'Non hai un account?',
     alreadyHaveAccount: 'Hai già un account?',
+    loggingIn: 'Accesso in corso...',
+    signingUp: 'Registrazione in corso...',
+    loginSuccess: 'Accesso riuscito!',
+    signupSuccess: 'Registrazione riuscita!',
+    loginError: 'Errore di accesso',
+    signupError: 'Errore',
+    welcomeBack: 'Bentornato',
+    welcome: 'Benvenuto su Luxio! Ora sei connesso.',
+    emailRequired: 'L\'email è obbligatoria',
+    passwordRequired: 'La password è obbligatoria',
+    emailInvalid: 'Formato email non valido',
+    passwordMinLength: 'La password deve contenere almeno 6 caratteri',
+    passwordsDontMatch: 'Le password non corrispondono',
+    firstNameRequired: 'Il nome è obbligatorio',
+    lastNameRequired: 'Il cognome è obbligatorio',
+    countryRequired: 'Il paese è obbligatorio',
+    cityRequired: 'La città è obbligatoria',
+    addressRequired: 'L\'indirizzo è obbligatorio',
+    phoneRequired: 'Il telefono è obbligatorio',
+    validationError: 'Errore di validazione',
+    fixErrors: 'Si prega di correggere gli errori nel modulo',
+    emailPlaceholder: 'tua@email.com',
+    firstNamePlaceholder: 'Mario',
+    lastNamePlaceholder: 'Rossi',
+    countryPlaceholder: 'Italia',
+    cityPlaceholder: 'Roma',
+    addressPlaceholder: 'Via Principale 123',
+    phonePlaceholder: '+39 06 1234 5678',
     
     // Messages
     itemAddedToCart: 'Articolo aggiunto al carrello!',
@@ -2775,9 +2978,38 @@ export const translations: Record<Language, Translations> = {
     // Auth
     email: 'E-mail',
     password: 'Jelszó',
+    confirmPassword: 'Jelszó megerősítése',
     fullName: 'Teljes név',
     dontHaveAccount: 'Nincs fiókja?',
     alreadyHaveAccount: 'Már van fiókja?',
+    loggingIn: 'Bejelentkezés...',
+    signingUp: 'Regisztráció...',
+    loginSuccess: 'Sikeres bejelentkezés!',
+    signupSuccess: 'Sikeres regisztráció!',
+    loginError: 'Bejelentkezési hiba',
+    signupError: 'Hiba',
+    welcomeBack: 'Üdvözöljük újra',
+    welcome: 'Üdvözöljük a Luxio-ban! Most már be van jelentkezve.',
+    emailRequired: 'Az e-mail cím kötelező',
+    passwordRequired: 'A jelszó kötelező',
+    emailInvalid: 'Érvénytelen e-mail formátum',
+    passwordMinLength: 'A jelszónak legalább 6 karakterből kell állnia',
+    passwordsDontMatch: 'A jelszavak nem egyeznek',
+    firstNameRequired: 'A keresztnév kötelező',
+    lastNameRequired: 'A vezetéknév kötelező',
+    countryRequired: 'Az ország kötelező',
+    cityRequired: 'A város kötelező',
+    addressRequired: 'A cím kötelező',
+    phoneRequired: 'A telefonszám kötelező',
+    validationError: 'Érvényesítési hiba',
+    fixErrors: 'Kérjük, javítsa ki a hibákat az űrlapon',
+    emailPlaceholder: 'te@email.com',
+    firstNamePlaceholder: 'János',
+    lastNamePlaceholder: 'Kovács',
+    countryPlaceholder: 'Magyarország',
+    cityPlaceholder: 'Budapest',
+    addressPlaceholder: 'Fő utca 123',
+    phonePlaceholder: '+36 1 234 5678',
     
     // Messages
     itemAddedToCart: 'Termék hozzáadva a kosárhoz!',

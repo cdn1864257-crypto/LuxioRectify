@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Loader2 } from "lucide-react";
 
 interface LoginFormData {
@@ -19,6 +20,7 @@ interface LoginFormProps {
 export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
   const { toast } = useToast();
   const { login, user } = useAuth();
+  const { t } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<LoginFormData>({
     email: "",
@@ -30,7 +32,6 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Effacer l'erreur du champ quand l'utilisateur tape
     if (errors[name as keyof LoginFormData]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
@@ -40,13 +41,13 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
     const newErrors: Partial<Record<keyof LoginFormData, string>> = {};
 
     if (!formData.email.trim()) {
-      newErrors.email = "L'email est obligatoire";
+      newErrors.email = t('emailRequired');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Format email invalide";
+      newErrors.email = t('emailInvalid');
     }
 
     if (!formData.password) {
-      newErrors.password = "Le mot de passe est obligatoire";
+      newErrors.password = t('passwordRequired');
     }
 
     setErrors(newErrors);
@@ -66,15 +67,14 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
       const result = await login(formData.email, formData.password);
 
       if (!result.success) {
-        throw new Error(result.error || 'Erreur lors de la connexion');
+        throw new Error(result.error || t('loginError'));
       }
 
       toast({
-        title: "Connexion réussie !",
-        description: user ? `Bienvenue ${user.firstName} !` : "Bienvenue !",
+        title: t('loginSuccess'),
+        description: user ? `${t('welcomeBack')} ${user.firstName}!` : t('welcomeBack'),
       });
 
-      // Réinitialiser le formulaire
       setFormData({
         email: "",
         password: ""
@@ -86,8 +86,8 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
 
     } catch (error) {
       toast({
-        title: "Erreur de connexion",
-        description: error instanceof Error ? error.message : "Une erreur est survenue",
+        title: t('loginError'),
+        description: error instanceof Error ? error.message : t('loginError'),
         variant: "destructive"
       });
     } finally {
@@ -98,14 +98,14 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4" data-testid="form-login">
       <div className="space-y-2">
-        <Label htmlFor="login-email">Email</Label>
+        <Label htmlFor="login-email">{t('email')}</Label>
         <Input
           id="login-email"
           name="email"
           type="email"
           value={formData.email}
           onChange={handleChange}
-          placeholder="votre@email.com"
+          placeholder={t('emailPlaceholder')}
           disabled={isLoading}
           data-testid="input-login-email"
           className={errors.email ? "border-red-500" : ""}
@@ -116,7 +116,7 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="login-password">Mot de passe</Label>
+        <Label htmlFor="login-password">{t('password')}</Label>
         <Input
           id="login-password"
           name="password"
@@ -142,16 +142,16 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
         {isLoading ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Connexion en cours...
+            {t('loggingIn')}
           </>
         ) : (
-          "Se connecter"
+          t('login')
         )}
       </Button>
 
       {onSwitchToSignup && (
         <div className="text-center text-sm">
-          <span className="text-gray-600">Pas encore de compte ? </span>
+          <span className="text-gray-600">{t('dontHaveAccount')} </span>
           <button
             type="button"
             onClick={onSwitchToSignup}
@@ -159,7 +159,7 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
             disabled={isLoading}
             data-testid="button-switch-signup"
           >
-            S'inscrire
+            {t('signup')}
           </button>
         </div>
       )}

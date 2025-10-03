@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Loader2 } from "lucide-react";
 
 interface SignupFormData {
@@ -26,6 +27,7 @@ interface SignupFormProps {
 export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
   const { toast } = useToast();
   const { signup, refreshUser } = useAuth();
+  const { t } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<SignupFormData>({
     firstName: "",
@@ -44,7 +46,6 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Effacer l'erreur du champ quand l'utilisateur tape
     if (errors[name as keyof SignupFormData]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
@@ -53,27 +54,27 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
   const validateForm = (): boolean => {
     const newErrors: Partial<Record<keyof SignupFormData, string>> = {};
 
-    if (!formData.firstName.trim()) newErrors.firstName = "Le prénom est obligatoire";
-    if (!formData.lastName.trim()) newErrors.lastName = "Le nom est obligatoire";
-    if (!formData.country.trim()) newErrors.country = "Le pays est obligatoire";
-    if (!formData.city.trim()) newErrors.city = "La ville est obligatoire";
-    if (!formData.address.trim()) newErrors.address = "L'adresse est obligatoire";
-    if (!formData.phone.trim()) newErrors.phone = "Le téléphone est obligatoire";
+    if (!formData.firstName.trim()) newErrors.firstName = t('firstNameRequired');
+    if (!formData.lastName.trim()) newErrors.lastName = t('lastNameRequired');
+    if (!formData.country.trim()) newErrors.country = t('countryRequired');
+    if (!formData.city.trim()) newErrors.city = t('cityRequired');
+    if (!formData.address.trim()) newErrors.address = t('addressRequired');
+    if (!formData.phone.trim()) newErrors.phone = t('phoneRequired');
     
     if (!formData.email.trim()) {
-      newErrors.email = "L'email est obligatoire";
+      newErrors.email = t('emailRequired');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Format email invalide";
+      newErrors.email = t('emailInvalid');
     }
 
     if (!formData.password) {
-      newErrors.password = "Le mot de passe est obligatoire";
+      newErrors.password = t('passwordRequired');
     } else if (formData.password.length < 6) {
-      newErrors.password = "Le mot de passe doit contenir au moins 6 caractères";
+      newErrors.password = t('passwordMinLength');
     }
 
     if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Les mots de passe ne correspondent pas";
+      newErrors.confirmPassword = t('passwordsDontMatch');
     }
 
     setErrors(newErrors);
@@ -85,8 +86,8 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
 
     if (!validateForm()) {
       toast({
-        title: "Erreur de validation",
-        description: "Veuillez corriger les erreurs dans le formulaire",
+        title: t('validationError'),
+        description: t('fixErrors'),
         variant: "destructive"
       });
       return;
@@ -107,18 +108,16 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
       });
 
       if (!result.success) {
-        throw new Error(result.error || 'Erreur lors de l\'inscription');
+        throw new Error(result.error || t('signupError'));
       }
 
-      // Rafraîchir l'utilisateur pour récupérer les données du cookie
       await refreshUser();
 
       toast({
-        title: "Inscription réussie !",
-        description: "Bienvenue sur Luxio ! Vous êtes maintenant connecté.",
+        title: t('signupSuccess'),
+        description: t('welcome'),
       });
 
-      // Réinitialiser le formulaire
       setFormData({
         firstName: "",
         lastName: "",
@@ -137,8 +136,8 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
 
     } catch (error) {
       toast({
-        title: "Erreur",
-        description: error instanceof Error ? error.message : "Une erreur est survenue",
+        title: t('signupError'),
+        description: error instanceof Error ? error.message : t('signupError'),
         variant: "destructive"
       });
     } finally {
@@ -150,14 +149,14 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     <form onSubmit={handleSubmit} className="space-y-4" data-testid="form-signup">
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="firstName">Prénom *</Label>
+          <Label htmlFor="firstName">{t('firstName')} *</Label>
           <Input
             id="firstName"
             name="firstName"
             type="text"
             value={formData.firstName}
             onChange={handleChange}
-            placeholder="Jean"
+            placeholder={t('firstNamePlaceholder')}
             disabled={isLoading}
             data-testid="input-firstName"
             className={errors.firstName ? "border-red-500" : ""}
@@ -168,14 +167,14 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="lastName">Nom *</Label>
+          <Label htmlFor="lastName">{t('lastName')} *</Label>
           <Input
             id="lastName"
             name="lastName"
             type="text"
             value={formData.lastName}
             onChange={handleChange}
-            placeholder="Dupont"
+            placeholder={t('lastNamePlaceholder')}
             disabled={isLoading}
             data-testid="input-lastName"
             className={errors.lastName ? "border-red-500" : ""}
@@ -188,14 +187,14 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="country">Pays *</Label>
+          <Label htmlFor="country">{t('country')} *</Label>
           <Input
             id="country"
             name="country"
             type="text"
             value={formData.country}
             onChange={handleChange}
-            placeholder="France"
+            placeholder={t('countryPlaceholder')}
             disabled={isLoading}
             data-testid="input-country"
             className={errors.country ? "border-red-500" : ""}
@@ -206,14 +205,14 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="city">Ville *</Label>
+          <Label htmlFor="city">{t('city')} *</Label>
           <Input
             id="city"
             name="city"
             type="text"
             value={formData.city}
             onChange={handleChange}
-            placeholder="Paris"
+            placeholder={t('cityPlaceholder')}
             disabled={isLoading}
             data-testid="input-city"
             className={errors.city ? "border-red-500" : ""}
@@ -225,14 +224,14 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="address">Adresse *</Label>
+        <Label htmlFor="address">{t('address')} *</Label>
         <Input
           id="address"
           name="address"
           type="text"
           value={formData.address}
           onChange={handleChange}
-          placeholder="123 Rue de la République"
+          placeholder={t('addressPlaceholder')}
           disabled={isLoading}
           data-testid="input-address"
           className={errors.address ? "border-red-500" : ""}
@@ -243,14 +242,14 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="phone">Téléphone *</Label>
+        <Label htmlFor="phone">{t('phone')} *</Label>
         <Input
           id="phone"
           name="phone"
           type="tel"
           value={formData.phone}
           onChange={handleChange}
-          placeholder="+33 6 12 34 56 78"
+          placeholder={t('phonePlaceholder')}
           disabled={isLoading}
           data-testid="input-phone"
           className={errors.phone ? "border-red-500" : ""}
@@ -261,14 +260,14 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="email">Email *</Label>
+        <Label htmlFor="email">{t('email')} *</Label>
         <Input
           id="email"
           name="email"
           type="email"
           value={formData.email}
           onChange={handleChange}
-          placeholder="jean.dupont@example.com"
+          placeholder={t('emailPlaceholder')}
           disabled={isLoading}
           data-testid="input-email"
           className={errors.email ? "border-red-500" : ""}
@@ -279,7 +278,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="password">Mot de passe *</Label>
+        <Label htmlFor="password">{t('password')} *</Label>
         <Input
           id="password"
           name="password"
@@ -297,7 +296,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="confirmPassword">Confirmer le mot de passe *</Label>
+        <Label htmlFor="confirmPassword">{t('confirmPassword')} *</Label>
         <Input
           id="confirmPassword"
           name="confirmPassword"
@@ -323,16 +322,16 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
         {isLoading ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Inscription en cours...
+            {t('signingUp')}
           </>
         ) : (
-          "S'inscrire"
+          t('signup')
         )}
       </Button>
 
       {onSwitchToLogin && (
         <div className="text-center text-sm">
-          <span className="text-gray-600">Vous avez déjà un compte ? </span>
+          <span className="text-gray-600">{t('alreadyHaveAccount')} </span>
           <button
             type="button"
             onClick={onSwitchToLogin}
@@ -340,7 +339,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
             disabled={isLoading}
             data-testid="button-switch-login"
           >
-            Se connecter
+            {t('login')}
           </button>
         </div>
       )}
