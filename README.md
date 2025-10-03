@@ -161,9 +161,85 @@ GET  /api/auth/me           # Récupérer l'utilisateur connecté
 
 #### Paiements
 ```bash
-POST /api/payment/submit-order     # Soumettre une commande avec codes de paiement (PCS/TransCash)
-POST /api/payment/bank-transfer    # Créer une commande par virement bancaire
-POST /api/payment/maxelpay-return  # Callback de retour Maxelpay
+POST /api/payment/submit-order       # Soumettre une commande avec codes de paiement (PCS/TransCash)
+POST /api/payment/bank-transfer      # Créer une commande par virement bancaire
+POST /api/payment/maxelpay-init      # Initialiser un paiement Maxelpay
+POST /api/payment/maxelpay-return    # Callback de retour Maxelpay
+```
+
+## 💳 Méthodes de paiement
+
+Luxio propose **3 méthodes de paiement** sécurisées :
+
+### 1. 🏦 Virement bancaire
+
+**Détails bancaires** :
+- **Bénéficiaire** : Matt Luxio
+- **IBAN** : ES6115632626383268707364
+- **BIC** : NTSBESM1XXX
+- **Référence** : Numéro de commande unique généré automatiquement
+
+**Processus** :
+1. Le client sélectionne "Virement bancaire"
+2. Un numéro de commande unique est généré (ex: LX-1730673481234-ABC123)
+3. La commande est enregistrée avec le statut "En attente de virement"
+4. Le client reçoit un email avec les détails du virement
+5. L'administrateur reçoit une notification de la nouvelle commande
+
+**Emails envoyés** :
+- ✅ **Client** : Confirmation avec détails bancaires et numéro de référence
+- ✅ **Admin** : Notification avec détails de la commande à vérifier
+
+### 2. 💳 Maxelpay (Recommandé)
+
+**Configuration** :
+```bash
+MAXELPAY_MERCHANT_ID=votre_merchant_id
+MAXELPAY_API_KEY=votre_api_key
+```
+
+**Processus** :
+1. Le client clique sur "Payer avec Maxelpay"
+2. La commande est créée avec un `orderReference` unique
+3. Le client est redirigé vers la plateforme sécurisée Maxelpay
+4. Après paiement, Maxelpay redirige vers `/api/payment/maxelpay-return`
+5. Le statut de la commande est mis à jour automatiquement
+
+**Sécurité** :
+- API Key incluse dans chaque requête
+- Matching des commandes par `orderReference` (pas par ID)
+- Webhook de retour sécurisé
+
+### 3. 🎫 Tickets PCS/Transcash
+
+**Sécurité** :
+```bash
+ENCRYPTION_KEY=votre_cle_minimum_32_caracteres_aleatoire
+```
+
+⚠️ **Important** : Les codes PCS/Transcash sont **chiffrés avec AES-256** avant stockage en base de données. La clé `ENCRYPTION_KEY` est **obligatoire** et doit être :
+- Au minimum 32 caractères
+- Générée aléatoirement
+- Gardée secrète (jamais commitée dans Git)
+
+**Processus** :
+1. Le client sélectionne le type de ticket (PCS ou Transcash)
+2. Le montant total est calculé automatiquement
+3. Le client saisit les codes de paiement
+4. Les codes sont **chiffrés** avant stockage en base de données
+5. La commande est créée avec le statut "En attente de validation"
+
+**Emails envoyés** :
+- ✅ **Client** : Confirmation de soumission avec récapitulatif
+- ✅ **Support** : Notification avec codes chiffrés à valider
+
+**Chiffrement** :
+```typescript
+// Les codes sont automatiquement chiffrés
+import { encryptCode, decryptCode } from './utils/encryption';
+
+const encrypted = encryptCode('CODE123456'); // Stocké en base
+const original = decryptCode(encrypted);      // Récupéré pour validation
 ```
 
 ### Exemple d'utilisation de l'API de paiement

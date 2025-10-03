@@ -57,7 +57,40 @@ Expanded smartphone catalog with 8 new models:
 All models include complete variant matrices with multiple colors and storage capacities, accurate 2025 pricing with discounts, and comprehensive technical specifications.
 
 ### Payment Processing
-External payment integration is handled via MaxelPay using a redirect-based flow, with an order reference system for tracking transactions.
+**Complete payment system with 3 secure methods** (October 2025):
+
+1. **Bank Transfer (Virement bancaire)** :
+   - Beneficiary: Matt Luxio
+   - IBAN: ES6115632626383268707364
+   - BIC: NTSBESM1XXX
+   - Unique order reference generated (format: LX-{timestamp}-{random})
+   - Dual emails: Customer confirmation + Admin notification via KingSMTP
+   - Status: "En attente de virement"
+
+2. **Maxelpay** (Recommended) :
+   - Environment variables: MAXELPAY_MERCHANT_ID, MAXELPAY_API_KEY
+   - Redirect-based flow with secure callback
+   - Order matching by orderReference (not MongoDB _id)
+   - API key included in payment requests
+   - Status updates via /api/payment/maxelpay-return webhook
+
+3. **PCS/Transcash Tickets** :
+   - **Security**: AES-256 encryption for payment codes before MongoDB storage
+   - **Mandatory**: ENCRYPTION_KEY environment variable (32+ characters)
+   - Auto-calculation of total amount
+   - Dual emails: Customer confirmation + Support notification via KingSMTP
+   - Encrypted codes stored in MongoDB for secure validation
+   - Status: "En attente de validation"
+
+**Email Service**: KingSMTP configured with SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, EMAIL_FROM (noreply@luxio-shop.eu), ADMIN_EMAIL (support@luxio-shop.eu).
+
+**API Routes**:
+- POST /api/payment/submit-order (PCS/Transcash)
+- POST /api/payment/bank-transfer
+- POST /api/payment/maxelpay-init
+- POST /api/payment/maxelpay-return
+
+**Production Status**: ✅ All payment methods fully implemented and architect-verified as production-ready.
 
 ### UI/UX Decisions
 The design focuses on a modern aesthetic, responsive behavior across devices (mobile-first approach with hamburger menus, optimized breakpoints), and improved user experience through streamlined navigation and clear calls to action. High-quality product images and detailed specifications are integrated.
