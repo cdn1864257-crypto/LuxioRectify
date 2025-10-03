@@ -48,7 +48,7 @@ export function LazyImage({ src, alt, className = '', 'data-testid': testId }: L
             <img
               src={placeholderUrl}
               alt="Loading..."
-              className={`w-full h-48 object-cover transition-opacity duration-300 ${
+              className={`w-full h-full object-cover transition-opacity duration-300 ${
                 loaded ? 'opacity-0' : 'opacity-100'
               }`}
             />
@@ -56,7 +56,7 @@ export function LazyImage({ src, alt, className = '', 'data-testid': testId }: L
           <img
             src={error ? errorPlaceholder : src}
             alt={alt}
-            className={`w-full h-48 object-cover transition-opacity duration-300 ${
+            className={`w-full h-full object-cover transition-opacity duration-300 ${
               loaded ? 'opacity-100' : 'opacity-0'
             } ${loaded ? '' : 'absolute top-0 left-0'}`}
             onLoad={handleLoad}
@@ -69,7 +69,7 @@ export function LazyImage({ src, alt, className = '', 'data-testid': testId }: L
         <img
           src={placeholderUrl}
           alt="Loading..."
-          className="w-full h-48 object-cover"
+          className="w-full h-full object-cover"
         />
       )}
     </div>
