@@ -1346,7 +1346,7 @@ export const products: Product[] = [
     price: 119,
     originalPrice: 149,
     discount: 20,
-    image: '/attached_assets/stock_images/nike_dunk_low_panda__63ded949.jpg',
+    image: '/attached_assets/NIKE+DUNK+LOW+RETRO_1759487487249.jpeg',
     category: 'sneakers',
     description: 'Panda',
     features: ['Retro basketball', 'Versatile style', 'Premium materials', 'Free shipping']
@@ -1357,7 +1357,7 @@ export const products: Product[] = [
     price: 199,
     originalPrice: 229,
     discount: 13,
-    image: '/attached_assets/stock_images/new_balance_990v6_gr_68c04952.jpg',
+    image: '/attached_assets/m990bk6_nb_02_i_1759487501879.webp',
     category: 'sneakers',
     description: 'Gray',
     features: ['Made in USA', 'Premium comfort', 'Classic design', 'Free shipping']
@@ -1390,7 +1390,7 @@ export const products: Product[] = [
     price: 69,
     originalPrice: 89,
     discount: 22,
-    image: '/attached_assets/stock_images/vans_old_skool_black_4df74cad.jpg',
+    image: '/attached_assets/Old-Skool-Shoes_1759487515282.jpg',
     category: 'sneakers',
     description: 'Black/White',
     features: ['Skate heritage', 'Waffle outsole', 'Iconic stripe', 'Free shipping']
@@ -1445,7 +1445,7 @@ export const products: Product[] = [
     price: 98,
     originalPrice: 118,
     discount: 17,
-    image: '/attached_assets/stock_images/allbirds_tree_runner_b4aa3677.jpg',
+    image: '/attached_assets/71HAeWiQ-wL._AC_SY395__1759487530132.jpg',
     category: 'sneakers',
     description: 'Natural White',
     features: ['Sustainable materials', 'Tree fiber', 'Comfortable', 'Free shipping']
