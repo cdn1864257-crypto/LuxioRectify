@@ -827,80 +827,6 @@ export const products: Product[] = [
       { color: 'Sage', capacity: '1TB', price: 1439, originalPrice: 1599, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Vert-Sauge_1759420439082.jpg' },
     ]
   },
-  // Xiaomi 15 Pro with variants
-  {
-    id: 'xiaomi-15-pro',
-    name: 'Xiaomi 15 Pro',
-    price: 849,
-    originalPrice: 949,
-    discount: 11,
-    image: '/attached_assets/stock_images/xiaomi_15_pro_smartp_ac80a368.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.73" LTPO AMOLED',
-    features: ['Snapdragon 8 Elite', 'Triple 50MP Leica', '6100mAh + 90W charging', 'IP68', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Black', capacity: '256GB', price: 849, originalPrice: 949 },
-      { color: 'Black', capacity: '512GB', price: 999, originalPrice: 1099 },
-      { color: 'Black', capacity: '1TB', price: 1199, originalPrice: 1299 },
-      { color: 'White', capacity: '256GB', price: 849, originalPrice: 949 },
-      { color: 'White', capacity: '512GB', price: 999, originalPrice: 1099 },
-      { color: 'White', capacity: '1TB', price: 1199, originalPrice: 1299 },
-      { color: 'Mocha', capacity: '256GB', price: 849, originalPrice: 949 },
-      { color: 'Mocha', capacity: '512GB', price: 999, originalPrice: 1099 },
-      { color: 'Mocha', capacity: '1TB', price: 1199, originalPrice: 1299 },
-      { color: 'Titanium', capacity: '512GB', price: 999, originalPrice: 1099 },
-      { color: 'Titanium', capacity: '1TB', price: 1199, originalPrice: 1299 },
-    ]
-  },
-  // Xiaomi 15T Pro with variants
-  {
-    id: 'xiaomi-15t-pro',
-    name: 'Xiaomi 15T Pro',
-    price: 540,
-    originalPrice: 600,
-    discount: 10,
-    image: '/attached_assets/stock_images/xiaomi_15t_pro_smart_f71eee46.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.83" OLED 144Hz',
-    features: ['Dimensity 9400+', '50MP triple camera', '5500mAh + 90W charging', 'IP68', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Titanium Gray', capacity: '256GB', price: 540, originalPrice: 600 },
-      { color: 'Titanium Gray', capacity: '512GB', price: 630, originalPrice: 700 },
-      { color: 'Titanium Gray', capacity: '1TB', price: 810, originalPrice: 900 },
-      { color: 'Titanium Blue', capacity: '256GB', price: 540, originalPrice: 600 },
-      { color: 'Titanium Blue', capacity: '512GB', price: 630, originalPrice: 700 },
-      { color: 'Titanium Blue', capacity: '1TB', price: 810, originalPrice: 900 },
-      { color: 'Titanium Black', capacity: '256GB', price: 540, originalPrice: 600 },
-      { color: 'Titanium Black', capacity: '512GB', price: 630, originalPrice: 700 },
-      { color: 'Titanium Black', capacity: '1TB', price: 810, originalPrice: 900 },
-      { color: 'Mocha', capacity: '256GB', price: 540, originalPrice: 600, image: '/attached_assets/Smartphone-Xiaomi-15T-Pro-6-83-5G-Double-Nano-SIM-512-Go-Mocha-concu-avec-Leica_1759420464103.jpg' },
-      { color: 'Mocha', capacity: '512GB', price: 630, originalPrice: 700, image: '/attached_assets/Smartphone-Xiaomi-15T-Pro-6-83-5G-Double-Nano-SIM-512-Go-Mocha-concu-avec-Leica_1759420464103.jpg' },
-      { color: 'Mocha', capacity: '1TB', price: 810, originalPrice: 900, image: '/attached_assets/Smartphone-Xiaomi-15T-Pro-6-83-5G-Double-Nano-SIM-512-Go-Mocha-concu-avec-Leica_1759420464103.jpg' },
-    ]
-  },
-  // Xiaomi 15T with variants
-  {
-    id: 'xiaomi-15t',
-    name: 'Xiaomi 15T',
-    price: 449,
-    originalPrice: 499,
-    discount: 10,
-    image: '/attached_assets/stock_images/xiaomi_15t_smartphon_3a23c11f.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.83" OLED 120Hz',
-    features: ['Dimensity 8400 Ultra', '50MP triple camera', '5500mAh battery', 'IP68', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Titan Black', capacity: '256GB', price: 449, originalPrice: 499 },
-      { color: 'Titan Black', capacity: '512GB', price: 539, originalPrice: 599 },
-      { color: 'Titan Blue', capacity: '256GB', price: 449, originalPrice: 499 },
-      { color: 'Titan Blue', capacity: '512GB', price: 539, originalPrice: 599 },
-      { color: 'Titan Gray', capacity: '256GB', price: 449, originalPrice: 499 },
-      { color: 'Titan Gray', capacity: '512GB', price: 539, originalPrice: 599 },
-    ]
-  },
   // Honor Magic 7 Pro with variants
   {
     id: 'honor-magic-7-pro',
@@ -1018,23 +944,6 @@ export const products: Product[] = [
       { color: 'Pink', capacity: '512GB', price: 809, originalPrice: 899 },
     ]
   },
-  // Asus Zenfone 12 Ultra with variants
-  {
-    id: 'asus-zenfone-12-ultra',
-    name: 'Asus Zenfone 12 Ultra',
-    price: 989,
-    originalPrice: 1099,
-    discount: 10,
-    image: '/attached_assets/27818093-1505-3756-1_1759425393108.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Gimbal Stabilization',
-    features: ['Snapdragon 8 Elite', '50MP gimbal OIS', '6.78" AMOLED 144Hz', '5500mAh + 65W charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Sage Green', capacity: '256GB', price: 989, originalPrice: 1099, image: '/attached_assets/27818093-1505-3756-1_1759425393108.jpg' },
-      { color: 'Sage Green', capacity: '512GB', price: 1169, originalPrice: 1299, image: '/attached_assets/27818093-1505-3756-1_1759425393108.jpg' },
-    ]
-  },
   // Fairphone 6 with variants
   {
     id: 'fairphone-6',
@@ -1051,27 +960,6 @@ export const products: Product[] = [
       { color: 'Forest Green', capacity: '256GB', price: 449, originalPrice: 499, image: '/attached_assets/Smartphone-Fairphone-Gen-6-6-31-5G-Double-SIM-256-Go-Vert-Foret_1759425451707.jpg' },
       { color: 'Horizon Black', capacity: '256GB', price: 449, originalPrice: 499, image: '/attached_assets/Smartphone-Fairphone-Gen-6-6-31-5G-Double-SIM-256-Go-Noir-Horizon_1759425468626.jpg' },
       { color: 'Cloud White', capacity: '256GB', price: 449, originalPrice: 499, image: '/attached_assets/Smartphone-Fairphone-Gen-6-6-31-5G-Double-SIM-256-Go-Blanc-Nuage_1759425492385.jpg' },
-    ]
-  },
-  // Redmi Note 14 Pro+ 5G with variants
-  {
-    id: 'redmi-note-14-pro-plus',
-    name: 'Redmi Note 14 Pro+ 5G',
-    price: 360,
-    originalPrice: 400,
-    discount: 10,
-    image: '/attached_assets/smartphones/redmi-note-14-pro-plus.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 200MP Camera',
-    features: ['Snapdragon 7s Gen 3', '200MP main with OIS', '5110mAh + 120W charging', 'IP68', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Sand Gold', capacity: '256GB', price: 360, originalPrice: 400 },
-      { color: 'Sand Gold', capacity: '512GB', price: 432, originalPrice: 480 },
-      { color: 'Midnight Black', capacity: '256GB', price: 360, originalPrice: 400 },
-      { color: 'Midnight Black', capacity: '512GB', price: 432, originalPrice: 480 },
-      { color: 'Frost Blue', capacity: '256GB', price: 360, originalPrice: 400 },
-      { color: 'Frost Blue', capacity: '512GB', price: 432, originalPrice: 480 },
     ]
   },
   // Sony Xperia 1 VII with variants
@@ -1095,49 +983,6 @@ export const products: Product[] = [
       { color: 'Khaki Green', capacity: '1TB', price: 1799, originalPrice: 1999 },
       { color: 'Platinum Silver', capacity: '256GB', price: 1349, originalPrice: 1499 },
       { color: 'Platinum Silver', capacity: '512GB', price: 1529, originalPrice: 1699 },
-    ]
-  },
-  // OnePlus Nord 5 with variants
-  {
-    id: 'oneplus-nord-5',
-    name: 'OnePlus Nord 5',
-    price: 449,
-    originalPrice: 499,
-    discount: 10,
-    image: '/attached_assets/smartphones/oneplus-nord-5.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Value Flagship',
-    features: ['Snapdragon 7+ Gen 3', '6.74" AMOLED 120Hz', '50MP dual camera', '5000mAh + 80W charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Aqua Surge', capacity: '256GB', price: 449, originalPrice: 499 },
-      { color: 'Aqua Surge', capacity: '512GB', price: 539, originalPrice: 599 },
-      { color: 'Misty Gray', capacity: '256GB', price: 449, originalPrice: 499 },
-      { color: 'Misty Gray', capacity: '512GB', price: 539, originalPrice: 599 },
-      { color: 'Nord Green', capacity: '256GB', price: 449, originalPrice: 499 },
-      { color: 'Nord Green', capacity: '512GB', price: 539, originalPrice: 599 },
-    ]
-  },
-  // Motorola Edge 60 Ultra with variants
-  {
-    id: 'motorola-edge-60-ultra',
-    name: 'Motorola Edge 60 Ultra',
-    price: 899,
-    originalPrice: 999,
-    discount: 10,
-    image: '/attached_assets/smartphones/motorola-edge-60-ultra.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.7" Endless Edge Display',
-    features: ['Snapdragon 8 Gen 3', '6.7" pOLED 165Hz', '50MP triple camera', '4800mAh + 125W charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Eclipse Black', capacity: '256GB', price: 899, originalPrice: 999 },
-      { color: 'Eclipse Black', capacity: '512GB', price: 1079, originalPrice: 1199 },
-      { color: 'Eclipse Black', capacity: '1TB', price: 1259, originalPrice: 1399 },
-      { color: 'Interstellar Blue', capacity: '256GB', price: 899, originalPrice: 999 },
-      { color: 'Interstellar Blue', capacity: '512GB', price: 1079, originalPrice: 1199 },
-      { color: 'Smoky Quartz', capacity: '256GB', price: 899, originalPrice: 999 },
-      { color: 'Smoky Quartz', capacity: '512GB', price: 1079, originalPrice: 1199 },
     ]
   },
   // Realme GT 7 Pro with variants
@@ -1185,27 +1030,6 @@ export const products: Product[] = [
       { color: 'Silver', capacity: '1TB', price: 809, originalPrice: 899 },
     ]
   },
-  // Asus Zenfone 12 with variants
-  {
-    id: 'asus-zenfone-12',
-    name: 'Asus Zenfone 12',
-    price: 629,
-    originalPrice: 699,
-    discount: 10,
-    image: '/attached_assets/smartphones/asus-zenfone-12.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Compact Flagship',
-    features: ['Snapdragon 8 Gen 3', '5.9" AMOLED 144Hz', '50MP triple camera', 'Compact & lightweight', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Midnight Black', capacity: '256GB', price: 629, originalPrice: 699 },
-      { color: 'Midnight Black', capacity: '512GB', price: 719, originalPrice: 799 },
-      { color: 'Horizon Silver', capacity: '256GB', price: 629, originalPrice: 699 },
-      { color: 'Horizon Silver', capacity: '512GB', price: 719, originalPrice: 799 },
-      { color: 'Aurora Green', capacity: '256GB', price: 629, originalPrice: 699 },
-      { color: 'Aurora Green', capacity: '512GB', price: 719, originalPrice: 799 },
-    ]
-  },
   // === GAMING SMARTPHONES ===
   // Asus ROG Phone 9 Pro with variants
   {
@@ -1243,23 +1067,6 @@ export const products: Product[] = [
       { color: 'Storm White', capacity: '512GB', price: 1169, originalPrice: 1299, image: '/attached_assets/27989829-1505-3756-1_1759425430264.jpg' },
     ]
   },
-  // Lenovo Legion Phone with variants
-  {
-    id: 'lenovo-legion-phone',
-    name: 'Lenovo Legion Phone',
-    price: 809,
-    originalPrice: 899,
-    discount: 10,
-    image: '/attached_assets/smartphones/lenovo-legion-phone.jpg',
-    category: 'smartphones',
-    description: '512GB - Side Pop-up Camera',
-    features: ['Snapdragon 8 Gen 3', 'Side pop-up camera', '6.78" AMOLED 144Hz', '5000mAh + 68W charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Titanium White', capacity: '512GB', price: 809, originalPrice: 899 },
-      { color: 'Ultimate Black', capacity: '512GB', price: 809, originalPrice: 899 },
-    ]
-  },
   // Nubia RedMagic 10 Pro with variants
   {
     id: 'nubia-redmagic-10-pro',
@@ -1284,72 +1091,6 @@ export const products: Product[] = [
       { color: 'Shadowblade', capacity: '1TB', price: 900, originalPrice: 1000 },
     ]
   },
-  // Nubia RedMagic 10 Air 5G with variants
-  {
-    id: 'nubia-redmagic-10-air',
-    name: 'Nubia RedMagic 10 Air 5G',
-    price: 494,
-    originalPrice: 549,
-    discount: 10,
-    image: '/attached_assets/smartphones/nubia-redmagic-10-air.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Ultra-thin Gaming',
-    features: ['Snapdragon 8 Gen 3', 'Thinner design', '6.8" AMOLED 120Hz', '6000mAh + 80W charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Twilight', capacity: '256GB', price: 494, originalPrice: 549 },
-      { color: 'Twilight', capacity: '512GB', price: 629, originalPrice: 699 },
-      { color: 'Hailstone', capacity: '256GB', price: 494, originalPrice: 549 },
-      { color: 'Hailstone', capacity: '512GB', price: 629, originalPrice: 699 },
-      { color: 'Flare', capacity: '256GB', price: 494, originalPrice: 549 },
-      { color: 'Flare', capacity: '512GB', price: 629, originalPrice: 699 },
-    ]
-  },
-  // Xiaomi 14T with variants
-  {
-    id: 'xiaomi-14t',
-    name: 'Xiaomi 14T',
-    price: 372,
-    originalPrice: 537,
-    discount: 31,
-    image: '/attached_assets/stock_images/xiaomi_14t_smartphon_a0796c31.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.67" AMOLED Display',
-    features: ['Dimensity 8300 Ultra', '50MP Leica triple camera', '5000mAh + 67W charging', 'IP68', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Titan Black', capacity: '256GB', price: 372, originalPrice: 537 },
-      { color: 'Titan Black', capacity: '512GB', price: 445, originalPrice: 645 },
-      { color: 'Titan Blue', capacity: '256GB', price: 372, originalPrice: 537 },
-      { color: 'Titan Blue', capacity: '512GB', price: 445, originalPrice: 645 },
-      { color: 'Titan Gray', capacity: '256GB', price: 372, originalPrice: 537 },
-      { color: 'Titan Gray', capacity: '512GB', price: 445, originalPrice: 645 },
-    ]
-  },
-  // Xiaomi 14T Pro with variants
-  {
-    id: 'xiaomi-14t-pro',
-    name: 'Xiaomi 14T Pro',
-    price: 496,
-    originalPrice: 661,
-    discount: 25,
-    image: '/attached_assets/stock_images/xiaomi_14t_pro_smart_04870bfb.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.67" AMOLED 144Hz',
-    features: ['Dimensity 9300+', '50MP Leica triple camera', '5000mAh + 120W charging', 'IP68', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Titan Black', capacity: '256GB', price: 496, originalPrice: 661 },
-      { color: 'Titan Black', capacity: '512GB', price: 661, originalPrice: 744 },
-      { color: 'Titan Black', capacity: '1TB', price: 744, originalPrice: 826 },
-      { color: 'Titan Blue', capacity: '256GB', price: 496, originalPrice: 661 },
-      { color: 'Titan Blue', capacity: '512GB', price: 661, originalPrice: 744 },
-      { color: 'Titan Blue', capacity: '1TB', price: 744, originalPrice: 826 },
-      { color: 'Titan Gray', capacity: '256GB', price: 496, originalPrice: 661 },
-      { color: 'Titan Gray', capacity: '512GB', price: 661, originalPrice: 744 },
-      { color: 'Titan Gray', capacity: '1TB', price: 744, originalPrice: 826 },
-    ]
-  },
   // Xiaomi 14 with variants
   {
     id: 'xiaomi-14',
@@ -1370,116 +1111,6 @@ export const products: Product[] = [
       { color: 'Jade Green', capacity: '256GB', price: 744, originalPrice: 909 },
       { color: 'Jade Green', capacity: '512GB', price: 827, originalPrice: 1009 },
     ]
-  },
-  // Samsung Galaxy A36 5G with variants
-  {
-    id: 'samsung-galaxy-a36',
-    name: 'Samsung Galaxy A36 5G',
-    price: 314,
-    originalPrice: 372,
-    discount: 16,
-    image: '/attached_assets/stock_images/samsung_galaxy_s25_s_752fec1b.jpg',
-    category: 'smartphones',
-    description: 'From 128GB - 6.6" Super AMOLED',
-    features: ['Exynos 1380', '6.6" Super AMOLED 120Hz', '50MP triple camera', 'IP67 water resistance', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Awesome Navy', capacity: '128GB', price: 279, originalPrice: 330 },
-      { color: 'Awesome Navy', capacity: '256GB', price: 314, originalPrice: 372 },
-      { color: 'Awesome Lilac', capacity: '128GB', price: 279, originalPrice: 330 },
-      { color: 'Awesome Lilac', capacity: '256GB', price: 314, originalPrice: 372 },
-      { color: 'Awesome Mint', capacity: '128GB', price: 279, originalPrice: 330 },
-      { color: 'Awesome Mint', capacity: '256GB', price: 314, originalPrice: 372 },
-    ]
-  },
-  // Samsung Galaxy A26 5G with variants
-  {
-    id: 'samsung-galaxy-a26',
-    name: 'Samsung Galaxy A26 5G',
-    price: 248,
-    originalPrice: 306,
-    discount: 19,
-    image: '/attached_assets/stock_images/samsung_galaxy_s25_n_037e580a.jpg',
-    category: 'smartphones',
-    description: 'From 128GB - 6.64" Super AMOLED',
-    features: ['Exynos 1280', '6.64" Super AMOLED 120Hz', '50MP dual camera', '5000mAh battery', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Black', capacity: '128GB', price: 223, originalPrice: 275 },
-      { color: 'Black', capacity: '256GB', price: 248, originalPrice: 306 },
-      { color: 'Light Blue', capacity: '128GB', price: 223, originalPrice: 275 },
-      { color: 'Light Blue', capacity: '256GB', price: 248, originalPrice: 306 },
-      { color: 'Light Violet', capacity: '128GB', price: 223, originalPrice: 275 },
-      { color: 'Light Violet', capacity: '256GB', price: 248, originalPrice: 306 },
-    ]
-  },
-  // Samsung Galaxy A16 with variants
-  {
-    id: 'samsung-galaxy-a16',
-    name: 'Samsung Galaxy A16 5G',
-    price: 165,
-    originalPrice: 195,
-    discount: 15,
-    image: '/attached_assets/stock_images/samsung_galaxy_a16_5_9b81659d.jpg',
-    category: 'smartphones',
-    description: 'From 128GB - 6.7" Super AMOLED',
-    features: ['Dimensity 6300', '6.7" Super AMOLED 90Hz', '50MP triple camera', '5000mAh battery', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Black', capacity: '128GB', price: 165, originalPrice: 195 },
-      { color: 'Black', capacity: '256GB', price: 185, originalPrice: 220 },
-      { color: 'Blue', capacity: '128GB', price: 165, originalPrice: 195 },
-      { color: 'Blue', capacity: '256GB', price: 185, originalPrice: 220 },
-      { color: 'Gold', capacity: '128GB', price: 165, originalPrice: 195 },
-      { color: 'Gold', capacity: '256GB', price: 185, originalPrice: 220 },
-    ]
-  },
-  // Samsung Galaxy M15 5G with variants
-  {
-    id: 'samsung-galaxy-m15',
-    name: 'Samsung Galaxy M15 5G',
-    price: 140,
-    originalPrice: 165,
-    discount: 15,
-    image: '/attached_assets/stock_images/samsung_galaxy_m15_5_e45587d7.jpg',
-    category: 'smartphones',
-    description: 'From 128GB - 6.5" Super AMOLED',
-    features: ['Dimensity 6100+', '6.5" Super AMOLED 90Hz', '50MP triple camera', '6000mAh battery', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Stone Gray', capacity: '128GB', price: 140, originalPrice: 165 },
-      { color: 'Stone Gray', capacity: '256GB', price: 158, originalPrice: 186 },
-      { color: 'Light Blue', capacity: '128GB', price: 140, originalPrice: 165 },
-      { color: 'Light Blue', capacity: '256GB', price: 158, originalPrice: 186 },
-      { color: 'Blue Black', capacity: '128GB', price: 140, originalPrice: 165 },
-      { color: 'Blue Black', capacity: '256GB', price: 158, originalPrice: 186 },
-    ]
-  },
-  // Motorola Edge 60 Pro
-  {
-    id: 'motorola-edge-60-pro',
-    name: 'Motorola Edge 60 Pro',
-    price: 599,
-    originalPrice: 749,
-    discount: 20,
-    image: '/attached_assets/stock_images/motorola_edge_60_pro_1ce06e87.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Quad-curved flagship',
-    features: ['Snapdragon 8 Gen 3', '6.7" pOLED 144Hz', 'Sony LYTIA 700C 50MP + quad camera', '6000mAh battery', 'Free shipping'],
-    hasVariants: false
-  },
-  // Lenovo Legion Phone Duel 2
-  {
-    id: 'lenovo-legion-phone-duel-2',
-    name: 'Lenovo Legion Phone Duel 2',
-    price: 549,
-    originalPrice: 699,
-    discount: 21,
-    image: '/attached_assets/stock_images/lenovo_legion_phone__fb9ffec6.jpg',
-    category: 'smartphones',
-    description: 'Gaming phone - Dual cooling',
-    features: ['Snapdragon 888', '6.92" AMOLED 144Hz', 'Pop-up camera + octa triggers', '5500mAh + 90W dual charging', 'Free shipping'],
-    hasVariants: false
   },
 
   // === SMARTWATCHES (16 products) ===
