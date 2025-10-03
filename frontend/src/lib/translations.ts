@@ -643,6 +643,9 @@ export const translations: Record<Language, Translations> = {
     invalidEmail: 'Veuillez saisir une adresse email valide',
     invalidPhone: 'Veuillez saisir un numéro de téléphone valide',
     ticketCodeSent: 'Codes tickets envoyés avec succès',
+    enterTicketCode: 'Veuillez entrer au moins un code ticket',
+    orderFailed: 'Commande échouée. Veuillez réessayer.',
+    redirectingToMaxelPay: 'Redirection vers MaxelPay...',
     
     // Search & Filters
     searchPlaceholder: 'Rechercher des produits...',
@@ -956,6 +959,9 @@ export const translations: Record<Language, Translations> = {
     invalidEmail: 'Por favor, introduce un email válido',
     invalidPhone: 'Por favor, introduce un teléfono válido',
     ticketCodeSent: 'Códigos de tickets enviados correctamente',
+    enterTicketCode: 'Por favor, introduce al menos un código de ticket',
+    orderFailed: 'Pedido fallido. Por favor, inténtalo de nuevo.',
+    redirectingToMaxelPay: 'Redirigiendo a MaxelPay...',
     
     // Search & Filters
     searchPlaceholder: 'Buscar productos...',
@@ -1269,6 +1275,9 @@ export const translations: Record<Language, Translations> = {
     invalidEmail: 'Por favor, introduza um email válido',
     invalidPhone: 'Por favor, introduza um telefone válido',
     ticketCodeSent: 'Códigos de tickets enviados com sucesso',
+    enterTicketCode: 'Por favor, insira pelo menos um código de ticket',
+    orderFailed: 'Pedido falhou. Por favor, tente novamente.',
+    redirectingToMaxelPay: 'Redirecionando para MaxelPay...',
     
     // Search & Filters
     searchPlaceholder: 'Pesquisar produtos...',
@@ -1582,6 +1591,9 @@ export const translations: Record<Language, Translations> = {
     invalidEmail: 'Proszę wprowadzić poprawny adres email',
     invalidPhone: 'Proszę wprowadzić poprawny numer telefonu',
     ticketCodeSent: 'Kody kart wysłane pomyślnie',
+    enterTicketCode: 'Proszę wprowadzić co najmniej jeden kod karty',
+    orderFailed: 'Zamówienie nie powiodło się. Spróbuj ponownie.',
+    redirectingToMaxelPay: 'Przekierowanie do MaxelPay...',
     
     // Search & Filters
     searchPlaceholder: 'Szukaj produktów...',
@@ -1895,6 +1907,9 @@ export const translations: Record<Language, Translations> = {
     invalidEmail: 'Inserisci un indirizzo email valido',
     invalidPhone: 'Inserisci un numero di telefono valido',
     ticketCodeSent: 'Codici ticket inviati con successo',
+    enterTicketCode: 'Inserisci almeno un codice ticket',
+    orderFailed: 'Ordine fallito. Riprova.',
+    redirectingToMaxelPay: 'Reindirizzamento a MaxelPay...',
     
     // Search & Filters
     searchPlaceholder: 'Cerca prodotti...',
@@ -2208,6 +2223,9 @@ export const translations: Record<Language, Translations> = {
     invalidEmail: 'Adjon meg érvényes e-mail címet',
     invalidPhone: 'Adjon meg érvényes telefonszámot',
     ticketCodeSent: 'Kártya kódok sikeresen elküldve',
+    enterTicketCode: 'Kérjük, adjon meg legalább egy kártya kódot',
+    orderFailed: 'Rendelés sikertelen. Kérjük, próbálja újra.',
+    redirectingToMaxelPay: 'Átirányítás MaxelPay-ra...',
     
     // Search & Filters
     searchPlaceholder: 'Termékek keresése...',
