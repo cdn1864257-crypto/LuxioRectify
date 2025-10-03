@@ -287,10 +287,7 @@ export default function Premium() {
             <p className="text-xl text-slate-300" data-testid="text-premium-subtitle">
               {t('discoverLatest') || 'Discover the latest flagship smartphones with exclusive discounts'}
             </p>
-            <div className="mt-6 flex items-center gap-4">
-              <Badge variant="secondary" className="text-lg px-4 py-2">
-                {filteredSmartphones.length} {t('products') || 'products'}
-              </Badge>
+            <div className="mt-6">
               <Badge variant="destructive" className="text-lg px-4 py-2">
                 {t('upTo') || 'Up to'} 37% {t('off') || 'OFF'}
               </Badge>
