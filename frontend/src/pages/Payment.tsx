@@ -334,6 +334,19 @@ Montant: ${orderTotal.toFixed(2)} €`;
                         {paymentMethod === 'tickets' && (
                           <div className="px-4 pb-4 space-y-3">
                             <Separator className="mb-4" />
+                            <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-4">
+                              <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
+                                <AlertCircle className="h-4 w-4" />
+                                Instructions pour le paiement par tickets
+                              </h4>
+                              <ul className="text-xs space-y-1 text-muted-foreground">
+                                <li>• Sélectionnez le type de ticket (PCS ou TransCash)</li>
+                                <li>• Entrez le code de votre ticket (ex: 1234567890123456)</li>
+                                <li>• Indiquez le montant exact disponible sur chaque ticket</li>
+                                <li>• Vous pouvez ajouter plusieurs tickets si nécessaire</li>
+                                <li>• Le total doit être égal ou supérieur au montant de la commande</li>
+                              </ul>
+                            </div>
                             {tickets.map((ticket, index) => (
                               <div key={ticket.id} className="space-y-2 p-3 bg-muted/50 rounded-lg">
                                 <div className="flex items-center justify-between mb-2">
@@ -448,6 +461,19 @@ Montant: ${orderTotal.toFixed(2)} €`;
                         {paymentMethod === 'bank' && (
                           <div className="px-4 pb-4">
                             <Separator className="mb-4" />
+                            <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-4">
+                              <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
+                                <AlertCircle className="h-4 w-4" />
+                                Instructions pour le virement bancaire
+                              </h4>
+                              <ul className="text-xs space-y-1 text-muted-foreground">
+                                <li>• Effectuez un virement vers le compte indiqué ci-dessous</li>
+                                <li>• ⚠️ IMPORTANT : Indiquez OBLIGATOIREMENT la référence de commande</li>
+                                <li>• Le montant doit correspondre exactement à celui indiqué</li>
+                                <li>• Votre commande sera traitée après réception du virement (2-3 jours)</li>
+                                <li>• Vous recevrez un email de confirmation après validation</li>
+                              </ul>
+                            </div>
                             <div className="bg-muted/50 rounded-lg p-4 space-y-3">
                               <div>
                                 <Label className="text-xs text-muted-foreground">IBAN</Label>
@@ -498,20 +524,47 @@ Montant: ${orderTotal.toFixed(2)} €`;
 
                       {/* MaxelPay */}
                       <div 
-                        className={`flex items-center space-x-3 p-4 rounded-lg border-2 transition-colors cursor-pointer ${
-                          paymentMethod === 'maxelpay' ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'
+                        className={`border-2 rounded-lg transition-colors ${
+                          paymentMethod === 'maxelpay' ? 'border-primary bg-primary/5' : 'border-border'
                         }`}
-                        onClick={() => setPaymentMethod('maxelpay')}
-                        data-testid="payment-option-maxelpay"
                       >
-                        <RadioGroupItem value="maxelpay" id="maxelpay" />
-                        <Label htmlFor="maxelpay" className="flex-1 flex items-center justify-between cursor-pointer">
-                          <div className="flex items-center gap-3">
-                            <Wallet className="h-5 w-5 text-primary" />
-                            <span className="font-medium">MaxelPay</span>
+                        <div 
+                          className="flex items-center space-x-3 p-4 cursor-pointer"
+                          onClick={() => setPaymentMethod('maxelpay')}
+                          data-testid="payment-option-maxelpay"
+                        >
+                          <RadioGroupItem value="maxelpay" id="maxelpay" />
+                          <Label htmlFor="maxelpay" className="flex-1 flex items-center justify-between cursor-pointer">
+                            <div className="flex items-center gap-3">
+                              <Wallet className="h-5 w-5 text-primary" />
+                              <span className="font-medium">MaxelPay (Crypto & Cartes)</span>
+                            </div>
+                            <Badge>Recommandé</Badge>
+                          </Label>
+                        </div>
+                        
+                        {paymentMethod === 'maxelpay' && (
+                          <div className="px-4 pb-4">
+                            <Separator className="mb-4" />
+                            <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                              <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
+                                <AlertCircle className="h-4 w-4" />
+                                Instructions pour MaxelPay
+                              </h4>
+                              <ul className="text-xs space-y-1 text-muted-foreground mb-3">
+                                <li>• Paiement instantané et sécurisé par cryptomonnaies ou carte bancaire</li>
+                                <li>• Vous serez redirigé vers la plateforme MaxelPay</li>
+                                <li>• Accepte : Bitcoin, Ethereum, USDT, Visa, Mastercard</li>
+                                <li>• Votre commande sera confirmée immédiatement après paiement</li>
+                                <li>• Transaction sécurisée avec cryptage SSL 256 bits</li>
+                              </ul>
+                              <div className="flex items-center gap-2 text-xs text-green-600 dark:text-green-400">
+                                <CheckCircle2 className="h-4 w-4" />
+                                <span className="font-medium">Méthode recommandée pour un traitement rapide</span>
+                              </div>
+                            </div>
                           </div>
-                          <Badge>Recommandé</Badge>
-                        </Label>
+                        )}
                       </div>
                     </div>
                   </RadioGroup>
