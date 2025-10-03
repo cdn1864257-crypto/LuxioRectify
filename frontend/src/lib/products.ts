@@ -1592,7 +1592,7 @@ export const products: Product[] = [
     price: 649,
     originalPrice: 749,
     discount: 13,
-    image: 'https://images.unsplash.com/photo-1559311320-36b8d171c6e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/xiaomi-electric-scooter-4-ultra-black_1759495926795.jpg',
     category: 'mobility',
     description: '70km range',
     features: ['25 km/h max speed', '70km range', 'Dual braking system', 'Free shipping']
@@ -1603,7 +1603,7 @@ export const products: Product[] = [
     price: 799,
     originalPrice: 899,
     discount: 11,
-    image: 'https://images.unsplash.com/photo-1585748347325-d0f4db2f7b11?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/segway-ninebot-kickscooter-max-g2d_1759495940010.jpg',
     category: 'mobility',
     description: '70km range',
     features: ['30 km/h max speed', '70km range', 'Self-healing tires', 'Free shipping']
@@ -1614,7 +1614,7 @@ export const products: Product[] = [
     price: 2299,
     originalPrice: 2599,
     discount: 12,
-    image: 'https://images.unsplash.com/photo-1571333250630-f0230c320b6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/00c6793c-s5__w580_1759495952489.jpeg',
     category: 'mobility',
     description: '150km range',
     features: ['32 km/h assisted', '150km range', 'Anti-theft tracking', 'Free shipping']
@@ -1625,7 +1625,7 @@ export const products: Product[] = [
     price: 2190,
     originalPrice: 2490,
     discount: 12,
-    image: 'https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/IMG_5160-Photoroom_610x_crop_center_1759495964426.jpg',
     category: 'mobility',
     description: '70km range',
     features: ['25 km/h assisted', '70km range', 'Connected app', 'Free shipping']
@@ -1636,7 +1636,7 @@ export const products: Product[] = [
     price: 549,
     originalPrice: 629,
     discount: 13,
-    image: 'https://images.unsplash.com/photo-1598289431512-b97b0917affc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/ninebot-by-segway-kickscooter-f2-pro-e_1759495992398.jpg',
     category: 'mobility',
     description: '55km range',
     features: ['25 km/h max speed', '55km range', 'IPX5 water resistant', 'Free shipping']
@@ -1647,7 +1647,7 @@ export const products: Product[] = [
     price: 2495,
     originalPrice: 2795,
     discount: 11,
-    image: 'https://images.unsplash.com/photo-1559911567-88ba57e5e15a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/Medium-691642YCL041000_A_1759496006225.jpg',
     category: 'mobility',
     description: '120km range',
     features: ['32 km/h max speed', '120km range', 'Retro design', 'Free shipping']
@@ -1658,7 +1658,7 @@ export const products: Product[] = [
     price: 449,
     originalPrice: 499,
     discount: 10,
-    image: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/51-WW1QXfoL._AC_SY355__1759496021443.jpg',
     category: 'mobility',
     description: '50km range',
     features: ['25 km/h max speed', '50km range', 'Foldable design', 'Free shipping']
@@ -1669,7 +1669,7 @@ export const products: Product[] = [
     price: 1899,
     originalPrice: 2099,
     discount: 10,
-    image: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/a53016_c3370a24d1204690bc66e82700c8fadb_mv2-600x400.jpeg_1759496036901.webp',
     category: 'mobility',
     description: '72km range',
     features: ['32 km/h assisted', '72km range', 'Cargo ready', 'Free shipping']
@@ -1680,7 +1680,7 @@ export const products: Product[] = [
     price: 349,
     originalPrice: 399,
     discount: 13,
-    image: 'https://images.unsplash.com/photo-1600796603940-76c6c06c7fdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/3d776f686a0484865e4e07d7afdca55c~2_1759496055735.jpg',
     category: 'mobility',
     description: '20km range',
     features: ['20 km/h max speed', '20km range', 'Lightweight 13kg', 'Free shipping']
@@ -1691,7 +1691,7 @@ export const products: Product[] = [
     price: 3299,
     originalPrice: 3699,
     discount: 11,
-    image: 'https://images.unsplash.com/photo-1544191696-102dbdaeefc0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/velo-pliant-electrique-tern-vektron-q9_1759496068117.jpg',
     category: 'mobility',
     description: '100km range',
     features: ['25 km/h assisted', '100km range', 'Folds compact', 'Free shipping']
@@ -1702,7 +1702,7 @@ export const products: Product[] = [
     price: 1199,
     originalPrice: 1349,
     discount: 11,
-    image: 'https://images.unsplash.com/photo-1623312781503-2a24e03e0013?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/trottinette_electrique_inokim_quick4_super_pas_cher-251437_1759496089194.jpg',
     category: 'mobility',
     description: '65km range',
     features: ['30 km/h max speed', '65km range', 'Premium build', 'Free shipping']
@@ -1713,7 +1713,7 @@ export const products: Product[] = [
     price: 4299,
     originalPrice: 4799,
     discount: 10,
-    image: 'https://images.unsplash.com/photo-1617912734022-51e762ac8d18?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/4209557966_1759496101986.png',
     category: 'mobility',
     description: '90km range',
     features: ['25 km/h assisted', '90km range', 'Carbon fiber frame', 'Free shipping']
