@@ -55,6 +55,16 @@ export default function Payment() {
   // États pour le virement bancaire
   const [orderReference, setOrderReference] = useState<string>('');
   const [copied, setCopied] = useState(false);
+  
+  // États pour l'adresse de livraison
+  const [isEditingAddress, setIsEditingAddress] = useState(false);
+  const [shippingAddress, setShippingAddress] = useState({
+    fullName: '',
+    address: '',
+    city: '',
+    country: '',
+    phone: ''
+  });
 
   useEffect(() => {
     if (!user) {
@@ -70,6 +80,15 @@ export default function Payment() {
     // Générer une référence de commande unique
     const ref = `LX${Date.now().toString().slice(-8)}`;
     setOrderReference(ref);
+    
+    // Pré-remplir l'adresse de livraison avec les données de l'utilisateur
+    setShippingAddress({
+      fullName: `${user.firstName} ${user.lastName}`,
+      address: user.address || '',
+      city: user.city || '',
+      country: user.country || '',
+      phone: user.phone || ''
+    });
   }, [user, cart, navigate]);
 
   // Calculer le total des tickets
@@ -106,8 +125,9 @@ export default function Payment() {
   };
 
   const copyBankDetails = async () => {
-    const bankInfo = `IBAN: FR76 1234 5678 9012 3456 7890 123
-BIC: LUXIFRPP
+    const bankInfo = `Bénéficiaire: Matt Luxio
+IBAN: ES61 1563 2626 3832 6870 7364
+BIC: NTSBESM1XXX
 Référence: ${orderReference}
 Montant: ${orderTotal.toFixed(2)} €`;
 
@@ -156,7 +176,11 @@ Montant: ${orderTotal.toFixed(2)} €`;
       // Préparer les données pour l'envoi
       const orderData = {
         customerEmail: user?.email || '',
-        customerName: `${user?.firstName || ''} ${user?.lastName || ''}`,
+        customerName: shippingAddress.fullName,
+        customerAddress: shippingAddress.address,
+        customerCity: shippingAddress.city,
+        customerCountry: shippingAddress.country,
+        customerPhone: shippingAddress.phone,
         productId: cart[0].id,
         productName: cart.map(item => `${item.name} x${item.quantity}`).join(', '),
         productModel: cart.length > 1 ? `${cart.length} articles` : '',
@@ -216,6 +240,10 @@ Montant: ${orderTotal.toFixed(2)} €`;
     
     try {
       // Créer l'objet commande pour Maxelpay
+      const nameParts = shippingAddress.fullName.split(' ');
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || '';
+      
       const order = {
         reference: orderReference,
         items: cart,
@@ -223,12 +251,12 @@ Montant: ${orderTotal.toFixed(2)} €`;
         status: 'pending' as const,
         date: new Date().toISOString(),
         customerInfo: {
-          firstName: user.firstName,
-          lastName: user.lastName,
-          address: user.address || '',
-          city: user.city || '',
-          country: user.country || '',
-          phone: user.phone || ''
+          firstName,
+          lastName,
+          address: shippingAddress.address,
+          city: shippingAddress.city,
+          country: shippingAddress.country,
+          phone: shippingAddress.phone
         }
       };
 
@@ -335,17 +363,29 @@ Montant: ${orderTotal.toFixed(2)} €`;
                           <div className="px-4 pb-4 space-y-3">
                             <Separator className="mb-4" />
                             <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-4">
-                              <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
+                              <h4 className="font-semibold text-sm mb-3 flex items-center gap-2">
                                 <AlertCircle className="h-4 w-4" />
                                 Instructions pour le paiement par tickets
                               </h4>
-                              <ul className="text-xs space-y-1 text-muted-foreground">
-                                <li>• Sélectionnez le type de ticket (PCS ou TransCash)</li>
-                                <li>• Entrez le code de votre ticket (ex: 1234567890123456)</li>
-                                <li>• Indiquez le montant exact disponible sur chaque ticket</li>
-                                <li>• Vous pouvez ajouter plusieurs tickets si nécessaire</li>
-                                <li>• Le total doit être égal ou supérieur au montant de la commande</li>
+                              <ul className="text-xs space-y-1.5 text-muted-foreground mb-3">
+                                <li>• <strong>Sélectionnez le type</strong> : PCS ou TransCash</li>
+                                <li>• <strong>Code du ticket</strong> : Saisissez le code à 16 chiffres (ex: 1234 5678 9012 3456)</li>
+                                <li>• <strong>Montant disponible</strong> : Indiquez le solde exact de chaque ticket en euros</li>
+                                <li>• <strong>Multi-tickets</strong> : Ajoutez autant de tickets que nécessaire pour atteindre le montant requis</li>
+                                <li>• <strong>Validation</strong> : Le bouton "Payer" s'active automatiquement quand le total ≥ montant de la commande</li>
                               </ul>
+                              <div className="mt-3 pt-3 border-t border-blue-200 dark:border-blue-800">
+                                <p className="text-xs mb-2 font-medium">Vous n'avez pas de tickets ?</p>
+                                <a 
+                                  href="https://www.recharge.com" 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1 text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                                  data-testid="link-recharge"
+                                >
+                                  Acheter des tickets PCS/TransCash sur Recharge.com →
+                                </a>
+                              </div>
                             </div>
                             {tickets.map((ticket, index) => (
                               <div key={ticket.id} className="space-y-2 p-3 bg-muted/50 rounded-lg">
@@ -476,12 +516,16 @@ Montant: ${orderTotal.toFixed(2)} €`;
                             </div>
                             <div className="bg-muted/50 rounded-lg p-4 space-y-3">
                               <div>
+                                <Label className="text-xs text-muted-foreground">Bénéficiaire</Label>
+                                <p className="font-semibold mt-1">Matt Luxio</p>
+                              </div>
+                              <div>
                                 <Label className="text-xs text-muted-foreground">IBAN</Label>
-                                <p className="font-mono text-sm font-semibold mt-1">FR76 1234 5678 9012 3456 7890 123</p>
+                                <p className="font-mono text-sm font-semibold mt-1">ES61 1563 2626 3832 6870 7364</p>
                               </div>
                               <div>
                                 <Label className="text-xs text-muted-foreground">BIC</Label>
-                                <p className="font-mono text-sm font-semibold mt-1">LUXIFRPP</p>
+                                <p className="font-mono text-sm font-semibold mt-1">NTSBESM1XXX</p>
                               </div>
                               <div>
                                 <Label className="text-xs text-muted-foreground">Référence (OBLIGATOIRE)</Label>
@@ -583,19 +627,115 @@ Montant: ${orderTotal.toFixed(2)} €`;
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Adresse de livraison</CardTitle>
+                  <div className="flex items-center justify-between">
+                    <CardTitle>Adresse de livraison</CardTitle>
+                    {!isEditingAddress && (
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => setIsEditingAddress(true)}
+                        data-testid="button-edit-address"
+                      >
+                        Modifier
+                      </Button>
+                    )}
+                  </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-2">
-                    <p className="font-medium">{user.displayName}</p>
-                    {user.address && <p className="text-sm text-muted-foreground">{user.address}</p>}
-                    {(user.city || user.country) && (
-                      <p className="text-sm text-muted-foreground">
-                        {[user.city, user.country].filter(Boolean).join(', ')}
-                      </p>
-                    )}
-                    {user.phone && <p className="text-sm text-muted-foreground">{user.phone}</p>}
-                  </div>
+                  {isEditingAddress ? (
+                    <div className="space-y-4">
+                      <div>
+                        <Label htmlFor="fullName">Nom complet</Label>
+                        <Input
+                          id="fullName"
+                          value={shippingAddress.fullName}
+                          onChange={(e) => setShippingAddress({ ...shippingAddress, fullName: e.target.value })}
+                          placeholder="Prénom Nom"
+                          data-testid="input-shipping-fullname"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="address">Adresse complète</Label>
+                        <Input
+                          id="address"
+                          value={shippingAddress.address}
+                          onChange={(e) => setShippingAddress({ ...shippingAddress, address: e.target.value })}
+                          placeholder="Numéro et nom de rue"
+                          data-testid="input-shipping-address"
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="city">Ville</Label>
+                          <Input
+                            id="city"
+                            value={shippingAddress.city}
+                            onChange={(e) => setShippingAddress({ ...shippingAddress, city: e.target.value })}
+                            placeholder="Ville"
+                            data-testid="input-shipping-city"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="country">Pays</Label>
+                          <Input
+                            id="country"
+                            value={shippingAddress.country}
+                            onChange={(e) => setShippingAddress({ ...shippingAddress, country: e.target.value })}
+                            placeholder="Pays"
+                            data-testid="input-shipping-country"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <Label htmlFor="phone">Téléphone</Label>
+                        <Input
+                          id="phone"
+                          value={shippingAddress.phone}
+                          onChange={(e) => setShippingAddress({ ...shippingAddress, phone: e.target.value })}
+                          placeholder="+33 6 12 34 56 78"
+                          data-testid="input-shipping-phone"
+                        />
+                      </div>
+                      <div className="flex gap-2">
+                        <Button 
+                          variant="default" 
+                          onClick={() => setIsEditingAddress(false)}
+                          className="flex-1"
+                          data-testid="button-save-address"
+                        >
+                          Enregistrer
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          onClick={() => {
+                            setShippingAddress({
+                              fullName: user ? `${user.firstName} ${user.lastName}` : '',
+                              address: user?.address || '',
+                              city: user?.city || '',
+                              country: user?.country || '',
+                              phone: user?.phone || ''
+                            });
+                            setIsEditingAddress(false);
+                          }}
+                          className="flex-1"
+                          data-testid="button-cancel-address"
+                        >
+                          Annuler
+                        </Button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="space-y-2">
+                      <p className="font-medium">{shippingAddress.fullName}</p>
+                      {shippingAddress.address && <p className="text-sm text-muted-foreground">{shippingAddress.address}</p>}
+                      {(shippingAddress.city || shippingAddress.country) && (
+                        <p className="text-sm text-muted-foreground">
+                          {[shippingAddress.city, shippingAddress.country].filter(Boolean).join(', ')}
+                        </p>
+                      )}
+                      {shippingAddress.phone && <p className="text-sm text-muted-foreground">{shippingAddress.phone}</p>}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </div>
