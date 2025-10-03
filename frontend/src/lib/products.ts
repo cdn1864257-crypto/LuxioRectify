@@ -1139,14 +1139,14 @@ export const products: Product[] = [
     ]
   },
 
-  // === SMARTWATCHES (16 products) ===
+  // === SMARTWATCHES (15 products) ===
   {
     id: 'apple-watch-ultra-2',
     name: 'Apple Watch Ultra 2',
     price: 749,
     originalPrice: 999,
     discount: 25,
-    image: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/Apple-Watch-Ultra-2-GPS-Cellular-49-mm-Boitier-en-Titane-Noir-avec-Boucle-Trail-Noir-M-L-version-2024_1759480201265.jpg',
     category: 'watches',
     description: '49mm, Ocean Band',
     features: ['Titanium case', 'Extended battery', 'Action button', 'Free shipping']
@@ -1157,7 +1157,7 @@ export const products: Product[] = [
     price: 349,
     originalPrice: 549,
     discount: 36,
-    image: 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/Montre-connectee-Samsung-Galaxy-Watch6-Claic-Bluetooth-47mm-Noir_1759480215243.jpg',
     category: 'watches',
     description: '47mm, Black',
     features: ['Rotating bezel', 'Sleep tracking', 'Wear OS', 'Free shipping']
@@ -1168,7 +1168,7 @@ export const products: Product[] = [
     price: 699,
     originalPrice: 799,
     discount: 13,
-    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/Montre-connectee-Garmin-Fenix-7X-Solar-Gray-avec-bracelet-silicone-Noir_1759480229118.jpg',
     category: 'watches',
     description: 'Solar, Sapphire',
     features: ['Multi-sport GPS', 'Solar charging', 'Rugged design', 'Free shipping']
@@ -1179,7 +1179,7 @@ export const products: Product[] = [
     price: 249,
     originalPrice: 299,
     discount: 17,
-    image: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/Montre-connectee-Fitbit-Sense-2-Noir-inclus-6-mois-a-Fitbit-Premium_1759480242060.jpg',
     category: 'watches',
     description: 'Health focused',
     features: ['Stress management', 'ECG app', 'GPS built-in', 'Free shipping']
@@ -1190,7 +1190,7 @@ export const products: Product[] = [
     price: 549,
     originalPrice: 649,
     discount: 15,
-    image: 'https://images.unsplash.com/photo-1594736797933-d0cc01e17207?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/Montre-connectee-Suunto-9-Peak-Pro-Noir_1759480257437.jpg',
     category: 'watches',
     description: 'Titanium, GPS',
     features: ['Adventure ready', 'Long battery', 'Offline maps', 'Free shipping']
@@ -1201,21 +1201,10 @@ export const products: Product[] = [
     price: 499,
     originalPrice: 599,
     discount: 17,
-    image: 'https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/Montre-connectee-Polar-Grit-X2-Pro-35-3-mm-Noir-avec-bracelet-Noir-Taille-S-L_1759480270678.jpg',
     category: 'watches',
     description: 'Titan, Sapphire',
     features: ['Military-grade durability', 'Training guidance', 'Recovery insights', 'Free shipping']
-  },
-  {
-    id: 'coros-vertix-2s',
-    name: 'COROS Vertix 2S',
-    price: 599,
-    originalPrice: 699,
-    discount: 14,
-    image: 'https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
-    category: 'watches',
-    description: 'Adventure GPS',
-    features: ['60-day battery', 'Dual-frequency GPS', 'Mountain ready', 'Free shipping']
   },
   {
     id: 'amazfit-t-rex-3',
@@ -1223,7 +1212,7 @@ export const products: Product[] = [
     price: 199,
     originalPrice: 249,
     discount: 20,
-    image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/Montre-connectee-Amazfit-T-Rex-3-Onyx_1759480284605.jpg',
     category: 'watches',
     description: 'Rugged GPS',
     features: ['Military standard', 'Long battery life', 'Health tracking', 'Free shipping']
@@ -1234,7 +1223,7 @@ export const products: Product[] = [
     price: 249,
     originalPrice: 299,
     discount: 17,
-    image: 'https://images.unsplash.com/photo-1589492477829-5e65395b66cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/Montre-connectee-Huawei-Watch-GT-4-46-mm-Active-Noir_1759480298767.jpg',
     category: 'watches',
     description: '46mm, Sport',
     features: ['2-week battery', 'Fitness tracking', 'Smart features', 'Free shipping']
@@ -1245,7 +1234,7 @@ export const products: Product[] = [
     price: 199,
     originalPrice: 259,
     discount: 23,
-    image: 'https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/18956137-1505-3756-1_1759480314555.jpg',
     category: 'watches',
     description: 'Wear OS 3',
     features: ['Wellness focused', 'Google Assistant', 'Fast charging', 'Free shipping']
@@ -1256,7 +1245,7 @@ export const products: Product[] = [
     price: 349,
     originalPrice: 399,
     discount: 13,
-    image: 'https://images.unsplash.com/photo-1544117519-31a4b719223d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/28494320-1505-3756-1_1759480328812.jpg',
     category: 'watches',
     description: 'Snapdragon W5',
     features: ['Dual display', 'Wear OS 3', 'Long battery', 'Free shipping']
@@ -1267,7 +1256,7 @@ export const products: Product[] = [
     price: 349,
     originalPrice: 399,
     discount: 13,
-    image: 'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/Montre-connectee-Withings-ScanWatch-2-38-mm-Or-Rose-avec-bracelet-Beige_1759480342595.jpg',
     category: 'watches',
     description: 'Hybrid smartwatch',
     features: ['Medical-grade sensors', 'Classic design', '30-day battery', 'Free shipping']
@@ -1278,7 +1267,7 @@ export const products: Product[] = [
     price: 399,
     originalPrice: 449,
     discount: 11,
-    image: 'https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/23810294-1505-1540-1_1759480356123.jpg',
     category: 'watches',
     description: 'Tough Solar',
     features: ['G-Shock durability', 'Tide graph', 'Phone finder', 'Free shipping']
@@ -1289,7 +1278,7 @@ export const products: Product[] = [
     price: 1799,
     originalPrice: 1999,
     discount: 10,
-    image: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/TAG-Heuer-Carrera_1759480389446.jpg',
     category: 'watches',
     description: 'Luxury smartwatch',
     features: ['Swiss luxury', 'Titanium case', 'Premium materials', 'Free shipping']
@@ -1300,7 +1289,7 @@ export const products: Product[] = [
     price: 149,
     originalPrice: 199,
     discount: 25,
-    image: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/Montre-connectee-Xiaomi-Mi-Watch-S3-46-mm-Bluetooth-Argent_1759480405991.jpg',
     category: 'watches',
     description: 'AMOLED display',
     features: ['12-day battery', 'Health monitoring', 'Always-on display', 'Free shipping']
@@ -1311,7 +1300,7 @@ export const products: Product[] = [
     price: 299,
     originalPrice: 349,
     discount: 14,
-    image: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/pop_highlights_ring_trimmed_1759480421094.png',
     category: 'watches',
     description: 'Smart ring',
     features: ['Sleep tracking', 'Recovery insights', 'Discreet design', 'Free shipping']
