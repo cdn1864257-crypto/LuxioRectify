@@ -1297,8 +1297,8 @@ export const products: Product[] = [
   {
     id: 'xiaomi-watch-s4',
     name: 'Xiaomi Watch S4',
-    price: 128,
-    originalPrice: 160,
+    price: 156,
+    originalPrice: 195,
     discount: 20,
     image: '/attached_assets/Montre-connectee-Xiaomi-Watch-S4-Bluetooth-Noir_1759483363254.jpg',
     category: 'watches',
