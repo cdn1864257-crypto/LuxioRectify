@@ -374,7 +374,7 @@ export const translations: Record<Language, Translations> = {
     
     // Legal Pages Content
     legalNoticeTitle: 'Legal Notice',
-    legalNoticeContent: 'Luxio is an online store specializing in electronic products. Headquarters: [generic address]. Publication manager: [generic name]. Hosting: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
+    legalNoticeContent: 'Luxio is an online store specializing in electronic products. Headquarters: 4349 St Jean Baptiste St Havre St Pierre, QC G0G 1P0. Publication manager: Saári Barnabás (Luxio). Hosting: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
     privacyPolicyTitle: 'Privacy Policy',
     privacyPolicyContent: 'We only collect data necessary for order processing (name, address, email, phone). This information is never resold and can be deleted upon request via our contact email.',
     termsOfServiceTitle: 'Terms of Service',
@@ -687,7 +687,7 @@ export const translations: Record<Language, Translations> = {
     
     // Legal Pages Content
     legalNoticeTitle: 'Mentions légales',
-    legalNoticeContent: 'Luxio est une boutique en ligne spécialisée dans les produits électroniques. Siège social : [adresse générique]. Responsable de publication : [nom générique]. Hébergement : Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
+    legalNoticeContent: 'Luxio est une boutique en ligne spécialisée dans les produits électroniques. Siège social : 4349 St Jean Baptiste St Havre St Pierre, QC G0G 1P0. Responsable de publication : Saári Barnabás (Luxio). Hébergement : Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
     privacyPolicyTitle: 'Politique de confidentialité',
     privacyPolicyContent: 'Nous collectons uniquement les données nécessaires au traitement des commandes (nom, adresse, email, téléphone). Ces informations ne sont jamais revendues et peuvent être supprimées sur demande via notre email de contact.',
     termsOfServiceTitle: 'Conditions générales de vente',
@@ -1000,7 +1000,7 @@ export const translations: Record<Language, Translations> = {
     
     // Legal Pages Content
     legalNoticeTitle: 'Aviso legal',
-    legalNoticeContent: 'Luxio es una tienda online especializada en productos electrónicos. Sede social: [dirección genérica]. Responsable de publicación: [nombre genérico]. Hosting: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
+    legalNoticeContent: 'Luxio es una tienda online especializada en productos electrónicos. Sede social: 4349 St Jean Baptiste St Havre St Pierre, QC G0G 1P0. Responsable de publicación: Saári Barnabás (Luxio). Hosting: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
     privacyPolicyTitle: 'Política de privacidad',
     privacyPolicyContent: 'Solo recopilamos los datos necesarios para el procesamiento de pedidos (nombre, dirección, email, teléfono). Esta información nunca se revende y puede ser eliminada bajo petición a través de nuestro email de contacto.',
     termsOfServiceTitle: 'Términos de servicio',
@@ -1313,7 +1313,7 @@ export const translations: Record<Language, Translations> = {
     
     // Legal Pages Content
     legalNoticeTitle: 'Aviso legal',
-    legalNoticeContent: 'Luxio é uma loja online especializada em produtos eletrónicos. Sede: [morada genérica]. Responsável pela publicação: [nome genérico]. Alojamento: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
+    legalNoticeContent: 'Luxio é uma loja online especializada em produtos eletrónicos. Sede: 4349 St Jean Baptiste St Havre St Pierre, QC G0G 1P0. Responsável pela publicação: Saári Barnabás (Luxio). Alojamento: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
     privacyPolicyTitle: 'Política de privacidade',
     privacyPolicyContent: 'Recolhemos apenas os dados necessários para o processamento de pedidos (nome, morada, email, telefone). Esta informação nunca é revendida e pode ser eliminada mediante pedido através do nosso email de contacto.',
     termsOfServiceTitle: 'Termos de serviço',
@@ -1626,7 +1626,7 @@ export const translations: Record<Language, Translations> = {
     
     // Legal Pages Content
     legalNoticeTitle: 'Informacje prawne',
-    legalNoticeContent: 'Luxio to sklep internetowy specjalizujący się w produktach elektronicznych. Siedziba: [adres ogólny]. Odpowiedzialny za publikację: [nazwa ogólna]. Hosting: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
+    legalNoticeContent: 'Luxio to sklep internetowy specjalizujący się w produktach elektronicznych. Siedziba: 4349 St Jean Baptiste St Havre St Pierre, QC G0G 1P0. Odpowiedzialny za publikację: Saári Barnabás (Luxio). Hosting: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
     privacyPolicyTitle: 'Polityka prywatności',
     privacyPolicyContent: 'Zbieramy tylko dane niezbędne do realizacji zamówień (imię, adres, email, telefon). Te informacje nigdy nie są odsprzedawane i mogą być usunięte na żądanie przez nasz email kontaktowy.',
     termsOfServiceTitle: 'Warunki usługi',
@@ -1939,7 +1939,7 @@ export const translations: Record<Language, Translations> = {
     
     // Legal Pages Content
     legalNoticeTitle: 'Note legali',
-    legalNoticeContent: 'Luxio è un negozio online specializzato in prodotti elettronici. Sede: [indirizzo generico]. Responsabile pubblicazione: [nome generico]. Hosting: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
+    legalNoticeContent: 'Luxio è un negozio online specializzato in prodotti elettronici. Sede: 4349 St Jean Baptiste St Havre St Pierre, QC G0G 1P0. Responsabile pubblicazione: Saári Barnabás (Luxio). Hosting: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
     privacyPolicyTitle: 'Privacy policy',
     privacyPolicyContent: 'Raccogliamo solo i dati necessari per elaborare gli ordini (nome, indirizzo, email, telefono). Queste informazioni non vengono mai rivendute e possono essere cancellate su richiesta tramite la nostra email di contatto.',
     termsOfServiceTitle: 'Termini di servizio',
@@ -2252,7 +2252,7 @@ export const translations: Record<Language, Translations> = {
     
     // Legal Pages Content
     legalNoticeTitle: 'Jogi tájékoztató',
-    legalNoticeContent: 'A Luxio elektronikai termékekre szakosodott online áruház. Székhely: [általános cím]. Kiadásért felelős: [általános név]. Tárhely: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
+    legalNoticeContent: 'A Luxio elektronikai termékekre szakosodott online áruház. Székhely: 4349 St Jean Baptiste St Havre St Pierre, QC G0G 1P0. Kiadásért felelős: Saári Barnabás (Luxio). Tárhely: Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA.',
     privacyPolicyTitle: 'Adatvédelmi szabályzat',
     privacyPolicyContent: 'Csak a rendelések feldolgozásához szükséges adatokat gyűjtjük (név, cím, e-mail, telefon). Ezeket az információkat soha nem adjuk el, és kérésre törölhetők kapcsolati e-mailünkön keresztül.',
     termsOfServiceTitle: 'Szolgáltatási feltételek',
