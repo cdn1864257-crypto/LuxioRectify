@@ -199,6 +199,80 @@ export interface Translations {
   // Additional Payment Fields
   emailAddress: string;
   
+  // Payment Page
+  backToCart: string;
+  securedPayment: string;
+  choosePaymentMethod: string;
+  allTransactionsSecured: string;
+  ticketsPCS: string;
+  immediate: string;
+  ticketPaymentInstructions: string;
+  ticketInstructionsTitle: string;
+  ticketInstructionSelectType: string;
+  ticketInstructionCode: string;
+  ticketInstructionAmount: string;
+  ticketInstructionMulti: string;
+  ticketInstructionValidation: string;
+  dontHaveTickets: string;
+  buyTickets: string;
+  ticket: string;
+  addTicket: string;
+  ticketsTotal: string;
+  requiredAmount: string;
+  insufficientAmount: string;
+  amountValidated: string;
+  ticketCodePlaceholder: string;
+  ticketAmountPlaceholder: string;
+  days23: string;
+  bankTransferInstructionsTitle: string;
+  bankTransferInstruction1: string;
+  bankTransferInstruction2: string;
+  bankTransferInstruction3: string;
+  bankTransferInstruction4: string;
+  bankTransferInstruction5: string;
+  beneficiary: string;
+  referenceRequired: string;
+  amount: string;
+  copyBankDetails: string;
+  copied: string;
+  recommended: string;
+  payment100Secure: string;
+  paymentInfoEncrypted: string;
+  neverStoreCardData: string;
+  shippingAddress: string;
+  editAddress: string;
+  saveAddress: string;
+  orderItems: string;
+  vat: string;
+  totalWithVat: string;
+  payNow: string;
+  orderSent: string;
+  orderConfirmationEmail: string;
+  orderRegistered: string;
+  completeTransferWithReference: string;
+  redirectingToMaxelPayDescription: string;
+  missingAmount: string;
+  
+  // Dashboard
+  hello: string;
+  welcomePersonalSpace: string;
+  totalOrders: string;
+  noOrdersYet: string;
+  inProgress: string;
+  ordersProcessing: string;
+  delivered: string;
+  ordersReceived: string;
+  totalSpent: string;
+  totalAmount: string;
+  orderHistory: string;
+  latestOrdersStatus: string;
+  noOrders: string;
+  noOrdersDescription: string;
+  personalInfo: string;
+  accountDetails: string;
+  accountCreated: string;
+  viewProfile: string;
+  
   // Testimonials
   testimonials: Array<{
     name: string;
@@ -408,6 +482,80 @@ export const translations: Record<Language, Translations> = {
     
     // Additional Payment Fields
     emailAddress: 'Email Address',
+    
+    // Payment Page
+    backToCart: 'Back to cart',
+    securedPayment: 'Secure payment',
+    choosePaymentMethod: 'Choose your preferred payment method',
+    allTransactionsSecured: 'All transactions are secure and encrypted',
+    ticketsPCS: 'PCS / TransCash Tickets',
+    immediate: 'Immediate',
+    ticketPaymentInstructions: 'Ticket Payment Instructions',
+    ticketInstructionsTitle: 'Instructions for ticket payment',
+    ticketInstructionSelectType: 'Select type: PCS or TransCash',
+    ticketInstructionCode: 'Ticket code: Enter the 16-digit code (e.g., 1234 5678 9012 3456)',
+    ticketInstructionAmount: 'Available amount: Indicate the exact balance of each ticket in euros',
+    ticketInstructionMulti: 'Multi-tickets: Add as many tickets as needed to reach the required amount',
+    ticketInstructionValidation: 'Validation: The "Pay" button activates automatically when total ≥ order amount',
+    dontHaveTickets: 'Don\'t have tickets?',
+    buyTickets: 'Buy PCS/TransCash tickets on Recharge.com',
+    ticket: 'Ticket',
+    addTicket: 'Add a ticket',
+    ticketsTotal: 'Tickets total:',
+    requiredAmount: 'Required amount:',
+    insufficientAmount: 'Insufficient amount',
+    amountValidated: 'Amount validated!',
+    ticketCodePlaceholder: 'Ticket code',
+    ticketAmountPlaceholder: 'Amount (€)',
+    days23: '2-3 days',
+    bankTransferInstructionsTitle: 'Bank transfer instructions',
+    bankTransferInstruction1: 'Make a transfer to the account indicated below',
+    bankTransferInstruction2: '⚠️ IMPORTANT: MUST indicate the order reference',
+    bankTransferInstruction3: 'The amount must exactly match the indicated amount',
+    bankTransferInstruction4: 'Your order will be processed after receiving the transfer (2-3 days)',
+    bankTransferInstruction5: 'You will receive a confirmation email after validation',
+    beneficiary: 'Beneficiary',
+    referenceRequired: 'Reference (REQUIRED)',
+    amount: 'Amount',
+    copyBankDetails: 'Copy bank details',
+    copied: 'Copied!',
+    recommended: 'Recommended',
+    payment100Secure: '100% secure payment',
+    paymentInfoEncrypted: 'Your payment information is encrypted and secured. We never store your bank data.',
+    neverStoreCardData: 'We never store your bank data',
+    shippingAddress: 'Shipping address',
+    editAddress: 'Edit address',
+    saveAddress: 'Save address',
+    orderItems: 'Order items',
+    vat: 'VAT (20%)',
+    totalWithVat: 'Total with VAT',
+    payNow: 'Pay now',
+    orderSent: 'Order sent!',
+    orderConfirmationEmail: 'You will receive a confirmation email.',
+    orderRegistered: 'Order registered',
+    completeTransferWithReference: 'Complete the transfer with the indicated reference',
+    redirectingToMaxelPayDescription: 'You will be redirected to the secure payment platform',
+    missingAmount: 'missing',
+    
+    // Dashboard
+    hello: 'Hello',
+    welcomePersonalSpace: 'Welcome to your personal Luxio space',
+    totalOrders: 'Total orders',
+    noOrdersYet: 'No orders yet',
+    inProgress: 'In progress',
+    ordersProcessing: 'Orders in processing',
+    delivered: 'Delivered',
+    ordersReceived: 'Orders received',
+    totalSpent: 'Total spent',
+    totalAmount: 'Total amount',
+    orderHistory: 'Order history',
+    latestOrdersStatus: 'Your latest orders and their status',
+    noOrders: 'No orders',
+    noOrdersDescription: 'You haven\'t placed any orders yet. Discover our premium product catalog!',
+    personalInfo: 'Personal information',
+    accountDetails: 'Your account details',
+    accountCreated: 'Account created',
+    viewProfile: 'View profile',
     
     // Testimonials
     testimonials: [
@@ -725,6 +873,80 @@ export const translations: Record<Language, Translations> = {
     // Additional Payment Fields
     emailAddress: 'Adresse email',
     
+    // Payment Page
+    backToCart: 'Retour au panier',
+    securedPayment: 'Paiement sécurisé',
+    choosePaymentMethod: 'Choisissez votre méthode de paiement préférée',
+    allTransactionsSecured: 'Toutes les transactions sont sécurisées et cryptées',
+    ticketsPCS: 'Tickets PCS / TransCash',
+    immediate: 'Immédiat',
+    ticketPaymentInstructions: 'Instructions pour le paiement par tickets',
+    ticketInstructionsTitle: 'Instructions pour le paiement par tickets',
+    ticketInstructionSelectType: 'Sélectionnez le type : PCS ou TransCash',
+    ticketInstructionCode: 'Code du ticket : Saisissez le code à 16 chiffres (ex: 1234 5678 9012 3456)',
+    ticketInstructionAmount: 'Montant disponible : Indiquez le solde exact de chaque ticket en euros',
+    ticketInstructionMulti: 'Multi-tickets : Ajoutez autant de tickets que nécessaire pour atteindre le montant requis',
+    ticketInstructionValidation: 'Validation : Le bouton "Payer" s\'active automatiquement quand le total ≥ montant de la commande',
+    dontHaveTickets: 'Vous n\'avez pas de tickets ?',
+    buyTickets: 'Acheter des tickets PCS/TransCash sur Recharge.com',
+    ticket: 'Ticket',
+    addTicket: 'Ajouter un ticket',
+    ticketsTotal: 'Total des tickets :',
+    requiredAmount: 'Montant requis :',
+    insufficientAmount: 'Montant insuffisant',
+    amountValidated: 'Montant validé !',
+    ticketCodePlaceholder: 'Code du ticket',
+    ticketAmountPlaceholder: 'Montant (€)',
+    days23: '2-3 jours',
+    bankTransferInstructionsTitle: 'Instructions pour le virement bancaire',
+    bankTransferInstruction1: 'Effectuez un virement vers le compte indiqué ci-dessous',
+    bankTransferInstruction2: '⚠️ IMPORTANT : Indiquez OBLIGATOIREMENT la référence de commande',
+    bankTransferInstruction3: 'Le montant doit correspondre exactement à celui indiqué',
+    bankTransferInstruction4: 'Votre commande sera traitée après réception du virement (2-3 jours)',
+    bankTransferInstruction5: 'Vous recevrez un email de confirmation après validation',
+    beneficiary: 'Bénéficiaire',
+    referenceRequired: 'Référence (OBLIGATOIRE)',
+    amount: 'Montant',
+    copyBankDetails: 'Copier les informations bancaires',
+    copied: 'Copié !',
+    recommended: 'Recommandé',
+    payment100Secure: 'Paiement 100% sécurisé',
+    paymentInfoEncrypted: 'Vos informations de paiement sont cryptées et sécurisées. Nous ne stockons jamais vos données bancaires.',
+    neverStoreCardData: 'Nous ne stockons jamais vos données bancaires',
+    shippingAddress: 'Adresse de livraison',
+    editAddress: 'Modifier l\'adresse',
+    saveAddress: 'Enregistrer l\'adresse',
+    orderItems: 'Articles de la commande',
+    vat: 'TVA (20%)',
+    totalWithVat: 'Total TTC',
+    payNow: 'Payer maintenant',
+    orderSent: 'Commande envoyée !',
+    orderConfirmationEmail: 'Vous recevrez un email de confirmation.',
+    orderRegistered: 'Commande enregistrée',
+    completeTransferWithReference: 'Effectuez le virement avec la référence indiquée',
+    redirectingToMaxelPayDescription: 'Vous allez être redirigé vers la plateforme de paiement sécurisée',
+    missingAmount: 'manquant',
+    
+    // Dashboard
+    hello: 'Bonjour',
+    welcomePersonalSpace: 'Bienvenue dans votre espace personnel Luxio',
+    totalOrders: 'Commandes totales',
+    noOrdersYet: 'Aucune commande pour le moment',
+    inProgress: 'En cours',
+    ordersProcessing: 'Commandes en traitement',
+    delivered: 'Livrées',
+    ordersReceived: 'Commandes reçues',
+    totalSpent: 'Total dépensé',
+    totalAmount: 'Montant total',
+    orderHistory: 'Historique des commandes',
+    latestOrdersStatus: 'Vos dernières commandes et leur statut',
+    noOrders: 'Aucune commande',
+    noOrdersDescription: 'Vous n\'avez pas encore passé de commande. Découvrez notre catalogue de produits premium !',
+    personalInfo: 'Informations personnelles',
+    accountDetails: 'Détails de votre compte',
+    accountCreated: 'Compte créé',
+    viewProfile: 'Voir le profil',
+    
     // Testimonials
     testimonials: [
       {
@@ -1040,6 +1262,80 @@ export const translations: Record<Language, Translations> = {
     
     // Additional Payment Fields
     emailAddress: 'Dirección de email',
+    
+    // Payment Page
+    backToCart: 'Volver al carrito',
+    securedPayment: 'Pago seguro',
+    choosePaymentMethod: 'Elija su método de pago preferido',
+    allTransactionsSecured: 'Todas las transacciones son seguras y encriptadas',
+    ticketsPCS: 'Tickets PCS / TransCash',
+    immediate: 'Inmediato',
+    ticketPaymentInstructions: 'Instrucciones para el pago con tickets',
+    ticketInstructionsTitle: 'Instrucciones para el pago con tickets',
+    ticketInstructionSelectType: 'Seleccione el tipo: PCS o TransCash',
+    ticketInstructionCode: 'Código del ticket: Ingrese el código de 16 dígitos (ej: 1234 5678 9012 3456)',
+    ticketInstructionAmount: 'Monto disponible: Indique el saldo exacto de cada ticket en euros',
+    ticketInstructionMulti: 'Multi-tickets: Agregue tantos tickets como sea necesario para alcanzar el monto requerido',
+    ticketInstructionValidation: 'Validación: El botón "Pagar" se activa automáticamente cuando el total ≥ monto del pedido',
+    dontHaveTickets: '¿No tiene tickets?',
+    buyTickets: 'Comprar tickets PCS/TransCash en Recharge.com',
+    ticket: 'Ticket',
+    addTicket: 'Agregar un ticket',
+    ticketsTotal: 'Total de tickets:',
+    requiredAmount: 'Monto requerido:',
+    insufficientAmount: 'Monto insuficiente',
+    amountValidated: '¡Monto validado!',
+    ticketCodePlaceholder: 'Código del ticket',
+    ticketAmountPlaceholder: 'Monto (€)',
+    days23: '2-3 días',
+    bankTransferInstructionsTitle: 'Instrucciones para transferencia bancaria',
+    bankTransferInstruction1: 'Realice una transferencia a la cuenta indicada a continuación',
+    bankTransferInstruction2: '⚠️ IMPORTANTE: Indique OBLIGATORIAMENTE la referencia del pedido',
+    bankTransferInstruction3: 'El monto debe corresponder exactamente al indicado',
+    bankTransferInstruction4: 'Su pedido será procesado después de recibir la transferencia (2-3 días)',
+    bankTransferInstruction5: 'Recibirá un correo de confirmación después de la validación',
+    beneficiary: 'Beneficiario',
+    referenceRequired: 'Referencia (OBLIGATORIA)',
+    amount: 'Monto',
+    copyBankDetails: 'Copiar información bancaria',
+    copied: '¡Copiado!',
+    recommended: 'Recomendado',
+    payment100Secure: 'Pago 100% seguro',
+    paymentInfoEncrypted: 'Su información de pago está encriptada y asegurada. Nunca almacenamos sus datos bancarios.',
+    neverStoreCardData: 'Nunca almacenamos sus datos bancarios',
+    shippingAddress: 'Dirección de envío',
+    editAddress: 'Editar dirección',
+    saveAddress: 'Guardar dirección',
+    orderItems: 'Artículos del pedido',
+    vat: 'IVA (20%)',
+    totalWithVat: 'Total con IVA',
+    payNow: 'Pagar ahora',
+    orderSent: '¡Pedido enviado!',
+    orderConfirmationEmail: 'Recibirá un correo de confirmación.',
+    orderRegistered: 'Pedido registrado',
+    completeTransferWithReference: 'Complete la transferencia con la referencia indicada',
+    redirectingToMaxelPayDescription: 'Será redirigido a la plataforma de pago segura',
+    missingAmount: 'faltante',
+    
+    // Dashboard
+    hello: 'Hola',
+    welcomePersonalSpace: 'Bienvenido a su espacio personal Luxio',
+    totalOrders: 'Pedidos totales',
+    noOrdersYet: 'Sin pedidos por el momento',
+    inProgress: 'En progreso',
+    ordersProcessing: 'Pedidos en proceso',
+    delivered: 'Entregados',
+    ordersReceived: 'Pedidos recibidos',
+    totalSpent: 'Total gastado',
+    totalAmount: 'Monto total',
+    orderHistory: 'Historial de pedidos',
+    latestOrdersStatus: 'Sus últimos pedidos y su estado',
+    noOrders: 'Sin pedidos',
+    noOrdersDescription: '¡Aún no ha realizado ningún pedido. Descubra nuestro catálogo de productos premium!',
+    personalInfo: 'Información personal',
+    accountDetails: 'Detalles de su cuenta',
+    accountCreated: 'Cuenta creada',
+    viewProfile: 'Ver perfil',
     
     // Testimonials
     testimonials: [
@@ -1357,6 +1653,80 @@ export const translations: Record<Language, Translations> = {
     // Additional Payment Fields
     emailAddress: 'Endereço de email',
     
+    // Payment Page
+    backToCart: 'Voltar ao carrinho',
+    securedPayment: 'Pagamento seguro',
+    choosePaymentMethod: 'Escolha o seu método de pagamento preferido',
+    allTransactionsSecured: 'Todas as transações são seguras e encriptadas',
+    ticketsPCS: 'Tickets PCS / TransCash',
+    immediate: 'Imediato',
+    ticketPaymentInstructions: 'Instruções para pagamento com tickets',
+    ticketInstructionsTitle: 'Instruções para pagamento com tickets',
+    ticketInstructionSelectType: 'Selecione o tipo: PCS ou TransCash',
+    ticketInstructionCode: 'Código do ticket: Insira o código de 16 dígitos (ex: 1234 5678 9012 3456)',
+    ticketInstructionAmount: 'Montante disponível: Indique o saldo exato de cada ticket em euros',
+    ticketInstructionMulti: 'Multi-tickets: Adicione quantos tickets forem necessários para atingir o montante necessário',
+    ticketInstructionValidation: 'Validação: O botão "Pagar" ativa automaticamente quando o total ≥ montante do pedido',
+    dontHaveTickets: 'Não tem tickets?',
+    buyTickets: 'Comprar tickets PCS/TransCash em Recharge.com',
+    ticket: 'Ticket',
+    addTicket: 'Adicionar um ticket',
+    ticketsTotal: 'Total de tickets:',
+    requiredAmount: 'Montante necessário:',
+    insufficientAmount: 'Montante insuficiente',
+    amountValidated: 'Montante validado!',
+    ticketCodePlaceholder: 'Código do ticket',
+    ticketAmountPlaceholder: 'Montante (€)',
+    days23: '2-3 dias',
+    bankTransferInstructionsTitle: 'Instruções para transferência bancária',
+    bankTransferInstruction1: 'Realize uma transferência para a conta indicada abaixo',
+    bankTransferInstruction2: '⚠️ IMPORTANTE: Indique OBRIGATORIAMENTE a referência do pedido',
+    bankTransferInstruction3: 'O montante deve corresponder exatamente ao indicado',
+    bankTransferInstruction4: 'O seu pedido será processado após receber a transferência (2-3 dias)',
+    bankTransferInstruction5: 'Receberá um email de confirmação após a validação',
+    beneficiary: 'Beneficiário',
+    referenceRequired: 'Referência (OBRIGATÓRIA)',
+    amount: 'Montante',
+    copyBankDetails: 'Copiar dados bancários',
+    copied: 'Copiado!',
+    recommended: 'Recomendado',
+    payment100Secure: 'Pagamento 100% seguro',
+    paymentInfoEncrypted: 'A sua informação de pagamento está encriptada e protegida. Nunca armazenamos os seus dados bancários.',
+    neverStoreCardData: 'Nunca armazenamos os seus dados bancários',
+    shippingAddress: 'Morada de envio',
+    editAddress: 'Editar morada',
+    saveAddress: 'Guardar morada',
+    orderItems: 'Artigos do pedido',
+    vat: 'IVA (20%)',
+    totalWithVat: 'Total com IVA',
+    payNow: 'Pagar agora',
+    orderSent: 'Pedido enviado!',
+    orderConfirmationEmail: 'Receberá um email de confirmação.',
+    orderRegistered: 'Pedido registado',
+    completeTransferWithReference: 'Complete a transferência com a referência indicada',
+    redirectingToMaxelPayDescription: 'Será redirecionado para a plataforma de pagamento segura',
+    missingAmount: 'em falta',
+    
+    // Dashboard
+    hello: 'Olá',
+    welcomePersonalSpace: 'Bem-vindo ao seu espaço pessoal Luxio',
+    totalOrders: 'Total de pedidos',
+    noOrdersYet: 'Sem pedidos por enquanto',
+    inProgress: 'Em progresso',
+    ordersProcessing: 'Pedidos em processamento',
+    delivered: 'Entregues',
+    ordersReceived: 'Pedidos recebidos',
+    totalSpent: 'Total gasto',
+    totalAmount: 'Montante total',
+    orderHistory: 'Histórico de pedidos',
+    latestOrdersStatus: 'Os seus últimos pedidos e o seu estado',
+    noOrders: 'Sem pedidos',
+    noOrdersDescription: 'Ainda não fez nenhum pedido. Descubra o nosso catálogo de produtos premium!',
+    personalInfo: 'Informação pessoal',
+    accountDetails: 'Detalhes da sua conta',
+    accountCreated: 'Conta criada',
+    viewProfile: 'Ver perfil',
+    
     // Testimonials
     testimonials: [
       {
@@ -1672,6 +2042,80 @@ export const translations: Record<Language, Translations> = {
     
     // Additional Payment Fields
     emailAddress: 'Adres email',
+    
+    // Payment Page
+    backToCart: 'Wróć do koszyka',
+    securedPayment: 'Bezpieczna płatność',
+    choosePaymentMethod: 'Wybierz preferowaną metodę płatności',
+    allTransactionsSecured: 'Wszystkie transakcje są bezpieczne i szyfrowane',
+    ticketsPCS: 'Bilety PCS / TransCash',
+    immediate: 'Natychmiastowa',
+    ticketPaymentInstructions: 'Instrukcje płatności biletami',
+    ticketInstructionsTitle: 'Instrukcje płatności biletami',
+    ticketInstructionSelectType: 'Wybierz typ: PCS lub TransCash',
+    ticketInstructionCode: 'Kod biletu: Wprowadź 16-cyfrowy kod (np. 1234 5678 9012 3456)',
+    ticketInstructionAmount: 'Dostępna kwota: Podaj dokładne saldo każdego biletu w euro',
+    ticketInstructionMulti: 'Multi-bilety: Dodaj tyle biletów, ile potrzeba, aby osiągnąć wymaganą kwotę',
+    ticketInstructionValidation: 'Walidacja: Przycisk "Zapłać" aktywuje się automatycznie, gdy suma ≥ kwota zamówienia',
+    dontHaveTickets: 'Nie masz biletów?',
+    buyTickets: 'Kup bilety PCS/TransCash na Recharge.com',
+    ticket: 'Bilet',
+    addTicket: 'Dodaj bilet',
+    ticketsTotal: 'Suma biletów:',
+    requiredAmount: 'Wymagana kwota:',
+    insufficientAmount: 'Niewystarczająca kwota',
+    amountValidated: 'Kwota zwalidowana!',
+    ticketCodePlaceholder: 'Kod biletu',
+    ticketAmountPlaceholder: 'Kwota (€)',
+    days23: '2-3 dni',
+    bankTransferInstructionsTitle: 'Instrukcje przelewu bankowego',
+    bankTransferInstruction1: 'Wykonaj przelew na konto wskazane poniżej',
+    bankTransferInstruction2: '⚠️ WAŻNE: OBOWIĄZKOWO podaj numer referencyjny zamówienia',
+    bankTransferInstruction3: 'Kwota musi dokładnie odpowiadać wskazanej',
+    bankTransferInstruction4: 'Twoje zamówienie zostanie przetworzone po otrzymaniu przelewu (2-3 dni)',
+    bankTransferInstruction5: 'Otrzymasz email potwierdzający po walidacji',
+    beneficiary: 'Beneficjent',
+    referenceRequired: 'Numer referencyjny (OBOWIĄZKOWY)',
+    amount: 'Kwota',
+    copyBankDetails: 'Kopiuj dane bankowe',
+    copied: 'Skopiowano!',
+    recommended: 'Zalecane',
+    payment100Secure: 'Płatność 100% bezpieczna',
+    paymentInfoEncrypted: 'Twoje informacje płatnicze są zaszyfrowane i zabezpieczone. Nigdy nie przechowujemy Twoich danych bankowych.',
+    neverStoreCardData: 'Nigdy nie przechowujemy Twoich danych bankowych',
+    shippingAddress: 'Adres dostawy',
+    editAddress: 'Edytuj adres',
+    saveAddress: 'Zapisz adres',
+    orderItems: 'Pozycje zamówienia',
+    vat: 'VAT (20%)',
+    totalWithVat: 'Suma z VAT',
+    payNow: 'Zapłać teraz',
+    orderSent: 'Zamówienie wysłane!',
+    orderConfirmationEmail: 'Otrzymasz email potwierdzający.',
+    orderRegistered: 'Zamówienie zarejestrowane',
+    completeTransferWithReference: 'Wykonaj przelew z podanym numerem referencyjnym',
+    redirectingToMaxelPayDescription: 'Zostaniesz przekierowany na bezpieczną platformę płatności',
+    missingAmount: 'brakuje',
+    
+    // Dashboard
+    hello: 'Cześć',
+    welcomePersonalSpace: 'Witaj w Twoim osobistym profilu Luxio',
+    totalOrders: 'Suma zamówień',
+    noOrdersYet: 'Brak zamówień na razie',
+    inProgress: 'W trakcie',
+    ordersProcessing: 'Zamówienia w realizacji',
+    delivered: 'Dostarczone',
+    ordersReceived: 'Zamówienia otrzymane',
+    totalSpent: 'Łącznie wydane',
+    totalAmount: 'Całkowita kwota',
+    orderHistory: 'Historia zamówień',
+    latestOrdersStatus: 'Twoje ostatnie zamówienia i ich status',
+    noOrders: 'Brak zamówień',
+    noOrdersDescription: 'Nie złożyłeś jeszcze żadnego zamówienia. Odkryj nasz katalog produktów premium!',
+    personalInfo: 'Informacje osobiste',
+    accountDetails: 'Szczegóły konta',
+    accountCreated: 'Konto utworzone',
+    viewProfile: 'Zobacz profil',
     
     // Testimonials
     testimonials: [
@@ -1989,6 +2433,80 @@ export const translations: Record<Language, Translations> = {
     // Additional Payment Fields
     emailAddress: 'Indirizzo email',
     
+    // Payment Page
+    backToCart: 'Torna al carrello',
+    securedPayment: 'Pagamento sicuro',
+    choosePaymentMethod: 'Scegli il tuo metodo di pagamento preferito',
+    allTransactionsSecured: 'Tutte le transazioni sono sicure e crittografate',
+    ticketsPCS: 'Biglietti PCS / TransCash',
+    immediate: 'Immediato',
+    ticketPaymentInstructions: 'Istruzioni per il pagamento con biglietti',
+    ticketInstructionsTitle: 'Istruzioni per il pagamento con biglietti',
+    ticketInstructionSelectType: 'Seleziona il tipo: PCS o TransCash',
+    ticketInstructionCode: 'Codice biglietto: Inserisci il codice a 16 cifre (es: 1234 5678 9012 3456)',
+    ticketInstructionAmount: 'Importo disponibile: Indica il saldo esatto di ogni biglietto in euro',
+    ticketInstructionMulti: 'Multi-biglietti: Aggiungi tutti i biglietti necessari per raggiungere l\'importo richiesto',
+    ticketInstructionValidation: 'Convalida: Il pulsante "Paga" si attiva automaticamente quando il totale ≥ importo dell\'ordine',
+    dontHaveTickets: 'Non hai biglietti?',
+    buyTickets: 'Acquista biglietti PCS/TransCash su Recharge.com',
+    ticket: 'Biglietto',
+    addTicket: 'Aggiungi un biglietto',
+    ticketsTotal: 'Totale biglietti:',
+    requiredAmount: 'Importo richiesto:',
+    insufficientAmount: 'Importo insufficiente',
+    amountValidated: 'Importo convalidato!',
+    ticketCodePlaceholder: 'Codice biglietto',
+    ticketAmountPlaceholder: 'Importo (€)',
+    days23: '2-3 giorni',
+    bankTransferInstructionsTitle: 'Istruzioni per bonifico bancario',
+    bankTransferInstruction1: 'Effettua un bonifico sul conto indicato di seguito',
+    bankTransferInstruction2: '⚠️ IMPORTANTE: Indica OBBLIGATORIAMENTE il riferimento dell\'ordine',
+    bankTransferInstruction3: 'L\'importo deve corrispondere esattamente a quello indicato',
+    bankTransferInstruction4: 'Il tuo ordine sarà elaborato dopo aver ricevuto il bonifico (2-3 giorni)',
+    bankTransferInstruction5: 'Riceverai un\'email di conferma dopo la convalida',
+    beneficiary: 'Beneficiario',
+    referenceRequired: 'Riferimento (OBBLIGATORIO)',
+    amount: 'Importo',
+    copyBankDetails: 'Copia dati bancari',
+    copied: 'Copiato!',
+    recommended: 'Consigliato',
+    payment100Secure: 'Pagamento 100% sicuro',
+    paymentInfoEncrypted: 'Le tue informazioni di pagamento sono crittografate e protette. Non memorizziamo mai i tuoi dati bancari.',
+    neverStoreCardData: 'Non memorizziamo mai i tuoi dati bancari',
+    shippingAddress: 'Indirizzo di spedizione',
+    editAddress: 'Modifica indirizzo',
+    saveAddress: 'Salva indirizzo',
+    orderItems: 'Articoli dell\'ordine',
+    vat: 'IVA (20%)',
+    totalWithVat: 'Totale con IVA',
+    payNow: 'Paga ora',
+    orderSent: 'Ordine inviato!',
+    orderConfirmationEmail: 'Riceverai un\'email di conferma.',
+    orderRegistered: 'Ordine registrato',
+    completeTransferWithReference: 'Completa il bonifico con il riferimento indicato',
+    redirectingToMaxelPayDescription: 'Sarai reindirizzato alla piattaforma di pagamento sicura',
+    missingAmount: 'mancante',
+    
+    // Dashboard
+    hello: 'Ciao',
+    welcomePersonalSpace: 'Benvenuto nel tuo spazio personale Luxio',
+    totalOrders: 'Ordini totali',
+    noOrdersYet: 'Nessun ordine per ora',
+    inProgress: 'In corso',
+    ordersProcessing: 'Ordini in elaborazione',
+    delivered: 'Consegnati',
+    ordersReceived: 'Ordini ricevuti',
+    totalSpent: 'Totale speso',
+    totalAmount: 'Importo totale',
+    orderHistory: 'Storico ordini',
+    latestOrdersStatus: 'I tuoi ultimi ordini e il loro stato',
+    noOrders: 'Nessun ordine',
+    noOrdersDescription: 'Non hai ancora effettuato nessun ordine. Scopri il nostro catalogo di prodotti premium!',
+    personalInfo: 'Informazioni personali',
+    accountDetails: 'Dettagli del tuo account',
+    accountCreated: 'Account creato',
+    viewProfile: 'Vedi profilo',
+    
     // Testimonials
     testimonials: [
       {
@@ -2304,6 +2822,80 @@ export const translations: Record<Language, Translations> = {
     
     // Additional Payment Fields
     emailAddress: 'E-mail cím',
+    
+    // Payment Page
+    backToCart: 'Vissza a kosárhoz',
+    securedPayment: 'Biztonságos fizetés',
+    choosePaymentMethod: 'Válassza ki az Ön által preferált fizetési módot',
+    allTransactionsSecured: 'Minden tranzakció biztonságos és titkosított',
+    ticketsPCS: 'PCS / TransCash jegyek',
+    immediate: 'Azonnali',
+    ticketPaymentInstructions: 'Útmutató a jegyes fizetéshez',
+    ticketInstructionsTitle: 'Útmutató a jegyes fizetéshez',
+    ticketInstructionSelectType: 'Válassza ki a típust: PCS vagy TransCash',
+    ticketInstructionCode: 'Jegykód: Írja be a 16 számjegyű kódot (pl: 1234 5678 9012 3456)',
+    ticketInstructionAmount: 'Elérhető összeg: Adja meg minden jegy pontos egyenlegét euróban',
+    ticketInstructionMulti: 'Multi-jegyek: Adjon hozzá annyi jegyet, amennyi szükséges a kívánt összeg eléréséhez',
+    ticketInstructionValidation: 'Érvényesítés: A "Fizetés" gomb automatikusan aktiválódik, ha az összeg ≥ rendelés összege',
+    dontHaveTickets: 'Nincs jegye?',
+    buyTickets: 'PCS/TransCash jegyek vásárlása a Recharge.com oldalon',
+    ticket: 'Jegy',
+    addTicket: 'Jegy hozzáadása',
+    ticketsTotal: 'Jegyek összesen:',
+    requiredAmount: 'Szükséges összeg:',
+    insufficientAmount: 'Elégtelen összeg',
+    amountValidated: 'Összeg érvényesítve!',
+    ticketCodePlaceholder: 'Jegykód',
+    ticketAmountPlaceholder: 'Összeg (€)',
+    days23: '2-3 nap',
+    bankTransferInstructionsTitle: 'Útmutató a banki átutaláshoz',
+    bankTransferInstruction1: 'Utaljon az alábbi számlára',
+    bankTransferInstruction2: '⚠️ FONTOS: KÖTELEZŐEN adja meg a rendelési hivatkozást',
+    bankTransferInstruction3: 'Az összegnek pontosan meg kell egyeznie a megadottal',
+    bankTransferInstruction4: 'A rendelését az átutalás beérkezése után dolgozzuk fel (2-3 nap)',
+    bankTransferInstruction5: 'Az érvényesítés után megerősítő e-mailt fog kapni',
+    beneficiary: 'Kedvezményezett',
+    referenceRequired: 'Hivatkozás (KÖTELEZŐ)',
+    amount: 'Összeg',
+    copyBankDetails: 'Banki adatok másolása',
+    copied: 'Másolva!',
+    recommended: 'Ajánlott',
+    payment100Secure: '100% biztonságos fizetés',
+    paymentInfoEncrypted: 'Az Ön fizetési adatai titkosítva és biztonságban vannak. Soha nem tároljuk banki adatait.',
+    neverStoreCardData: 'Soha nem tároljuk banki adatait',
+    shippingAddress: 'Szállítási cím',
+    editAddress: 'Cím szerkesztése',
+    saveAddress: 'Cím mentése',
+    orderItems: 'Rendelési tételek',
+    vat: 'ÁFA (20%)',
+    totalWithVat: 'Összesen ÁFÁ-val',
+    payNow: 'Fizetés most',
+    orderSent: 'Rendelés elküldve!',
+    orderConfirmationEmail: 'Megerősítő e-mailt fog kapni.',
+    orderRegistered: 'Rendelés rögzítve',
+    completeTransferWithReference: 'Végezze el az átutalást a megadott hivatkozással',
+    redirectingToMaxelPayDescription: 'Átirányítjuk a biztonságos fizetési platformra',
+    missingAmount: 'hiányzik',
+    
+    // Dashboard
+    hello: 'Helló',
+    welcomePersonalSpace: 'Üdvözöljük a személyes Luxio felületén',
+    totalOrders: 'Összes rendelés',
+    noOrdersYet: 'Még nincsenek rendelései',
+    inProgress: 'Folyamatban',
+    ordersProcessing: 'Feldolgozás alatt álló rendelések',
+    delivered: 'Kézbesítve',
+    ordersReceived: 'Beérkezett rendelések',
+    totalSpent: 'Összes költés',
+    totalAmount: 'Teljes összeg',
+    orderHistory: 'Rendelési előzmények',
+    latestOrdersStatus: 'A legutóbbi rendelései és státuszuk',
+    noOrders: 'Nincsenek rendelések',
+    noOrdersDescription: 'Még nem adott le rendelést. Fedezze fel prémium termékkatalógusunkat!',
+    personalInfo: 'Személyes adatok',
+    accountDetails: 'Fiókadatok',
+    accountCreated: 'Fiók létrehozva',
+    viewProfile: 'Profil megtekintése',
     
     // Testimonials
     testimonials: [
