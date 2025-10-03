@@ -309,6 +309,29 @@ export interface Translations {
   accountCreated: string;
   viewProfile: string;
   
+  // User Profile
+  myAccount: string;
+  profile: string;
+  myOrders: string;
+  settings: string;
+  accountSettings: string;
+  security: string;
+  changePassword: string;
+  notifications: string;
+  orderNotifications: string;
+  priceAlerts: string;
+  promotionalNewsletter: string;
+  fullNameLabel: string;
+  accountStats: string;
+  totalOrdersCount: string;
+  totalSpentAmount: string;
+  orderHistoryTitle: string;
+  noOrdersYetMessage: string;
+  orderLabel: string;
+  paidStatus: string;
+  pendingStatus: string;
+  user: string;
+  
   // Testimonials
   testimonials: Array<{
     name: string;
@@ -628,6 +651,29 @@ export const translations: Record<Language, Translations> = {
     accountDetails: 'Your account details',
     accountCreated: 'Account created',
     viewProfile: 'View profile',
+    
+    // User Profile
+    myAccount: 'My Account',
+    profile: 'Profile',
+    myOrders: 'My Orders',
+    settings: 'Settings',
+    accountSettings: 'Account Settings',
+    security: 'Security',
+    changePassword: 'Change Password',
+    notifications: 'Notifications',
+    orderNotifications: 'Order notifications',
+    priceAlerts: 'Price alerts',
+    promotionalNewsletter: 'Promotional newsletter',
+    fullNameLabel: 'Full Name',
+    accountStats: 'Account statistics',
+    totalOrdersCount: 'Total orders',
+    totalSpentAmount: 'Total spent',
+    orderHistoryTitle: 'Order history',
+    noOrdersYetMessage: 'No orders yet',
+    orderLabel: 'Order',
+    paidStatus: 'Paid',
+    pendingStatus: 'Pending',
+    user: 'User',
     
     // Testimonials
     testimonials: [
@@ -1055,6 +1101,29 @@ export const translations: Record<Language, Translations> = {
     accountCreated: 'Compte créé',
     viewProfile: 'Voir le profil',
     
+    // User Profile
+    myAccount: 'Mon Compte',
+    profile: 'Profil',
+    myOrders: 'Mes Commandes',
+    settings: 'Paramètres',
+    accountSettings: 'Paramètres du compte',
+    security: 'Sécurité',
+    changePassword: 'Changer le mot de passe',
+    notifications: 'Notifications',
+    orderNotifications: 'Notifications de commande',
+    priceAlerts: 'Alertes de prix',
+    promotionalNewsletter: 'Newsletter promotionnelle',
+    fullNameLabel: 'Nom complet',
+    accountStats: 'Statistiques du compte',
+    totalOrdersCount: 'Commandes totales',
+    totalSpentAmount: 'Montant total dépensé',
+    orderHistoryTitle: 'Historique des commandes',
+    noOrdersYetMessage: 'Aucune commande pour le moment',
+    orderLabel: 'Commande',
+    paidStatus: 'Payé',
+    pendingStatus: 'En attente',
+    user: 'Utilisateur',
+    
     // Testimonials
     testimonials: [
       {
@@ -1480,6 +1549,29 @@ export const translations: Record<Language, Translations> = {
     accountDetails: 'Detalles de su cuenta',
     accountCreated: 'Cuenta creada',
     viewProfile: 'Ver perfil',
+    
+    // User Profile
+    myAccount: 'Mi Cuenta',
+    profile: 'Perfil',
+    myOrders: 'Mis Pedidos',
+    settings: 'Configuración',
+    accountSettings: 'Configuración de la cuenta',
+    security: 'Seguridad',
+    changePassword: 'Cambiar contraseña',
+    notifications: 'Notificaciones',
+    orderNotifications: 'Notificaciones de pedido',
+    priceAlerts: 'Alertas de precio',
+    promotionalNewsletter: 'Boletín promocional',
+    fullNameLabel: 'Nombre completo',
+    accountStats: 'Estadísticas de la cuenta',
+    totalOrdersCount: 'Pedidos totales',
+    totalSpentAmount: 'Total gastado',
+    orderHistoryTitle: 'Historial de pedidos',
+    noOrdersYetMessage: 'Aún no hay pedidos',
+    orderLabel: 'Pedido',
+    paidStatus: 'Pagado',
+    pendingStatus: 'Pendiente',
+    user: 'Usuario',
     
     // Testimonials
     testimonials: [
@@ -1907,6 +1999,29 @@ export const translations: Record<Language, Translations> = {
     accountCreated: 'Conta criada',
     viewProfile: 'Ver perfil',
     
+    // User Profile
+    myAccount: 'Minha Conta',
+    profile: 'Perfil',
+    myOrders: 'Meus Pedidos',
+    settings: 'Configurações',
+    accountSettings: 'Configurações da conta',
+    security: 'Segurança',
+    changePassword: 'Alterar senha',
+    notifications: 'Notificações',
+    orderNotifications: 'Notificações de pedido',
+    priceAlerts: 'Alertas de preço',
+    promotionalNewsletter: 'Newsletter promocional',
+    fullNameLabel: 'Nome completo',
+    accountStats: 'Estatísticas da conta',
+    totalOrdersCount: 'Pedidos totais',
+    totalSpentAmount: 'Total gasto',
+    orderHistoryTitle: 'Histórico de pedidos',
+    noOrdersYetMessage: 'Ainda sem pedidos',
+    orderLabel: 'Pedido',
+    paidStatus: 'Pago',
+    pendingStatus: 'Pendente',
+    user: 'Usuário',
+    
     // Testimonials
     testimonials: [
       {
@@ -2332,6 +2447,29 @@ export const translations: Record<Language, Translations> = {
     accountDetails: 'Szczegóły konta',
     accountCreated: 'Konto utworzone',
     viewProfile: 'Zobacz profil',
+    
+    // User Profile
+    myAccount: 'Moje Konto',
+    profile: 'Profil',
+    myOrders: 'Moje Zamówienia',
+    settings: 'Ustawienia',
+    accountSettings: 'Ustawienia konta',
+    security: 'Bezpieczeństwo',
+    changePassword: 'Zmień hasło',
+    notifications: 'Powiadomienia',
+    orderNotifications: 'Powiadomienia o zamówieniach',
+    priceAlerts: 'Alerty cenowe',
+    promotionalNewsletter: 'Newsletter promocyjny',
+    fullNameLabel: 'Pełna nazwa',
+    accountStats: 'Statystyki konta',
+    totalOrdersCount: 'Łącznie zamówień',
+    totalSpentAmount: 'Łączne wydatki',
+    orderHistoryTitle: 'Historia zamówień',
+    noOrdersYetMessage: 'Brak zamówień',
+    orderLabel: 'Zamówienie',
+    paidStatus: 'Opłacone',
+    pendingStatus: 'Oczekujące',
+    user: 'Użytkownik',
     
     // Testimonials
     testimonials: [
@@ -2759,6 +2897,29 @@ export const translations: Record<Language, Translations> = {
     accountCreated: 'Account creato',
     viewProfile: 'Vedi profilo',
     
+    // User Profile
+    myAccount: 'Il Mio Account',
+    profile: 'Profilo',
+    myOrders: 'I Miei Ordini',
+    settings: 'Impostazioni',
+    accountSettings: 'Impostazioni dell\'account',
+    security: 'Sicurezza',
+    changePassword: 'Cambia password',
+    notifications: 'Notifiche',
+    orderNotifications: 'Notifiche ordini',
+    priceAlerts: 'Avvisi sui prezzi',
+    promotionalNewsletter: 'Newsletter promozionale',
+    fullNameLabel: 'Nome completo',
+    accountStats: 'Statistiche account',
+    totalOrdersCount: 'Ordini totali',
+    totalSpentAmount: 'Totale speso',
+    orderHistoryTitle: 'Storico ordini',
+    noOrdersYetMessage: 'Nessun ordine ancora',
+    orderLabel: 'Ordine',
+    paidStatus: 'Pagato',
+    pendingStatus: 'In attesa',
+    user: 'Utente',
+    
     // Testimonials
     testimonials: [
       {
@@ -3184,6 +3345,29 @@ export const translations: Record<Language, Translations> = {
     accountDetails: 'Fiókadatok',
     accountCreated: 'Fiók létrehozva',
     viewProfile: 'Profil megtekintése',
+    
+    // User Profile
+    myAccount: 'Fiókom',
+    profile: 'Profil',
+    myOrders: 'Rendeléseim',
+    settings: 'Beállítások',
+    accountSettings: 'Fiók beállításai',
+    security: 'Biztonság',
+    changePassword: 'Jelszó módosítása',
+    notifications: 'Értesítések',
+    orderNotifications: 'Rendelési értesítések',
+    priceAlerts: 'Ár riasztások',
+    promotionalNewsletter: 'Promóciós hírlevél',
+    fullNameLabel: 'Teljes név',
+    accountStats: 'Fiók statisztikák',
+    totalOrdersCount: 'Összes rendelés',
+    totalSpentAmount: 'Összes költés',
+    orderHistoryTitle: 'Rendelési előzmények',
+    noOrdersYetMessage: 'Még nincsenek rendelések',
+    orderLabel: 'Rendelés',
+    paidStatus: 'Fizetve',
+    pendingStatus: 'Függőben',
+    user: 'Felhasználó',
     
     // Testimonials
     testimonials: [
