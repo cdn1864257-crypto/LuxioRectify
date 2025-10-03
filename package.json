@@ -4,7 +4,7 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "cd frontend && npm run dev",
+    "dev": "node start-dev.js",
     "build": "cd frontend && npm run build",
     "start": "npx serve dist -s -p 5000",
     "check": "tsc",
