@@ -506,3 +506,249 @@ Luxio - Votre boutique de smartphones et accessoires premium
     text: textContent,
   });
 }
+
+export async function sendBankTransferNotification(
+  details: BankTransferDetails
+): Promise<boolean> {
+  const adminEmail = process.env.ADMIN_EMAIL || 'support@luxio-shop.eu';
+  
+  const htmlContent = getEmailLayout(`
+    <h2 style="color: #dc2626; margin-top: 0;">🔔 Nouvelle commande par virement bancaire</h2>
+    <p>Une nouvelle commande nécessite un virement bancaire.</p>
+    
+    <div style="background-color: #f3f4f6; border-radius: 8px; padding: 20px; margin: 20px 0;">
+      <h3 style="margin-top: 0; color: #1f2937;">📋 Détails de la commande</h3>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Commande :</td>
+          <td style="padding: 8px 0; font-weight: 700;">#${details.orderId}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Client :</td>
+          <td style="padding: 8px 0; font-weight: 700;">${details.customerName}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Email :</td>
+          <td style="padding: 8px 0;">${details.customerEmail}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Montant :</td>
+          <td style="padding: 8px 0; font-size: 18px; font-weight: 700; color: #059669;">
+            ${details.totalAmount.toFixed(2)} €
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Référence :</td>
+          <td style="padding: 8px 0; font-family: 'Courier New', monospace; font-weight: 700; color: #dc2626;">
+            ${details.reference}
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px 20px; margin: 20px 0;">
+      <p style="margin: 0; color: #92400e;">
+        ⚠️ <strong>Action requise :</strong> Surveillez les virements entrants avec la référence <strong>${details.reference}</strong>
+      </p>
+    </div>
+  `);
+
+  const textContent = `
+🔔 Nouvelle commande par virement bancaire
+
+Une nouvelle commande nécessite un virement bancaire.
+
+--- Détails de la commande ---
+Commande : #${details.orderId}
+Client : ${details.customerName}
+Email : ${details.customerEmail}
+Montant : ${details.totalAmount.toFixed(2)} €
+Référence : ${details.reference}
+
+⚠️ Action requise : Surveillez les virements entrants avec la référence ${details.reference}
+
+---
+Luxio Admin
+  `.trim();
+
+  return sendEmail({
+    to: adminEmail,
+    subject: `🔔 Nouvelle commande par virement — Luxio (#${details.orderId})`,
+    html: htmlContent,
+    text: textContent,
+  });
+}
+
+interface TicketOrderDetails {
+  orderId: string;
+  customerEmail: string;
+  customerName: string;
+  totalAmount: number;
+  ticketType: string;
+  ticketCodes: Array<{ code: string; amount: number }>;
+}
+
+export async function sendTicketConfirmationToCustomer(
+  details: TicketOrderDetails
+): Promise<boolean> {
+  const htmlContent = getEmailLayout(`
+    <h2 style="color: #1e3a8a; margin-top: 0;">Confirmation de commande</h2>
+    <p>Bonjour <strong>${details.customerName}</strong>,</p>
+    <p>
+      Merci pour votre commande <strong>#${details.orderId}</strong> via tickets ${details.ticketType}.
+    </p>
+    
+    <div style="background-color: #eff6ff; border: 2px solid #3b82f6; border-radius: 8px; padding: 25px; margin: 25px 0;">
+      <h3 style="margin-top: 0; color: #1e40af; font-size: 18px;">📋 Récapitulatif</h3>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="padding: 10px 0; color: #6b7280; font-weight: 500;">Commande :</td>
+          <td style="padding: 10px 0; font-weight: 700;">#${details.orderId}</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px 0; color: #6b7280; font-weight: 500;">Type de ticket :</td>
+          <td style="padding: 10px 0; font-weight: 700;">${details.ticketType}</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px 0; color: #6b7280; font-weight: 500;">Montant total :</td>
+          <td style="padding: 10px 0; font-size: 20px; font-weight: 700; color: #059669;">
+            ${details.totalAmount.toFixed(2)} €
+          </td>
+        </tr>
+      </table>
+      
+      <h4 style="color: #1e40af; margin-top: 20px;">Codes soumis :</h4>
+      <ul style="list-style: none; padding: 0;">
+        ${details.ticketCodes.map(ticket => `
+          <li style="background: #f0f9ff; padding: 8px 12px; margin: 5px 0; border-radius: 4px; font-family: 'Courier New', monospace;">
+            ${ticket.code} — ${ticket.amount.toFixed(2)} €
+          </li>
+        `).join('')}
+      </ul>
+    </div>
+
+    <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px 20px; margin: 25px 0;">
+      <p style="margin: 0; color: #92400e;">
+        ⏳ <strong>En attente de validation</strong><br>
+        Votre commande sera validée sous 24-48h après vérification de vos codes.
+      </p>
+    </div>
+
+    <p style="color: #6b7280; font-size: 14px;">
+      Vous recevrez un email de confirmation une fois la commande validée.
+    </p>
+  `);
+
+  const textContent = `
+Confirmation de commande
+
+Bonjour ${details.customerName},
+
+Merci pour votre commande #${details.orderId} via tickets ${details.ticketType}.
+
+--- Récapitulatif ---
+Commande : #${details.orderId}
+Type de ticket : ${details.ticketType}
+Montant total : ${details.totalAmount.toFixed(2)} €
+
+Codes soumis :
+${details.ticketCodes.map(ticket => `  - ${ticket.code} — ${ticket.amount.toFixed(2)} €`).join('\n')}
+
+⏳ En attente de validation
+Votre commande sera validée sous 24-48h après vérification de vos codes.
+
+Vous recevrez un email de confirmation une fois la commande validée.
+
+---
+Luxio - Votre boutique de smartphones et accessoires premium
+  `.trim();
+
+  return sendEmail({
+    to: details.customerEmail,
+    subject: `Confirmation de commande #${details.orderId} - Luxio`,
+    html: htmlContent,
+    text: textContent,
+  });
+}
+
+export async function sendTicketNotificationToSupport(
+  details: TicketOrderDetails
+): Promise<boolean> {
+  const adminEmail = process.env.ADMIN_EMAIL || 'support@luxio-shop.eu';
+  
+  const htmlContent = getEmailLayout(`
+    <h2 style="color: #dc2626; margin-top: 0;">🔔 Nouvelle commande via tickets ${details.ticketType}</h2>
+    <p>Une nouvelle commande nécessite validation des codes de paiement.</p>
+    
+    <div style="background-color: #f3f4f6; border-radius: 8px; padding: 20px; margin: 20px 0;">
+      <h3 style="margin-top: 0; color: #1f2937;">📋 Détails de la commande</h3>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Commande :</td>
+          <td style="padding: 8px 0; font-weight: 700;">#${details.orderId}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Client :</td>
+          <td style="padding: 8px 0; font-weight: 700;">${details.customerName}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Email :</td>
+          <td style="padding: 8px 0;">${details.customerEmail}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Type :</td>
+          <td style="padding: 8px 0; font-weight: 700;">${details.ticketType}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0; color: #6b7280; font-weight: 500;">Montant :</td>
+          <td style="padding: 8px 0; font-size: 18px; font-weight: 700; color: #059669;">
+            ${details.totalAmount.toFixed(2)} €
+          </td>
+        </tr>
+      </table>
+      
+      <h4 style="color: #1f2937; margin-top: 20px;">Codes à valider :</h4>
+      <ul style="list-style: none; padding: 0;">
+        ${details.ticketCodes.map(ticket => `
+          <li style="background: #e5e7eb; padding: 10px 15px; margin: 5px 0; border-radius: 4px; font-family: 'Courier New', monospace; font-weight: 600;">
+            ${ticket.code} — ${ticket.amount.toFixed(2)} €
+          </li>
+        `).join('')}
+      </ul>
+    </div>
+
+    <div style="background-color: #fee2e2; border-left: 4px solid #dc2626; padding: 15px 20px; margin: 20px 0;">
+      <p style="margin: 0; color: #7f1d1d;">
+        ⚠️ <strong>ACTION REQUISE :</strong> Vérifier et valider les codes de paiement ${details.ticketType}
+      </p>
+    </div>
+  `);
+
+  const textContent = `
+🔔 Nouvelle commande via tickets ${details.ticketType}
+
+Une nouvelle commande nécessite validation des codes de paiement.
+
+--- Détails de la commande ---
+Commande : #${details.orderId}
+Client : ${details.customerName}
+Email : ${details.customerEmail}
+Type : ${details.ticketType}
+Montant : ${details.totalAmount.toFixed(2)} €
+
+Codes à valider :
+${details.ticketCodes.map(ticket => `  - ${ticket.code} — ${ticket.amount.toFixed(2)} €`).join('\n')}
+
+⚠️ ACTION REQUISE : Vérifier et valider les codes de paiement ${details.ticketType}
+
+---
+Luxio Admin
+  `.trim();
+
+  return sendEmail({
+    to: adminEmail,
+    subject: `🔔 Nouvelle commande via ${details.ticketType} — Luxio (#${details.orderId})`,
+    html: htmlContent,
+    text: textContent,
+  });
+}
