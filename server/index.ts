@@ -1,13 +1,13 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import healthHandler from '../api/health.js';
-import usersHandler from '../api/users.js';
-import signupHandler from '../api/auth/signup.js';
-import loginHandler from '../api/auth/login.js';
-import meHandler from '../api/auth/me.js';
-import logoutHandler from '../api/auth/logout.js';
-import submitOrderHandler from '../api/payment/submit-order.js';
+import healthHandler from '../api/health';
+import usersHandler from '../api/users';
+import signupHandler from '../api/auth/signup';
+import loginHandler from '../api/auth/login';
+import meHandler from '../api/auth/me';
+import logoutHandler from '../api/auth/logout';
+import submitOrderHandler from '../api/payment/submit-order';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
