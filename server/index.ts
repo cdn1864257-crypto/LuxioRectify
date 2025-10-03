@@ -8,6 +8,8 @@ import loginHandler from '../api/auth/login';
 import meHandler from '../api/auth/me';
 import logoutHandler from '../api/auth/logout';
 import submitOrderHandler from '../api/payment/submit-order';
+import bankTransferHandler from '../api/payment/bank-transfer';
+import maxelpayReturnHandler from '../api/payment/maxelpay-return';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -83,6 +85,8 @@ app.use('/api/auth/me', convertVercelHandler(meHandler));
 
 // Payment routes
 app.use('/api/payment/submit-order', convertVercelHandler(submitOrderHandler));
+app.use('/api/payment/bank-transfer', convertVercelHandler(bankTransferHandler));
+app.use('/api/payment/maxelpay-return', convertVercelHandler(maxelpayReturnHandler));
 
 // Serve static files from frontend dist in production
 if (process.env.NODE_ENV === 'production') {

@@ -12,7 +12,7 @@ import Home from "@/pages/Home";
 import Premium from "@/pages/Premium";
 import Dashboard from "@/pages/Dashboard";
 import Cart from "@/pages/Cart";
-import Payment from "@/pages/Payment";
+import NewPayment from "@/pages/NewPayment";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -32,7 +32,7 @@ function Router() {
       </Route>
       <Route path="/payment">
         <ProtectedRoute>
-          <Payment />
+          <NewPayment />
         </ProtectedRoute>
       </Route>
       <Route component={NotFound} />

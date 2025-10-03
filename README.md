@@ -16,7 +16,7 @@ Plateforme e-commerce moderne pour la vente de smartphones, smartwatches, sneake
 - **MongoDB Atlas** pour la base de données
 - **JWT** pour l'authentification
 - **bcrypt** pour le hashage des mots de passe
-- **AWS SES** pour l'envoi d'emails transactionnels
+- **KingSMTP** pour l'envoi d'emails transactionnels
 
 ## 📦 Installation
 
@@ -24,7 +24,7 @@ Plateforme e-commerce moderne pour la vente de smartphones, smartwatches, sneake
 - Node.js 20+
 - npm ou yarn
 - Compte MongoDB Atlas
-- Compte AWS avec accès à SES
+- Compte KingSMTP pour l'envoi d'emails
 
 ### Installation des dépendances
 
@@ -48,124 +48,58 @@ MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/luxio
 JWT_SECRET=votre_secret_jwt_minimum_32_caracteres
 ```
 
-#### Amazon SES (Envoi d'emails)
+#### KingSMTP (Envoi d'emails)
 ```bash
-AWS_SES_ACCESS_KEY=votre_access_key_aws
-AWS_SES_SECRET_KEY=votre_secret_key_aws
-AWS_SES_REGION=us-east-1
-EMAIL_FROM=noreply@luxio-shop.com
-ADMIN_EMAIL=admin@luxio-shop.com
+SMTP_HOST=smtp.kingsmtp.com
+SMTP_PORT=587
+SMTP_USER=votre_username_kingsmtp
+SMTP_PASS=votre_password_kingsmtp
+EMAIL_FROM=noreply@luxio-shop.eu
+ADMIN_EMAIL=support@luxio-shop.eu
 ```
 
-### 2. Configuration Amazon SES
+### 2. Configuration KingSMTP
 
-#### Étape 1 : Créer un compte AWS
-1. Créez un compte sur [AWS Console](https://aws.amazon.com/console/)
-2. Accédez au service **Amazon SES**
+#### Étape 1 : Créer un compte KingSMTP
+1. Créez un compte sur [KingSMTP](https://www.kingsmtp.com/)
+2. Accédez à votre tableau de bord
 
-#### Étape 2 : Vérifier votre adresse email (Mode Sandbox)
+#### Étape 2 : Obtenir les identifiants SMTP
 
-En mode sandbox (par défaut), vous ne pouvez envoyer des emails qu'à des adresses vérifiées :
+1. Dans votre tableau de bord KingSMTP, trouvez vos identifiants SMTP
+2. Notez les informations suivantes :
+   - **SMTP Host** : généralement `smtp.kingsmtp.com`
+   - **SMTP Port** : `587` (TLS) ou `465` (SSL)
+   - **Username** : votre nom d'utilisateur KingSMTP
+   - **Password** : votre mot de passe KingSMTP
 
-1. Dans Amazon SES, allez dans **Verified identities**
-2. Cliquez sur **Create identity**
-3. Sélectionnez **Email address**
-4. Entrez votre email (ex: `noreply@luxio-shop.com`)
-5. Cliquez sur **Create identity**
-6. Vérifiez l'email reçu dans votre boîte mail
-
-**Note :** Répétez cette opération pour chaque adresse email de test.
-
-#### Étape 3 : Vérifier un domaine (Production)
-
-Pour envoyer des emails à n'importe quelle adresse :
-
-1. Dans **Verified identities**, cliquez sur **Create identity**
-2. Sélectionnez **Domain**
-3. Entrez votre domaine (ex: `luxio-shop.com`)
-4. Cochez **Generate DKIM settings**
-5. Suivez les instructions pour ajouter les enregistrements DNS :
-   - Ajoutez les enregistrements DKIM dans votre DNS
-   - Ajoutez l'enregistrement MX si nécessaire
-6. Attendez la validation (peut prendre 24-48h)
-
-#### Étape 4 : Sortir du mode Sandbox
-
-1. Dans le menu SES, allez dans **Account dashboard**
-2. Sous **Sending statistics**, cliquez sur **Request production access**
-3. Remplissez le formulaire :
-   - **Use case description** : Décrivez votre usage (ex: "E-commerce transactional emails for order confirmations and user notifications")
-   - **Website URL** : Votre site web
-   - **Email sending rate** : Estimez votre volume (ex: 100-500 emails/jour)
-4. Soumettez la demande (validation sous 24h généralement)
-
-#### Étape 5 : Créer des clés d'accès IAM
-
-1. Dans AWS Console, allez dans **IAM** (Identity and Access Management)
-2. Cliquez sur **Users** → **Create user**
-3. Nom d'utilisateur : `luxio-ses-sender`
-4. Cochez **Programmatic access**
-5. Permissions : Attachez la policy **AmazonSESFullAccess**
-6. Créez l'utilisateur et **sauvegardez les clés** :
-   - `Access Key ID` → `AWS_SES_ACCESS_KEY`
-   - `Secret Access Key` → `AWS_SES_SECRET_KEY`
-
-⚠️ **Important** : Sauvegardez ces clés immédiatement, elles ne seront plus accessibles après.
-
-#### Étape 6 : Configuration Replit/Vercel
+#### Étape 3 : Configuration Replit
 
 **Pour Replit :**
 1. Ouvrez le panneau **Secrets** (icône cadenas)
 2. Ajoutez chaque variable :
-   - `AWS_SES_ACCESS_KEY`
-   - `AWS_SES_SECRET_KEY`
-   - `AWS_SES_REGION` (ex: `us-east-1`)
-   - `EMAIL_FROM` (votre email vérifié)
-   - `ADMIN_EMAIL` (email de l'admin pour les notifications)
+   - `SMTP_HOST` : `smtp.kingsmtp.com`
+   - `SMTP_PORT` : `587`
+   - `SMTP_USER` : votre username KingSMTP
+   - `SMTP_PASS` : votre password KingSMTP
+   - `EMAIL_FROM` : `noreply@luxio-shop.eu`
+   - `ADMIN_EMAIL` : `support@luxio-shop.eu`
 
-**Pour Vercel :**
+⚠️ **Important** : Gardez vos identifiants KingSMTP en sécurité et ne les partagez jamais.
+
+### 3. Configuration des emails
+
+Configurez vos adresses email d'expéditeur :
 ```bash
-vercel env add AWS_SES_ACCESS_KEY
-vercel env add AWS_SES_SECRET_KEY
-vercel env add AWS_SES_REGION
-vercel env add EMAIL_FROM
-vercel env add ADMIN_EMAIL
+EMAIL_FROM=noreply@luxio-shop.eu  # Email d'expédition
+ADMIN_EMAIL=support@luxio-shop.eu # Email support pour notifications
 ```
 
-### 3. Passer d'un email générique à un email professionnel
-
-#### Option 1 : Email générique (Gmail, Yahoo, etc.)
-
-Pour commencer rapidement en mode développement :
-```bash
-EMAIL_FROM=noreply@gmail.com
-```
-
-Limitations :
-- Doit être vérifié dans SES
-- Peut avoir des problèmes de délivrabilité
-- Moins professionnel
-
-#### Option 2 : Email avec domaine personnalisé (Recommandé)
-
-Une fois votre domaine vérifié dans SES :
-
-1. **Achetez un nom de domaine** (ex: `luxio-shop.com`)
-   - Chez Namecheap, GoDaddy, OVH, etc.
-
-2. **Configurez les DNS pour SES** (voir Étape 3 ci-dessus)
-
-3. **Utilisez votre domaine dans les emails :**
-   ```bash
-   EMAIL_FROM=contact@luxio-shop.com
-   ADMIN_EMAIL=admin@luxio-shop.com
-   ```
-
-Avantages :
-- Plus professionnel
-- Meilleure délivrabilité
-- Confiance des utilisateurs
-- Personnalisation complète
+Avantages de KingSMTP :
+- Configuration simple et rapide
+- Haute délivrabilité
+- Support technique réactif
+- Tarification flexible
 
 ## 🚀 Développement
 
@@ -214,7 +148,9 @@ GET  /api/auth/me           # Récupérer l'utilisateur connecté
 
 #### Paiements
 ```bash
-POST /api/payment/submit-order  # Soumettre une commande avec codes de paiement
+POST /api/payment/submit-order     # Soumettre une commande avec codes de paiement (PCS/TransCash)
+POST /api/payment/bank-transfer    # Créer une commande par virement bancaire
+POST /api/payment/maxelpay-return  # Callback de retour Maxelpay
 ```
 
 ### Exemple d'utilisation de l'API de paiement
@@ -292,7 +228,7 @@ Notifie l'admin d'une nouvelle commande.
 ## 🔒 Sécurité
 
 ### Bonnes pratiques
-- ✅ Toutes les clés AWS stockées dans Secrets (jamais dans le code)
+- ✅ Toutes les clés SMTP stockées dans Secrets (jamais dans le code)
 - ✅ Mots de passe hashés avec bcrypt (10 rounds)
 - ✅ JWT avec httpOnly cookies
 - ✅ Validation des données côté backend
@@ -302,10 +238,10 @@ Notifie l'admin d'une nouvelle commande.
 ### Ne jamais exposer
 ```bash
 # ❌ JAMAIS dans le code
-const AWS_KEY = "AKIAIOSFODNN7EXAMPLE";
+const SMTP_PASS = "mon_mot_de_passe_secret";
 
 # ✅ TOUJOURS via variables d'environnement
-const AWS_KEY = process.env.AWS_SES_ACCESS_KEY;
+const SMTP_PASS = process.env.SMTP_PASS;
 ```
 
 ## 🏗️ Build & Déploiement
@@ -335,41 +271,33 @@ Assurez-vous d'avoir configuré toutes les variables d'environnement dans Vercel
 
 1. **Vérifiez les variables d'environnement** :
    ```bash
-   echo $AWS_SES_ACCESS_KEY
+   echo $SMTP_HOST
+   echo $SMTP_USER
    echo $EMAIL_FROM
    ```
 
-2. **Vérifiez que l'email expéditeur est vérifié dans SES** :
-   - Mode sandbox : L'email `EMAIL_FROM` doit être vérifié
-   - Production : Votre domaine doit être vérifié
+2. **Vérifiez la connexion KingSMTP** :
+   - Assurez-vous que vos identifiants sont corrects
+   - Vérifiez que le port SMTP est bien 587 ou 465
+   - Consultez les logs du backend pour voir les erreurs de connexion
 
 3. **Consultez les logs** :
-   ```bash
-   # Vérifiez les erreurs dans les logs du backend
-   ```
+   - Recherchez les messages d'erreur dans la console backend
+   - Vérifiez que KingSMTP est bien configuré
 
-4. **Testez les credentials AWS** :
-   ```bash
-   # Utilisez AWS CLI pour tester
-   aws ses verify-email-identity --email-address test@example.com --region us-east-1
-   ```
+### Erreur de connexion SMTP
 
-### Erreur "Email address not verified"
-
-Vous êtes en mode sandbox. Vérifiez toutes les adresses email dans SES ou demandez l'accès production.
-
-### Limite de taux dépassée
-
-SES a des limites d'envoi :
-- Mode sandbox : 200 emails/jour
-- Production : Dépend de votre demande (augmente progressivement)
+Si vous obtenez une erreur de connexion :
+- Vérifiez que `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER` et `SMTP_PASS` sont correctement configurés
+- Assurez-vous que votre compte KingSMTP est actif
+- Vérifiez que vous n'avez pas de pare-feu bloquant le port SMTP
 
 ## 📚 Ressources
 
-- [Documentation AWS SES](https://docs.aws.amazon.com/ses/)
-- [AWS SDK for JavaScript v3](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/)
+- [Documentation KingSMTP](https://www.kingsmtp.com/)
 - [MongoDB Atlas](https://www.mongodb.com/atlas)
 - [Vite Documentation](https://vitejs.dev/)
+- [Nodemailer](https://nodemailer.com/)
 
 ## 📝 License
 
