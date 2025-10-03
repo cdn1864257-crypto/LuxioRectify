@@ -331,6 +331,11 @@ export interface Translations {
   paidStatus: string;
   pendingStatus: string;
   user: string;
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+  passwordChangeSuccess: string;
+  passwordChangeFailed: string;
   
   // Testimonials
   testimonials: Array<{
@@ -674,6 +679,11 @@ export const translations: Record<Language, Translations> = {
     paidStatus: 'Paid',
     pendingStatus: 'Pending',
     user: 'User',
+    currentPassword: 'Current Password',
+    newPassword: 'New Password',
+    confirmNewPassword: 'Confirm New Password',
+    passwordChangeSuccess: 'Password changed successfully!',
+    passwordChangeFailed: 'Failed to change password',
     
     // Testimonials
     testimonials: [
@@ -1123,6 +1133,11 @@ export const translations: Record<Language, Translations> = {
     paidStatus: 'Payé',
     pendingStatus: 'En attente',
     user: 'Utilisateur',
+    currentPassword: 'Mot de passe actuel',
+    newPassword: 'Nouveau mot de passe',
+    confirmNewPassword: 'Confirmer le mot de passe',
+    passwordChangeSuccess: 'Mot de passe changé avec succès !',
+    passwordChangeFailed: 'Échec du changement de mot de passe',
     
     // Testimonials
     testimonials: [
@@ -1572,6 +1587,11 @@ export const translations: Record<Language, Translations> = {
     paidStatus: 'Pagado',
     pendingStatus: 'Pendiente',
     user: 'Usuario',
+    currentPassword: 'Contraseña actual',
+    newPassword: 'Nueva contraseña',
+    confirmNewPassword: 'Confirmar contraseña',
+    passwordChangeSuccess: '¡Contraseña cambiada con éxito!',
+    passwordChangeFailed: 'Error al cambiar la contraseña',
     
     // Testimonials
     testimonials: [
@@ -2021,6 +2041,11 @@ export const translations: Record<Language, Translations> = {
     paidStatus: 'Pago',
     pendingStatus: 'Pendente',
     user: 'Usuário',
+    currentPassword: 'Senha atual',
+    newPassword: 'Nova senha',
+    confirmNewPassword: 'Confirmar senha',
+    passwordChangeSuccess: 'Senha alterada com sucesso!',
+    passwordChangeFailed: 'Falha ao alterar a senha',
     
     // Testimonials
     testimonials: [
@@ -2470,6 +2495,11 @@ export const translations: Record<Language, Translations> = {
     paidStatus: 'Opłacone',
     pendingStatus: 'Oczekujące',
     user: 'Użytkownik',
+    currentPassword: 'Obecne hasło',
+    newPassword: 'Nowe hasło',
+    confirmNewPassword: 'Potwierdź hasło',
+    passwordChangeSuccess: 'Hasło zmienione pomyślnie!',
+    passwordChangeFailed: 'Nie udało się zmienić hasła',
     
     // Testimonials
     testimonials: [
@@ -2919,6 +2949,11 @@ export const translations: Record<Language, Translations> = {
     paidStatus: 'Pagato',
     pendingStatus: 'In attesa',
     user: 'Utente',
+    currentPassword: 'Password attuale',
+    newPassword: 'Nuova password',
+    confirmNewPassword: 'Conferma password',
+    passwordChangeSuccess: 'Password cambiata con successo!',
+    passwordChangeFailed: 'Impossibile cambiare la password',
     
     // Testimonials
     testimonials: [
@@ -3368,6 +3403,11 @@ export const translations: Record<Language, Translations> = {
     paidStatus: 'Fizetve',
     pendingStatus: 'Függőben',
     user: 'Felhasználó',
+    currentPassword: 'Jelenlegi jelszó',
+    newPassword: 'Új jelszó',
+    confirmNewPassword: 'Jelszó megerősítése',
+    passwordChangeSuccess: 'Jelszó sikeresen megváltoztatva!',
+    passwordChangeFailed: 'Nem sikerült megváltoztatni a jelszót',
     
     // Testimonials
     testimonials: [

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'wouter';
 import { useCart } from '@/contexts/CartContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CartSidebar } from '@/components/CartSidebar';
@@ -13,12 +14,13 @@ import { showToast } from '@/components/ToastNotifications';
 
 export default function Cart() {
   const { cart, updateQuantity, removeFromCart, total } = useCart();
+  const { t } = useLanguage();
   const [cartOpen, setCartOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
   const handleRemoveItem = (productId: string) => {
     removeFromCart(productId);
-    showToast('Article retiré du panier', 'info');
+    showToast(t('itemRemovedFromCart'), 'info');
   };
 
   return (
@@ -29,10 +31,10 @@ export default function Cart() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-foreground mb-2" data-testid="text-cart-title">
-              Mon Panier
+              {t('shoppingCart')}
             </h1>
             <p className="text-muted-foreground">
-              {cart.length} {cart.length === 1 ? 'article' : 'articles'} dans votre panier
+              {cart.length} {cart.length === 1 ? t('item') : t('items')}
             </p>
           </div>
 
@@ -43,15 +45,15 @@ export default function Cart() {
                   <ShoppingBag className="h-20 w-20 text-muted-foreground" />
                 </div>
                 <h2 className="text-2xl font-semibold mb-3" data-testid="text-empty-cart">
-                  Votre panier est vide
+                  {t('cartEmpty')}
                 </h2>
                 <p className="text-muted-foreground text-center mb-6 max-w-md">
-                  Découvrez notre sélection de produits premium et ajoutez vos articles préférés à votre panier.
+                  {t('cartEmptyDescription')}
                 </p>
                 <Link href="/">
                   <Button size="lg" data-testid="button-continue-shopping">
                     <ShoppingBag className="h-5 w-5 mr-2" />
-                    Découvrir nos produits
+                    {t('shopNow')}
                   </Button>
                 </Link>
               </CardContent>
@@ -122,7 +124,7 @@ export default function Cart() {
                               </p>
                               {item.quantity > 1 && (
                                 <p className="text-sm text-muted-foreground">
-                                  {(item.price / item.quantity).toFixed(2)} € / unité
+                                  {(item.price / item.quantity).toFixed(2)} € / {t('item')}
                                 </p>
                               )}
                             </div>
@@ -137,23 +139,23 @@ export default function Cart() {
               <div className="lg:col-span-1">
                 <Card className="sticky top-24">
                   <CardContent className="p-6">
-                    <h2 className="text-xl font-semibold mb-4">Résumé de la commande</h2>
+                    <h2 className="text-xl font-semibold mb-4">{t('orderSummary')}</h2>
                     
                     <div className="space-y-3 mb-4">
                       <div className="flex justify-between text-sm">
-                        <span className="text-muted-foreground">Sous-total</span>
+                        <span className="text-muted-foreground">{t('subtotal')}</span>
                         <span className="font-medium" data-testid="text-subtotal">{total.toFixed(2)} €</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-muted-foreground">Livraison</span>
-                        <span className="font-medium text-green-600">Gratuite</span>
+                        <span className="text-muted-foreground">{t('shipping')}</span>
+                        <span className="font-medium text-green-600">{t('free')}</span>
                       </div>
                     </div>
 
                     <Separator className="my-4" />
 
                     <div className="flex justify-between mb-6">
-                      <span className="text-lg font-semibold">Total</span>
+                      <span className="text-lg font-semibold">{t('total')}</span>
                       <span className="text-2xl font-bold text-primary" data-testid="text-total">
                         {total.toFixed(2)} €
                       </span>
@@ -161,23 +163,23 @@ export default function Cart() {
 
                     <Link href="/payment">
                       <Button className="w-full" size="lg" data-testid="button-checkout">
-                        Passer la commande
+                        {t('proceedToCheckout')}
                         <ArrowRight className="h-5 w-5 ml-2" />
                       </Button>
                     </Link>
 
                     <Link href="/">
                       <Button variant="outline" className="w-full mt-3" data-testid="button-continue-shopping-summary">
-                        Continuer mes achats
+                        {t('continueShopping')}
                       </Button>
                     </Link>
 
                     <div className="mt-6 p-4 bg-muted/50 rounded-lg">
                       <p className="text-sm text-muted-foreground">
-                        🚚 <span className="font-medium">Livraison gratuite</span> sur toutes les commandes
+                        🚚 <span className="font-medium">{t('freeShipping')}</span>
                       </p>
                       <p className="text-sm text-muted-foreground mt-2">
-                        🔒 <span className="font-medium">Paiement sécurisé</span> garanti
+                        🔒 <span className="font-medium">{t('securePayment')}</span>
                       </p>
                     </div>
                   </CardContent>
@@ -189,7 +191,7 @@ export default function Cart() {
       </main>
 
       <Footer />
-      <CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} onCheckout={() => {}} />
+      <CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} />
       <UserProfile isOpen={profileOpen} onClose={() => setProfileOpen(false)} />
     </div>
   );

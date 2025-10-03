@@ -45,11 +45,11 @@ export function UserProfile({ isOpen, onClose }: UserProfileProps) {
     try {
       // Here you would normally call your API to change the password
       // For now, we'll just show a success message
-      showToast('Password changed successfully!', 'success');
+      showToast(t('passwordChangeSuccess'), 'success');
       setShowPasswordModal(false);
       setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
     } catch (error) {
-      showToast('Failed to change password', 'error');
+      showToast(t('passwordChangeFailed'), 'error');
     }
   };
 
@@ -267,7 +267,7 @@ export function UserProfile({ isOpen, onClose }: UserProfileProps) {
 
             <form onSubmit={handleChangePassword} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-2">Current Password</label>
+                <label className="block text-sm font-medium mb-2">{t('currentPassword')}</label>
                 <input 
                   type="password"
                   value={passwordData.currentPassword}
@@ -278,7 +278,7 @@ export function UserProfile({ isOpen, onClose }: UserProfileProps) {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">New Password</label>
+                <label className="block text-sm font-medium mb-2">{t('newPassword')}</label>
                 <input 
                   type="password"
                   value={passwordData.newPassword}
@@ -290,7 +290,7 @@ export function UserProfile({ isOpen, onClose }: UserProfileProps) {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Confirm New Password</label>
+                <label className="block text-sm font-medium mb-2">{t('confirmNewPassword')}</label>
                 <input 
                   type="password"
                   value={passwordData.confirmPassword}
