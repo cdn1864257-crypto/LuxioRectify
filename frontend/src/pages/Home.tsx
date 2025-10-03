@@ -7,32 +7,15 @@ import { ProductGrid } from '../components/ProductGrid';
 import { TestimonialsCarousel } from '../components/TestimonialsCarousel';
 import { Footer } from '../components/Footer';
 import { CartSidebar } from '../components/CartSidebar';
-import { CheckoutModal } from '../components/CheckoutModal';
 import { UserProfile } from '../components/UserProfile';
-import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getProductsByCategory } from '../lib/products';
-import { showToast } from '../components/ToastNotifications';
 import { Button } from '../components/ui/button';
 
 export default function Home() {
-  const { user } = useAuth();
   const { t } = useLanguage();
   const [cartOpen, setCartOpen] = useState(false);
-  const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-
-  const handleProceedToCheckout = () => {
-    if (!user) {
-      // Redirect to static checkout for non-logged users
-      showToast(t('loginRequired'), 'info');
-      setCartOpen(false);
-      setCheckoutOpen(true); // Allow checkout without login as per specs
-      return;
-    }
-    setCartOpen(false);
-    setCheckoutOpen(true);
-  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -100,12 +83,6 @@ export default function Home() {
       <CartSidebar
         isOpen={cartOpen}
         onClose={() => setCartOpen(false)}
-        onCheckout={handleProceedToCheckout}
-      />
-      
-      <CheckoutModal
-        isOpen={checkoutOpen}
-        onClose={() => setCheckoutOpen(false)}
       />
       
       <UserProfile

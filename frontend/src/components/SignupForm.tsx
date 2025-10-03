@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 import { Loader2 } from "lucide-react";
 
 interface SignupFormData {
@@ -24,6 +25,7 @@ interface SignupFormProps {
 
 export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
   const { toast } = useToast();
+  const { signup, refreshUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<SignupFormData>({
     firstName: "",
@@ -93,32 +95,27 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/auth/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          country: formData.country,
-          city: formData.city,
-          address: formData.address,
-          phone: formData.phone,
-          email: formData.email,
-          password: formData.password
-        })
+      const result = await signup({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        country: formData.country,
+        city: formData.city,
+        address: formData.address,
+        phone: formData.phone,
+        email: formData.email,
+        password: formData.password
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Erreur lors de l\'inscription');
+      if (!result.success) {
+        throw new Error(result.error || 'Erreur lors de l\'inscription');
       }
+
+      // Rafraîchir l'utilisateur pour récupérer les données du cookie
+      await refreshUser();
 
       toast({
         title: "Inscription réussie !",
-        description: "Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter.",
+        description: "Bienvenue sur Luxio ! Vous êtes maintenant connecté.",
       });
 
       // Réinitialiser le formulaire

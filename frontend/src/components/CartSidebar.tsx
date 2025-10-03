@@ -1,4 +1,5 @@
 import { X, ShoppingCart, Minus, Plus, Trash2 } from 'lucide-react';
+import { useLocation } from 'wouter';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { showToast } from './ToastNotifications';
@@ -6,12 +7,12 @@ import { showToast } from './ToastNotifications';
 interface CartSidebarProps {
   isOpen: boolean;
   onClose: () => void;
-  onCheckout: () => void;
 }
 
-export function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebarProps) {
+export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   const { cart, updateQuantity, removeFromCart, total } = useCart();
   const { t } = useLanguage();
+  const [, setLocation] = useLocation();
 
   const handleRemoveItem = (productId: string) => {
     removeFromCart(productId);
@@ -177,7 +178,10 @@ export function CartSidebar({ isOpen, onClose, onCheckout }: CartSidebarProps) {
               
               {/* Checkout Button */}
               <button 
-                onClick={onCheckout}
+                onClick={() => {
+                  onClose();
+                  setLocation('/payment');
+                }}
                 className="w-full bg-primary text-primary-foreground py-3.5 sm:py-4 rounded-xl font-semibold text-base sm:text-lg hover:bg-primary/90 active:scale-[0.98] transition-all shadow-lg hover:shadow-xl"
                 data-testid="button-proceed-checkout"
               >

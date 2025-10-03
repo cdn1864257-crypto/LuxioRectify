@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 import { Loader2 } from "lucide-react";
 
 interface LoginFormData {
@@ -17,6 +18,7 @@ interface LoginFormProps {
 
 export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
   const { toast } = useToast();
+  const { login, user } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<LoginFormData>({
     email: "",
@@ -61,27 +63,15 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include', // Important pour les cookies
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password
-        })
-      });
+      const result = await login(formData.email, formData.password);
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Erreur lors de la connexion');
+      if (!result.success) {
+        throw new Error(result.error || 'Erreur lors de la connexion');
       }
 
       toast({
         title: "Connexion réussie !",
-        description: `Bienvenue ${data.user.firstName} !`,
+        description: user ? `Bienvenue ${user.firstName} !` : "Bienvenue !",
       });
 
       // Réinitialiser le formulaire
@@ -91,7 +81,7 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
       });
 
       if (onSuccess) {
-        onSuccess(data.user);
+        onSuccess(user);
       }
 
     } catch (error) {

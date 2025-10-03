@@ -674,7 +674,7 @@ Montant: ${orderTotal.toFixed(2)} €`;
       </main>
 
       <Footer />
-      <CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} onCheckout={() => {}} />
+      <CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} />
       <UserProfile isOpen={profileOpen} onClose={() => setProfileOpen(false)} />
     </div>
   );

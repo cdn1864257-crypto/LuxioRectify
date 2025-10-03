@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
@@ -32,6 +32,13 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
   });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('login') === 'true') {
+      setAuthModal({ open: true, mode: 'login' });
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     setMobileMenuOpen(false);
