@@ -3,10 +3,10 @@ import CryptoJS from 'crypto-js';
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
 
 if (!ENCRYPTION_KEY) {
-  throw new Error('ENCRYPTION_KEY environment variable is required for secure payment code encryption');
+  console.warn('⚠️  ENCRYPTION_KEY not set. Using development key. DO NOT use in production!');
 }
 
-const key: string = ENCRYPTION_KEY;
+const key: string = ENCRYPTION_KEY || 'dev-only-key-please-set-encryption-key-in-production';
 
 export function encryptCode(code: string): string {
   return CryptoJS.AES.encrypt(code, key).toString();

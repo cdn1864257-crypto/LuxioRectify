@@ -148,10 +148,16 @@ The application is now fully functional and ready to use in the Replit environme
 - Root: npm packages already installed from original setup
 - Frontend: `npm install` completed successfully (418 packages freshly installed)
 
-**Environment Variables Configured**:
-- ✅ `MONGODB_URI`: MongoDB Atlas connection string configured for user authentication
-- ✅ `JWT_SECRET`: Secret key configured for JWT token signing
+**Environment Variables** (Required for Full Functionality):
+- `MONGODB_URI`: MongoDB Atlas connection string for user authentication
+- `JWT_SECRET`: Secret key for JWT token signing (32+ characters recommended)
+- `ENCRYPTION_KEY`: AES-256 encryption key for PCS/Transcash payment codes (32+ characters)
+- `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`: KingSMTP configuration for transactional emails
+- `EMAIL_FROM`, `ADMIN_EMAIL`: Email addresses for customer and admin notifications
+- `MAXELPAY_MERCHANT_ID`, `MAXELPAY_API_KEY`: Maxelpay payment gateway credentials
 - `DATABASE_URL` (optional): PostgreSQL database (Drizzle config present but not actively used)
+
+**Note**: The application will run in development mode without these variables, but will show warnings and authentication/payment features will not work. The ENCRYPTION_KEY has a fallback development key that should NOT be used in production.
 
 **Authentication Status**: ✅ Fully configured - User signup, login, and protected pages (Dashboard, Cart, Payment) are now operational.
 
