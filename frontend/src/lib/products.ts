@@ -1335,7 +1335,7 @@ export const products: Product[] = [
     price: 249,
     originalPrice: 299,
     discount: 17,
-    image: '/attached_assets/stock_images/yeezy_boost_350_v2_b_4c83c894.jpg',
+    image: '/attached_assets/m_wp_65a9b73087a2f5e132aa6f91_1759487962373.webp',
     category: 'sneakers',
     description: 'Bone',
     features: ['Boost technology', 'Primeknit upper', 'Iconic design', 'Free shipping']
