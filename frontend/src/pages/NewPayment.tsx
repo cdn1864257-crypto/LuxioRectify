@@ -104,29 +104,46 @@ export default function NewPayment() {
     }
   };
 
-  const handleMaxelpay = () => {
+  const handleMaxelpay = async () => {
     setIsProcessing(true);
     toast({
       title: t.redirectingToMaxelPay,
       description: t.redirectingToMaxelPayDescription
     });
 
-    setTimeout(() => {
-      const merchantId = 'YOUR_MERCHANT_ID';
-      const orderRef = `LX-${Date.now()}`;
-      const returnUrl = `${window.location.origin}/payment-success`;
-      
-      const params = new URLSearchParams({
-        merchant_id: merchantId,
-        amount: totalWithTax.toString(),
-        currency: 'EUR',
-        reference: orderRef,
-        description: `Luxio Order ${orderRef}`,
-        return_url: returnUrl
+    try {
+      const response = await fetch('/api/payment/maxelpay-init', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customerEmail: user.email,
+          customerName: `${user.firstName} ${user.lastName}`,
+          totalAmount: totalWithTax,
+          cartItems: cart.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity
+          }))
+        })
       });
 
-      window.location.href = `https://checkout.maxelpay.com/?${params.toString()}`;
-    }, 1000);
+      const data = await response.json();
+
+      if (data.success && data.redirectUrl) {
+        clearCart();
+        window.location.href = data.redirectUrl;
+      } else {
+        throw new Error(data.error || 'Erreur lors de l\'initialisation du paiement');
+      }
+    } catch (error) {
+      toast({
+        title: t.error,
+        description: error instanceof Error ? error.message : t.orderFailed,
+        variant: 'destructive'
+      });
+      setIsProcessing(false);
+    }
   };
 
   const handleTicketPayment = async () => {

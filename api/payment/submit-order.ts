@@ -1,5 +1,7 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import { sendOrderConfirmationToCustomer, sendOrderNotificationToAdmin } from '../../utils/email.js';
+import { sendTicketConfirmationToCustomer, sendTicketNotificationToSupport } from '../../utils/email.js';
+import { encryptCodes } from '../../utils/encryption.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -99,7 +101,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const db = client.db('luxio');
       const ordersCollection = db.collection('orders');
 
-      // Créer la commande
+      const encryptedCodes = encryptCodes(codes);
+      
       const newOrder = {
         customerEmail: customerEmail.toLowerCase(),
         customerName,
@@ -109,8 +112,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         productPrice,
         totalAmount,
         codeType,
-        codes,
-        status: 'pending', // En attente de validation
+        codes: encryptedCodes,
+        status: 'pending',
         createdAt: new Date(),
         updatedAt: new Date()
       };
@@ -118,25 +121,20 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const result = await ordersCollection.insertOne(newOrder);
       const orderId = result.insertedId.toString();
 
-      // Préparer les détails de commande pour les emails
-      const orderDetails = {
+      const ticketOrderDetails = {
         orderId,
         customerEmail: customerEmail.toLowerCase(),
         customerName,
-        productName,
-        productModel,
-        productPrice,
         totalAmount,
-        codeType,
-        codes
+        ticketType: codeType,
+        ticketCodes: codes.map(code => ({ code, amount: 0 }))
       };
 
-      // Envoyer les emails (sans bloquer la réponse)
       Promise.all([
-        sendOrderConfirmationToCustomer(orderDetails),
-        sendOrderNotificationToAdmin(orderDetails)
+        sendTicketConfirmationToCustomer(ticketOrderDetails),
+        sendTicketNotificationToSupport(ticketOrderDetails)
       ]).catch((error: Error) => {
-        console.error('Erreur lors de l\'envoi des emails de commande:', error);
+        console.error('Erreur lors de l\'envoi des emails de tickets:', error);
       });
 
       // Retourner la confirmation de commande

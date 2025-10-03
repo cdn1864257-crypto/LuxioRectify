@@ -1,5 +1,4 @@
 import { MongoClient } from 'mongodb';
-import { sendBankTransferEmail, sendBankTransferNotification } from '../../utils/email.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -17,7 +16,7 @@ interface VercelResponse {
   end: (chunk?: any) => void;
 }
 
-interface BankTransferData {
+interface MaxelpayInitData {
   customerEmail: string;
   customerName: string;
   totalAmount: number;
@@ -47,7 +46,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       customerName,
       totalAmount,
       cartItems
-    }: BankTransferData = req.body;
+    }: MaxelpayInitData = req.body;
 
     if (!customerEmail || !customerName || !totalAmount || !cartItems || cartItems.length === 0) {
       return res.status(400).json({
@@ -61,14 +60,22 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(customerEmail)) {
-      return res.status(400).json({ error: 'Format email invalide' });
-    }
-
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
       return res.status(500).json({ error: 'Configuration MongoDB manquante' });
+    }
+
+    const maxelpayMerchantId = process.env.MAXELPAY_MERCHANT_ID;
+    const maxelpayApiKey = process.env.MAXELPAY_API_KEY;
+    
+    if (!maxelpayMerchantId || !maxelpayApiKey) {
+      return res.status(500).json({ 
+        error: 'Configuration Maxelpay manquante',
+        missing: {
+          MAXELPAY_MERCHANT_ID: !maxelpayMerchantId,
+          MAXELPAY_API_KEY: !maxelpayApiKey
+        }
+      });
     }
 
     const client = new MongoClient(mongoUri);
@@ -77,7 +84,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       await client.connect();
 
       const db = client.db('luxio');
-      const ordersCollection = db.collection('bank_transfer_orders');
+      const ordersCollection = db.collection('maxelpay_orders');
 
       const orderReference = generateOrderReference();
 
@@ -87,7 +94,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         totalAmount,
         cartItems,
         orderReference,
-        paymentMethod: 'bank_transfer',
+        paymentMethod: 'maxelpay',
         status: 'pending',
         createdAt: new Date(),
         updatedAt: new Date()
@@ -96,46 +103,39 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const result = await ordersCollection.insertOne(newOrder);
       const orderId = result.insertedId.toString();
 
-      const bankDetails = {
-        orderId,
-        customerEmail: customerEmail.toLowerCase(),
-        customerName,
-        totalAmount,
-        bankName: 'Matt Luxio',
-        iban: 'ES6115632626383268707364',
-        bic: 'NTSBESM1XXX',
-        reference: `Dépôt+${customerName} #${orderReference}`
-      };
+      const returnUrl = `${req.headers.origin || 'https://luxio-shop.eu'}/api/payment/maxelpay-return`;
+      const cancelUrl = `${req.headers.origin || 'https://luxio-shop.eu'}/payment?cancelled=true`;
 
-      Promise.all([
-        sendBankTransferEmail(bankDetails),
-        sendBankTransferNotification(bankDetails)
-      ]).catch((error: Error) => {
-        console.error('Erreur lors de l\'envoi des emails de virement:', error);
+      const params = new URLSearchParams({
+        merchant_id: maxelpayMerchantId,
+        amount: totalAmount.toFixed(2),
+        currency: 'EUR',
+        reference: orderReference,
+        order_id: orderId,
+        description: `Luxio Order ${orderReference}`,
+        customer_email: customerEmail,
+        customer_name: customerName,
+        return_url: returnUrl,
+        cancel_url: cancelUrl,
+        api_key: maxelpayApiKey
       });
 
-      return res.status(201).json({
+      const redirectUrl = `https://checkout.maxelpay.com/?${params.toString()}`;
+
+      return res.status(200).json({
         success: true,
-        message: 'Commande enregistrée avec succès',
         orderId,
         orderReference,
-        status: 'pending',
-        bankDetails: {
-          bankName: bankDetails.bankName,
-          iban: bankDetails.iban,
-          bic: bankDetails.bic,
-          reference: bankDetails.reference,
-          amount: totalAmount
-        }
+        redirectUrl
       });
     } finally {
       await client.close();
     }
 
   } catch (error) {
-    console.error('Erreur lors de l\'enregistrement de la commande par virement:', error);
+    console.error('Erreur lors de l\'initialisation du paiement Maxelpay:', error);
     return res.status(500).json({
-      error: 'Erreur serveur lors de l\'enregistrement de la commande',
+      error: 'Erreur serveur lors de l\'initialisation du paiement',
       details: error instanceof Error ? error.message : 'Unknown error'
     });
   }

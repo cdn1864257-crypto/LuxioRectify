@@ -49,11 +49,12 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const ordersCollection = db.collection('maxelpay_orders');
 
       await ordersCollection.updateOne(
-        { orderId },
+        { orderReference: orderId },
         {
           $set: {
             paymentStatus: status,
             transactionId: transactionId || null,
+            paidAt: status === 'success' ? new Date() : null,
             updatedAt: new Date()
           }
         }

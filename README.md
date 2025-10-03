@@ -58,6 +58,19 @@ EMAIL_FROM=noreply@luxio-shop.eu
 ADMIN_EMAIL=support@luxio-shop.eu
 ```
 
+#### Maxelpay (Paiement en ligne)
+```bash
+MAXELPAY_MERCHANT_ID=votre_merchant_id_maxelpay
+MAXELPAY_API_KEY=votre_api_key_maxelpay
+```
+
+#### Sécurité
+```bash
+ENCRYPTION_KEY=votre_cle_de_chiffrement_minimum_32_caracteres
+```
+
+⚠️ **Important** : La clé de chiffrement `ENCRYPTION_KEY` est utilisée pour sécuriser les codes de paiement PCS/Transcash stockés en base de données. Utilisez une clé forte et ne la partagez jamais.
+
 ### 2. Configuration KingSMTP
 
 #### Étape 1 : Créer un compte KingSMTP
