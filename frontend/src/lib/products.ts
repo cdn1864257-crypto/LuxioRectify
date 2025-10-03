@@ -1245,7 +1245,7 @@ export const products: Product[] = [
     price: 349,
     originalPrice: 399,
     discount: 13,
-    image: '/attached_assets/28494320-1505-3756-1_1759480328812.jpg',
+    image: '/attached_assets/display-watch1.0_1759493221518.png',
     category: 'watches',
     description: 'Snapdragon W5',
     features: ['Dual display', 'Wear OS 3', 'Long battery', 'Free shipping']
@@ -1267,7 +1267,7 @@ export const products: Product[] = [
     price: 399,
     originalPrice: 449,
     discount: 11,
-    image: '/attached_assets/23810294-1505-1540-1_1759480356123.jpg',
+    image: '/attached_assets/14887022_1759493201172.jpg',
     category: 'watches',
     description: 'Tough Solar',
     features: ['G-Shock durability', 'Tide graph', 'Phone finder', 'Free shipping']
@@ -1469,7 +1469,7 @@ export const products: Product[] = [
     price: 549,
     originalPrice: 649,
     discount: 15,
-    image: 'https://images.unsplash.com/photo-1585338447937-7082f8fc763d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/71sLiO+x53L._AC_SX425__1759493235848.jpg',
     category: 'gadgets',
     description: 'HEPA Filter, WiFi Enabled',
     features: ['HEPA filtration', 'Real-time air quality', 'Dyson technology', 'Free delivery']
@@ -1480,7 +1480,7 @@ export const products: Product[] = [
     price: 199,
     originalPrice: 249,
     discount: 20,
-    image: 'https://images.unsplash.com/photo-1558002038-1055907df827?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/sonos-one-gen-2-blanc_1759493250625.jpg',
     category: 'gadgets',
     description: 'Smart Speaker',
     features: ['Voice control', 'Hi-Fi sound', 'Multi-room audio', 'Free delivery']
@@ -1491,7 +1491,7 @@ export const products: Product[] = [
     price: 149,
     originalPrice: 199,
     discount: 25,
-    image: 'https://images.unsplash.com/photo-1524634126442-357e0eac3c14?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/407e189ac14e36f8d9d5fd5de4730899.w3248.h3248._CR0,0,3248,3248_SX960__1759493265749.jpeg',
     category: 'gadgets',
     description: 'Smart lighting',
     features: ['16 million colors', 'Voice control', 'App control', 'Free delivery']
@@ -1502,7 +1502,7 @@ export const products: Product[] = [
     price: 129,
     originalPrice: 169,
     discount: 24,
-    image: 'https://images.unsplash.com/photo-1558089687-5a7b3a3e4d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/unnamed_1759493281821.jpg',
     category: 'gadgets',
     description: 'Smart home control',
     features: ['Energy saving', 'Voice control', 'Remote access', 'Free delivery']
@@ -1513,7 +1513,7 @@ export const products: Product[] = [
     price: 179,
     originalPrice: 229,
     discount: 22,
-    image: 'https://images.unsplash.com/photo-1556302487-0e97e34fa26e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/51eiekBal8L._SY355__1759493295901.jpg',
     category: 'gadgets',
     description: 'Home security',
     features: ['1080p HD video', 'Two-way talk', 'Motion detection', 'Free delivery']
@@ -1524,7 +1524,7 @@ export const products: Product[] = [
     price: 149,
     originalPrice: 179,
     discount: 17,
-    image: 'https://images.unsplash.com/photo-1625945277632-0ebf1c0db4e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/anker-powercore-737-batterie-externe-24-k-24-0_1759493312807.jpg',
     category: 'gadgets',
     description: '24000mAh capacity',
     features: ['140W output', 'Fast charging', 'Multiple ports', 'Free delivery']
@@ -1535,9 +1535,9 @@ export const products: Product[] = [
     price: 279,
     originalPrice: 329,
     discount: 15,
-    image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/bose-quietcomfort-45-blanc-nuage_1759493326153.jpg',
     category: 'gadgets',
-    description: 'Wireless headphones',
+    description: 'Cloud White',
     features: ['Active noise cancellation', 'Premium sound', '24h battery', 'Free delivery']
   },
   {
@@ -1546,9 +1546,9 @@ export const products: Product[] = [
     price: 349,
     originalPrice: 399,
     discount: 13,
-    image: 'https://images.unsplash.com/photo-1599669454699-248893623440?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/sony-wh-1000xm5-noir_1759493340560.jpg',
     category: 'gadgets',
-    description: 'Premium headphones',
+    description: 'Black',
     features: ['Industry-leading ANC', 'LDAC codec', '30h battery', 'Free delivery']
   },
   {
@@ -1557,18 +1557,18 @@ export const products: Product[] = [
     price: 249,
     originalPrice: 299,
     discount: 17,
-    image: 'https://images.unsplash.com/photo-1589492477829-5e65395b66cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/amazon-echo-show-15-2024_1759493359207.jpg',
     category: 'gadgets',
     description: 'Smart display',
     features: ['15.6" Full HD', 'Alexa built-in', 'Smart home hub', 'Free delivery']
   },
   {
-    id: 'dji-mini-4-pro',
-    name: 'DJI Mini 4 Pro',
+    id: 'dji-mini-3-pro',
+    name: 'DJI Mini 3 Pro',
     price: 759,
     originalPrice: 899,
     discount: 16,
-    image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/dji-mini-3-pro-dji-rc_1759493371848.jpg',
     category: 'gadgets',
     description: 'Compact drone',
     features: ['4K HDR video', 'Obstacle avoidance', 'Long flight time', 'Free delivery']
@@ -1579,7 +1579,7 @@ export const products: Product[] = [
     price: 349,
     originalPrice: 399,
     discount: 13,
-    image: 'https://images.unsplash.com/photo-1590179068383-b9c69aacebd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/gopro-hero12-black-standard_1759493443152.jpg',
     category: 'gadgets',
     description: 'Action camera',
     features: ['5.3K video', 'HyperSmooth 6.0', 'Waterproof', 'Free delivery']
