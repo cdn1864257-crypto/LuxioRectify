@@ -1,26 +1,4 @@
-import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
-
-function isSESConfigured(): boolean {
-  const hasAccessKey = !!process.env.AWS_SES_ACCESS_KEY;
-  const hasSecretKey = !!process.env.AWS_SES_SECRET_KEY;
-  const hasEmailFrom = !!process.env.EMAIL_FROM;
-
-  return hasAccessKey && hasSecretKey && hasEmailFrom;
-}
-
-function getSESClient(): SESClient | null {
-  if (!isSESConfigured()) {
-    return null;
-  }
-
-  return new SESClient({
-    region: process.env.AWS_SES_REGION || "us-east-1",
-    credentials: {
-      accessKeyId: process.env.AWS_SES_ACCESS_KEY!,
-      secretAccessKey: process.env.AWS_SES_SECRET_KEY!,
-    },
-  });
-}
+import { sendEmail as sendEmailViaSMTP } from './mailer';
 
 interface EmailOptions {
   to: string | string[];
@@ -31,65 +9,7 @@ interface EmailOptions {
 }
 
 export async function sendEmail(options: EmailOptions): Promise<boolean> {
-  // Vérifier la configuration SES
-  if (!isSESConfigured()) {
-    console.warn("⚠️  Amazon SES not configured. Email sending skipped.");
-    console.warn("   Please set the following environment variables:");
-    console.warn("   - AWS_SES_ACCESS_KEY");
-    console.warn("   - AWS_SES_SECRET_KEY");
-    console.warn("   - EMAIL_FROM");
-    console.warn(`   Email was intended for: ${Array.isArray(options.to) ? options.to.join(', ') : options.to}`);
-    console.warn(`   Subject: ${options.subject}`);
-    return false;
-  }
-
-  const sesClient = getSESClient();
-  if (!sesClient) {
-    return false;
-  }
-
-  const fromEmail = options.from || process.env.EMAIL_FROM || "noreply@luxio-shop.com";
-  const toAddresses = Array.isArray(options.to) ? options.to : [options.to];
-
-  const params = {
-    Source: fromEmail,
-    Destination: {
-      ToAddresses: toAddresses,
-    },
-    Message: {
-      Subject: {
-        Data: options.subject,
-        Charset: "UTF-8",
-      },
-      Body: {
-        Text: {
-          Data: options.text,
-          Charset: "UTF-8",
-        },
-        Html: {
-          Data: options.html,
-          Charset: "UTF-8",
-        },
-      },
-    },
-  };
-
-  try {
-    const command = new SendEmailCommand(params);
-    const result = await sesClient.send(command);
-    console.log("✅ Email sent successfully:", result.MessageId);
-    console.log(`   To: ${toAddresses.join(', ')}`);
-    console.log(`   Subject: ${options.subject}`);
-    return true;
-  } catch (error) {
-    console.error("❌ Error sending email:", error);
-    console.error(`   To: ${toAddresses.join(', ')}`);
-    console.error(`   Subject: ${options.subject}`);
-    if (error instanceof Error) {
-      console.error(`   Error message: ${error.message}`);
-    }
-    return false;
-  }
+  return sendEmailViaSMTP(options);
 }
 
 export function getEmailLayout(content: string): string {
