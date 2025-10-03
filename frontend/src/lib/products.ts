@@ -1324,7 +1324,7 @@ export const products: Product[] = [
     price: 219,
     originalPrice: 259,
     discount: 15,
-    image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/stock_images/air_jordan_4_retro_w_ac3024a6.jpg',
     category: 'sneakers',
     description: 'White Cement',
     features: ['Classic silhouette', 'Premium leather', 'Basketball heritage', 'Free shipping']
@@ -1335,7 +1335,7 @@ export const products: Product[] = [
     price: 249,
     originalPrice: 299,
     discount: 17,
-    image: 'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/stock_images/yeezy_boost_350_v2_b_4c83c894.jpg',
     category: 'sneakers',
     description: 'Bone',
     features: ['Boost technology', 'Primeknit upper', 'Iconic design', 'Free shipping']
@@ -1346,7 +1346,7 @@ export const products: Product[] = [
     price: 119,
     originalPrice: 149,
     discount: 20,
-    image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/stock_images/nike_dunk_low_panda__63ded949.jpg',
     category: 'sneakers',
     description: 'Panda',
     features: ['Retro basketball', 'Versatile style', 'Premium materials', 'Free shipping']
@@ -1357,7 +1357,7 @@ export const products: Product[] = [
     price: 199,
     originalPrice: 229,
     discount: 13,
-    image: 'https://images.unsplash.com/photo-1506629905460-e6eaec17cff0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/stock_images/new_balance_990v6_gr_68c04952.jpg',
     category: 'sneakers',
     description: 'Gray',
     features: ['Made in USA', 'Premium comfort', 'Classic design', 'Free shipping']
@@ -1368,7 +1368,7 @@ export const products: Product[] = [
     price: 179,
     originalPrice: 219,
     discount: 18,
-    image: 'https://images.unsplash.com/photo-1586316237874-40a3b3d24e34?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/stock_images/adidas_ultraboost_22_7434d8a4.jpg',
     category: 'sneakers',
     description: 'Core Black',
     features: ['Boost midsole', 'Primeknit upper', 'Energy return', 'Free shipping']
@@ -1379,7 +1379,7 @@ export const products: Product[] = [
     price: 89,
     originalPrice: 109,
     discount: 18,
-    image: 'https://images.unsplash.com/photo-1597048122608-8ad69e6f8d96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/stock_images/converse_chuck_70_hi_1a9f5efc.jpg',
     category: 'sneakers',
     description: 'High Top',
     features: ['Vintage style', 'Premium canvas', 'Timeless design', 'Free shipping']
@@ -1390,7 +1390,7 @@ export const products: Product[] = [
     price: 69,
     originalPrice: 89,
     discount: 22,
-    image: 'https://images.unsplash.com/photo-1556906781-9a412961c28c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/stock_images/vans_old_skool_black_4df74cad.jpg',
     category: 'sneakers',
     description: 'Black/White',
     features: ['Skate heritage', 'Waffle outsole', 'Iconic stripe', 'Free shipping']
@@ -1401,7 +1401,7 @@ export const products: Product[] = [
     price: 79,
     originalPrice: 99,
     discount: 20,
-    image: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/stock_images/puma_suede_classic_p_fa158a22.jpg',
     category: 'sneakers',
     description: 'Peacoat',
     features: ['Suede upper', 'Classic formstrip', 'Retro style', 'Free shipping']
@@ -1412,7 +1412,7 @@ export const products: Product[] = [
     price: 159,
     originalPrice: 189,
     discount: 16,
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/stock_images/asics_gel-kayano_30__156eae86.jpg',
     category: 'sneakers',
     description: 'Running shoe',
     features: ['Stability running', 'Gel cushioning', 'FlyteFoam', 'Free shipping']
@@ -1423,7 +1423,7 @@ export const products: Product[] = [
     price: 169,
     originalPrice: 199,
     discount: 15,
-    image: 'https://images.unsplash.com/photo-1605348532760-6753d2c43329?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/stock_images/on_cloudstratus_3_ma_525f8950.jpg',
     category: 'sneakers',
     description: 'Maximalist running',
     features: ['CloudTec cushioning', 'Swiss engineering', 'Premium comfort', 'Free shipping']
@@ -1434,7 +1434,7 @@ export const products: Product[] = [
     price: 139,
     originalPrice: 169,
     discount: 18,
-    image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/stock_images/hoka_clifton_9_neutr_d9c4322b.jpg',
     category: 'sneakers',
     description: 'Neutral running',
     features: ['Maximum cushioning', 'Lightweight', 'Everyday comfort', 'Free shipping']
@@ -1445,7 +1445,7 @@ export const products: Product[] = [
     price: 98,
     originalPrice: 118,
     discount: 17,
-    image: 'https://images.unsplash.com/photo-1584735175315-9d5df23860e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: '/attached_assets/stock_images/allbirds_tree_runner_b4aa3677.jpg',
     category: 'sneakers',
     description: 'Natural White',
     features: ['Sustainable materials', 'Tree fiber', 'Comfortable', 'Free shipping']
