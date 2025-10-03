@@ -1458,7 +1458,7 @@ export const products: Product[] = [
     price: 1299,
     originalPrice: 1599,
     discount: 19,
-    image: 'https://images.unsplash.com/photo-1631822481648-4a6f77850f4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300',
+    image: 'https://m.media-amazon.com/images/I/61b-693nj5L._AC_SY355_.jpg',
     category: 'gadgets',
     description: 'Station auto-vidante, Lavage sonic',
     features: ['Navigation LiDAR 3D', 'Aspiration 6000Pa', 'Station tout-en-un', 'Livraison gratuite']
