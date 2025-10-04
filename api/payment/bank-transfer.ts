@@ -98,13 +98,15 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
       const bankDetails = {
         orderId,
+        orderReference,
         customerEmail: customerEmail.toLowerCase(),
         customerName,
         totalAmount,
         bankName: 'Matt Luxio',
         iban: 'ES6115632626383268707364',
         bic: 'NTSBESM1XXX',
-        reference: `Dépôt+${customerName} #${orderReference}`
+        reference: `Dépôt+${customerName}`,
+        cartItems
       };
 
       Promise.all([

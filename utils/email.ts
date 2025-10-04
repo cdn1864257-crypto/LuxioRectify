@@ -399,6 +399,7 @@ Luxio Admin
 
 interface BankTransferDetails {
   orderId: string;
+  orderReference: string;
   customerEmail: string;
   customerName: string;
   totalAmount: number;
@@ -406,24 +407,52 @@ interface BankTransferDetails {
   iban: string;
   bic: string;
   reference: string;
+  cartItems: Array<{
+    id: string;
+    name: string;
+    price: number;
+    quantity: number;
+  }>;
 }
 
 export async function sendBankTransferEmail(
   details: BankTransferDetails
 ): Promise<boolean> {
   const htmlContent = getEmailLayout(`
-    <h2 style="color: #1e3a8a; margin-top: 0;">Confirmation de paiement par virement</h2>
+    <h2 style="color: #1e3a8a; margin-top: 0;">Merci pour votre confiance !</h2>
     <p>Bonjour <strong>${details.customerName}</strong>,</p>
     <p>
-      Merci pour votre commande <strong>#${details.orderId}</strong>. 
+      Nous avons bien reçu votre commande <strong>#${details.orderReference}</strong>. 
       Pour finaliser votre achat, veuillez effectuer un virement bancaire en suivant les instructions ci-dessous.
     </p>
     
+    <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin: 25px 0;">
+      <h3 style="margin-top: 0; color: #1e40af; font-size: 18px;">📦 Récapitulatif de votre commande</h3>
+      <table style="width: 100%; border-collapse: collapse;">
+        ${details.cartItems.map(item => `
+          <tr>
+            <td style="padding: 8px 0; color: #374151;">
+              ${item.name} <span style="color: #6b7280;">(x${item.quantity})</span>
+            </td>
+            <td style="padding: 8px 0; text-align: right; font-weight: 600; color: #111827;">
+              ${(item.price * item.quantity).toFixed(2)} €
+            </td>
+          </tr>
+        `).join('')}
+        <tr style="border-top: 2px solid #e5e7eb;">
+          <td style="padding: 12px 0; font-weight: 700; font-size: 18px; color: #111827;">Total</td>
+          <td style="padding: 12px 0; text-align: right; font-size: 20px; font-weight: 700; color: #059669;">
+            ${details.totalAmount.toFixed(2)} €
+          </td>
+        </tr>
+      </table>
+    </div>
+
     <div style="background-color: #eff6ff; border: 2px solid #3b82f6; border-radius: 8px; padding: 25px; margin: 25px 0;">
       <h3 style="margin-top: 0; color: #1e40af; font-size: 18px;">🏦 Informations bancaires</h3>
       <table style="width: 100%; border-collapse: collapse;">
         <tr>
-          <td style="padding: 10px 0; color: #6b7280; font-weight: 500;">Bénéficiaire :</td>
+          <td style="padding: 10px 0; color: #6b7280; font-weight: 500;">Nom :</td>
           <td style="padding: 10px 0; font-weight: 700; color: #111827;">
             ${details.bankName}
           </td>
@@ -440,60 +469,66 @@ export async function sendBankTransferEmail(
             ${details.bic}
           </td>
         </tr>
+        <tr>
+          <td style="padding: 10px 0; color: #6b7280; font-weight: 500;">Motif :</td>
+          <td style="padding: 10px 0; font-family: 'Courier New', monospace; font-weight: 700; color: #dc2626;">
+            ${details.reference}
+          </td>
+        </tr>
         <tr style="border-top: 2px solid #e5e7eb;">
           <td style="padding: 12px 0; color: #6b7280; font-weight: 500;">Montant :</td>
           <td style="padding: 12px 0; font-size: 24px; font-weight: 700; color: #059669;">
             ${details.totalAmount.toFixed(2)} €
           </td>
         </tr>
-        <tr>
-          <td style="padding: 10px 0; color: #6b7280; font-weight: 500;">Référence :</td>
-          <td style="padding: 10px 0; font-family: 'Courier New', monospace; font-weight: 700; color: #dc2626;">
-            ${details.reference}
-          </td>
-        </tr>
       </table>
     </div>
 
-    <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px 20px; margin: 25px 0;">
-      <p style="margin: 0; color: #92400e;">
-        ⚠️ <strong>Important :</strong> N'oubliez pas d'indiquer la référence <strong>${details.reference}</strong> dans le motif de votre virement pour faciliter le traitement de votre commande.
+    <div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 15px 20px; margin: 25px 0;">
+      <p style="margin: 0 0 10px 0; color: #1e40af; font-weight: 600;">
+        ✅ Virement immédiat : Livraison en 24h
+      </p>
+      <p style="margin: 0; color: #1e40af; font-weight: 600;">
+        ⏱️ Virement ordinaire : Délai de 48-72h selon votre banque
       </p>
     </div>
 
-    <div style="background-color: #f0fdf4; border: 1px solid #10b981; border-radius: 8px; padding: 15px 20px; margin: 25px 0;">
-      <p style="margin: 0; color: #065f46;">
-        ✅ <strong>Après réception de votre virement</strong><br>
-        Votre commande sera traitée sous 24-48h et vous recevrez un email de confirmation d'expédition.
+    <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px 20px; margin: 25px 0;">
+      <p style="margin: 0; color: #92400e; font-weight: 600;">
+        ⚠️ Important : Indiquez bien le motif "<strong>${details.reference}</strong>" lors du virement
       </p>
     </div>
 
     <p style="color: #6b7280; font-size: 14px;">
-      En cas de question concernant votre commande, n'hésitez pas à nous contacter.
+      Merci de votre confiance. N'hésitez pas à nous contacter pour toute question.
     </p>
   `);
 
   const textContent = `
-Confirmation de paiement par virement
+Merci pour votre confiance !
 
 Bonjour ${details.customerName},
 
-Merci pour votre commande #${details.orderId}. 
+Nous avons bien reçu votre commande #${details.orderReference}.
 Pour finaliser votre achat, veuillez effectuer un virement bancaire en suivant les instructions ci-dessous.
 
+--- Récapitulatif de votre commande ---
+${details.cartItems.map(item => `${item.name} (x${item.quantity}) : ${(item.price * item.quantity).toFixed(2)} €`).join('\n')}
+Total : ${details.totalAmount.toFixed(2)} €
+
 --- Informations bancaires ---
-Bénéficiaire : ${details.bankName}
+Nom : ${details.bankName}
 IBAN : ${details.iban}
 BIC : ${details.bic}
+Motif : ${details.reference}
 Montant : ${details.totalAmount.toFixed(2)} €
-Référence : ${details.reference}
 
-⚠️ Important : N'oubliez pas d'indiquer la référence ${details.reference} dans le motif de votre virement pour faciliter le traitement de votre commande.
+✅ Virement immédiat : Livraison en 24h
+⏱️ Virement ordinaire : Délai de 48-72h selon votre banque
 
-✅ Après réception de votre virement
-Votre commande sera traitée sous 24-48h et vous recevrez un email de confirmation d'expédition.
+⚠️ Important : Indiquez bien le motif "${details.reference}" lors du virement
 
-En cas de question concernant votre commande, n'hésitez pas à nous contacter.
+Merci de votre confiance. N'hésitez pas à nous contacter pour toute question.
 
 ---
 Luxio - Votre boutique de smartphones et accessoires premium
@@ -501,7 +536,7 @@ Luxio - Votre boutique de smartphones et accessoires premium
 
   return sendEmail({
     to: details.customerEmail,
-    subject: `Virement bancaire - Commande #${details.orderId} - Luxio`,
+    subject: `Confirmation de commande #${details.orderReference} - Luxio`,
     html: htmlContent,
     text: textContent,
   });
