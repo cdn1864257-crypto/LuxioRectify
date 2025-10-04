@@ -40,9 +40,17 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: 'Le nouveau mot de passe doit contenir au moins 6 caractères' });
     }
 
-    const token = req.cookies.auth_token;
+    let token = req.cookies.auth_token;
+    
     if (!token) {
-      return res.status(401).json({ error: 'Non authentifié' });
+      const authHeader = req.headers.authorization;
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        token = authHeader.substring(7);
+      }
+    }
+    
+    if (!token) {
+      return res.status(401).json({ error: 'Non authentifié - Token manquant' });
     }
 
     const jwtSecret = process.env.JWT_SECRET;
@@ -54,7 +62,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     try {
       decoded = jwt.verify(token, jwtSecret);
     } catch (error) {
-      return res.status(401).json({ error: 'Session invalide' });
+      return res.status(401).json({ error: 'Votre session a expiré, veuillez vous reconnecter' });
     }
 
     const mongoUri = process.env.MONGODB_URI;
