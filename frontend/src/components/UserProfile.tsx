@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { X, ShoppingBag, LogOut, Lock } from 'lucide-react';
+import { useLocation } from 'wouter';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { loadOrders, Order } from '../lib/cart';
@@ -13,9 +14,11 @@ interface UserProfileProps {
 export function UserProfile({ isOpen, onClose }: UserProfileProps) {
   const { user, logout } = useAuth();
   const { t } = useLanguage();
+  const [, navigate] = useLocation();
   const [activeTab, setActiveTab] = useState<'profile' | 'orders' | 'settings'>('profile');
   const [orders] = useState<Order[]>(loadOrders());
   const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
     newPassword: '',
@@ -42,14 +45,43 @@ export function UserProfile({ isOpen, onClose }: UserProfileProps) {
       return;
     }
 
+    setIsChangingPassword(true);
+
     try {
-      // Here you would normally call your API to change the password
-      // For now, we'll just show a success message
+      const response = await fetch('/api/auth/change-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          currentPassword: passwordData.currentPassword,
+          newPassword: passwordData.newPassword,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (response.status === 401 && data.error?.includes('session a expiré')) {
+          showToast(data.error, 'error');
+          await logout();
+          onClose();
+          navigate('/');
+          return;
+        }
+        
+        showToast(data.error || t('passwordChangeFailed'), 'error');
+        return;
+      }
+
       showToast(t('passwordChangeSuccess'), 'success');
       setShowPasswordModal(false);
       setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
     } catch (error) {
       showToast(t('passwordChangeFailed'), 'error');
+    } finally {
+      setIsChangingPassword(false);
     }
   };
 
@@ -306,14 +338,16 @@ export function UserProfile({ isOpen, onClose }: UserProfileProps) {
                   type="button"
                   onClick={() => setShowPasswordModal(false)}
                   className="flex-1 px-4 py-2 border border-border rounded-md hover:bg-muted transition-colors"
+                  disabled={isChangingPassword}
                 >
                   {t('cancel')}
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                  className="flex-1 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={isChangingPassword}
                 >
-                  {t('confirm')}
+                  {isChangingPassword ? t('loading') : t('confirm')}
                 </button>
               </div>
             </form>
