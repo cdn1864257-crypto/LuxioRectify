@@ -1,6 +1,7 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { parse } from 'cookie';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -40,11 +41,17 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: 'Le nouveau mot de passe doit contenir au moins 6 caractères' });
     }
 
-    let token = req.cookies.auth_token;
+    let token: string | undefined;
     
-    if (!token) {
+    const cookieHeader = req.headers.cookie;
+    if (cookieHeader) {
+      const cookies = parse(cookieHeader);
+      token = cookies.auth_token;
+    }
+    
+    if (!token && req.headers.authorization) {
       const authHeader = req.headers.authorization;
-      if (authHeader && authHeader.startsWith('Bearer ')) {
+      if (authHeader.startsWith('Bearer ')) {
         token = authHeader.substring(7);
       }
     }
