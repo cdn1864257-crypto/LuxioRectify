@@ -26,6 +26,7 @@ export default function Payment() {
   // Bank Transfer Modal
   const [bankTransferOpen, setBankTransferOpen] = useState(false);
   const [bankTransferLoading, setBankTransferLoading] = useState(false);
+  const [bankTransferConfirmed, setBankTransferConfirmed] = useState(false);
   const [bankTransferData, setBankTransferData] = useState<any>(null);
 
   // Maxelpay Modal
@@ -62,7 +63,13 @@ export default function Payment() {
     });
   };
 
-  const handleBankTransfer = async () => {
+  const generateOrderReference = () => {
+    const timestamp = Date.now().toString(36);
+    const randomStr = Math.random().toString(36).substring(2, 8).toUpperCase();
+    return `LX-${timestamp}-${randomStr}`;
+  };
+
+  const handleBankTransferConfirm = async () => {
     setBankTransferLoading(true);
     try {
       const response = await fetch('/api/payment/bank-transfer', {
@@ -86,11 +93,15 @@ export default function Payment() {
       const data = await response.json();
 
       if (response.ok) {
-        setBankTransferData(data);
+        setBankTransferConfirmed(true);
         toast({
-          title: "Commande créée",
-          description: "Votre commande a été enregistrée avec succès",
+          title: "Email envoyé",
+          description: "Les informations de paiement ont été envoyées à votre adresse e-mail",
         });
+        setTimeout(() => {
+          clearCart();
+          navigate('/dashboard');
+        }, 3000);
       } else {
         toast({
           title: "Erreur",
@@ -294,9 +305,11 @@ export default function Payment() {
                 className="w-full justify-start h-auto py-6 px-6"
                 onClick={() => {
                   setBankTransferOpen(true);
-                  handleBankTransfer();
+                  setBankTransferConfirmed(false);
+                  setBankTransferData({
+                    orderReference: generateOrderReference(),
+                  });
                 }}
-                disabled={bankTransferLoading}
                 data-testid="button-bank-transfer"
               >
                 <div className="flex items-center gap-4 w-full">
@@ -307,7 +320,6 @@ export default function Payment() {
                       Paiement sécurisé par virement
                     </div>
                   </div>
-                  {bankTransferLoading && <Loader2 className="h-5 w-5 animate-spin" />}
                 </div>
               </Button>
 
@@ -364,7 +376,13 @@ export default function Payment() {
       <UserProfile isOpen={profileOpen} onClose={() => setProfileOpen(false)} />
 
       {/* Modal Virement bancaire */}
-      <Dialog open={bankTransferOpen} onOpenChange={setBankTransferOpen}>
+      <Dialog open={bankTransferOpen} onOpenChange={(open) => {
+        setBankTransferOpen(open);
+        if (!open) {
+          setBankTransferConfirmed(false);
+          setBankTransferData(null);
+        }
+      }}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
             <div className="text-center mb-4">
@@ -378,7 +396,28 @@ export default function Payment() {
             </DialogDescription>
           </DialogHeader>
 
-          {bankTransferData && (
+          {bankTransferConfirmed ? (
+            <div className="py-8 text-center space-y-6">
+              <div className="mx-auto w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+                <Check className="h-8 w-8 text-green-600 dark:text-green-400" />
+              </div>
+              
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold text-green-600 dark:text-green-400">
+                  ✅ Les informations de paiement ont été envoyées à votre adresse e-mail.
+                </h3>
+                <p className="text-muted-foreground font-semibold">
+                  Merci pour votre confiance.
+                </p>
+              </div>
+
+              <div className="bg-blue-50 dark:bg-blue-950 rounded-lg p-4">
+                <p className="text-sm text-blue-800 dark:text-blue-200">
+                  Redirection vers votre tableau de bord...
+                </p>
+              </div>
+            </div>
+          ) : bankTransferData && (
             <div className="space-y-6 py-4">
               {/* Informations bancaires */}
               <div className="bg-blue-50 dark:bg-blue-950 rounded-lg p-6 space-y-4">
@@ -470,42 +509,48 @@ export default function Payment() {
 
               {/* Délais de livraison */}
               <div className="bg-yellow-50 dark:bg-yellow-950 rounded-lg p-4 space-y-2">
-                <div className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-600 mt-0.5" />
-                  <div>
-                    <p className="font-semibold">Virement immédiat : Livraison en 24h</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-blue-600 mt-0.5" />
-                  <div>
-                    <p className="font-semibold">Virement ordinaire : Délai de 48-72h selon votre banque</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Message de confirmation */}
-              <div className="text-center space-y-3">
-                <div className="bg-green-50 dark:bg-green-950 rounded-lg p-4">
-                  <p className="text-sm text-green-800 dark:text-green-200">
-                    ✅ Un email de confirmation contenant ces informations vous a été envoyé à <strong>{user.email}</strong>
-                  </p>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  Merci de votre confiance. N'oubliez pas d'indiquer le motif lors de votre virement.
+                <p className="font-semibold text-center mb-3">
+                  Faites un virement immédiat pour être livré en 24h.
+                </p>
+                <p className="text-sm text-center text-muted-foreground">
+                  Si virement ordinaire, délai 48-72h selon votre banque.
                 </p>
               </div>
 
-              <Button
-                className="w-full"
-                onClick={() => {
-                  setBankTransferOpen(false);
-                  clearCart();
-                  navigate('/dashboard');
-                }}
-              >
-                Compris, j'ai noté les informations
-              </Button>
+              {/* Boutons de confirmation */}
+              <div className="space-y-3">
+                <Button
+                  className="w-full"
+                  size="lg"
+                  onClick={handleBankTransferConfirm}
+                  disabled={bankTransferLoading}
+                  data-testid="button-confirm-bank-transfer"
+                >
+                  {bankTransferLoading ? (
+                    <>
+                      <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                      Envoi en cours...
+                    </>
+                  ) : (
+                    'Oui, je procède au virement'
+                  )}
+                </Button>
+                
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  size="lg"
+                  onClick={() => {
+                    setBankTransferOpen(false);
+                    setBankTransferConfirmed(false);
+                    setBankTransferData(null);
+                  }}
+                  disabled={bankTransferLoading}
+                  data-testid="button-cancel-bank-transfer"
+                >
+                  Non, je choisis une autre méthode
+                </Button>
+              </div>
             </div>
           )}
         </DialogContent>
