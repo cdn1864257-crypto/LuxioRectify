@@ -5,6 +5,9 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { useToast } from '@/hooks/use-toast';
 import { 
   User, 
   Mail, 
@@ -25,13 +28,13 @@ import {
   ChevronUp,
   Home,
   Sparkles,
-  LogOut
+  LogOut,
+  Lock
 } from 'lucide-react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { useState } from 'react';
 import { CartSidebar } from '@/components/CartSidebar';
-import { UserProfile } from '@/components/UserProfile';
 import { useQuery } from '@tanstack/react-query';
 import { format, differenceInMinutes, differenceInHours, differenceInDays } from 'date-fns';
 import { fr, es, pt, pl, it, hu, enUS } from 'date-fns/locale';
@@ -76,8 +79,14 @@ export default function Dashboard() {
   const { user, logout } = useAuth();
   const { t, language } = useLanguage();
   const [cartOpen, setCartOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(true);
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [passwordLoading, setPasswordLoading] = useState(false);
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  });
   const [, navigate] = useLocation();
 
   const { data: ordersData, isLoading } = useQuery<OrdersResponse>({
@@ -225,11 +234,73 @@ export default function Dashboard() {
     );
   };
 
+  const { toast } = useToast();
+
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      toast({
+        title: t('error') || 'Erreur',
+        description: t('passwordsDontMatch') || 'Les mots de passe ne correspondent pas',
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (passwordData.newPassword.length < 6) {
+      toast({
+        title: t('error') || 'Erreur',
+        description: t('passwordMinLength') || 'Le mot de passe doit contenir au moins 6 caractères',
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setPasswordLoading(true);
+
+    try {
+      const response = await fetch('/api/auth/change-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          currentPassword: passwordData.currentPassword,
+          newPassword: passwordData.newPassword
+        })
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Erreur lors du changement de mot de passe');
+      }
+
+      toast({
+        title: '✅ Succès',
+        description: t('passwordChangeSuccess') || 'Votre mot de passe a été réinitialisé avec succès.',
+      });
+
+      setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
+      setShowPasswordForm(false);
+
+    } catch (error) {
+      toast({
+        title: t('error') || 'Erreur',
+        description: error instanceof Error ? error.message : 'Erreur lors du changement de mot de passe',
+        variant: "destructive"
+      });
+    } finally {
+      setPasswordLoading(false);
+    }
+  };
+
   if (!user) return null;
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header onToggleCart={() => setCartOpen(!cartOpen)} onToggleProfile={() => setProfileOpen(!profileOpen)} />
+      <Header onToggleCart={() => setCartOpen(!cartOpen)} />
       
       <main className="flex-1 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -591,6 +662,112 @@ export default function Dashboard() {
                     </div>
                   </CardContent>
                 </Card>
+
+                <Card data-testid="card-password-reset">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Lock className="h-5 w-5" />
+                      {t('security') || 'Sécurité'}
+                    </CardTitle>
+                    <CardDescription>
+                      Réinitialisez votre mot de passe pour sécuriser votre compte
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    {!showPasswordForm ? (
+                      <Button
+                        onClick={() => setShowPasswordForm(true)}
+                        className="w-full"
+                        data-testid="button-show-password-form"
+                      >
+                        <Lock className="h-4 w-4 mr-2" />
+                        {t('changePassword') || 'Réinitialiser mon mot de passe'}
+                      </Button>
+                    ) : (
+                      <form onSubmit={handleChangePassword} className="space-y-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="current-password">
+                            {t('currentPassword') || 'Mot de passe actuel'}
+                          </Label>
+                          <Input
+                            id="current-password"
+                            type="password"
+                            value={passwordData.currentPassword}
+                            onChange={(e) => setPasswordData({ ...passwordData, currentPassword: e.target.value })}
+                            required
+                            disabled={passwordLoading}
+                            data-testid="input-current-password"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="new-password">
+                            {t('newPassword') || 'Nouveau mot de passe'}
+                          </Label>
+                          <Input
+                            id="new-password"
+                            type="password"
+                            value={passwordData.newPassword}
+                            onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
+                            required
+                            minLength={6}
+                            disabled={passwordLoading}
+                            data-testid="input-new-password"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="confirm-password">
+                            {t('confirmNewPassword') || 'Confirmer le nouveau mot de passe'}
+                          </Label>
+                          <Input
+                            id="confirm-password"
+                            type="password"
+                            value={passwordData.confirmPassword}
+                            onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })}
+                            required
+                            minLength={6}
+                            disabled={passwordLoading}
+                            data-testid="input-confirm-password"
+                          />
+                        </div>
+
+                        <div className="flex gap-3 pt-2">
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => {
+                              setShowPasswordForm(false);
+                              setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
+                            }}
+                            disabled={passwordLoading}
+                            className="flex-1"
+                            data-testid="button-cancel-password"
+                          >
+                            {t('cancel') || 'Annuler'}
+                          </Button>
+                          <Button
+                            type="submit"
+                            disabled={passwordLoading}
+                            className="flex-1"
+                            data-testid="button-submit-password"
+                          >
+                            {passwordLoading ? (
+                              <>
+                                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                                {t('processing') || 'En cours...'}
+                              </>
+                            ) : (
+                              <>
+                                {t('confirm') || 'Confirmer'}
+                              </>
+                            )}
+                          </Button>
+                        </div>
+                      </form>
+                    )}
+                  </CardContent>
+                </Card>
               </div>
             </>
           )}
@@ -599,7 +776,6 @@ export default function Dashboard() {
 
       <Footer />
       <CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} />
-      <UserProfile isOpen={profileOpen} onClose={() => setProfileOpen(false)} />
     </div>
   );
 }

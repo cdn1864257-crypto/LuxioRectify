@@ -7,6 +7,7 @@ import signupHandler from '../api/auth/signup';
 import loginHandler from '../api/auth/login';
 import meHandler from '../api/auth/me';
 import logoutHandler from '../api/auth/logout';
+import changePasswordHandler from '../api/auth/change-password';
 import submitOrderHandler from '../api/payment/submit-order';
 import bankTransferHandler from '../api/payment/bank-transfer';
 import maxelpayReturnHandler from '../api/payment/maxelpay-return';
@@ -84,6 +85,7 @@ app.use('/api/auth/signup', convertVercelHandler(signupHandler));
 app.use('/api/auth/login', convertVercelHandler(loginHandler));
 app.use('/api/auth/logout', convertVercelHandler(logoutHandler));
 app.use('/api/auth/me', convertVercelHandler(meHandler));
+app.use('/api/auth/change-password', convertVercelHandler(changePasswordHandler));
 
 // Payment routes
 app.use('/api/payment/submit-order', convertVercelHandler(submitOrderHandler));

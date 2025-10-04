@@ -2,6 +2,7 @@ import { X } from 'lucide-react';
 import { SignupForm } from './SignupForm';
 import { LoginForm } from './LoginForm';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useLocation } from 'wouter';
 
 interface AuthModalProps {
   open: boolean;
@@ -12,11 +13,13 @@ interface AuthModalProps {
 
 export function AuthModal({ open, mode, onClose, onSwitchMode }: AuthModalProps) {
   const { t } = useLanguage();
+  const [, navigate] = useLocation();
 
   if (!open) return null;
 
   const handleSuccess = () => {
     onClose();
+    navigate('/dashboard');
   };
 
   const handleSwitchMode = () => {

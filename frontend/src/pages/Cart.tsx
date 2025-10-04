@@ -5,7 +5,6 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CartSidebar } from '@/components/CartSidebar';
-import { UserProfile } from '@/components/UserProfile';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -16,7 +15,6 @@ export default function Cart() {
   const { cart, updateQuantity, removeFromCart, total } = useCart();
   const { t } = useLanguage();
   const [cartOpen, setCartOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
 
   const handleRemoveItem = (productId: string) => {
     removeFromCart(productId);
@@ -25,7 +23,7 @@ export default function Cart() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header onToggleCart={() => setCartOpen(!cartOpen)} onToggleProfile={() => setProfileOpen(!profileOpen)} />
+      <Header onToggleCart={() => setCartOpen(!cartOpen)} />
       
       <main className="flex-1 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -192,7 +190,6 @@ export default function Cart() {
 
       <Footer />
       <CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} />
-      <UserProfile isOpen={profileOpen} onClose={() => setProfileOpen(false)} />
     </div>
   );
 }

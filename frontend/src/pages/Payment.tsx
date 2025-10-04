@@ -5,7 +5,6 @@ import { useCart } from '@/contexts/CartContext';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CartSidebar } from '@/components/CartSidebar';
-import { UserProfile } from '@/components/UserProfile';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -20,7 +19,6 @@ export default function Payment() {
   const { cart, total, clearCart } = useCart();
   const [, navigate] = useLocation();
   const [cartOpen, setCartOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
   const { toast } = useToast();
 
   // Bank Transfer Modal
@@ -227,7 +225,7 @@ export default function Payment() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header onToggleCart={() => setCartOpen(!cartOpen)} onToggleProfile={() => setProfileOpen(!profileOpen)} />
+      <Header onToggleCart={() => setCartOpen(!cartOpen)} />
       
       <main className="flex-1 py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -373,7 +371,6 @@ export default function Payment() {
       <Footer />
 
       <CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} />
-      <UserProfile isOpen={profileOpen} onClose={() => setProfileOpen(false)} />
 
       {/* Modal Virement bancaire */}
       <Dialog open={bankTransferOpen} onOpenChange={(open) => {

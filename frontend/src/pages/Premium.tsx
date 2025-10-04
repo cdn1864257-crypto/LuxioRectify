@@ -7,7 +7,6 @@ import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { CartSidebar } from '../components/CartSidebar';
 import { CheckoutModal } from '../components/CheckoutModal';
-import { UserProfile } from '../components/UserProfile';
 import { showToast } from '../components/ToastNotifications';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -31,7 +30,6 @@ export default function Premium() {
   // UI States
   const [cartOpen, setCartOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
   const [addedToCart, setAddedToCart] = useState<Set<string>>(new Set());
 
   // Filters
@@ -255,16 +253,10 @@ export default function Premium() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleProceedToCheckout = () => {
-    setCartOpen(false);
-    setCheckoutOpen(true);
-  };
-
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header 
         onToggleCart={() => setCartOpen(!cartOpen)} 
-        onToggleProfile={() => setProfileOpen(!profileOpen)}
       />
 
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
@@ -572,17 +564,11 @@ export default function Premium() {
       <CartSidebar
         isOpen={cartOpen}
         onClose={() => setCartOpen(false)}
-        onCheckout={handleProceedToCheckout}
       />
       
       <CheckoutModal
         isOpen={checkoutOpen}
         onClose={() => setCheckoutOpen(false)}
-      />
-      
-      <UserProfile
-        isOpen={profileOpen}
-        onClose={() => setProfileOpen(false)}
       />
     </div>
   );

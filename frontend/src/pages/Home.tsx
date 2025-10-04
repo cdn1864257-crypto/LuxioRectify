@@ -7,7 +7,6 @@ import { ProductGrid } from '../components/ProductGrid';
 import { TestimonialsCarousel } from '../components/TestimonialsCarousel';
 import { Footer } from '../components/Footer';
 import { CartSidebar } from '../components/CartSidebar';
-import { UserProfile } from '../components/UserProfile';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getProductsByCategory } from '../lib/products';
 import { Button } from '../components/ui/button';
@@ -15,13 +14,11 @@ import { Button } from '../components/ui/button';
 export default function Home() {
   const { t } = useLanguage();
   const [cartOpen, setCartOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header 
-        onToggleCart={() => setCartOpen(!cartOpen)} 
-        onToggleProfile={() => setProfileOpen(!profileOpen)}
+        onToggleCart={() => setCartOpen(!cartOpen)}
       />
       <main>
         <Hero />
@@ -83,11 +80,6 @@ export default function Home() {
       <CartSidebar
         isOpen={cartOpen}
         onClose={() => setCartOpen(false)}
-      />
-      
-      <UserProfile
-        isOpen={profileOpen}
-        onClose={() => setProfileOpen(false)}
       />
     </div>
   );

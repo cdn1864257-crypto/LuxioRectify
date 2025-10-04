@@ -5,7 +5,7 @@ import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { AuthModal } from './AuthModal';
 import { LanguageSelector } from './LanguageSelector';
-import { ChevronDown, Search, ShoppingCart as ShoppingCartIcon, Menu, LayoutDashboard, LogOut } from 'lucide-react';
+import { Search, ShoppingCart as ShoppingCartIcon, Menu, LayoutDashboard, LogOut } from 'lucide-react';
 import { Button } from './ui/button';
 import {
   Sheet,
@@ -18,10 +18,9 @@ import {
 
 interface HeaderProps {
   onToggleCart: () => void;
-  onToggleProfile: () => void;
 }
 
-export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
+export function Header({ onToggleCart }: HeaderProps) {
   const { user, logout } = useAuth();
   const { itemCount } = useCart();
   const { t } = useLanguage();
@@ -311,7 +310,11 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                 </button>
               ) : (
                 <button
-                  onClick={onToggleProfile}
+                  onClick={() => {
+                    if (location !== '/dashboard') {
+                      navigate('/dashboard');
+                    }
+                  }}
                   className="flex items-center gap-2 hover:bg-muted rounded-lg px-2 sm:px-3 py-2 transition-colors"
                   data-testid="button-profile"
                 >
@@ -319,7 +322,6 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                     <span data-testid="user-initials">{user.initials}</span>
                   </div>
                   <span className="hidden lg:inline text-sm" data-testid="user-name">{user.displayName || user.email}</span>
-                  <ChevronDown className="h-3 w-3 hidden lg:block" />
                 </button>
               )}
               
