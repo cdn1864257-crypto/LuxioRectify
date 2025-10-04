@@ -21,7 +21,7 @@ State is managed using React Query for server state, AuthContext for authenticat
 User authentication is managed with JWT-based session management. The system supports email/password registration and login, with secure password hashing using bcrypt. JWT tokens are stored in httpOnly cookies for security. Complete authentication flow includes dynamic navigation and protected pages.
 
 ### Internationalization
-The platform supports multiple languages (English, French, Polish, Spanish, Portuguese, Italian, Hungarian) with dynamic switching, IP-based detection, and localized content.
+The platform supports multiple languages (English, French, Polish, Spanish, Portuguese, Italian, Hungarian) with dynamic switching, IP-based detection, and localized content. All payment modals (bank transfer, Maxelpay, PCS tickets) are fully internationalized with no hardcoded text, supporting all 7 languages with consistent translations.
 
 ### Data Management
 Product and order data are managed client-side using a static product database, organized by categories. Local storage is used for cart persistence and order history. The product catalog includes extensive real smartphone data from GSMArena, including variant matrices, accurate pricing, and professional images. Product images are managed via an automated workflow that syncs images from a root `attached_assets/` folder to `frontend/public/attached_assets/`.
@@ -59,7 +59,15 @@ The project is configured for the Replit environment with:
 - ✅ Deployment configured for autoscale with build and serve commands
 - ✅ Product images synced from `attached_assets/` to `frontend/public/`
 - ✅ Application running successfully on webview
+- ✅ Bank transfer payment modals fully internationalized (18 new translation keys added)
 - ⚠️ Optional: Configure environment variables in Secrets for full functionality (auth, payments, emails)
+
+### Recent Changes (October 4, 2025)
+**Internationalization Fix - Bank Transfer Modals:**
+- Added 18 new translation keys to support full internationalization of bank transfer payment modals
+- Replaced all hardcoded French text in confirmation and success modals with dynamic translation keys
+- Keys added: `verifyTransferDetails`, `amountToTransfer`, `instructionsLabel`, `transferInstruction1Short`, `transferInstruction2Short`, `immediateTransfer`, `delivery24h`, `standardTransfer`, `delivery4872h`, `noCancel`, `yesProceedTransfer`, `name`, `reference`, `importantReferenceNote`, `viewMyOrders`, `processing`, `orderReference`, `paymentInitError`
+- All translations implemented across all 7 supported languages (EN, FR, ES, PT, PL, IT, HU)
 
 ### Environment Variables
 The application requires several environment variables for full functionality, including `MONGODB_URI`, `JWT_SECRET`, `ENCRYPTION_KEY` (critical for production), `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM`, `ADMIN_EMAIL`, `MAXELPAY_MERCHANT_ID`, and `MAXELPAY_API_KEY`.
