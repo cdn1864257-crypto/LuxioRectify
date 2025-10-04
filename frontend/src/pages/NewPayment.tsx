@@ -58,7 +58,6 @@ export default function NewPayment() {
     return null;
   }
 
-  const totalWithTax = total * 1.2;
   const ticketTotal = ticketCodes.reduce((sum, ticket) => sum + (ticket.amount || 0), 0);
 
   const handleBankTransfer = async () => {
@@ -70,7 +69,7 @@ export default function NewPayment() {
         body: JSON.stringify({
           customerEmail: user.email,
           customerName: `${user.firstName} ${user.lastName}`,
-          totalAmount: totalWithTax,
+          totalAmount: total,
           cartItems: cart.map(item => ({
             id: item.id,
             name: item.name,
@@ -118,7 +117,7 @@ export default function NewPayment() {
         body: JSON.stringify({
           customerEmail: user.email,
           customerName: `${user.firstName} ${user.lastName}`,
-          totalAmount: totalWithTax,
+          totalAmount: total,
           cartItems: cart.map(item => ({
             id: item.id,
             name: item.name,
@@ -158,7 +157,7 @@ export default function NewPayment() {
       return;
     }
 
-    if (ticketTotal < totalWithTax) {
+    if (ticketTotal < total) {
       toast({
         title: t.error,
         description: t.insufficientAmount,
@@ -179,7 +178,7 @@ export default function NewPayment() {
           productName: cart.length === 1 ? cart[0].name : `${cart.length} produits`,
           productModel: undefined,
           productPrice: total,
-          totalAmount: totalWithTax,
+          totalAmount: total,
           codeType: ticketType,
           codes: validCodes.map(t => t.code)
         })
@@ -246,7 +245,7 @@ export default function NewPayment() {
 
   const isPaymentReady = () => {
     if (paymentMethod === 'pcs-transcash') {
-      return ticketTotal >= totalWithTax && ticketCodes.some(t => t.code.trim() !== '');
+      return ticketTotal >= total && ticketCodes.some(t => t.code.trim() !== '');
     }
     return true;
   };
@@ -298,18 +297,10 @@ export default function NewPayment() {
               </div>
 
               <div className="pt-4 border-t space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">{t.subtotal}</span>
-                  <span>{total.toFixed(2)} €</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">{t.vat} (20%)</span>
-                  <span>{(total * 0.2).toFixed(2)} €</span>
-                </div>
-                <div className="flex justify-between text-lg font-bold pt-2 border-t">
+                <div className="flex justify-between text-lg font-bold">
                   <span>{t.total}</span>
                   <span className="text-primary" data-testid="text-total-amount">
-                    {totalWithTax.toFixed(2)} €
+                    {total.toFixed(2)} €
                   </span>
                 </div>
               </div>
@@ -447,12 +438,12 @@ export default function NewPayment() {
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-muted-foreground">{t.requiredAmount}:</span>
-                      <span className="text-sm">{totalWithTax.toFixed(2)} €</span>
+                      <span className="text-sm">{total.toFixed(2)} €</span>
                     </div>
-                    {ticketTotal > 0 && ticketTotal < totalWithTax && (
-                      <p className="text-sm text-destructive mt-2">{t.missingAmount}: {(totalWithTax - ticketTotal).toFixed(2)} €</p>
+                    {ticketTotal > 0 && ticketTotal < total && (
+                      <p className="text-sm text-destructive mt-2">{t.missingAmount}: {(total - ticketTotal).toFixed(2)} €</p>
                     )}
-                    {ticketTotal >= totalWithTax && (
+                    {ticketTotal >= total && (
                       <p className="text-sm text-green-600 mt-2">✓ {t.amountValidated}</p>
                     )}
                   </div>
