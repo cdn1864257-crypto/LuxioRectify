@@ -355,6 +355,23 @@ export interface Translations {
   createdMinutesAgo: string;
   reserveStock: string;
   
+  // Order Actions
+  cancelOrder: string;
+  cancelOrderWarning: string;
+  orderCancelledSuccess: string;
+  paymentInstructionsTitle: string;
+  bankTransferInstructionsMessage: string;
+  ticketPaymentMessage: string;
+  maxelpayConfirmationMessage: string;
+  contactSupportEmail: string;
+  confirmCancellation: string;
+  cancelAction: string;
+  bankDetails: string;
+  paymentReference: string;
+  uniqueOrderNumber: string;
+  deliveryInfoMessage: string;
+  deliveryInfoStandard: string;
+  
   // User Profile
   myAccount: string;
   profile: string;
@@ -748,6 +765,23 @@ export const translations: Record<Language, Translations> = {
     createdHoursAgo: 'Created {hours} hour(s) ago',
     createdMinutesAgo: 'Created {minutes} minute(s) ago',
     reserveStock: 'Reserve stock',
+    
+    // Order Actions
+    cancelOrder: 'Cancel Order',
+    cancelOrderWarning: '⚠️ If you have already paid for this order, please wait or contact us by email. If payment has not yet been made, you can cancel it.',
+    orderCancelledSuccess: '✅ Order successfully cancelled.',
+    paymentInstructionsTitle: 'Payment Instructions',
+    bankTransferInstructionsMessage: 'Thank you for your order! For delivery within 24h, make the transfer immediately. For standard transfer, processing may take 48 to 72h depending on your bank.',
+    ticketPaymentMessage: 'We have received your notification following the order. We are currently verifying the payment. You will receive final confirmation within a few minutes.',
+    maxelpayConfirmationMessage: 'Payment confirmed via MaxelPay. Your order is being processed.',
+    contactSupportEmail: 'Contact us at support@luxio-shop.eu if you have already paid.',
+    confirmCancellation: 'Confirm Cancellation',
+    cancelAction: 'Cancel',
+    bankDetails: 'Bank Details',
+    paymentReference: 'Payment Reference',
+    uniqueOrderNumber: 'Unique Order Number',
+    deliveryInfoMessage: 'For delivery within 24h, make an immediate transfer.',
+    deliveryInfoStandard: 'Standard transfer: 48-72h depending on your bank.',
     
     // User Profile
     myAccount: 'My Account',
@@ -1249,6 +1283,23 @@ export const translations: Record<Language, Translations> = {
     createdMinutesAgo: 'Créée il y a {minutes} minute(s)',
     reserveStock: 'Réserver le stock',
     
+    // Order Actions
+    cancelOrder: 'Annuler la commande',
+    cancelOrderWarning: '⚠️ Si vous avez déjà payé cette commande, veuillez patienter ou nous contacter par e-mail. Si le paiement n\'a pas encore été effectué, vous pouvez l\'annuler.',
+    orderCancelledSuccess: '✅ Commande annulée avec succès.',
+    paymentInstructionsTitle: 'Instructions de paiement',
+    bankTransferInstructionsMessage: 'Merci pour votre commande ! Pour une livraison en 24h, effectuez le virement immédiatement. En cas de virement ordinaire, le traitement peut prendre 48 à 72h selon la banque.',
+    ticketPaymentMessage: 'Nous avons bien reçu votre notification suite à la commande. Nous procédons actuellement à la vérification du paiement. Vous recevrez une confirmation définitive d\'ici quelques minutes.',
+    maxelpayConfirmationMessage: 'Paiement confirmé via MaxelPay. Votre commande est en cours de traitement.',
+    contactSupportEmail: 'Contactez-nous à support@luxio-shop.eu si vous avez déjà payé.',
+    confirmCancellation: 'Confirmer l\'annulation',
+    cancelAction: 'Annuler',
+    bankDetails: 'Coordonnées bancaires',
+    paymentReference: 'Motif',
+    uniqueOrderNumber: 'Numéro de commande unique',
+    deliveryInfoMessage: 'Pour une livraison en 24h, effectuez un virement immédiat.',
+    deliveryInfoStandard: 'Virement ordinaire : 48-72h selon votre banque.',
+    
     // User Profile
     myAccount: 'Mon Compte',
     profile: 'Profil',
@@ -1748,6 +1799,23 @@ export const translations: Record<Language, Translations> = {
     createdHoursAgo: 'Creado hace {hours} hora(s)',
     createdMinutesAgo: 'Creado hace {minutes} minuto(s)',
     reserveStock: 'Reservar stock',
+    
+    // Order Actions
+    cancelOrder: 'Cancelar Pedido',
+    cancelOrderWarning: '⚠️ Si ya ha pagado este pedido, espere o contáctenos por correo electrónico. Si aún no se ha realizado el pago, puede cancelarlo.',
+    orderCancelledSuccess: '✅ Pedido cancelado correctamente.',
+    paymentInstructionsTitle: 'Instrucciones de Pago',
+    bankTransferInstructionsMessage: '¡Gracias por su pedido! Para entrega en 24h, realice la transferencia inmediatamente. En caso de transferencia estándar, el procesamiento puede tardar 48 a 72h según su banco.',
+    ticketPaymentMessage: 'Hemos recibido su notificación del pedido. Actualmente estamos verificando el pago. Recibirá una confirmación definitiva en unos minutos.',
+    maxelpayConfirmationMessage: 'Pago confirmado a través de MaxelPay. Su pedido está siendo procesado.',
+    contactSupportEmail: 'Contáctenos en support@luxio-shop.eu si ya ha pagado.',
+    confirmCancellation: 'Confirmar Cancelación',
+    cancelAction: 'Cancelar',
+    bankDetails: 'Datos Bancarios',
+    paymentReference: 'Referencia de Pago',
+    uniqueOrderNumber: 'Número de Pedido Único',
+    deliveryInfoMessage: 'Para entrega en 24h, realice una transferencia inmediata.',
+    deliveryInfoStandard: 'Transferencia estándar: 48-72h según su banco.',
     
     // User Profile
     myAccount: 'Mi Cuenta',
@@ -2249,6 +2317,23 @@ export const translations: Record<Language, Translations> = {
     createdMinutesAgo: 'Criado há {minutes} minuto(s)',
     reserveStock: 'Reservar stock',
     
+    // Order Actions
+    cancelOrder: 'Cancelar Pedido',
+    cancelOrderWarning: '⚠️ Se já pagou este pedido, aguarde ou contacte-nos por e-mail. Se o pagamento ainda não foi efetuado, pode cancelá-lo.',
+    orderCancelledSuccess: '✅ Pedido cancelado com sucesso.',
+    paymentInstructionsTitle: 'Instruções de Pagamento',
+    bankTransferInstructionsMessage: 'Obrigado pelo seu pedido! Para entrega em 24h, efetue a transferência imediatamente. Em caso de transferência normal, o processamento pode demorar 48 a 72h dependendo do seu banco.',
+    ticketPaymentMessage: 'Recebemos a sua notificação do pedido. Estamos atualmente a verificar o pagamento. Receberá uma confirmação final dentro de alguns minutos.',
+    maxelpayConfirmationMessage: 'Pagamento confirmado via MaxelPay. O seu pedido está a ser processado.',
+    contactSupportEmail: 'Contacte-nos em support@luxio-shop.eu se já pagou.',
+    confirmCancellation: 'Confirmar Cancelamento',
+    cancelAction: 'Cancelar',
+    bankDetails: 'Dados Bancários',
+    paymentReference: 'Referência de Pagamento',
+    uniqueOrderNumber: 'Número de Pedido Único',
+    deliveryInfoMessage: 'Para entrega em 24h, efetue uma transferência imediata.',
+    deliveryInfoStandard: 'Transferência normal: 48-72h dependendo do seu banco.',
+    
     // User Profile
     myAccount: 'Minha Conta',
     profile: 'Perfil',
@@ -2748,6 +2833,23 @@ export const translations: Record<Language, Translations> = {
     createdHoursAgo: 'Utworzono {hours} godzinę (y) temu',
     createdMinutesAgo: 'Utworzono {minutes} minutę (y) temu',
     reserveStock: 'Zarezerwuj zapasy',
+    
+    // Order Actions
+    cancelOrder: 'Anuluj Zamówienie',
+    cancelOrderWarning: '⚠️ Jeśli już zapłaciłeś za to zamówienie, poczekaj lub skontaktuj się z nami e-mailem. Jeśli płatność nie została jeszcze dokonana, możesz je anulować.',
+    orderCancelledSuccess: '✅ Zamówienie pomyślnie anulowane.',
+    paymentInstructionsTitle: 'Instrukcje Płatności',
+    bankTransferInstructionsMessage: 'Dziękujemy za zamówienie! W celu dostawy w ciągu 24h, wykonaj przelew natychmiast. W przypadku przelewu standardowego, przetwarzanie może potrwać 48 do 72h w zależności od banku.',
+    ticketPaymentMessage: 'Otrzymaliśmy Twoją notyfikację o zamówieniu. Obecnie weryfikujemy płatność. Otrzymasz ostateczne potwierdzenie w ciągu kilku minut.',
+    maxelpayConfirmationMessage: 'Płatność potwierdzona przez MaxelPay. Twoje zamówienie jest w trakcie realizacji.',
+    contactSupportEmail: 'Skontaktuj się z nami na support@luxio-shop.eu jeśli już zapłaciłeś.',
+    confirmCancellation: 'Potwierdź Anulowanie',
+    cancelAction: 'Anuluj',
+    bankDetails: 'Dane Bankowe',
+    paymentReference: 'Tytuł Przelewu',
+    uniqueOrderNumber: 'Unikalny Numer Zamówienia',
+    deliveryInfoMessage: 'W celu dostawy w ciągu 24h, wykonaj natychmiastowy przelew.',
+    deliveryInfoStandard: 'Przelew standardowy: 48-72h w zależności od banku.',
     
     // User Profile
     myAccount: 'Moje Konto',
@@ -3249,6 +3351,23 @@ export const translations: Record<Language, Translations> = {
     createdMinutesAgo: 'Creato {minutes} minuto/i fa',
     reserveStock: 'Riserva scorte',
     
+    // Order Actions
+    cancelOrder: 'Annulla Ordine',
+    cancelOrderWarning: '⚠️ Se hai già pagato questo ordine, attendi o contattaci via e-mail. Se il pagamento non è ancora stato effettuato, puoi annullarlo.',
+    orderCancelledSuccess: '✅ Ordine annullato con successo.',
+    paymentInstructionsTitle: 'Istruzioni di Pagamento',
+    bankTransferInstructionsMessage: 'Grazie per il tuo ordine! Per la consegna entro 24h, effettua il bonifico immediatamente. In caso di bonifico standard, il processing può richiedere 48-72h a seconda della tua banca.',
+    ticketPaymentMessage: 'Abbiamo ricevuto la tua notifica dell\'ordine. Stiamo attualmente verificando il pagamento. Riceverai una conferma definitiva entro pochi minuti.',
+    maxelpayConfirmationMessage: 'Pagamento confermato tramite MaxelPay. Il tuo ordine è in elaborazione.',
+    contactSupportEmail: 'Contattaci a support@luxio-shop.eu se hai già pagato.',
+    confirmCancellation: 'Conferma Annullamento',
+    cancelAction: 'Annulla',
+    bankDetails: 'Dati Bancari',
+    paymentReference: 'Causale Pagamento',
+    uniqueOrderNumber: 'Numero Ordine Unico',
+    deliveryInfoMessage: 'Per la consegna entro 24h, effettua un bonifico immediato.',
+    deliveryInfoStandard: 'Bonifico standard: 48-72h a seconda della tua banca.',
+    
     // User Profile
     myAccount: 'Il Mio Account',
     profile: 'Profilo',
@@ -3748,6 +3867,23 @@ export const translations: Record<Language, Translations> = {
     createdHoursAgo: 'Létrehozva {hours} órája',
     createdMinutesAgo: 'Létrehozva {minutes} perce',
     reserveStock: 'Készlet lefoglalása',
+    
+    // Order Actions
+    cancelOrder: 'Rendelés Törlése',
+    cancelOrderWarning: '⚠️ Ha már fizetett erre a rendelésre, kérjük várjon vagy lépjen velünk kapcsolatba e-mailben. Ha a fizetés még nem történt meg, törölheti.',
+    orderCancelledSuccess: '✅ Rendelés sikeresen törölve.',
+    paymentInstructionsTitle: 'Fizetési Utasítások',
+    bankTransferInstructionsMessage: 'Köszönjük rendelését! A 24 órás kézbesítéshez azonnal hajtsa végre az átutalást. Normál átutalás esetén a feldolgozás 48-72 órát vehet igénybe a bankjától függően.',
+    ticketPaymentMessage: 'Megkaptuk a rendelésről szóló értesítést. Jelenleg ellenőrizzük a fizetést. Pár percen belül végleges megerősítést kap.',
+    maxelpayConfirmationMessage: 'Fizetés megerősítve a MaxelPay-en keresztül. Rendelése feldolgozás alatt áll.',
+    contactSupportEmail: 'Lépjen velünk kapcsolatba a support@luxio-shop.eu címen, ha már fizetett.',
+    confirmCancellation: 'Törlés Megerősítése',
+    cancelAction: 'Mégse',
+    bankDetails: 'Banki Adatok',
+    paymentReference: 'Fizetési Hivatkozás',
+    uniqueOrderNumber: 'Egyedi Rendelésszám',
+    deliveryInfoMessage: '24 órás szállításhoz hajtson végre azonnali átutalást.',
+    deliveryInfoStandard: 'Normál átutalás: 48-72 óra a banktól függően.',
     
     // User Profile
     myAccount: 'Fiókom',

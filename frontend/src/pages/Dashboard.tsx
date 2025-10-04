@@ -8,6 +8,23 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { 
   User, 
   Mail, 
@@ -88,8 +105,17 @@ export default function Dashboard() {
     confirmPassword: ''
   });
   const [, navigate] = useLocation();
+  const [instructionsModal, setInstructionsModal] = useState<{ open: boolean; order: Order | null }>({
+    open: false,
+    order: null
+  });
+  const [cancelModal, setCancelModal] = useState<{ open: boolean; order: Order | null }>({
+    open: false,
+    order: null
+  });
+  const [cancellingOrder, setCancellingOrder] = useState(false);
 
-  const { data: ordersData, isLoading } = useQuery<OrdersResponse>({
+  const { data: ordersData, isLoading, refetch } = useQuery<OrdersResponse>({
     queryKey: ['/api/orders'],
     enabled: !!user,
   });
@@ -201,40 +227,37 @@ export default function Dashboard() {
     return methodMap[method] || method;
   };
 
-  const getPaymentActionButton = (order: Order) => {
-    const buttonMap: Record<string, { label: string, icon: React.ReactNode }> = {
-      bank_transfer: { 
-        label: t('completeBankTransfer'),
-        icon: <DollarSign className="h-4 w-4" />
-      },
-      pcs_transcash: { 
-        label: t('submitPCSCodes'),
-        icon: <CreditCard className="h-4 w-4" />
-      },
-      maxelpay: { 
-        label: t('openMaxelPay'),
-        icon: <ExternalLink className="h-4 w-4" />
-      },
-    };
-
-    const action = buttonMap[order.paymentMethod] || { 
-      label: t('completePayment'),
-      icon: <CreditCard className="h-4 w-4" />
-    };
-
-    return (
-      <Button 
-        size="sm" 
-        className="w-full sm:w-auto"
-        data-testid={`button-pay-${order.orderId}`}
-      >
-        {action.icon}
-        {action.label}
-      </Button>
-    );
-  };
-
   const { toast } = useToast();
+
+  const handleCancelOrder = async (orderId: string) => {
+    setCancellingOrder(true);
+    try {
+      const response = await fetch(`/api/orders/${orderId}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to cancel order');
+      }
+
+      toast({
+        title: t('orderCancelledSuccess'),
+        description: t('orderCancelledSuccess'),
+      });
+
+      refetch();
+      setCancelModal({ open: false, order: null });
+    } catch (error) {
+      toast({
+        title: t('error') || 'Error',
+        description: error instanceof Error ? error.message : 'Failed to cancel order',
+        variant: "destructive"
+      });
+    } finally {
+      setCancellingOrder(false);
+    }
+  };
 
   const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -438,14 +461,23 @@ export default function Dashboard() {
                                   <p className="text-lg font-semibold text-foreground">{order.totalAmount.toFixed(2)} €</p>
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                  {getPaymentActionButton(order)}
                                   <Button 
-                                    variant="outline" 
+                                    variant="default" 
                                     size="sm"
                                     className="w-full sm:w-auto"
+                                    onClick={() => setInstructionsModal({ open: true, order })}
                                     data-testid={`button-instructions-${order.orderId}`}
                                   >
                                     {t('viewInstructions')}
+                                  </Button>
+                                  <Button 
+                                    variant="outline" 
+                                    size="sm"
+                                    className="w-full sm:w-auto text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950"
+                                    onClick={() => setCancelModal({ open: true, order })}
+                                    data-testid={`button-cancel-${order.orderId}`}
+                                  >
+                                    {t('cancelOrder')}
                                   </Button>
                                 </div>
                               </div>
@@ -776,6 +808,126 @@ export default function Dashboard() {
 
       <Footer />
       <CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+
+      {/* Instructions Modal */}
+      <Dialog open={instructionsModal.open} onOpenChange={(open) => setInstructionsModal({ open, order: instructionsModal.order })}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <div className="flex items-center gap-2 mb-2">
+              <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <span className="text-xl font-bold text-primary">L</span>
+              </div>
+              <DialogTitle>{t('paymentInstructionsTitle')}</DialogTitle>
+            </div>
+          </DialogHeader>
+          
+          {instructionsModal.order && (
+            <div className="space-y-4 py-4">
+              {instructionsModal.order.paymentMethod === 'bank_transfer' && (
+                <>
+                  <div className="space-y-3 text-sm">
+                    <div className="p-4 bg-muted rounded-lg space-y-2">
+                      <div className="flex justify-between">
+                        <span className="font-medium">{t('beneficiary')}:</span>
+                        <span>Matt Luxio</span>
+                      </div>
+                      <Separator />
+                      <div className="flex justify-between">
+                        <span className="font-medium">IBAN:</span>
+                        <span className="font-mono text-xs">ES6115632626383268707364</span>
+                      </div>
+                      <Separator />
+                      <div className="flex justify-between">
+                        <span className="font-medium">BIC:</span>
+                        <span>NTSBESM1XXX</span>
+                      </div>
+                      <Separator />
+                      <div className="flex justify-between">
+                        <span className="font-medium">{t('paymentReference')}:</span>
+                        <span>Dépôt + {user?.firstName || 'votre nom'}</span>
+                      </div>
+                      <Separator />
+                      <div className="flex justify-between">
+                        <span className="font-medium">{t('uniqueOrderNumber')}:</span>
+                        <span className="font-mono text-xs">{instructionsModal.order.orderReference}</span>
+                      </div>
+                    </div>
+                    
+                    <div className="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg text-sm">
+                      <p className="text-blue-900 dark:text-blue-100">
+                        {t('bankTransferInstructionsMessage')}
+                      </p>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {instructionsModal.order.paymentMethod === 'pcs_transcash' && (
+                <div className="p-4 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                  <p className="text-green-900 dark:text-green-100 text-sm">
+                    {t('ticketPaymentMessage')}
+                  </p>
+                </div>
+              )}
+
+              {instructionsModal.order.paymentMethod === 'maxelpay' && (
+                <div className="p-4 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
+                  <p className="text-purple-900 dark:text-purple-100 text-sm">
+                    {t('maxelpayConfirmationMessage')}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setInstructionsModal({ open: false, order: null })}
+              data-testid="button-close-instructions"
+            >
+              {t('close') || 'Fermer'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Cancel Order Confirmation Dialog */}
+      <AlertDialog open={cancelModal.open} onOpenChange={(open) => setCancelModal({ open, order: cancelModal.order })}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t('confirmCancellation')}</AlertDialogTitle>
+            <AlertDialogDescription className="space-y-2">
+              <p>{t('cancelOrderWarning')}</p>
+              {cancelModal.order && (
+                <p className="text-sm font-medium mt-3">
+                  {t('orderNumber')}: {cancelModal.order.orderReference}
+                </p>
+              )}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel data-testid="button-cancel-dialog-no">
+              {t('cancelAction')}
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => cancelModal.order && handleCancelOrder(cancelModal.order.orderId)}
+              disabled={cancellingOrder}
+              className="bg-red-600 hover:bg-red-700"
+              data-testid="button-cancel-dialog-yes"
+            >
+              {cancellingOrder ? (
+                <>
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  {t('processing')}
+                </>
+              ) : (
+                t('confirmCancellation')
+              )}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
