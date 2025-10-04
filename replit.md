@@ -1,7 +1,7 @@
 # Luxio - Premium E-Commerce Platform
 
 ## Overview
-Luxio is a static e-commerce platform built with React and TypeScript for selling premium electronics (smartphones, smartwatches, sneakers, smart home gadgets, and urban mobility devices). It features a modern design, client-side architecture with Firebase authentication, and external payment processing, operating without server-side dependencies. The project aims to provide a robust e-commerce experience with a focus on modern UI/UX and comprehensive product variant management, with a business vision to capture a significant market share in premium electronics e-commerce.
+Luxio is a premium e-commerce platform built with React and TypeScript for selling premium electronics (smartphones, smartwatches, sneakers, smart home gadgets, and urban mobility devices). It features a modern design with MongoDB Atlas for user authentication and order storage, Express.js backend API, and external payment processing. The project provides a robust e-commerce experience with a focus on modern UI/UX and comprehensive product variant management.
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
@@ -38,7 +38,18 @@ All payment methods feature a modern UI/UX, are protected routes requiring authe
 The design emphasizes a modern aesthetic, responsive behavior across devices (mobile-first approach), and improved user experience through streamlined navigation and clear calls to action. High-quality product images and detailed specifications are integrated.
 
 ### Technical Implementations
-The project is configured for the Replit environment with a unified `start-dev.js` script to run both backend (Express on port 3001) and frontend (Vite dev server on port 5000). Vite is configured with `host: '0.0.0.0'` and `allowedHosts: true` for Replit proxy support, and an API proxy forwards `/api` requests to the backend. Autoscale deployment is configured for static site hosting. The `copy-images.js` script ensures product images are correctly placed for the frontend.
+The project is configured for the Replit environment with:
+- **Development**: A unified `start-dev.js` script runs both backend (Express on port 3001) and frontend (Vite dev server on port 5000)
+- **Vite Configuration**: Configured with `host: '0.0.0.0'` and `allowedHosts: true` for Replit proxy support
+- **API Proxy**: The Vite dev server proxies `/api` requests to the backend on port 3001
+- **Deployment**: Autoscale deployment builds the frontend and serves via `serve` on port 5000
+- **Image Management**: The `copy-images.js` script syncs product images from `attached_assets/` to `frontend/public/attached_assets/`
+
+### Getting Started in Replit
+1. The project is pre-configured with all dependencies installed
+2. Click the "Run" button to start the development server
+3. The application will be available in the webview
+4. To deploy: Click the "Deploy" button for production hosting
 
 ### Environment Variables
 The application requires several environment variables for full functionality, including `MONGODB_URI`, `JWT_SECRET`, `ENCRYPTION_KEY` (critical for production), `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM`, `ADMIN_EMAIL`, `MAXELPAY_MERCHANT_ID`, and `MAXELPAY_API_KEY`.
