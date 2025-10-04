@@ -34,10 +34,12 @@ export default function NewPayment() {
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('maxelpay');
   const [isProcessing, setIsProcessing] = useState(false);
   const [showBankModal, setShowBankModal] = useState(false);
+  const [showBankConfirmModal, setShowBankConfirmModal] = useState(false);
   const [bankDetails, setBankDetails] = useState<any>(null);
   const [copied, setCopied] = useState(false);
   const [ticketType, setTicketType] = useState<TicketType>('PCS');
   const [ticketCodes, setTicketCodes] = useState<TicketCode[]>([{ code: '', amount: 0 }]);
+  const [isConfirmingOrder, setIsConfirmingOrder] = useState(false);
   const { toast } = useToast();
   const { language } = useLanguage();
   const t = translations[language] || translations.en;
@@ -48,11 +50,11 @@ export default function NewPayment() {
       return;
     }
     
-    if (cart.length === 0) {
+    if (cart.length === 0 && !isConfirmingOrder) {
       navigate('/cart');
       return;
     }
-  }, [user, cart, navigate]);
+  }, [user, cart, navigate, isConfirmingOrder]);
 
   if (!user || cart.length === 0) {
     return null;
@@ -60,8 +62,22 @@ export default function NewPayment() {
 
   const ticketTotal = ticketCodes.reduce((sum, ticket) => sum + (ticket.amount || 0), 0);
 
-  const handleBankTransfer = async () => {
+  const handleBankTransferClick = () => {
+    const orderReference = `LX-${Date.now()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
+    setBankDetails({
+      bankName: 'Matt Luxio',
+      iban: 'ES6115632626383268707364',
+      bic: 'NTSBESM1XXX',
+      reference: orderReference,
+      orderReference: orderReference,
+      amount: total
+    });
+    setShowBankConfirmModal(true);
+  };
+
+  const handleBankTransferConfirm = async () => {
     setIsProcessing(true);
+    setIsConfirmingOrder(true);
     try {
       const response = await fetch('/api/payment/bank-transfer', {
         method: 'POST',
@@ -82,10 +98,7 @@ export default function NewPayment() {
       const data = await response.json();
 
       if (data.success) {
-        setBankDetails({
-          ...data.bankDetails,
-          orderReference: data.orderReference
-        });
+        setShowBankConfirmModal(false);
         setShowBankModal(true);
         clearCart();
         toast({
@@ -101,6 +114,7 @@ export default function NewPayment() {
         description: error instanceof Error ? error.message : t.orderFailed,
         variant: 'destructive'
       });
+      setIsConfirmingOrder(false);
     } finally {
       setIsProcessing(false);
     }
@@ -212,7 +226,7 @@ export default function NewPayment() {
 
   const handlePayment = () => {
     if (paymentMethod === 'bank-transfer') {
-      handleBankTransfer();
+      handleBankTransferClick();
     } else if (paymentMethod === 'maxelpay') {
       handleMaxelpay();
     } else if (paymentMethod === 'pcs-transcash') {
@@ -466,6 +480,93 @@ export default function NewPayment() {
           </Card>
         </div>
       </main>
+
+      <Dialog open={showBankConfirmModal} onOpenChange={setShowBankConfirmModal}>
+        <DialogContent className="max-w-lg" data-testid="dialog-bank-confirm">
+          <DialogHeader>
+            <div className="flex justify-center mb-4">
+              <div className="text-3xl font-bold text-primary">Luxio</div>
+            </div>
+            <DialogTitle className="text-center">Virement bancaire</DialogTitle>
+            <DialogDescription className="text-center">
+              Veuillez vérifier les détails de votre virement avant de confirmer votre commande
+            </DialogDescription>
+          </DialogHeader>
+          {bankDetails && (
+            <div className="space-y-4">
+              <div className="p-4 bg-accent rounded-lg space-y-3">
+                <div>
+                  <Label className="text-sm text-muted-foreground">Bénéficiaire</Label>
+                  <p className="font-semibold">{bankDetails.bankName}</p>
+                </div>
+                <div>
+                  <Label className="text-sm text-muted-foreground">IBAN</Label>
+                  <div className="flex items-center gap-2">
+                    <p className="font-mono font-semibold flex-1">{bankDetails.iban}</p>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      onClick={() => copyToClipboard(bankDetails.iban)}
+                      data-testid="button-copy-iban-confirm"
+                    >
+                      {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                    </Button>
+                  </div>
+                </div>
+                <div>
+                  <Label className="text-sm text-muted-foreground">BIC</Label>
+                  <p className="font-mono font-semibold">{bankDetails.bic}</p>
+                </div>
+                <div>
+                  <Label className="text-sm text-muted-foreground">Référence de commande</Label>
+                  <p className="font-semibold text-primary">{bankDetails.orderReference}</p>
+                </div>
+                <div className="pt-2 border-t">
+                  <Label className="text-sm text-muted-foreground">Montant à transférer</Label>
+                  <p className="font-bold text-2xl text-primary">{bankDetails.amount.toFixed(2)} €</p>
+                </div>
+              </div>
+              <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 p-3 rounded-lg">
+                <p className="text-sm text-blue-800 dark:text-blue-200 font-medium">
+                  📋 Instructions :
+                </p>
+                <ul className="text-sm text-blue-800 dark:text-blue-200 mt-2 space-y-1 list-disc list-inside">
+                  <li>Effectuez le virement vers le compte ci-dessus</li>
+                  <li>Indiquez bien la référence : <strong>{bankDetails.orderReference}</strong></li>
+                  <li>Vous recevrez un email de confirmation</li>
+                </ul>
+              </div>
+              <div className="bg-yellow-50 dark:bg-yellow-950 border border-yellow-200 dark:border-yellow-800 p-3 rounded-lg space-y-2">
+                <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                  <strong>✅ Virement immédiat :</strong> Livraison en 24h
+                </p>
+                <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                  <strong>⏱️ Virement ordinaire :</strong> 48-72h selon votre banque
+                </p>
+              </div>
+              <div className="flex gap-3">
+                <Button 
+                  onClick={() => setShowBankConfirmModal(false)} 
+                  variant="outline" 
+                  className="flex-1"
+                  disabled={isProcessing}
+                  data-testid="button-cancel-bank-transfer"
+                >
+                  Non, annuler
+                </Button>
+                <Button 
+                  onClick={handleBankTransferConfirm} 
+                  className="flex-1"
+                  disabled={isProcessing}
+                  data-testid="button-confirm-bank-transfer"
+                >
+                  {isProcessing ? 'Traitement...' : 'Oui, je procède au virement'}
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <Dialog open={showBankModal} onOpenChange={setShowBankModal}>
         <DialogContent className="max-w-lg" data-testid="dialog-bank-transfer">
