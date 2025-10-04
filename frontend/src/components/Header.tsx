@@ -33,11 +33,11 @@ export function Header({ onToggleCart }: HeaderProps) {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    if (params.get('login') === 'true') {
+    if (params.get('login') === 'true' && !user) {
       setAuthModal({ open: true, mode: 'login' });
       window.history.replaceState({}, '', window.location.pathname);
     }
-  }, []);
+  }, [user]);
 
   const scrollToSection = (sectionId: string) => {
     setMobileMenuOpen(false);
