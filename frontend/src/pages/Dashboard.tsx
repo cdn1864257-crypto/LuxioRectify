@@ -3,6 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Button } from '@/components/ui/button';
 import { 
   User, 
   Mail, 
@@ -12,7 +13,13 @@ import {
   ShoppingBag,
   Clock,
   CreditCard,
-  Loader2
+  Loader2,
+  AlertCircle,
+  CheckCircle2,
+  HourglassIcon,
+  Truck,
+  DollarSign,
+  ExternalLink
 } from 'lucide-react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -20,7 +27,7 @@ import { useState } from 'react';
 import { CartSidebar } from '@/components/CartSidebar';
 import { UserProfile } from '@/components/UserProfile';
 import { useQuery } from '@tanstack/react-query';
-import { format } from 'date-fns';
+import { format, differenceInMinutes, differenceInHours, differenceInDays } from 'date-fns';
 import { fr, es, pt, pl, it, hu, enUS } from 'date-fns/locale';
 
 const localeMap = {
@@ -78,18 +85,93 @@ export default function Dashboard() {
 
   const orders = ordersData?.orders || [];
 
+  const unpaidOrders = orders.filter(order => 
+    order.status === 'awaiting_payment' || order.status === 'pending'
+  );
+
+  const getTimeAgo = (createdAt: string) => {
+    const now = new Date();
+    const created = new Date(createdAt);
+    
+    const minutes = differenceInMinutes(now, created);
+    const hours = differenceInHours(now, created);
+    const days = differenceInDays(now, created);
+
+    if (days > 0) {
+      return t('createdDaysAgo').replace('{days}', days.toString());
+    } else if (hours > 0) {
+      return t('createdHoursAgo').replace('{hours}', hours.toString());
+    } else {
+      return t('createdMinutesAgo').replace('{minutes}', Math.max(1, minutes).toString());
+    }
+  };
+
   const getStatusBadge = (status: string) => {
-    const statusMap: Record<string, { variant: 'default' | 'secondary' | 'destructive' | 'outline', label: string }> = {
-      pending: { variant: 'outline', label: t('inProgress') },
-      awaiting_payment: { variant: 'outline', label: t('inProgress') },
-      paid: { variant: 'secondary', label: t('inProgress') },
-      shipped: { variant: 'secondary', label: t('inProgress') },
-      delivered: { variant: 'default', label: t('delivered') },
-      completed: { variant: 'default', label: t('delivered') },
+    const statusMap: Record<string, { 
+      variant: 'default' | 'secondary' | 'destructive' | 'outline', 
+      label: string,
+      icon: React.ReactNode,
+      className?: string
+    }> = {
+      pending: { 
+        variant: 'outline', 
+        label: t('awaitingPayment'),
+        icon: <AlertCircle className="h-3 w-3" />,
+        className: 'border-yellow-500 text-yellow-700 dark:text-yellow-400'
+      },
+      awaiting_payment: { 
+        variant: 'outline', 
+        label: t('awaitingPayment'),
+        icon: <AlertCircle className="h-3 w-3" />,
+        className: 'border-yellow-500 text-yellow-700 dark:text-yellow-400'
+      },
+      payment_review: { 
+        variant: 'secondary', 
+        label: t('paymentReview'),
+        icon: <HourglassIcon className="h-3 w-3" />,
+        className: 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-200'
+      },
+      paid: { 
+        variant: 'secondary', 
+        label: t('processingOrder'),
+        icon: <Package className="h-3 w-3" />,
+        className: 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300'
+      },
+      shipped: { 
+        variant: 'secondary', 
+        label: t('processingOrder'),
+        icon: <Truck className="h-3 w-3" />,
+        className: 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300'
+      },
+      delivered: { 
+        variant: 'default', 
+        label: t('fulfilled'),
+        icon: <CheckCircle2 className="h-3 w-3" />,
+        className: 'bg-green-500 text-white'
+      },
+      completed: { 
+        variant: 'default', 
+        label: t('fulfilled'),
+        icon: <CheckCircle2 className="h-3 w-3" />,
+        className: 'bg-green-500 text-white'
+      },
     };
 
-    const statusInfo = statusMap[status] || { variant: 'outline' as const, label: status };
-    return <Badge variant={statusInfo.variant}>{statusInfo.label}</Badge>;
+    const statusInfo = statusMap[status] || { 
+      variant: 'outline' as const, 
+      label: status,
+      icon: <Clock className="h-3 w-3" />
+    };
+    
+    return (
+      <Badge 
+        variant={statusInfo.variant} 
+        className={`flex items-center gap-1 ${statusInfo.className || ''}`}
+      >
+        {statusInfo.icon}
+        {statusInfo.label}
+      </Badge>
+    );
   };
 
   const getPaymentMethodLabel = (method: string) => {
@@ -99,6 +181,39 @@ export default function Dashboard() {
       pcs_transcash: t('prepaidTickets'),
     };
     return methodMap[method] || method;
+  };
+
+  const getPaymentActionButton = (order: Order) => {
+    const buttonMap: Record<string, { label: string, icon: React.ReactNode }> = {
+      bank_transfer: { 
+        label: t('completeBankTransfer'),
+        icon: <DollarSign className="h-4 w-4" />
+      },
+      pcs_transcash: { 
+        label: t('submitPCSCodes'),
+        icon: <CreditCard className="h-4 w-4" />
+      },
+      maxelpay: { 
+        label: t('openMaxelPay'),
+        icon: <ExternalLink className="h-4 w-4" />
+      },
+    };
+
+    const action = buttonMap[order.paymentMethod] || { 
+      label: t('completePayment'),
+      icon: <CreditCard className="h-4 w-4" />
+    };
+
+    return (
+      <Button 
+        size="sm" 
+        className="w-full sm:w-auto"
+        data-testid={`button-pay-${order.orderId}`}
+      >
+        {action.icon}
+        {action.label}
+      </Button>
+    );
   };
 
   if (!user) return null;
@@ -125,6 +240,94 @@ export default function Dashboard() {
             </div>
           ) : (
             <>
+              {unpaidOrders.length > 0 && (
+                <Card 
+                  className="mb-8 border-yellow-500/50 bg-yellow-50 dark:bg-yellow-950/20" 
+                  data-testid="card-actions-required"
+                >
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-yellow-900 dark:text-yellow-100">
+                      <AlertCircle className="h-5 w-5" />
+                      {t('actionsRequired')}
+                    </CardTitle>
+                    <CardDescription className="text-yellow-700 dark:text-yellow-300">
+                      {t('payWithin24h')}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      {unpaidOrders.map((order) => {
+                        const days = differenceInDays(new Date(), new Date(order.createdAt));
+                        const isUrgent = days >= 1;
+                        
+                        return (
+                          <div
+                            key={order.orderId}
+                            className={`flex flex-col sm:flex-row sm:items-center justify-between p-4 border rounded-lg bg-white dark:bg-gray-950 ${
+                              isUrgent ? 'border-red-300 dark:border-red-700' : 'border-gray-200 dark:border-gray-800'
+                            }`}
+                            data-testid={`unpaid-order-${order.orderId}`}
+                          >
+                            <div className="space-y-2 flex-1 mb-3 sm:mb-0">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <p className="font-medium text-sm">
+                                  {t('orderNumber')}: {order.orderReference}
+                                </p>
+                                {getStatusBadge(order.status)}
+                                {isUrgent && (
+                                  <Badge variant="destructive" className="flex items-center gap-1">
+                                    <Clock className="h-3 w-3" />
+                                    {t('reserveStock')}
+                                  </Badge>
+                                )}
+                              </div>
+                              <p className="text-xs text-muted-foreground">
+                                {getPaymentMethodLabel(order.paymentMethod)} • {order.itemCount || 1} {(order.itemCount || 1) === 1 ? t('item') : t('items')}
+                              </p>
+                              {order.productInfo && (
+                                <p className="text-xs text-muted-foreground">{order.productInfo}</p>
+                              )}
+                              <p className="text-xs text-muted-foreground font-medium">
+                                {getTimeAgo(order.createdAt)}
+                              </p>
+                              <p className="text-lg font-semibold text-foreground">{order.totalAmount.toFixed(2)} €</p>
+                            </div>
+                            <div className="flex flex-col gap-2">
+                              {getPaymentActionButton(order)}
+                              <Button 
+                                variant="outline" 
+                                size="sm"
+                                className="w-full sm:w-auto"
+                                data-testid={`button-instructions-${order.orderId}`}
+                              >
+                                {t('viewInstructions')}
+                              </Button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {unpaidOrders.length === 0 && orders.length > 0 && (
+                <Card 
+                  className="mb-8 border-green-500/50 bg-green-50 dark:bg-green-950/20" 
+                  data-testid="card-no-actions"
+                >
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-green-900 dark:text-green-100">
+                      <CheckCircle2 className="h-5 w-5" />
+                      {t('noActionsRequired')}
+                    </CardTitle>
+                    <CardDescription className="text-green-700 dark:text-green-300">
+                      {t('allOrdersPaid')}
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+              )}
+
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
                 <Card className="border-primary/20 hover:border-primary/40 transition-colors" data-testid="card-total-orders">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -144,14 +347,20 @@ export default function Dashboard() {
                 <Card className="border-primary/20 hover:border-primary/40 transition-colors" data-testid="card-pending-orders">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      {t('inProgress')}
+                      {unpaidOrders.length > 0 ? t('unpaidOrders') : t('inProgress')}
                     </CardTitle>
-                    <Clock className="h-4 w-4 text-muted-foreground" />
+                    {unpaidOrders.length > 0 ? (
+                      <AlertCircle className="h-4 w-4 text-yellow-500" />
+                    ) : (
+                      <Clock className="h-4 w-4 text-muted-foreground" />
+                    )}
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{stats.pendingOrders}</div>
+                    <div className="text-2xl font-bold">
+                      {unpaidOrders.length > 0 ? unpaidOrders.length : stats.pendingOrders}
+                    </div>
                     <p className="text-xs text-muted-foreground">
-                      {t('ordersProcessing')}
+                      {unpaidOrders.length > 0 ? t('paymentPending') : t('ordersProcessing')}
                     </p>
                   </CardContent>
                 </Card>
@@ -218,7 +427,7 @@ export default function Dashboard() {
                             data-testid={`order-${order.orderId}`}
                           >
                             <div className="space-y-1 flex-1 mb-3 sm:mb-0">
-                              <div className="flex items-center gap-2">
+                              <div className="flex items-center gap-2 flex-wrap">
                                 <p className="font-medium text-sm">
                                   {t('orderNumber')}: {order.orderReference}
                                 </p>
@@ -231,7 +440,7 @@ export default function Dashboard() {
                                 <p className="text-xs text-muted-foreground">{order.productInfo}</p>
                               )}
                               <p className="text-xs text-muted-foreground">
-                                {format(new Date(order.createdAt), 'PPP', { locale: localeMap[language] })}
+                                {format(new Date(order.createdAt), 'PPP', { locale: localeMap[language] })} • {getTimeAgo(order.createdAt)}
                               </p>
                             </div>
                             <div className="text-right">
