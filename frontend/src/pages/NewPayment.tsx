@@ -82,7 +82,10 @@ export default function NewPayment() {
       const data = await response.json();
 
       if (data.success) {
-        setBankDetails(data.bankDetails);
+        setBankDetails({
+          ...data.bankDetails,
+          orderReference: data.orderReference
+        });
         setShowBankModal(true);
         clearCart();
         toast({
@@ -467,16 +470,23 @@ export default function NewPayment() {
       <Dialog open={showBankModal} onOpenChange={setShowBankModal}>
         <DialogContent className="max-w-lg" data-testid="dialog-bank-transfer">
           <DialogHeader>
-            <DialogTitle>{t.bankTransferTitle}</DialogTitle>
-            <DialogDescription>
+            <div className="flex justify-center mb-4">
+              <div className="text-3xl font-bold text-primary">Luxio</div>
+            </div>
+            <DialogTitle className="text-center">{t.bankTransferTitle}</DialogTitle>
+            <DialogDescription className="text-center">
               {t.transferInstructions}
             </DialogDescription>
           </DialogHeader>
           {bankDetails && (
             <div className="space-y-4">
+              <div className="text-center pb-3 border-b">
+                <Label className="text-sm text-muted-foreground">Numéro de commande</Label>
+                <p className="font-bold text-lg text-primary">{bankDetails.orderReference}</p>
+              </div>
               <div className="p-4 bg-accent rounded-lg space-y-3">
                 <div>
-                  <Label className="text-sm text-muted-foreground">{t.beneficiary}</Label>
+                  <Label className="text-sm text-muted-foreground">Nom</Label>
                   <p className="font-semibold">{bankDetails.bankName}</p>
                 </div>
                 <div>
@@ -498,17 +508,25 @@ export default function NewPayment() {
                   <p className="font-mono font-semibold">{bankDetails.bic}</p>
                 </div>
                 <div>
-                  <Label className="text-sm text-muted-foreground">{t.amount}</Label>
-                  <p className="font-bold text-xl text-primary">{bankDetails.amount.toFixed(2)} €</p>
-                </div>
-                <div>
-                  <Label className="text-sm text-muted-foreground">{t.transferReference}</Label>
+                  <Label className="text-sm text-muted-foreground">Motif</Label>
                   <p className="font-semibold text-destructive">{bankDetails.reference}</p>
                 </div>
+                <div className="pt-2 border-t">
+                  <Label className="text-sm text-muted-foreground">{t.amount}</Label>
+                  <p className="font-bold text-2xl text-primary">{bankDetails.amount.toFixed(2)} €</p>
+                </div>
+              </div>
+              <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 p-3 rounded-lg space-y-2">
+                <p className="text-sm text-blue-800 dark:text-blue-200">
+                  <strong>✅ Virement immédiat :</strong> Livraison en 24h
+                </p>
+                <p className="text-sm text-blue-800 dark:text-blue-200">
+                  <strong>⏱️ Virement ordinaire :</strong> 48-72h selon votre banque
+                </p>
               </div>
               <div className="bg-yellow-50 dark:bg-yellow-950 border border-yellow-200 dark:border-yellow-800 p-3 rounded-lg">
-                <p className="text-sm text-yellow-800 dark:text-yellow-200">
-                  ⚠️ {t.referenceRequired}
+                <p className="text-sm text-yellow-800 dark:text-yellow-200 font-medium">
+                  ⚠️ Important : Indiquez bien le motif "{bankDetails.reference}" lors du virement
                 </p>
               </div>
               <Button onClick={() => {
