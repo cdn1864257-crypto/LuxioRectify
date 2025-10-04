@@ -39,6 +39,13 @@ export function Header({ onToggleCart }: HeaderProps) {
     }
   }, [user]);
 
+  // Fermer automatiquement le modal de connexion si l'utilisateur est connecté
+  useEffect(() => {
+    if (user && authModal.open) {
+      setAuthModal({ open: false, mode: 'login' });
+    }
+  }, [user, authModal.open]);
+
   const scrollToSection = (sectionId: string) => {
     setMobileMenuOpen(false);
     
@@ -346,12 +353,14 @@ export function Header({ onToggleCart }: HeaderProps) {
         </div>
       </header>
 
-      <AuthModal 
-        open={authModal.open}
-        mode={authModal.mode}
-        onClose={() => setAuthModal(prev => ({ ...prev, open: false }))}
-        onSwitchMode={(mode: 'login' | 'signup') => setAuthModal(prev => ({ ...prev, mode }))}
-      />
+      {!user && (
+        <AuthModal 
+          open={authModal.open}
+          mode={authModal.mode}
+          onClose={() => setAuthModal(prev => ({ ...prev, open: false }))}
+          onSwitchMode={(mode: 'login' | 'signup') => setAuthModal(prev => ({ ...prev, mode }))}
+        />
+      )}
     </>
   );
 }

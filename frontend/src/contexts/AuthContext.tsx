@@ -153,9 +153,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         credentials: 'include',
       });
 
+      // Vider le cache local et session storage
+      localStorage.clear();
+      sessionStorage.clear();
+      
       setUser(null);
       return { success: true };
     } catch (error: any) {
+      // Vider le cache même en cas d'erreur
+      localStorage.clear();
+      sessionStorage.clear();
+      
       setUser(null);
       return { success: false, error: error.message || 'Erreur lors de la déconnexion' };
     }
