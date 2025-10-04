@@ -63,9 +63,24 @@ The project is configured for the Replit environment with:
 - ✅ **Backend running**: Express API server on localhost:3001
 - ✅ **Frontend running**: Vite dev server on 0.0.0.0:5000
 - ✅ **Application accessible**: Successfully displaying in webview
-- ⚠️ **Optional**: Configure environment variables in Secrets for full functionality (MongoDB, JWT, SMTP, payments)
+- ⚠️ **Optional Configuration**: Set environment variables in Secrets for full functionality:
+  - `MONGODB_URI` - MongoDB Atlas connection string for user/order data persistence
+  - `JWT_SECRET` - Secret key for JWT token generation (32+ characters recommended)
+  - `ENCRYPTION_KEY` - AES-256 encryption key for PCS/Transcash codes (32+ characters, critical for production)
+  - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` - KingSMTP configuration for email notifications
+  - `EMAIL_FROM`, `ADMIN_EMAIL` - Email addresses for outgoing messages
+  - `MAXELPAY_MERCHANT_ID`, `MAXELPAY_API_KEY` - Maxelpay payment gateway credentials
 
 ### Recent Changes (October 4, 2025)
+**GitHub Import and Replit Environment Setup:**
+- Successfully imported project from GitHub repository
+- Installed all root and frontend dependencies
+- Configured workflow to run development servers on correct ports
+- Set up deployment configuration for autoscale hosting
+- Verified frontend displays correctly with proxy support
+- Backend API running with development fallback keys for testing
+- All 485+ product images successfully synced to frontend public directory
+
 **Internationalization Fix - Bank Transfer Modals:**
 - Added 18 new translation keys to support full internationalization of bank transfer payment modals
 - Replaced all hardcoded French text in confirmation and success modals with dynamic translation keys
@@ -74,6 +89,13 @@ The project is configured for the Replit environment with:
 
 ### Environment Variables
 The application requires several environment variables for full functionality, including `MONGODB_URI`, `JWT_SECRET`, `ENCRYPTION_KEY` (critical for production), `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM`, `ADMIN_EMAIL`, `MAXELPAY_MERCHANT_ID`, and `MAXELPAY_API_KEY`.
+
+**Development Fallbacks:**
+- The app uses development fallback values for testing without configuration
+- `ENCRYPTION_KEY`: Uses a development-only key (warning displayed in logs)
+- `JWT_SECRET`: Authentication features will show errors without this
+- `MONGODB_URI`: Database operations will fail gracefully without connection
+- SMTP credentials: Email notifications won't be sent without KingSMTP setup
 
 ## External Dependencies
 
