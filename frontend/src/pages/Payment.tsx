@@ -8,14 +8,35 @@ import { CartSidebar } from '@/components/CartSidebar';
 import { UserProfile } from '@/components/UserProfile';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, ShoppingBag, CreditCard } from 'lucide-react';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ArrowLeft, ShoppingBag, CreditCard, Building2, Ticket, Check, Copy, Loader2 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 export default function Payment() {
   const { user } = useAuth();
-  const { cart, total } = useCart();
+  const { cart, total, clearCart } = useCart();
   const [, navigate] = useLocation();
   const [cartOpen, setCartOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const { toast } = useToast();
+
+  // Bank Transfer Modal
+  const [bankTransferOpen, setBankTransferOpen] = useState(false);
+  const [bankTransferLoading, setBankTransferLoading] = useState(false);
+  const [bankTransferData, setBankTransferData] = useState<any>(null);
+
+  // Maxelpay Modal
+  const [maxelpayLoading, setMaxelpayLoading] = useState(false);
+
+  // Tickets Modal
+  const [ticketsOpen, setTicketsOpen] = useState(false);
+  const [ticketsLoading, setTicketsLoading] = useState(false);
+  const [ticketType, setTicketType] = useState<'PCS' | 'TransCash'>('PCS');
+  const [ticketCodes, setTicketCodes] = useState<string[]>(['', '', '']);
+  const [ticketsSuccess, setTicketsSuccess] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -33,7 +54,165 @@ export default function Payment() {
     return null;
   }
 
-  const totalWithTax = total * 1.2;
+  const copyToClipboard = (text: string, label: string) => {
+    navigator.clipboard.writeText(text);
+    toast({
+      title: "Copié !",
+      description: `${label} copié dans le presse-papiers`,
+    });
+  };
+
+  const handleBankTransfer = async () => {
+    setBankTransferLoading(true);
+    try {
+      const response = await fetch('/api/payment/bank-transfer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          customerEmail: user.email,
+          customerName: user.firstName + ' ' + user.lastName,
+          totalAmount: total,
+          cartItems: cart.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+          })),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setBankTransferData(data);
+        toast({
+          title: "Commande créée",
+          description: "Votre commande a été enregistrée avec succès",
+        });
+      } else {
+        toast({
+          title: "Erreur",
+          description: data.error || "Une erreur est survenue",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Erreur lors de la création de la commande:', error);
+      toast({
+        title: "Erreur",
+        description: "Impossible de créer la commande",
+        variant: "destructive",
+      });
+    } finally {
+      setBankTransferLoading(false);
+    }
+  };
+
+  const handleMaxelpay = async () => {
+    setMaxelpayLoading(true);
+    try {
+      const response = await fetch('/api/payment/maxelpay-init', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          customerEmail: user.email,
+          customerName: user.firstName + ' ' + user.lastName,
+          totalAmount: total,
+          cartItems: cart.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+          })),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.redirectUrl) {
+        window.location.href = data.redirectUrl;
+      } else {
+        toast({
+          title: "Erreur",
+          description: data.error || "Impossible d'initialiser le paiement Maxelpay",
+          variant: "destructive",
+        });
+        setMaxelpayLoading(false);
+      }
+    } catch (error) {
+      console.error('Erreur Maxelpay:', error);
+      toast({
+        title: "Erreur",
+        description: "Impossible de se connecter à Maxelpay",
+        variant: "destructive",
+      });
+      setMaxelpayLoading(false);
+    }
+  };
+
+  const handleTicketsSubmit = async () => {
+    const validCodes = ticketCodes.filter(code => code.trim() !== '');
+    
+    if (validCodes.length === 0) {
+      toast({
+        title: "Codes manquants",
+        description: "Veuillez entrer au moins un code de paiement",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setTicketsLoading(true);
+    try {
+      const firstItem = cart[0];
+      const response = await fetch('/api/payment/submit-order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          customerEmail: user.email,
+          customerName: user.firstName + ' ' + user.lastName,
+          productId: firstItem.id,
+          productName: firstItem.name,
+          productModel: '',
+          productPrice: firstItem.price,
+          totalAmount: total,
+          codeType: ticketType,
+          codes: validCodes,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setTicketsSuccess(true);
+        setTimeout(() => {
+          clearCart();
+          navigate('/dashboard');
+        }, 5000);
+      } else {
+        toast({
+          title: "Erreur",
+          description: data.error || "Impossible de soumettre la commande",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Erreur lors de la soumission des tickets:', error);
+      toast({
+        title: "Erreur",
+        description: "Impossible de soumettre les codes de paiement",
+        variant: "destructive",
+      });
+    } finally {
+      setTicketsLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -55,7 +234,7 @@ export default function Payment() {
               Paiement
             </h1>
             <p className="text-muted-foreground">
-              Finalisez votre commande
+              Choisissez votre moyen de paiement
             </p>
           </div>
 
@@ -85,20 +264,12 @@ export default function Payment() {
                 ))}
               </div>
 
-              {/* Totaux */}
-              <div className="pt-4 border-t space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Sous-total</span>
-                  <span>{total.toFixed(2)} €</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">TVA (20%)</span>
-                  <span>{(total * 0.2).toFixed(2)} €</span>
-                </div>
-                <div className="flex justify-between text-lg font-bold pt-2 border-t">
+              {/* Total */}
+              <div className="pt-4 border-t">
+                <div className="flex justify-between text-lg font-bold">
                   <span>Total</span>
                   <span className="text-primary" data-testid="text-total-amount">
-                    {totalWithTax.toFixed(2)} €
+                    {total.toFixed(2)} €
                   </span>
                 </div>
               </div>
@@ -113,14 +284,75 @@ export default function Payment() {
                 Moyens de paiement
               </CardTitle>
               <CardDescription>
-                Les moyens de paiement seront configurés prochainement
+                Sélectionnez votre méthode de paiement préférée
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="text-center py-12 text-muted-foreground">
-                <p className="mb-4">Section de paiement en cours de configuration</p>
-                <p className="text-sm">Les options de paiement seront disponibles sous peu</p>
-              </div>
+            <CardContent className="space-y-4">
+              {/* Virement bancaire */}
+              <Button
+                variant="outline"
+                className="w-full justify-start h-auto py-6 px-6"
+                onClick={() => {
+                  setBankTransferOpen(true);
+                  handleBankTransfer();
+                }}
+                disabled={bankTransferLoading}
+                data-testid="button-bank-transfer"
+              >
+                <div className="flex items-center gap-4 w-full">
+                  <Building2 className="h-6 w-6 text-primary" />
+                  <div className="flex-1 text-left">
+                    <div className="font-semibold text-base">Virement bancaire</div>
+                    <div className="text-sm text-muted-foreground">
+                      Paiement sécurisé par virement
+                    </div>
+                  </div>
+                  {bankTransferLoading && <Loader2 className="h-5 w-5 animate-spin" />}
+                </div>
+              </Button>
+
+              {/* Maxelpay */}
+              <Button
+                variant="outline"
+                className="w-full justify-start h-auto py-6 px-6 border-2 border-primary/20 bg-primary/5"
+                onClick={handleMaxelpay}
+                disabled={maxelpayLoading}
+                data-testid="button-maxelpay"
+              >
+                <div className="flex items-center gap-4 w-full">
+                  <CreditCard className="h-6 w-6 text-primary" />
+                  <div className="flex-1 text-left">
+                    <div className="font-semibold text-base flex items-center gap-2">
+                      Maxelpay
+                      <span className="text-xs bg-primary text-primary-foreground px-2 py-0.5 rounded-full">
+                        Recommandé
+                      </span>
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Paiement par carte bancaire sécurisé
+                    </div>
+                  </div>
+                  {maxelpayLoading && <Loader2 className="h-5 w-5 animate-spin" />}
+                </div>
+              </Button>
+
+              {/* Tickets PCS/TransCash */}
+              <Button
+                variant="outline"
+                className="w-full justify-start h-auto py-6 px-6"
+                onClick={() => setTicketsOpen(true)}
+                data-testid="button-tickets"
+              >
+                <div className="flex items-center gap-4 w-full">
+                  <Ticket className="h-6 w-6 text-primary" />
+                  <div className="flex-1 text-left">
+                    <div className="font-semibold text-base">Tickets PCS / TransCash</div>
+                    <div className="text-sm text-muted-foreground">
+                      Paiement par codes de paiement
+                    </div>
+                  </div>
+                </div>
+              </Button>
             </CardContent>
           </Card>
         </div>
@@ -130,6 +362,264 @@ export default function Payment() {
 
       <CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} />
       <UserProfile isOpen={profileOpen} onClose={() => setProfileOpen(false)} />
+
+      {/* Modal Virement bancaire */}
+      <Dialog open={bankTransferOpen} onOpenChange={setBankTransferOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <div className="text-center mb-4">
+              <h1 className="text-3xl font-bold text-primary mb-2">Luxio</h1>
+            </div>
+            <DialogTitle className="text-2xl text-center">
+              Informations de virement
+            </DialogTitle>
+            <DialogDescription className="text-center">
+              Effectuez votre virement bancaire avec les informations ci-dessous
+            </DialogDescription>
+          </DialogHeader>
+
+          {bankTransferData && (
+            <div className="space-y-6 py-4">
+              {/* Informations bancaires */}
+              <div className="bg-blue-50 dark:bg-blue-950 rounded-lg p-6 space-y-4">
+                <h3 className="font-semibold text-lg mb-4">Coordonnées bancaires</h3>
+                
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground">Nom :</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-semibold">Matt Luxio</span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => copyToClipboard('Matt Luxio', 'Nom')}
+                      >
+                        <Copy className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground">IBAN :</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-semibold">ES6115632626383268707364</span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => copyToClipboard('ES6115632626383268707364', 'IBAN')}
+                      >
+                        <Copy className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground">BIC :</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-semibold">NTSBESM1XXX</span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => copyToClipboard('NTSBESM1XXX', 'BIC')}
+                      >
+                        <Copy className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground">Motif :</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-semibold text-red-600 dark:text-red-400">
+                        Dépôt+{user.firstName} {user.lastName}
+                      </span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => copyToClipboard(`Dépôt+${user.firstName} ${user.lastName}`, 'Motif')}
+                      >
+                        <Copy className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center pt-3 border-t">
+                    <span className="text-muted-foreground">Numéro de commande :</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-bold text-primary">
+                        {bankTransferData.orderReference}
+                      </span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => copyToClipboard(bankTransferData.orderReference, 'Numéro de commande')}
+                      >
+                        <Copy className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center pt-3 border-t">
+                    <span className="font-semibold">Montant :</span>
+                    <span className="font-bold text-2xl text-green-600 dark:text-green-400">
+                      {total.toFixed(2)} €
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Délais de livraison */}
+              <div className="bg-yellow-50 dark:bg-yellow-950 rounded-lg p-4 space-y-2">
+                <div className="flex items-start gap-2">
+                  <Check className="h-5 w-5 text-green-600 mt-0.5" />
+                  <div>
+                    <p className="font-semibold">Virement immédiat : Livraison en 24h</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="h-5 w-5 text-blue-600 mt-0.5" />
+                  <div>
+                    <p className="font-semibold">Virement ordinaire : Délai de 48-72h selon votre banque</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Message de confirmation */}
+              <div className="text-center space-y-3">
+                <div className="bg-green-50 dark:bg-green-950 rounded-lg p-4">
+                  <p className="text-sm text-green-800 dark:text-green-200">
+                    ✅ Un email de confirmation contenant ces informations vous a été envoyé à <strong>{user.email}</strong>
+                  </p>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Merci de votre confiance. N'oubliez pas d'indiquer le motif lors de votre virement.
+                </p>
+              </div>
+
+              <Button
+                className="w-full"
+                onClick={() => {
+                  setBankTransferOpen(false);
+                  clearCart();
+                  navigate('/dashboard');
+                }}
+              >
+                Compris, j'ai noté les informations
+              </Button>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Modal Tickets */}
+      <Dialog open={ticketsOpen} onOpenChange={setTicketsOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <div className="text-center mb-4">
+              <h1 className="text-3xl font-bold text-primary mb-2">Luxio</h1>
+            </div>
+            <DialogTitle className="text-2xl text-center">
+              {ticketsSuccess ? 'Commande reçue' : 'Paiement par tickets'}
+            </DialogTitle>
+          </DialogHeader>
+
+          {ticketsSuccess ? (
+            <div className="py-8 text-center space-y-6">
+              <div className="mx-auto w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+                <Check className="h-8 w-8 text-green-600 dark:text-green-400" />
+              </div>
+              
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold">
+                  Vous venez de recevoir une notification suite à votre commande.
+                </h3>
+                <p className="text-muted-foreground">
+                  Nous procéderons à la vérification du paiement.
+                </p>
+                <p className="text-muted-foreground font-semibold">
+                  Vous recevrez une confirmation définitive d'ici quelques minutes.
+                </p>
+              </div>
+
+              <div className="bg-blue-50 dark:bg-blue-950 rounded-lg p-4">
+                <p className="text-sm text-blue-800 dark:text-blue-200">
+                  Un email récapitulatif a été envoyé à <strong>{user.email}</strong>
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-6 py-4">
+              <div>
+                <Label htmlFor="ticket-type">Type de ticket</Label>
+                <Select
+                  value={ticketType}
+                  onValueChange={(value: 'PCS' | 'TransCash') => setTicketType(value)}
+                >
+                  <SelectTrigger id="ticket-type" data-testid="select-ticket-type">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="PCS">PCS</SelectItem>
+                    <SelectItem value="TransCash">TransCash</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <Label>Codes de paiement</Label>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Entrez vos codes {ticketType} (minimum 1, maximum 3)
+                </p>
+                <div className="space-y-3">
+                  {ticketCodes.map((code, index) => (
+                    <Input
+                      key={index}
+                      placeholder={`Code ${index + 1}`}
+                      value={code}
+                      onChange={(e) => {
+                        const newCodes = [...ticketCodes];
+                        newCodes[index] = e.target.value;
+                        setTicketCodes(newCodes);
+                      }}
+                      data-testid={`input-ticket-code-${index}`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-yellow-50 dark:bg-yellow-950 rounded-lg p-4">
+                <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                  ⚠️ <strong>Important :</strong> Vos codes seront vérifiés par notre équipe. 
+                  Vous recevrez une confirmation par email une fois la validation effectuée.
+                </p>
+              </div>
+
+              <div className="flex justify-between items-center pt-4 border-t">
+                <span className="font-semibold">Montant total :</span>
+                <span className="font-bold text-2xl text-green-600 dark:text-green-400">
+                  {total.toFixed(2)} €
+                </span>
+              </div>
+
+              <Button
+                className="w-full"
+                onClick={handleTicketsSubmit}
+                disabled={ticketsLoading}
+                data-testid="button-submit-tickets"
+              >
+                {ticketsLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Envoi en cours...
+                  </>
+                ) : (
+                  'Soumettre les codes'
+                )}
+              </Button>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

@@ -57,30 +57,63 @@ Expanded smartphone catalog with 8 new models:
 All models include complete variant matrices with multiple colors and storage capacities, accurate 2025 pricing with discounts, and comprehensive technical specifications.
 
 ### Payment Processing
-**Complete payment system with 3 secure methods** (October 2025):
+**Complete payment system with 3 secure methods** (October 2025 - Updated):
 
-1. **Bank Transfer (Virement bancaire)** :
-   - Beneficiary: Matt Luxio
-   - IBAN: ES6115632626383268707364
-   - BIC: NTSBESM1XXX
-   - Unique order reference generated (format: LX-{timestamp}-{random})
+#### Payment Page Features
+- **No TVA (Tax)**: Total displayed is the final amount without additional tax calculation
+- **Three payment methods** available with dedicated modals/flows
+- **Protected route**: Requires user authentication and non-empty cart
+- **Responsive design**: Mobile-friendly payment interface
+
+#### 1. **Bank Transfer (Virement bancaire)**
+**Frontend Modal Features**:
+   - Luxio logo/branding at top
+   - Complete banking details with copy-to-clipboard functionality:
+     * Beneficiary: Matt Luxio
+     * IBAN: ES6115632626383268707364
+     * BIC: NTSBESM1XXX
+     * Motif: "Dépôt+[User First Name] [User Last Name]"
+   - Unique order reference generated for each order (format: LX-{timestamp}-{random})
+   - Clear delivery timeline information:
+     * Immediate transfer: 24h delivery
+     * Regular transfer: 48-72h depending on bank
+   - Confirmation message about email sent to customer
+
+**Backend Processing**:
    - Dual emails: Customer confirmation + Admin notification via KingSMTP
-   - Status: "En attente de virement"
+   - Order stored in MongoDB with status: "En attente de virement"
+   - Cart automatically cleared after modal confirmation
 
-2. **Maxelpay** (Recommended) :
+#### 2. **Maxelpay** (Recommended)
+   - Marked as "Recommended" in the UI with visual badge
    - Environment variables: MAXELPAY_MERCHANT_ID, MAXELPAY_API_KEY
    - Redirect-based flow with secure callback
    - Order matching by orderReference (not MongoDB _id)
    - API key included in payment requests
    - Status updates via /api/payment/maxelpay-return webhook
+   - Loading state during redirect initialization
 
-3. **PCS/Transcash Tickets** :
+#### 3. **PCS/Transcash Tickets**
+**Frontend Modal Features**:
+   - Luxio logo/branding at top
+   - Dropdown selection for ticket type (PCS or TransCash)
+   - 3 input fields for payment codes (minimum 1, maximum 3)
+   - Real-time total amount display
+   - Warning message about verification process
+   - **Success state** showing custom message:
+     * "Vous venez de recevoir une notification suite à votre commande."
+     * "Nous procéderons à la vérification du paiement."
+     * "Vous recevrez une confirmation définitive d'ici quelques minutes."
+   - Automatic redirect to dashboard after 5 seconds
+
+**Backend Processing**:
    - **Security**: AES-256 encryption for payment codes before MongoDB storage
    - **Mandatory**: ENCRYPTION_KEY environment variable (32+ characters)
    - Auto-calculation of total amount
    - Dual emails: Customer confirmation + Support notification via KingSMTP
    - Encrypted codes stored in MongoDB for secure validation
    - Status: "En attente de validation"
+   - Cart automatically cleared after successful submission
 
 **Email Service**: KingSMTP configured with SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, EMAIL_FROM (noreply@luxio-shop.eu), ADMIN_EMAIL (support@luxio-shop.eu).
 
@@ -90,7 +123,7 @@ All models include complete variant matrices with multiple colors and storage ca
 - POST /api/payment/maxelpay-init
 - POST /api/payment/maxelpay-return
 
-**Production Status**: ✅ All payment methods fully implemented and architect-verified as production-ready.
+**Production Status**: ✅ All payment methods fully implemented with modern UI/UX and ready for production use.
 
 ### UI/UX Decisions
 The design focuses on a modern aesthetic, responsive behavior across devices (mobile-first approach with hamburger menus, optimized breakpoints), and improved user experience through streamlined navigation and clear calls to action. High-quality product images and detailed specifications are integrated.
