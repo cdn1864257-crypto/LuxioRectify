@@ -5,6 +5,7 @@ import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { generateOrderReference, generateMaxelPayUrl, saveOrder, Order } from '../lib/cart';
 import { showToast } from './ToastNotifications';
+import { queryClient } from '@/lib/queryClient';
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -157,6 +158,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
   // Ticket Confirmation Modal
   if (showTicketConfirmation) {
     const handleCloseTicketModal = () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/orders'] });
       onClose();
       setLocation('/dashboard');
     };

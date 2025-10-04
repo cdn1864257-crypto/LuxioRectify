@@ -92,6 +92,17 @@ The project is configured for the Replit environment with:
 - Keys added: `verifyTransferDetails`, `amountToTransfer`, `instructionsLabel`, `transferInstruction1Short`, `transferInstruction2Short`, `immediateTransfer`, `delivery24h`, `standardTransfer`, `delivery4872h`, `noCancel`, `yesProceedTransfer`, `name`, `reference`, `importantReferenceNote`, `viewMyOrders`, `processing`, `orderReference`, `paymentInitError`
 - All translations implemented across all 7 supported languages (EN, FR, ES, PT, PL, IT, HU)
 
+**Ticket Payment Dashboard Refresh Fix (October 4, 2025):**
+- ✅ Fixed automatic dashboard refresh issue after ticket (PCS/Transcash) payment
+- **Problem**: After submitting ticket payment, users had to manually refresh the page to see their new order in the dashboard
+- **Solution**: Implemented React Query cache invalidation in CheckoutModal component
+- **Technical Details**:
+  - Imported `queryClient` from `@/lib/queryClient` in CheckoutModal
+  - Added `queryClient.invalidateQueries({ queryKey: ['/api/orders'] })` to `handleCloseTicketModal` function
+  - Now when the ticket confirmation modal is closed, the orders cache is invalidated
+  - Dashboard automatically refetches and displays the new order when the user navigates to it
+- **Result**: Orders now appear instantly in the dashboard after ticket payment without manual page refresh
+
 ### Environment Variables
 The application requires several environment variables for full functionality, including `MONGODB_URI`, `JWT_SECRET`, `ENCRYPTION_KEY` (critical for production), `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM`, `ADMIN_EMAIL`, `MAXELPAY_MERCHANT_ID`, and `MAXELPAY_API_KEY`.
 

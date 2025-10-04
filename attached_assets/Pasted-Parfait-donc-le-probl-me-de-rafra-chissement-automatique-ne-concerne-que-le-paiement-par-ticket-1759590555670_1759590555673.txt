@@ -1,0 +1,100 @@
+Parfait 👍 — donc le problème de rafraîchissement automatique ne concerne que le paiement par ticket, pas les autres modes de paiement (comme carte ou virement).
+Dans ce cas, on va cibler uniquement ce flux dans le prompt pour Replit.
+
+Voici la version corrigée et précise du prompt, à copier-coller :
+
+
+---
+
+🧾 Prompt Replit — Rafraîchir automatiquement le Dashboard après paiement par ticket
+
+> Corrige le comportement du Dashboard uniquement pour le paiement par ticket.
+
+Problème actuel :
+
+Après saisie du code ticket et validation du paiement, le modal s’affiche et tout fonctionne.
+
+MAIS quand on ferme le modal ou qu’on va dans le Dashboard, la commande n’apparaît pas automatiquement.
+
+Il faut recharger la page manuellement pour voir la commande ajoutée.
+
+
+
+---
+
+Objectif :
+
+Dès que le paiement par ticket est validé ou que le modal est fermé, le Dashboard doit se mettre à jour automatiquement (sans reload manuel).
+
+La commande du ticket doit apparaître immédiatement dans la liste des commandes.
+
+
+
+---
+
+À faire côté Frontend (React) :
+
+1. Localiser le composant gérant le paiement par ticket (TicketPaymentModal, handleTicketSubmit, ou similaire).
+
+
+2. Après validation du ticket et fermeture du modal (setShowTicketModal(false)), appeler une fonction de rafraîchissement :
+
+const handleCloseTicketModal = () => {
+  setShowTicketModal(false);
+  if (typeof fetchOrders === 'function') {
+    fetchOrders(); // recharge les commandes à jour
+  }
+};
+
+
+3. Si fetchOrders() n’est pas accessible dans ce composant, utiliser un callback passé en prop depuis le Dashboard :
+
+<TicketPaymentModal onClose={fetchOrders} />
+
+Et dans le modal :
+
+const handleClose = () => {
+  onClose?.(); // recharge les commandes du Dashboard
+};
+
+
+4. Vérifier que fetchOrders() (ou équivalent) récupère bien les commandes récentes de l’utilisateur :
+
+const fetchOrders = async () => {
+  const res = await fetch('/api/orders/user', {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const data = await res.json();
+  setOrders(data);
+};
+
+
+
+
+---
+
+Backend :
+
+Aucun changement nécessaire si la route /api/orders/user renvoie déjà les commandes par utilisateur.
+
+
+
+---
+
+Résultat attendu :
+
+Après saisie du ticket + validation, le modal affiche la confirmation.
+
+Quand il est fermé ou que l’utilisateur navigue vers le Dashboard, la nouvelle commande apparaît instantanément, sans recharger la page.
+
+Message visuel optionnel : “✅ Commande enregistrée avec succès”.
+
+
+
+
+
+---
+
+Souhaites-tu que je te montre maintenant le petit bout de code React exact à insérer (la fonction fetchOrders() + le handleCloseTicketModal() complet) ?
+Ainsi tu pourras vérifier si Replit l’a bien appliqué.
+
