@@ -1,7 +1,7 @@
 # Luxio - Premium E-Commerce Platform
 
 ## Overview
-Luxio is a static e-commerce platform built with React and TypeScript, designed for selling premium electronics (smartphones, smartwatches, sneakers, smart home gadgets, and urban mobility devices). It features a modern design, client-side architecture with Firebase authentication, and external payment processing, operating without server-side dependencies. The project aims to provide a robust e-commerce experience with a focus on modern UI/UX and comprehensive product variant management, with a business vision to capture a significant market share in premium electronics e-commerce.
+Luxio is a static e-commerce platform built with React and TypeScript for selling premium electronics (smartphones, smartwatches, sneakers, smart home gadgets, and urban mobility devices). It features a modern design, client-side architecture with Firebase authentication, and external payment processing, operating without server-side dependencies. The project aims to provide a robust e-commerce experience with a focus on modern UI/UX and comprehensive product variant management, with a business vision to capture a significant market share in premium electronics e-commerce.
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
@@ -18,222 +18,55 @@ The UI is organized into Layout (Header, Footer, Hero), Product (ProductGrid), C
 State is managed using React Query for server state, AuthContext for authentication, CartContext for shopping cart, LanguageContext for internationalization, Local Storage for cart persistence and order history, and React Context API for toast notifications.
 
 ### Authentication System
-MongoDB Atlas is used for user authentication with JWT-based session management. The system supports email/password registration and login, with secure password hashing using bcrypt. JWT tokens are stored in httpOnly cookies for security. Complete authentication flow includes dynamic navigation and protected pages (Dashboard, Cart, Payment).
+User authentication is managed with JWT-based session management. The system supports email/password registration and login, with secure password hashing using bcrypt. JWT tokens are stored in httpOnly cookies for security. Complete authentication flow includes dynamic navigation and protected pages.
 
 ### Internationalization
 The platform supports multiple languages (English, French, Polish, Spanish, Portuguese, Italian, Hungarian) with dynamic switching, IP-based detection, and localized content.
 
 ### Data Management
-Product and order data are managed client-side using a static product database, organized by categories. Local storage is used for cart persistence and order history. Extensive integration of real smartphone data from GSMArena, including variant matrices, accurate pricing, and professional images.
-
-#### Recent Catalog Updates
-
-**October 2025 - Premium Product Image Updates (Oct 1):**
-- Updated product variant images for 6 premium smartphone families:
-  - **Xiaomi 15**: Updated Black, White, and Green variants with new official images
-  - **Oppo Find X7 Ultra**: Updated main product image
-  - **Vivo X100 Pro**: Updated main product image
-  - **Sony Xperia 1 VI**: Updated Black, Platinum Silver, and added Red variant with images
-  - **Samsung Galaxy A55 5G**: Updated all color variants (Iceblue, Navy, Lilac, Lemon) with new images
-  - **Google Pixel 8a**: Updated Obsidian, Porcelain, and Bay variants with new images
-- All new images stored in `attached_assets/` and automatically synced to `frontend/public/attached_assets/`
-- Images verified and copied successfully via the automated `copy-images.js` workflow
-
-**October 2025 - Official Brand Images & New Models:**
-- Downloaded official product images from brand media kits and distributor catalogs
-- Updated Samsung Galaxy A16 5G and M15 5G with official images
-- Fixed Samsung Galaxy A16 5G specs (corrected to Dimensity 6300 chipset for proper 5G support)
-- Added 2 new gaming flagship models:
-  - **Motorola Edge 60 Pro** ($599) - Snapdragon 8 Gen 3, Sony LYTIA 700C camera system
-  - **Lenovo Legion Phone Duel 2** ($549) - Dual cooling system, pop-up camera
-- Corrected all product image paths to use standardized `/attached_assets/stock_images/` format
-- Total catalog: **69 premium smartphone models** with official imagery
-
-**September 2025 - Initial Expansion:**
-Expanded smartphone catalog with 8 new models:
-- **Premium Segment**: Nothing Phone 3 ($799), Asus ROG Phone 8 Pro ($1,299), Sony Xperia 1 VI ($1,399)
-- **Mid-Range Segment**: Samsung Galaxy A55 5G ($350), Google Pixel 8a ($499), OnePlus 12R ($549), Realme GT 6 ($420), Motorola Edge 50 Pro ($377)
-
-All models include complete variant matrices with multiple colors and storage capacities, accurate 2025 pricing with discounts, and comprehensive technical specifications.
+Product and order data are managed client-side using a static product database, organized by categories. Local storage is used for cart persistence and order history. The product catalog includes extensive real smartphone data from GSMArena, including variant matrices, accurate pricing, and professional images. Product images are managed via an automated workflow that syncs images from a root `attached_assets/` folder to `frontend/public/attached_assets/`.
 
 ### Payment Processing
-**Complete payment system with 3 secure methods** (October 2025 - Updated):
+The platform includes a complete payment system with three secure methods:
+1.  **Bank Transfer**: Features a two-step confirmation process where users first see bank details (IBAN: ES6115632626383268707364, BIC: NTSBESM1XXX, Beneficiary: Matt Luxio) with "Oui/Non" buttons. Email is sent via KingSMTP only when user confirms with "Oui, je procède au virement". Generates unique order reference (format: LX-timestamp-random) and includes delivery timing information (24h for instant transfer, 48-72h for standard).
+2.  **Maxelpay**: A recommended redirect-based payment gateway integrated with environment variables and secure callbacks.
+3.  **PCS/Transcash Tickets**: Allows payment via multiple ticket codes, with AES-256 encryption for secure storage of codes. Displays proper confirmation message: "Vous venez de recevoir une notification suite à votre commande. Nous procéderons à la vérification du paiement. Vous recevrez une confirmation définitive d'ici quelques minutes." Redirects to dashboard (not home page) after successful submission.
 
-#### Payment Page Features
-- **No TVA (Tax)**: Total displayed is the final amount without additional tax calculation
-- **Three payment methods** available with dedicated modals/flows
-- **Protected route**: Requires user authentication and non-empty cart
-- **Responsive design**: Mobile-friendly payment interface
-
-#### 1. **Bank Transfer (Virement bancaire)**
-**Frontend Modal Features**:
-   - Luxio logo/branding at top
-   - Complete banking details with copy-to-clipboard functionality:
-     * Beneficiary: Matt Luxio
-     * IBAN: ES6115632626383268707364
-     * BIC: NTSBESM1XXX
-     * Motif: "Dépôt+[User First Name] [User Last Name]"
-   - Unique order reference generated for each order (format: LX-{timestamp}-{random})
-   - Clear delivery timeline information:
-     * Immediate transfer: 24h delivery
-     * Regular transfer: 48-72h depending on bank
-   - Confirmation message about email sent to customer
-
-**Backend Processing**:
-   - Dual emails: Customer confirmation + Admin notification via KingSMTP
-   - Order stored in MongoDB with status: "En attente de virement"
-   - Cart automatically cleared after modal confirmation
-
-#### 2. **Maxelpay** (Recommended)
-   - Marked as "Recommended" in the UI with visual badge
-   - Environment variables: MAXELPAY_MERCHANT_ID, MAXELPAY_API_KEY
-   - Redirect-based flow with secure callback
-   - Order matching by orderReference (not MongoDB _id)
-   - API key included in payment requests
-   - Status updates via /api/payment/maxelpay-return webhook
-   - Loading state during redirect initialization
-
-#### 3. **PCS/Transcash Tickets**
-**Frontend Modal Features**:
-   - Luxio logo/branding at top
-   - Dropdown selection for ticket type (PCS or TransCash)
-   - 3 input fields for payment codes (minimum 1, maximum 3)
-   - Real-time total amount display
-   - Warning message about verification process
-   - **Success state** showing custom message:
-     * "Vous venez de recevoir une notification suite à votre commande."
-     * "Nous procéderons à la vérification du paiement."
-     * "Vous recevrez une confirmation définitive d'ici quelques minutes."
-   - Automatic redirect to dashboard after 5 seconds
-
-**Backend Processing**:
-   - **Security**: AES-256 encryption for payment codes before MongoDB storage
-   - **Mandatory**: ENCRYPTION_KEY environment variable (32+ characters)
-   - Auto-calculation of total amount
-   - Dual emails: Customer confirmation + Support notification via KingSMTP
-   - Encrypted codes stored in MongoDB for secure validation
-   - Status: "En attente de validation"
-   - Cart automatically cleared after successful submission
-
-**Email Service**: KingSMTP configured with SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, EMAIL_FROM (noreply@luxio-shop.eu), ADMIN_EMAIL (support@luxio-shop.eu).
-
-**API Routes**:
-- POST /api/payment/submit-order (PCS/Transcash)
-- POST /api/payment/bank-transfer
-- POST /api/payment/maxelpay-init
-- POST /api/payment/maxelpay-return
-
-**Production Status**: ✅ All payment methods fully implemented with modern UI/UX and ready for production use.
+All payment methods feature a modern UI/UX, are protected routes requiring authentication and a non-empty cart. Email notifications are handled via KingSMTP with proper logging ("✅ Email sent successfully via KingSMTP").
 
 ### UI/UX Decisions
-The design focuses on a modern aesthetic, responsive behavior across devices (mobile-first approach with hamburger menus, optimized breakpoints), and improved user experience through streamlined navigation and clear calls to action. High-quality product images and detailed specifications are integrated.
+The design emphasizes a modern aesthetic, responsive behavior across devices (mobile-first approach), and improved user experience through streamlined navigation and clear calls to action. High-quality product images and detailed specifications are integrated.
 
 ### Technical Implementations
-The project is configured for the Replit environment with a unified `start-dev.js` script to run both backend (Express on port 3001) and frontend (Vite dev server on port 5000). Vite is configured with `host: '0.0.0.0'` and `allowedHosts: true` for Replit proxy support, and an API proxy forwards `/api` requests to the backend. Autoscale deployment is configured for static site hosting.
+The project is configured for the Replit environment with a unified `start-dev.js` script to run both backend (Express on port 3001) and frontend (Vite dev server on port 5000). Vite is configured with `host: '0.0.0.0'` and `allowedHosts: true` for Replit proxy support, and an API proxy forwards `/api` requests to the backend. Autoscale deployment is configured for static site hosting. The `copy-images.js` script ensures product images are correctly placed for the frontend.
 
-#### Product Image Management Strategy
-**Automated workflow for product variant images** (configured October 2025):
-- All product images are stored in the root `attached_assets/` folder
-- The `copy-images.js` script automatically syncs images to `frontend/public/attached_assets/` at startup
-- This script is integrated into `start-dev.js` and runs before servers start
-- **For future product additions**: Simply place images in `attached_assets/` and reference them in `frontend/src/lib/products.ts` as `/attached_assets/filename.jpg`
-- Images are automatically copied to the public folder on every server restart
-- Example: iPhone Air variants all use this pattern with images for Space Black, Cloud White, Sky Blue, and Light Gold colors
-
-### Replit Environment Setup (October 2025)
-**Status**: ✅ Fully configured and running successfully in Replit environment.
-
-**Latest GitHub Import**: October 4, 2025 (Fresh Clone - COMPLETED ✅)
-- ✅ Fresh clone successfully configured for Replit environment
-- ✅ Frontend dependencies installed (335 packages in frontend/)
-- ✅ Workflow configured with webview output type on port 5000
-- ✅ Vite dev server properly configured for Replit proxy (host: 0.0.0.0, allowedHosts: true)
-- ✅ Backend API running on port 3001 (localhost)
-- ✅ Both frontend and backend servers running successfully
-- ✅ Product images automatically synced (310+ images copied to frontend/public)
-- ✅ Application fully functional and tested with screenshot verification
-- ✅ Deployment configuration set up (autoscale deployment ready)
-- ✅ Hero section displaying correctly with premium product images
-- ✅ Navigation, language selector, and cart icon all functional
-- ✅ .gitignore updated with comprehensive Node.js patterns
-- ✅ Import completed successfully - Ready for use!
-
-**Import Summary (October 4, 2025)**:
-This was a fresh GitHub clone that required complete Replit environment setup:
-1. ✅ Installed frontend dependencies (335 npm packages) in the `frontend/` subdirectory
-2. ✅ Configured the workflow with proper webview output type on port 5000
-3. ✅ Verified Vite configuration already has correct Replit settings (host: 0.0.0.0, allowedHosts: true)
-4. ✅ Confirmed backend Express server binds to localhost:3001 (correct for backend)
-5. ✅ Tested application successfully - Hero section, navigation, and responsive design all working
-6. ✅ Set up autoscale deployment configuration for production (build + start commands configured)
-7. ✅ All 310+ product images copied successfully from attached_assets to frontend/public
-8. ✅ Updated .gitignore with comprehensive patterns (dependencies, logs, editor files, OS files)
-
-**⚠️ Security Notice**: The ENCRYPTION_KEY environment variable is using a development fallback key. For production use, you MUST set a secure 32+ character ENCRYPTION_KEY in Replit Secrets to properly encrypt PCS/Transcash payment codes.
-
-The application is now fully functional and ready to use in the Replit environment!
-
-**Development Workflow**: The "Start application" workflow runs `node start-dev.js` which:
-- Copies product images from `attached_assets/` to `frontend/public/attached_assets/`
-- Starts the Express backend API on port 3001 (localhost only)
-- Starts the Vite frontend dev server on port 5000 (0.0.0.0 with allowedHosts: true)
-- Frontend configured to proxy `/api` requests to the backend
-- Both servers start automatically with proper logging
-
-**Dependencies Status**:
-- Root: npm packages already installed from original setup
-- Frontend: `npm install` completed successfully (418 packages freshly installed)
-
-**Environment Variables** (Required for Full Functionality):
-- `MONGODB_URI`: MongoDB Atlas connection string for user authentication
-- `JWT_SECRET`: Secret key for JWT token signing (32+ characters recommended)
-- `ENCRYPTION_KEY`: AES-256 encryption key for PCS/Transcash payment codes (32+ characters)
-- `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`: KingSMTP configuration for transactional emails
-- `EMAIL_FROM`, `ADMIN_EMAIL`: Email addresses for customer and admin notifications
-- `MAXELPAY_MERCHANT_ID`, `MAXELPAY_API_KEY`: Maxelpay payment gateway credentials
-- `DATABASE_URL` (optional): PostgreSQL database (Drizzle config present but not actively used)
-
-**Note**: The application will run in development mode without these variables, but will show warnings and authentication/payment features will not work. The ENCRYPTION_KEY has a fallback development key that should NOT be used in production.
-
-**Authentication Status**: ✅ Fully configured - User signup, login, and protected pages (Dashboard, Cart, Payment) are now operational.
-
-**Deployment Configuration**: ✅ Autoscale deployment configured with:
-- Build: `npm run build` (builds frontend to `dist` folder)
-- Run: `npm run start` (serves static files from `dist` on port 5000)
-- Build verified successful: 612KB JS bundle, 97KB CSS, assets included
-
-**Verified Working Features**:
-- ✅ Frontend loads correctly with hero section and navigation
-- ✅ Backend API responding (health check: OK)
-- ✅ Vite proxy correctly forwarding API requests
-- ✅ Responsive design displays properly
-- ✅ Product browsing and cart functionality (client-side)
-- ✅ Multi-language support active (EN default)
-- ✅ Build process generates production-ready static files
+### Environment Variables
+The application requires several environment variables for full functionality, including `MONGODB_URI`, `JWT_SECRET`, `ENCRYPTION_KEY` (critical for production), `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM`, `ADMIN_EMAIL`, `MAXELPAY_MERCHANT_ID`, and `MAXELPAY_API_KEY`.
 
 ## External Dependencies
 
 ### Authentication Services
-- **MongoDB Atlas**: User data storage and authentication.
-- **JWT (jsonwebtoken)**: Secure token-based authentication.
-- **bcrypt**: Password hashing and verification.
+-   **MongoDB Atlas**: User data storage and authentication.
+-   **JWT (jsonwebtoken)**: Secure token-based authentication.
+-   **bcrypt**: Password hashing and verification.
 
 ### Payment Processing
-- **MaxelPay**: Primary payment gateway.
+-   **MaxelPay**: Primary payment gateway.
+-   **KingSMTP**: For transactional email services.
 
 ### Development and Build Tools
-- **Vite**: Build tool and development server.
-- **TypeScript**: Type-safe development.
+-   **Vite**: Build tool and development server.
+-   **TypeScript**: Type-safe development.
 
 ### UI and Styling
-- **Tailwind CSS**: Utility-first CSS framework.
-- **shadcn/ui Components**: UI component library based on Radix UI.
-- **Font Awesome**: Iconography.
-- **Google Fonts (Inter)**: Typography.
+-   **Tailwind CSS**: Utility-first CSS framework.
+-   **shadcn/ui Components**: UI component library based on Radix UI.
+-   **Font Awesome**: Iconography.
+-   **Google Fonts (Inter)**: Typography.
 
 ### Utility Libraries
-- **date-fns**: Date manipulation.
-- **clsx** and **tailwind-merge**: CSS class management.
-- **Embla Carousel**: Product showcase.
-- **Wouter**: Client-side routing.
-- **TanStack React Query**: Server state management.
+-   **date-fns**: Date manipulation.
+-   **clsx** and **tailwind-merge**: CSS class management.
+-   **Embla Carousel**: Product showcase.
+-   **Wouter**: Client-side routing.
+-   **TanStack React Query**: Server state management.
