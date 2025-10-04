@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { X, CheckCircle, Building2, AlertTriangle, Info, Ticket, Plus, CreditCard, Package, Truck, Shield } from 'lucide-react';
+import { useLocation } from 'wouter';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { generateOrderReference, generateMaxelPayUrl, saveOrder, Order } from '../lib/cart';
@@ -15,10 +16,12 @@ type PaymentMethod = 'bank-transfer' | 'prepaid-tickets' | 'maxelpay';
 export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
   const { cart, total, clearCart } = useCart();
   const { t } = useLanguage();
+  const [, setLocation] = useLocation();
   const [loading, setLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('bank-transfer');
   const [orderReference, setOrderReference] = useState<string>('');
   const [showPaymentDetails, setShowPaymentDetails] = useState(false);
+  const [showTicketConfirmation, setShowTicketConfirmation] = useState(false);
   const [ticketCodes, setTicketCodes] = useState<string[]>(['']);
   
   const [formData, setFormData] = useState({
@@ -36,6 +39,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
     if (!isOpen) {
       // Reset all state when modal closes
       setShowPaymentDetails(false);
+      setShowTicketConfirmation(false);
       setOrderReference('');
       setLoading(false);
       setPaymentMethod('bank-transfer');
@@ -123,8 +127,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
         });
         
         clearCart();
-        showToast(`${t('ticketCodeSent')} - ${t('orderNumber')}: ${orderRef}`, 'success');
-        setShowPaymentDetails(true);
+        setShowTicketConfirmation(true);
         
       } else {
         clearCart();
@@ -138,6 +141,62 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
       setLoading(false);
     }
   };
+
+  // Auto-redirect to dashboard after 3 seconds for ticket confirmation
+  useEffect(() => {
+    if (showTicketConfirmation) {
+      const timer = setTimeout(() => {
+        onClose();
+        setLocation('/dashboard');
+      }, 3000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [showTicketConfirmation, onClose, setLocation]);
+
+  // Ticket Confirmation Modal
+  if (showTicketConfirmation) {
+    const handleCloseTicketModal = () => {
+      onClose();
+      setLocation('/dashboard');
+    };
+
+    return (
+      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" data-testid="ticket-confirmation-modal">
+        <div className="bg-background rounded-2xl shadow-2xl max-w-md w-full">
+          {/* Success Header */}
+          <div className="bg-gradient-to-br from-green-500 to-emerald-600 p-8 text-white rounded-t-2xl">
+            <div className="flex justify-center mb-4">
+              <div className="p-4 bg-white/20 rounded-full">
+                <CheckCircle className="h-16 w-16" />
+              </div>
+            </div>
+            <h2 className="text-2xl font-bold text-center">Commande envoyée !</h2>
+          </div>
+
+          <div className="p-8">
+            {/* Confirmation Message */}
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 border border-green-200 dark:border-green-800 rounded-xl p-6">
+              <p className="text-center text-base text-green-800 dark:text-green-100 leading-relaxed">
+                Vous venez de recevoir une notification suite à votre commande.<br />
+                Nous procéderons à la vérification du paiement.<br />
+                Vous recevrez une confirmation définitive d'ici quelques minutes.
+              </p>
+            </div>
+
+            {/* Close Button */}
+            <button 
+              onClick={handleCloseTicketModal}
+              className="w-full mt-6 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground py-3.5 rounded-xl font-semibold text-base hover:shadow-xl transition-all active:scale-[0.98]"
+              data-testid="button-close-ticket-confirmation"
+            >
+              Voir mes commandes
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (showPaymentDetails) {
     return (
