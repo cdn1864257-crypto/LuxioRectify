@@ -54,91 +54,192 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
       const normalizedEmail = userEmail.toLowerCase();
 
-      const bankTransferOrders = await db
+      const aggregationPipeline = [
+        {
+          $match: { customerEmail: normalizedEmail }
+        },
+        {
+          $addFields: {
+            orderId: { $toString: '$_id' },
+            orderReference: {
+              $ifNull: ['$orderReference', { $toString: '$_id' }]
+            },
+            paymentMethod: 'bank_transfer',
+            status: { $ifNull: ['$status', 'pending'] },
+            totalAmount: { $ifNull: ['$totalAmount', 0] },
+            createdAt: { $ifNull: ['$createdAt', '$$NOW'] },
+            items: { $ifNull: ['$cartItems', []] },
+            itemCount: {
+              $cond: {
+                if: { $isArray: '$cartItems' },
+                then: { $size: '$cartItems' },
+                else: 0
+              }
+            },
+            productInfo: null
+          }
+        },
+        {
+          $unionWith: {
+            coll: 'maxelpay_orders',
+            pipeline: [
+              {
+                $match: { customerEmail: normalizedEmail }
+              },
+              {
+                $addFields: {
+                  orderId: { $toString: '$_id' },
+                  orderReference: {
+                    $ifNull: ['$orderReference', { $toString: '$_id' }]
+                  },
+                  paymentMethod: 'maxelpay',
+                  status: { $ifNull: ['$status', 'pending'] },
+                  totalAmount: { $ifNull: ['$totalAmount', 0] },
+                  createdAt: { $ifNull: ['$createdAt', '$$NOW'] },
+                  items: { $ifNull: ['$cartItems', []] },
+                  itemCount: {
+                    $cond: {
+                      if: { $isArray: '$cartItems' },
+                      then: { $size: '$cartItems' },
+                      else: 0
+                    }
+                  },
+                  productInfo: null
+                }
+              }
+            ]
+          }
+        },
+        {
+          $unionWith: {
+            coll: 'orders',
+            pipeline: [
+              {
+                $match: { customerEmail: normalizedEmail }
+              },
+              {
+                $addFields: {
+                  orderId: { $toString: '$_id' },
+                  orderReference: { $toString: '$_id' },
+                  paymentMethod: 'pcs_transcash',
+                  status: { $ifNull: ['$status', 'pending'] },
+                  totalAmount: { $ifNull: ['$totalAmount', 0] },
+                  createdAt: { $ifNull: ['$createdAt', '$$NOW'] },
+                  items: [],
+                  itemCount: 1,
+                  productInfo: {
+                    $trim: {
+                      input: {
+                        $concat: [
+                          { $ifNull: ['$productName', ''] },
+                          ' - ',
+                          { $ifNull: ['$productModel', ''] }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          $sort: { createdAt: -1 }
+        },
+        {
+          $facet: {
+            orders: [
+              {
+                $project: {
+                  orderId: 1,
+                  orderReference: 1,
+                  paymentMethod: 1,
+                  status: 1,
+                  totalAmount: 1,
+                  createdAt: 1,
+                  items: 1,
+                  itemCount: 1,
+                  productInfo: 1
+                }
+              }
+            ],
+            stats: [
+              {
+                $group: {
+                  _id: null,
+                  totalOrders: { $sum: 1 },
+                  pendingOrders: {
+                    $sum: {
+                      $cond: [
+                        {
+                          $and: [
+                            { $ne: ['$status', 'delivered'] },
+                            { $ne: ['$status', 'completed'] }
+                          ]
+                        },
+                        1,
+                        0
+                      ]
+                    }
+                  },
+                  deliveredOrders: {
+                    $sum: {
+                      $cond: [
+                        {
+                          $or: [
+                            { $eq: ['$status', 'delivered'] },
+                            { $eq: ['$status', 'completed'] }
+                          ]
+                        },
+                        1,
+                        0
+                      ]
+                    }
+                  },
+                  totalSpent: { $sum: '$totalAmount' }
+                }
+              },
+              {
+                $project: {
+                  _id: 0,
+                  totalOrders: 1,
+                  pendingOrders: 1,
+                  deliveredOrders: 1,
+                  totalSpent: 1
+                }
+              }
+            ]
+          }
+        }
+      ];
+
+      const result = await db
         .collection('bank_transfer_orders')
-        .find({ customerEmail: normalizedEmail })
-        .sort({ createdAt: -1 })
+        .aggregate(aggregationPipeline)
         .toArray();
 
-      const maxelpayOrders = await db
-        .collection('maxelpay_orders')
-        .find({ customerEmail: normalizedEmail })
-        .sort({ createdAt: -1 })
-        .toArray();
-
-      const ticketOrders = await db
-        .collection('orders')
-        .find({ customerEmail: normalizedEmail })
-        .sort({ createdAt: -1 })
-        .toArray();
-
-      const normalizedOrders: NormalizedOrder[] = [];
-
-      bankTransferOrders.forEach((order: any) => {
-        normalizedOrders.push({
-          orderId: order._id.toString(),
-          orderReference: order.orderReference || order._id.toString(),
-          paymentMethod: 'bank_transfer',
-          status: order.status || 'pending',
-          totalAmount: order.totalAmount || 0,
-          createdAt: order.createdAt || new Date(),
-          items: order.cartItems || [],
-          itemCount: order.cartItems?.length || 0,
-        });
-      });
-
-      maxelpayOrders.forEach((order: any) => {
-        normalizedOrders.push({
-          orderId: order._id.toString(),
-          orderReference: order.orderReference || order._id.toString(),
-          paymentMethod: 'maxelpay',
-          status: order.status || 'pending',
-          totalAmount: order.totalAmount || 0,
-          createdAt: order.createdAt || new Date(),
-          items: order.cartItems || [],
-          itemCount: order.cartItems?.length || 0,
-        });
-      });
-
-      ticketOrders.forEach((order: any) => {
-        normalizedOrders.push({
-          orderId: order._id.toString(),
-          orderReference: order._id.toString(),
-          paymentMethod: 'pcs_transcash',
-          status: order.status || 'pending',
-          totalAmount: order.totalAmount || 0,
-          createdAt: order.createdAt || new Date(),
-          productInfo: `${order.productName} - ${order.productModel}`,
-          itemCount: 1,
-        });
-      });
-
-      normalizedOrders.sort((a, b) => 
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
-
-      const totalOrders = normalizedOrders.length;
-      const pendingOrders = normalizedOrders.filter(o => 
-        o.status === 'pending' || o.status === 'awaiting_payment'
-      ).length;
-      const deliveredOrders = normalizedOrders.filter(o => 
-        o.status === 'delivered' || o.status === 'completed'
-      ).length;
-      const totalSpent = normalizedOrders.reduce((sum, o) => sum + o.totalAmount, 0);
+      const facetResult = result[0] || { orders: [], stats: [] };
+      const orders = facetResult.orders || [];
+      const stats = facetResult.stats?.[0] || {
+        totalOrders: 0,
+        pendingOrders: 0,
+        deliveredOrders: 0,
+        totalSpent: 0
+      };
 
       return res.status(200).json({
         success: true,
         stats: {
-          totalOrders,
-          pendingOrders,
-          deliveredOrders,
-          totalSpent: parseFloat(totalSpent.toFixed(2)),
+          totalOrders: stats.totalOrders,
+          pendingOrders: stats.pendingOrders,
+          deliveredOrders: stats.deliveredOrders,
+          totalSpent: parseFloat(stats.totalSpent.toFixed(2)),
         },
-        orders: normalizedOrders,
+        orders: orders,
         pagination: {
-          total: totalOrders,
+          total: stats.totalOrders,
           page: 1,
-          pageSize: normalizedOrders.length,
+          pageSize: orders.length,
         },
       });
 
