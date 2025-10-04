@@ -94,9 +94,9 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                 </SheetTrigger>
                 <SheetContent side="left" className="w-[280px] sm:w-[320px]">
                   <SheetHeader>
-                    <SheetTitle className="text-left">Navigation</SheetTitle>
+                    <SheetTitle className="text-left">{t('navigation')}</SheetTitle>
                     <SheetDescription className="text-left">
-                      Accédez aux différentes sections du site
+                      {t('accessSections')}
                     </SheetDescription>
                   </SheetHeader>
                   <nav className="flex flex-col gap-4 mt-6">
@@ -106,7 +106,7 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                       data-testid="mobile-nav-home"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Accueil
+                      {t('home')}
                     </Link>
                     
                     {user ? (
@@ -119,7 +119,7 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                         >
                           <div className="flex items-center gap-2">
                             <LayoutDashboard className="h-4 w-4" />
-                            Tableau de bord
+                            {t('dashboard')}
                           </div>
                         </Link>
                         <Link 
@@ -130,7 +130,7 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                         >
                           <div className="flex items-center gap-2">
                             <ShoppingCartIcon className="h-4 w-4" />
-                            Panier
+                            {t('cart')}
                           </div>
                         </Link>
                         <button 
@@ -144,7 +144,7 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                         >
                           <div className="flex items-center gap-2">
                             <LogOut className="h-4 w-4" />
-                            Déconnexion
+                            {t('logout')}
                           </div>
                         </button>
                       </>
@@ -156,7 +156,7 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                           data-testid="mobile-nav-premium"
                           onClick={() => setMobileMenuOpen(false)}
                         >
-                          Premium
+                          {t('premium')}
                         </Link>
                         <button 
                           onClick={() => scrollToSection('watches')}
@@ -208,7 +208,7 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                   className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
                   data-testid="nav-home"
                 >
-                  Accueil
+                  {t('home')}
                 </Link>
                 
                 {user ? (
@@ -218,14 +218,14 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                       className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
                       data-testid="nav-dashboard"
                     >
-                      Tableau de bord
+                      {t('dashboard')}
                     </Link>
                     <Link 
                       href="/cart"
                       className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
                       data-testid="nav-cart"
                     >
-                      Panier
+                      {t('cart')}
                     </Link>
                     <button 
                       onClick={async () => {
@@ -235,7 +235,7 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                       className="text-sm xl:text-base text-muted-foreground hover:text-destructive transition-colors whitespace-nowrap"
                       data-testid="nav-logout"
                     >
-                      Déconnexion
+                      {t('logout')}
                     </button>
                   </>
                 ) : (
@@ -245,7 +245,7 @@ export function Header({ onToggleCart, onToggleProfile }: HeaderProps) {
                       className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
                       data-testid="nav-premium"
                     >
-                      Premium
+                      {t('premium')}
                     </Link>
                     <button 
                       onClick={() => scrollToSection('watches')}

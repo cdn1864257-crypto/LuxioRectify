@@ -2,6 +2,12 @@ export type Language = 'en' | 'fr' | 'es' | 'pt' | 'pl' | 'it' | 'hu';
 
 export interface Translations {
   // Navigation
+  navigation: string;
+  accessSections: string;
+  home: string;
+  dashboard: string;
+  cart: string;
+  premium: string;
   smartphones: string;
   watches: string;
   sneakers: string;
@@ -371,6 +377,12 @@ export interface Translations {
 export const translations: Record<Language, Translations> = {
   en: {
     // Navigation
+    navigation: 'Navigation',
+    accessSections: 'Access different sections of the site',
+    home: 'Home',
+    dashboard: 'Dashboard',
+    cart: 'Cart',
+    premium: 'Premium',
     smartphones: 'Smartphones',
     watches: 'Watches',
     sneakers: 'Sneakers',
@@ -846,6 +858,12 @@ export const translations: Record<Language, Translations> = {
   
   fr: {
     // Navigation
+    navigation: 'Navigation',
+    accessSections: 'Accédez aux différentes sections du site',
+    home: 'Accueil',
+    dashboard: 'Tableau de bord',
+    cart: 'Panier',
+    premium: 'Premium',
     smartphones: 'Smartphones',
     watches: 'Montres',
     sneakers: 'Baskets',
@@ -1321,6 +1339,12 @@ export const translations: Record<Language, Translations> = {
   
   es: {
     // Navigation
+    navigation: 'Navegación',
+    accessSections: 'Accede a diferentes secciones del sitio',
+    home: 'Inicio',
+    dashboard: 'Panel de control',
+    cart: 'Carrito',
+    premium: 'Premium',
     smartphones: 'Smartphones',
     watches: 'Relojes',
     sneakers: 'Zapatillas',
@@ -1796,6 +1820,12 @@ export const translations: Record<Language, Translations> = {
   
   pt: {
     // Navigation
+    navigation: 'Navegação',
+    accessSections: 'Aceda a diferentes secções do site',
+    home: 'Início',
+    dashboard: 'Painel de controlo',
+    cart: 'Carrinho',
+    premium: 'Premium',
     smartphones: 'Smartphones',
     watches: 'Relógios',
     sneakers: 'Ténis',
@@ -2271,6 +2301,12 @@ export const translations: Record<Language, Translations> = {
   
   pl: {
     // Navigation
+    navigation: 'Nawigacja',
+    accessSections: 'Dostęp do różnych sekcji witryny',
+    home: 'Strona główna',
+    dashboard: 'Panel kontrolny',
+    cart: 'Koszyk',
+    premium: 'Premium',
     smartphones: 'Smartfony',
     watches: 'Zegarki',
     sneakers: 'Buty',
@@ -2746,6 +2782,12 @@ export const translations: Record<Language, Translations> = {
   
   it: {
     // Navigation
+    navigation: 'Navigazione',
+    accessSections: 'Accedi alle diverse sezioni del sito',
+    home: 'Home',
+    dashboard: 'Cruscotto',
+    cart: 'Carrello',
+    premium: 'Premium',
     smartphones: 'Smartphone',
     watches: 'Orologi',
     sneakers: 'Sneakers',
@@ -3221,6 +3263,12 @@ export const translations: Record<Language, Translations> = {
   
   hu: {
     // Navigation
+    navigation: 'Navigáció',
+    accessSections: 'Hozzáférés a webhely különböző szakaszaihoz',
+    home: 'Kezdőlap',
+    dashboard: 'Irányítópult',
+    cart: 'Kosár',
+    premium: 'Prémium',
     smartphones: 'Okostelefonok',
     watches: 'Órák',
     sneakers: 'Cipők',
