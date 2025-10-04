@@ -38,6 +38,7 @@ export default function NewPayment() {
   const [ticketType, setTicketType] = useState<TicketType>('PCS');
   const [ticketCodes, setTicketCodes] = useState<TicketCode[]>([{ code: '', amount: 0 }]);
   const [isConfirmingOrder, setIsConfirmingOrder] = useState(false);
+  const [showTicketModal, setShowTicketModal] = useState(false);
   const { toast } = useToast();
   const { language } = useLanguage();
   const t = translations[language] || translations.en;
@@ -48,17 +49,17 @@ export default function NewPayment() {
       return;
     }
     
-    if (cart.length === 0 && !isConfirmingOrder && !showBankModal) {
+    if (cart.length === 0 && !isConfirmingOrder && !showBankModal && !showTicketModal) {
       navigate('/cart');
       return;
     }
-  }, [user, cart, navigate, isConfirmingOrder, showBankModal]);
+  }, [user, cart, navigate, isConfirmingOrder, showBankModal, showTicketModal]);
 
   if (!user) {
     return null;
   }
 
-  if (cart.length === 0 && !isConfirmingOrder && !showBankModal) {
+  if (cart.length === 0 && !isConfirmingOrder && !showBankModal && !showTicketModal) {
     return null;
   }
 
@@ -207,11 +208,7 @@ export default function NewPayment() {
 
       if (data.success) {
         clearCart();
-        toast({
-          title: t.orderSent,
-          description: t.ticketCodeSent
-        });
-        navigate('/');
+        setShowTicketModal(true);
       } else {
         throw new Error(data.error);
       }
@@ -647,6 +644,38 @@ export default function NewPayment() {
               </Button>
             </div>
           )}
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showTicketModal} onOpenChange={(open) => {
+        if (!open) {
+          setShowTicketModal(false);
+          navigate('/dashboard');
+        }
+      }}>
+        <DialogContent className="max-w-lg" data-testid="dialog-ticket-confirmation">
+          <DialogHeader>
+            <div className="flex justify-center mb-4">
+              <div className="text-3xl font-bold text-primary">Luxio</div>
+            </div>
+            <DialogTitle className="text-center">{t.orderSent}</DialogTitle>
+            <DialogDescription className="text-center text-base">
+              {t.ticketPaymentMessage}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 p-4 rounded-lg text-center">
+              <p className="text-sm text-green-800 dark:text-green-200 font-medium">
+                ✅ {t.ticketCodeSent}
+              </p>
+            </div>
+            <Button onClick={() => {
+              setShowTicketModal(false);
+              navigate('/dashboard');
+            }} className="w-full" data-testid="button-close-ticket-modal">
+              {t.viewMyOrders}
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
 
