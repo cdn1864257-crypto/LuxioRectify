@@ -65,8 +65,8 @@ export default function Dashboard() {
   const [profileOpen, setProfileOpen] = useState(false);
 
   const { data: ordersData, isLoading } = useQuery<OrdersResponse>({
-    queryKey: ['/api/orders', user?.email],
-    enabled: !!user?.email,
+    queryKey: ['/api/orders'],
+    enabled: !!user,
   });
 
   const stats = ordersData?.stats || {

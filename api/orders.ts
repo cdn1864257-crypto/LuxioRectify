@@ -1,4 +1,6 @@
 import { MongoClient } from 'mongodb';
+import jwt from 'jsonwebtoken';
+import { parse } from 'cookie';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -14,6 +16,11 @@ interface VercelResponse {
   json: (object: any) => VercelResponse;
   setHeader: (name: string, value: string | string[]) => VercelResponse;
   end: (chunk?: any) => void;
+}
+
+interface JWTPayload {
+  userId: string;
+  email: string;
 }
 
 interface NormalizedOrder {
@@ -35,11 +42,38 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const userEmail = req.query.email as string;
-
-    if (!userEmail) {
-      return res.status(401).json({ error: 'Email utilisateur requis' });
+    let token: string | undefined;
+    
+    const cookieHeader = req.headers.cookie;
+    if (cookieHeader) {
+      const cookies = parse(cookieHeader);
+      token = cookies.auth_token;
     }
+    
+    if (!token && req.headers.authorization) {
+      const authHeader = req.headers.authorization;
+      if (authHeader.startsWith('Bearer ')) {
+        token = authHeader.substring(7);
+      }
+    }
+
+    if (!token) {
+      return res.status(401).json({ error: 'Non authentifié - Token manquant' });
+    }
+
+    const jwtSecret = process.env.JWT_SECRET;
+    if (!jwtSecret) {
+      return res.status(500).json({ error: 'Configuration JWT manquante' });
+    }
+
+    let decoded: JWTPayload;
+    try {
+      decoded = jwt.verify(token, jwtSecret) as JWTPayload;
+    } catch (error) {
+      return res.status(401).json({ error: 'Token invalide ou expiré' });
+    }
+
+    const userEmail = decoded.email;
 
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
