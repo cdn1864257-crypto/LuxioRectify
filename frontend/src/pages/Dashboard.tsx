@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { 
   User, 
   Mail, 
@@ -19,7 +20,12 @@ import {
   HourglassIcon,
   Truck,
   DollarSign,
-  ExternalLink
+  ExternalLink,
+  ChevronDown,
+  ChevronUp,
+  Home,
+  Sparkles,
+  LogOut
 } from 'lucide-react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -29,6 +35,7 @@ import { UserProfile } from '@/components/UserProfile';
 import { useQuery } from '@tanstack/react-query';
 import { format, differenceInMinutes, differenceInHours, differenceInDays } from 'date-fns';
 import { fr, es, pt, pl, it, hu, enUS } from 'date-fns/locale';
+import { useLocation } from 'wouter';
 
 const localeMap = {
   en: enUS,
@@ -66,10 +73,12 @@ interface OrdersResponse {
 }
 
 export default function Dashboard() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { t, language } = useLanguage();
   const [cartOpen, setCartOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [actionsOpen, setActionsOpen] = useState(true);
+  const [, navigate] = useLocation();
 
   const { data: ordersData, isLoading } = useQuery<OrdersResponse>({
     queryKey: ['/api/orders'],
@@ -225,13 +234,53 @@ export default function Dashboard() {
       <main className="flex-1 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-foreground mb-2" data-testid="text-dashboard-greeting">
-              {t('hello')}, {user.firstName} 👋
-            </h1>
-            <p className="text-muted-foreground">
-              {t('welcomePersonalSpace')}
-            </p>
+          <div className="mb-8 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-bold text-foreground mb-2" data-testid="text-dashboard-greeting">
+                {t('hello')}, {user.firstName} 👋
+              </h1>
+              <p className="text-muted-foreground">
+                {t('welcomePersonalSpace')}
+              </p>
+            </div>
+            
+            <div className="flex flex-wrap items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigate('/')}
+                className="flex items-center gap-2 hover:bg-primary/10 hover:text-primary hover:border-primary transition-all"
+                data-testid="button-quick-home"
+              >
+                <Home className="h-4 w-4" />
+                <span className="hidden sm:inline">{t('home')}</span>
+              </Button>
+              
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigate('/premium')}
+                className="flex items-center gap-2 hover:bg-purple-500/10 hover:text-purple-600 hover:border-purple-500 dark:hover:text-purple-400 transition-all"
+                data-testid="button-quick-premium"
+              >
+                <Sparkles className="h-4 w-4" />
+                <span className="hidden sm:inline">{t('premium')}</span>
+              </Button>
+              
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={async () => {
+                  await logout();
+                  navigate('/');
+                }}
+                className="flex items-center gap-2 hover:bg-destructive/10 hover:text-destructive hover:border-destructive transition-all"
+                data-testid="button-quick-logout"
+              >
+                <LogOut className="h-4 w-4" />
+                <span className="hidden sm:inline">{t('logout')}</span>
+              </Button>
+            </div>
           </div>
 
           {isLoading ? (
@@ -241,74 +290,101 @@ export default function Dashboard() {
           ) : (
             <>
               {unpaidOrders.length > 0 && (
-                <Card 
-                  className="mb-8 border-yellow-500/50 bg-yellow-50 dark:bg-yellow-950/20" 
-                  data-testid="card-actions-required"
+                <Collapsible
+                  open={actionsOpen}
+                  onOpenChange={setActionsOpen}
+                  className="mb-8"
                 >
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-yellow-900 dark:text-yellow-100">
-                      <AlertCircle className="h-5 w-5" />
-                      {t('actionsRequired')}
-                    </CardTitle>
-                    <CardDescription className="text-yellow-700 dark:text-yellow-300">
-                      {t('payWithin24h')}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {unpaidOrders.map((order) => {
-                        const days = differenceInDays(new Date(), new Date(order.createdAt));
-                        const isUrgent = days >= 1;
-                        
-                        return (
-                          <div
-                            key={order.orderId}
-                            className={`flex flex-col sm:flex-row sm:items-center justify-between p-4 border rounded-lg bg-white dark:bg-gray-950 ${
-                              isUrgent ? 'border-red-300 dark:border-red-700' : 'border-gray-200 dark:border-gray-800'
-                            }`}
-                            data-testid={`unpaid-order-${order.orderId}`}
-                          >
-                            <div className="space-y-2 flex-1 mb-3 sm:mb-0">
-                              <div className="flex items-center gap-2 flex-wrap">
-                                <p className="font-medium text-sm">
-                                  {t('orderNumber')}: {order.orderReference}
-                                </p>
-                                {getStatusBadge(order.status)}
-                                {isUrgent && (
-                                  <Badge variant="destructive" className="flex items-center gap-1">
-                                    <Clock className="h-3 w-3" />
-                                    {t('reserveStock')}
-                                  </Badge>
-                                )}
-                              </div>
-                              <p className="text-xs text-muted-foreground">
-                                {getPaymentMethodLabel(order.paymentMethod)} • {order.itemCount || 1} {(order.itemCount || 1) === 1 ? t('item') : t('items')}
-                              </p>
-                              {order.productInfo && (
-                                <p className="text-xs text-muted-foreground">{order.productInfo}</p>
-                              )}
-                              <p className="text-xs text-muted-foreground font-medium">
-                                {getTimeAgo(order.createdAt)}
-                              </p>
-                              <p className="text-lg font-semibold text-foreground">{order.totalAmount.toFixed(2)} €</p>
-                            </div>
-                            <div className="flex flex-col gap-2">
-                              {getPaymentActionButton(order)}
-                              <Button 
-                                variant="outline" 
-                                size="sm"
-                                className="w-full sm:w-auto"
-                                data-testid={`button-instructions-${order.orderId}`}
-                              >
-                                {t('viewInstructions')}
-                              </Button>
+                  <Card 
+                    className="border-yellow-500/50 bg-yellow-50 dark:bg-yellow-950/20" 
+                    data-testid="card-actions-required"
+                  >
+                    <CollapsibleTrigger className="w-full">
+                      <CardHeader className="cursor-pointer hover:bg-yellow-100/50 dark:hover:bg-yellow-900/20 transition-colors rounded-t-lg">
+                        <div className="flex items-center justify-between w-full">
+                          <div className="flex items-center gap-3">
+                            <AlertCircle className="h-5 w-5 text-yellow-900 dark:text-yellow-100" />
+                            <div className="text-left">
+                              <CardTitle className="text-yellow-900 dark:text-yellow-100 flex items-center gap-2">
+                                {t('actionsRequired')}
+                                <Badge variant="destructive" className="ml-2">
+                                  {unpaidOrders.length}
+                                </Badge>
+                              </CardTitle>
+                              <CardDescription className="text-yellow-700 dark:text-yellow-300 text-sm mt-1">
+                                {t('payWithin24h')}
+                              </CardDescription>
                             </div>
                           </div>
-                        );
-                      })}
-                    </div>
-                  </CardContent>
-                </Card>
+                          <div className="flex items-center gap-2 text-yellow-900 dark:text-yellow-100">
+                            {actionsOpen ? (
+                              <ChevronUp className="h-5 w-5" />
+                            ) : (
+                              <ChevronDown className="h-5 w-5" />
+                            )}
+                          </div>
+                        </div>
+                      </CardHeader>
+                    </CollapsibleTrigger>
+                    
+                    <CollapsibleContent>
+                      <CardContent className="pt-0">
+                        <div className="space-y-4">
+                          {unpaidOrders.map((order) => {
+                            const days = differenceInDays(new Date(), new Date(order.createdAt));
+                            const isUrgent = days >= 1;
+                            
+                            return (
+                              <div
+                                key={order.orderId}
+                                className={`flex flex-col sm:flex-row sm:items-center justify-between p-4 border rounded-lg bg-white dark:bg-gray-950 ${
+                                  isUrgent ? 'border-red-300 dark:border-red-700' : 'border-gray-200 dark:border-gray-800'
+                                }`}
+                                data-testid={`unpaid-order-${order.orderId}`}
+                              >
+                                <div className="space-y-2 flex-1 mb-3 sm:mb-0">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <p className="font-medium text-sm">
+                                      {t('orderNumber')}: {order.orderReference}
+                                    </p>
+                                    {getStatusBadge(order.status)}
+                                    {isUrgent && (
+                                      <Badge variant="destructive" className="flex items-center gap-1">
+                                        <Clock className="h-3 w-3" />
+                                        {t('reserveStock')}
+                                      </Badge>
+                                    )}
+                                  </div>
+                                  <p className="text-xs text-muted-foreground">
+                                    {getPaymentMethodLabel(order.paymentMethod)} • {order.itemCount || 1} {(order.itemCount || 1) === 1 ? t('item') : t('items')}
+                                  </p>
+                                  {order.productInfo && (
+                                    <p className="text-xs text-muted-foreground">{order.productInfo}</p>
+                                  )}
+                                  <p className="text-xs text-muted-foreground font-medium">
+                                    {getTimeAgo(order.createdAt)}
+                                  </p>
+                                  <p className="text-lg font-semibold text-foreground">{order.totalAmount.toFixed(2)} €</p>
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                  {getPaymentActionButton(order)}
+                                  <Button 
+                                    variant="outline" 
+                                    size="sm"
+                                    className="w-full sm:w-auto"
+                                    data-testid={`button-instructions-${order.orderId}`}
+                                  >
+                                    {t('viewInstructions')}
+                                  </Button>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </CardContent>
+                    </CollapsibleContent>
+                  </Card>
+                </Collapsible>
               )}
 
               {unpaidOrders.length === 0 && orders.length > 0 && (
