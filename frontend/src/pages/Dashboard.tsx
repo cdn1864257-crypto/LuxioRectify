@@ -702,7 +702,7 @@ export default function Dashboard() {
                       {t('security') || 'Sécurité'}
                     </CardTitle>
                     <CardDescription>
-                      Réinitialisez votre mot de passe pour sécuriser votre compte
+                      {t('passwordResetDescription')}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>

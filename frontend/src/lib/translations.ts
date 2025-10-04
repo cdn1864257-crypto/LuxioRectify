@@ -380,6 +380,7 @@ export interface Translations {
   accountSettings: string;
   security: string;
   changePassword: string;
+  passwordResetDescription: string;
   notifications: string;
   orderNotifications: string;
   priceAlerts: string;
@@ -791,6 +792,7 @@ export const translations: Record<Language, Translations> = {
     accountSettings: 'Account Settings',
     security: 'Security',
     changePassword: 'Change Password',
+    passwordResetDescription: 'Reset your password to secure your account',
     notifications: 'Notifications',
     orderNotifications: 'Order notifications',
     priceAlerts: 'Price alerts',
@@ -1308,6 +1310,7 @@ export const translations: Record<Language, Translations> = {
     accountSettings: 'Paramètres du compte',
     security: 'Sécurité',
     changePassword: 'Changer le mot de passe',
+    passwordResetDescription: 'Réinitialisez votre mot de passe pour sécuriser votre compte',
     notifications: 'Notifications',
     orderNotifications: 'Notifications de commande',
     priceAlerts: 'Alertes de prix',
@@ -1825,6 +1828,7 @@ export const translations: Record<Language, Translations> = {
     accountSettings: 'Configuración de la cuenta',
     security: 'Seguridad',
     changePassword: 'Cambiar contraseña',
+    passwordResetDescription: 'Restablezca su contraseña para proteger su cuenta',
     notifications: 'Notificaciones',
     orderNotifications: 'Notificaciones de pedido',
     priceAlerts: 'Alertas de precio',
@@ -2342,6 +2346,7 @@ export const translations: Record<Language, Translations> = {
     accountSettings: 'Configurações da conta',
     security: 'Segurança',
     changePassword: 'Alterar senha',
+    passwordResetDescription: 'Redefina sua senha para proteger sua conta',
     notifications: 'Notificações',
     orderNotifications: 'Notificações de pedido',
     priceAlerts: 'Alertas de preço',
@@ -2859,6 +2864,7 @@ export const translations: Record<Language, Translations> = {
     accountSettings: 'Ustawienia konta',
     security: 'Bezpieczeństwo',
     changePassword: 'Zmień hasło',
+    passwordResetDescription: 'Zresetuj hasło, aby zabezpieczyć swoje konto',
     notifications: 'Powiadomienia',
     orderNotifications: 'Powiadomienia o zamówieniach',
     priceAlerts: 'Alerty cenowe',
@@ -3376,6 +3382,7 @@ export const translations: Record<Language, Translations> = {
     accountSettings: 'Impostazioni dell\'account',
     security: 'Sicurezza',
     changePassword: 'Cambia password',
+    passwordResetDescription: 'Reimposta la password per proteggere il tuo account',
     notifications: 'Notifiche',
     orderNotifications: 'Notifiche ordini',
     priceAlerts: 'Avvisi sui prezzi',
@@ -3893,6 +3900,7 @@ export const translations: Record<Language, Translations> = {
     accountSettings: 'Fiók beállításai',
     security: 'Biztonság',
     changePassword: 'Jelszó módosítása',
+    passwordResetDescription: 'Állítsa vissza jelszavát fiókja védelme érdekében',
     notifications: 'Értesítések',
     orderNotifications: 'Rendelési értesítések',
     priceAlerts: 'Ár riasztások',
