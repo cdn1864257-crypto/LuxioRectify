@@ -335,6 +335,25 @@ export interface Translations {
   accountDetails: string;
   accountCreated: string;
   viewProfile: string;
+  actionsRequired: string;
+  awaitingPayment: string;
+  paymentReview: string;
+  processingOrder: string;
+  fulfilled: string;
+  completeBankTransfer: string;
+  submitPCSCodes: string;
+  openMaxelPay: string;
+  viewInstructions: string;
+  payWithin24h: string;
+  unpaidOrders: string;
+  paymentPending: string;
+  completePayment: string;
+  noActionsRequired: string;
+  allOrdersPaid: string;
+  createdDaysAgo: string;
+  createdHoursAgo: string;
+  createdMinutesAgo: string;
+  reserveStock: string;
   
   // User Profile
   myAccount: string;
@@ -710,6 +729,25 @@ export const translations: Record<Language, Translations> = {
     accountDetails: 'Your account details',
     accountCreated: 'Account created',
     viewProfile: 'View profile',
+    actionsRequired: 'Actions Required',
+    awaitingPayment: 'Awaiting Payment',
+    paymentReview: 'Payment Review',
+    processingOrder: 'Processing',
+    fulfilled: 'Fulfilled',
+    completeBankTransfer: 'Complete Bank Transfer',
+    submitPCSCodes: 'Submit PCS Codes',
+    openMaxelPay: 'Open MaxelPay',
+    viewInstructions: 'View Instructions',
+    payWithin24h: 'Pay within 24h to reserve stock',
+    unpaidOrders: 'Unpaid Orders',
+    paymentPending: 'Payment Pending',
+    completePayment: 'Complete Payment',
+    noActionsRequired: 'No Actions Required',
+    allOrdersPaid: 'All your orders are paid!',
+    createdDaysAgo: 'Created {days} day(s) ago',
+    createdHoursAgo: 'Created {hours} hour(s) ago',
+    createdMinutesAgo: 'Created {minutes} minute(s) ago',
+    reserveStock: 'Reserve stock',
     
     // User Profile
     myAccount: 'My Account',
@@ -1191,6 +1229,25 @@ export const translations: Record<Language, Translations> = {
     accountDetails: 'Détails de votre compte',
     accountCreated: 'Compte créé',
     viewProfile: 'Voir le profil',
+    actionsRequired: 'Actions Requises',
+    awaitingPayment: 'En attente de paiement',
+    paymentReview: 'Paiement en révision',
+    processingOrder: 'En traitement',
+    fulfilled: 'Livré',
+    completeBankTransfer: 'Effectuer le virement',
+    submitPCSCodes: 'Soumettre les codes PCS',
+    openMaxelPay: 'Ouvrir MaxelPay',
+    viewInstructions: 'Voir les instructions',
+    payWithin24h: 'Payez sous 24h pour réserver le stock',
+    unpaidOrders: 'Commandes non payées',
+    paymentPending: 'Paiement en attente',
+    completePayment: 'Compléter le paiement',
+    noActionsRequired: 'Aucune action requise',
+    allOrdersPaid: 'Toutes vos commandes sont payées !',
+    createdDaysAgo: 'Créée il y a {days} jour(s)',
+    createdHoursAgo: 'Créée il y a {hours} heure(s)',
+    createdMinutesAgo: 'Créée il y a {minutes} minute(s)',
+    reserveStock: 'Réserver le stock',
     
     // User Profile
     myAccount: 'Mon Compte',
@@ -1672,6 +1729,25 @@ export const translations: Record<Language, Translations> = {
     accountDetails: 'Detalles de su cuenta',
     accountCreated: 'Cuenta creada',
     viewProfile: 'Ver perfil',
+    actionsRequired: 'Acciones Requeridas',
+    awaitingPayment: 'Esperando Pago',
+    paymentReview: 'Revisión de Pago',
+    processingOrder: 'En Proceso',
+    fulfilled: 'Completado',
+    completeBankTransfer: 'Completar Transferencia',
+    submitPCSCodes: 'Enviar Códigos PCS',
+    openMaxelPay: 'Abrir MaxelPay',
+    viewInstructions: 'Ver Instrucciones',
+    payWithin24h: 'Paga en 24h para reservar stock',
+    unpaidOrders: 'Pedidos No Pagados',
+    paymentPending: 'Pago Pendiente',
+    completePayment: 'Completar Pago',
+    noActionsRequired: 'No Se Requieren Acciones',
+    allOrdersPaid: '¡Todos tus pedidos están pagados!',
+    createdDaysAgo: 'Creado hace {days} día(s)',
+    createdHoursAgo: 'Creado hace {hours} hora(s)',
+    createdMinutesAgo: 'Creado hace {minutes} minuto(s)',
+    reserveStock: 'Reservar stock',
     
     // User Profile
     myAccount: 'Mi Cuenta',
@@ -2153,6 +2229,25 @@ export const translations: Record<Language, Translations> = {
     accountDetails: 'Detalhes da sua conta',
     accountCreated: 'Conta criada',
     viewProfile: 'Ver perfil',
+    actionsRequired: 'Ações Necessárias',
+    awaitingPayment: 'Aguardando Pagamento',
+    paymentReview: 'Revisão de Pagamento',
+    processingOrder: 'Em Processamento',
+    fulfilled: 'Concluído',
+    completeBankTransfer: 'Completar Transferência',
+    submitPCSCodes: 'Enviar Códigos PCS',
+    openMaxelPay: 'Abrir MaxelPay',
+    viewInstructions: 'Ver Instruções',
+    payWithin24h: 'Pague em 24h para reservar stock',
+    unpaidOrders: 'Pedidos Não Pagos',
+    paymentPending: 'Pagamento Pendente',
+    completePayment: 'Completar Pagamento',
+    noActionsRequired: 'Nenhuma Ação Necessária',
+    allOrdersPaid: 'Todos os seus pedidos estão pagos!',
+    createdDaysAgo: 'Criado há {days} dia(s)',
+    createdHoursAgo: 'Criado há {hours} hora(s)',
+    createdMinutesAgo: 'Criado há {minutes} minuto(s)',
+    reserveStock: 'Reservar stock',
     
     // User Profile
     myAccount: 'Minha Conta',
@@ -2634,6 +2729,25 @@ export const translations: Record<Language, Translations> = {
     accountDetails: 'Szczegóły konta',
     accountCreated: 'Konto utworzone',
     viewProfile: 'Zobacz profil',
+    actionsRequired: 'Wymagane Działania',
+    awaitingPayment: 'Oczekiwanie na Płatność',
+    paymentReview: 'Weryfikacja Płatności',
+    processingOrder: 'Przetwarzanie',
+    fulfilled: 'Zrealizowane',
+    completeBankTransfer: 'Dokończ Przelew',
+    submitPCSCodes: 'Wyślij Kody PCS',
+    openMaxelPay: 'Otwórz MaxelPay',
+    viewInstructions: 'Zobacz Instrukcje',
+    payWithin24h: 'Zapłać w ciągu 24h, aby zarezerwować zapasy',
+    unpaidOrders: 'Nieopłacone Zamówienia',
+    paymentPending: 'Płatność Oczekuje',
+    completePayment: 'Zakończ Płatność',
+    noActionsRequired: 'Brak Wymaganych Działań',
+    allOrdersPaid: 'Wszystkie zamówienia są opłacone!',
+    createdDaysAgo: 'Utworzono {days} dzień (dni) temu',
+    createdHoursAgo: 'Utworzono {hours} godzinę (y) temu',
+    createdMinutesAgo: 'Utworzono {minutes} minutę (y) temu',
+    reserveStock: 'Zarezerwuj zapasy',
     
     // User Profile
     myAccount: 'Moje Konto',
@@ -3115,6 +3229,25 @@ export const translations: Record<Language, Translations> = {
     accountDetails: 'Dettagli del tuo account',
     accountCreated: 'Account creato',
     viewProfile: 'Vedi profilo',
+    actionsRequired: 'Azioni Richieste',
+    awaitingPayment: 'In Attesa di Pagamento',
+    paymentReview: 'Revisione Pagamento',
+    processingOrder: 'In Elaborazione',
+    fulfilled: 'Completato',
+    completeBankTransfer: 'Completa Bonifico',
+    submitPCSCodes: 'Invia Codici PCS',
+    openMaxelPay: 'Apri MaxelPay',
+    viewInstructions: 'Vedi Istruzioni',
+    payWithin24h: 'Paga entro 24h per riservare le scorte',
+    unpaidOrders: 'Ordini Non Pagati',
+    paymentPending: 'Pagamento in Sospeso',
+    completePayment: 'Completa Pagamento',
+    noActionsRequired: 'Nessuna Azione Richiesta',
+    allOrdersPaid: 'Tutti i tuoi ordini sono pagati!',
+    createdDaysAgo: 'Creato {days} giorno/i fa',
+    createdHoursAgo: 'Creato {hours} ora/e fa',
+    createdMinutesAgo: 'Creato {minutes} minuto/i fa',
+    reserveStock: 'Riserva scorte',
     
     // User Profile
     myAccount: 'Il Mio Account',
@@ -3596,6 +3729,25 @@ export const translations: Record<Language, Translations> = {
     accountDetails: 'Fiókadatok',
     accountCreated: 'Fiók létrehozva',
     viewProfile: 'Profil megtekintése',
+    actionsRequired: 'Szükséges Műveletek',
+    awaitingPayment: 'Fizetésre Várva',
+    paymentReview: 'Fizetés Felülvizsgálata',
+    processingOrder: 'Feldolgozás',
+    fulfilled: 'Teljesítve',
+    completeBankTransfer: 'Átutalás Befejezése',
+    submitPCSCodes: 'PCS Kódok Beküldése',
+    openMaxelPay: 'MaxelPay Megnyitása',
+    viewInstructions: 'Utasítások Megtekintése',
+    payWithin24h: 'Fizessen 24 órán belül a készlet lefoglalásához',
+    unpaidOrders: 'Kifizetetlen Rendelések',
+    paymentPending: 'Függőben Lévő Fizetés',
+    completePayment: 'Fizetés Befejezése',
+    noActionsRequired: 'Nincs Szükség Műveletre',
+    allOrdersPaid: 'Minden rendelés ki van fizetve!',
+    createdDaysAgo: 'Létrehozva {days} napja',
+    createdHoursAgo: 'Létrehozva {hours} órája',
+    createdMinutesAgo: 'Létrehozva {minutes} perce',
+    reserveStock: 'Készlet lefoglalása',
     
     // User Profile
     myAccount: 'Fiókom',
