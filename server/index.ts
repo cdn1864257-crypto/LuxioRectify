@@ -13,6 +13,7 @@ import bankTransferHandler from '../api/payment/bank-transfer';
 import maxelpayReturnHandler from '../api/payment/maxelpay-return';
 import maxelpayInitHandler from '../api/payment/maxelpay-init';
 import ordersHandler from '../api/orders';
+import deleteOrderHandler from '../api/orders/[orderId]';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -42,7 +43,7 @@ const convertVercelHandler = (handler: any) => {
   return (req: express.Request, res: express.Response) => {
     // Convert Express req/res to Vercel format
     const vercelReq = {
-      query: req.query,
+      query: { ...req.query, ...req.params },
       body: req.body,
       cookies: req.cookies || {},
       method: req.method,
@@ -94,6 +95,7 @@ app.use('/api/payment/maxelpay-init', convertVercelHandler(maxelpayInitHandler))
 app.use('/api/payment/maxelpay-return', convertVercelHandler(maxelpayReturnHandler));
 
 // Orders routes
+app.delete('/api/orders/:orderId', convertVercelHandler(deleteOrderHandler));
 app.use('/api/orders', convertVercelHandler(ordersHandler));
 
 // Serve static files from frontend dist in production

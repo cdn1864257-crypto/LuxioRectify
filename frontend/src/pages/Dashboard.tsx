@@ -8,6 +8,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { deleteOrder as deleteOrderFromStorage } from '@/lib/cart';
 import {
   Dialog,
   DialogContent,
@@ -39,8 +40,6 @@ import {
   CheckCircle2,
   HourglassIcon,
   Truck,
-  DollarSign,
-  ExternalLink,
   ChevronDown,
   ChevronUp,
   Home,
@@ -229,7 +228,7 @@ export default function Dashboard() {
 
   const { toast } = useToast();
 
-  const handleCancelOrder = async (orderId: string) => {
+  const handleCancelOrder = async (orderId: string, orderReference: string) => {
     setCancellingOrder(true);
     try {
       const response = await fetch(`/api/orders/${orderId}`, {
@@ -237,21 +236,33 @@ export default function Dashboard() {
         credentials: 'include',
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to cancel order');
+      const data = await response.json();
+
+      if (response.ok) {
+        deleteOrderFromStorage(orderReference);
+        
+        toast({
+          title: '✅ ' + t('orderCancelledSuccess'),
+        });
+
+        refetch();
+        setCancelModal({ open: false, order: null });
+      } else if (response.status === 500 && data.error?.includes('MongoDB')) {
+        deleteOrderFromStorage(orderReference);
+        
+        toast({
+          title: '✅ ' + t('orderCancelledSuccess'),
+        });
+
+        refetch();
+        setCancelModal({ open: false, order: null });
+      } else {
+        throw new Error(data.error || data.details || 'Failed to cancel order');
       }
-
-      toast({
-        title: t('orderCancelledSuccess'),
-        description: t('orderCancelledSuccess'),
-      });
-
-      refetch();
-      setCancelModal({ open: false, order: null });
     } catch (error) {
       toast({
-        title: t('error') || 'Error',
-        description: error instanceof Error ? error.message : 'Failed to cancel order',
+        title: t('error') || 'Erreur',
+        description: error instanceof Error ? error.message : 'Impossible d\'annuler la commande',
         variant: "destructive"
       });
     } finally {
@@ -911,7 +922,7 @@ export default function Dashboard() {
               {t('cancelAction')}
             </AlertDialogCancel>
             <AlertDialogAction
-              onClick={() => cancelModal.order && handleCancelOrder(cancelModal.order.orderId)}
+              onClick={() => cancelModal.order && handleCancelOrder(cancelModal.order.orderId, cancelModal.order.orderReference)}
               disabled={cancellingOrder}
               className="bg-red-600 hover:bg-red-700"
               data-testid="button-cancel-dialog-yes"

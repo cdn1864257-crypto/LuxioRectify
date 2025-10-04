@@ -191,6 +191,18 @@ export const saveOrder = (order: Order): void => {
   localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(orders));
 };
 
+export const deleteOrder = (orderReference: string): boolean => {
+  try {
+    const orders = loadOrders();
+    const filteredOrders = orders.filter(order => order.reference !== orderReference);
+    localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(filteredOrders));
+    return true;
+  } catch (error) {
+    console.error('Failed to delete order from localStorage:', error);
+    return false;
+  }
+};
+
 export const generateOrderReference = (): string => {
   return 'LX' + Date.now().toString().slice(-8);
 };
