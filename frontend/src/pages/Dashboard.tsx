@@ -301,15 +301,7 @@ export default function Dashboard() {
 
                     <div className="pt-2">
                       <Badge variant="secondary" className="w-full justify-center">
-                        <span>
-                          {language === 'fr' ? 'Membre Luxio' : 
-                           language === 'es' ? 'Miembro Luxio' :
-                           language === 'pt' ? 'Membro Luxio' :
-                           language === 'pl' ? 'Członek Luxio' :
-                           language === 'it' ? 'Membro Luxio' :
-                           language === 'hu' ? 'Luxio Tag' :
-                           'Luxio Member'}
-                        </span>
+                        {t('luxioMember')}
                       </Badge>
                     </div>
                   </CardContent>

@@ -305,6 +305,7 @@ export interface Translations {
   noOrders: string;
   noOrdersDescription: string;
   personalInfo: string;
+  luxioMember: string;
   accountDetails: string;
   accountCreated: string;
   viewProfile: string;
@@ -653,6 +654,7 @@ export const translations: Record<Language, Translations> = {
     noOrders: 'No orders',
     noOrdersDescription: 'You haven\'t placed any orders yet. Discover our premium product catalog!',
     personalInfo: 'Personal information',
+    luxioMember: 'Luxio Member',
     accountDetails: 'Your account details',
     accountCreated: 'Account created',
     viewProfile: 'View profile',
@@ -1107,6 +1109,7 @@ export const translations: Record<Language, Translations> = {
     noOrders: 'Aucune commande',
     noOrdersDescription: 'Vous n\'avez pas encore passé de commande. Découvrez notre catalogue de produits premium !',
     personalInfo: 'Informations personnelles',
+    luxioMember: 'Membre Luxio',
     accountDetails: 'Détails de votre compte',
     accountCreated: 'Compte créé',
     viewProfile: 'Voir le profil',
@@ -1561,6 +1564,7 @@ export const translations: Record<Language, Translations> = {
     noOrders: 'Sin pedidos',
     noOrdersDescription: '¡Aún no ha realizado ningún pedido. Descubra nuestro catálogo de productos premium!',
     personalInfo: 'Información personal',
+    luxioMember: 'Miembro Luxio',
     accountDetails: 'Detalles de su cuenta',
     accountCreated: 'Cuenta creada',
     viewProfile: 'Ver perfil',
@@ -2015,6 +2019,7 @@ export const translations: Record<Language, Translations> = {
     noOrders: 'Sem pedidos',
     noOrdersDescription: 'Ainda não fez nenhum pedido. Descubra o nosso catálogo de produtos premium!',
     personalInfo: 'Informação pessoal',
+    luxioMember: 'Membro Luxio',
     accountDetails: 'Detalhes da sua conta',
     accountCreated: 'Conta criada',
     viewProfile: 'Ver perfil',
@@ -2469,6 +2474,7 @@ export const translations: Record<Language, Translations> = {
     noOrders: 'Brak zamówień',
     noOrdersDescription: 'Nie złożyłeś jeszcze żadnego zamówienia. Odkryj nasz katalog produktów premium!',
     personalInfo: 'Informacje osobiste',
+    luxioMember: 'Członek Luxio',
     accountDetails: 'Szczegóły konta',
     accountCreated: 'Konto utworzone',
     viewProfile: 'Zobacz profil',
@@ -2923,6 +2929,7 @@ export const translations: Record<Language, Translations> = {
     noOrders: 'Nessun ordine',
     noOrdersDescription: 'Non hai ancora effettuato nessun ordine. Scopri il nostro catalogo di prodotti premium!',
     personalInfo: 'Informazioni personali',
+    luxioMember: 'Membro Luxio',
     accountDetails: 'Dettagli del tuo account',
     accountCreated: 'Account creato',
     viewProfile: 'Vedi profilo',
@@ -3377,6 +3384,7 @@ export const translations: Record<Language, Translations> = {
     noOrders: 'Nincsenek rendelések',
     noOrdersDescription: 'Még nem adott le rendelést. Fedezze fel prémium termékkatalógusunkat!',
     personalInfo: 'Személyes adatok',
+    luxioMember: 'Luxio Tag',
     accountDetails: 'Fiókadatok',
     accountCreated: 'Fiók létrehozva',
     viewProfile: 'Profil megtekintése',
