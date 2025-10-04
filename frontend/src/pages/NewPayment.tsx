@@ -50,13 +50,17 @@ export default function NewPayment() {
       return;
     }
     
-    if (cart.length === 0 && !isConfirmingOrder) {
+    if (cart.length === 0 && !isConfirmingOrder && !showBankModal) {
       navigate('/cart');
       return;
     }
-  }, [user, cart, navigate, isConfirmingOrder]);
+  }, [user, cart, navigate, isConfirmingOrder, showBankModal]);
 
-  if (!user || cart.length === 0) {
+  if (!user) {
+    return null;
+  }
+
+  if (cart.length === 0 && !isConfirmingOrder && !showBankModal) {
     return null;
   }
 
@@ -568,7 +572,13 @@ export default function NewPayment() {
         </DialogContent>
       </Dialog>
 
-      <Dialog open={showBankModal} onOpenChange={setShowBankModal}>
+      <Dialog open={showBankModal} onOpenChange={(open) => {
+        if (!open) {
+          setShowBankModal(false);
+          setIsConfirmingOrder(false);
+          navigate('/dashboard');
+        }
+      }}>
         <DialogContent className="max-w-lg" data-testid="dialog-bank-transfer">
           <DialogHeader>
             <div className="flex justify-center mb-4">
@@ -632,9 +642,10 @@ export default function NewPayment() {
               </div>
               <Button onClick={() => {
                 setShowBankModal(false);
-                navigate('/');
-              }} className="w-full">
-                {t.close}
+                setIsConfirmingOrder(false);
+                navigate('/dashboard');
+              }} className="w-full" data-testid="button-close-bank-modal">
+                Voir mes commandes
               </Button>
             </div>
           )}
