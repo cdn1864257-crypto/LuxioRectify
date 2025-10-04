@@ -154,7 +154,7 @@ export default function NewPayment() {
         clearCart();
         window.location.href = data.redirectUrl;
       } else {
-        throw new Error(data.error || 'Erreur lors de l\'initialisation du paiement');
+        throw new Error(data.error || t.paymentInitError);
       }
     } catch (error) {
       toast({
@@ -491,16 +491,16 @@ export default function NewPayment() {
             <div className="flex justify-center mb-4">
               <div className="text-3xl font-bold text-primary">Luxio</div>
             </div>
-            <DialogTitle className="text-center">Virement bancaire</DialogTitle>
+            <DialogTitle className="text-center">{t.bankTransferTitle}</DialogTitle>
             <DialogDescription className="text-center">
-              Veuillez vérifier les détails de votre virement avant de confirmer votre commande
+              {t.verifyTransferDetails}
             </DialogDescription>
           </DialogHeader>
           {bankDetails && (
             <div className="space-y-4">
               <div className="p-4 bg-accent rounded-lg space-y-3">
                 <div>
-                  <Label className="text-sm text-muted-foreground">Bénéficiaire</Label>
+                  <Label className="text-sm text-muted-foreground">{t.beneficiary}</Label>
                   <p className="font-semibold">{bankDetails.bankName}</p>
                 </div>
                 <div>
@@ -522,30 +522,30 @@ export default function NewPayment() {
                   <p className="font-mono font-semibold">{bankDetails.bic}</p>
                 </div>
                 <div>
-                  <Label className="text-sm text-muted-foreground">Référence de commande</Label>
+                  <Label className="text-sm text-muted-foreground">{t.orderReference}</Label>
                   <p className="font-semibold text-primary">{bankDetails.orderReference}</p>
                 </div>
                 <div className="pt-2 border-t">
-                  <Label className="text-sm text-muted-foreground">Montant à transférer</Label>
+                  <Label className="text-sm text-muted-foreground">{t.amountToTransfer}</Label>
                   <p className="font-bold text-2xl text-primary">{bankDetails.amount.toFixed(2)} €</p>
                 </div>
               </div>
               <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 p-3 rounded-lg">
                 <p className="text-sm text-blue-800 dark:text-blue-200 font-medium">
-                  📋 Instructions :
+                  📋 {t.instructionsLabel}
                 </p>
                 <ul className="text-sm text-blue-800 dark:text-blue-200 mt-2 space-y-1 list-disc list-inside">
-                  <li>Effectuez le virement vers le compte ci-dessus</li>
-                  <li>Indiquez bien la référence : <strong>{bankDetails.orderReference}</strong></li>
-                  <li>Vous recevrez un email de confirmation</li>
+                  <li>{t.transferInstruction1Short}</li>
+                  <li>{t.transferInstruction2Short} : <strong>{bankDetails.orderReference}</strong></li>
+                  <li>{t.emailConfirmation}</li>
                 </ul>
               </div>
               <div className="bg-yellow-50 dark:bg-yellow-950 border border-yellow-200 dark:border-yellow-800 p-3 rounded-lg space-y-2">
                 <p className="text-sm text-yellow-800 dark:text-yellow-200">
-                  <strong>✅ Virement immédiat :</strong> Livraison en 24h
+                  <strong>✅ {t.immediateTransfer} :</strong> {t.delivery24h}
                 </p>
                 <p className="text-sm text-yellow-800 dark:text-yellow-200">
-                  <strong>⏱️ Virement ordinaire :</strong> 48-72h selon votre banque
+                  <strong>⏱️ {t.standardTransfer} :</strong> {t.delivery4872h}
                 </p>
               </div>
               <div className="flex gap-3">
@@ -556,7 +556,7 @@ export default function NewPayment() {
                   disabled={isProcessing}
                   data-testid="button-cancel-bank-transfer"
                 >
-                  Non, annuler
+                  {t.noCancel}
                 </Button>
                 <Button 
                   onClick={handleBankTransferConfirm} 
@@ -564,7 +564,7 @@ export default function NewPayment() {
                   disabled={isProcessing}
                   data-testid="button-confirm-bank-transfer"
                 >
-                  {isProcessing ? 'Traitement...' : 'Oui, je procède au virement'}
+                  {isProcessing ? t.processing : t.yesProceedTransfer}
                 </Button>
               </div>
             </div>
@@ -592,12 +592,12 @@ export default function NewPayment() {
           {bankDetails && (
             <div className="space-y-4">
               <div className="text-center pb-3 border-b">
-                <Label className="text-sm text-muted-foreground">Numéro de commande</Label>
+                <Label className="text-sm text-muted-foreground">{t.orderNumber}</Label>
                 <p className="font-bold text-lg text-primary">{bankDetails.orderReference}</p>
               </div>
               <div className="p-4 bg-accent rounded-lg space-y-3">
                 <div>
-                  <Label className="text-sm text-muted-foreground">Nom</Label>
+                  <Label className="text-sm text-muted-foreground">{t.name}</Label>
                   <p className="font-semibold">{bankDetails.bankName}</p>
                 </div>
                 <div>
@@ -619,7 +619,7 @@ export default function NewPayment() {
                   <p className="font-mono font-semibold">{bankDetails.bic}</p>
                 </div>
                 <div>
-                  <Label className="text-sm text-muted-foreground">Motif</Label>
+                  <Label className="text-sm text-muted-foreground">{t.reference}</Label>
                   <p className="font-semibold text-destructive">{bankDetails.reference}</p>
                 </div>
                 <div className="pt-2 border-t">
@@ -629,15 +629,15 @@ export default function NewPayment() {
               </div>
               <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 p-3 rounded-lg space-y-2">
                 <p className="text-sm text-blue-800 dark:text-blue-200">
-                  <strong>✅ Virement immédiat :</strong> Livraison en 24h
+                  <strong>✅ {t.immediateTransfer} :</strong> {t.delivery24h}
                 </p>
                 <p className="text-sm text-blue-800 dark:text-blue-200">
-                  <strong>⏱️ Virement ordinaire :</strong> 48-72h selon votre banque
+                  <strong>⏱️ {t.standardTransfer} :</strong> {t.delivery4872h}
                 </p>
               </div>
               <div className="bg-yellow-50 dark:bg-yellow-950 border border-yellow-200 dark:border-yellow-800 p-3 rounded-lg">
                 <p className="text-sm text-yellow-800 dark:text-yellow-200 font-medium">
-                  ⚠️ Important : Indiquez bien le motif "{bankDetails.reference}" lors du virement
+                  ⚠️ {t.importantReferenceNote} "{bankDetails.reference}"
                 </p>
               </div>
               <Button onClick={() => {
@@ -645,7 +645,7 @@ export default function NewPayment() {
                 setIsConfirmingOrder(false);
                 navigate('/dashboard');
               }} className="w-full" data-testid="button-close-bank-modal">
-                Voir mes commandes
+                {t.viewMyOrders}
               </Button>
             </div>
           )}

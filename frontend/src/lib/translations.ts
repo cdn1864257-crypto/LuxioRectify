@@ -289,6 +289,26 @@ export interface Translations {
   maxelPayInstruction5: string;
   maxelPayRecommendation: string;
   
+  // Bank Transfer Modal
+  verifyTransferDetails: string;
+  amountToTransfer: string;
+  instructionsLabel: string;
+  transferInstruction1Short: string;
+  transferInstruction2Short: string;
+  immediateTransfer: string;
+  delivery24h: string;
+  standardTransfer: string;
+  delivery4872h: string;
+  noCancel: string;
+  yesProceedTransfer: string;
+  name: string;
+  reference: string;
+  importantReferenceNote: string;
+  viewMyOrders: string;
+  processing: string;
+  orderReference: string;
+  paymentInitError: string;
+  
   // Dashboard
   hello: string;
   welcomePersonalSpace: string;
@@ -637,6 +657,26 @@ export const translations: Record<Language, Translations> = {
     maxelPayInstruction4: 'Your order will be confirmed immediately after payment',
     maxelPayInstruction5: 'Secure transaction with 256-bit SSL encryption',
     maxelPayRecommendation: 'Recommended method for fast processing',
+    
+    // Bank Transfer Modal
+    verifyTransferDetails: 'Please verify your wire transfer details before confirming your order',
+    amountToTransfer: 'Amount to transfer',
+    instructionsLabel: 'Instructions:',
+    transferInstruction1Short: 'Make the transfer to the account above',
+    transferInstruction2Short: 'Be sure to indicate the reference',
+    immediateTransfer: 'Immediate transfer',
+    delivery24h: 'Delivery in 24h',
+    standardTransfer: 'Standard transfer',
+    delivery4872h: '48-72h depending on your bank',
+    noCancel: 'No, cancel',
+    yesProceedTransfer: 'Yes, I proceed with the transfer',
+    name: 'Name',
+    reference: 'Reference',
+    importantReferenceNote: 'Important: Be sure to indicate the reference',
+    viewMyOrders: 'View my orders',
+    processing: 'Processing...',
+    orderReference: 'Order reference',
+    paymentInitError: 'Error initializing payment',
     
     // Dashboard
     hello: 'Hello',
@@ -1093,6 +1133,26 @@ export const translations: Record<Language, Translations> = {
     maxelPayInstruction5: 'Transaction sécurisée avec cryptage SSL 256 bits',
     maxelPayRecommendation: 'Méthode recommandée pour un traitement rapide',
     
+    // Bank Transfer Modal
+    verifyTransferDetails: 'Veuillez vérifier les détails de votre virement avant de confirmer votre commande',
+    amountToTransfer: 'Montant à transférer',
+    instructionsLabel: 'Instructions :',
+    transferInstruction1Short: 'Effectuez le virement vers le compte ci-dessus',
+    transferInstruction2Short: 'Indiquez bien la référence',
+    immediateTransfer: 'Virement immédiat',
+    delivery24h: 'Livraison en 24h',
+    standardTransfer: 'Virement ordinaire',
+    delivery4872h: '48-72h selon votre banque',
+    noCancel: 'Non, annuler',
+    yesProceedTransfer: 'Oui, je procède au virement',
+    name: 'Nom',
+    reference: 'Motif',
+    importantReferenceNote: 'Important : Indiquez bien le motif',
+    viewMyOrders: 'Voir mes commandes',
+    processing: 'Traitement...',
+    orderReference: 'Référence de commande',
+    paymentInitError: 'Erreur lors de l\'initialisation du paiement',
+    
     // Dashboard
     hello: 'Bonjour',
     welcomePersonalSpace: 'Bienvenue dans votre espace personnel Luxio',
@@ -1547,6 +1607,26 @@ export const translations: Record<Language, Translations> = {
     maxelPayInstruction4: 'Su pedido será confirmado inmediatamente después del pago',
     maxelPayInstruction5: 'Transacción segura con encriptación SSL de 256 bits',
     maxelPayRecommendation: 'Método recomendado para procesamiento rápido',
+    
+    // Bank Transfer Modal
+    verifyTransferDetails: 'Por favor verifique los detalles de su transferencia antes de confirmar su pedido',
+    amountToTransfer: 'Monto a transferir',
+    instructionsLabel: 'Instrucciones:',
+    transferInstruction1Short: 'Realice la transferencia a la cuenta indicada arriba',
+    transferInstruction2Short: 'Asegúrese de indicar la referencia',
+    immediateTransfer: 'Transferencia inmediata',
+    delivery24h: 'Entrega en 24h',
+    standardTransfer: 'Transferencia estándar',
+    delivery4872h: '48-72h según su banco',
+    noCancel: 'No, cancelar',
+    yesProceedTransfer: 'Sí, procedo con la transferencia',
+    name: 'Nombre',
+    reference: 'Referencia',
+    importantReferenceNote: 'Importante: Asegúrese de indicar la referencia',
+    viewMyOrders: 'Ver mis pedidos',
+    processing: 'Procesando...',
+    orderReference: 'Referencia del pedido',
+    paymentInitError: 'Error al inicializar el pago',
     
     // Dashboard
     hello: 'Hola',
@@ -2003,6 +2083,26 @@ export const translations: Record<Language, Translations> = {
     maxelPayInstruction5: 'Transação segura com criptografia SSL de 256 bits',
     maxelPayRecommendation: 'Método recomendado para processamento rápido',
     
+    // Bank Transfer Modal
+    verifyTransferDetails: 'Por favor verifique os detalhes da sua transferência antes de confirmar o pedido',
+    amountToTransfer: 'Montante a transferir',
+    instructionsLabel: 'Instruções:',
+    transferInstruction1Short: 'Realize a transferência para a conta indicada acima',
+    transferInstruction2Short: 'Certifique-se de indicar a referência',
+    immediateTransfer: 'Transferência imediata',
+    delivery24h: 'Entrega em 24h',
+    standardTransfer: 'Transferência padrão',
+    delivery4872h: '48-72h dependendo do seu banco',
+    noCancel: 'Não, cancelar',
+    yesProceedTransfer: 'Sim, procedo com a transferência',
+    name: 'Nome',
+    reference: 'Motivo',
+    importantReferenceNote: 'Importante: Certifique-se de indicar o motivo',
+    viewMyOrders: 'Ver meus pedidos',
+    processing: 'Processando...',
+    orderReference: 'Referência do pedido',
+    paymentInitError: 'Erro ao inicializar o pagamento',
+    
     // Dashboard
     hello: 'Olá',
     welcomePersonalSpace: 'Bem-vindo ao seu espaço pessoal Luxio',
@@ -2457,6 +2557,26 @@ export const translations: Record<Language, Translations> = {
     maxelPayInstruction4: 'Twoje zamówienie zostanie potwierdzone natychmiast po płatności',
     maxelPayInstruction5: 'Bezpieczna transakcja z szyfrowaniem SSL 256-bit',
     maxelPayRecommendation: 'Zalecana metoda szybkiego przetwarzania',
+    
+    // Bank Transfer Modal
+    verifyTransferDetails: 'Prosimy zweryfikować szczegóły przelewu przed potwierdzeniem zamówienia',
+    amountToTransfer: 'Kwota do przelewu',
+    instructionsLabel: 'Instrukcje:',
+    transferInstruction1Short: 'Wykonaj przelew na wskazany powyżej rachunek',
+    transferInstruction2Short: 'Upewnij się, że podałeś odniesienie',
+    immediateTransfer: 'Przelew natychmiastowy',
+    delivery24h: 'Dostawa w 24h',
+    standardTransfer: 'Przelew standardowy',
+    delivery4872h: '48-72h w zależności od banku',
+    noCancel: 'Nie, anuluj',
+    yesProceedTransfer: 'Tak, przystępuję do przelewu',
+    name: 'Nazwa',
+    reference: 'Odniesienie',
+    importantReferenceNote: 'Ważne: Upewnij się, że podałeś odniesienie',
+    viewMyOrders: 'Zobacz moje zamówienia',
+    processing: 'Przetwarzanie...',
+    orderReference: 'Numer zamówienia',
+    paymentInitError: 'Błąd inicjalizacji płatności',
     
     // Dashboard
     hello: 'Cześć',
@@ -2913,6 +3033,26 @@ export const translations: Record<Language, Translations> = {
     maxelPayInstruction5: 'Transazione sicura con crittografia SSL a 256 bit',
     maxelPayRecommendation: 'Metodo consigliato per elaborazione rapida',
     
+    // Bank Transfer Modal
+    verifyTransferDetails: 'Si prega di verificare i dettagli del bonifico prima di confermare l\'ordine',
+    amountToTransfer: 'Importo da trasferire',
+    instructionsLabel: 'Istruzioni:',
+    transferInstruction1Short: 'Effettuare il bonifico sul conto indicato sopra',
+    transferInstruction2Short: 'Assicurarsi di indicare il riferimento',
+    immediateTransfer: 'Bonifico immediato',
+    delivery24h: 'Consegna in 24h',
+    standardTransfer: 'Bonifico standard',
+    delivery4872h: '48-72h a seconda della banca',
+    noCancel: 'No, annulla',
+    yesProceedTransfer: 'Sì, procedo con il bonifico',
+    name: 'Nome',
+    reference: 'Riferimento',
+    importantReferenceNote: 'Importante: Assicurarsi di indicare il riferimento',
+    viewMyOrders: 'Visualizza i miei ordini',
+    processing: 'Elaborazione...',
+    orderReference: 'Riferimento ordine',
+    paymentInitError: 'Errore nell\'inizializzazione del pagamento',
+    
     // Dashboard
     hello: 'Ciao',
     welcomePersonalSpace: 'Benvenuto nel tuo spazio personale Luxio',
@@ -3367,6 +3507,26 @@ export const translations: Record<Language, Translations> = {
     maxelPayInstruction4: 'Rendelése azonnal megerősítésre kerül fizetés után',
     maxelPayInstruction5: 'Biztonságos tranzakció 256 bites SSL titkosítással',
     maxelPayRecommendation: 'Ajánlott módszer a gyors feldolgozáshoz',
+    
+    // Bank Transfer Modal
+    verifyTransferDetails: 'Kérjük, ellenőrizze az átutalás részleteit mielőtt megerősíti a rendelést',
+    amountToTransfer: 'Átutalandó összeg',
+    instructionsLabel: 'Utasítások:',
+    transferInstruction1Short: 'Végezze el az átutalást a fent megadott számlára',
+    transferInstruction2Short: 'Ügyeljen arra, hogy megadja a hivatkozást',
+    immediateTransfer: 'Azonnali átutalás',
+    delivery24h: 'Kézbesítés 24 órán belül',
+    standardTransfer: 'Normál átutalás',
+    delivery4872h: '48-72 óra banktól függően',
+    noCancel: 'Nem, mégse',
+    yesProceedTransfer: 'Igen, folytatom az átutalást',
+    name: 'Név',
+    reference: 'Hivatkozás',
+    importantReferenceNote: 'Fontos: Ügyeljen arra, hogy megadja a hivatkozást',
+    viewMyOrders: 'Rendeléseim megtekintése',
+    processing: 'Feldolgozás...',
+    orderReference: 'Rendelési hivatkozás',
+    paymentInitError: 'Hiba a fizetés inicializálása során',
     
     // Dashboard
     hello: 'Helló',
