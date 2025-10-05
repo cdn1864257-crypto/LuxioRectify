@@ -754,13 +754,310 @@ ${t.team_signature}
 
 export async function sendWelcomeEmail(
   userEmail: string,
-  firstName: string
+  firstName: string,
+  language?: string
 ): Promise<boolean> {
+  const lang = language?.toLowerCase() || 'fr';
+  const validLanguages = ['fr', 'en', 'es', 'pt', 'pl', 'hu'];
+  const emailLang = validLanguages.includes(lang) ? lang : 'fr';
   const dashboardUrl = process.env.REPLIT_DEV_DOMAIN || 'https://luxio-shop.com';
+  
+  // Traductions pour l'email de bienvenue
+  const welcomeTranslations: Record<string, {
+    title: string;
+    subtitle: string;
+    greeting: string;
+    intro: string;
+    highlights: string[];
+    sections: Array<{
+      icon: string;
+      title: string;
+      description: string;
+      linkText: string;
+      linkUrl: string;
+    }>;
+    ctaButton: string;
+    helpText: string;
+    footerNote: string;
+    teamSignature: string;
+  }> = {
+    fr: {
+      title: 'Bienvenue chez Luxio ! 🎉',
+      subtitle: 'DÉCOUVREZ L\'EXCELLENCE TECH À PRIX IMBATTABLES',
+      greeting: `Bonjour <strong>${firstName}</strong>,`,
+      intro: 'Nous sommes ravis de vous accueillir dans la famille Luxio ! Vous venez de rejoindre <strong>la boutique en ligne de référence</strong> pour les passionnés de technologie et de mode. Chez Luxio, nous croyons que tout le monde mérite d\'accéder aux meilleurs produits.',
+      highlights: [
+        'Réductions jusqu\'à 37% sur une sélection de produits',
+        'Livraison gratuite et garantie 2 ans',
+        'Paiement sécurisé avec plusieurs options'
+      ],
+      sections: [
+        {
+          icon: '📱',
+          title: 'Smartphones Premium',
+          description: 'Découvrez les derniers iPhone 17, Samsung Galaxy S25, Google Pixel et bien plus encore. Tous les modèles, toutes les couleurs, au meilleur prix.',
+          linkText: 'Voir les smartphones →',
+          linkUrl: `${dashboardUrl}/premium`
+        },
+        {
+          icon: '⌚',
+          title: 'Montres Connectées',
+          description: 'Apple Watch, Samsung Galaxy Watch, montres de luxe TAG Heuer... Restez connecté avec style grâce à notre sélection exclusive.',
+          linkText: 'Découvrir les montres →',
+          linkUrl: `${dashboardUrl}/watches`
+        },
+        {
+          icon: '👟',
+          title: 'Sneakers & Mode',
+          description: 'Nike, Adidas, New Balance, Yeezy... Les sneakers les plus recherchées pour compléter votre style urbain.',
+          linkText: 'Explorer les sneakers →',
+          linkUrl: `${dashboardUrl}/sneakers`
+        },
+        {
+          icon: '🏠',
+          title: 'Gadgets High-Tech',
+          description: 'Drones, trottinettes électriques, écouteurs sans fil, objets connectés... Tous les gadgets tendance pour faciliter votre quotidien.',
+          linkText: 'Voir les gadgets →',
+          linkUrl: `${dashboardUrl}/home-gadgets`
+        }
+      ],
+      ctaButton: 'Commencer mes achats',
+      helpText: 'Vous avez des questions ? Notre équipe est là pour vous aider à trouver les produits parfaits qui correspondent à vos besoins et à votre budget.',
+      footerNote: 'Cet email a été envoyé automatiquement. Merci de ne pas y répondre directement.',
+      teamSignature: '— Équipe Luxio – Service Client'
+    },
+    en: {
+      title: 'Welcome to Luxio! 🎉',
+      subtitle: 'DISCOVER TECH EXCELLENCE AT UNBEATABLE PRICES',
+      greeting: `Hello <strong>${firstName}</strong>,`,
+      intro: 'We\'re thrilled to welcome you to the Luxio family! You\'ve just joined <strong>the leading online store</strong> for tech and fashion enthusiasts. At Luxio, we believe everyone deserves access to the best products.',
+      highlights: [
+        'Discounts up to 37% on selected products',
+        'Free shipping and 2-year warranty',
+        'Secure payment with multiple options'
+      ],
+      sections: [
+        {
+          icon: '📱',
+          title: 'Premium Smartphones',
+          description: 'Discover the latest iPhone 17, Samsung Galaxy S25, Google Pixel and much more. All models, all colors, at the best price.',
+          linkText: 'View smartphones →',
+          linkUrl: `${dashboardUrl}/premium`
+        },
+        {
+          icon: '⌚',
+          title: 'Smart Watches',
+          description: 'Apple Watch, Samsung Galaxy Watch, luxury TAG Heuer watches... Stay connected in style with our exclusive selection.',
+          linkText: 'Discover watches →',
+          linkUrl: `${dashboardUrl}/watches`
+        },
+        {
+          icon: '👟',
+          title: 'Sneakers & Fashion',
+          description: 'Nike, Adidas, New Balance, Yeezy... The most sought-after sneakers to complete your urban style.',
+          linkText: 'Explore sneakers →',
+          linkUrl: `${dashboardUrl}/sneakers`
+        },
+        {
+          icon: '🏠',
+          title: 'High-Tech Gadgets',
+          description: 'Drones, electric scooters, wireless earbuds, smart devices... All the trending gadgets to simplify your daily life.',
+          linkText: 'View gadgets →',
+          linkUrl: `${dashboardUrl}/home-gadgets`
+        }
+      ],
+      ctaButton: 'Start Shopping',
+      helpText: 'Have questions? Our team is here to help you find the perfect products that match your needs and budget.',
+      footerNote: 'This email was sent automatically. Please do not reply directly.',
+      teamSignature: '— Luxio Support Team'
+    },
+    es: {
+      title: '¡Bienvenido a Luxio! 🎉',
+      subtitle: 'DESCUBRE LA EXCELENCIA TECH A PRECIOS INMEJORABLES',
+      greeting: `Hola <strong>${firstName}</strong>,`,
+      intro: '¡Estamos encantados de darte la bienvenida a la familia Luxio! Acabas de unirte a <strong>la tienda online de referencia</strong> para los apasionados de la tecnología y la moda. En Luxio, creemos que todos merecen acceder a los mejores productos.',
+      highlights: [
+        'Descuentos hasta el 37% en productos seleccionados',
+        'Envío gratis y garantía de 2 años',
+        'Pago seguro con múltiples opciones'
+      ],
+      sections: [
+        {
+          icon: '📱',
+          title: 'Smartphones Premium',
+          description: 'Descubre los últimos iPhone 17, Samsung Galaxy S25, Google Pixel y mucho más. Todos los modelos, todos los colores, al mejor precio.',
+          linkText: 'Ver smartphones →',
+          linkUrl: `${dashboardUrl}/premium`
+        },
+        {
+          icon: '⌚',
+          title: 'Relojes Inteligentes',
+          description: 'Apple Watch, Samsung Galaxy Watch, relojes de lujo TAG Heuer... Mantente conectado con estilo con nuestra selección exclusiva.',
+          linkText: 'Descubrir relojes →',
+          linkUrl: `${dashboardUrl}/watches`
+        },
+        {
+          icon: '👟',
+          title: 'Sneakers & Moda',
+          description: 'Nike, Adidas, New Balance, Yeezy... Las sneakers más buscadas para completar tu estilo urbano.',
+          linkText: 'Explorar sneakers →',
+          linkUrl: `${dashboardUrl}/sneakers`
+        },
+        {
+          icon: '🏠',
+          title: 'Gadgets High-Tech',
+          description: 'Drones, patinetes eléctricos, auriculares inalámbricos, dispositivos inteligentes... Todos los gadgets de moda para facilitar tu día a día.',
+          linkText: 'Ver gadgets →',
+          linkUrl: `${dashboardUrl}/home-gadgets`
+        }
+      ],
+      ctaButton: 'Empezar a Comprar',
+      helpText: '¿Tienes preguntas? Nuestro equipo está aquí para ayudarte a encontrar los productos perfectos que se adapten a tus necesidades y presupuesto.',
+      footerNote: 'Este correo fue enviado automáticamente. Por favor, no responda directamente.',
+      teamSignature: '— Equipo de Soporte Luxio'
+    },
+    pt: {
+      title: 'Bem-vindo ao Luxio! 🎉',
+      subtitle: 'DESCUBRA A EXCELÊNCIA TECH A PREÇOS IMBATÍVEIS',
+      greeting: `Olá <strong>${firstName}</strong>,`,
+      intro: 'Estamos muito felizes em recebê-lo na família Luxio! Você acabou de se juntar à <strong>loja online de referência</strong> para apaixonados por tecnologia e moda. Na Luxio, acreditamos que todos merecem acesso aos melhores produtos.',
+      highlights: [
+        'Descontos de até 37% em produtos selecionados',
+        'Frete grátis e garantia de 2 anos',
+        'Pagamento seguro com múltiplas opções'
+      ],
+      sections: [
+        {
+          icon: '📱',
+          title: 'Smartphones Premium',
+          description: 'Descubra os últimos iPhone 17, Samsung Galaxy S25, Google Pixel e muito mais. Todos os modelos, todas as cores, ao melhor preço.',
+          linkText: 'Ver smartphones →',
+          linkUrl: `${dashboardUrl}/premium`
+        },
+        {
+          icon: '⌚',
+          title: 'Relógios Inteligentes',
+          description: 'Apple Watch, Samsung Galaxy Watch, relógios de luxo TAG Heuer... Fique conectado com estilo com nossa seleção exclusiva.',
+          linkText: 'Descobrir relógios →',
+          linkUrl: `${dashboardUrl}/watches`
+        },
+        {
+          icon: '👟',
+          title: 'Tênis & Moda',
+          description: 'Nike, Adidas, New Balance, Yeezy... Os tênis mais procurados para completar seu estilo urbano.',
+          linkText: 'Explorar tênis →',
+          linkUrl: `${dashboardUrl}/sneakers`
+        },
+        {
+          icon: '🏠',
+          title: 'Gadgets High-Tech',
+          description: 'Drones, patinetes elétricos, fones sem fio, dispositivos inteligentes... Todos os gadgets em alta para facilitar seu dia a dia.',
+          linkText: 'Ver gadgets →',
+          linkUrl: `${dashboardUrl}/home-gadgets`
+        }
+      ],
+      ctaButton: 'Começar a Comprar',
+      helpText: 'Tem dúvidas? Nossa equipe está aqui para ajudá-lo a encontrar os produtos perfeitos que atendam às suas necessidades e orçamento.',
+      footerNote: 'Este e-mail foi enviado automaticamente. Por favor, não responda diretamente.',
+      teamSignature: '— Equipe de Suporte Luxio'
+    },
+    pl: {
+      title: 'Witamy w Luxio! 🎉',
+      subtitle: 'ODKRYJ DOSKONAŁOŚĆ TECH W NIEZRÓWNANYCH CENACH',
+      greeting: `Witaj <strong>${firstName}</strong>,`,
+      intro: 'Cieszymy się, że możemy powitać Cię w rodzinie Luxio! Właśnie dołączyłeś do <strong>wiodącego sklepu internetowego</strong> dla pasjonatów technologii i mody. W Luxio wierzymy, że każdy zasługuje na dostęp do najlepszych produktów.',
+      highlights: [
+        'Rabaty do 37% na wybrane produkty',
+        'Darmowa dostawa i 2-letnia gwarancja',
+        'Bezpieczna płatność z wieloma opcjami'
+      ],
+      sections: [
+        {
+          icon: '📱',
+          title: 'Smartfony Premium',
+          description: 'Odkryj najnowsze iPhone 17, Samsung Galaxy S25, Google Pixel i wiele więcej. Wszystkie modele, wszystkie kolory, w najlepszej cenie.',
+          linkText: 'Zobacz smartfony →',
+          linkUrl: `${dashboardUrl}/premium`
+        },
+        {
+          icon: '⌚',
+          title: 'Smartwatche',
+          description: 'Apple Watch, Samsung Galaxy Watch, luksusowe zegarki TAG Heuer... Pozostań w kontakcie ze stylem dzięki naszej ekskluzywnej ofercie.',
+          linkText: 'Odkryj zegarki →',
+          linkUrl: `${dashboardUrl}/watches`
+        },
+        {
+          icon: '👟',
+          title: 'Sneakersy i Moda',
+          description: 'Nike, Adidas, New Balance, Yeezy... Najbardziej poszukiwane sneakersy, aby dopełnić Twój miejski styl.',
+          linkText: 'Odkryj sneakersy →',
+          linkUrl: `${dashboardUrl}/sneakers`
+        },
+        {
+          icon: '🏠',
+          title: 'Gadżety High-Tech',
+          description: 'Drony, hulajnogi elektryczne, słuchawki bezprzewodowe, inteligentne urządzenia... Wszystkie modne gadżety ułatwiające codzienne życie.',
+          linkText: 'Zobacz gadżety →',
+          linkUrl: `${dashboardUrl}/home-gadgets`
+        }
+      ],
+      ctaButton: 'Rozpocznij Zakupy',
+      helpText: 'Masz pytania? Nasz zespół jest tu, aby pomóc Ci znaleźć idealne produkty odpowiadające Twoim potrzebom i budżetowi.',
+      footerNote: 'Ten e-mail został wysłany automatycznie. Prosimy nie odpowiadać bezpośrednio.',
+      teamSignature: '— Zespół Wsparcia Luxio'
+    },
+    hu: {
+      title: 'Üdvözlünk a Luxio-ban! 🎉',
+      subtitle: 'FEDEZD FEL A TECH KIVÁLÓSÁGOT VERHETETLEN ÁRAKON',
+      greeting: `Szia <strong>${firstName}</strong>,`,
+      intro: 'Örömmel üdvözlünk a Luxio családban! Most csatlakoztál a <strong>vezető online áruházhoz</strong> a technológia és divat rajongóinak. A Luxio-nál hiszünk abban, hogy mindenki megérdemli a hozzáférést a legjobb termékekhez.',
+      highlights: [
+        'Akár 37%-os kedvezmények kiválasztott termékekre',
+        'Ingyenes szállítás és 2 éves garancia',
+        'Biztonságos fizetés több opcióval'
+      ],
+      sections: [
+        {
+          icon: '📱',
+          title: 'Prémium Okostelefonok',
+          description: 'Fedezd fel a legújabb iPhone 17, Samsung Galaxy S25, Google Pixel és még sok más. Minden modell, minden szín, a legjobb áron.',
+          linkText: 'Okostelefonok megtekintése →',
+          linkUrl: `${dashboardUrl}/premium`
+        },
+        {
+          icon: '⌚',
+          title: 'Okosórák',
+          description: 'Apple Watch, Samsung Galaxy Watch, luxus TAG Heuer órák... Maradj kapcsolatban stílusosan exkluzív kínálatunkkal.',
+          linkText: 'Órák felfedezése →',
+          linkUrl: `${dashboardUrl}/watches`
+        },
+        {
+          icon: '👟',
+          title: 'Tornacipők és Divat',
+          description: 'Nike, Adidas, New Balance, Yeezy... A legkeresettebb tornacipők, hogy kiegészítsd városi stílusodat.',
+          linkText: 'Tornacipők felfedezése →',
+          linkUrl: `${dashboardUrl}/sneakers`
+        },
+        {
+          icon: '🏠',
+          title: 'High-Tech Kütyük',
+          description: 'Drónok, elektromos rollerek, vezeték nélküli fülhallgatók, okos eszközök... Minden trendi kütyü, hogy megkönnyítsd mindennapodat.',
+          linkText: 'Kütyük megtekintése →',
+          linkUrl: `${dashboardUrl}/home-gadgets`
+        }
+      ],
+      ctaButton: 'Vásárlás Kezdése',
+      helpText: 'Kérdésed van? Csapatunk itt van, hogy segítsünk megtalálni a tökéletes termékeket, amelyek megfelelnek igényeidnek és költségvetésednek.',
+      footerNote: 'Ez az e-mail automatikusan lett elküldve. Kérjük, ne válaszolj közvetlenül.',
+      teamSignature: '— Luxio Támogatási Csapat'
+    }
+  };
+
+  const content = welcomeTranslations[emailLang] || welcomeTranslations.fr;
   
   const htmlContent = `
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="${emailLang}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -923,101 +1220,57 @@ export async function sendWelcomeEmail(
     </div>
     
     <div class="banner">
-      <h1>Bienvenue chez Luxio ! 🎉</h1>
-      <p>DÉCOUVREZ L'EXCELLENCE TECH À PRIX IMBATTABLES</p>
+      <h1>${content.title}</h1>
+      <p>${content.subtitle}</p>
     </div>
     
     <div class="content">
-      <p class="greeting">Bonjour <strong>${firstName}</strong>,</p>
+      <p class="greeting">${content.greeting}</p>
       
       <p class="intro-text">
-        Nous sommes ravis de vous accueillir dans la famille Luxio ! Vous venez de rejoindre 
-        <strong>la boutique en ligne de référence</strong> pour les passionnés de technologie et de mode. 
-        Chez Luxio, nous croyons que tout le monde mérite d'accéder aux meilleurs produits.
+        ${content.intro}
       </p>
 
       <div class="highlights">
+        ${content.highlights.map(highlight => `
         <div class="highlight-item">
           <span class="highlight-icon">✓</span>
-          <span>Réductions jusqu'à 37% sur une sélection de produits</span>
+          <span>${highlight}</span>
         </div>
-        <div class="highlight-item">
-          <span class="highlight-icon">✓</span>
-          <span>Livraison gratuite et garantie 2 ans</span>
-        </div>
-        <div class="highlight-item">
-          <span class="highlight-icon">✓</span>
-          <span>Paiement sécurisé avec plusieurs options</span>
-        </div>
+        `).join('')}
       </div>
 
+      ${content.sections.map(section => `
       <div class="feature-section">
         <div class="feature-title">
-          <span class="feature-icon">📱</span>
-          <span>Smartphones Premium</span>
+          <span class="feature-icon">${section.icon}</span>
+          <span>${section.title}</span>
         </div>
         <p class="feature-description">
-          Découvrez les derniers iPhone 17, Samsung Galaxy S25, Google Pixel et bien plus encore. 
-          Tous les modèles, toutes les couleurs, au meilleur prix.
+          ${section.description}
         </p>
-        <a href="${dashboardUrl}/premium" class="feature-link">Voir les smartphones →</a>
+        <a href="${section.linkUrl}" class="feature-link">${section.linkText}</a>
       </div>
-
-      <div class="feature-section">
-        <div class="feature-title">
-          <span class="feature-icon">⌚</span>
-          <span>Montres Connectées</span>
-        </div>
-        <p class="feature-description">
-          Apple Watch, Samsung Galaxy Watch, montres de luxe TAG Heuer... 
-          Restez connecté avec style grâce à notre sélection exclusive.
-        </p>
-        <a href="${dashboardUrl}/watches" class="feature-link">Découvrir les montres →</a>
-      </div>
-
-      <div class="feature-section">
-        <div class="feature-title">
-          <span class="feature-icon">👟</span>
-          <span>Sneakers & Mode</span>
-        </div>
-        <p class="feature-description">
-          Nike, Adidas, New Balance, Yeezy... Les sneakers les plus recherchées 
-          pour compléter votre style urbain.
-        </p>
-        <a href="${dashboardUrl}/sneakers" class="feature-link">Explorer les sneakers →</a>
-      </div>
-
-      <div class="feature-section">
-        <div class="feature-title">
-          <span class="feature-icon">🏠</span>
-          <span>Gadgets High-Tech</span>
-        </div>
-        <p class="feature-description">
-          Drones, trottinettes électriques, écouteurs sans fil, objets connectés... 
-          Tous les gadgets tendance pour faciliter votre quotidien.
-        </p>
-        <a href="${dashboardUrl}/home-gadgets" class="feature-link">Voir les gadgets →</a>
-      </div>
+      `).join('')}
 
       <div style="text-align: center; margin: 35px 0;">
         <a href="${dashboardUrl}" class="cta-button">
-          Commencer mes achats
+          ${content.ctaButton}
         </a>
       </div>
 
       <p style="color: #6b7280; font-size: 14px; line-height: 1.6; margin-top: 30px;">
-        Vous avez des questions ? Notre équipe est là pour vous aider à trouver les produits parfaits 
-        qui correspondent à vos besoins et à votre budget.
+        ${content.helpText}
       </p>
     </div>
     
     <div class="footer">
       <p><strong>Luxio</strong></p>
       <p class="footer-note">
-        Cet email a été envoyé automatiquement. Merci de ne pas y répondre directement.
+        ${content.footerNote}
       </p>
       <p style="margin-top: 10px;">
-        — Équipe Luxio – Service Client
+        ${content.teamSignature}
       </p>
     </div>
   </div>
@@ -1026,40 +1279,33 @@ export async function sendWelcomeEmail(
   `.trim();
 
   const textContent = `
-Bienvenue chez Luxio ! 🎉
+${content.title}
 
-Bonjour ${firstName},
+${content.greeting.replace(/<[^>]*>/g, '')}
 
-Nous sommes ravis de vous accueillir dans la famille Luxio ! Vous venez de rejoindre la boutique en ligne de référence pour les passionnés de technologie et de mode.
+${content.intro.replace(/<[^>]*>/g, '')}
 
-✓ Réductions jusqu'à 37% sur une sélection de produits
-✓ Livraison gratuite et garantie 2 ans
-✓ Paiement sécurisé avec plusieurs options
+${content.highlights.map(h => `✓ ${h}`).join('\n')}
 
-📱 Smartphones Premium
-Découvrez les derniers iPhone 17, Samsung Galaxy S25, Google Pixel et bien plus encore.
-Voir: ${dashboardUrl}/premium
+${content.sections.map(s => `
+${s.icon} ${s.title}
+${s.description}
+${s.linkText}: ${s.linkUrl}
+`).join('\n')}
 
-⌚ Montres Connectées
-Apple Watch, Samsung Galaxy Watch, montres de luxe TAG Heuer...
-Voir: ${dashboardUrl}/watches
+${content.ctaButton}: ${dashboardUrl}
 
-👟 Sneakers & Mode
-Nike, Adidas, New Balance, Yeezy... Les sneakers les plus recherchées.
-Voir: ${dashboardUrl}/sneakers
+${content.helpText}
 
-🏠 Gadgets High-Tech
-Drones, trottinettes électriques, écouteurs sans fil, objets connectés...
-Voir: ${dashboardUrl}/home-gadgets
-
-Commencer mes achats : ${dashboardUrl}
-
-— Équipe Luxio – Service Client
+${content.footerNote}
+${content.teamSignature}
   `.trim();
 
+  const emailSubject = content.title;
+  
   return sendEmail({
     to: userEmail,
-    subject: "Bienvenue chez Luxio ! 🎉",
+    subject: emailSubject,
     html: htmlContent,
     text: textContent,
     from: DEFAULT_FROM

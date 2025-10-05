@@ -29,6 +29,7 @@ interface SignupData {
   phone: string;
   email: string;
   password: string;
+  language?: string;
 }
 
 async function handler(req: VercelRequest, res: VercelResponse) {
@@ -38,7 +39,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { firstName, lastName, country, city, address, phone, email, password }: SignupData = req.body;
+    const { firstName, lastName, country, city, address, phone, email, password, language }: SignupData = req.body;
 
     // Vérification que les champs obligatoires sont remplis
     if (!firstName || !lastName || !email || !password) {
@@ -87,6 +88,12 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       // Hashage du mot de passe avec bcrypt (10 rounds de salting)
       const hashedPassword = await bcrypt.hash(password, 10);
 
+      // Validation et normalisation de la langue
+      const validLanguages = ['fr', 'en', 'es', 'pt', 'pl', 'hu'];
+      const userLanguage = language && validLanguages.includes(language.toLowerCase()) 
+        ? language.toLowerCase() 
+        : 'fr';
+
       // Création de l'utilisateur
       const newUser = {
         firstName,
@@ -97,6 +104,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         phone: phone || '',
         email: email.toLowerCase(),
         password: hashedPassword,
+        language: userLanguage,
         createdAt: new Date(),
         updatedAt: new Date()
       };
@@ -116,8 +124,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         createdAt: newUser.createdAt
       };
 
-      // Envoyer l'email de bienvenue (sans bloquer la réponse)
-      sendWelcomeEmail(email.toLowerCase(), firstName).catch((error: Error) => {
+      // Envoyer l'email de bienvenue dans la langue de l'utilisateur (sans bloquer la réponse)
+      sendWelcomeEmail(email.toLowerCase(), firstName, userLanguage).catch((error: Error) => {
         console.error('Erreur lors de l\'envoi de l\'email de bienvenue:', error);
       });
 
