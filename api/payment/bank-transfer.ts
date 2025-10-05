@@ -78,6 +78,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
       const db = client.db('luxio');
       const ordersCollection = db.collection('bank_transfer_orders');
+      const usersCollection = db.collection('users');
+
+      // Récupérer la langue de l'utilisateur
+      const user = await usersCollection.findOne({ email: customerEmail.toLowerCase() });
+      const userLanguage = user?.language || 'fr';
 
       const orderReference = generateOrderReference();
 
@@ -89,6 +94,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         orderReference,
         paymentMethod: 'bank_transfer',
         status: 'pending',
+        language: userLanguage,
         createdAt: new Date(),
         updatedAt: new Date()
       };
@@ -106,7 +112,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         iban: 'ES6115632626383268707364',
         bic: 'NTSBESM1XXX',
         reference: `Dépôt+${customerName}`,
-        cartItems
+        cartItems,
+        language: userLanguage
       };
 
       Promise.all([
