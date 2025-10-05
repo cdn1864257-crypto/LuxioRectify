@@ -4039,21 +4039,55 @@ export const translations: Record<Language, Translations> = {
   }
 };
 
+const countryToLanguageMap: { [key: string]: Language } = {
+  FR: 'fr',
+  ES: 'es',
+  PT: 'pt',
+  PL: 'pl',
+  IT: 'it',
+  HU: 'hu',
+};
+
+async function detectLanguageFromIP(): Promise<Language | null> {
+  try {
+    const cachedCountry = sessionStorage.getItem('luxio-detected-country');
+    let countryCode: string;
+
+    if (cachedCountry) {
+      countryCode = cachedCountry;
+    } else {
+      const response = await fetch('https://ipapi.co/country_code/', {
+        method: 'GET',
+        headers: { 'Accept': 'text/plain' }
+      });
+
+      if (!response.ok) {
+        return null;
+      }
+
+      countryCode = (await response.text()).trim();
+      sessionStorage.setItem('luxio-detected-country', countryCode);
+    }
+
+    return countryToLanguageMap[countryCode] || 'en';
+  } catch (error) {
+    console.warn('Failed to detect language from IP:', error);
+    return null;
+  }
+}
+
 export function detectLanguage(): Language {
-  // Check URL parameter
   const urlParams = new URLSearchParams(window.location.search);
   const langParam = urlParams.get('lang') as Language;
   if (langParam && ['en', 'fr', 'es', 'pt', 'pl', 'it', 'hu'].includes(langParam)) {
     return langParam;
   }
 
-  // Check localStorage
   const storedLang = localStorage.getItem('luxio-language') as Language;
   if (storedLang && ['en', 'fr', 'es', 'pt', 'pl', 'it', 'hu'].includes(storedLang)) {
     return storedLang;
   }
 
-  // Check browser language
   const browserLang = navigator.language.toLowerCase();
   if (browserLang.startsWith('fr')) return 'fr';
   if (browserLang.startsWith('es')) return 'es';
@@ -4062,6 +4096,33 @@ export function detectLanguage(): Language {
   if (browserLang.startsWith('it')) return 'it';
   if (browserLang.startsWith('hu')) return 'hu';
 
-  // Default to English
+  return 'en';
+}
+
+export async function detectLanguageAsync(): Promise<Language> {
+  const urlParams = new URLSearchParams(window.location.search);
+  const langParam = urlParams.get('lang') as Language;
+  if (langParam && ['en', 'fr', 'es', 'pt', 'pl', 'it', 'hu'].includes(langParam)) {
+    return langParam;
+  }
+
+  const storedLang = localStorage.getItem('luxio-language') as Language;
+  if (storedLang && ['en', 'fr', 'es', 'pt', 'pl', 'it', 'hu'].includes(storedLang)) {
+    return storedLang;
+  }
+
+  const ipLang = await detectLanguageFromIP();
+  if (ipLang) {
+    return ipLang;
+  }
+
+  const browserLang = navigator.language.toLowerCase();
+  if (browserLang.startsWith('fr')) return 'fr';
+  if (browserLang.startsWith('es')) return 'es';
+  if (browserLang.startsWith('pt')) return 'pt';
+  if (browserLang.startsWith('pl')) return 'pl';
+  if (browserLang.startsWith('it')) return 'it';
+  if (browserLang.startsWith('hu')) return 'hu';
+
   return 'en';
 }

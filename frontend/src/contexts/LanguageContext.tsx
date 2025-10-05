@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Language, translations, detectLanguage } from '../lib/translations';
+import { Language, translations, detectLanguage, detectLanguageAsync } from '../lib/translations';
 
 interface LanguageContextType {
   language: Language;
@@ -17,14 +17,18 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>(() => detectLanguage());
 
   useEffect(() => {
-    const detectedLang = detectLanguage();
-    setLanguage(detectedLang);
-    if (!localStorage.getItem('luxio-language')) {
-      localStorage.setItem('luxio-language', detectedLang);
-    }
+    const detectAndSetLanguage = async () => {
+      const detectedLang = await detectLanguageAsync();
+      setLanguage(detectedLang);
+      if (!localStorage.getItem('luxio-language')) {
+        localStorage.setItem('luxio-language', detectedLang);
+      }
+    };
+
+    detectAndSetLanguage();
   }, []);
 
   const changeLanguage = (lang: Language) => {
