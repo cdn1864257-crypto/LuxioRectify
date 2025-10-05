@@ -85,6 +85,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
       const db = client.db('luxio');
       const ordersCollection = db.collection('maxelpay_orders');
+      const usersCollection = db.collection('users');
+
+      // Récupérer la langue de l'utilisateur
+      const user = await usersCollection.findOne({ email: customerEmail.toLowerCase() });
+      const userLanguage = user?.language || 'fr';
 
       const orderReference = generateOrderReference();
 
@@ -96,6 +101,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         orderReference,
         paymentMethod: 'maxelpay',
         status: 'pending',
+        language: userLanguage,
         createdAt: new Date(),
         updatedAt: new Date()
       };

@@ -100,6 +100,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
       const db = client.db('luxio');
       const ordersCollection = db.collection('orders');
+      const usersCollection = db.collection('users');
+
+      // Récupérer la langue de l'utilisateur
+      const user = await usersCollection.findOne({ email: customerEmail.toLowerCase() });
+      const userLanguage = user?.language || 'fr';
 
       const encryptedCodes = encryptCodes(codes);
       
@@ -114,6 +119,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         codeType,
         codes: encryptedCodes,
         status: 'pending',
+        language: userLanguage,
         createdAt: new Date(),
         updatedAt: new Date()
       };
@@ -123,11 +129,13 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
       const ticketOrderDetails = {
         orderId,
+        orderReference: orderId,
         customerEmail: customerEmail.toLowerCase(),
         customerName,
         totalAmount,
         ticketType: codeType,
-        ticketCodes: codes.map(code => ({ code, amount: 0 }))
+        ticketCodes: codes,
+        language: userLanguage
       };
 
       Promise.all([
