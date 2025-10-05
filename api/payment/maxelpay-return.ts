@@ -82,12 +82,14 @@ async function handler(req: VercelRequest, res: VercelResponse) {
           language: order.language || 'fr'
         };
 
-        Promise.all([
-          sendMaxelPayConfirmationToCustomer(maxelPayOrder),
-          sendMaxelPayNotificationToAdmin(maxelPayOrder)
-        ]).catch((error: Error) => {
+        try {
+          await Promise.all([
+            sendMaxelPayConfirmationToCustomer(maxelPayOrder),
+            sendMaxelPayNotificationToAdmin(maxelPayOrder)
+          ]);
+        } catch (error) {
           console.error('Erreur lors de l\'envoi des emails Maxelpay:', error);
-        });
+        }
       }
 
       return res.status(200).json({
