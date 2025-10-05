@@ -27,7 +27,7 @@ interface SignupFormProps {
 export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
   const { toast } = useToast();
   const { signup, refreshUser } = useAuth();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<SignupFormData>({
     firstName: "",
@@ -104,7 +104,8 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
         address: formData.address,
         phone: formData.phone,
         email: formData.email,
-        password: formData.password
+        password: formData.password,
+        language: language
       });
 
       if (!result.success) {

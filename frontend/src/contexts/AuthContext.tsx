@@ -31,6 +31,7 @@ interface SignupData {
   phone: string;
   email: string;
   password: string;
+  language?: string;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
