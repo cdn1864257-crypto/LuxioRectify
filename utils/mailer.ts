@@ -20,17 +20,17 @@ function isSmtpConfigured(): boolean {
 
 export function createMailer(): Transporter | null {
   if (!isSmtpConfigured()) {
-    console.warn('⚠️  KingSMTP not configured. Email sending will be skipped.');
+    console.warn('⚠️  SMTP not configured. Email sending will be skipped.');
     console.warn('   Please set the following environment variables:');
-    console.warn('   - SMTP_HOST=smtp.kingsmtp.com');
-    console.warn('   - SMTP_PORT=587');
-    console.warn('   - SMTP_USER (from KingSMTP dashboard)');
-    console.warn('   - SMTP_PASS (from KingSMTP dashboard)');
+    console.warn('   - SMTP_HOST');
+    console.warn('   - SMTP_PORT');
+    console.warn('   - SMTP_USER');
+    console.warn('   - SMTP_PASS');
     return null;
   }
 
   const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.kingsmtp.com',
+    host: process.env.SMTP_HOST,
     port: parseInt(process.env.SMTP_PORT || '587', 10),
     secure: false,
     auth: {
@@ -66,12 +66,12 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log('✅ Email sent successfully via KingSMTP:', info.messageId);
+    console.log('✅ Email sent successfully:', info.messageId);
     console.log(`   To: ${mailOptions.to}`);
     console.log(`   Subject: ${options.subject}`);
     return true;
   } catch (error) {
-    console.error('❌ Error sending email via KingSMTP:', error);
+    console.error('❌ Error sending email:', error);
     console.error(`   To: ${mailOptions.to}`);
     console.error(`   Subject: ${options.subject}`);
     if (error instanceof Error) {

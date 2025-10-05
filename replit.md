@@ -28,11 +28,11 @@ Product and order data are managed client-side using a static product database, 
 
 ### Payment Processing
 The platform includes a complete payment system with three secure methods:
-1.  **Bank Transfer**: Features a two-step confirmation process where users first see bank details (IBAN: ES6115632626383268707364, BIC: NTSBESM1XXX, Beneficiary: Matt Luxio) with "Oui/Non" buttons. Email is sent via KingSMTP only when user confirms with "Oui, je procède au virement". Generates unique order reference (format: LX-timestamp-random) and includes delivery timing information (24h for instant transfer, 48-72h for standard).
+1.  **Bank Transfer**: Features a two-step confirmation process where users first see bank details (IBAN: ES6115632626383268707364, BIC: NTSBESM1XXX, Beneficiary: Matt Luxio) with "Oui/Non" buttons. Email is sent via SMTP only when user confirms with "Oui, je procède au virement". Generates unique order reference (format: LX-timestamp-random) and includes delivery timing information (24h for instant transfer, 48-72h for standard).
 2.  **Maxelpay**: A recommended redirect-based payment gateway integrated with environment variables and secure callbacks.
 3.  **PCS/Transcash Tickets**: Allows payment via multiple ticket codes, with AES-256 encryption for secure storage of codes. Displays proper confirmation message: "Vous venez de recevoir une notification suite à votre commande. Nous procéderons à la vérification du paiement. Vous recevrez une confirmation définitive d'ici quelques minutes." Redirects to dashboard (not home page) after successful submission.
 
-All payment methods feature a modern UI/UX, are protected routes requiring authentication and a non-empty cart. Email notifications are handled via KingSMTP with proper logging ("✅ Email sent successfully via KingSMTP").
+All payment methods feature a modern UI/UX, are protected routes requiring authentication and a non-empty cart. Email notifications are handled via SendGrid SMTP with proper logging ("✅ Email sent successfully").
 
 ### UI/UX Decisions
 The design emphasizes a modern aesthetic, responsive behavior across devices (mobile-first approach), and improved user experience through streamlined navigation and clear calls to action. High-quality product images and detailed specifications are integrated.
@@ -67,7 +67,7 @@ The project is configured for the Replit environment with:
   - `MONGODB_URI` - MongoDB Atlas connection string for user/order data persistence
   - `JWT_SECRET` - Secret key for JWT token generation (32+ characters recommended)
   - `ENCRYPTION_KEY` - AES-256 encryption key for PCS/Transcash codes (32+ characters, critical for production)
-  - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` - KingSMTP configuration for email notifications
+  - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` - SendGrid SMTP configuration for email notifications
   - `EMAIL_FROM`, `ADMIN_EMAIL` - Email addresses for outgoing messages
   - `MAXELPAY_MERCHANT_ID`, `MAXELPAY_API_KEY` - Maxelpay payment gateway credentials
 
@@ -112,7 +112,7 @@ The application requires several environment variables for full functionality, i
 - `ENCRYPTION_KEY`: Uses a development-only key (warning displayed in logs)
 - `JWT_SECRET`: Authentication features will show errors without this
 - `MONGODB_URI`: Database operations will fail gracefully without connection
-- SMTP credentials: Email notifications won't be sent without KingSMTP setup
+- SMTP credentials: Email notifications won't be sent without SendGrid SMTP setup
 
 ## External Dependencies
 
@@ -123,7 +123,7 @@ The application requires several environment variables for full functionality, i
 
 ### Payment Processing
 -   **MaxelPay**: Primary payment gateway.
--   **KingSMTP**: For transactional email services.
+-   **SendGrid SMTP**: For transactional email services.
 
 ### Development and Build Tools
 -   **Vite**: Build tool and development server.

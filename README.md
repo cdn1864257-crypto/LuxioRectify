@@ -16,7 +16,7 @@ Plateforme e-commerce moderne pour la vente de smartphones, smartwatches, sneake
 - **MongoDB Atlas** pour la base de données
 - **JWT** pour l'authentification
 - **bcrypt** pour le hashage des mots de passe
-- **KingSMTP** pour l'envoi d'emails transactionnels
+- **SendGrid SMTP** pour l'envoi d'emails transactionnels
 
 ## 📦 Installation
 
@@ -24,7 +24,7 @@ Plateforme e-commerce moderne pour la vente de smartphones, smartwatches, sneake
 - Node.js 20+
 - npm ou yarn
 - Compte MongoDB Atlas
-- Compte KingSMTP pour l'envoi d'emails
+- Compte SendGrid pour l'envoi d'emails
 
 ### Installation des dépendances
 
@@ -48,13 +48,13 @@ MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/luxio
 JWT_SECRET=votre_secret_jwt_minimum_32_caracteres
 ```
 
-#### KingSMTP (Envoi d'emails)
+#### SendGrid SMTP (Envoi d'emails)
 ```bash
-SMTP_HOST=smtp.kingsmtp.com
+SMTP_HOST=smtp.sendgrid.net
 SMTP_PORT=587
-SMTP_USER=votre_username_kingsmtp
-SMTP_PASS=votre_password_kingsmtp
-EMAIL_FROM=noreply@luxio-shop.eu
+SMTP_USER=apikey
+SMTP_PASS=votre_cle_api_sendgrid
+EMAIL_FROM=replitprojet97@gmail.com
 ADMIN_EMAIL=support@luxio-shop.eu
 ```
 
@@ -71,48 +71,45 @@ ENCRYPTION_KEY=votre_cle_de_chiffrement_minimum_32_caracteres
 
 ⚠️ **Important** : La clé de chiffrement `ENCRYPTION_KEY` est utilisée pour sécuriser les codes de paiement PCS/Transcash stockés en base de données. Utilisez une clé forte et ne la partagez jamais.
 
-### 2. Configuration KingSMTP
+### 2. Configuration SendGrid SMTP
 
-#### Étape 1 : Créer un compte KingSMTP
-1. Créez un compte sur [KingSMTP](https://www.kingsmtp.com/)
+#### Étape 1 : Créer un compte SendGrid
+1. Créez un compte sur [SendGrid](https://sendgrid.com/)
 2. Accédez à votre tableau de bord
 
-#### Étape 2 : Obtenir les identifiants SMTP
+#### Étape 2 : Obtenir la clé API
 
-1. Dans votre tableau de bord KingSMTP, trouvez vos identifiants SMTP
-2. Notez les informations suivantes :
-   - **SMTP Host** : généralement `smtp.kingsmtp.com`
-   - **SMTP Port** : `587` (TLS) ou `465` (SSL)
-   - **Username** : votre nom d'utilisateur KingSMTP
-   - **Password** : votre mot de passe KingSMTP
+1. Dans votre tableau de bord SendGrid, allez dans Settings > API Keys
+2. Créez une nouvelle clé API avec les permissions d'envoi d'emails
+3. Copiez la clé API (elle ne sera affichée qu'une seule fois)
 
 #### Étape 3 : Configuration Replit
 
 **Pour Replit :**
 1. Ouvrez le panneau **Secrets** (icône cadenas)
 2. Ajoutez chaque variable :
-   - `SMTP_HOST` : `smtp.kingsmtp.com`
+   - `SMTP_HOST` : `smtp.sendgrid.net`
    - `SMTP_PORT` : `587`
-   - `SMTP_USER` : votre username KingSMTP
-   - `SMTP_PASS` : votre password KingSMTP
-   - `EMAIL_FROM` : `noreply@luxio-shop.eu`
+   - `SMTP_USER` : `apikey`
+   - `SMTP_PASS` : votre clé API SendGrid
+   - `EMAIL_FROM` : `replitprojet97@gmail.com`
    - `ADMIN_EMAIL` : `support@luxio-shop.eu`
 
-⚠️ **Important** : Gardez vos identifiants KingSMTP en sécurité et ne les partagez jamais.
+⚠️ **Important** : Gardez votre clé API SendGrid en sécurité et ne la partagez jamais.
 
 ### 3. Configuration des emails
 
 Configurez vos adresses email d'expéditeur :
 ```bash
-EMAIL_FROM=noreply@luxio-shop.eu  # Email d'expédition
+EMAIL_FROM=replitprojet97@gmail.com  # Email d'expédition
 ADMIN_EMAIL=support@luxio-shop.eu # Email support pour notifications
 ```
 
-Avantages de KingSMTP :
-- Configuration simple et rapide
+Avantages de SendGrid :
 - Haute délivrabilité
-- Support technique réactif
-- Tarification flexible
+- API simple et documentation complète
+- Statistiques d'envoi détaillées
+- Plan gratuit disponible (100 emails/jour)
 
 ## 🚀 Développement
 
@@ -365,25 +362,25 @@ Assurez-vous d'avoir configuré toutes les variables d'environnement dans Vercel
    echo $EMAIL_FROM
    ```
 
-2. **Vérifiez la connexion KingSMTP** :
-   - Assurez-vous que vos identifiants sont corrects
-   - Vérifiez que le port SMTP est bien 587 ou 465
+2. **Vérifiez la connexion SMTP** :
+   - Assurez-vous que votre clé API SendGrid est correcte
+   - Vérifiez que le port SMTP est bien 587
    - Consultez les logs du backend pour voir les erreurs de connexion
 
 3. **Consultez les logs** :
    - Recherchez les messages d'erreur dans la console backend
-   - Vérifiez que KingSMTP est bien configuré
+   - Vérifiez que SendGrid SMTP est bien configuré
 
 ### Erreur de connexion SMTP
 
 Si vous obtenez une erreur de connexion :
 - Vérifiez que `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER` et `SMTP_PASS` sont correctement configurés
-- Assurez-vous que votre compte KingSMTP est actif
+- Assurez-vous que votre clé API SendGrid est active et a les bonnes permissions
 - Vérifiez que vous n'avez pas de pare-feu bloquant le port SMTP
 
 ## 📚 Ressources
 
-- [Documentation KingSMTP](https://www.kingsmtp.com/)
+- [Documentation SendGrid](https://sendgrid.com/docs/)
 - [MongoDB Atlas](https://www.mongodb.com/atlas)
 - [Vite Documentation](https://vitejs.dev/)
 - [Nodemailer](https://nodemailer.com/)
