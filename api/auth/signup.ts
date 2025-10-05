@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { serialize } from 'cookie';
 import { sendWelcomeEmail } from '../../utils/email.js';
+import { detectLanguageFromIP, getClientIP } from '../../utils/language-detection.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -88,11 +89,22 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       // Hashage du mot de passe avec bcrypt (10 rounds de salting)
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      // Validation et normalisation de la langue
-      const validLanguages = ['fr', 'en', 'es', 'pt', 'pl', 'hu'];
+      // Détecter la langue automatiquement basée sur l'IP de l'utilisateur
+      const clientIP = getClientIP(req.headers);
+      let detectedLanguage = 'fr';
+      
+      if (clientIP) {
+        detectedLanguage = await detectLanguageFromIP(clientIP);
+        console.log(`📍 IP détectée: ${clientIP} → Langue: ${detectedLanguage}`);
+      } else {
+        console.log('⚠️  Impossible de détecter l\'IP, langue par défaut: fr');
+      }
+
+      // Validation et normalisation de la langue (utiliser langue détectée si non fournie)
+      const validLanguages = ['fr', 'en', 'es', 'pt', 'pl', 'it', 'hu'];
       const userLanguage = language && validLanguages.includes(language.toLowerCase()) 
         ? language.toLowerCase() 
-        : 'fr';
+        : (validLanguages.includes(detectedLanguage) ? detectedLanguage : 'fr');
 
       // Création de l'utilisateur
       const newUser = {
@@ -125,8 +137,9 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       };
 
       // Envoyer l'email de bienvenue dans la langue de l'utilisateur (sans bloquer la réponse)
+      console.log(`📧 Envoi de l'email de bienvenue à ${email.toLowerCase()} en langue: ${userLanguage}`);
       sendWelcomeEmail(email.toLowerCase(), firstName, userLanguage).catch((error: Error) => {
-        console.error('Erreur lors de l\'envoi de l\'email de bienvenue:', error);
+        console.error('❌ Erreur lors de l\'envoi de l\'email de bienvenue:', error);
       });
 
       // Générer un JWT pour connexion automatique
