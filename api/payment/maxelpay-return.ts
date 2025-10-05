@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+import { sendMaxelPayConfirmationToCustomer, sendMaxelPayNotificationToAdmin } from '../../utils/email.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -48,6 +49,15 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const db = client.db('luxio');
       const ordersCollection = db.collection('maxelpay_orders');
 
+      // Récupérer la commande pour obtenir les informations et la langue
+      const order = await ordersCollection.findOne({ orderReference: orderId });
+
+      if (!order) {
+        return res.status(404).json({
+          error: 'Commande non trouvée'
+        });
+      }
+
       await ordersCollection.updateOne(
         { orderReference: orderId },
         {
@@ -59,6 +69,26 @@ async function handler(req: VercelRequest, res: VercelResponse) {
           }
         }
       );
+
+      // Envoyer les emails de confirmation si le paiement est réussi
+      if (status === 'success') {
+        const maxelPayOrder = {
+          orderReference: order.orderReference,
+          customerEmail: order.customerEmail,
+          customerName: order.customerName,
+          totalAmount: order.totalAmount,
+          transactionId: transactionId || '',
+          cartItems: order.cartItems || [],
+          language: order.language || 'fr'
+        };
+
+        Promise.all([
+          sendMaxelPayConfirmationToCustomer(maxelPayOrder),
+          sendMaxelPayNotificationToAdmin(maxelPayOrder)
+        ]).catch((error: Error) => {
+          console.error('Erreur lors de l\'envoi des emails Maxelpay:', error);
+        });
+      }
 
       return res.status(200).json({
         success: true,
