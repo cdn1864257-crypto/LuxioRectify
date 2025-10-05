@@ -87,5 +87,5 @@ args = "npm run dev"
 waitForPort = 5000
 
 [agent]
-integrations = ["firebase_barebones_javascript==1.0.0", "javascript_mem_db==1.0.0"]
+integrations = ["firebase_barebones_javascript:1.0.0", "javascript_mem_db:1.0.0", "sendgrid:1.0.0"]
 expertMode = true
