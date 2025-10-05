@@ -142,7 +142,6 @@ function getEmailLayout(content: string, language: EmailLanguage = 'fr'): string
     </div>
     <div class="footer">
       <p><strong>Luxio</strong></p>
-      <p><a href="mailto:${DEFAULT_FROM}">${DEFAULT_FROM}</a></p>
       <p style="margin-top: 20px; font-size: 12px; color: #6b7280;">
         ${t.footer_note}
       </p>
@@ -757,34 +756,310 @@ export async function sendWelcomeEmail(
   userEmail: string,
   firstName: string
 ): Promise<boolean> {
-  const htmlContent = getEmailLayout(`
-    <h2 style="color: #1e3a8a; margin-top: 0;">Bienvenue sur Luxio 🎉</h2>
-    <p>Bonjour <strong>${firstName}</strong>,</p>
-    <p>
-      Nous sommes ravis de vous accueillir dans la famille Luxio ! 
-      Vous venez de rejoindre la boutique en ligne de référence pour les smartphones, 
-      smartwatches, sneakers et gadgets high-tech.
-    </p>
-    <div style="text-align: center; margin: 30px 0;">
-      <a href="${process.env.REPLIT_DEV_DOMAIN || 'https://luxio-shop.com'}" class="button">
-        Découvrir nos offres
-      </a>
+  const dashboardUrl = process.env.REPLIT_DEV_DOMAIN || 'https://luxio-shop.com';
+  
+  const htmlContent = `
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenue sur Luxio</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+    .email-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+    }
+    .header {
+      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      padding: 20px;
+      text-align: center;
+    }
+    .logo {
+      color: #ffffff;
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin: 0;
+    }
+    .banner {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      padding: 40px 20px;
+      text-align: center;
+      border-bottom: 4px solid #3b82f6;
+    }
+    .banner h1 {
+      color: #1e3a8a;
+      font-size: 36px;
+      margin: 0 0 10px 0;
+      font-weight: 800;
+    }
+    .banner p {
+      color: #1e40af;
+      font-size: 16px;
+      margin: 0;
+      font-weight: 600;
+    }
+    .content {
+      padding: 30px;
+      color: #333333;
+    }
+    .greeting {
+      font-size: 18px;
+      color: #111827;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .intro-text {
+      font-size: 16px;
+      color: #374151;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+    .feature-section {
+      background-color: #f9fafb;
+      border-radius: 12px;
+      padding: 25px;
+      margin: 25px 0;
+      border-left: 4px solid #3b82f6;
+    }
+    .feature-title {
+      color: #1e3a8a;
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 15px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .feature-icon {
+      font-size: 28px;
+    }
+    .feature-description {
+      color: #4b5563;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    .feature-link {
+      display: inline-block;
+      color: #3b82f6;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.3s;
+    }
+    .feature-link:hover {
+      color: #2563eb;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 16px 40px;
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      color: #ffffff !important;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 16px;
+      margin: 20px 0;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(59, 130, 246, 0.4);
+    }
+    .highlights {
+      background-color: #eff6ff;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 25px 0;
+    }
+    .highlight-item {
+      display: flex;
+      align-items: center;
+      margin: 12px 0;
+      color: #1e40af;
+      font-weight: 600;
+    }
+    .highlight-icon {
+      font-size: 20px;
+      margin-right: 12px;
+    }
+    .footer {
+      background-color: #1f2937;
+      color: #9ca3af;
+      padding: 25px;
+      text-align: center;
+      font-size: 13px;
+    }
+    .footer-note {
+      margin: 15px 0 10px 0;
+      font-size: 12px;
+      color: #6b7280;
+    }
+    @media only screen and (max-width: 600px) {
+      .banner h1 {
+        font-size: 28px;
+      }
+      .content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="header">
+      <h1 class="logo">Luxio</h1>
     </div>
-  `, 'fr');
+    
+    <div class="banner">
+      <h1>Bienvenue chez Luxio ! 🎉</h1>
+      <p>DÉCOUVREZ L'EXCELLENCE TECH À PRIX IMBATTABLES</p>
+    </div>
+    
+    <div class="content">
+      <p class="greeting">Bonjour <strong>${firstName}</strong>,</p>
+      
+      <p class="intro-text">
+        Nous sommes ravis de vous accueillir dans la famille Luxio ! Vous venez de rejoindre 
+        <strong>la boutique en ligne de référence</strong> pour les passionnés de technologie et de mode. 
+        Chez Luxio, nous croyons que tout le monde mérite d'accéder aux meilleurs produits.
+      </p>
+
+      <div class="highlights">
+        <div class="highlight-item">
+          <span class="highlight-icon">✓</span>
+          <span>Réductions jusqu'à 37% sur une sélection de produits</span>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-icon">✓</span>
+          <span>Livraison gratuite et garantie 2 ans</span>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-icon">✓</span>
+          <span>Paiement sécurisé avec plusieurs options</span>
+        </div>
+      </div>
+
+      <div class="feature-section">
+        <div class="feature-title">
+          <span class="feature-icon">📱</span>
+          <span>Smartphones Premium</span>
+        </div>
+        <p class="feature-description">
+          Découvrez les derniers iPhone 17, Samsung Galaxy S25, Google Pixel et bien plus encore. 
+          Tous les modèles, toutes les couleurs, au meilleur prix.
+        </p>
+        <a href="${dashboardUrl}/premium" class="feature-link">Voir les smartphones →</a>
+      </div>
+
+      <div class="feature-section">
+        <div class="feature-title">
+          <span class="feature-icon">⌚</span>
+          <span>Montres Connectées</span>
+        </div>
+        <p class="feature-description">
+          Apple Watch, Samsung Galaxy Watch, montres de luxe TAG Heuer... 
+          Restez connecté avec style grâce à notre sélection exclusive.
+        </p>
+        <a href="${dashboardUrl}/watches" class="feature-link">Découvrir les montres →</a>
+      </div>
+
+      <div class="feature-section">
+        <div class="feature-title">
+          <span class="feature-icon">👟</span>
+          <span>Sneakers & Mode</span>
+        </div>
+        <p class="feature-description">
+          Nike, Adidas, New Balance, Yeezy... Les sneakers les plus recherchées 
+          pour compléter votre style urbain.
+        </p>
+        <a href="${dashboardUrl}/sneakers" class="feature-link">Explorer les sneakers →</a>
+      </div>
+
+      <div class="feature-section">
+        <div class="feature-title">
+          <span class="feature-icon">🏠</span>
+          <span>Gadgets High-Tech</span>
+        </div>
+        <p class="feature-description">
+          Drones, trottinettes électriques, écouteurs sans fil, objets connectés... 
+          Tous les gadgets tendance pour faciliter votre quotidien.
+        </p>
+        <a href="${dashboardUrl}/home-gadgets" class="feature-link">Voir les gadgets →</a>
+      </div>
+
+      <div style="text-align: center; margin: 35px 0;">
+        <a href="${dashboardUrl}" class="cta-button">
+          Commencer mes achats
+        </a>
+      </div>
+
+      <p style="color: #6b7280; font-size: 14px; line-height: 1.6; margin-top: 30px;">
+        Vous avez des questions ? Notre équipe est là pour vous aider à trouver les produits parfaits 
+        qui correspondent à vos besoins et à votre budget.
+      </p>
+    </div>
+    
+    <div class="footer">
+      <p><strong>Luxio</strong></p>
+      <p class="footer-note">
+        Cet email a été envoyé automatiquement. Merci de ne pas y répondre directement.
+      </p>
+      <p style="margin-top: 10px;">
+        — Équipe Luxio – Service Client
+      </p>
+    </div>
+  </div>
+</body>
+</html>
+  `.trim();
 
   const textContent = `
-Bienvenue sur Luxio 🎉
+Bienvenue chez Luxio ! 🎉
 
 Bonjour ${firstName},
 
-Nous sommes ravis de vous accueillir dans la famille Luxio !
+Nous sommes ravis de vous accueillir dans la famille Luxio ! Vous venez de rejoindre la boutique en ligne de référence pour les passionnés de technologie et de mode.
 
-Découvrir nos offres : ${process.env.REPLIT_DEV_DOMAIN || 'https://luxio-shop.com'}
+✓ Réductions jusqu'à 37% sur une sélection de produits
+✓ Livraison gratuite et garantie 2 ans
+✓ Paiement sécurisé avec plusieurs options
+
+📱 Smartphones Premium
+Découvrez les derniers iPhone 17, Samsung Galaxy S25, Google Pixel et bien plus encore.
+Voir: ${dashboardUrl}/premium
+
+⌚ Montres Connectées
+Apple Watch, Samsung Galaxy Watch, montres de luxe TAG Heuer...
+Voir: ${dashboardUrl}/watches
+
+👟 Sneakers & Mode
+Nike, Adidas, New Balance, Yeezy... Les sneakers les plus recherchées.
+Voir: ${dashboardUrl}/sneakers
+
+🏠 Gadgets High-Tech
+Drones, trottinettes électriques, écouteurs sans fil, objets connectés...
+Voir: ${dashboardUrl}/home-gadgets
+
+Commencer mes achats : ${dashboardUrl}
+
+— Équipe Luxio – Service Client
   `.trim();
 
   return sendEmail({
     to: userEmail,
-    subject: "Bienvenue sur Luxio 🎉",
+    subject: "Bienvenue chez Luxio ! 🎉",
     html: htmlContent,
     text: textContent,
     from: DEFAULT_FROM
