@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+import { createHmac } from 'crypto';
 import { sendNowPaymentsConfirmationToCustomer, sendNowPaymentsNotificationToAdmin } from '../../utils/email.js';
 
 interface VercelRequest {
@@ -17,6 +18,34 @@ interface VercelResponse {
   end: (chunk?: any) => void;
 }
 
+function verifyNowPaymentsSignature(body: any, signature: string | undefined, secret: string): boolean {
+  if (!signature) {
+    console.warn('[NowPayments Webhook] No signature provided');
+    return false;
+  }
+
+  try {
+    const sortedBody = JSON.stringify(body, Object.keys(body).sort());
+    const hmac = createHmac('sha512', secret);
+    hmac.update(sortedBody);
+    const calculatedSignature = hmac.digest('hex');
+    
+    const isValid = calculatedSignature === signature;
+    
+    if (!isValid) {
+      console.error('[NowPayments Webhook] Signature mismatch!', {
+        received: signature,
+        calculated: calculatedSignature.substring(0, 20) + '...'
+      });
+    }
+    
+    return isValid;
+  } catch (error) {
+    console.error('[NowPayments Webhook] Signature verification error:', error);
+    return false;
+  }
+}
+
 async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', ['POST']);
@@ -24,6 +53,23 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    const ipnSecret = process.env.NOWPAYMENTS_IPN_SECRET;
+    
+    if (ipnSecret) {
+      const signature = req.headers['x-nowpayments-sig'];
+      
+      if (!verifyNowPaymentsSignature(req.body, signature, ipnSecret)) {
+        console.error('[NowPayments Webhook] Invalid signature - potential security threat!');
+        return res.status(401).json({
+          error: 'Signature invalide'
+        });
+      }
+      
+      console.log('[NowPayments Webhook] Signature verified successfully');
+    } else {
+      console.warn('[NowPayments Webhook] IPN_SECRET not configured - webhook security disabled!');
+    }
+
     const {
       order_id,
       payment_id,
