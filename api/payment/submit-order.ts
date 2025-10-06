@@ -1,5 +1,4 @@
 import { MongoClient, ObjectId } from 'mongodb';
-import { sendOrderConfirmationToCustomer, sendOrderNotificationToAdmin } from '../../utils/email.js';
 import { sendTicketConfirmationToCustomer, sendTicketNotificationToSupport } from '../../utils/email.js';
 import { encryptCodes } from '../../utils/encryption.js';
 

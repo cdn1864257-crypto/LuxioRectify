@@ -1,44 +1,55 @@
 export type EmailLanguage = 'fr' | 'en' | 'es' | 'pt' | 'pl' | 'hu';
 
 export interface EmailTranslations {
+  // Subjects
+  subject_welcome: string;
   subject_order_confirm: string;
   subject_ticket_confirm: string;
   subject_crypto_confirm: string;
   subject_admin_new_order: string;
+  
+  // Common
   hello: string;
-  order_confirmed: string;
-  bank_instructions: string;
-  instant_transfer: string;
-  standard_transfer: string;
-  ticket_thanks: string;
-  pending_validation: string;
-  ticket_wait_message: string;
-  crypto_received: string;
-  crypto_validation_message: string;
-  access_dashboard: string;
-  footer_note: string;
   team_signature: string;
-  order_summary: string;
+  footer_note: string;
+  access_dashboard: string;
+  
+  // Welcome Email
+  welcome_title: string;
+  welcome_message: string;
+  discover_products: string;
+  
+  // Order Confirmation
+  order_confirmed: string;
+  order_received: string;
   order_number: string;
   total_amount: string;
   payment_method: string;
-  customer_name: string;
-  customer_email: string;
-  items: string;
-  quantity: string;
-  price: string;
+  status: string;
+  
+  // Bank Transfer
+  bank_instructions: string;
   beneficiary: string;
   iban: string;
   bic: string;
-  reference: string;
   transfer_reason: string;
-  order_details: string;
+  delivery_time: string;
+  
+  // Ticket Payment
   ticket_type: string;
   codes_submitted: string;
-  status: string;
+  pending_validation: string;
+  validation_time: string;
+  
+  // Crypto Payment
   transaction_id: string;
+  payment_received: string;
+  verification_message: string;
+  
+  // Admin Notifications
   new_order_received: string;
-  admin_notification: string;
+  customer_name: string;
+  customer_email: string;
   bank_transfer: string;
   ticket_payment: string;
   crypto_payment: string;
@@ -46,269 +57,331 @@ export interface EmailTranslations {
 
 export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
   fr: {
+    // Subjects
+    subject_welcome: 'Bienvenue chez Luxio',
     subject_order_confirm: 'Confirmation de commande – Luxio',
-    subject_ticket_confirm: 'Confirmation de commande – Tickets TransCash/PCS',
-    subject_crypto_confirm: 'Confirmation de commande – Paiement Crypto',
+    subject_ticket_confirm: 'Confirmation de commande – Luxio',
+    subject_crypto_confirm: 'Confirmation de commande – Luxio',
     subject_admin_new_order: 'Nouvelle commande reçue',
+    
+    // Common
     hello: 'Bonjour',
-    order_confirmed: 'Confirmation de commande',
-    bank_instructions: 'Veuillez effectuer votre virement en suivant les instructions ci-dessous :',
-    instant_transfer: 'Livraison sous 24h après virement immédiat.',
-    standard_transfer: '48 à 72h selon votre banque.',
-    ticket_thanks: 'Merci pour votre commande via tickets TransCash/PCS.',
-    pending_validation: 'En attente de validation',
-    ticket_wait_message: 'Votre commande sera validée sous 24 à 48h après vérification de vos codes.',
-    crypto_received: 'Votre paiement via MaxelPay a bien été reçu.',
-    crypto_validation_message: 'Nous procédons à la vérification sur la blockchain. Vous recevrez une confirmation dès validation.',
-    access_dashboard: 'Accéder à mon espace client',
-    footer_note: 'Cet email a été envoyé automatiquement. Merci de ne pas y répondre directement.',
-    team_signature: '— Équipe Luxio – Service Client',
-    order_summary: 'Récapitulatif de commande',
+    team_signature: 'Équipe Luxio',
+    footer_note: 'Cet email a été envoyé automatiquement.',
+    access_dashboard: 'Accéder à mon espace',
+    
+    // Welcome Email
+    welcome_title: 'Bienvenue chez Luxio',
+    welcome_message: 'Nous sommes ravis de vous compter parmi nous. Découvrez dès maintenant notre sélection de produits premium.',
+    discover_products: 'Découvrir nos produits',
+    
+    // Order Confirmation
+    order_confirmed: 'Commande confirmée',
+    order_received: 'Nous avons bien reçu votre commande.',
     order_number: 'Commande',
-    total_amount: 'Montant total',
-    payment_method: 'Méthode de paiement',
-    customer_name: 'Client',
-    customer_email: 'Email',
-    items: 'Articles',
-    quantity: 'Quantité',
-    price: 'Prix',
+    total_amount: 'Montant',
+    payment_method: 'Paiement',
+    status: 'Statut',
+    
+    // Bank Transfer
+    bank_instructions: 'Veuillez effectuer votre virement avec les informations suivantes :',
     beneficiary: 'Bénéficiaire',
     iban: 'IBAN',
     bic: 'BIC',
-    reference: 'Référence',
     transfer_reason: 'Motif',
-    order_details: 'Détails de la commande',
+    delivery_time: 'Livraison sous 24-72h après réception du virement.',
+    
+    // Ticket Payment
     ticket_type: 'Type de ticket',
     codes_submitted: 'Codes soumis',
-    status: 'Statut',
+    pending_validation: 'En attente de validation',
+    validation_time: 'Validation sous 24-48h après vérification.',
+    
+    // Crypto Payment
     transaction_id: 'Transaction',
-    new_order_received: 'Nouvelle commande reçue',
-    admin_notification: 'Notification administrateur',
+    payment_received: 'Votre paiement a bien été reçu.',
+    verification_message: 'Livraison après vérification blockchain.',
+    
+    // Admin Notifications
+    new_order_received: 'Nouvelle commande',
+    customer_name: 'Client',
+    customer_email: 'Email',
     bank_transfer: 'Virement bancaire',
     ticket_payment: 'Paiement par tickets',
     crypto_payment: 'Paiement crypto'
   },
   en: {
+    // Subjects
+    subject_welcome: 'Welcome to Luxio',
     subject_order_confirm: 'Order Confirmation – Luxio',
-    subject_ticket_confirm: 'Order Confirmation – Ticket Payment',
-    subject_crypto_confirm: 'Order Confirmation – Crypto Payment',
+    subject_ticket_confirm: 'Order Confirmation – Luxio',
+    subject_crypto_confirm: 'Order Confirmation – Luxio',
     subject_admin_new_order: 'New Order Received',
+    
+    // Common
     hello: 'Hello',
-    order_confirmed: 'Order Confirmation',
-    bank_instructions: 'Please complete your bank transfer using the details below:',
-    instant_transfer: 'Delivery within 24h after instant transfer.',
-    standard_transfer: '48–72h depending on your bank.',
-    ticket_thanks: 'Thank you for your order via TransCash/PCS tickets.',
-    pending_validation: 'Pending validation',
-    ticket_wait_message: 'Your order will be validated within 24–48h after code verification.',
-    crypto_received: 'Your MaxelPay payment has been received.',
-    crypto_validation_message: 'We are verifying the blockchain transaction. You\'ll receive confirmation soon.',
+    team_signature: 'Luxio Team',
+    footer_note: 'This email was sent automatically.',
     access_dashboard: 'Access my dashboard',
-    footer_note: 'This email was sent automatically. Please do not reply directly.',
-    team_signature: '— Luxio Support Team',
-    order_summary: 'Order Summary',
+    
+    // Welcome Email
+    welcome_title: 'Welcome to Luxio',
+    welcome_message: 'We are thrilled to have you with us. Discover our premium product selection now.',
+    discover_products: 'Discover our products',
+    
+    // Order Confirmation
+    order_confirmed: 'Order confirmed',
+    order_received: 'We have received your order.',
     order_number: 'Order',
-    total_amount: 'Total Amount',
-    payment_method: 'Payment Method',
-    customer_name: 'Customer',
-    customer_email: 'Email',
-    items: 'Items',
-    quantity: 'Quantity',
-    price: 'Price',
+    total_amount: 'Amount',
+    payment_method: 'Payment',
+    status: 'Status',
+    
+    // Bank Transfer
+    bank_instructions: 'Please complete your bank transfer using the following details:',
     beneficiary: 'Beneficiary',
     iban: 'IBAN',
     bic: 'BIC',
-    reference: 'Reference',
-    transfer_reason: 'Reason',
-    order_details: 'Order Details',
-    ticket_type: 'Ticket Type',
-    codes_submitted: 'Codes Submitted',
-    status: 'Status',
+    transfer_reason: 'Reference',
+    delivery_time: 'Delivery within 24-72h after payment receipt.',
+    
+    // Ticket Payment
+    ticket_type: 'Ticket type',
+    codes_submitted: 'Codes submitted',
+    pending_validation: 'Pending validation',
+    validation_time: 'Validation within 24-48h after verification.',
+    
+    // Crypto Payment
     transaction_id: 'Transaction',
-    new_order_received: 'New Order Received',
-    admin_notification: 'Admin Notification',
+    payment_received: 'Your payment has been received.',
+    verification_message: 'Delivery after blockchain verification.',
+    
+    // Admin Notifications
+    new_order_received: 'New Order',
+    customer_name: 'Customer',
+    customer_email: 'Email',
     bank_transfer: 'Bank Transfer',
     ticket_payment: 'Ticket Payment',
     crypto_payment: 'Crypto Payment'
   },
   es: {
+    // Subjects
+    subject_welcome: 'Bienvenido a Luxio',
     subject_order_confirm: 'Confirmación de pedido – Luxio',
-    subject_ticket_confirm: 'Confirmación de pedido – Pago con tickets',
-    subject_crypto_confirm: 'Confirmación de pedido – Pago Crypto',
+    subject_ticket_confirm: 'Confirmación de pedido – Luxio',
+    subject_crypto_confirm: 'Confirmación de pedido – Luxio',
     subject_admin_new_order: 'Nuevo pedido recibido',
+    
+    // Common
     hello: 'Hola',
-    order_confirmed: 'Confirmación de pedido',
-    bank_instructions: 'Por favor, realice su transferencia bancaria siguiendo las instrucciones a continuación:',
-    instant_transfer: 'Entrega en 24h después de transferencia inmediata.',
-    standard_transfer: '48 a 72h según su banco.',
-    ticket_thanks: 'Gracias por su pedido a través de tickets TransCash/PCS.',
-    pending_validation: 'Pendiente de validación',
-    ticket_wait_message: 'Su pedido será validado en 24–48h después de la verificación de sus códigos.',
-    crypto_received: 'Su pago vía MaxelPay ha sido recibido.',
-    crypto_validation_message: 'Estamos verificando la transacción en la blockchain. Recibirá una confirmación pronto.',
+    team_signature: 'Equipo Luxio',
+    footer_note: 'Este correo fue enviado automáticamente.',
     access_dashboard: 'Acceder a mi panel',
-    footer_note: 'Este correo fue enviado automáticamente. Por favor, no responda directamente.',
-    team_signature: '— Equipo de Soporte Luxio',
-    order_summary: 'Resumen del pedido',
+    
+    // Welcome Email
+    welcome_title: 'Bienvenido a Luxio',
+    welcome_message: 'Estamos encantados de tenerte con nosotros. Descubre ahora nuestra selección de productos premium.',
+    discover_products: 'Descubrir nuestros productos',
+    
+    // Order Confirmation
+    order_confirmed: 'Pedido confirmado',
+    order_received: 'Hemos recibido su pedido.',
     order_number: 'Pedido',
-    total_amount: 'Monto total',
-    payment_method: 'Método de pago',
-    customer_name: 'Cliente',
-    customer_email: 'Email',
-    items: 'Artículos',
-    quantity: 'Cantidad',
-    price: 'Precio',
+    total_amount: 'Monto',
+    payment_method: 'Pago',
+    status: 'Estado',
+    
+    // Bank Transfer
+    bank_instructions: 'Por favor, realice su transferencia con los siguientes datos:',
     beneficiary: 'Beneficiario',
     iban: 'IBAN',
     bic: 'BIC',
-    reference: 'Referencia',
     transfer_reason: 'Motivo',
-    order_details: 'Detalles del pedido',
+    delivery_time: 'Entrega en 24-72h después de recibir el pago.',
+    
+    // Ticket Payment
     ticket_type: 'Tipo de ticket',
     codes_submitted: 'Códigos enviados',
-    status: 'Estado',
+    pending_validation: 'Pendiente de validación',
+    validation_time: 'Validación en 24-48h después de verificación.',
+    
+    // Crypto Payment
     transaction_id: 'Transacción',
-    new_order_received: 'Nuevo pedido recibido',
-    admin_notification: 'Notificación de administrador',
-    bank_transfer: 'Transferencia bancaria',
-    ticket_payment: 'Pago con tickets',
-    crypto_payment: 'Pago crypto'
-  },
-  pt: {
-    subject_order_confirm: 'Confirmação de pedido – Luxio',
-    subject_ticket_confirm: 'Confirmação de pedido – Pagamento com tickets',
-    subject_crypto_confirm: 'Confirmação de pedido – Pagamento Crypto',
-    subject_admin_new_order: 'Novo pedido recebido',
-    hello: 'Olá',
-    order_confirmed: 'Confirmação de pedido',
-    bank_instructions: 'Por favor, complete sua transferência bancária usando os detalhes abaixo:',
-    instant_transfer: 'Entrega em 24h após transferência imediata.',
-    standard_transfer: '48–72h dependendo do seu banco.',
-    ticket_thanks: 'Obrigado pelo seu pedido via tickets TransCash/PCS.',
-    pending_validation: 'Pendente de validação',
-    ticket_wait_message: 'Seu pedido será validado em 24–48h após a verificação dos códigos.',
-    crypto_received: 'Seu pagamento via MaxelPay foi recebido.',
-    crypto_validation_message: 'Estamos verificando a transação no blockchain. Você receberá uma confirmação em breve.',
-    access_dashboard: 'Acessar meu painel',
-    footer_note: 'Este e-mail foi enviado automaticamente. Por favor, não responda diretamente.',
-    team_signature: '— Equipe de Suporte Luxio',
-    order_summary: 'Resumo do pedido',
-    order_number: 'Pedido',
-    total_amount: 'Valor total',
-    payment_method: 'Método de pagamento',
+    payment_received: 'Su pago ha sido recibido.',
+    verification_message: 'Entrega después de verificación blockchain.',
+    
+    // Admin Notifications
+    new_order_received: 'Nuevo Pedido',
     customer_name: 'Cliente',
     customer_email: 'Email',
-    items: 'Itens',
-    quantity: 'Quantidade',
-    price: 'Preço',
+    bank_transfer: 'Transferencia Bancaria',
+    ticket_payment: 'Pago con Tickets',
+    crypto_payment: 'Pago Crypto'
+  },
+  pt: {
+    // Subjects
+    subject_welcome: 'Bem-vindo ao Luxio',
+    subject_order_confirm: 'Confirmação de pedido – Luxio',
+    subject_ticket_confirm: 'Confirmação de pedido – Luxio',
+    subject_crypto_confirm: 'Confirmação de pedido – Luxio',
+    subject_admin_new_order: 'Novo pedido recebido',
+    
+    // Common
+    hello: 'Olá',
+    team_signature: 'Equipe Luxio',
+    footer_note: 'Este email foi enviado automaticamente.',
+    access_dashboard: 'Acessar meu painel',
+    
+    // Welcome Email
+    welcome_title: 'Bem-vindo ao Luxio',
+    welcome_message: 'Estamos felizes em tê-lo conosco. Descubra agora nossa seleção de produtos premium.',
+    discover_products: 'Descobrir nossos produtos',
+    
+    // Order Confirmation
+    order_confirmed: 'Pedido confirmado',
+    order_received: 'Recebemos seu pedido.',
+    order_number: 'Pedido',
+    total_amount: 'Valor',
+    payment_method: 'Pagamento',
+    status: 'Status',
+    
+    // Bank Transfer
+    bank_instructions: 'Por favor, faça sua transferência com as seguintes informações:',
     beneficiary: 'Beneficiário',
     iban: 'IBAN',
     bic: 'BIC',
-    reference: 'Referência',
     transfer_reason: 'Motivo',
-    order_details: 'Detalhes do pedido',
+    delivery_time: 'Entrega em 24-72h após recebimento do pagamento.',
+    
+    // Ticket Payment
     ticket_type: 'Tipo de ticket',
     codes_submitted: 'Códigos enviados',
-    status: 'Status',
+    pending_validation: 'Pendente de validação',
+    validation_time: 'Validação em 24-48h após verificação.',
+    
+    // Crypto Payment
     transaction_id: 'Transação',
-    new_order_received: 'Novo pedido recebido',
-    admin_notification: 'Notificação de administrador',
-    bank_transfer: 'Transferência bancária',
-    ticket_payment: 'Pagamento com tickets',
-    crypto_payment: 'Pagamento crypto'
+    payment_received: 'Seu pagamento foi recebido.',
+    verification_message: 'Entrega após verificação blockchain.',
+    
+    // Admin Notifications
+    new_order_received: 'Novo Pedido',
+    customer_name: 'Cliente',
+    customer_email: 'Email',
+    bank_transfer: 'Transferência Bancária',
+    ticket_payment: 'Pagamento por Tickets',
+    crypto_payment: 'Pagamento Crypto'
   },
   pl: {
+    // Subjects
+    subject_welcome: 'Witamy w Luxio',
     subject_order_confirm: 'Potwierdzenie zamówienia – Luxio',
-    subject_ticket_confirm: 'Potwierdzenie zamówienia – Płatność biletami',
-    subject_crypto_confirm: 'Potwierdzenie zamówienia – Płatność Crypto',
+    subject_ticket_confirm: 'Potwierdzenie zamówienia – Luxio',
+    subject_crypto_confirm: 'Potwierdzenie zamówienia – Luxio',
     subject_admin_new_order: 'Otrzymano nowe zamówienie',
-    hello: 'Witaj',
-    order_confirmed: 'Potwierdzenie zamówienia',
-    bank_instructions: 'Prosimy o dokonanie przelewu bankowego zgodnie z poniższymi instrukcjami:',
-    instant_transfer: 'Dostawa w ciągu 24h po natychmiastowym przelewie.',
-    standard_transfer: '48–72h w zależności od Twojego banku.',
-    ticket_thanks: 'Dziękujemy za zamówienie za pomocą biletów TransCash/PCS.',
-    pending_validation: 'Oczekuje na weryfikację',
-    ticket_wait_message: 'Twoje zamówienie zostanie zweryfikowane w ciągu 24–48h po sprawdzeniu kodów.',
-    crypto_received: 'Twoja płatność przez MaxelPay została otrzymana.',
-    crypto_validation_message: 'Weryfikujemy transakcję w blockchain. Wkrótce otrzymasz potwierdzenie.',
-    access_dashboard: 'Przejdź do mojego panelu',
-    footer_note: 'Ten e-mail został wysłany automatycznie. Prosimy nie odpowiadać bezpośrednio.',
-    team_signature: '— Zespół Wsparcia Luxio',
-    order_summary: 'Podsumowanie zamówienia',
+    
+    // Common
+    hello: 'Cześć',
+    team_signature: 'Zespół Luxio',
+    footer_note: 'Ten email został wysłany automatycznie.',
+    access_dashboard: 'Dostęp do mojego panelu',
+    
+    // Welcome Email
+    welcome_title: 'Witamy w Luxio',
+    welcome_message: 'Cieszymy się, że jesteś z nami. Odkryj teraz naszą ofertę produktów premium.',
+    discover_products: 'Odkryj nasze produkty',
+    
+    // Order Confirmation
+    order_confirmed: 'Zamówienie potwierdzone',
+    order_received: 'Otrzymaliśmy Twoje zamówienie.',
     order_number: 'Zamówienie',
-    total_amount: 'Łączna kwota',
-    payment_method: 'Metoda płatności',
-    customer_name: 'Klient',
-    customer_email: 'Email',
-    items: 'Przedmioty',
-    quantity: 'Ilość',
-    price: 'Cena',
+    total_amount: 'Kwota',
+    payment_method: 'Płatność',
+    status: 'Status',
+    
+    // Bank Transfer
+    bank_instructions: 'Proszę wykonać przelew z następującymi danymi:',
     beneficiary: 'Beneficjent',
     iban: 'IBAN',
     bic: 'BIC',
-    reference: 'Numer referencyjny',
-    transfer_reason: 'Powód',
-    order_details: 'Szczegóły zamówienia',
+    transfer_reason: 'Tytuł',
+    delivery_time: 'Dostawa w ciągu 24-72h po otrzymaniu płatności.',
+    
+    // Ticket Payment
     ticket_type: 'Typ biletu',
     codes_submitted: 'Przesłane kody',
-    status: 'Status',
+    pending_validation: 'Oczekuje na walidację',
+    validation_time: 'Walidacja w ciągu 24-48h po weryfikacji.',
+    
+    // Crypto Payment
     transaction_id: 'Transakcja',
-    new_order_received: 'Otrzymano nowe zamówienie',
-    admin_notification: 'Powiadomienie administratora',
-    bank_transfer: 'Przelew bankowy',
-    ticket_payment: 'Płatność biletami',
-    crypto_payment: 'Płatność crypto'
+    payment_received: 'Otrzymaliśmy Twoją płatność.',
+    verification_message: 'Dostawa po weryfikacji blockchain.',
+    
+    // Admin Notifications
+    new_order_received: 'Nowe Zamówienie',
+    customer_name: 'Klient',
+    customer_email: 'Email',
+    bank_transfer: 'Przelew Bankowy',
+    ticket_payment: 'Płatność Biletami',
+    crypto_payment: 'Płatność Crypto'
   },
   hu: {
+    // Subjects
+    subject_welcome: 'Üdvözöljük a Luxio-nál',
     subject_order_confirm: 'Rendelés megerősítése – Luxio',
-    subject_ticket_confirm: 'Rendelés megerősítése – Jegy fizetés',
-    subject_crypto_confirm: 'Rendelés megerősítése – Kripto fizetés',
+    subject_ticket_confirm: 'Rendelés megerősítése – Luxio',
+    subject_crypto_confirm: 'Rendelés megerősítése – Luxio',
     subject_admin_new_order: 'Új rendelés érkezett',
-    hello: 'Szia',
-    order_confirmed: 'Rendelés megerősítése',
-    bank_instructions: 'Kérjük, teljesítse az átutalást az alábbi adatok szerint:',
-    instant_transfer: 'Kézbesítés 24 órán belül azonnali utalás után.',
-    standard_transfer: '48–72 óra a banktól függően.',
-    ticket_thanks: 'Köszönjük rendelését TransCash/PCS jegyekkel.',
-    pending_validation: 'Ellenőrzésre vár',
-    ticket_wait_message: 'Rendelése 24–48 órán belül ellenőrzésre kerül a kódok ellenőrzése után.',
-    crypto_received: 'MaxelPay fizetését megkaptuk.',
-    crypto_validation_message: 'A blockchain tranzakciót ellenőrizzük. Hamarosan megerősítést kapsz.',
-    access_dashboard: 'Hozzáférés a vezérlőpulthoz',
-    footer_note: 'Ez az e-mail automatikusan lett elküldve. Kérjük, ne válaszoljon közvetlenül.',
-    team_signature: '— Luxio Támogatási Csapat',
-    order_summary: 'Rendelés összegzése',
+    
+    // Common
+    hello: 'Helló',
+    team_signature: 'Luxio Csapat',
+    footer_note: 'Ez az email automatikusan lett elküldve.',
+    access_dashboard: 'Hozzáférés a vezérlőpulhoz',
+    
+    // Welcome Email
+    welcome_title: 'Üdvözöljük a Luxio-nál',
+    welcome_message: 'Örülünk, hogy velünk vagy. Fedezd fel prémium termékeinket most.',
+    discover_products: 'Termékek felfedezése',
+    
+    // Order Confirmation
+    order_confirmed: 'Rendelés megerősítve',
+    order_received: 'Megkaptuk a rendelését.',
     order_number: 'Rendelés',
-    total_amount: 'Teljes összeg',
-    payment_method: 'Fizetési mód',
-    customer_name: 'Ügyfél',
-    customer_email: 'Email',
-    items: 'Tételek',
-    quantity: 'Mennyiség',
-    price: 'Ár',
+    total_amount: 'Összeg',
+    payment_method: 'Fizetés',
+    status: 'Státusz',
+    
+    // Bank Transfer
+    bank_instructions: 'Kérjük, végezze el az utalást az alábbi adatokkal:',
     beneficiary: 'Kedvezményezett',
     iban: 'IBAN',
     bic: 'BIC',
-    reference: 'Hivatkozás',
-    transfer_reason: 'Ok',
-    order_details: 'Rendelés részletei',
+    transfer_reason: 'Közlemény',
+    delivery_time: 'Szállítás 24-72 órán belül a fizetés beérkezése után.',
+    
+    // Ticket Payment
     ticket_type: 'Jegy típusa',
     codes_submitted: 'Beküldött kódok',
-    status: 'Állapot',
+    pending_validation: 'Érvényesítésre vár',
+    validation_time: 'Érvényesítés 24-48 órán belül ellenőrzés után.',
+    
+    // Crypto Payment
     transaction_id: 'Tranzakció',
-    new_order_received: 'Új rendelés érkezett',
-    admin_notification: 'Adminisztrátor értesítés',
-    bank_transfer: 'Banki átutalás',
-    ticket_payment: 'Jegy fizetés',
-    crypto_payment: 'Kripto fizetés'
+    payment_received: 'Megkaptuk a fizetését.',
+    verification_message: 'Szállítás blockchain ellenőrzés után.',
+    
+    // Admin Notifications
+    new_order_received: 'Új Rendelés',
+    customer_name: 'Ügyfél',
+    customer_email: 'Email',
+    bank_transfer: 'Banki Átutalás',
+    ticket_payment: 'Jegyes Fizetés',
+    crypto_payment: 'Kripto Fizetés'
   }
 };
 
-export function getTranslation(language: string | undefined): EmailTranslations {
-  const lang = language?.toLowerCase();
-  if (lang && lang in emailTranslations) {
-    return emailTranslations[lang as EmailLanguage];
-  }
-  return emailTranslations.fr;
+export function getTranslation(language: EmailLanguage): EmailTranslations {
+  return emailTranslations[language] || emailTranslations.fr;
 }

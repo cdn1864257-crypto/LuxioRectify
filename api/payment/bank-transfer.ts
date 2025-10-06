@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import { sendBankTransferEmail, sendBankTransferNotification } from '../../utils/email.js';
+import { sendBankTransferEmail, sendBankTransferNotificationToAdmin } from '../../utils/email.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -118,7 +118,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
       Promise.all([
         sendBankTransferEmail(bankDetails),
-        sendBankTransferNotification(bankDetails)
+        sendBankTransferNotificationToAdmin(bankDetails)
       ]).catch((error: Error) => {
         console.error('Erreur lors de l\'envoi des emails de virement:', error);
       });
