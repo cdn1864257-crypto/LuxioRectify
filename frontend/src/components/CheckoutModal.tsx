@@ -106,7 +106,6 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
         const paymentResult = await initializeNowPayment(order, formData.email, customerName);
         
         if (paymentResult.success && paymentResult.redirectUrl) {
-          clearCart();
           onClose();
           showToast(`${t('orderPlaced')} ${orderRef}. Redirecting to payment...`, 'success');
           

@@ -43,23 +43,76 @@ export default function NewPayment() {
   const { language } = useLanguage();
   const t = translations[language] || translations.en;
 
+  // Check for NowPayments return
+  const urlParams = new URLSearchParams(window.location.search);
+  const paymentSuccess = urlParams.get('success') === 'true';
+  const paymentCancelled = urlParams.get('cancelled') === 'true';
+  const paymentPending = urlParams.get('pending') === 'true';
+  const paymentError = urlParams.get('error') === 'true';
+  const orderRef = urlParams.get('order');
+  const fromNowPayments = paymentSuccess || paymentCancelled || paymentPending || paymentError;
+
   useEffect(() => {
     if (!user) {
       navigate('/?login=true');
       return;
     }
+
+    // If returning from NowPayments with success, clear cart and show success message
+    if (paymentSuccess) {
+      if (cart.length > 0) {
+        clearCart();
+      }
+      toast({
+        title: "Paiement réussi !",
+        description: orderRef ? `Commande ${orderRef} confirmée` : "Votre commande a été confirmée",
+      });
+      setTimeout(() => navigate('/dashboard'), 3000);
+      return;
+    }
+
+    // If returning from NowPayments with cancellation
+    if (paymentCancelled) {
+      toast({
+        title: "Paiement annulé",
+        description: "Le paiement a été annulé. Votre panier est toujours disponible.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // If returning from NowPayments with pending status
+    if (paymentPending) {
+      toast({
+        title: "Paiement en attente",
+        description: "Votre paiement est en cours de traitement. Vous recevrez une confirmation par email.",
+      });
+      return;
+    }
+
+    // If returning from NowPayments with error
+    if (paymentError) {
+      toast({
+        title: t.error,
+        description: "Une erreur s'est produite lors du paiement. Veuillez réessayer.",
+        variant: "destructive",
+      });
+      return;
+    }
     
-    if (cart.length === 0 && !isConfirmingOrder && !showBankModal && !showTicketModal) {
+    // Only redirect to cart if cart is empty AND we're not returning from NowPayments
+    if (cart.length === 0 && !isConfirmingOrder && !showBankModal && !showTicketModal && !fromNowPayments) {
       navigate('/cart');
       return;
     }
-  }, [user, cart, navigate, isConfirmingOrder, showBankModal, showTicketModal]);
+  }, [user, cart, navigate, isConfirmingOrder, showBankModal, showTicketModal, paymentSuccess, paymentCancelled, paymentPending, paymentError, orderRef, clearCart, toast, fromNowPayments, t]);
 
   if (!user) {
     return null;
   }
 
-  if (cart.length === 0 && !isConfirmingOrder && !showBankModal && !showTicketModal) {
+  // Allow rendering if cart has items OR if returning from NowPayments OR if confirming order
+  if (cart.length === 0 && !isConfirmingOrder && !showBankModal && !showTicketModal && !fromNowPayments) {
     return null;
   }
 
@@ -126,8 +179,8 @@ export default function NewPayment() {
   const handleNowPayments = async () => {
     setIsProcessing(true);
     toast({
-      title: t.redirectingToNowPayments,
-      description: t.redirectingToNowPaymentsDescription
+      title: t.redirectingToCryptoPayment || "Redirection vers NOWPayments",
+      description: "Vous allez être redirigé vers la page de paiement sécurisée..."
     });
 
     try {
@@ -150,7 +203,6 @@ export default function NewPayment() {
       const data = await response.json();
 
       if (data.success && data.redirectUrl) {
-        clearCart();
         window.location.href = data.redirectUrl;
       } else {
         throw new Error(data.error || t.paymentInitError);
