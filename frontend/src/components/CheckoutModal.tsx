@@ -528,25 +528,25 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                     </div>
                   )}
 
-                  {/* MaxelPay */}
-                  <label className={`flex items-start p-4 border-2 rounded-xl cursor-pointer hover:bg-muted/50 transition-all ${paymentMethod === 'maxelpay' ? 'border-primary bg-primary/5 shadow-md' : 'border-border'}`}>
+                  {/* NowPayments */}
+                  <label className={`flex items-start p-4 border-2 rounded-xl cursor-pointer hover:bg-muted/50 transition-all ${paymentMethod === 'nowpayments' ? 'border-primary bg-primary/5 shadow-md' : 'border-border'}`}>
                     <input 
                       type="radio" 
                       name="payment" 
-                      value="maxelpay" 
-                      checked={paymentMethod === 'maxelpay'}
+                      value="nowpayments" 
+                      checked={paymentMethod === 'nowpayments'}
                       onChange={(e) => setPaymentMethod(e.target.value as PaymentMethod)}
                       className="mr-3 mt-1 w-4 h-4 text-primary" 
                     />
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-1">
                         <CreditCard className="h-5 w-5 text-primary" />
-                        <span className="font-semibold">{t('maxelPay')}</span>
+                        <span className="font-semibold">{t('nowPayments')}</span>
                         <span className="ml-auto text-green-600 text-xs font-medium px-2 py-1 bg-green-50 dark:bg-green-950/30 rounded-full">
                           {t('active')}
                         </span>
                       </div>
-                      <p className="text-sm text-muted-foreground">{t('maxelPayDescription')}</p>
+                      <p className="text-sm text-muted-foreground">{t('nowPaymentsDescription')}</p>
                     </div>
                   </label>
                 </div>

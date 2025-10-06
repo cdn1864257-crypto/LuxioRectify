@@ -27,8 +27,8 @@ export default function Payment() {
   const [bankTransferConfirmed, setBankTransferConfirmed] = useState(false);
   const [bankTransferData, setBankTransferData] = useState<any>(null);
 
-  // Maxelpay Modal
-  const [maxelpayLoading, setMaxelpayLoading] = useState(false);
+  // NowPayments Modal
+  const [nowpaymentsLoading, setNowpaymentsLoading] = useState(false);
 
   // Tickets Modal
   const [ticketsOpen, setTicketsOpen] = useState(false);
@@ -119,10 +119,10 @@ export default function Payment() {
     }
   };
 
-  const handleMaxelpay = async () => {
-    setMaxelpayLoading(true);
+  const handleNowPayments = async () => {
+    setNowpaymentsLoading(true);
     try {
-      const response = await fetch('/api/payment/maxelpay-init', {
+      const response = await fetch('/api/payment/nowpayments-init', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -147,19 +147,19 @@ export default function Payment() {
       } else {
         toast({
           title: "Erreur",
-          description: data.error || "Impossible d'initialiser le paiement Maxelpay",
+          description: data.error || "Impossible d'initialiser le paiement NowPayments",
           variant: "destructive",
         });
-        setMaxelpayLoading(false);
+        setNowpaymentsLoading(false);
       }
     } catch (error) {
-      console.error('Erreur Maxelpay:', error);
+      console.error('Erreur NowPayments:', error);
       toast({
         title: "Erreur",
-        description: "Impossible de se connecter à Maxelpay",
+        description: "Impossible de se connecter à NowPayments",
         variant: "destructive",
       });
-      setMaxelpayLoading(false);
+      setNowpaymentsLoading(false);
     }
   };
 
@@ -321,28 +321,28 @@ export default function Payment() {
                 </div>
               </Button>
 
-              {/* Maxelpay */}
+              {/* NowPayments */}
               <Button
                 variant="outline"
                 className="w-full justify-start h-auto py-6 px-6 border-2 border-primary/20 bg-primary/5"
-                onClick={handleMaxelpay}
-                disabled={maxelpayLoading}
-                data-testid="button-maxelpay"
+                onClick={handleNowPayments}
+                disabled={nowpaymentsLoading}
+                data-testid="button-nowpayments"
               >
                 <div className="flex items-center gap-4 w-full">
                   <CreditCard className="h-6 w-6 text-primary" />
                   <div className="flex-1 text-left">
                     <div className="font-semibold text-base flex items-center gap-2">
-                      Maxelpay
+                      NowPayments
                       <span className="text-xs bg-primary text-primary-foreground px-2 py-0.5 rounded-full">
                         Recommandé
                       </span>
                     </div>
                     <div className="text-sm text-muted-foreground">
-                      Paiement par carte bancaire sécurisé
+                      Paiement par cryptocurrency sécurisé
                     </div>
                   </div>
-                  {maxelpayLoading && <Loader2 className="h-5 w-5 animate-spin" />}
+                  {nowpaymentsLoading && <Loader2 className="h-5 w-5 animate-spin" />}
                 </div>
               </Button>
 

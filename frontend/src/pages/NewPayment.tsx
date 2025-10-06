@@ -16,7 +16,7 @@ import { ArrowLeft, ShoppingBag, CreditCard, Building2, Ticket, Zap, X, Copy, Ch
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/lib/translations';
 
-type PaymentMethod = 'bank-transfer' | 'maxelpay' | 'pcs-transcash';
+type PaymentMethod = 'bank-transfer' | 'nowpayments' | 'pcs-transcash';
 type TicketType = 'PCS' | 'TransCash';
 
 interface TicketCode {
@@ -29,7 +29,7 @@ export default function NewPayment() {
   const { cart, total, clearCart } = useCart();
   const [, navigate] = useLocation();
   const [cartOpen, setCartOpen] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('maxelpay');
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('nowpayments');
   const [isProcessing, setIsProcessing] = useState(false);
   const [showBankModal, setShowBankModal] = useState(false);
   const [showBankConfirmModal, setShowBankConfirmModal] = useState(false);
@@ -123,15 +123,15 @@ export default function NewPayment() {
     }
   };
 
-  const handleMaxelpay = async () => {
+  const handleNowPayments = async () => {
     setIsProcessing(true);
     toast({
-      title: t.redirectingToMaxelPay,
-      description: t.redirectingToMaxelPayDescription
+      title: t.redirectingToNowPayments,
+      description: t.redirectingToNowPaymentsDescription
     });
 
     try {
-      const response = await fetch('/api/payment/maxelpay-init', {
+      const response = await fetch('/api/payment/nowpayments-init', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -226,8 +226,8 @@ export default function NewPayment() {
   const handlePayment = () => {
     if (paymentMethod === 'bank-transfer') {
       handleBankTransferClick();
-    } else if (paymentMethod === 'maxelpay') {
-      handleMaxelpay();
+    } else if (paymentMethod === 'nowpayments') {
+      handleNowPayments();
     } else if (paymentMethod === 'pcs-transcash') {
       handleTicketPayment();
     }
@@ -335,15 +335,15 @@ export default function NewPayment() {
             </CardHeader>
             <CardContent className="space-y-6">
               <RadioGroup value={paymentMethod} onValueChange={(value) => setPaymentMethod(value as PaymentMethod)}>
-                <div className="flex items-center space-x-2 p-4 border rounded-lg cursor-pointer hover:bg-accent" onClick={() => setPaymentMethod('maxelpay')}>
-                  <RadioGroupItem value="maxelpay" id="maxelpay" data-testid="radio-maxelpay" />
-                  <Label htmlFor="maxelpay" className="flex-1 cursor-pointer">
+                <div className="flex items-center space-x-2 p-4 border rounded-lg cursor-pointer hover:bg-accent" onClick={() => setPaymentMethod('nowpayments')}>
+                  <RadioGroupItem value="nowpayments" id="nowpayments" data-testid="radio-nowpayments" />
+                  <Label htmlFor="nowpayments" className="flex-1 cursor-pointer">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <Zap className="h-5 w-5 text-primary" />
                         <div>
-                          <p className="font-semibold">{t.maxelPay}</p>
-                          <p className="text-sm text-muted-foreground">{t.maxelPayDescription}</p>
+                          <p className="font-semibold">{t.nowPayments}</p>
+                          <p className="text-sm text-muted-foreground">{t.nowPaymentsDescription}</p>
                         </div>
                       </div>
                       <span className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded">

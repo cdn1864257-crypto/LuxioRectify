@@ -26,7 +26,7 @@ interface JWTPayload {
 interface NormalizedOrder {
   orderId: string;
   orderReference: string;
-  paymentMethod: 'bank_transfer' | 'maxelpay' | 'pcs_transcash';
+  paymentMethod: 'bank_transfer' | 'nowpayments' | 'pcs_transcash';
   status: string;
   totalAmount: number;
   createdAt: Date;
@@ -115,7 +115,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         },
         {
           $unionWith: {
-            coll: 'maxelpay_orders',
+            coll: 'nowpayments_orders',
             pipeline: [
               {
                 $match: { customerEmail: normalizedEmail }
@@ -126,7 +126,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
                   orderReference: {
                     $ifNull: ['$orderReference', { $toString: '$_id' }]
                   },
-                  paymentMethod: 'maxelpay',
+                  paymentMethod: 'nowpayments',
                   status: { $ifNull: ['$status', 'pending'] },
                   totalAmount: { $ifNull: ['$totalAmount', 0] },
                   createdAt: { $ifNull: ['$createdAt', '$$NOW'] },

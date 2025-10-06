@@ -11,8 +11,9 @@ import logoutHandler from '../api/auth/logout';
 import changePasswordHandler from '../api/auth/change-password';
 import submitOrderHandler from '../api/payment/submit-order';
 import bankTransferHandler from '../api/payment/bank-transfer';
-import maxelpayReturnHandler from '../api/payment/maxelpay-return';
-import maxelpayInitHandler from '../api/payment/maxelpay-init';
+import nowpaymentsReturnHandler from '../api/payment/nowpayments-return';
+import nowpaymentsInitHandler from '../api/payment/nowpayments-init';
+import nowpaymentsWebhookHandler from '../api/payment/nowpayments-webhook';
 import ordersHandler from '../api/orders';
 import deleteOrderHandler from '../api/orders/[orderId]';
 
@@ -93,8 +94,9 @@ app.use('/api/auth/change-password', convertVercelHandler(changePasswordHandler)
 // Payment routes
 app.use('/api/payment/submit-order', convertVercelHandler(submitOrderHandler));
 app.use('/api/payment/bank-transfer', convertVercelHandler(bankTransferHandler));
-app.use('/api/payment/maxelpay-init', convertVercelHandler(maxelpayInitHandler));
-app.use('/api/payment/maxelpay-return', convertVercelHandler(maxelpayReturnHandler));
+app.use('/api/payment/nowpayments-init', convertVercelHandler(nowpaymentsInitHandler));
+app.use('/api/payment/nowpayments-return', convertVercelHandler(nowpaymentsReturnHandler));
+app.post('/api/payment/nowpayments-webhook', convertVercelHandler(nowpaymentsWebhookHandler));
 
 // Orders routes
 app.delete('/api/orders/:orderId', convertVercelHandler(deleteOrderHandler));

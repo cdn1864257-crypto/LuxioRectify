@@ -82,7 +82,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const normalizedEmail = userEmail.toLowerCase();
 
       // Try to find and delete the order from all possible collections
-      const collections = ['bank_transfer_orders', 'maxelpay_orders', 'orders'];
+      const collections = ['bank_transfer_orders', 'nowpayments_orders', 'orders'];
       let deletedCount = 0;
 
       for (const collectionName of collections) {
