@@ -18,21 +18,22 @@ interface VercelResponse {
 }
 
 async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== 'GET' && req.method !== 'POST') {
-    res.setHeader('Allow', ['GET', 'POST']);
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', ['POST']);
     return res.status(405).json({ error: `Method ${req.method} Not Allowed` });
   }
 
   try {
-    const params = req.method === 'GET' ? req.query : req.body;
-    
-    const orderId = params.orderID || params.orderId || params.reference;
-    const status = params.status;
-    const transactionId = params.transactionId || params.transactionHash || params.txHash;
+    const {
+      orderID,
+      status,
+      transactionId,
+      transactionHash
+    } = req.body;
 
-    if (!orderId) {
+    if (!orderID || !status) {
       return res.status(400).json({
-        error: 'Données MaxelPay incomplètes - orderID manquant'
+        error: 'Données webhook MaxelPay incomplètes'
       });
     }
 
@@ -49,8 +50,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const db = client.db('luxio');
       const ordersCollection = db.collection('maxelpay_orders');
 
-      // Récupérer la commande pour obtenir les informations et la langue
-      const order = await ordersCollection.findOne({ orderReference: orderId });
+      const order = await ordersCollection.findOne({ orderReference: orderID });
 
       if (!order) {
         return res.status(404).json({
@@ -63,11 +63,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
                            status === 'pending' ? 'pending' : 'unknown';
 
       await ordersCollection.updateOne(
-        { orderReference: orderId },
+        { orderReference: orderID },
         {
           $set: {
             paymentStatus: paymentStatus,
-            transactionId: transactionId || null,
+            transactionId: transactionId || transactionHash || null,
             paidAt: paymentStatus === 'success' ? new Date() : null,
             updatedAt: new Date()
           }
@@ -80,7 +80,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
           customerEmail: order.customerEmail,
           customerName: order.customerName,
           totalAmount: order.totalAmount,
-          transactionId: transactionId || '',
+          transactionId: transactionId || transactionHash || '',
           cartItems: order.cartItems || [],
           language: order.language || 'fr'
         };
@@ -91,32 +91,20 @@ async function handler(req: VercelRequest, res: VercelResponse) {
             sendMaxelPayNotificationToAdmin(maxelPayOrder)
           ]);
         } catch (error) {
-          console.error('Erreur lors de l\'envoi des emails Maxelpay:', error);
+          console.error('Erreur lors de l\'envoi des emails MaxelPay:', error);
         }
-      }
-
-      const redirectUrl = paymentStatus === 'success' 
-        ? `${req.headers.origin || 'https://luxio-shop.eu'}/payment?success=true&order=${orderId}`
-        : `${req.headers.origin || 'https://luxio-shop.eu'}/payment?cancelled=true`;
-
-      if (req.method === 'GET') {
-        res.setHeader('Location', redirectUrl);
-        return res.status(302).end();
       }
 
       return res.status(200).json({
         success: true,
-        message: 'Statut de paiement mis à jour',
-        orderId,
-        status: paymentStatus,
-        redirectUrl
+        message: 'Webhook traité avec succès'
       });
     } finally {
       await client.close();
     }
 
   } catch (error) {
-    console.error('Erreur lors du traitement du retour Maxelpay:', error);
+    console.error('Erreur lors du traitement du webhook MaxelPay:', error);
     return res.status(500).json({
       error: 'Erreur serveur',
       details: error instanceof Error ? error.message : 'Unknown error'
