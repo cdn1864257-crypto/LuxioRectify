@@ -59,7 +59,7 @@ export interface EmailTranslations {
 export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
   fr: {
     // Subjects
-    subject_welcome: 'Bienvenue chez Luxio',
+    subject_welcome: 'Bienvenue chez Luxio – Votre compte a été créé avec succès',
     subject_order_confirm: 'Confirmation de commande – Luxio',
     subject_ticket_confirm: 'Confirmation de commande – Luxio',
     subject_crypto_confirm: 'Confirmation de commande – Luxio',
@@ -67,42 +67,42 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     
     // Common
     hello: 'Bonjour',
-    team_signature: 'Équipe Luxio',
-    footer_note: 'Cet email a été envoyé automatiquement.',
-    access_dashboard: 'Accéder à mon espace',
+    team_signature: 'Cordialement,\nL\'équipe Luxio\nVotre partenaire de confiance pour des produits premium',
+    footer_note: 'Cet email a été envoyé automatiquement. Pour toute question, notre équipe est disponible 7j/7 à infos@luxioshopping.com',
+    access_dashboard: 'Accéder à mon espace client',
     
     // Welcome Email
-    welcome_title: 'Bienvenue chez Luxio',
-    welcome_message: 'Nous sommes ravis de vous compter parmi nous. Découvrez dès maintenant notre sélection de produits premium.',
-    discover_products: 'Découvrir nos produits',
+    welcome_title: 'Bienvenue dans l\'univers Luxio ! 🎉',
+    welcome_message: 'Merci d\'avoir rejoint Luxio, votre destination privilégiée pour des produits tech premium de haute qualité.\n\nVotre compte a été créé avec succès et vous pouvez dès maintenant profiter de notre catalogue exclusif de smartphones, montres connectées, sneakers et gadgets high-tech.\n\nChez Luxio, nous nous engageons à vous offrir :\n• Une sélection rigoureuse de produits premium authentiques\n• Une livraison rapide et sécurisée sous 24-72h\n• Un service client réactif disponible 7j/7\n• Des garanties constructeur de 2 ans sur tous nos produits',
+    discover_products: 'Découvrir notre catalogue',
     
     // Order Confirmation
-    order_confirmed: 'Commande confirmée',
-    order_received: 'Nous avons bien reçu votre commande.',
-    order_number: 'Commande',
-    total_amount: 'Montant',
-    payment_method: 'Paiement',
-    status: 'Statut',
+    order_confirmed: 'Votre commande a été confirmée avec succès ! ✓',
+    order_received: 'Nous vous confirmons la bonne réception de votre commande. Notre équipe prépare déjà votre colis avec le plus grand soin.\n\nVous recevrez un email de suivi dès l\'expédition de vos articles.',
+    order_number: 'Numéro de commande',
+    total_amount: 'Montant total',
+    payment_method: 'Mode de paiement',
+    status: 'Statut de la commande',
     
     // Bank Transfer
-    bank_instructions: 'Veuillez effectuer votre virement avec les informations suivantes :',
+    bank_instructions: 'Pour finaliser votre commande, veuillez effectuer un virement bancaire en utilisant les coordonnées ci-dessous.\n\nIMPORTANT : Merci d\'indiquer le motif exact du virement pour un traitement rapide de votre commande.',
     beneficiary: 'Bénéficiaire',
     iban: 'IBAN',
-    bic: 'BIC',
-    transfer_reason: 'Motif',
-    delivery_time: 'Livraison sous 24-72h après réception du virement.',
-    proof_instruction: 'Pour accélérer la vérification, envoyez votre preuve de virement à infos@luxioshopping.com',
+    bic: 'BIC / SWIFT',
+    transfer_reason: 'Motif du virement (obligatoire)',
+    delivery_time: '📦 Livraison express sous 24-72h après validation de votre virement\n🔒 Emballage sécurisé et discret\n📍 Suivi de colis en temps réel',
+    proof_instruction: '⚡ ASTUCE : Pour un traitement prioritaire, envoyez-nous votre justificatif de virement à infos@luxioshopping.com. Cela nous permettra de traiter votre commande jusqu\'à 48h plus rapidement.',
     
     // Ticket Payment
-    ticket_type: 'Type de ticket',
+    ticket_type: 'Type de ticket prépayé',
     codes_submitted: 'Codes soumis',
-    pending_validation: 'En attente de validation',
-    validation_time: 'Validation sous 24-48h après vérification.',
+    pending_validation: 'En cours de validation',
+    validation_time: '⏱️ Validation en cours : Votre commande sera confirmée sous 24-48h après vérification de vos codes.\n\nNotre équipe vérifie manuellement chaque ticket pour garantir la sécurité de votre transaction.\n\nVous recevrez un email de confirmation dès validation.',
     
     // Crypto Payment
-    transaction_id: 'Transaction',
-    payment_received: 'Votre paiement a bien été reçu.',
-    verification_message: 'Livraison après vérification blockchain.',
+    transaction_id: 'ID de transaction blockchain',
+    payment_received: 'Excellent ! Votre paiement cryptomonnaie a été détecté avec succès sur la blockchain.',
+    verification_message: '🔐 Sécurité blockchain : Nous attendons les confirmations réseau nécessaires avant d\'expédier votre commande.\n\n⏱️ Temps estimé : 1-6 confirmations blockchain (généralement sous 60 minutes)\n📦 Expédition immédiate après validation complète',
     
     // Admin Notifications
     new_order_received: 'Nouvelle commande',
@@ -114,7 +114,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
   },
   en: {
     // Subjects
-    subject_welcome: 'Welcome to Luxio',
+    subject_welcome: 'Welcome to Luxio – Your account has been created successfully',
     subject_order_confirm: 'Order Confirmation – Luxio',
     subject_ticket_confirm: 'Order Confirmation – Luxio',
     subject_crypto_confirm: 'Order Confirmation – Luxio',
@@ -122,42 +122,42 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     
     // Common
     hello: 'Hello',
-    team_signature: 'Luxio Team',
-    footer_note: 'This email was sent automatically.',
-    access_dashboard: 'Access my dashboard',
+    team_signature: 'Best regards,\nThe Luxio Team\nYour trusted partner for premium products',
+    footer_note: 'This email was sent automatically. For any questions, our team is available 7 days a week at infos@luxioshopping.com',
+    access_dashboard: 'Access my customer area',
     
     // Welcome Email
-    welcome_title: 'Welcome to Luxio',
-    welcome_message: 'We are thrilled to have you with us. Discover our premium product selection now.',
-    discover_products: 'Discover our products',
+    welcome_title: 'Welcome to the Luxio universe! 🎉',
+    welcome_message: 'Thank you for joining Luxio, your preferred destination for premium high-quality tech products.\n\nYour account has been created successfully and you can now enjoy our exclusive catalog of smartphones, smartwatches, sneakers, and high-tech gadgets.\n\nAt Luxio, we are committed to providing you with:\n• Carefully selected authentic premium products\n• Fast and secure delivery within 24-72h\n• Responsive customer service available 7 days a week\n• 2-year manufacturer warranties on all our products',
+    discover_products: 'Discover our catalog',
     
     // Order Confirmation
-    order_confirmed: 'Order confirmed',
-    order_received: 'We have received your order.',
-    order_number: 'Order',
-    total_amount: 'Amount',
-    payment_method: 'Payment',
-    status: 'Status',
+    order_confirmed: 'Your order has been confirmed successfully! ✓',
+    order_received: 'We confirm receipt of your order. Our team is already carefully preparing your package.\n\nYou will receive a tracking email as soon as your items are shipped.',
+    order_number: 'Order number',
+    total_amount: 'Total amount',
+    payment_method: 'Payment method',
+    status: 'Order status',
     
     // Bank Transfer
-    bank_instructions: 'Please complete your bank transfer using the following details:',
+    bank_instructions: 'To finalize your order, please make a bank transfer using the details below.\n\nIMPORTANT: Please include the exact transfer reference for quick processing of your order.',
     beneficiary: 'Beneficiary',
     iban: 'IBAN',
-    bic: 'BIC',
-    transfer_reason: 'Reference',
-    delivery_time: 'Delivery within 24-72h after payment receipt.',
-    proof_instruction: 'To speed up verification, send your payment proof to infos@luxioshopping.com',
+    bic: 'BIC / SWIFT',
+    transfer_reason: 'Transfer reference (required)',
+    delivery_time: '📦 Express delivery within 24-72h after payment validation\n🔒 Secure and discreet packaging\n📍 Real-time parcel tracking',
+    proof_instruction: '⚡ TIP: For priority processing, send us your payment proof to infos@luxioshopping.com. This will allow us to process your order up to 48 hours faster.',
     
     // Ticket Payment
-    ticket_type: 'Ticket type',
+    ticket_type: 'Prepaid ticket type',
     codes_submitted: 'Codes submitted',
-    pending_validation: 'Pending validation',
-    validation_time: 'Validation within 24-48h after verification.',
+    pending_validation: 'Under validation',
+    validation_time: '⏱️ Validation in progress: Your order will be confirmed within 24-48h after code verification.\n\nOur team manually verifies each ticket to ensure the security of your transaction.\n\nYou will receive a confirmation email upon validation.',
     
     // Crypto Payment
-    transaction_id: 'Transaction',
-    payment_received: 'Your payment has been received.',
-    verification_message: 'Delivery after blockchain verification.',
+    transaction_id: 'Blockchain transaction ID',
+    payment_received: 'Excellent! Your cryptocurrency payment has been successfully detected on the blockchain.',
+    verification_message: '🔐 Blockchain security: We are waiting for the necessary network confirmations before shipping your order.\n\n⏱️ Estimated time: 1-6 blockchain confirmations (usually under 60 minutes)\n📦 Immediate shipping after full validation',
     
     // Admin Notifications
     new_order_received: 'New Order',
@@ -169,7 +169,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
   },
   es: {
     // Subjects
-    subject_welcome: 'Bienvenido a Luxio',
+    subject_welcome: 'Bienvenido a Luxio – Su cuenta ha sido creada con éxito',
     subject_order_confirm: 'Confirmación de pedido – Luxio',
     subject_ticket_confirm: 'Confirmación de pedido – Luxio',
     subject_crypto_confirm: 'Confirmación de pedido – Luxio',
@@ -177,42 +177,42 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     
     // Common
     hello: 'Hola',
-    team_signature: 'Equipo Luxio',
-    footer_note: 'Este correo fue enviado automáticamente.',
-    access_dashboard: 'Acceder a mi panel',
+    team_signature: 'Cordialmente,\nEl equipo Luxio\nSu socio de confianza para productos premium',
+    footer_note: 'Este correo fue enviado automáticamente. Para cualquier pregunta, nuestro equipo está disponible 7 días a la semana en infos@luxioshopping.com',
+    access_dashboard: 'Acceder a mi área de cliente',
     
     // Welcome Email
-    welcome_title: 'Bienvenido a Luxio',
-    welcome_message: 'Estamos encantados de tenerte con nosotros. Descubre ahora nuestra selección de productos premium.',
-    discover_products: 'Descubrir nuestros productos',
+    welcome_title: '¡Bienvenido al universo Luxio! 🎉',
+    welcome_message: 'Gracias por unirse a Luxio, su destino preferido para productos tecnológicos premium de alta calidad.\n\nSu cuenta ha sido creada con éxito y ya puede disfrutar de nuestro catálogo exclusivo de smartphones, relojes inteligentes, zapatillas y gadgets de alta tecnología.\n\nEn Luxio, nos comprometemos a ofrecerle:\n• Una selección rigurosa de productos premium auténticos\n• Entrega rápida y segura en 24-72h\n• Servicio al cliente receptivo disponible 7 días a la semana\n• Garantías del fabricante de 2 años en todos nuestros productos',
+    discover_products: 'Descubrir nuestro catálogo',
     
     // Order Confirmation
-    order_confirmed: 'Pedido confirmado',
-    order_received: 'Hemos recibido su pedido.',
-    order_number: 'Pedido',
-    total_amount: 'Monto',
-    payment_method: 'Pago',
-    status: 'Estado',
+    order_confirmed: '¡Su pedido ha sido confirmado con éxito! ✓',
+    order_received: 'Confirmamos la recepción de su pedido. Nuestro equipo ya está preparando cuidadosamente su paquete.\n\nRecibirá un correo de seguimiento tan pronto como se envíen sus artículos.',
+    order_number: 'Número de pedido',
+    total_amount: 'Monto total',
+    payment_method: 'Método de pago',
+    status: 'Estado del pedido',
     
     // Bank Transfer
-    bank_instructions: 'Por favor, realice su transferencia con los siguientes datos:',
+    bank_instructions: 'Para finalizar su pedido, realice una transferencia bancaria usando los datos a continuación.\n\nIMPORTANTE: Por favor incluya la referencia exacta de la transferencia para un procesamiento rápido de su pedido.',
     beneficiary: 'Beneficiario',
     iban: 'IBAN',
-    bic: 'BIC',
-    transfer_reason: 'Motivo',
-    delivery_time: 'Entrega en 24-72h después de recibir el pago.',
-    proof_instruction: 'Para acelerar la verificación, envíe su comprobante de pago a infos@luxioshopping.com',
+    bic: 'BIC / SWIFT',
+    transfer_reason: 'Referencia de transferencia (obligatoria)',
+    delivery_time: '📦 Entrega exprés en 24-72h después de la validación del pago\n🔒 Embalaje seguro y discreto\n📍 Seguimiento de paquete en tiempo real',
+    proof_instruction: '⚡ CONSEJO: Para un procesamiento prioritario, envíenos su comprobante de pago a infos@luxioshopping.com. Esto nos permitirá procesar su pedido hasta 48 horas más rápido.',
     
     // Ticket Payment
-    ticket_type: 'Tipo de ticket',
+    ticket_type: 'Tipo de ticket prepago',
     codes_submitted: 'Códigos enviados',
-    pending_validation: 'Pendiente de validación',
-    validation_time: 'Validación en 24-48h después de verificación.',
+    pending_validation: 'En validación',
+    validation_time: '⏱️ Validación en curso: Su pedido será confirmado en 24-48h después de la verificación de los códigos.\n\nNuestro equipo verifica manualmente cada ticket para garantizar la seguridad de su transacción.\n\nRecibirá un correo de confirmación tras la validación.',
     
     // Crypto Payment
-    transaction_id: 'Transacción',
-    payment_received: 'Su pago ha sido recibido.',
-    verification_message: 'Entrega después de verificación blockchain.',
+    transaction_id: 'ID de transacción blockchain',
+    payment_received: '¡Excelente! Su pago en criptomoneda ha sido detectado con éxito en la blockchain.',
+    verification_message: '🔐 Seguridad blockchain: Esperamos las confirmaciones de red necesarias antes de enviar su pedido.\n\n⏱️ Tiempo estimado: 1-6 confirmaciones blockchain (generalmente menos de 60 minutos)\n📦 Envío inmediato después de la validación completa',
     
     // Admin Notifications
     new_order_received: 'Nuevo Pedido',
@@ -224,7 +224,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
   },
   pt: {
     // Subjects
-    subject_welcome: 'Bem-vindo ao Luxio',
+    subject_welcome: 'Bem-vindo ao Luxio – Sua conta foi criada com sucesso',
     subject_order_confirm: 'Confirmação de pedido – Luxio',
     subject_ticket_confirm: 'Confirmação de pedido – Luxio',
     subject_crypto_confirm: 'Confirmação de pedido – Luxio',
@@ -232,42 +232,42 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     
     // Common
     hello: 'Olá',
-    team_signature: 'Equipe Luxio',
-    footer_note: 'Este email foi enviado automaticamente.',
-    access_dashboard: 'Acessar meu painel',
+    team_signature: 'Cordialmente,\nA equipe Luxio\nSeu parceiro de confiança para produtos premium',
+    footer_note: 'Este email foi enviado automaticamente. Para qualquer pergunta, nossa equipe está disponível 7 dias por semana em infos@luxioshopping.com',
+    access_dashboard: 'Acessar minha área de cliente',
     
     // Welcome Email
-    welcome_title: 'Bem-vindo ao Luxio',
-    welcome_message: 'Estamos felizes em tê-lo conosco. Descubra agora nossa seleção de produtos premium.',
-    discover_products: 'Descobrir nossos produtos',
+    welcome_title: 'Bem-vindo ao universo Luxio! 🎉',
+    welcome_message: 'Obrigado por se juntar ao Luxio, seu destino preferido para produtos tecnológicos premium de alta qualidade.\n\nSua conta foi criada com sucesso e você já pode aproveitar nosso catálogo exclusivo de smartphones, relógios inteligentes, tênis e gadgets de alta tecnologia.\n\nNo Luxio, estamos comprometidos em oferecer a você:\n• Uma seleção rigorosa de produtos premium autênticos\n• Entrega rápida e segura em 24-72h\n• Atendimento ao cliente responsivo disponível 7 dias por semana\n• Garantias do fabricante de 2 anos em todos os nossos produtos',
+    discover_products: 'Descobrir nosso catálogo',
     
     // Order Confirmation
-    order_confirmed: 'Pedido confirmado',
-    order_received: 'Recebemos seu pedido.',
-    order_number: 'Pedido',
-    total_amount: 'Valor',
-    payment_method: 'Pagamento',
-    status: 'Status',
+    order_confirmed: 'Seu pedido foi confirmado com sucesso! ✓',
+    order_received: 'Confirmamos o recebimento do seu pedido. Nossa equipe já está preparando cuidadosamente seu pacote.\n\nVocê receberá um email de rastreamento assim que seus itens forem enviados.',
+    order_number: 'Número do pedido',
+    total_amount: 'Valor total',
+    payment_method: 'Método de pagamento',
+    status: 'Status do pedido',
     
     // Bank Transfer
-    bank_instructions: 'Por favor, faça sua transferência com as seguintes informações:',
+    bank_instructions: 'Para finalizar seu pedido, faça uma transferência bancária usando os dados abaixo.\n\nIMPORTANTE: Por favor, inclua a referência exata da transferência para um processamento rápido do seu pedido.',
     beneficiary: 'Beneficiário',
     iban: 'IBAN',
-    bic: 'BIC',
-    transfer_reason: 'Motivo',
-    delivery_time: 'Entrega em 24-72h após recebimento do pagamento.',
-    proof_instruction: 'Para acelerar a verificação, envie seu comprovante de pagamento para infos@luxioshopping.com',
+    bic: 'BIC / SWIFT',
+    transfer_reason: 'Referência da transferência (obrigatória)',
+    delivery_time: '📦 Entrega expressa em 24-72h após validação do pagamento\n🔒 Embalagem segura e discreta\n📍 Rastreamento de pacote em tempo real',
+    proof_instruction: '⚡ DICA: Para processamento prioritário, envie-nos seu comprovante de pagamento para infos@luxioshopping.com. Isso nos permitirá processar seu pedido até 48 horas mais rápido.',
     
     // Ticket Payment
-    ticket_type: 'Tipo de ticket',
+    ticket_type: 'Tipo de ticket pré-pago',
     codes_submitted: 'Códigos enviados',
-    pending_validation: 'Pendente de validação',
-    validation_time: 'Validação em 24-48h após verificação.',
+    pending_validation: 'Em validação',
+    validation_time: '⏱️ Validação em andamento: Seu pedido será confirmado em 24-48h após verificação dos códigos.\n\nNossa equipe verifica manualmente cada ticket para garantir a segurança da sua transação.\n\nVocê receberá um email de confirmação após a validação.',
     
     // Crypto Payment
-    transaction_id: 'Transação',
-    payment_received: 'Seu pagamento foi recebido.',
-    verification_message: 'Entrega após verificação blockchain.',
+    transaction_id: 'ID da transação blockchain',
+    payment_received: 'Excelente! Seu pagamento em criptomoeda foi detectado com sucesso na blockchain.',
+    verification_message: '🔐 Segurança blockchain: Estamos aguardando as confirmações de rede necessárias antes de enviar seu pedido.\n\n⏱️ Tempo estimado: 1-6 confirmações blockchain (geralmente menos de 60 minutos)\n📦 Envio imediato após validação completa',
     
     // Admin Notifications
     new_order_received: 'Novo Pedido',
@@ -279,7 +279,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
   },
   pl: {
     // Subjects
-    subject_welcome: 'Witamy w Luxio',
+    subject_welcome: 'Witamy w Luxio – Twoje konto zostało pomyślnie utworzone',
     subject_order_confirm: 'Potwierdzenie zamówienia – Luxio',
     subject_ticket_confirm: 'Potwierdzenie zamówienia – Luxio',
     subject_crypto_confirm: 'Potwierdzenie zamówienia – Luxio',
@@ -287,42 +287,42 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     
     // Common
     hello: 'Cześć',
-    team_signature: 'Zespół Luxio',
-    footer_note: 'Ten email został wysłany automatycznie.',
-    access_dashboard: 'Dostęp do mojego panelu',
+    team_signature: 'Z poważaniem,\nZespół Luxio\nTwój zaufany partner dla produktów premium',
+    footer_note: 'Ten email został wysłany automatycznie. W razie pytań, nasz zespół jest dostępny 7 dni w tygodniu pod adresem infos@luxioshopping.com',
+    access_dashboard: 'Dostęp do mojego obszaru klienta',
     
     // Welcome Email
-    welcome_title: 'Witamy w Luxio',
-    welcome_message: 'Cieszymy się, że jesteś z nami. Odkryj teraz naszą ofertę produktów premium.',
-    discover_products: 'Odkryj nasze produkty',
+    welcome_title: 'Witamy w uniwersum Luxio! 🎉',
+    welcome_message: 'Dziękujemy za dołączenie do Luxio, Twojego preferowanego miejsca dla premium produktów technologicznych wysokiej jakości.\n\nTwoje konto zostało pomyślnie utworzone i możesz teraz cieszyć się naszym ekskluzywnym katalogiem smartfonów, zegarków inteligentnych, butów i gadżetów high-tech.\n\nW Luxio zobowiązujemy się zapewnić Ci:\n• Starannie wyselekcjonowane autentyczne produkty premium\n• Szybką i bezpieczną dostawę w ciągu 24-72h\n• Responsywną obsługę klienta dostępną 7 dni w tygodniu\n• 2-letnią gwarancję producenta na wszystkie nasze produkty',
+    discover_products: 'Odkryj nasz katalog',
     
     // Order Confirmation
-    order_confirmed: 'Zamówienie potwierdzone',
-    order_received: 'Otrzymaliśmy Twoje zamówienie.',
-    order_number: 'Zamówienie',
-    total_amount: 'Kwota',
-    payment_method: 'Płatność',
-    status: 'Status',
+    order_confirmed: 'Twoje zamówienie zostało pomyślnie potwierdzone! ✓',
+    order_received: 'Potwierdzamy otrzymanie Twojego zamówienia. Nasz zespół już starannie przygotowuje Twoją paczkę.\n\nOtrzymasz email śledzący, gdy tylko Twoje artykuły zostaną wysłane.',
+    order_number: 'Numer zamówienia',
+    total_amount: 'Kwota całkowita',
+    payment_method: 'Metoda płatności',
+    status: 'Status zamówienia',
     
     // Bank Transfer
-    bank_instructions: 'Proszę wykonać przelew z następującymi danymi:',
+    bank_instructions: 'Aby sfinalizować zamówienie, wykonaj przelew bankowy używając poniższych danych.\n\nWAŻNE: Proszę podać dokładny tytuł przelewu dla szybkiego przetworzenia zamówienia.',
     beneficiary: 'Beneficjent',
     iban: 'IBAN',
-    bic: 'BIC',
-    transfer_reason: 'Tytuł',
-    delivery_time: 'Dostawa w ciągu 24-72h po otrzymaniu płatności.',
-    proof_instruction: 'Aby przyspieszyć weryfikację, wyślij potwierdzenie przelewu na infos@luxioshopping.com',
+    bic: 'BIC / SWIFT',
+    transfer_reason: 'Tytuł przelewu (wymagany)',
+    delivery_time: '📦 Dostawa ekspresowa w ciągu 24-72h po walidacji płatności\n🔒 Bezpieczne i dyskretne opakowanie\n📍 Śledzenie paczki w czasie rzeczywistym',
+    proof_instruction: '⚡ WSKAZÓWKA: Dla priorytetowego przetwarzania, wyślij nam potwierdzenie płatności na infos@luxioshopping.com. Pozwoli nam to przetworzyć Twoje zamówienie nawet o 48 godzin szybciej.',
     
     // Ticket Payment
-    ticket_type: 'Typ biletu',
+    ticket_type: 'Typ biletu przedpłaconego',
     codes_submitted: 'Przesłane kody',
-    pending_validation: 'Oczekuje na walidację',
-    validation_time: 'Walidacja w ciągu 24-48h po weryfikacji.',
+    pending_validation: 'W trakcie walidacji',
+    validation_time: '⏱️ Walidacja w toku: Twoje zamówienie zostanie potwierdzone w ciągu 24-48h po weryfikacji kodów.\n\nNasz zespół ręcznie weryfikuje każdy bilet, aby zagwarantować bezpieczeństwo Twojej transakcji.\n\nOtrzymasz email potwierdzający po walidacji.',
     
     // Crypto Payment
-    transaction_id: 'Transakcja',
-    payment_received: 'Otrzymaliśmy Twoją płatność.',
-    verification_message: 'Dostawa po weryfikacji blockchain.',
+    transaction_id: 'ID transakcji blockchain',
+    payment_received: 'Doskonale! Twoja płatność kryptowalutą została pomyślnie wykryta na blockchain.',
+    verification_message: '🔐 Bezpieczeństwo blockchain: Czekamy na niezbędne potwierdzenia sieciowe przed wysłaniem zamówienia.\n\n⏱️ Szacowany czas: 1-6 potwierdzeń blockchain (zazwyczaj poniżej 60 minut)\n📦 Natychmiastowa wysyłka po pełnej walidacji',
     
     // Admin Notifications
     new_order_received: 'Nowe Zamówienie',
@@ -334,7 +334,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
   },
   hu: {
     // Subjects
-    subject_welcome: 'Üdvözöljük a Luxio-nál',
+    subject_welcome: 'Üdvözöljük a Luxio-nál – Fiókja sikeresen létrejött',
     subject_order_confirm: 'Rendelés megerősítése – Luxio',
     subject_ticket_confirm: 'Rendelés megerősítése – Luxio',
     subject_crypto_confirm: 'Rendelés megerősítése – Luxio',
@@ -342,42 +342,42 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     
     // Common
     hello: 'Helló',
-    team_signature: 'Luxio Csapat',
-    footer_note: 'Ez az email automatikusan lett elküldve.',
-    access_dashboard: 'Hozzáférés a vezérlőpulhoz',
+    team_signature: 'Tisztelettel,\nA Luxio Csapat\nAz Ön megbízható partnere prémium termékekhez',
+    footer_note: 'Ez az email automatikusan lett elküldve. Bármilyen kérdés esetén csapatunk elérhető a héten 7 napja az infos@luxioshopping.com címen',
+    access_dashboard: 'Hozzáférés az ügyfél területhez',
     
     // Welcome Email
-    welcome_title: 'Üdvözöljük a Luxio-nál',
-    welcome_message: 'Örülünk, hogy velünk vagy. Fedezd fel prémium termékeinket most.',
-    discover_products: 'Termékek felfedezése',
+    welcome_title: 'Üdvözöljük a Luxio univerzumban! 🎉',
+    welcome_message: 'Köszönjük, hogy csatlakozott a Luxio-hoz, az Ön preferált céljához a prémium minőségű tech termékekért.\n\nFiókja sikeresen létrejött és most már élvezheti exkluzív katalógusunkat okostelefonok, okosórák, cipők és high-tech eszközök terén.\n\nA Luxio-nál elkötelezettek vagyunk, hogy biztosítsuk Önnek:\n• Gondosan válogatott autentikus prémium termékeket\n• Gyors és biztonságos szállítást 24-72 órán belül\n• Reagáló ügyfélszolgálatot, amely elérhető a héten 7 napja\n• 2 éves gyártói garanciát minden termékünkre',
+    discover_products: 'Katalógus felfedezése',
     
     // Order Confirmation
-    order_confirmed: 'Rendelés megerősítve',
-    order_received: 'Megkaptuk a rendelését.',
-    order_number: 'Rendelés',
-    total_amount: 'Összeg',
-    payment_method: 'Fizetés',
-    status: 'Státusz',
+    order_confirmed: 'Rendelése sikeresen megerősítve! ✓',
+    order_received: 'Megerősítjük rendelése beérkezését. Csapatunk már gondosan készíti csomagját.\n\nKövetési emailt fog kapni, amint termékei feladásra kerülnek.',
+    order_number: 'Rendelésszám',
+    total_amount: 'Teljes összeg',
+    payment_method: 'Fizetési mód',
+    status: 'Rendelés státusza',
     
     // Bank Transfer
-    bank_instructions: 'Kérjük, végezze el az utalást az alábbi adatokkal:',
+    bank_instructions: 'Rendelése véglegesítéséhez végezzen banki átutalást az alábbi adatok használatával.\n\nFONTOS: Kérjük, adja meg a pontos átutalási közleményt rendelése gyors feldolgozásához.',
     beneficiary: 'Kedvezményezett',
     iban: 'IBAN',
-    bic: 'BIC',
-    transfer_reason: 'Közlemény',
-    delivery_time: 'Szállítás 24-72 órán belül a fizetés beérkezése után.',
-    proof_instruction: 'A gyorsabb ellenőrzéshez küldje el az átutalási igazolást a infos@luxioshopping.com címre',
+    bic: 'BIC / SWIFT',
+    transfer_reason: 'Átutalási közlemény (kötelező)',
+    delivery_time: '📦 Expressz szállítás 24-72 órán belül a fizetés jóváhagyása után\n🔒 Biztonságos és diszkrét csomagolás\n📍 Valós idejű csomag követés',
+    proof_instruction: '⚡ TIPP: Prioritásos feldolgozáshoz küldje el fizetési igazolását az infos@luxioshopping.com címre. Ez lehetővé teszi számunkra, hogy akár 48 órával gyorsabban feldolgozzuk rendelését.',
     
     // Ticket Payment
-    ticket_type: 'Jegy típusa',
+    ticket_type: 'Előre fizetett jegy típusa',
     codes_submitted: 'Beküldött kódok',
-    pending_validation: 'Érvényesítésre vár',
-    validation_time: 'Érvényesítés 24-48 órán belül ellenőrzés után.',
+    pending_validation: 'Érvényesítés alatt',
+    validation_time: '⏱️ Érvényesítés folyamatban: Rendelése 24-48 órán belül megerősítésre kerül a kódok ellenőrzése után.\n\nCsapatunk manuálisan ellenőrzi minden jegyet tranzakciója biztonságának garantálásához.\n\nMegerősítő emailt fog kapni az érvényesítés után.',
     
     // Crypto Payment
-    transaction_id: 'Tranzakció',
-    payment_received: 'Megkaptuk a fizetését.',
-    verification_message: 'Szállítás blockchain ellenőrzés után.',
+    transaction_id: 'Blockchain tranzakció ID',
+    payment_received: 'Kiváló! Kriptovaluta fizetése sikeresen észlelve lett a blockchainon.',
+    verification_message: '🔐 Blockchain biztonság: Várjuk a szükséges hálózati megerősítéseket rendelése feladása előtt.\n\n⏱️ Becsült idő: 1-6 blockchain megerősítés (általában 60 percen belül)\n📦 Azonnali feladás teljes érvényesítés után',
     
     // Admin Notifications
     new_order_received: 'Új Rendelés',

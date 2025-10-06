@@ -163,13 +163,15 @@ export async function sendWelcomeEmail(
   const htmlContent = getEmailLayout(`
     <h2>${t.welcome_title}</h2>
     <p>${t.hello} <strong>${firstName}</strong>,</p>
-    <p>${t.welcome_message}</p>
+    <p style="white-space: pre-line; line-height: 1.8;">${t.welcome_message}</p>
     
     <div style="text-align: center; margin: 32px 0;">
       <a href="${dashboardUrl}" class="button">${t.discover_products}</a>
     </div>
     
-    <p style="color: #9ca3af; font-size: 14px;">${t.team_signature}</p>
+    <div class="divider"></div>
+    
+    <p style="color: #6b7280; font-size: 14px; white-space: pre-line;">${t.team_signature}</p>
   `, emailLang);
 
   const textContent = `
@@ -219,53 +221,60 @@ export async function sendBankTransferEmail(
   const htmlContent = getEmailLayout(`
     <h2>${t.order_confirmed}</h2>
     <p>${t.hello} <strong>${order.customerName}</strong>,</p>
-    <p>${t.bank_instructions}</p>
+    <p style="white-space: pre-line; line-height: 1.8;">${t.order_received}</p>
     
     <div class="details">
       <table>
         <tr>
           <td>${t.order_number}</td>
-          <td>#${order.orderReference}</td>
+          <td style="font-weight: 600;">#${order.orderReference}</td>
         </tr>
         <tr>
           <td>${t.total_amount}</td>
           <td style="font-size: 18px; font-weight: 600; color: #059669;">${order.totalAmount.toFixed(2)} €</td>
         </tr>
       </table>
-      
-      <div class="divider"></div>
-      
+    </div>
+
+    <div class="divider"></div>
+
+    <h3 style="font-size: 16px; font-weight: 600; color: #111827; margin: 24px 0 16px 0;">💳 Informations de virement</h3>
+    <p style="white-space: pre-line; line-height: 1.8; color: #6b7280; font-size: 14px;">${t.bank_instructions}</p>
+    
+    <div class="details">
       <table>
         <tr>
           <td>${t.beneficiary}</td>
-          <td>Matt Luxio</td>
+          <td style="font-weight: 600;">Matt Luxio</td>
         </tr>
         <tr>
           <td>${t.iban}</td>
-          <td style="font-family: 'Courier New', monospace; font-size: 13px;">ES6115632626383268707364</td>
+          <td style="font-family: 'Courier New', monospace; font-size: 13px; font-weight: 600;">ES6115632626383268707364</td>
         </tr>
         <tr>
           <td>${t.bic}</td>
-          <td style="font-family: 'Courier New', monospace;">NTSBESM1XXX</td>
+          <td style="font-family: 'Courier New', monospace; font-weight: 600;">NTSBESM1XXX</td>
         </tr>
         <tr>
           <td>${t.transfer_reason}</td>
-          <td style="font-weight: 600;">Dépôt + ${order.customerName}</td>
+          <td style="font-weight: 600; color: #dc2626;">Dépôt + ${order.customerName}</td>
         </tr>
       </table>
     </div>
 
-    <p style="font-size: 14px; color: #6b7280;">${t.delivery_time}</p>
+    <p style="white-space: pre-line; line-height: 1.8; font-size: 14px; color: #6b7280; margin: 24px 0;">${t.delivery_time}</p>
     
-    <p style="background-color: #eff6ff; padding: 16px; border-radius: 6px; font-size: 14px; color: #1e40af; margin: 24px 0;">
-      <strong>${t.proof_instruction}</strong>
-    </p>
+    <div style="background-color: #eff6ff; padding: 16px; border-radius: 6px; font-size: 14px; color: #1e40af; margin: 24px 0; border-left: 4px solid #3b82f6;">
+      <p style="margin: 0; white-space: pre-line; line-height: 1.6;">${t.proof_instruction}</p>
+    </div>
     
     <div style="text-align: center;">
       <a href="${dashboardUrl}/dashboard" class="button">${t.access_dashboard}</a>
     </div>
     
-    <p style="color: #9ca3af; font-size: 14px; margin-top: 24px;">${t.team_signature}</p>
+    <div class="divider"></div>
+    
+    <p style="color: #6b7280; font-size: 14px; margin-top: 24px; white-space: pre-line;">${t.team_signature}</p>
   `, lang);
 
   const textContent = `
@@ -382,13 +391,13 @@ export async function sendTicketConfirmationToCustomer(
   const htmlContent = getEmailLayout(`
     <h2>${t.order_confirmed}</h2>
     <p>${t.hello} <strong>${order.customerName}</strong>,</p>
-    <p>${t.order_received}</p>
+    <p style="white-space: pre-line; line-height: 1.8;">${t.order_received}</p>
     
     <div class="details">
       <table>
         <tr>
           <td>${t.order_number}</td>
-          <td>#${order.orderReference}</td>
+          <td style="font-weight: 600;">#${order.orderReference}</td>
         </tr>
         <tr>
           <td>${t.total_amount}</td>
@@ -396,22 +405,26 @@ export async function sendTicketConfirmationToCustomer(
         </tr>
         <tr>
           <td>${t.payment_method}</td>
-          <td>${order.ticketType}</td>
+          <td style="font-weight: 600;">${order.ticketType}</td>
         </tr>
         <tr>
           <td>${t.status}</td>
-          <td style="color: #f59e0b; font-weight: 500;">${t.pending_validation}</td>
+          <td style="color: #f59e0b; font-weight: 600;">⏳ ${t.pending_validation}</td>
         </tr>
       </table>
     </div>
 
-    <p style="font-size: 14px; color: #6b7280;">${t.validation_time}</p>
+    <div style="background-color: #fef3c7; padding: 16px; border-radius: 6px; font-size: 14px; color: #92400e; margin: 24px 0; border-left: 4px solid #f59e0b;">
+      <p style="margin: 0; white-space: pre-line; line-height: 1.6;">${t.validation_time}</p>
+    </div>
     
     <div style="text-align: center;">
       <a href="${dashboardUrl}/dashboard" class="button">${t.access_dashboard}</a>
     </div>
     
-    <p style="color: #9ca3af; font-size: 14px; margin-top: 24px;">${t.team_signature}</p>
+    <div class="divider"></div>
+    
+    <p style="color: #6b7280; font-size: 14px; margin-top: 24px; white-space: pre-line;">${t.team_signature}</p>
   `, lang);
 
   const textContent = `
@@ -527,13 +540,13 @@ export async function sendMaxelPayConfirmationToCustomer(
   const htmlContent = getEmailLayout(`
     <h2>${t.order_confirmed}</h2>
     <p>${t.hello} <strong>${order.customerName}</strong>,</p>
-    <p>${t.payment_received}</p>
+    <p style="line-height: 1.8; color: #059669; font-weight: 500;">${t.payment_received}</p>
     
     <div class="details">
       <table>
         <tr>
           <td>${t.order_number}</td>
-          <td>#${order.orderReference}</td>
+          <td style="font-weight: 600;">#${order.orderReference}</td>
         </tr>
         <tr>
           <td>${t.total_amount}</td>
@@ -541,18 +554,22 @@ export async function sendMaxelPayConfirmationToCustomer(
         </tr>
         <tr>
           <td>${t.transaction_id}</td>
-          <td style="font-family: 'Courier New', monospace; font-size: 13px;">${order.transactionId}</td>
+          <td style="font-family: 'Courier New', monospace; font-size: 12px; font-weight: 600;">${order.transactionId}</td>
         </tr>
       </table>
     </div>
 
-    <p style="font-size: 14px; color: #6b7280;">${t.verification_message}</p>
+    <div style="background-color: #ecfdf5; padding: 16px; border-radius: 6px; font-size: 14px; color: #065f46; margin: 24px 0; border-left: 4px solid #059669;">
+      <p style="margin: 0; white-space: pre-line; line-height: 1.6;">${t.verification_message}</p>
+    </div>
     
     <div style="text-align: center;">
       <a href="${dashboardUrl}/dashboard" class="button">${t.access_dashboard}</a>
     </div>
     
-    <p style="color: #9ca3af; font-size: 14px; margin-top: 24px;">${t.team_signature}</p>
+    <div class="divider"></div>
+    
+    <p style="color: #6b7280; font-size: 14px; margin-top: 24px; white-space: pre-line;">${t.team_signature}</p>
   `, lang);
 
   const textContent = `
