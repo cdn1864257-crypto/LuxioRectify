@@ -34,6 +34,7 @@ export interface EmailTranslations {
   bic: string;
   transfer_reason: string;
   delivery_time: string;
+  proof_instruction: string;
   
   // Ticket Payment
   ticket_type: string;
@@ -90,6 +91,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC',
     transfer_reason: 'Motif',
     delivery_time: 'Livraison sous 24-72h après réception du virement.',
+    proof_instruction: 'Pour accélérer la vérification, envoyez votre preuve de virement à infos@luxioshopping.com',
     
     // Ticket Payment
     ticket_type: 'Type de ticket',
@@ -144,6 +146,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC',
     transfer_reason: 'Reference',
     delivery_time: 'Delivery within 24-72h after payment receipt.',
+    proof_instruction: 'To speed up verification, send your payment proof to infos@luxioshopping.com',
     
     // Ticket Payment
     ticket_type: 'Ticket type',
@@ -198,6 +201,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC',
     transfer_reason: 'Motivo',
     delivery_time: 'Entrega en 24-72h después de recibir el pago.',
+    proof_instruction: 'Para acelerar la verificación, envíe su comprobante de pago a infos@luxioshopping.com',
     
     // Ticket Payment
     ticket_type: 'Tipo de ticket',
@@ -252,6 +256,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC',
     transfer_reason: 'Motivo',
     delivery_time: 'Entrega em 24-72h após recebimento do pagamento.',
+    proof_instruction: 'Para acelerar a verificação, envie seu comprovante de pagamento para infos@luxioshopping.com',
     
     // Ticket Payment
     ticket_type: 'Tipo de ticket',
@@ -306,6 +311,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC',
     transfer_reason: 'Tytuł',
     delivery_time: 'Dostawa w ciągu 24-72h po otrzymaniu płatności.',
+    proof_instruction: 'Aby przyspieszyć weryfikację, wyślij potwierdzenie przelewu na infos@luxioshopping.com',
     
     // Ticket Payment
     ticket_type: 'Typ biletu',
@@ -360,6 +366,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC',
     transfer_reason: 'Közlemény',
     delivery_time: 'Szállítás 24-72 órán belül a fizetés beérkezése után.',
+    proof_instruction: 'A gyorsabb ellenőrzéshez küldje el az átutalási igazolást a infos@luxioshopping.com címre',
     
     // Ticket Payment
     ticket_type: 'Jegy típusa',

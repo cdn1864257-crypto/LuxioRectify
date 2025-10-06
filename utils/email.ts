@@ -257,6 +257,10 @@ export async function sendBankTransferEmail(
 
     <p style="font-size: 14px; color: #6b7280;">${t.delivery_time}</p>
     
+    <p style="background-color: #eff6ff; padding: 16px; border-radius: 6px; font-size: 14px; color: #1e40af; margin: 24px 0;">
+      <strong>${t.proof_instruction}</strong>
+    </p>
+    
     <div style="text-align: center;">
       <a href="${dashboardUrl}/dashboard" class="button">${t.access_dashboard}</a>
     </div>
@@ -280,6 +284,8 @@ ${t.bic}: NTSBESM1XXX
 ${t.transfer_reason}: Dépôt + ${order.customerName}
 
 ${t.delivery_time}
+
+${t.proof_instruction}
 
 ${t.access_dashboard}: ${dashboardUrl}/dashboard
 
