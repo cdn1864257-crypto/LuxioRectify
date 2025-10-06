@@ -73,7 +73,9 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
       newErrors.password = t('passwordMinLength');
     }
 
-    if (formData.password !== formData.confirmPassword) {
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = t('confirmPasswordRequired');
+    } else if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = t('passwordsDontMatch');
     }
 
@@ -159,6 +161,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
             onChange={handleChange}
             placeholder={t('firstNamePlaceholder')}
             disabled={isLoading}
+            required
             data-testid="input-firstName"
             className={errors.firstName ? "border-red-500" : ""}
           />
@@ -177,6 +180,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
             onChange={handleChange}
             placeholder={t('lastNamePlaceholder')}
             disabled={isLoading}
+            required
             data-testid="input-lastName"
             className={errors.lastName ? "border-red-500" : ""}
           />
@@ -197,6 +201,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
             onChange={handleChange}
             placeholder={t('countryPlaceholder')}
             disabled={isLoading}
+            required
             data-testid="input-country"
             className={errors.country ? "border-red-500" : ""}
           />
@@ -215,6 +220,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
             onChange={handleChange}
             placeholder={t('cityPlaceholder')}
             disabled={isLoading}
+            required
             data-testid="input-city"
             className={errors.city ? "border-red-500" : ""}
           />
@@ -234,6 +240,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
           onChange={handleChange}
           placeholder={t('addressPlaceholder')}
           disabled={isLoading}
+          required
           data-testid="input-address"
           className={errors.address ? "border-red-500" : ""}
         />
@@ -252,6 +259,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
           onChange={handleChange}
           placeholder={t('phonePlaceholder')}
           disabled={isLoading}
+          required
           data-testid="input-phone"
           className={errors.phone ? "border-red-500" : ""}
         />
@@ -270,6 +278,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
           onChange={handleChange}
           placeholder={t('emailPlaceholder')}
           disabled={isLoading}
+          required
           data-testid="input-email"
           className={errors.email ? "border-red-500" : ""}
         />
@@ -288,6 +297,8 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
           onChange={handleChange}
           placeholder="••••••••"
           disabled={isLoading}
+          required
+          minLength={6}
           data-testid="input-password"
           className={errors.password ? "border-red-500" : ""}
         />
@@ -306,6 +317,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
           onChange={handleChange}
           placeholder="••••••••"
           disabled={isLoading}
+          required
           data-testid="input-confirmPassword"
           className={errors.confirmPassword ? "border-red-500" : ""}
         />

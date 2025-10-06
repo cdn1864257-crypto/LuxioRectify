@@ -125,6 +125,7 @@ export interface Translations {
   emailInvalid: string;
   passwordMinLength: string;
   passwordsDontMatch: string;
+  confirmPasswordRequired: string;
   firstNameRequired: string;
   lastNameRequired: string;
   countryRequired: string;
@@ -537,6 +538,7 @@ export const translations: Record<Language, Translations> = {
     emailInvalid: 'Invalid email format',
     passwordMinLength: 'Password must be at least 6 characters',
     passwordsDontMatch: 'Passwords do not match',
+    confirmPasswordRequired: 'Confirm password is required',
     firstNameRequired: 'First name is required',
     lastNameRequired: 'Last name is required',
     countryRequired: 'Country is required',
@@ -1055,6 +1057,7 @@ export const translations: Record<Language, Translations> = {
     emailInvalid: 'Format email invalide',
     passwordMinLength: 'Le mot de passe doit contenir au moins 6 caractères',
     passwordsDontMatch: 'Les mots de passe ne correspondent pas',
+    confirmPasswordRequired: 'La confirmation du mot de passe est obligatoire',
     firstNameRequired: 'Le prénom est obligatoire',
     lastNameRequired: 'Le nom est obligatoire',
     countryRequired: 'Le pays est obligatoire',
@@ -1573,6 +1576,7 @@ export const translations: Record<Language, Translations> = {
     emailInvalid: 'Formato de email inválido',
     passwordMinLength: 'La contraseña debe tener al menos 6 caracteres',
     passwordsDontMatch: 'Las contraseñas no coinciden',
+    confirmPasswordRequired: 'La confirmación de la contraseña es obligatoria',
     firstNameRequired: 'El nombre es obligatorio',
     lastNameRequired: 'El apellido es obligatorio',
     countryRequired: 'El país es obligatorio',
@@ -2091,6 +2095,7 @@ export const translations: Record<Language, Translations> = {
     emailInvalid: 'Formato de email inválido',
     passwordMinLength: 'A palavra-passe deve ter pelo menos 6 caracteres',
     passwordsDontMatch: 'As palavras-passe não correspondem',
+    confirmPasswordRequired: 'A confirmação da palavra-passe é obrigatória',
     firstNameRequired: 'O primeiro nome é obrigatório',
     lastNameRequired: 'O sobrenome é obrigatório',
     countryRequired: 'O país é obrigatório',
@@ -2609,6 +2614,7 @@ export const translations: Record<Language, Translations> = {
     emailInvalid: 'Nieprawidłowy format email',
     passwordMinLength: 'Hasło musi mieć co najmniej 6 znaków',
     passwordsDontMatch: 'Hasła nie pasują do siebie',
+    confirmPasswordRequired: 'Potwierdzenie hasła jest wymagane',
     firstNameRequired: 'Imię jest wymagane',
     lastNameRequired: 'Nazwisko jest wymagane',
     countryRequired: 'Kraj jest wymagany',
@@ -3127,6 +3133,7 @@ export const translations: Record<Language, Translations> = {
     emailInvalid: 'Formato email non valido',
     passwordMinLength: 'La password deve contenere almeno 6 caratteri',
     passwordsDontMatch: 'Le password non corrispondono',
+    confirmPasswordRequired: 'La conferma della password è obbligatoria',
     firstNameRequired: 'Il nome è obbligatorio',
     lastNameRequired: 'Il cognome è obbligatorio',
     countryRequired: 'Il paese è obbligatorio',
@@ -3645,6 +3652,7 @@ export const translations: Record<Language, Translations> = {
     emailInvalid: 'Érvénytelen e-mail formátum',
     passwordMinLength: 'A jelszónak legalább 6 karakterből kell állnia',
     passwordsDontMatch: 'A jelszavak nem egyeznek',
+    confirmPasswordRequired: 'A jelszó megerősítése kötelező',
     firstNameRequired: 'A keresztnév kötelező',
     lastNameRequired: 'A vezetéknév kötelező',
     countryRequired: 'Az ország kötelező',
