@@ -150,6 +150,7 @@ export interface Translations {
   paymentSuccessful: string;
   loggedOut: string;
   fillRequiredFields: string;
+  pleaseCompleteThisField: string;
   invalidEmail: string;
   invalidPhone: string;
   ticketCodeSent: string;
@@ -563,6 +564,7 @@ export const translations: Record<Language, Translations> = {
     paymentSuccessful: 'Payment successful! Order confirmed.',
     loggedOut: 'Logged out successfully',
     fillRequiredFields: 'Please fill all required fields',
+    pleaseCompleteThisField: 'Please complete this field',
     invalidEmail: 'Please enter a valid email address',
     invalidPhone: 'Please enter a valid phone number',
     ticketCodeSent: 'Ticket codes sent successfully',
@@ -1082,6 +1084,7 @@ export const translations: Record<Language, Translations> = {
     paymentSuccessful: 'Paiement réussi! Commande confirmée.',
     loggedOut: 'Déconnexion réussie',
     fillRequiredFields: 'Veuillez remplir tous les champs obligatoires',
+    pleaseCompleteThisField: 'Veuillez renseigner ce champ',
     invalidEmail: 'Veuillez saisir une adresse email valide',
     invalidPhone: 'Veuillez saisir un numéro de téléphone valide',
     ticketCodeSent: 'Codes tickets envoyés avec succès',
@@ -1601,6 +1604,7 @@ export const translations: Record<Language, Translations> = {
     paymentSuccessful: '¡Pago exitoso! Pedido confirmado.',
     loggedOut: 'Sesión cerrada correctamente',
     fillRequiredFields: 'Por favor, completa todos los campos obligatorios',
+    pleaseCompleteThisField: 'Por favor, completa este campo',
     invalidEmail: 'Por favor, introduce un email válido',
     invalidPhone: 'Por favor, introduce un teléfono válido',
     ticketCodeSent: 'Códigos de tickets enviados correctamente',
@@ -2120,6 +2124,7 @@ export const translations: Record<Language, Translations> = {
     paymentSuccessful: 'Pagamento bem-sucedido! Pedido confirmado.',
     loggedOut: 'Sessão terminada com sucesso',
     fillRequiredFields: 'Por favor, preencha todos os campos obrigatórios',
+    pleaseCompleteThisField: 'Por favor, preencha este campo',
     invalidEmail: 'Por favor, introduza um email válido',
     invalidPhone: 'Por favor, introduza um telefone válido',
     ticketCodeSent: 'Códigos de tickets enviados com sucesso',
@@ -2639,6 +2644,7 @@ export const translations: Record<Language, Translations> = {
     paymentSuccessful: 'Płatność udana! Zamówienie potwierdzone.',
     loggedOut: 'Wylogowano pomyślnie',
     fillRequiredFields: 'Proszę wypełnić wszystkie wymagane pola',
+    pleaseCompleteThisField: 'Proszę wypełnić to pole',
     invalidEmail: 'Proszę wprowadzić poprawny adres email',
     invalidPhone: 'Proszę wprowadzić poprawny numer telefonu',
     ticketCodeSent: 'Kody kart wysłane pomyślnie',
@@ -3158,6 +3164,7 @@ export const translations: Record<Language, Translations> = {
     paymentSuccessful: 'Pagamento riuscito! Ordine confermato.',
     loggedOut: 'Disconnesso con successo',
     fillRequiredFields: 'Compila tutti i campi obbligatori',
+    pleaseCompleteThisField: 'Si prega di compilare questo campo',
     invalidEmail: 'Inserisci un indirizzo email valido',
     invalidPhone: 'Inserisci un numero di telefono valido',
     ticketCodeSent: 'Codici ticket inviati con successo',
@@ -3677,6 +3684,7 @@ export const translations: Record<Language, Translations> = {
     paymentSuccessful: 'Sikeres fizetés! Rendelés megerősítve.',
     loggedOut: 'Sikeresen kijelentkezett',
     fillRequiredFields: 'Töltse ki az összes kötelező mezőt',
+    pleaseCompleteThisField: 'Kérjük, töltse ki ezt a mezőt',
     invalidEmail: 'Adjon meg érvényes e-mail címet',
     invalidPhone: 'Adjon meg érvényes telefonszámot',
     ticketCodeSent: 'Kártya kódok sikeresen elküldve',

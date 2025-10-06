@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -29,6 +29,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
   const { signup, refreshUser } = useAuth();
   const { t, language } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState<SignupFormData>({
     firstName: "",
     lastName: "",
@@ -42,6 +43,33 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
   });
 
   const [errors, setErrors] = useState<Partial<Record<keyof SignupFormData, string>>>({});
+
+  // Set custom validation messages in the current language
+  useEffect(() => {
+    if (!formRef.current) return;
+    
+    const inputs = formRef.current.querySelectorAll('input[required]');
+    const handleInvalid = (e: Event) => {
+      const input = e.target as HTMLInputElement;
+      input.setCustomValidity(t('pleaseCompleteThisField'));
+    };
+    const handleInput = (e: Event) => {
+      const input = e.target as HTMLInputElement;
+      input.setCustomValidity('');
+    };
+    
+    inputs.forEach((input) => {
+      input.addEventListener('invalid', handleInvalid);
+      input.addEventListener('input', handleInput);
+    });
+    
+    return () => {
+      inputs.forEach((input) => {
+        input.removeEventListener('invalid', handleInvalid);
+        input.removeEventListener('input', handleInput);
+      });
+    };
+  }, [language, t]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -149,7 +177,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4" data-testid="form-signup">
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-4" data-testid="form-signup">
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="firstName">{t('firstName')} *</Label>
