@@ -207,22 +207,41 @@ export const generateOrderReference = (): string => {
   return 'LX' + Date.now().toString().slice(-8);
 };
 
-export const generateMaxelPayUrl = (order: Order): string => {
-  const merchantId = (typeof window !== 'undefined' && window.location?.hostname === 'localhost') 
-    ? 'TEST_MERCHANT_ID' 
-    : 'YOUR_MERCHANT_ID';
-  const baseUrl = 'https://checkout.maxelpay.com/';
-  
-  const params = new URLSearchParams({
-    merchant_id: merchantId,
-    amount: order.total.toString(),
-    currency: 'EUR',
-    reference: order.reference,
-    description: `Luxio Order ${order.reference}`,
-    return_url: (typeof window !== 'undefined' ? window.location.origin : '') + '/payment-return'
-  });
-  
-  return `${baseUrl}?${params.toString()}`;
+export const initializeNowPayment = async (order: Order, customerEmail: string, customerName: string): Promise<{ success: boolean; redirectUrl?: string; error?: string }> => {
+  try {
+    const response = await fetch('/api/payment/nowpayments-init', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        customerEmail,
+        customerName,
+        totalAmount: order.total,
+        cartItems: order.items
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      return {
+        success: false,
+        error: errorData.error || 'Payment initialization failed'
+      };
+    }
+
+    const data = await response.json();
+    return {
+      success: true,
+      redirectUrl: data.redirectUrl
+    };
+  } catch (error) {
+    console.error('Error initializing NowPayments:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error'
+    };
+  }
 };
 
 export const getCartSummary = (cart: CartItem[]) => {

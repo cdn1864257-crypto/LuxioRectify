@@ -3,7 +3,7 @@ import { X, CheckCircle, Building2, AlertTriangle, Info, Ticket, Plus, CreditCar
 import { useLocation } from 'wouter';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
-import { generateOrderReference, generateMaxelPayUrl, saveOrder, Order } from '../lib/cart';
+import { generateOrderReference, initializeNowPayment, saveOrder, Order } from '../lib/cart';
 import { showToast } from './ToastNotifications';
 import { queryClient } from '@/lib/queryClient';
 
@@ -12,7 +12,7 @@ interface CheckoutModalProps {
   onClose: () => void;
 }
 
-type PaymentMethod = 'bank-transfer' | 'prepaid-tickets' | 'maxelpay';
+type PaymentMethod = 'bank-transfer' | 'prepaid-tickets' | 'nowpayments';
 
 export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
   const { cart, total, clearCart } = useCart();
@@ -101,16 +101,21 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
 
       saveOrder(order);
       
-      if (paymentMethod === 'maxelpay') {
-        const paymentUrl = generateMaxelPayUrl(order);
-        clearCart();
-        onClose();
-        showToast(`${t('orderPlaced')} ${orderRef}. Redirecting to MaxelPay...`, 'success');
+      if (paymentMethod === 'nowpayments') {
+        const customerName = `${formData.firstName} ${formData.lastName}`;
+        const paymentResult = await initializeNowPayment(order, formData.email, customerName);
         
-        console.log('Redirect to MaxelPay:', paymentUrl);
-        setTimeout(() => {
-          showToast(t('paymentSuccessful'), 'success');
-        }, 2000);
+        if (paymentResult.success && paymentResult.redirectUrl) {
+          clearCart();
+          onClose();
+          showToast(`${t('orderPlaced')} ${orderRef}. Redirecting to payment...`, 'success');
+          
+          window.location.href = paymentResult.redirectUrl;
+        } else {
+          showToast(paymentResult.error || 'Payment initialization failed', 'error');
+          setLoading(false);
+          return;
+        }
         
       } else if (paymentMethod === 'prepaid-tickets') {
         const validCodes = ticketCodes.filter(code => code.trim() !== '');

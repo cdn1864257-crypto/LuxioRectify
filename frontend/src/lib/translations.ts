@@ -83,8 +83,8 @@ export interface Translations {
   // Payment Methods
   bankTransfer: string;
   prepaidTickets: string;
-  maxelPay: string;
-  maxelPayDescription: string;
+  nowPayments: string;
+  nowPaymentsDescription: string;
   selectPaymentMethod: string;
   bankTransferTitle: string;
   bankTransferDescription: string;
@@ -156,7 +156,8 @@ export interface Translations {
   ticketCodeSent: string;
   enterTicketCode: string;
   orderFailed: string;
-  redirectingToMaxelPay: string;
+  redirectingToCryptoPayment: string;
+  paymentInitFailed: string;
   
   // Search & Filters
   searchPlaceholder: string;
@@ -287,15 +288,15 @@ export interface Translations {
   orderConfirmationEmail: string;
   orderRegistered: string;
   completeTransferWithReference: string;
-  redirectingToMaxelPayDescription: string;
+  redirectingToNowPaymentsDescription: string;
   missingAmount: string;
-  maxelPayInstructionsTitle: string;
-  maxelPayInstruction1: string;
-  maxelPayInstruction2: string;
-  maxelPayInstruction3: string;
-  maxelPayInstruction4: string;
-  maxelPayInstruction5: string;
-  maxelPayRecommendation: string;
+  nowPaymentsInstructionsTitle: string;
+  nowPaymentsInstruction1: string;
+  nowPaymentsInstruction2: string;
+  nowPaymentsInstruction3: string;
+  nowPaymentsInstruction4: string;
+  nowPaymentsInstruction5: string;
+  nowPaymentsRecommendation: string;
   
   // Bank Transfer Modal
   verifyTransferDetails: string;
@@ -344,7 +345,7 @@ export interface Translations {
   fulfilled: string;
   completeBankTransfer: string;
   submitPCSCodes: string;
-  openMaxelPay: string;
+  openNowPayments: string;
   viewInstructions: string;
   payWithin24h: string;
   unpaidOrders: string;
@@ -364,7 +365,7 @@ export interface Translations {
   paymentInstructionsTitle: string;
   bankTransferInstructionsMessage: string;
   ticketPaymentMessage: string;
-  maxelpayConfirmationMessage: string;
+  nowpaymentsConfirmationMessage: string;
   contactSupportEmail: string;
   confirmCancellation: string;
   cancelAction: string;
@@ -497,8 +498,8 @@ export const translations: Record<Language, Translations> = {
     // Payment Methods
     bankTransfer: 'Bank Transfer',
     prepaidTickets: 'Prepaid Tickets',
-    maxelPay: 'MaxelPay',
-    maxelPayDescription: 'Fast and secure online payment',
+    nowPayments: 'NowPayments',
+    nowPaymentsDescription: 'Fast and secure online payment',
     selectPaymentMethod: 'Select Payment Method',
     bankTransferTitle: 'Bank Transfer',
     bankTransferDescription: 'Transfer the amount to our bank account',
@@ -570,7 +571,7 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Ticket codes sent successfully',
     enterTicketCode: 'Please enter at least one ticket code',
     orderFailed: 'Order failed. Please try again.',
-    redirectingToMaxelPay: 'Redirecting to MaxelPay...',
+    redirectingToNowPayments: 'Redirecting to NowPayments...',
     
     // Search & Filters
     searchPlaceholder: 'Search products...',
@@ -619,7 +620,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Privacy Policy',
     privacyPolicyContent: 'We only collect data necessary for order processing (name, address, email, phone). This information is never resold and can be deleted upon request via our contact email.',
     termsOfServiceTitle: 'Terms of Service',
-    termsOfServiceContent: 'Prices are in euros including VAT. Accepted payments: bank transfer, Transcash/PCS prepaid tickets, MaxelPay. Orders are shipped within 24-48 hours after payment confirmation. Any complaint must be addressed to our contact email.',
+    termsOfServiceContent: 'Prices are in euros including VAT. Accepted payments: bank transfer, Transcash/PCS prepaid tickets, NowPayments. Orders are shipped within 24-48 hours after payment confirmation. Any complaint must be addressed to our contact email.',
     contactTitle: 'Contact',
     contactContent: 'For any questions: support@luxio-store.com',
     
@@ -701,15 +702,15 @@ export const translations: Record<Language, Translations> = {
     orderConfirmationEmail: 'You will receive a confirmation email.',
     orderRegistered: 'Order registered',
     completeTransferWithReference: 'Complete the transfer with the indicated reference',
-    redirectingToMaxelPayDescription: 'You will be redirected to the secure payment platform',
+    redirectingToNowPaymentsDescription: 'You will be redirected to the secure payment platform',
     missingAmount: 'missing',
-    maxelPayInstructionsTitle: 'MaxelPay Instructions',
-    maxelPayInstruction1: 'Instant and secure payment by cryptocurrency or bank card',
-    maxelPayInstruction2: 'You will be redirected to the MaxelPay platform',
-    maxelPayInstruction3: 'Accepts: Bitcoin, Ethereum, USDT, Visa, Mastercard',
-    maxelPayInstruction4: 'Your order will be confirmed immediately after payment',
-    maxelPayInstruction5: 'Secure transaction with 256-bit SSL encryption',
-    maxelPayRecommendation: 'Recommended method for fast processing',
+    nowPaymentsInstructionsTitle: 'NowPayments Instructions',
+    nowPaymentsInstruction1: 'Instant and secure payment by cryptocurrency or bank card',
+    nowPaymentsInstruction2: 'You will be redirected to the NowPayments platform',
+    nowPaymentsInstruction3: 'Accepts: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    nowPaymentsInstruction4: 'Your order will be confirmed immediately after payment',
+    nowPaymentsInstruction5: 'Secure transaction with 256-bit SSL encryption',
+    nowPaymentsRecommendation: 'Recommended method for fast processing',
     
     // Bank Transfer Modal
     verifyTransferDetails: 'Please verify your wire transfer details before confirming your order',
@@ -758,7 +759,7 @@ export const translations: Record<Language, Translations> = {
     fulfilled: 'Fulfilled',
     completeBankTransfer: 'Complete Bank Transfer',
     submitPCSCodes: 'Submit PCS Codes',
-    openMaxelPay: 'Open MaxelPay',
+    openNowPayments: 'Open NowPayments',
     viewInstructions: 'View Instructions',
     payWithin24h: 'Pay within 24h to reserve stock',
     unpaidOrders: 'Unpaid Orders',
@@ -778,7 +779,7 @@ export const translations: Record<Language, Translations> = {
     paymentInstructionsTitle: 'Payment Instructions',
     bankTransferInstructionsMessage: 'Thank you for your order! For delivery within 24h, make the transfer immediately. For standard transfer, processing may take 48 to 72h depending on your bank.',
     ticketPaymentMessage: 'We have received your notification following the order. We are currently verifying the payment. You will receive final confirmation within a few minutes.',
-    maxelpayConfirmationMessage: 'Payment confirmed via MaxelPay. Your order is being processed.',
+    nowpaymentsConfirmationMessage: 'Payment confirmed via NowPayments. Your order is being processed.',
     contactSupportEmail: 'Contact us at support@luxio-shop.eu if you have already paid.',
     confirmCancellation: 'Confirm Cancellation',
     cancelAction: 'Cancel',
@@ -1017,8 +1018,8 @@ export const translations: Record<Language, Translations> = {
     // Payment Methods
     bankTransfer: 'Virement bancaire',
     prepaidTickets: 'Tickets prépayés',
-    maxelPay: 'MaxelPay',
-    maxelPayDescription: 'Paiement en ligne rapide et sécurisé',
+    nowPayments: 'NowPayments',
+    nowPaymentsDescription: 'Paiement en ligne rapide et sécurisé',
     selectPaymentMethod: 'Choisir le mode de paiement',
     bankTransferTitle: 'Virement bancaire',
     bankTransferDescription: 'Transférez le montant sur notre compte bancaire',
@@ -1090,7 +1091,7 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Codes tickets envoyés avec succès',
     enterTicketCode: 'Veuillez entrer au moins un code ticket',
     orderFailed: 'Commande échouée. Veuillez réessayer.',
-    redirectingToMaxelPay: 'Redirection vers MaxelPay...',
+    redirectingToNowPayments: 'Redirection vers NowPayments...',
     
     // Search & Filters
     searchPlaceholder: 'Rechercher des produits...',
@@ -1139,7 +1140,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Politique de confidentialité',
     privacyPolicyContent: 'Nous collectons uniquement les données nécessaires au traitement des commandes (nom, adresse, email, téléphone). Ces informations ne sont jamais revendues et peuvent être supprimées sur demande via notre email de contact.',
     termsOfServiceTitle: 'Conditions générales de vente',
-    termsOfServiceContent: 'Les prix sont en euros TTC. Paiements acceptés : virement bancaire, tickets prépayés Transcash/PCS, MaxelPay. Les commandes sont expédiées sous 24-48 h après confirmation du paiement. Toute réclamation doit être adressée à notre email de contact.',
+    termsOfServiceContent: 'Les prix sont en euros TTC. Paiements acceptés : virement bancaire, tickets prépayés Transcash/PCS, NowPayments. Les commandes sont expédiées sous 24-48 h après confirmation du paiement. Toute réclamation doit être adressée à notre email de contact.',
     contactTitle: 'Contact',
     contactContent: 'Pour toute question : support@luxio-store.com',
     
@@ -1221,15 +1222,15 @@ export const translations: Record<Language, Translations> = {
     orderConfirmationEmail: 'Vous recevrez un email de confirmation.',
     orderRegistered: 'Commande enregistrée',
     completeTransferWithReference: 'Effectuez le virement avec la référence indiquée',
-    redirectingToMaxelPayDescription: 'Vous allez être redirigé vers la plateforme de paiement sécurisée',
+    redirectingToNowPaymentsDescription: 'Vous allez être redirigé vers la plateforme de paiement sécurisée',
     missingAmount: 'manquant',
-    maxelPayInstructionsTitle: 'Instructions pour MaxelPay',
-    maxelPayInstruction1: 'Paiement instantané et sécurisé par cryptomonnaies ou carte bancaire',
-    maxelPayInstruction2: 'Vous serez redirigé vers la plateforme MaxelPay',
-    maxelPayInstruction3: 'Accepte : Bitcoin, Ethereum, USDT, Visa, Mastercard',
-    maxelPayInstruction4: 'Votre commande sera confirmée immédiatement après paiement',
-    maxelPayInstruction5: 'Transaction sécurisée avec cryptage SSL 256 bits',
-    maxelPayRecommendation: 'Méthode recommandée pour un traitement rapide',
+    nowPaymentsInstructionsTitle: 'Instructions pour NowPayments',
+    nowPaymentsInstruction1: 'Paiement instantané et sécurisé par cryptomonnaies ou carte bancaire',
+    nowPaymentsInstruction2: 'Vous serez redirigé vers la plateforme NowPayments',
+    nowPaymentsInstruction3: 'Accepte : Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    nowPaymentsInstruction4: 'Votre commande sera confirmée immédiatement après paiement',
+    nowPaymentsInstruction5: 'Transaction sécurisée avec cryptage SSL 256 bits',
+    nowPaymentsRecommendation: 'Méthode recommandée pour un traitement rapide',
     
     // Bank Transfer Modal
     verifyTransferDetails: 'Veuillez vérifier les détails de votre virement avant de confirmer votre commande',
@@ -1278,7 +1279,7 @@ export const translations: Record<Language, Translations> = {
     fulfilled: 'Livré',
     completeBankTransfer: 'Effectuer le virement',
     submitPCSCodes: 'Soumettre les codes PCS',
-    openMaxelPay: 'Ouvrir MaxelPay',
+    openNowPayments: 'Ouvrir NowPayments',
     viewInstructions: 'Voir les instructions',
     payWithin24h: 'Payez sous 24h pour réserver le stock',
     unpaidOrders: 'Commandes non payées',
@@ -1298,7 +1299,7 @@ export const translations: Record<Language, Translations> = {
     paymentInstructionsTitle: 'Instructions de paiement',
     bankTransferInstructionsMessage: 'Merci pour votre commande ! Pour une livraison en 24h, effectuez le virement immédiatement. En cas de virement ordinaire, le traitement peut prendre 48 à 72h selon la banque.',
     ticketPaymentMessage: 'Nous avons bien reçu votre notification suite à la commande. Nous procédons actuellement à la vérification du paiement. Vous recevrez une confirmation définitive d\'ici quelques minutes.',
-    maxelpayConfirmationMessage: 'Paiement confirmé via MaxelPay. Votre commande est en cours de traitement.',
+    nowpaymentsConfirmationMessage: 'Paiement confirmé via NowPayments. Votre commande est en cours de traitement.',
     contactSupportEmail: 'Contactez-nous à support@luxio-shop.eu si vous avez déjà payé.',
     confirmCancellation: 'Confirmer l\'annulation',
     cancelAction: 'Annuler',
@@ -1537,8 +1538,8 @@ export const translations: Record<Language, Translations> = {
     // Payment Methods
     bankTransfer: 'Transferencia bancaria',
     prepaidTickets: 'Tickets prepagados',
-    maxelPay: 'MaxelPay',
-    maxelPayDescription: 'Pago en línea rápido y seguro',
+    nowPayments: 'NowPayments',
+    nowPaymentsDescription: 'Pago en línea rápido y seguro',
     selectPaymentMethod: 'Seleccionar método de pago',
     bankTransferTitle: 'Transferencia bancaria',
     bankTransferDescription: 'Transfiere el importe a nuestra cuenta bancaria',
@@ -1610,7 +1611,7 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Códigos de tickets enviados correctamente',
     enterTicketCode: 'Por favor, introduce al menos un código de ticket',
     orderFailed: 'Pedido fallido. Por favor, inténtalo de nuevo.',
-    redirectingToMaxelPay: 'Redirigiendo a MaxelPay...',
+    redirectingToNowPayments: 'Redirigiendo a NowPayments...',
     
     // Search & Filters
     searchPlaceholder: 'Buscar productos...',
@@ -1659,7 +1660,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Política de privacidad',
     privacyPolicyContent: 'Solo recopilamos los datos necesarios para el procesamiento de pedidos (nombre, dirección, email, teléfono). Esta información nunca se revende y puede ser eliminada bajo petición a través de nuestro email de contacto.',
     termsOfServiceTitle: 'Términos de servicio',
-    termsOfServiceContent: 'Los precios están en euros con IVA incluido. Pagos aceptados: transferencia bancaria, tickets prepagados Transcash/PCS, MaxelPay. Los pedidos se envían en 24-48 horas tras confirmación del pago. Cualquier reclamación debe dirigirse a nuestro email de contacto.',
+    termsOfServiceContent: 'Los precios están en euros con IVA incluido. Pagos aceptados: transferencia bancaria, tickets prepagados Transcash/PCS, NowPayments. Los pedidos se envían en 24-48 horas tras confirmación del pago. Cualquier reclamación debe dirigirse a nuestro email de contacto.',
     contactTitle: 'Contacto',
     contactContent: 'Para cualquier pregunta: support@luxio-store.com',
     
@@ -1741,15 +1742,15 @@ export const translations: Record<Language, Translations> = {
     orderConfirmationEmail: 'Recibirá un correo de confirmación.',
     orderRegistered: 'Pedido registrado',
     completeTransferWithReference: 'Complete la transferencia con la referencia indicada',
-    redirectingToMaxelPayDescription: 'Será redirigido a la plataforma de pago segura',
+    redirectingToNowPaymentsDescription: 'Será redirigido a la plataforma de pago segura',
     missingAmount: 'faltante',
-    maxelPayInstructionsTitle: 'Instrucciones para MaxelPay',
-    maxelPayInstruction1: 'Pago instantáneo y seguro por criptomonedas o tarjeta bancaria',
-    maxelPayInstruction2: 'Será redirigido a la plataforma MaxelPay',
-    maxelPayInstruction3: 'Acepta: Bitcoin, Ethereum, USDT, Visa, Mastercard',
-    maxelPayInstruction4: 'Su pedido será confirmado inmediatamente después del pago',
-    maxelPayInstruction5: 'Transacción segura con encriptación SSL de 256 bits',
-    maxelPayRecommendation: 'Método recomendado para procesamiento rápido',
+    nowPaymentsInstructionsTitle: 'Instrucciones para NowPayments',
+    nowPaymentsInstruction1: 'Pago instantáneo y seguro por criptomonedas o tarjeta bancaria',
+    nowPaymentsInstruction2: 'Será redirigido a la plataforma NowPayments',
+    nowPaymentsInstruction3: 'Acepta: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    nowPaymentsInstruction4: 'Su pedido será confirmado inmediatamente después del pago',
+    nowPaymentsInstruction5: 'Transacción segura con encriptación SSL de 256 bits',
+    nowPaymentsRecommendation: 'Método recomendado para procesamiento rápido',
     
     // Bank Transfer Modal
     verifyTransferDetails: 'Por favor verifique los detalles de su transferencia antes de confirmar su pedido',
@@ -1798,7 +1799,7 @@ export const translations: Record<Language, Translations> = {
     fulfilled: 'Completado',
     completeBankTransfer: 'Completar Transferencia',
     submitPCSCodes: 'Enviar Códigos PCS',
-    openMaxelPay: 'Abrir MaxelPay',
+    openNowPayments: 'Abrir NowPayments',
     viewInstructions: 'Ver Instrucciones',
     payWithin24h: 'Paga en 24h para reservar stock',
     unpaidOrders: 'Pedidos No Pagados',
@@ -1818,7 +1819,7 @@ export const translations: Record<Language, Translations> = {
     paymentInstructionsTitle: 'Instrucciones de Pago',
     bankTransferInstructionsMessage: '¡Gracias por su pedido! Para entrega en 24h, realice la transferencia inmediatamente. En caso de transferencia estándar, el procesamiento puede tardar 48 a 72h según su banco.',
     ticketPaymentMessage: 'Hemos recibido su notificación del pedido. Actualmente estamos verificando el pago. Recibirá una confirmación definitiva en unos minutos.',
-    maxelpayConfirmationMessage: 'Pago confirmado a través de MaxelPay. Su pedido está siendo procesado.',
+    nowpaymentsConfirmationMessage: 'Pago confirmado a través de NowPayments. Su pedido está siendo procesado.',
     contactSupportEmail: 'Contáctenos en support@luxio-shop.eu si ya ha pagado.',
     confirmCancellation: 'Confirmar Cancelación',
     cancelAction: 'Cancelar',
@@ -2057,8 +2058,8 @@ export const translations: Record<Language, Translations> = {
     // Payment Methods
     bankTransfer: 'Transferência bancária',
     prepaidTickets: 'Tickets pré-pagos',
-    maxelPay: 'MaxelPay',
-    maxelPayDescription: 'Pagamento online rápido e seguro',
+    nowPayments: 'NowPayments',
+    nowPaymentsDescription: 'Pagamento online rápido e seguro',
     selectPaymentMethod: 'Selecionar método de pagamento',
     bankTransferTitle: 'Transferência bancária',
     bankTransferDescription: 'Transfira o valor para a nossa conta bancária',
@@ -2130,7 +2131,7 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Códigos de tickets enviados com sucesso',
     enterTicketCode: 'Por favor, insira pelo menos um código de ticket',
     orderFailed: 'Pedido falhou. Por favor, tente novamente.',
-    redirectingToMaxelPay: 'Redirecionando para MaxelPay...',
+    redirectingToNowPayments: 'Redirecionando para NowPayments...',
     
     // Search & Filters
     searchPlaceholder: 'Pesquisar produtos...',
@@ -2179,7 +2180,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Política de privacidade',
     privacyPolicyContent: 'Recolhemos apenas os dados necessários para o processamento de pedidos (nome, morada, email, telefone). Esta informação nunca é revendida e pode ser eliminada mediante pedido através do nosso email de contacto.',
     termsOfServiceTitle: 'Termos de serviço',
-    termsOfServiceContent: 'Os preços estão em euros com IVA incluído. Pagamentos aceites: transferência bancária, tickets pré-pagos Transcash/PCS, MaxelPay. Os pedidos são enviados em 24-48 horas após confirmação do pagamento. Qualquer reclamação deve ser dirigida ao nosso email de contacto.',
+    termsOfServiceContent: 'Os preços estão em euros com IVA incluído. Pagamentos aceites: transferência bancária, tickets pré-pagos Transcash/PCS, NowPayments. Os pedidos são enviados em 24-48 horas após confirmação do pagamento. Qualquer reclamação deve ser dirigida ao nosso email de contacto.',
     contactTitle: 'Contacto',
     contactContent: 'Para qualquer questão: support@luxio-store.com',
     
@@ -2261,15 +2262,15 @@ export const translations: Record<Language, Translations> = {
     orderConfirmationEmail: 'Receberá um email de confirmação.',
     orderRegistered: 'Pedido registado',
     completeTransferWithReference: 'Complete a transferência com a referência indicada',
-    redirectingToMaxelPayDescription: 'Será redirecionado para a plataforma de pagamento segura',
+    redirectingToNowPaymentsDescription: 'Será redirecionado para a plataforma de pagamento segura',
     missingAmount: 'em falta',
-    maxelPayInstructionsTitle: 'Instruções para MaxelPay',
-    maxelPayInstruction1: 'Pagamento instantâneo e seguro por criptomoedas ou cartão bancário',
-    maxelPayInstruction2: 'Você será redirecionado para a plataforma MaxelPay',
-    maxelPayInstruction3: 'Aceita: Bitcoin, Ethereum, USDT, Visa, Mastercard',
-    maxelPayInstruction4: 'Seu pedido será confirmado imediatamente após o pagamento',
-    maxelPayInstruction5: 'Transação segura com criptografia SSL de 256 bits',
-    maxelPayRecommendation: 'Método recomendado para processamento rápido',
+    nowPaymentsInstructionsTitle: 'Instruções para NowPayments',
+    nowPaymentsInstruction1: 'Pagamento instantâneo e seguro por criptomoedas ou cartão bancário',
+    nowPaymentsInstruction2: 'Você será redirecionado para a plataforma NowPayments',
+    nowPaymentsInstruction3: 'Aceita: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    nowPaymentsInstruction4: 'Seu pedido será confirmado imediatamente após o pagamento',
+    nowPaymentsInstruction5: 'Transação segura com criptografia SSL de 256 bits',
+    nowPaymentsRecommendation: 'Método recomendado para processamento rápido',
     
     // Bank Transfer Modal
     verifyTransferDetails: 'Por favor verifique os detalhes da sua transferência antes de confirmar o pedido',
@@ -2318,7 +2319,7 @@ export const translations: Record<Language, Translations> = {
     fulfilled: 'Concluído',
     completeBankTransfer: 'Completar Transferência',
     submitPCSCodes: 'Enviar Códigos PCS',
-    openMaxelPay: 'Abrir MaxelPay',
+    openNowPayments: 'Abrir NowPayments',
     viewInstructions: 'Ver Instruções',
     payWithin24h: 'Pague em 24h para reservar stock',
     unpaidOrders: 'Pedidos Não Pagos',
@@ -2338,7 +2339,7 @@ export const translations: Record<Language, Translations> = {
     paymentInstructionsTitle: 'Instruções de Pagamento',
     bankTransferInstructionsMessage: 'Obrigado pelo seu pedido! Para entrega em 24h, efetue a transferência imediatamente. Em caso de transferência normal, o processamento pode demorar 48 a 72h dependendo do seu banco.',
     ticketPaymentMessage: 'Recebemos a sua notificação do pedido. Estamos atualmente a verificar o pagamento. Receberá uma confirmação final dentro de alguns minutos.',
-    maxelpayConfirmationMessage: 'Pagamento confirmado via MaxelPay. O seu pedido está a ser processado.',
+    nowpaymentsConfirmationMessage: 'Pagamento confirmado via NowPayments. O seu pedido está a ser processado.',
     contactSupportEmail: 'Contacte-nos em support@luxio-shop.eu se já pagou.',
     confirmCancellation: 'Confirmar Cancelamento',
     cancelAction: 'Cancelar',
@@ -2577,8 +2578,8 @@ export const translations: Record<Language, Translations> = {
     // Payment Methods
     bankTransfer: 'Przelew bankowy',
     prepaidTickets: 'Karty przedpłacone',
-    maxelPay: 'MaxelPay',
-    maxelPayDescription: 'Szybka i bezpieczna płatność online',
+    nowPayments: 'NowPayments',
+    nowPaymentsDescription: 'Szybka i bezpieczna płatność online',
     selectPaymentMethod: 'Wybierz metodę płatności',
     bankTransferTitle: 'Przelew bankowy',
     bankTransferDescription: 'Przelej kwotę na nasze konto bankowe',
@@ -2650,7 +2651,7 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Kody kart wysłane pomyślnie',
     enterTicketCode: 'Proszę wprowadzić co najmniej jeden kod karty',
     orderFailed: 'Zamówienie nie powiodło się. Spróbuj ponownie.',
-    redirectingToMaxelPay: 'Przekierowanie do MaxelPay...',
+    redirectingToNowPayments: 'Przekierowanie do NowPayments...',
     
     // Search & Filters
     searchPlaceholder: 'Szukaj produktów...',
@@ -2699,7 +2700,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Polityka prywatności',
     privacyPolicyContent: 'Zbieramy tylko dane niezbędne do realizacji zamówień (imię, adres, email, telefon). Te informacje nigdy nie są odsprzedawane i mogą być usunięte na żądanie przez nasz email kontaktowy.',
     termsOfServiceTitle: 'Warunki usługi',
-    termsOfServiceContent: 'Ceny podane są w euro z VAT. Akceptowane płatności: przelew bankowy, karty przedpłacone Transcash/PCS, MaxelPay. Zamówienia są wysyłane w ciągu 24-48 godzin po potwierdzeniu płatności. Wszelkie reklamacje należy kierować na nasz email kontaktowy.',
+    termsOfServiceContent: 'Ceny podane są w euro z VAT. Akceptowane płatności: przelew bankowy, karty przedpłacone Transcash/PCS, NowPayments. Zamówienia są wysyłane w ciągu 24-48 godzin po potwierdzeniu płatności. Wszelkie reklamacje należy kierować na nasz email kontaktowy.',
     contactTitle: 'Kontakt',
     contactContent: 'W przypadku pytań: support@luxio-store.com',
     
@@ -2781,15 +2782,15 @@ export const translations: Record<Language, Translations> = {
     orderConfirmationEmail: 'Otrzymasz email potwierdzający.',
     orderRegistered: 'Zamówienie zarejestrowane',
     completeTransferWithReference: 'Wykonaj przelew z podanym numerem referencyjnym',
-    redirectingToMaxelPayDescription: 'Zostaniesz przekierowany na bezpieczną platformę płatności',
+    redirectingToNowPaymentsDescription: 'Zostaniesz przekierowany na bezpieczną platformę płatności',
     missingAmount: 'brakuje',
-    maxelPayInstructionsTitle: 'Instrukcje MaxelPay',
-    maxelPayInstruction1: 'Natychmiastowa i bezpieczna płatność kryptowalutą lub kartą bankową',
-    maxelPayInstruction2: 'Zostaniesz przekierowany na platformę MaxelPay',
-    maxelPayInstruction3: 'Akceptuje: Bitcoin, Ethereum, USDT, Visa, Mastercard',
-    maxelPayInstruction4: 'Twoje zamówienie zostanie potwierdzone natychmiast po płatności',
-    maxelPayInstruction5: 'Bezpieczna transakcja z szyfrowaniem SSL 256-bit',
-    maxelPayRecommendation: 'Zalecana metoda szybkiego przetwarzania',
+    nowPaymentsInstructionsTitle: 'Instrukcje NowPayments',
+    nowPaymentsInstruction1: 'Natychmiastowa i bezpieczna płatność kryptowalutą lub kartą bankową',
+    nowPaymentsInstruction2: 'Zostaniesz przekierowany na platformę NowPayments',
+    nowPaymentsInstruction3: 'Akceptuje: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    nowPaymentsInstruction4: 'Twoje zamówienie zostanie potwierdzone natychmiast po płatności',
+    nowPaymentsInstruction5: 'Bezpieczna transakcja z szyfrowaniem SSL 256-bit',
+    nowPaymentsRecommendation: 'Zalecana metoda szybkiego przetwarzania',
     
     // Bank Transfer Modal
     verifyTransferDetails: 'Prosimy zweryfikować szczegóły przelewu przed potwierdzeniem zamówienia',
@@ -2838,7 +2839,7 @@ export const translations: Record<Language, Translations> = {
     fulfilled: 'Zrealizowane',
     completeBankTransfer: 'Dokończ Przelew',
     submitPCSCodes: 'Wyślij Kody PCS',
-    openMaxelPay: 'Otwórz MaxelPay',
+    openNowPayments: 'Otwórz NowPayments',
     viewInstructions: 'Zobacz Instrukcje',
     payWithin24h: 'Zapłać w ciągu 24h, aby zarezerwować zapasy',
     unpaidOrders: 'Nieopłacone Zamówienia',
@@ -2858,7 +2859,7 @@ export const translations: Record<Language, Translations> = {
     paymentInstructionsTitle: 'Instrukcje Płatności',
     bankTransferInstructionsMessage: 'Dziękujemy za zamówienie! W celu dostawy w ciągu 24h, wykonaj przelew natychmiast. W przypadku przelewu standardowego, przetwarzanie może potrwać 48 do 72h w zależności od banku.',
     ticketPaymentMessage: 'Otrzymaliśmy Twoją notyfikację o zamówieniu. Obecnie weryfikujemy płatność. Otrzymasz ostateczne potwierdzenie w ciągu kilku minut.',
-    maxelpayConfirmationMessage: 'Płatność potwierdzona przez MaxelPay. Twoje zamówienie jest w trakcie realizacji.',
+    nowpaymentsConfirmationMessage: 'Płatność potwierdzona przez NowPayments. Twoje zamówienie jest w trakcie realizacji.',
     contactSupportEmail: 'Skontaktuj się z nami na support@luxio-shop.eu jeśli już zapłaciłeś.',
     confirmCancellation: 'Potwierdź Anulowanie',
     cancelAction: 'Anuluj',
@@ -3097,8 +3098,8 @@ export const translations: Record<Language, Translations> = {
     // Payment Methods
     bankTransfer: 'Bonifico bancario',
     prepaidTickets: 'Ticket prepagati',
-    maxelPay: 'MaxelPay',
-    maxelPayDescription: 'Pagamento online veloce e sicuro',
+    nowPayments: 'NowPayments',
+    nowPaymentsDescription: 'Pagamento online veloce e sicuro',
     selectPaymentMethod: 'Seleziona metodo di pagamento',
     bankTransferTitle: 'Bonifico bancario',
     bankTransferDescription: 'Trasferisci l\'importo sul nostro conto bancario',
@@ -3170,7 +3171,7 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Codici ticket inviati con successo',
     enterTicketCode: 'Inserisci almeno un codice ticket',
     orderFailed: 'Ordine fallito. Riprova.',
-    redirectingToMaxelPay: 'Reindirizzamento a MaxelPay...',
+    redirectingToNowPayments: 'Reindirizzamento a NowPayments...',
     
     // Search & Filters
     searchPlaceholder: 'Cerca prodotti...',
@@ -3219,7 +3220,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Privacy policy',
     privacyPolicyContent: 'Raccogliamo solo i dati necessari per elaborare gli ordini (nome, indirizzo, email, telefono). Queste informazioni non vengono mai rivendute e possono essere cancellate su richiesta tramite la nostra email di contatto.',
     termsOfServiceTitle: 'Termini di servizio',
-    termsOfServiceContent: 'I prezzi sono in euro IVA inclusa. Pagamenti accettati: bonifico bancario, ticket prepagati Transcash/PCS, MaxelPay. Gli ordini vengono spediti entro 24-48 ore dopo la conferma del pagamento. Qualsiasi reclamo deve essere indirizzato alla nostra email di contatto.',
+    termsOfServiceContent: 'I prezzi sono in euro IVA inclusa. Pagamenti accettati: bonifico bancario, ticket prepagati Transcash/PCS, NowPayments. Gli ordini vengono spediti entro 24-48 ore dopo la conferma del pagamento. Qualsiasi reclamo deve essere indirizzato alla nostra email di contatto.',
     contactTitle: 'Contatti',
     contactContent: 'Per qualsiasi domanda: support@luxio-store.com',
     
@@ -3301,15 +3302,15 @@ export const translations: Record<Language, Translations> = {
     orderConfirmationEmail: 'Riceverai un\'email di conferma.',
     orderRegistered: 'Ordine registrato',
     completeTransferWithReference: 'Completa il bonifico con il riferimento indicato',
-    redirectingToMaxelPayDescription: 'Sarai reindirizzato alla piattaforma di pagamento sicura',
+    redirectingToNowPaymentsDescription: 'Sarai reindirizzato alla piattaforma di pagamento sicura',
     missingAmount: 'mancante',
-    maxelPayInstructionsTitle: 'Istruzioni MaxelPay',
-    maxelPayInstruction1: 'Pagamento istantaneo e sicuro tramite criptovaluta o carta bancaria',
-    maxelPayInstruction2: 'Verrai reindirizzato alla piattaforma MaxelPay',
-    maxelPayInstruction3: 'Accetta: Bitcoin, Ethereum, USDT, Visa, Mastercard',
-    maxelPayInstruction4: 'Il tuo ordine sarà confermato immediatamente dopo il pagamento',
-    maxelPayInstruction5: 'Transazione sicura con crittografia SSL a 256 bit',
-    maxelPayRecommendation: 'Metodo consigliato per elaborazione rapida',
+    nowPaymentsInstructionsTitle: 'Istruzioni NowPayments',
+    nowPaymentsInstruction1: 'Pagamento istantaneo e sicuro tramite criptovaluta o carta bancaria',
+    nowPaymentsInstruction2: 'Verrai reindirizzato alla piattaforma NowPayments',
+    nowPaymentsInstruction3: 'Accetta: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    nowPaymentsInstruction4: 'Il tuo ordine sarà confermato immediatamente dopo il pagamento',
+    nowPaymentsInstruction5: 'Transazione sicura con crittografia SSL a 256 bit',
+    nowPaymentsRecommendation: 'Metodo consigliato per elaborazione rapida',
     
     // Bank Transfer Modal
     verifyTransferDetails: 'Si prega di verificare i dettagli del bonifico prima di confermare l\'ordine',
@@ -3358,7 +3359,7 @@ export const translations: Record<Language, Translations> = {
     fulfilled: 'Completato',
     completeBankTransfer: 'Completa Bonifico',
     submitPCSCodes: 'Invia Codici PCS',
-    openMaxelPay: 'Apri MaxelPay',
+    openNowPayments: 'Apri NowPayments',
     viewInstructions: 'Vedi Istruzioni',
     payWithin24h: 'Paga entro 24h per riservare le scorte',
     unpaidOrders: 'Ordini Non Pagati',
@@ -3378,7 +3379,7 @@ export const translations: Record<Language, Translations> = {
     paymentInstructionsTitle: 'Istruzioni di Pagamento',
     bankTransferInstructionsMessage: 'Grazie per il tuo ordine! Per la consegna entro 24h, effettua il bonifico immediatamente. In caso di bonifico standard, il processing può richiedere 48-72h a seconda della tua banca.',
     ticketPaymentMessage: 'Abbiamo ricevuto la tua notifica dell\'ordine. Stiamo attualmente verificando il pagamento. Riceverai una conferma definitiva entro pochi minuti.',
-    maxelpayConfirmationMessage: 'Pagamento confermato tramite MaxelPay. Il tuo ordine è in elaborazione.',
+    nowpaymentsConfirmationMessage: 'Pagamento confermato tramite NowPayments. Il tuo ordine è in elaborazione.',
     contactSupportEmail: 'Contattaci a support@luxio-shop.eu se hai già pagato.',
     confirmCancellation: 'Conferma Annullamento',
     cancelAction: 'Annulla',
@@ -3617,8 +3618,8 @@ export const translations: Record<Language, Translations> = {
     // Payment Methods
     bankTransfer: 'Banki átutalás',
     prepaidTickets: 'Feltöltőkártyák',
-    maxelPay: 'MaxelPay',
-    maxelPayDescription: 'Gyors és biztonságos online fizetés',
+    nowPayments: 'NowPayments',
+    nowPaymentsDescription: 'Gyors és biztonságos online fizetés',
     selectPaymentMethod: 'Fizetési mód kiválasztása',
     bankTransferTitle: 'Banki átutalás',
     bankTransferDescription: 'Utalja át az összeget a bankszámlánkra',
@@ -3690,7 +3691,7 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Kártya kódok sikeresen elküldve',
     enterTicketCode: 'Kérjük, adjon meg legalább egy kártya kódot',
     orderFailed: 'Rendelés sikertelen. Kérjük, próbálja újra.',
-    redirectingToMaxelPay: 'Átirányítás MaxelPay-ra...',
+    redirectingToNowPayments: 'Átirányítás NowPayments-ra...',
     
     // Search & Filters
     searchPlaceholder: 'Termékek keresése...',
@@ -3739,7 +3740,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Adatvédelmi szabályzat',
     privacyPolicyContent: 'Csak a rendelések feldolgozásához szükséges adatokat gyűjtjük (név, cím, e-mail, telefon). Ezeket az információkat soha nem adjuk el, és kérésre törölhetők kapcsolati e-mailünkön keresztül.',
     termsOfServiceTitle: 'Szolgáltatási feltételek',
-    termsOfServiceContent: 'Az árak euróban vannak ÁFA-val. Elfogadott fizetések: banki átutalás, Transcash/PCS feltöltőkártyák, MaxelPay. A rendeléseket 24-48 órán belül szállítjuk ki a fizetés megerősítése után. Minden panaszt a kapcsolati e-mailünkre kell címezni.',
+    termsOfServiceContent: 'Az árak euróban vannak ÁFA-val. Elfogadott fizetések: banki átutalás, Transcash/PCS feltöltőkártyák, NowPayments. A rendeléseket 24-48 órán belül szállítjuk ki a fizetés megerősítése után. Minden panaszt a kapcsolati e-mailünkre kell címezni.',
     contactTitle: 'Kapcsolat',
     contactContent: 'Bármilyen kérdés esetén: support@luxio-store.com',
     
@@ -3821,15 +3822,15 @@ export const translations: Record<Language, Translations> = {
     orderConfirmationEmail: 'Megerősítő e-mailt fog kapni.',
     orderRegistered: 'Rendelés rögzítve',
     completeTransferWithReference: 'Végezze el az átutalást a megadott hivatkozással',
-    redirectingToMaxelPayDescription: 'Átirányítjuk a biztonságos fizetési platformra',
+    redirectingToNowPaymentsDescription: 'Átirányítjuk a biztonságos fizetési platformra',
     missingAmount: 'hiányzik',
-    maxelPayInstructionsTitle: 'MaxelPay utasítások',
-    maxelPayInstruction1: 'Azonnali és biztonságos fizetés kriptovalutával vagy bankkártyával',
-    maxelPayInstruction2: 'Átirányításra kerül a MaxelPay platformra',
-    maxelPayInstruction3: 'Elfogad: Bitcoin, Ethereum, USDT, Visa, Mastercard',
-    maxelPayInstruction4: 'Rendelése azonnal megerősítésre kerül fizetés után',
-    maxelPayInstruction5: 'Biztonságos tranzakció 256 bites SSL titkosítással',
-    maxelPayRecommendation: 'Ajánlott módszer a gyors feldolgozáshoz',
+    nowPaymentsInstructionsTitle: 'NowPayments utasítások',
+    nowPaymentsInstruction1: 'Azonnali és biztonságos fizetés kriptovalutával vagy bankkártyával',
+    nowPaymentsInstruction2: 'Átirányításra kerül a NowPayments platformra',
+    nowPaymentsInstruction3: 'Elfogad: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    nowPaymentsInstruction4: 'Rendelése azonnal megerősítésre kerül fizetés után',
+    nowPaymentsInstruction5: 'Biztonságos tranzakció 256 bites SSL titkosítással',
+    nowPaymentsRecommendation: 'Ajánlott módszer a gyors feldolgozáshoz',
     
     // Bank Transfer Modal
     verifyTransferDetails: 'Kérjük, ellenőrizze az átutalás részleteit mielőtt megerősíti a rendelést',
@@ -3878,7 +3879,7 @@ export const translations: Record<Language, Translations> = {
     fulfilled: 'Teljesítve',
     completeBankTransfer: 'Átutalás Befejezése',
     submitPCSCodes: 'PCS Kódok Beküldése',
-    openMaxelPay: 'MaxelPay Megnyitása',
+    openNowPayments: 'NowPayments Megnyitása',
     viewInstructions: 'Utasítások Megtekintése',
     payWithin24h: 'Fizessen 24 órán belül a készlet lefoglalásához',
     unpaidOrders: 'Kifizetetlen Rendelések',
@@ -3898,7 +3899,7 @@ export const translations: Record<Language, Translations> = {
     paymentInstructionsTitle: 'Fizetési Utasítások',
     bankTransferInstructionsMessage: 'Köszönjük rendelését! A 24 órás kézbesítéshez azonnal hajtsa végre az átutalást. Normál átutalás esetén a feldolgozás 48-72 órát vehet igénybe a bankjától függően.',
     ticketPaymentMessage: 'Megkaptuk a rendelésről szóló értesítést. Jelenleg ellenőrizzük a fizetést. Pár percen belül végleges megerősítést kap.',
-    maxelpayConfirmationMessage: 'Fizetés megerősítve a MaxelPay-en keresztül. Rendelése feldolgozás alatt áll.',
+    nowpaymentsConfirmationMessage: 'Fizetés megerősítve a NowPayments-en keresztül. Rendelése feldolgozás alatt áll.',
     contactSupportEmail: 'Lépjen velünk kapcsolatba a support@luxio-shop.eu címen, ha már fizetett.',
     confirmCancellation: 'Törlés Megerősítése',
     cancelAction: 'Mégse',
