@@ -145,6 +145,12 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       );
 
       console.log(`[NowPayments] Payment created: ${payment.payment_id} for order ${orderReference}`);
+      console.log('[NowPayments] Payment response:', JSON.stringify(payment, null, 2));
+
+      // NowPayments invoice_url pour la redirection
+      const redirectUrl = payment.invoice_url || payment.payment_url || `https://nowpayments.io/payment/?iid=${payment.payment_id}`;
+      
+      console.log(`[NowPayments] Redirect URL: ${redirectUrl}`);
 
       return res.status(200).json({
         success: true,
@@ -155,7 +161,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         payAmount: payment.pay_amount,
         payCurrency: payment.pay_currency,
         paymentStatus: payment.payment_status,
-        redirectUrl: payment.invoice_url || `${baseUrl}/payment?order=${orderReference}`
+        redirectUrl: redirectUrl
       });
     } finally {
       await client.close();
