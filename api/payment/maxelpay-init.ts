@@ -137,13 +137,14 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         : 'https://api.maxelpay.com/v1/prod/merchant/order/checkout';
 
       console.log(`[MaxelPay] Mode: ${maxelpayMode}, URL: ${apiUrl}`);
+      console.log(`[MaxelPay] Testing auth format: Authorization Bearer`);
 
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-API-KEY': maxelpayApiKey,
-          'X-SECRET-KEY': maxelpaySecretKey
+          'Authorization': `Bearer ${maxelpayApiKey}`,
+          'X-Secret-Key': maxelpaySecretKey
         },
         body: JSON.stringify(paymentData)
       });
