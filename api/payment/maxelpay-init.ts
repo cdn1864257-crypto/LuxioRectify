@@ -129,7 +129,16 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         webhookUrl: webhookUrl
       };
 
-      const response = await fetch('https://api.maxelpay.com/payment/create', {
+      // Utiliser l'URL de production MaxelPay
+      // Mode TEST: utilisez la variable MAXELPAY_MODE=test si disponible
+      const maxelpayMode = process.env.MAXELPAY_MODE || 'production';
+      const apiUrl = maxelpayMode === 'test' 
+        ? 'https://api.maxelpay.com/v1/test/merchant/order/checkout'
+        : 'https://api.maxelpay.com/v1/prod/merchant/order/checkout';
+
+      console.log(`[MaxelPay] Mode: ${maxelpayMode}, URL: ${apiUrl}`);
+
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
