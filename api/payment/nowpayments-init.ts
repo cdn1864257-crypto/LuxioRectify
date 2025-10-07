@@ -112,43 +112,50 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const npApi = new NowPaymentsApi({ apiKey: nowpaymentsApiKey });
 
       // URLs pour les callbacks
-      const baseUrl = req.headers.origin || process.env.REPLIT_DEV_DOMAIN || 'https://luxio-shop.eu';
+      const replitDomain = process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS}` : '';
+      const baseUrl = req.headers.origin || replitDomain || 'https://luxio-shop.eu';
       const successUrl = `${baseUrl}/api/payment/nowpayments-return?status=finished`;
       const cancelUrl = `${baseUrl}/payment?cancelled=true`;
       const ipnCallbackUrl = `${baseUrl}/api/payment/nowpayments-webhook`;
+      
+      console.log(`[NowPayments] Using base URL: ${baseUrl}`);
 
       // Créer le paiement avec NowPayments
       // Note: NowPayments accepte les paiements en crypto, donc on spécifie EUR comme devise de prix
-      const payment = await npApi.createPayment({
+      const paymentResponse: any = await npApi.createPayment({
         price_amount: totalAmount,
         price_currency: 'eur',
         pay_currency: 'btc', // Par défaut BTC, peut être changé côté utilisateur
         order_id: orderReference,
         order_description: `Luxio Order - ${orderReference}`,
-        ipn_callback_url: ipnCallbackUrl,
-        success_url: successUrl,
-        cancel_url: cancelUrl
+        ipn_callback_url: ipnCallbackUrl
       });
+
+      // Vérifier que la réponse est valide
+      if (!paymentResponse || !paymentResponse.payment_id) {
+        console.error('[NowPayments] Invalid payment response:', paymentResponse);
+        throw new Error('Réponse invalide de NowPayments');
+      }
 
       // Mettre à jour la commande avec le payment_id de NowPayments
       await ordersCollection.updateOne(
         { orderReference: orderReference },
         {
           $set: {
-            nowpaymentsId: payment.payment_id,
-            payAddress: payment.pay_address,
-            payAmount: payment.pay_amount,
-            payCurrency: payment.pay_currency,
+            nowpaymentsId: paymentResponse.payment_id,
+            payAddress: paymentResponse.pay_address,
+            payAmount: paymentResponse.pay_amount,
+            payCurrency: paymentResponse.pay_currency,
             updatedAt: new Date()
           }
         }
       );
 
-      console.log(`[NowPayments] Payment created: ${payment.payment_id} for order ${orderReference}`);
-      console.log('[NowPayments] Payment response:', JSON.stringify(payment, null, 2));
+      console.log(`[NowPayments] Payment created: ${paymentResponse.payment_id} for order ${orderReference}`);
+      console.log('[NowPayments] Payment response:', JSON.stringify(paymentResponse, null, 2));
 
       // NowPayments invoice_url pour la redirection
-      const redirectUrl = payment.invoice_url || payment.payment_url || `https://nowpayments.io/payment/?iid=${payment.payment_id}`;
+      const redirectUrl = paymentResponse.invoice_url || paymentResponse.payment_url || `https://nowpayments.io/payment/?iid=${paymentResponse.payment_id}`;
       
       console.log(`[NowPayments] Redirect URL: ${redirectUrl}`);
 
@@ -156,11 +163,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         success: true,
         orderId,
         orderReference,
-        paymentId: payment.payment_id,
-        payAddress: payment.pay_address,
-        payAmount: payment.pay_amount,
-        payCurrency: payment.pay_currency,
-        paymentStatus: payment.payment_status,
+        paymentId: paymentResponse.payment_id,
+        payAddress: paymentResponse.pay_address,
+        payAmount: paymentResponse.pay_amount,
+        payCurrency: paymentResponse.pay_currency,
+        paymentStatus: paymentResponse.payment_status,
         redirectUrl: redirectUrl
       });
     } finally {

@@ -18,6 +18,22 @@ interface VercelResponse {
   end: (chunk?: any) => void;
 }
 
+// Recursively sort object keys
+function sortObjectRecursively(obj: any): any {
+  if (obj === null || typeof obj !== 'object' || Array.isArray(obj)) {
+    return obj;
+  }
+  
+  const sorted: any = {};
+  const keys = Object.keys(obj).sort();
+  
+  for (const key of keys) {
+    sorted[key] = sortObjectRecursively(obj[key]);
+  }
+  
+  return sorted;
+}
+
 function verifyNowPaymentsSignature(body: any, signature: string | undefined, secret: string): boolean {
   if (!signature) {
     console.warn('[NowPayments Webhook] No signature provided');
@@ -25,9 +41,12 @@ function verifyNowPaymentsSignature(body: any, signature: string | undefined, se
   }
 
   try {
-    const sortedBody = JSON.stringify(body, Object.keys(body).sort());
+    // Sort the object recursively and stringify without whitespace
+    const sortedBody = sortObjectRecursively(body);
+    const sortedJson = JSON.stringify(sortedBody);
+    
     const hmac = createHmac('sha512', secret);
-    hmac.update(sortedBody);
+    hmac.update(sortedJson);
     const calculatedSignature = hmac.digest('hex');
     
     const isValid = calculatedSignature === signature;
@@ -35,8 +54,11 @@ function verifyNowPaymentsSignature(body: any, signature: string | undefined, se
     if (!isValid) {
       console.error('[NowPayments Webhook] Signature mismatch!', {
         received: signature,
-        calculated: calculatedSignature.substring(0, 20) + '...'
+        calculated: calculatedSignature.substring(0, 20) + '...',
+        body: sortedJson.substring(0, 100) + '...'
       });
+    } else {
+      console.log('[NowPayments Webhook] Signature verified successfully ✅');
     }
     
     return isValid;

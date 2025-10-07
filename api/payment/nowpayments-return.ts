@@ -63,7 +63,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         redirectPath = order ? `/payment?pending=true&order=${order.orderReference}` : '/payment?pending=true';
       }
 
-      const baseUrl = req.headers.origin || process.env.REPLIT_DEV_DOMAIN || 'https://luxio-shop.eu';
+      const replitDomain = process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS}` : '';
+      const baseUrl = req.headers.origin || replitDomain || 'https://luxio-shop.eu';
       const redirectUrl = `${baseUrl}${redirectPath}`;
 
       if (req.method === 'GET') {
@@ -84,7 +85,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   } catch (error) {
     console.error('Erreur lors du traitement du retour NowPayments:', error);
     
-    const baseUrl = req.headers.origin || process.env.REPLIT_DEV_DOMAIN || 'https://luxio-shop.eu';
+    const replitDomain = process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS}` : '';
+    const baseUrl = req.headers.origin || replitDomain || 'https://luxio-shop.eu';
     const errorRedirectUrl = `${baseUrl}/payment?error=true`;
     
     if (req.method === 'GET') {
