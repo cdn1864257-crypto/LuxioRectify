@@ -16,8 +16,8 @@ export default function Cart() {
   const { t } = useLanguage();
   const [cartOpen, setCartOpen] = useState(false);
 
-  const handleRemoveItem = (productId: string) => {
-    removeFromCart(productId);
+  const handleRemoveItem = (productId: string, description: string) => {
+    removeFromCart(productId, description);
     showToast(t('itemRemovedFromCart'), 'info');
   };
 
@@ -78,12 +78,12 @@ export default function Cart() {
                               <h3 className="font-semibold text-foreground line-clamp-1" data-testid={`text-product-name-${item.id}`}>
                                 {item.name}
                               </h3>
-                              <p className="text-sm text-muted-foreground mt-1 line-clamp-1">
-                                {item.category}
+                              <p className="text-sm text-muted-foreground mt-1">
+                                {item.description}
                               </p>
                             </div>
                             <button
-                              onClick={() => handleRemoveItem(item.id)}
+                              onClick={() => handleRemoveItem(item.id, item.description)}
                               className="text-muted-foreground hover:text-destructive transition-colors shrink-0"
                               data-testid={`button-remove-${item.id}`}
                             >
@@ -97,7 +97,7 @@ export default function Cart() {
                                 variant="outline"
                                 size="icon"
                                 className="h-8 w-8"
-                                onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
+                                onClick={() => updateQuantity(item.id, item.description, Math.max(1, item.quantity - 1))}
                                 data-testid={`button-decrease-${item.id}`}
                               >
                                 <Minus className="h-4 w-4" />
@@ -109,7 +109,7 @@ export default function Cart() {
                                 variant="outline"
                                 size="icon"
                                 className="h-8 w-8"
-                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                onClick={() => updateQuantity(item.id, item.description, item.quantity + 1)}
                                 data-testid={`button-increase-${item.id}`}
                               >
                                 <Plus className="h-4 w-4" />

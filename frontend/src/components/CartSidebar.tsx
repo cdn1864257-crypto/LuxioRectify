@@ -14,8 +14,8 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   const { t } = useLanguage();
   const [, setLocation] = useLocation();
 
-  const handleRemoveItem = (productId: string) => {
-    removeFromCart(productId);
+  const handleRemoveItem = (productId: string, description: string) => {
+    removeFromCart(productId, description);
     showToast(t('itemRemovedFromCart'), 'info');
   };
 
@@ -109,13 +109,17 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                             {item.name}
                           </h4>
                           <button 
-                            onClick={() => handleRemoveItem(item.id)}
+                            onClick={() => handleRemoveItem(item.id, item.description)}
                             className="p-1.5 rounded-lg text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors flex-shrink-0"
                             data-testid={`button-remove-${item.id}`}
                           >
                             <Trash2 className="h-4 w-4" />
                           </button>
                         </div>
+                        
+                        <p className="text-xs text-muted-foreground mb-2" data-testid={`cart-item-description-${item.id}`}>
+                          {item.description}
+                        </p>
                         
                         <p className="text-lg sm:text-xl font-bold text-primary mb-3" data-testid={`cart-item-price-${item.id}`}>
                           €{item.price}
@@ -125,7 +129,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         <div className="flex items-center gap-3">
                           <div className="flex items-center bg-muted rounded-lg p-1">
                             <button 
-                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                              onClick={() => updateQuantity(item.id, item.description, item.quantity - 1)}
                               className="w-8 h-8 sm:w-9 sm:h-9 rounded-md flex items-center justify-center hover:bg-background transition-colors active:scale-95"
                               data-testid={`button-decrease-${item.id}`}
                             >
@@ -135,7 +139,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                               {item.quantity}
                             </span>
                             <button 
-                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                              onClick={() => updateQuantity(item.id, item.description, item.quantity + 1)}
                               className="w-8 h-8 sm:w-9 sm:h-9 rounded-md flex items-center justify-center hover:bg-background transition-colors active:scale-95"
                               data-testid={`button-increase-${item.id}`}
                             >
