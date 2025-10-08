@@ -104,6 +104,18 @@ The project is configured for the Replit environment with:
   - Dashboard automatically refetches and displays the new order when the user navigates to it
 - **Result**: Orders now appear instantly in the dashboard after ticket payment without manual page refresh
 
+**Cart Variant Handling Fix (October 8, 2025):**
+- ✅ Fixed critical bug where product variants (color/capacity) were incorrectly merged in the cart
+- **Problem**: Products with same ID but different variants (e.g., iPhone 15 Pro 256GB Black vs 512GB White) were treated as the same item, causing incorrect quantities and UI issues
+- **Solution**: Implemented composite key system for cart item identification
+- **Technical Details**:
+  - Modified `CartContext.tsx`: Updated `updateQuantity` and `removeFromCart` to accept both `productId` and `description` parameters
+  - Modified cart logic to match items based on both product ID AND description (variant details)
+  - Updated `CartSidebar.tsx` and `Cart.tsx`: Generate unique React keys using `${item.id}-${item.description.replace(/[^a-zA-Z0-9]/g, '-')}`
+  - Applied composite keys to all data-testid attributes for proper testing and UI reconciliation
+  - Each variant now displays its description (color/capacity details) in the cart UI
+- **Result**: Different variants of the same product are now correctly handled as separate cart items with proper quantity tracking and removal
+
 ### Environment Variables
 The application requires several environment variables for full functionality, including `MONGODB_URI`, `JWT_SECRET`, `ENCRYPTION_KEY` (critical for production), `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM`, `ADMIN_EMAIL`, `MAXELPAY_MERCHANT_ID`, and `MAXELPAY_API_KEY`.
 
