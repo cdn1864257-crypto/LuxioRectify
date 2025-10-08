@@ -1,4 +1,5 @@
 import { Product } from './products';
+import { getApiUrl } from './config';
 
 export interface CartItem {
   id: string;
@@ -209,7 +210,7 @@ export const generateOrderReference = (): string => {
 
 export const initializeNowPayment = async (order: Order, customerEmail: string, customerName: string): Promise<{ success: boolean; redirectUrl?: string; error?: string }> => {
   try {
-    const response = await fetch('/api/payment/nowpayments-init', {
+    const response = await fetch(getApiUrl('/api/payment/nowpayments-init'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

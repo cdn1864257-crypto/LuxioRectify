@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
+import { getApiUrl } from '@/lib/config';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CartSidebar } from '@/components/CartSidebar';
@@ -135,7 +136,7 @@ export default function NewPayment() {
     setIsProcessing(true);
     setIsConfirmingOrder(true);
     try {
-      const response = await fetch('/api/payment/bank-transfer', {
+      const response = await fetch(getApiUrl('/api/payment/bank-transfer'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -184,7 +185,7 @@ export default function NewPayment() {
     });
 
     try {
-      const response = await fetch('/api/payment/nowpayments-init', {
+      const response = await fetch(getApiUrl('/api/payment/nowpayments-init'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -240,7 +241,7 @@ export default function NewPayment() {
 
     setIsProcessing(true);
     try {
-      const response = await fetch('/api/payment/submit-order', {
+      const response = await fetch(getApiUrl('/api/payment/submit-order'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -5,6 +5,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { loadOrders, Order } from '../lib/cart';
 import { showToast } from './ToastNotifications';
+import { getApiUrl } from '@/lib/config';
 
 interface UserProfileProps {
   isOpen: boolean;
@@ -48,7 +49,7 @@ export function UserProfile({ isOpen, onClose }: UserProfileProps) {
     setIsChangingPassword(true);
 
     try {
-      const response = await fetch('/api/auth/change-password', {
+      const response = await fetch(getApiUrl('/api/auth/change-password'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
