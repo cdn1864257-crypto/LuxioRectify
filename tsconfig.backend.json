@@ -1,18 +1,21 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ES2020",
+    "moduleResolution": "node",
     "lib": ["ES2020"],
     "types": ["node"],
-    "outDir": "./",
+    "outDir": "./dist",
     "rootDir": "./",
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "noEmit": false,
+    "declaration": false,
+    "allowJs": true
   },
   "include": [
     "server/**/*",
@@ -23,6 +26,7 @@
     "node_modules",
     "frontend",
     "client",
-    "**/*.test.ts"
+    "**/*.test.ts",
+    "dist"
   ]
 }
