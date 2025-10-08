@@ -1,8 +1,12 @@
 # Configuration du Déploiement
 
-## Problème Résolu
+## Problèmes Résolus
 
+### 1. Erreur JSON lors de la connexion
 L'erreur "Failed to execute 'json' on 'Response': Unexpected end of JSON input" était causée par le fait que le frontend ne se connectait pas au bon backend.
+
+### 2. Déconnexion après actualisation de page
+La session ne persistait pas après actualisation car les cookies n'étaient pas configurés pour fonctionner entre domaines différents (cross-domain).
 
 ## Architecture
 
@@ -111,7 +115,30 @@ proxy: {
 └──────────────────────┘
 ```
 
-## Fichiers Modifiés
+## Configuration des Cookies Cross-Domain
+
+### Le Problème
+Quand le frontend (Vercel) et le backend (Render) sont sur des domaines différents, les cookies avec `sameSite: 'lax'` ne sont **pas envoyés** avec les requêtes cross-domain. C'est pourquoi la session ne persistait pas.
+
+### La Solution
+Les cookies d'authentification sont maintenant configurés avec :
+```javascript
+{
+  httpOnly: true,              // Sécurité : inaccessible en JavaScript
+  secure: true,                // HTTPS uniquement (requis pour sameSite: 'none')
+  sameSite: 'none',            // Autorise les cookies cross-domain
+  maxAge: 60 * 60 * 24 * 7,   // 7 jours
+  path: '/'
+}
+```
+
+**Note** : En développement local, les cookies utilisent `sameSite: 'lax'` (car frontend et backend sont sur localhost).
+
+### Fichiers Modifiés pour les Cookies
+- `api/auth/login.ts` - Cookie avec sameSite: 'none' en production
+- `api/auth/signup.ts` - Cookie avec sameSite: 'none' en production
+
+### Fichiers Modifiés pour les Appels API
 
 Les fichiers suivants ont été mis à jour pour utiliser `getApiUrl()` :
 
@@ -125,7 +152,23 @@ Les fichiers suivants ont été mis à jour pour utiliser `getApiUrl()` :
 
 ## Prochaines Étapes
 
-1. ✅ Vérifiez que `VITE_API_URL` est défini sur Vercel
-2. ✅ Redéployez l'application Vercel
-3. ✅ Testez la connexion sur https://luxios.vercel.app
-4. ✅ Vérifiez que le backend Render est accessible
+### ⚠️ IMPORTANT : Redéployez le Backend sur Render
+
+Les fichiers de cookies ont été modifiés (`api/auth/login.ts` et `api/auth/signup.ts`). Vous **DEVEZ** redéployer le backend sur Render pour que les changements prennent effet :
+
+1. Allez sur votre dashboard Render
+2. Sélectionnez votre service backend (luxio.onrender.com)
+3. Cliquez sur **Manual Deploy** → **Deploy latest commit**
+4. Attendez que le déploiement soit terminé
+
+### Puis sur Vercel (si pas déjà fait)
+
+1. ✅ Vérifiez que `VITE_API_URL=https://luxio.onrender.com` est défini sur Vercel
+2. ✅ Redéployez l'application Vercel si la variable a changé
+
+### Test Final
+
+1. Ouvrez https://luxios.vercel.app
+2. Connectez-vous avec vos identifiants
+3. ✅ **Actualisez la page (F5)** - vous devriez rester connecté !
+4. La session devrait persister même après actualisation

@@ -90,7 +90,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     const cookie = serialize('auth_token', token, {
       httpOnly: true,
       secure: isProduction, // HTTPS uniquement en production
-      sameSite: 'lax',
+      sameSite: isProduction ? 'none' : 'lax', // 'none' requis pour cross-domain en production
       maxAge: 60 * 60 * 24 * 7, // 7 jours en secondes
       path: '/'
     });
