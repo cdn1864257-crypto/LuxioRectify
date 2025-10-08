@@ -1,6 +1,5 @@
 import { useLanguage } from '../contexts/LanguageContext';
 import { Link } from 'wouter';
-import iphone17ProImage from '@assets/iphone17 pro1_1759187408941.jpeg';
 
 export function Hero() {
   const { t } = useLanguage();
@@ -94,7 +93,7 @@ export function Hero() {
               
               <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/20 shadow-2xl">
                 <img 
-                  src={iphone17ProImage} 
+                  src="/iphone17 pro1_1759187408941.jpeg" 
                   alt="iPhone 17 Pro - Premium smartphone collection" 
                   className="w-full h-auto rounded-2xl shadow-2xl"
                   loading="eager"
