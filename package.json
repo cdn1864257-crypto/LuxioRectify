@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node start-dev.js",
     "build": "cd frontend && npm run build",
+    "build:backend": "echo 'No build needed - using tsx to run TypeScript directly'",
     "start": "npx serve frontend/dist -s -p 5000",
     "start:backend": "npx tsx server/index-render.ts",
     "check": "tsc",
