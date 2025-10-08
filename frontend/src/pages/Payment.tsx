@@ -14,6 +14,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ArrowLeft, ShoppingBag, CreditCard, Building2, Ticket, Check, Copy, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { queryClient } from '@/lib/queryClient';
 
 export default function Payment() {
   const { user } = useAuth();
@@ -58,6 +59,8 @@ export default function Payment() {
       if (cart.length > 0) {
         clearCart();
       }
+      // Invalider le cache des commandes pour forcer le rechargement
+      queryClient.invalidateQueries({ queryKey: ['/api/orders'] });
       toast({
         title: "Paiement réussi !",
         description: orderRef ? `Commande ${orderRef} confirmée` : "Votre commande a été confirmée",
@@ -150,6 +153,8 @@ export default function Payment() {
 
       if (response.ok) {
         setBankTransferConfirmed(true);
+        // Invalider le cache des commandes
+        queryClient.invalidateQueries({ queryKey: ['/api/orders'] });
         toast({
           title: "Email envoyé",
           description: "Les informations de paiement ont été envoyées à votre adresse e-mail",
@@ -258,6 +263,8 @@ export default function Payment() {
 
       if (response.ok) {
         setTicketsSuccess(true);
+        // Invalider le cache des commandes
+        queryClient.invalidateQueries({ queryKey: ['/api/orders'] });
         setTimeout(() => {
           clearCart();
           navigate('/dashboard');

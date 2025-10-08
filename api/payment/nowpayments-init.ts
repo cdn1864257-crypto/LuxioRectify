@@ -112,13 +112,24 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const npApi = new NowPaymentsApi({ apiKey: nowpaymentsApiKey });
 
       // URLs pour les callbacks
+      // IMPORTANT: Les callbacks API (success_url, ipn_callback_url) doivent pointer vers le BACKEND
+      // car les routes /api/* n'existent que sur le backend
       const replitDomain = process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS}` : '';
-      const baseUrl = req.headers.origin || replitDomain || 'https://luxio-shop.eu';
-      const successUrl = `${baseUrl}/api/payment/nowpayments-return?status=finished`;
-      const cancelUrl = `${baseUrl}/payment?cancelled=true`;
-      const ipnCallbackUrl = `${baseUrl}/api/payment/nowpayments-webhook`;
+      const backendUrl = process.env.BACKEND_URL || replitDomain || 'https://luxio.onrender.com';
+      const frontendUrl = req.headers.origin || process.env.FRONTEND_URL || 'https://luxios.vercel.app';
       
-      console.log(`[NowPayments] Using base URL: ${baseUrl}`);
+      // Les URLs de callback API doivent pointer vers le backend
+      const successUrl = `${backendUrl}/api/payment/nowpayments-return?status=finished`;
+      const ipnCallbackUrl = `${backendUrl}/api/payment/nowpayments-webhook`;
+      
+      // L'URL d'annulation redirige vers le frontend
+      const cancelUrl = `${frontendUrl}/payment?cancelled=true`;
+      
+      console.log(`[NowPayments] Backend URL: ${backendUrl}`);
+      console.log(`[NowPayments] Frontend URL: ${frontendUrl}`);
+      console.log(`[NowPayments] Success URL: ${successUrl}`);
+      console.log(`[NowPayments] Cancel URL: ${cancelUrl}`);
+      console.log(`[NowPayments] IPN Callback URL: ${ipnCallbackUrl}`);
 
       // Créer une invoice NowPayments qui permet à l'utilisateur de choisir sa crypto
       const paymentResponse: any = await npApi.createInvoice({

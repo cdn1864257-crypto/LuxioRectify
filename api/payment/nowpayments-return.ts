@@ -63,9 +63,12 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         redirectPath = order ? `/payment?pending=true&order=${order.orderReference}` : '/payment?pending=true';
       }
 
+      // Rediriger vers le frontend (pas le backend)
       const replitDomain = process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS}` : '';
-      const baseUrl = req.headers.origin || replitDomain || 'https://luxio-shop.eu';
-      const redirectUrl = `${baseUrl}${redirectPath}`;
+      const frontendUrl = process.env.FRONTEND_URL || replitDomain || 'https://luxios.vercel.app';
+      const redirectUrl = `${frontendUrl}${redirectPath}`;
+      
+      console.log(`[NowPayments Return] Redirecting to: ${redirectUrl}`);
 
       if (req.method === 'GET') {
         res.setHeader('Location', redirectUrl);
@@ -86,8 +89,10 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     console.error('Erreur lors du traitement du retour NowPayments:', error);
     
     const replitDomain = process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS}` : '';
-    const baseUrl = req.headers.origin || replitDomain || 'https://luxio-shop.eu';
-    const errorRedirectUrl = `${baseUrl}/payment?error=true`;
+    const frontendUrl = process.env.FRONTEND_URL || replitDomain || 'https://luxios.vercel.app';
+    const errorRedirectUrl = `${frontendUrl}/payment?error=true`;
+    
+    console.error('[NowPayments Return] Error redirect to:', errorRedirectUrl);
     
     if (req.method === 'GET') {
       res.setHeader('Location', errorRedirectUrl);

@@ -72,16 +72,20 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 6. IPN Callback URL : `https://votre-backend-render.onrender.com/api/payment/nowpayments-webhook`
 7. Générer et copier l'IPN Secret
 
-### 6. Frontend (Vercel)
+### 6. URLs Frontend et Backend ⚠️ IMPORTANT
 
-| Variable | Exemple | Description |
-|----------|---------|-------------|
-| `FRONTEND_URL` | `https://luxio-shop.vercel.app` | URL complète de votre frontend Vercel |
+| Variable | Exemple | Description | Obligatoire |
+|----------|---------|-------------|-------------|
+| `FRONTEND_URL` | `https://luxios.vercel.app` | URL complète de votre frontend Vercel | ✅ OUI |
+| `BACKEND_URL` | `https://luxio.onrender.com` | URL complète de votre backend Render | ✅ OUI |
+
+**⚠️ CRITIQUE pour NowPayments** : La variable `BACKEND_URL` est **OBLIGATOIRE** pour que les paiements NowPayments fonctionnent correctement. Sans elle, les redirections après paiement échoueront.
 
 **Comment obtenir :**
-1. Déployer votre frontend sur Vercel
-2. Copier l'URL de production (ex: `https://votre-app.vercel.app`)
-3. Utiliser cette URL pour la variable `FRONTEND_URL`
+1. **Frontend** : Déployer votre frontend sur Vercel → Copier l'URL (ex: `https://luxios.vercel.app`)
+2. **Backend** : Déployer votre backend sur Render → Copier l'URL du service (ex: `https://luxio.onrender.com`)
+
+**⚠️ ATTENTION** : Ces deux URLs doivent être configurées sur Render AVANT le premier paiement NowPayments
 
 ## Récapitulatif : Ordre de configuration
 
@@ -90,6 +94,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 2. ✅ Créer compte SendGrid → Obtenir `SENDGRID_API_KEY` et `SENDGRID_FROM_EMAIL`
 3. ✅ Créer compte NowPayments → Obtenir `NOWPAYMENTS_API_KEY` et `NOWPAYMENTS_IPN_SECRET`
 4. ✅ Déployer frontend sur Vercel → Obtenir `FRONTEND_URL`
+5. ✅ Déployer backend sur Render → Obtenir `BACKEND_URL` (⚠️ NOUVEAU - OBLIGATOIRE)
 
 ### Étape 2 : Générer les secrets
 ```bash
@@ -131,8 +136,9 @@ SENDGRID_FROM_EMAIL=noreply@luxio-shop.com
 NOWPAYMENTS_API_KEY=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 NOWPAYMENTS_IPN_SECRET=your_ipn_secret_here
 
-# Frontend
-FRONTEND_URL=https://luxio-shop.vercel.app
+# Frontend et Backend
+FRONTEND_URL=https://luxios.vercel.app
+BACKEND_URL=https://luxio.onrender.com
 ```
 
 ## Vérification après déploiement
