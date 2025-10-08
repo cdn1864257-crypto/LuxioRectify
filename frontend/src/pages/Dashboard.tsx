@@ -232,7 +232,7 @@ export default function Dashboard() {
   const handleCancelOrder = async (orderId: string, orderReference: string) => {
     setCancellingOrder(true);
     try {
-      const response = await fetch(`/api/orders/${orderId}`, {
+      const response = await fetch(getApiUrl(`/api/orders/${orderId}`), {
         method: 'DELETE',
         credentials: 'include',
       });
