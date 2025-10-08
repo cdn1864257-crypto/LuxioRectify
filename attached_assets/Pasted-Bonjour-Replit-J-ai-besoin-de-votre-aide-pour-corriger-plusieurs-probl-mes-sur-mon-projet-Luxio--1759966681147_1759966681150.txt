@@ -1,0 +1,90 @@
+Bonjour Replit 👋
+
+J’ai besoin de votre aide pour corriger plusieurs problèmes sur mon projet Luxio, un site e-commerce dont :
+
+le frontend est déployé sur Vercel,
+
+et le backend est hébergé sur Render, où j’ai configuré toutes les clés et variables d’environnement.
+
+
+Voici les liens :
+
+Frontend : https://luxios.vercel.app/
+
+Backend : https://luxio.onrender.com
+
+
+
+---
+
+🔧 1. Problème de variantes produits dans le panier
+
+Lorsque je sélectionne un produit avec une couleur spécifique, le panier affiche souvent une autre couleur ou une autre image.
+
+Exemple : sur la page PREMIUM, j’ai choisi Xiaomi 15 et Xiaomi 15 Ultra, mais l’image affichée dans le panier correspond à celle d’un Xiaomi noir.
+
+👉 Merci de corriger ce bug de manière complète et définitive, afin que la variante exacte choisie (image, couleur, etc.) soit bien celle affichée dans le panier et la commande.
+
+⚠️ Note importante :
+Si le problème vient de l’emplacement ou du chemin des images dans le code (ou la base de données), merci de rectifier leur structure, leurs liens ou leurs références afin qu’ils correspondent correctement à chaque variante du produit.
+
+Tous les produits ne présentent pas ce problème, mais plusieurs sont affectés — merci donc de vérifier la cohérence des données et du rendu sur l’ensemble des variantes.
+
+
+---
+
+🌍 2. Formulaire d’inscription (Signup)
+
+Plusieurs ajustements sont nécessaires :
+
+Le champ “Pays” affiche bien une liste déroulante, mais lorsque je sélectionne “Poland”, une erreur s’affiche :
+
+> “Veuillez entrer un pays valide.”
+👉 Merci de supprimer cette vérification forcée du pays, pour que les valeurs proposées dans la liste soient acceptées telles quelles.
+
+
+
+Le champ “Numéro de téléphone” doit afficher automatiquement le préfixe du pays choisi.
+👉 Par exemple, si l’utilisateur sélectionne “France”, le préfixe +33 doit apparaître automatiquement avant la saisie du numéro.
+
+La liste des pays ne doit pas inclure les pays d’Afrique et du Moyen-Orient.
+
+Lorsqu’un pays est choisi, la liste de villes correspondantes doit se charger dynamiquement.
+👉 La liste “Villes” doit rester inactive tant qu’aucun pays n’a été sélectionné.
+
+
+
+---
+
+🔐 3. Réinitialisation du mot de passe
+
+Le bouton “Mot de passe oublié” sur la page Login renvoie toujours l’erreur suivante :
+
+> “Erreur lors de l’envoi de l’email.”
+
+
+
+Pourtant, la réinitialisation fonctionne correctement depuis le Dashboard.
+
+👉 Merci de corriger cela pour que la réinitialisation fonctionne aussi depuis la page de connexion publique.
+
+Crédit utile :
+J’utilise déjà SendGrid, configuré sur Render, pour :
+
+les emails de bienvenue,
+
+et les confirmations de commande.
+
+
+Vous pouvez vous appuyer sur cette configuration SendGrid pour envoyer le lien de réinitialisation du mot de passe.
+
+
+---
+
+✅ Attentes finales
+
+Corriger tous ces problèmes,
+
+Vérifier le bon fonctionnement complet (front + back),
+
+Rectifier l’emplacement ou les chemins d’images si nécessaire,
