@@ -6,6 +6,20 @@ Luxio is a premium e-commerce platform built with React and TypeScript, designed
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (October 2025)
+
+### NowPayments Integration Fixes
+- **Critical Fix**: Corrected callback URLs to point to backend (`BACKEND_URL`) instead of frontend, preventing redirect failures after payment
+- **Environment Variable**: Added mandatory `BACKEND_URL` environment variable for Render deployment
+- **Cache Invalidation**: Added automatic query invalidation after successful payments for all payment methods
+- **Auto-refresh Dashboard**: Implemented automatic dashboard refresh (30s interval + on window focus) to capture webhook updates even when users don't visit return page
+
+### Dashboard Improvements
+- Added `refetchOnWindowFocus: true` to refresh orders when user returns to tab
+- Added `refetchInterval: 30000` for periodic refresh every 30 seconds
+- Set `staleTime: 0` to always fetch fresh data from backend
+- Ensures real-time order updates after NowPayments webhook completion
+
 ## System Architecture
 
 ### Frontend Architecture
@@ -43,7 +57,24 @@ The project is configured for the Replit environment:
 -   **Image Management**: A `copy-images.js` script syncs product images.
 
 ### Environment Variables
-The application requires `MONGODB_URI`, `JWT_SECRET`, `ENCRYPTION_KEY`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM`, `ADMIN_EMAIL`, `MAXELPAY_MERCHANT_ID`, and `MAXELPAY_API_KEY` for full functionality. Development fallbacks are provided for testing without full configuration.
+The application requires the following environment variables for full functionality:
+
+**Required for Production (Render Backend):**
+- `MONGODB_URI` - MongoDB Atlas connection string
+- `JWT_SECRET` - Secret key for JWT token generation
+- `BACKEND_URL` - Backend URL (e.g., `https://luxio.onrender.com`) **[MANDATORY for NowPayments]**
+- `FRONTEND_URL` - Frontend URL (e.g., `https://luxios.vercel.app`)
+- `NOWPAYMENTS_API_KEY` - NowPayments API key for crypto payments
+- `SENDGRID_API_KEY` - SendGrid API key for email notifications
+- `SENDGRID_FROM_EMAIL` - Verified sender email address
+
+**Optional:**
+- `ENCRYPTION_KEY` - Key for encrypting payment ticket codes
+- `NOWPAYMENTS_IPN_SECRET` - IPN secret for webhook verification
+- `MAXELPAY_MERCHANT_ID` - MaxelPay merchant ID
+- `MAXELPAY_API_KEY` - MaxelPay API key
+
+Development fallbacks are provided for testing without full configuration. See `VARIABLES_ENVIRONNEMENT.md` for detailed setup instructions.
 
 ## External Dependencies
 
