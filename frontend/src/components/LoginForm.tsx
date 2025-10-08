@@ -67,7 +67,12 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
       const result = await login(formData.email, formData.password);
 
       if (!result.success) {
-        throw new Error(result.error || t('loginError'));
+        // Traduire les codes d'erreur du backend
+        const errorCode = result.error || 'loginError';
+        const errorMessage = errorCode === 'INVALID_CREDENTIALS' ? t('invalidCredentials') : 
+                           errorCode === 'REQUIRED_FIELDS' ? t('fillRequiredFields') :
+                           t('loginError');
+        throw new Error(errorMessage);
       }
 
       toast({
