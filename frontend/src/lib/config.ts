@@ -13,6 +13,11 @@ export function getApiUrl(path: string): string {
     return `${API_BASE_URL}${path}`;
   }
   
-  // Fallback : utiliser le même domaine (ne fonctionnera pas avec Vercel)
+  // IMPORTANT: En production, VITE_API_URL doit être configuré sur Vercel
+  // pour pointer vers l'URL du backend Render (ex: https://luxio-backend.onrender.com)
+  console.error('❌ ERREUR: VITE_API_URL non configuré en production!');
+  console.error('Configure VITE_API_URL sur Vercel avec l\'URL de ton backend Render');
+  
+  // Fallback : utiliser le même domaine (ne fonctionnera PAS avec un backend séparé)
   return path;
 }
