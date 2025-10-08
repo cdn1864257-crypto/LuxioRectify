@@ -7,7 +7,25 @@ interface SendGridCredentials {
   email: string;
 }
 
+// Détection de l'environnement Render (utilise les variables d'environnement directement)
+function isRenderEnvironment(): boolean {
+  return !!(process.env.SENDGRID_API_KEY && process.env.SENDGRID_FROM_EMAIL);
+}
+
 async function getCredentials(): Promise<SendGridCredentials> {
+  // Si on est sur Render, utiliser les variables d'environnement directement
+  if (isRenderEnvironment()) {
+    const apiKey = process.env.SENDGRID_API_KEY;
+    const email = process.env.SENDGRID_FROM_EMAIL;
+    
+    if (!apiKey || !email) {
+      throw new Error('SendGrid credentials not found in environment variables');
+    }
+    
+    return { apiKey, email };
+  }
+  
+  // Sinon, utiliser l'API Replit Connectors
   const hostname = process.env.REPLIT_CONNECTORS_HOSTNAME;
   const xReplitToken = process.env.REPL_IDENTITY 
     ? 'repl ' + process.env.REPL_IDENTITY 
