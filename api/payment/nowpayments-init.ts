@@ -143,17 +143,18 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       });
 
       // Vérifier que la réponse est valide
-      if (!paymentResponse || !paymentResponse.payment_id) {
+      // NowPayments createInvoice renvoie un champ "id" et non "payment_id"
+      if (!paymentResponse || !paymentResponse.id) {
         console.error('[NowPayments] Invalid payment response:', paymentResponse);
         throw new Error('Réponse invalide de NowPayments');
       }
 
-      // Mettre à jour la commande avec le payment_id de NowPayments
+      // Mettre à jour la commande avec l'id de NowPayments
       await ordersCollection.updateOne(
         { orderReference: orderReference },
         {
           $set: {
-            nowpaymentsId: paymentResponse.payment_id,
+            nowpaymentsId: paymentResponse.id,
             payAddress: paymentResponse.pay_address,
             payAmount: paymentResponse.pay_amount,
             payCurrency: paymentResponse.pay_currency,
@@ -162,11 +163,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         }
       );
 
-      console.log(`[NowPayments] Payment created: ${paymentResponse.payment_id} for order ${orderReference}`);
+      console.log(`[NowPayments] Payment created: ${paymentResponse.id} for order ${orderReference}`);
       console.log('[NowPayments] Payment response:', JSON.stringify(paymentResponse, null, 2));
 
       // NowPayments invoice_url pour la redirection
-      const redirectUrl = paymentResponse.invoice_url || paymentResponse.payment_url || `https://nowpayments.io/payment/?iid=${paymentResponse.payment_id}`;
+      const redirectUrl = paymentResponse.invoice_url || paymentResponse.payment_url || `https://nowpayments.io/payment/?iid=${paymentResponse.id}`;
       
       console.log(`[NowPayments] Redirect URL: ${redirectUrl}`);
 
@@ -174,7 +175,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         success: true,
         orderId,
         orderReference,
-        paymentId: paymentResponse.payment_id,
+        paymentId: paymentResponse.id,
         payAddress: paymentResponse.pay_address,
         payAmount: paymentResponse.pay_amount,
         payCurrency: paymentResponse.pay_currency,
