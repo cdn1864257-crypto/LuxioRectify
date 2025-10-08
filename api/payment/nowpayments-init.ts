@@ -120,15 +120,15 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       
       console.log(`[NowPayments] Using base URL: ${baseUrl}`);
 
-      // Créer le paiement avec NowPayments
-      // Note: NowPayments accepte les paiements en crypto, donc on spécifie EUR comme devise de prix
-      const paymentResponse: any = await npApi.createPayment({
+      // Créer une invoice NowPayments qui permet à l'utilisateur de choisir sa crypto
+      const paymentResponse: any = await npApi.createInvoice({
         price_amount: totalAmount,
         price_currency: 'eur',
-        pay_currency: 'btc', // Par défaut BTC, peut être changé côté utilisateur
         order_id: orderReference,
         order_description: `Luxio Order - ${orderReference}`,
-        ipn_callback_url: ipnCallbackUrl
+        ipn_callback_url: ipnCallbackUrl,
+        success_url: successUrl,
+        cancel_url: cancelUrl
       });
 
       // Vérifier que la réponse est valide
