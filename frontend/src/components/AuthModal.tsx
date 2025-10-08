@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { X } from 'lucide-react';
 import { SignupForm } from './SignupForm';
 import { LoginForm } from './LoginForm';
+import { ForgotPasswordForm } from './ForgotPasswordForm';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useLocation } from 'wouter';
 
@@ -14,6 +16,7 @@ interface AuthModalProps {
 export function AuthModal({ open, mode, onClose, onSwitchMode }: AuthModalProps) {
   const { t } = useLanguage();
   const [, navigate] = useLocation();
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   if (!open) return null;
 
@@ -23,7 +26,21 @@ export function AuthModal({ open, mode, onClose, onSwitchMode }: AuthModalProps)
   };
 
   const handleSwitchMode = () => {
+    setShowForgotPassword(false);
     onSwitchMode(mode === 'login' ? 'signup' : 'login');
+  };
+
+  const handleForgotPassword = () => {
+    setShowForgotPassword(true);
+  };
+
+  const handleBackToLogin = () => {
+    setShowForgotPassword(false);
+  };
+
+  const getTitle = () => {
+    if (showForgotPassword) return 'Mot de passe oublié';
+    return mode === 'login' ? t('login') : t('signup');
   };
 
   return (
@@ -31,10 +48,13 @@ export function AuthModal({ open, mode, onClose, onSwitchMode }: AuthModalProps)
       <div className="bg-card rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold" data-testid="auth-title">
-            {mode === 'login' ? t('login') : t('signup')}
+            {getTitle()}
           </h2>
           <button 
-            onClick={onClose}
+            onClick={() => {
+              setShowForgotPassword(false);
+              onClose();
+            }}
             className="text-muted-foreground hover:text-foreground"
             data-testid="button-close-auth"
           >
@@ -42,10 +62,13 @@ export function AuthModal({ open, mode, onClose, onSwitchMode }: AuthModalProps)
           </button>
         </div>
         
-        {mode === 'login' ? (
+        {showForgotPassword ? (
+          <ForgotPasswordForm onBack={handleBackToLogin} />
+        ) : mode === 'login' ? (
           <LoginForm 
             onSuccess={handleSuccess}
             onSwitchToSignup={handleSwitchMode}
+            onForgotPassword={handleForgotPassword}
           />
         ) : (
           <SignupForm 

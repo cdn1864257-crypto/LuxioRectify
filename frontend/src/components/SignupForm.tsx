@@ -5,7 +5,9 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Loader2 } from "lucide-react";
+import { Loader2, Check, X } from "lucide-react";
+import { validatePasswordStrength, isPasswordValid, type PasswordStrength } from "@/lib/password-strength";
+import { isValidCountry, isValidCity, isValidAddress, isValidRealEmail, isValidPhone, VALIDATION_MESSAGES } from "@/lib/validation";
 
 interface SignupFormData {
   firstName: string;
@@ -43,6 +45,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
   });
 
   const [errors, setErrors] = useState<Partial<Record<keyof SignupFormData, string>>>({});
+  const [passwordStrength, setPasswordStrength] = useState<PasswordStrength | null>(null);
 
   // Set custom validation messages in the current language
   useEffect(() => {
@@ -77,6 +80,12 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     if (errors[name as keyof SignupFormData]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
+    
+    // Update password strength when password changes
+    if (name === 'password') {
+      const validation = validatePasswordStrength(value);
+      setPasswordStrength(validation.strength);
+    }
   };
 
   const validateForm = (): boolean => {
@@ -84,21 +93,43 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
 
     if (!formData.firstName.trim()) newErrors.firstName = t('firstNameRequired');
     if (!formData.lastName.trim()) newErrors.lastName = t('lastNameRequired');
-    if (!formData.country.trim()) newErrors.country = t('countryRequired');
-    if (!formData.city.trim()) newErrors.city = t('cityRequired');
-    if (!formData.address.trim()) newErrors.address = t('addressRequired');
-    if (!formData.phone.trim()) newErrors.phone = t('phoneRequired');
+    
+    if (!formData.country.trim()) {
+      newErrors.country = t('countryRequired');
+    } else if (!isValidCountry(formData.country)) {
+      newErrors.country = VALIDATION_MESSAGES.invalidCountry;
+    }
+    
+    if (!formData.city.trim()) {
+      newErrors.city = t('cityRequired');
+    } else if (!isValidCity(formData.city)) {
+      newErrors.city = VALIDATION_MESSAGES.invalidCity;
+    }
+    
+    if (!formData.address.trim()) {
+      newErrors.address = t('addressRequired');
+    } else if (!isValidAddress(formData.address)) {
+      newErrors.address = VALIDATION_MESSAGES.invalidAddress;
+    }
+    
+    if (!formData.phone.trim()) {
+      newErrors.phone = t('phoneRequired');
+    } else if (!isValidPhone(formData.phone)) {
+      newErrors.phone = VALIDATION_MESSAGES.invalidPhone;
+    }
     
     if (!formData.email.trim()) {
       newErrors.email = t('emailRequired');
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = t('emailInvalid');
+    } else if (!isValidRealEmail(formData.email)) {
+      newErrors.email = VALIDATION_MESSAGES.invalidEmail;
     }
 
     if (!formData.password) {
       newErrors.password = t('passwordRequired');
-    } else if (formData.password.length < 6) {
-      newErrors.password = t('passwordMinLength');
+    } else if (!isPasswordValid(formData.password)) {
+      newErrors.password = "Le mot de passe doit contenir au moins 8 caractères, des lettres et des chiffres. Le caractère @ est fortement recommandé.";
+    } else if (passwordStrength === 'weak') {
+      newErrors.password = "Mot de passe trop faible. Ajoutez des caractères spéciaux pour renforcer la sécurité.";
     }
 
     if (!formData.confirmPassword) {
@@ -326,10 +357,52 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
           placeholder="••••••••"
           disabled={isLoading}
           required
-          minLength={6}
+          minLength={8}
           data-testid="input-password"
           className={errors.password ? "border-red-500" : ""}
         />
+        {formData.password && passwordStrength && (
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div 
+                  className={`h-full transition-all ${
+                    passwordStrength === 'weak' ? 'w-1/3 bg-red-500' :
+                    passwordStrength === 'medium' ? 'w-2/3 bg-yellow-500' :
+                    'w-full bg-green-500'
+                  }`}
+                />
+              </div>
+              <span className={`text-sm font-medium ${
+                passwordStrength === 'weak' ? 'text-red-600' :
+                passwordStrength === 'medium' ? 'text-yellow-600' :
+                'text-green-600'
+              }`}>
+                {passwordStrength === 'weak' ? 'Faible' :
+                 passwordStrength === 'medium' ? 'Moyen' :
+                 'Fort'}
+              </span>
+            </div>
+            <div className="text-xs space-y-1">
+              <div className={`flex items-center gap-1 ${formData.password.length >= 8 ? 'text-green-600' : 'text-gray-400'}`}>
+                {formData.password.length >= 8 ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                <span>Au moins 8 caractères</span>
+              </div>
+              <div className={`flex items-center gap-1 ${/[a-zA-Z]/.test(formData.password) ? 'text-green-600' : 'text-gray-400'}`}>
+                {/[a-zA-Z]/.test(formData.password) ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                <span>Contient des lettres</span>
+              </div>
+              <div className={`flex items-center gap-1 ${/\d/.test(formData.password) ? 'text-green-600' : 'text-gray-400'}`}>
+                {/\d/.test(formData.password) ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                <span>Contient des chiffres</span>
+              </div>
+              <div className={`flex items-center gap-1 ${/@/.test(formData.password) ? 'text-green-600' : 'text-gray-400'}`}>
+                {/@/.test(formData.password) ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                <span>Contient le caractère @ (recommandé)</span>
+              </div>
+            </div>
+          </div>
+        )}
         {errors.password && (
           <p className="text-sm text-red-500">{errors.password}</p>
         )}

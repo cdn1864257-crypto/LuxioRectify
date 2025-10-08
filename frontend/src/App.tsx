@@ -13,6 +13,7 @@ import Premium from "@/pages/Premium";
 import Dashboard from "@/pages/Dashboard";
 import Cart from "@/pages/Cart";
 import NewPayment from "@/pages/NewPayment";
+import ResetPassword from "@/pages/ResetPassword";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -20,6 +21,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/premium" component={Premium} />
+      <Route path="/reset-password" component={ResetPassword} />
       <Route path="/dashboard">
         <ProtectedRoute>
           <Dashboard />

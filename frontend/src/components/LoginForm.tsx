@@ -15,9 +15,10 @@ interface LoginFormData {
 interface LoginFormProps {
   onSuccess?: (user: any) => void;
   onSwitchToSignup?: () => void;
+  onForgotPassword?: () => void;
 }
 
-export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
+export function LoginForm({ onSuccess, onSwitchToSignup, onForgotPassword }: LoginFormProps) {
   const { toast } = useToast();
   const { login, user } = useAuth();
   const { t } = useLanguage();
@@ -121,7 +122,20 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="login-password">{t('password')}</Label>
+        <div className="flex justify-between items-center">
+          <Label htmlFor="login-password">{t('password')}</Label>
+          {onForgotPassword && (
+            <button
+              type="button"
+              onClick={onForgotPassword}
+              className="text-sm text-blue-600 hover:underline"
+              disabled={isLoading}
+              data-testid="button-forgot-password"
+            >
+              Mot de passe oublié ?
+            </button>
+          )}
+        </div>
         <Input
           id="login-password"
           name="password"
