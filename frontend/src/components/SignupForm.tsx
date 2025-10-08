@@ -2,12 +2,14 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Loader2, Check, X } from "lucide-react";
 import { validatePasswordStrength, isPasswordValid, type PasswordStrength } from "@/lib/password-strength";
 import { isValidCountry, isValidCity, isValidAddress, isValidRealEmail, isValidPhone, VALIDATION_MESSAGES } from "@/lib/validation";
+import { countriesCities } from "@/lib/countries-cities";
 
 interface SignupFormData {
   firstName: string;
@@ -46,6 +48,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
 
   const [errors, setErrors] = useState<Partial<Record<keyof SignupFormData, string>>>({});
   const [passwordStrength, setPasswordStrength] = useState<PasswordStrength | null>(null);
+  const [availableCities, setAvailableCities] = useState<{ en: string; fr: string; es: string }[]>([]);
 
   // Set custom validation messages in the current language
   useEffect(() => {
@@ -85,6 +88,32 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     if (name === 'password') {
       const validation = validatePasswordStrength(value);
       setPasswordStrength(validation.strength);
+    }
+  };
+
+  const handleCountryChange = (countryCode: string) => {
+    const selectedCountry = countriesCities.find(c => c.code === countryCode);
+    
+    if (selectedCountry) {
+      // Stocker le nom EN canonique pour les validateurs
+      setFormData(prev => ({ ...prev, country: selectedCountry.en, city: "" }));
+      setAvailableCities(selectedCountry.cities);
+    }
+    
+    if (errors.country) {
+      setErrors(prev => ({ ...prev, country: undefined }));
+    }
+  };
+
+  const handleCityChange = (cityIndex: string) => {
+    // Récupérer le nom EN canonique de la ville
+    const cityIdx = parseInt(cityIndex);
+    if (availableCities[cityIdx]) {
+      setFormData(prev => ({ ...prev, city: availableCities[cityIdx].en }));
+    }
+    
+    if (errors.city) {
+      setErrors(prev => ({ ...prev, city: undefined }));
     }
   };
 
@@ -252,18 +281,30 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="country">{t('country')} *</Label>
-          <Input
-            id="country"
-            name="country"
-            type="text"
-            value={formData.country}
-            onChange={handleChange}
-            placeholder={t('countryPlaceholder')}
+          <Select 
+            value={countriesCities.find(c => c.en === formData.country)?.code || ""} 
+            onValueChange={handleCountryChange}
             disabled={isLoading}
-            required
-            data-testid="input-country"
-            className={errors.country ? "border-red-500" : ""}
-          />
+          >
+            <SelectTrigger 
+              id="country"
+              data-testid="select-country"
+              className={errors.country ? "border-red-500" : ""}
+            >
+              <SelectValue placeholder={t('selectCountry') || t('countryPlaceholder')} />
+            </SelectTrigger>
+            <SelectContent>
+              {countriesCities.map(country => {
+                const langKey = language as 'en' | 'fr' | 'es';
+                const countryName = country[langKey] || country.en;
+                return (
+                  <SelectItem key={country.code} value={country.code}>
+                    {countryName}
+                  </SelectItem>
+                );
+              })}
+            </SelectContent>
+          </Select>
           {errors.country && (
             <p className="text-sm text-red-500">{errors.country}</p>
           )}
@@ -271,18 +312,30 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
 
         <div className="space-y-2">
           <Label htmlFor="city">{t('city')} *</Label>
-          <Input
-            id="city"
-            name="city"
-            type="text"
-            value={formData.city}
-            onChange={handleChange}
-            placeholder={t('cityPlaceholder')}
-            disabled={isLoading}
-            required
-            data-testid="input-city"
-            className={errors.city ? "border-red-500" : ""}
-          />
+          <Select 
+            value={availableCities.findIndex(c => c.en === formData.city).toString()} 
+            onValueChange={handleCityChange}
+            disabled={isLoading || availableCities.length === 0}
+          >
+            <SelectTrigger 
+              id="city"
+              data-testid="select-city"
+              className={errors.city ? "border-red-500" : ""}
+            >
+              <SelectValue placeholder={availableCities.length === 0 ? t('selectCountry') : t('cityPlaceholder')} />
+            </SelectTrigger>
+            <SelectContent>
+              {availableCities.map((city, index) => {
+                const langKey = language as 'en' | 'fr' | 'es';
+                const cityName = city[langKey] || city.en;
+                return (
+                  <SelectItem key={`${city.en}-${index}`} value={index.toString()}>
+                    {cityName}
+                  </SelectItem>
+                );
+              })}
+            </SelectContent>
+          </Select>
           {errors.city && (
             <p className="text-sm text-red-500">{errors.city}</p>
           )}

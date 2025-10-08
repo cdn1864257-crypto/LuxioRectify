@@ -38,13 +38,14 @@ function ProductCard({ product }: { product: Product }) {
           ...product,
           price: selectedVariant.price,
           originalPrice: selectedVariant.originalPrice,
+          discount: currentDiscount,
           image: selectedVariant.image || product.image,
           description: `${selectedVariant.capacity}, ${selectedVariant.color}`,
         }
       : product;
     
     addToCart(productToAdd);
-    showToast(`${product.name} - ${t('itemAddedToCart')}`, 'success');
+    showToast(`${product.name} ${selectedVariant ? `(${selectedVariant.color})` : ''} - ${t('itemAddedToCart')}`, 'success');
     
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 2000);

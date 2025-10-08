@@ -1,23 +1,14 @@
 // Configuration de l'API backend
-export const API_BASE_URL = import.meta.env.VITE_API_URL || '';
+// Backend hébergé sur Render par défaut
+const DEFAULT_BACKEND_URL = 'https://luxio.onrender.com';
+
+// VITE_API_URL peut être configuré pour override (staging, tests, etc.)
+export const API_BASE_URL = import.meta.env.VITE_API_URL || DEFAULT_BACKEND_URL;
 
 // Helper pour construire les URLs d'API
 export function getApiUrl(path: string): string {
-  // En développement, utiliser le proxy Vite (pas de préfixe)
-  if (import.meta.env.DEV) {
-    return path;
-  }
-  
-  // En production, utiliser l'URL complète du backend
-  if (API_BASE_URL) {
-    return `${API_BASE_URL}${path}`;
-  }
-  
-  // IMPORTANT: En production, VITE_API_URL doit être configuré sur Vercel
-  // pour pointer vers l'URL du backend Render (ex: https://luxio-backend.onrender.com)
-  console.error('❌ ERREUR: VITE_API_URL non configuré en production!');
-  console.error('Configure VITE_API_URL sur Vercel avec l\'URL de ton backend Render');
-  
-  // Fallback : utiliser le même domaine (ne fonctionnera PAS avec un backend séparé)
-  return path;
+  // Si VITE_API_URL est défini, l'utiliser (pour staging/tests)
+  // Sinon utiliser l'URL du backend Render par défaut
+  // car le backend et le frontend sont déployés séparément
+  return `${API_BASE_URL}${path}`;
 }
