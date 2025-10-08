@@ -81,7 +81,12 @@ export const saveCart = (cart: CartItem[]): boolean => {
 
 export const addToCart = (product: Product): { success: boolean; cart: CartItem[]; message?: string } => {
   const cart = loadCart();
-  const existingItem = cart.find(item => item.id === product.id);
+  
+  // Pour les produits avec variantes, on compare par id + description (qui contient capacity, color)
+  // Pour les produits sans variante, on compare juste par id
+  const existingItem = cart.find(item => 
+    item.id === product.id && item.description === product.description
+  );
   
   if (existingItem) {
     if (existingItem.quantity >= MAX_QUANTITY_PER_ITEM) {
