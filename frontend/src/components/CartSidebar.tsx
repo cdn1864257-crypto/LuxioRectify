@@ -83,11 +83,13 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               </div>
             ) : (
               <div className="space-y-3 sm:space-y-4">
-                {cart.map((item) => (
+                {cart.map((item) => {
+                  const uniqueKey = `${item.id}-${item.description.replace(/[^a-zA-Z0-9]/g, '-')}`;
+                  return (
                   <div 
-                    key={item.id}
+                    key={uniqueKey}
                     className="group relative bg-card border border-border rounded-xl p-3 sm:p-4 hover:shadow-lg transition-all duration-200"
-                    data-testid={`cart-item-${item.id}`}
+                    data-testid={`cart-item-${uniqueKey}`}
                   >
                     <div className="flex gap-3 sm:gap-4">
                       {/* Product Image */}
@@ -97,7 +99,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                             src={item.image}
                             alt={item.name}
                             className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg bg-muted"
-                            data-testid={`cart-item-image-${item.id}`}
+                            data-testid={`cart-item-image-${uniqueKey}`}
                           />
                         </div>
                       )}
@@ -105,23 +107,23 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                       {/* Product Info */}
                       <div className="flex-1 min-w-0">
                         <div className="flex justify-between items-start gap-2 mb-2">
-                          <h4 className="font-semibold text-sm sm:text-base line-clamp-2" data-testid={`cart-item-name-${item.id}`}>
+                          <h4 className="font-semibold text-sm sm:text-base line-clamp-2" data-testid={`cart-item-name-${uniqueKey}`}>
                             {item.name}
                           </h4>
                           <button 
                             onClick={() => handleRemoveItem(item.id, item.description)}
                             className="p-1.5 rounded-lg text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors flex-shrink-0"
-                            data-testid={`button-remove-${item.id}`}
+                            data-testid={`button-remove-${uniqueKey}`}
                           >
                             <Trash2 className="h-4 w-4" />
                           </button>
                         </div>
                         
-                        <p className="text-xs text-muted-foreground mb-2" data-testid={`cart-item-description-${item.id}`}>
+                        <p className="text-xs text-muted-foreground mb-2" data-testid={`cart-item-description-${uniqueKey}`}>
                           {item.description}
                         </p>
                         
-                        <p className="text-lg sm:text-xl font-bold text-primary mb-3" data-testid={`cart-item-price-${item.id}`}>
+                        <p className="text-lg sm:text-xl font-bold text-primary mb-3" data-testid={`cart-item-price-${uniqueKey}`}>
                           €{item.price}
                         </p>
                         
@@ -131,17 +133,17 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                             <button 
                               onClick={() => updateQuantity(item.id, item.description, item.quantity - 1)}
                               className="w-8 h-8 sm:w-9 sm:h-9 rounded-md flex items-center justify-center hover:bg-background transition-colors active:scale-95"
-                              data-testid={`button-decrease-${item.id}`}
+                              data-testid={`button-decrease-${uniqueKey}`}
                             >
                               <Minus className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                             </button>
-                            <span className="w-10 sm:w-12 text-center font-semibold text-sm sm:text-base" data-testid={`cart-item-quantity-${item.id}`}>
+                            <span className="w-10 sm:w-12 text-center font-semibold text-sm sm:text-base" data-testid={`cart-item-quantity-${uniqueKey}`}>
                               {item.quantity}
                             </span>
                             <button 
                               onClick={() => updateQuantity(item.id, item.description, item.quantity + 1)}
                               className="w-8 h-8 sm:w-9 sm:h-9 rounded-md flex items-center justify-center hover:bg-background transition-colors active:scale-95"
-                              data-testid={`button-increase-${item.id}`}
+                              data-testid={`button-increase-${uniqueKey}`}
                             >
                               <Plus className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                             </button>
@@ -153,7 +155,8 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                       </div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>

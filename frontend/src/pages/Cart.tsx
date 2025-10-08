@@ -59,8 +59,10 @@ export default function Cart() {
           ) : (
             <div className="grid gap-8 lg:grid-cols-3">
               <div className="lg:col-span-2 space-y-4">
-                {cart.map((item) => (
-                  <Card key={item.id} data-testid={`cart-item-${item.id}`}>
+                {cart.map((item) => {
+                  const uniqueKey = `${item.id}-${item.description.replace(/[^a-zA-Z0-9]/g, '-')}`;
+                  return (
+                  <Card key={uniqueKey} data-testid={`cart-item-${uniqueKey}`}>
                     <CardContent className="p-4 sm:p-6">
                       <div className="flex gap-4">
                         <div className="relative h-24 w-24 sm:h-32 sm:w-32 shrink-0 rounded-lg overflow-hidden bg-muted">
@@ -68,14 +70,14 @@ export default function Cart() {
                             src={item.image}
                             alt={item.name}
                             className="h-full w-full object-cover"
-                            data-testid={`img-product-${item.id}`}
+                            data-testid={`img-product-${uniqueKey}`}
                           />
                         </div>
 
                         <div className="flex-1 min-w-0">
                           <div className="flex justify-between gap-4 mb-2">
                             <div>
-                              <h3 className="font-semibold text-foreground line-clamp-1" data-testid={`text-product-name-${item.id}`}>
+                              <h3 className="font-semibold text-foreground line-clamp-1" data-testid={`text-product-name-${uniqueKey}`}>
                                 {item.name}
                               </h3>
                               <p className="text-sm text-muted-foreground mt-1">
@@ -85,7 +87,7 @@ export default function Cart() {
                             <button
                               onClick={() => handleRemoveItem(item.id, item.description)}
                               className="text-muted-foreground hover:text-destructive transition-colors shrink-0"
-                              data-testid={`button-remove-${item.id}`}
+                              data-testid={`button-remove-${uniqueKey}`}
                             >
                               <Trash2 className="h-5 w-5" />
                             </button>
@@ -98,11 +100,11 @@ export default function Cart() {
                                 size="icon"
                                 className="h-8 w-8"
                                 onClick={() => updateQuantity(item.id, item.description, Math.max(1, item.quantity - 1))}
-                                data-testid={`button-decrease-${item.id}`}
+                                data-testid={`button-decrease-${uniqueKey}`}
                               >
                                 <Minus className="h-4 w-4" />
                               </Button>
-                              <span className="w-12 text-center font-medium" data-testid={`text-quantity-${item.id}`}>
+                              <span className="w-12 text-center font-medium" data-testid={`text-quantity-${uniqueKey}`}>
                                 {item.quantity}
                               </span>
                               <Button
@@ -110,14 +112,14 @@ export default function Cart() {
                                 size="icon"
                                 className="h-8 w-8"
                                 onClick={() => updateQuantity(item.id, item.description, item.quantity + 1)}
-                                data-testid={`button-increase-${item.id}`}
+                                data-testid={`button-increase-${uniqueKey}`}
                               >
                                 <Plus className="h-4 w-4" />
                               </Button>
                             </div>
 
                             <div className="text-right">
-                              <p className="text-lg font-bold text-foreground" data-testid={`text-price-${item.id}`}>
+                              <p className="text-lg font-bold text-foreground" data-testid={`text-price-${uniqueKey}`}>
                                 {item.price.toFixed(2)} €
                               </p>
                               {item.quantity > 1 && (
@@ -131,7 +133,8 @@ export default function Cart() {
                       </div>
                     </CardContent>
                   </Card>
-                ))}
+                  );
+                })}
               </div>
 
               <div className="lg:col-span-1">
