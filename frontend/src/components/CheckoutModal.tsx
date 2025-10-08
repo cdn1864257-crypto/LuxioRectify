@@ -205,6 +205,11 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
   }
 
   if (showPaymentDetails) {
+    const handleCloseBankModal = () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/orders'] });
+      onClose();
+    };
+
     return (
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" data-testid="payment-details-modal">
         <div className="bg-background rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
@@ -291,7 +296,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
 
             {/* Action Buttons */}
             <button 
-              onClick={onClose}
+              onClick={handleCloseBankModal}
               className="w-full bg-gradient-to-r from-primary to-primary/90 text-primary-foreground py-3.5 sm:py-4 rounded-xl font-semibold text-base sm:text-lg hover:shadow-xl transition-all active:scale-[0.98]"
               data-testid="button-close-payment-details"
             >
