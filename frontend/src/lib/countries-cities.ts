@@ -10,6 +10,47 @@ export interface CountryCities {
   }[];
 }
 
+export const PHONE_PREFIXES: Record<string, string> = {
+  "FR": "+33",
+  "ES": "+34",
+  "IT": "+39",
+  "DE": "+49",
+  "GB": "+44",
+  "PL": "+48",
+  "PT": "+351",
+  "NL": "+31",
+  "BE": "+32",
+  "AT": "+43",
+  "CH": "+41",
+  "SE": "+46",
+  "NO": "+47",
+  "DK": "+45",
+  "FI": "+358",
+  "IE": "+353",
+  "CZ": "+420",
+  "HU": "+36",
+  "GR": "+30",
+  "RO": "+40",
+  "BG": "+359",
+  "US": "+1",
+  "CA": "+1",
+  "MX": "+52",
+  "BR": "+55",
+  "AR": "+54",
+  "CL": "+56",
+  "CO": "+57",
+  "AU": "+61",
+  "NZ": "+64",
+  "JP": "+81",
+  "KR": "+82",
+  "CN": "+86",
+  "IN": "+91",
+  "TH": "+66",
+  "SG": "+65",
+  "MY": "+60",
+  "PH": "+63"
+};
+
 export const countriesCities: CountryCities[] = [
   // Europe
   {

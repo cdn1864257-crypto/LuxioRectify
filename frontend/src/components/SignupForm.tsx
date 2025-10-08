@@ -9,7 +9,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Loader2, Check, X } from "lucide-react";
 import { validatePasswordStrength, isPasswordValid, type PasswordStrength } from "@/lib/password-strength";
 import { isValidCountry, isValidCity, isValidAddress, isValidRealEmail, isValidPhone, VALIDATION_MESSAGES } from "@/lib/validation";
-import { countriesCities } from "@/lib/countries-cities";
+import { countriesCities, PHONE_PREFIXES } from "@/lib/countries-cities";
 
 interface SignupFormData {
   firstName: string;
@@ -96,7 +96,16 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     
     if (selectedCountry) {
       // Stocker le nom EN canonique pour les validateurs
-      setFormData(prev => ({ ...prev, country: selectedCountry.en, city: "" }));
+      const phonePrefix = PHONE_PREFIXES[countryCode] || "";
+      const currentPhone = formData.phone.replace(/^\+\d+\s*/, '').trim();
+      const newPhone = currentPhone ? `${phonePrefix} ${currentPhone}` : phonePrefix + " ";
+      
+      setFormData(prev => ({ 
+        ...prev, 
+        country: selectedCountry.en, 
+        city: "",
+        phone: newPhone
+      }));
       setAvailableCities(selectedCountry.cities);
     }
     
