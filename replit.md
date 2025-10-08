@@ -116,6 +116,24 @@ The project is configured for the Replit environment with:
   - Each variant now displays its description (color/capacity details) in the cart UI
 - **Result**: Different variants of the same product are now correctly handled as separate cart items with proper quantity tracking and removal
 
+**Login Error Internationalization & Email Fix (October 8, 2025):**
+- ✅ Fixed login errors to display in the user's selected language instead of hardcoded French
+- ✅ Fixed email delivery issue for both Replit and Render deployments
+- **Problems**: 
+  1. Login error messages were hardcoded in French, not translated based on user language
+  2. Welcome emails and order confirmations not being sent on Render deployment despite SendGrid configuration
+- **Solution**: 
+  1. Backend API now returns error codes (e.g., `INVALID_CREDENTIALS`, `REQUIRED_FIELDS`) instead of hardcoded messages
+  2. Frontend translates error codes based on user's selected language
+  3. Email service now detects environment and uses appropriate configuration
+- **Technical Details**:
+  - Added `invalidCredentials` translation key across all 7 supported languages (EN, FR, ES, PT, PL, IT, HU)
+  - Modified `api/auth/login.ts`: Returns error codes (`INVALID_CREDENTIALS`, `REQUIRED_FIELDS`, etc.) instead of French messages
+  - Modified `frontend/src/components/LoginForm.tsx`: Translates error codes using the language context
+  - Modified `utils/sendgrid-service.ts`: Added environment detection to support both Replit (using connectors) and Render (using direct env vars)
+  - SendGrid service now checks for `SENDGRID_API_KEY` and `SENDGRID_FROM_EMAIL` env vars to determine environment
+- **Result**: Login errors now display in correct language for all users, and email notifications work on both Replit and Render deployments
+
 ### Environment Variables
 The application requires several environment variables for full functionality, including `MONGODB_URI`, `JWT_SECRET`, `ENCRYPTION_KEY` (critical for production), `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM`, `ADMIN_EMAIL`, `MAXELPAY_MERCHANT_ID`, and `MAXELPAY_API_KEY`.
 
