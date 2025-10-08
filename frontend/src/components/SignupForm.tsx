@@ -127,9 +127,9 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     if (!formData.password) {
       newErrors.password = t('passwordRequired');
     } else if (!isPasswordValid(formData.password)) {
-      newErrors.password = "Le mot de passe doit contenir au moins 8 caractères, des lettres et des chiffres. Le caractère @ est fortement recommandé.";
+      newErrors.password = t('passwordRequirements');
     } else if (passwordStrength === 'weak') {
-      newErrors.password = "Mot de passe trop faible. Ajoutez des caractères spéciaux pour renforcer la sécurité.";
+      newErrors.password = t('passwordTooWeak');
     }
 
     if (!formData.confirmPassword) {
@@ -378,27 +378,27 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
                 passwordStrength === 'medium' ? 'text-yellow-600' :
                 'text-green-600'
               }`}>
-                {passwordStrength === 'weak' ? 'Faible' :
-                 passwordStrength === 'medium' ? 'Moyen' :
-                 'Fort'}
+                {passwordStrength === 'weak' ? t('weak') :
+                 passwordStrength === 'medium' ? t('medium') :
+                 t('strong')}
               </span>
             </div>
             <div className="text-xs space-y-1">
               <div className={`flex items-center gap-1 ${formData.password.length >= 8 ? 'text-green-600' : 'text-gray-400'}`}>
                 {formData.password.length >= 8 ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
-                <span>Au moins 8 caractères</span>
+                <span>{t('passwordMinLength8')}</span>
               </div>
               <div className={`flex items-center gap-1 ${/[a-zA-Z]/.test(formData.password) ? 'text-green-600' : 'text-gray-400'}`}>
                 {/[a-zA-Z]/.test(formData.password) ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
-                <span>Contient des lettres</span>
+                <span>{t('passwordHasLetters')}</span>
               </div>
               <div className={`flex items-center gap-1 ${/\d/.test(formData.password) ? 'text-green-600' : 'text-gray-400'}`}>
                 {/\d/.test(formData.password) ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
-                <span>Contient des chiffres</span>
+                <span>{t('passwordHasNumbers')}</span>
               </div>
               <div className={`flex items-center gap-1 ${/@/.test(formData.password) ? 'text-green-600' : 'text-gray-400'}`}>
                 {/@/.test(formData.password) ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
-                <span>Contient le caractère @ (recommandé)</span>
+                <span>{t('passwordHasAtSymbol')}</span>
               </div>
             </div>
           </div>

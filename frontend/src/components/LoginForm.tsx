@@ -132,7 +132,7 @@ export function LoginForm({ onSuccess, onSwitchToSignup, onForgotPassword }: Log
               disabled={isLoading}
               data-testid="button-forgot-password"
             >
-              Mot de passe oublié ?
+              {t('forgotPassword')}
             </button>
           )}
         </div>

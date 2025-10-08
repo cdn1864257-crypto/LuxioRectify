@@ -141,6 +141,29 @@ export interface Translations {
   cityPlaceholder: string;
   addressPlaceholder: string;
   phonePlaceholder: string;
+  forgotPassword: string;
+  forgotPasswordTitle: string;
+  forgotPasswordDescription: string;
+  sendResetLink: string;
+  sending: string;
+  backToLogin: string;
+  emailSent: string;
+  resetLinkSentDescription: string;
+  checkYourEmail: string;
+  resetEmailSentMessage: string;
+  resetLinkExpiry: string;
+  emailSendError: string;
+  errorOccurred: string;
+  weak: string;
+  medium: string;
+  strong: string;
+  passwordMinLength8: string;
+  passwordHasLetters: string;
+  passwordHasNumbers: string;
+  passwordHasAtSymbol: string;
+  passwordRequirements: string;
+  passwordTooWeak: string;
+  invalidCredentials: string;
   
   // Messages
   itemAddedToCart: string;
@@ -557,6 +580,28 @@ export const translations: Record<Language, Translations> = {
     cityPlaceholder: 'New York',
     addressPlaceholder: '123 Main Street',
     phonePlaceholder: '+1 234 567 8900',
+    forgotPassword: 'Forgot password?',
+    forgotPasswordTitle: 'Forgot password',
+    forgotPasswordDescription: 'Enter your email address and we will send you a link to reset your password.',
+    sendResetLink: 'Send reset link',
+    sending: 'Sending...',
+    backToLogin: 'Back to login',
+    emailSent: 'Email sent',
+    resetLinkSentDescription: 'If an account exists with this email, you will receive a reset link.',
+    checkYourEmail: 'Check your email',
+    resetEmailSentMessage: 'If an account exists with the address {email}, you will receive an email with instructions to reset your password.',
+    resetLinkExpiry: 'The link will expire in 1 hour for security reasons.',
+    emailSendError: 'Error sending email',
+    errorOccurred: 'An error occurred',
+    weak: 'Weak',
+    medium: 'Medium',
+    strong: 'Strong',
+    passwordMinLength8: 'At least 8 characters',
+    passwordHasLetters: 'Contains letters',
+    passwordHasNumbers: 'Contains numbers',
+    passwordHasAtSymbol: 'Contains @ character (recommended)',
+    passwordRequirements: 'Password must contain at least 8 characters, letters and numbers. The @ character is highly recommended.',
+    passwordTooWeak: 'Password too weak. Add special characters to improve security.',
     
     // Messages
     itemAddedToCart: 'Item added to cart!',
@@ -1078,6 +1123,28 @@ export const translations: Record<Language, Translations> = {
     cityPlaceholder: 'Paris',
     addressPlaceholder: '123 Rue de la Paix',
     phonePlaceholder: '+33 1 23 45 67 89',
+    forgotPassword: 'Mot de passe oublié ?',
+    forgotPasswordTitle: 'Mot de passe oublié',
+    forgotPasswordDescription: 'Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe.',
+    sendResetLink: 'Envoyer le lien de réinitialisation',
+    sending: 'Envoi en cours...',
+    backToLogin: 'Retour à la connexion',
+    emailSent: 'Email envoyé',
+    resetLinkSentDescription: 'Si un compte existe avec cet email, vous recevrez un lien de réinitialisation.',
+    checkYourEmail: 'Vérifiez votre email',
+    resetEmailSentMessage: 'Si un compte existe avec l\'adresse {email}, vous recevrez un email avec des instructions pour réinitialiser votre mot de passe.',
+    resetLinkExpiry: 'Le lien expirera dans 1 heure pour des raisons de sécurité.',
+    emailSendError: 'Erreur lors de l\'envoi de l\'email',
+    errorOccurred: 'Une erreur est survenue',
+    weak: 'Faible',
+    medium: 'Moyen',
+    strong: 'Fort',
+    passwordMinLength8: 'Au moins 8 caractères',
+    passwordHasLetters: 'Contient des lettres',
+    passwordHasNumbers: 'Contient des chiffres',
+    passwordHasAtSymbol: 'Contient le caractère @ (recommandé)',
+    passwordRequirements: 'Le mot de passe doit contenir au moins 8 caractères, des lettres et des chiffres. Le caractère @ est fortement recommandé.',
+    passwordTooWeak: 'Mot de passe trop faible. Ajoutez des caractères spéciaux pour renforcer la sécurité.',
     
     // Messages
     itemAddedToCart: 'Article ajouté au panier!',
@@ -1599,6 +1666,28 @@ export const translations: Record<Language, Translations> = {
     cityPlaceholder: 'Madrid',
     addressPlaceholder: 'Calle Principal 123',
     phonePlaceholder: '+34 912 34 56 78',
+    forgotPassword: '¿Olvidaste tu contraseña?',
+    forgotPasswordTitle: 'Contraseña olvidada',
+    forgotPasswordDescription: 'Ingresa tu dirección de correo electrónico y te enviaremos un enlace para restablecer tu contraseña.',
+    sendResetLink: 'Enviar enlace de restablecimiento',
+    sending: 'Enviando...',
+    backToLogin: 'Volver al inicio de sesión',
+    emailSent: 'Correo enviado',
+    resetLinkSentDescription: 'Si existe una cuenta con este correo, recibirás un enlace de restablecimiento.',
+    checkYourEmail: 'Revisa tu correo',
+    resetEmailSentMessage: 'Si existe una cuenta con la dirección {email}, recibirás un correo con instrucciones para restablecer tu contraseña.',
+    resetLinkExpiry: 'El enlace expirará en 1 hora por razones de seguridad.',
+    emailSendError: 'Error al enviar el correo',
+    errorOccurred: 'Ocurrió un error',
+    weak: 'Débil',
+    medium: 'Medio',
+    strong: 'Fuerte',
+    passwordMinLength8: 'Al menos 8 caracteres',
+    passwordHasLetters: 'Contiene letras',
+    passwordHasNumbers: 'Contiene números',
+    passwordHasAtSymbol: 'Contiene el carácter @ (recomendado)',
+    passwordRequirements: 'La contraseña debe contener al menos 8 caracteres, letras y números. El carácter @ es altamente recomendado.',
+    passwordTooWeak: 'Contraseña demasiado débil. Agrega caracteres especiales para mejorar la seguridad.',
     
     // Messages
     itemAddedToCart: '¡Producto añadido al carrito!',
@@ -2120,6 +2209,28 @@ export const translations: Record<Language, Translations> = {
     cityPlaceholder: 'Lisboa',
     addressPlaceholder: 'Rua Principal 123',
     phonePlaceholder: '+351 21 123 4567',
+    forgotPassword: 'Esqueceu a senha?',
+    forgotPasswordTitle: 'Esqueci a senha',
+    forgotPasswordDescription: 'Digite seu endereço de e-mail e enviaremos um link para redefinir sua senha.',
+    sendResetLink: 'Enviar link de redefinição',
+    sending: 'Enviando...',
+    backToLogin: 'Voltar ao login',
+    emailSent: 'E-mail enviado',
+    resetLinkSentDescription: 'Se existir uma conta com este e-mail, você receberá um link de redefinição.',
+    checkYourEmail: 'Verifique seu e-mail',
+    resetEmailSentMessage: 'Se existir uma conta com o endereço {email}, você receberá um e-mail com instruções para redefinir sua senha.',
+    resetLinkExpiry: 'O link expirará em 1 hora por razões de segurança.',
+    emailSendError: 'Erro ao enviar e-mail',
+    errorOccurred: 'Ocorreu um erro',
+    weak: 'Fraca',
+    medium: 'Média',
+    strong: 'Forte',
+    passwordMinLength8: 'Pelo menos 8 caracteres',
+    passwordHasLetters: 'Contém letras',
+    passwordHasNumbers: 'Contém números',
+    passwordHasAtSymbol: 'Contém o caractere @ (recomendado)',
+    passwordRequirements: 'A senha deve conter pelo menos 8 caracteres, letras e números. O caractere @ é altamente recomendado.',
+    passwordTooWeak: 'Senha muito fraca. Adicione caracteres especiais para melhorar a segurança.',
     
     // Messages
     itemAddedToCart: 'Item adicionado ao carrinho!',
@@ -2641,6 +2752,28 @@ export const translations: Record<Language, Translations> = {
     cityPlaceholder: 'Warszawa',
     addressPlaceholder: 'ul. Główna 123',
     phonePlaceholder: '+48 22 123 45 67',
+    forgotPassword: 'Nie pamiętasz hasła?',
+    forgotPasswordTitle: 'Zapomniane hasło',
+    forgotPasswordDescription: 'Wprowadź swój adres e-mail, a wyślemy Ci link do zresetowania hasła.',
+    sendResetLink: 'Wyślij link resetujący',
+    sending: 'Wysyłanie...',
+    backToLogin: 'Powrót do logowania',
+    emailSent: 'E-mail wysłany',
+    resetLinkSentDescription: 'Jeśli konto z tym e-mailem istnieje, otrzymasz link resetujący.',
+    checkYourEmail: 'Sprawdź swoją pocztę',
+    resetEmailSentMessage: 'Jeśli konto z adresem {email} istnieje, otrzymasz e-mail z instrukcjami resetowania hasła.',
+    resetLinkExpiry: 'Link wygaśnie za 1 godzinę ze względów bezpieczeństwa.',
+    emailSendError: 'Błąd wysyłania e-maila',
+    errorOccurred: 'Wystąpił błąd',
+    weak: 'Słabe',
+    medium: 'Średnie',
+    strong: 'Silne',
+    passwordMinLength8: 'Co najmniej 8 znaków',
+    passwordHasLetters: 'Zawiera litery',
+    passwordHasNumbers: 'Zawiera cyfry',
+    passwordHasAtSymbol: 'Zawiera znak @ (zalecane)',
+    passwordRequirements: 'Hasło musi zawierać co najmniej 8 znaków, litery i cyfry. Znak @ jest wysoce zalecany.',
+    passwordTooWeak: 'Hasło zbyt słabe. Dodaj znaki specjalne, aby zwiększyć bezpieczeństwo.',
     
     // Messages
     itemAddedToCart: 'Dodano do koszyka!',
@@ -3162,6 +3295,28 @@ export const translations: Record<Language, Translations> = {
     cityPlaceholder: 'Roma',
     addressPlaceholder: 'Via Principale 123',
     phonePlaceholder: '+39 06 1234 5678',
+    forgotPassword: 'Password dimenticata?',
+    forgotPasswordTitle: 'Password dimenticata',
+    forgotPasswordDescription: 'Inserisci il tuo indirizzo email e ti invieremo un link per reimpostare la password.',
+    sendResetLink: 'Invia link di ripristino',
+    sending: 'Invio in corso...',
+    backToLogin: 'Torna al login',
+    emailSent: 'Email inviata',
+    resetLinkSentDescription: 'Se esiste un account con questa email, riceverai un link di ripristino.',
+    checkYourEmail: 'Controlla la tua email',
+    resetEmailSentMessage: 'Se esiste un account con l\'indirizzo {email}, riceverai un\'email con istruzioni per reimpostare la password.',
+    resetLinkExpiry: 'Il link scadrà tra 1 ora per motivi di sicurezza.',
+    emailSendError: 'Errore nell\'invio dell\'email',
+    errorOccurred: 'Si è verificato un errore',
+    weak: 'Debole',
+    medium: 'Media',
+    strong: 'Forte',
+    passwordMinLength8: 'Almeno 8 caratteri',
+    passwordHasLetters: 'Contiene lettere',
+    passwordHasNumbers: 'Contiene numeri',
+    passwordHasAtSymbol: 'Contiene il carattere @ (consigliato)',
+    passwordRequirements: 'La password deve contenere almeno 8 caratteri, lettere e numeri. Il carattere @ è altamente consigliato.',
+    passwordTooWeak: 'Password troppo debole. Aggiungi caratteri speciali per migliorare la sicurezza.',
     
     // Messages
     itemAddedToCart: 'Articolo aggiunto al carrello!',
@@ -3683,6 +3838,28 @@ export const translations: Record<Language, Translations> = {
     cityPlaceholder: 'Budapest',
     addressPlaceholder: 'Fő utca 123',
     phonePlaceholder: '+36 1 234 5678',
+    forgotPassword: 'Elfelejtette jelszavát?',
+    forgotPasswordTitle: 'Elfelejtett jelszó',
+    forgotPasswordDescription: 'Adja meg e-mail címét, és küldünk egy linket a jelszó visszaállításához.',
+    sendResetLink: 'Visszaállítási link küldése',
+    sending: 'Küldés...',
+    backToLogin: 'Vissza a bejelentkezéshez',
+    emailSent: 'E-mail elküldve',
+    resetLinkSentDescription: 'Ha létezik fiók ezzel az e-maillel, kap egy visszaállítási linket.',
+    checkYourEmail: 'Ellenőrizze e-mailjét',
+    resetEmailSentMessage: 'Ha létezik fiók a(z) {email} címmel, kap egy e-mailt a jelszó visszaállításához szükséges utasításokkal.',
+    resetLinkExpiry: 'A link biztonsági okokból 1 óra múlva lejár.',
+    emailSendError: 'Hiba az e-mail küldésekor',
+    errorOccurred: 'Hiba történt',
+    weak: 'Gyenge',
+    medium: 'Közepes',
+    strong: 'Erős',
+    passwordMinLength8: 'Legalább 8 karakter',
+    passwordHasLetters: 'Tartalmaz betűket',
+    passwordHasNumbers: 'Tartalmaz számokat',
+    passwordHasAtSymbol: '@ karaktert tartalmaz (ajánlott)',
+    passwordRequirements: 'A jelszónak legalább 8 karaktert, betűket és számokat kell tartalmaznia. Az @ karakter erősen ajánlott.',
+    passwordTooWeak: 'A jelszó túl gyenge. Adjon hozzá speciális karaktereket a biztonság növelése érdekében.',
     
     // Messages
     itemAddedToCart: 'Termék hozzáadva a kosárhoz!',

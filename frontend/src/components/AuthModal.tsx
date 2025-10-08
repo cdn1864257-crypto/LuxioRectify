@@ -39,7 +39,7 @@ export function AuthModal({ open, mode, onClose, onSwitchMode }: AuthModalProps)
   };
 
   const getTitle = () => {
-    if (showForgotPassword) return 'Mot de passe oublié';
+    if (showForgotPassword) return t('forgotPasswordTitle');
     return mode === 'login' ? t('login') : t('signup');
   };
 
