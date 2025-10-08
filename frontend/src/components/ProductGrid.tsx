@@ -38,6 +38,7 @@ function ProductCard({ product }: { product: Product }) {
           ...product,
           price: selectedVariant.price,
           originalPrice: selectedVariant.originalPrice,
+          image: selectedVariant.image || product.image,
           description: `${selectedVariant.capacity}, ${selectedVariant.color}`,
         }
       : product;
