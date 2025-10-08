@@ -35,13 +35,13 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Vérification des champs
     if (!email || !password) {
-      return res.status(400).json({ error: 'Email et mot de passe requis' });
+      return res.status(400).json({ error: 'REQUIRED_FIELDS', errorCode: 'REQUIRED_FIELDS' });
     }
 
     // Connexion à MongoDB
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
-      return res.status(500).json({ error: 'Configuration MongoDB manquante' });
+      return res.status(500).json({ error: 'DATABASE_CONFIG_ERROR', errorCode: 'DATABASE_CONFIG_ERROR' });
     }
 
     const client = new MongoClient(mongoUri);
@@ -57,14 +57,14 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       user = await usersCollection.findOne({ email: email.toLowerCase() });
       
       if (!user) {
-        return res.status(401).json({ error: 'Email ou mot de passe incorrect' });
+        return res.status(401).json({ error: 'INVALID_CREDENTIALS', errorCode: 'INVALID_CREDENTIALS' });
       }
 
       // Vérifier le mot de passe
       const isPasswordValid = await bcrypt.compare(password, user.password);
       
       if (!isPasswordValid) {
-        return res.status(401).json({ error: 'Email ou mot de passe incorrect' });
+        return res.status(401).json({ error: 'INVALID_CREDENTIALS', errorCode: 'INVALID_CREDENTIALS' });
       }
     } finally {
       await client.close();
@@ -73,7 +73,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     // Générer le JWT
     const jwtSecret = process.env.JWT_SECRET;
     if (!jwtSecret) {
-      return res.status(500).json({ error: 'Configuration JWT manquante' });
+      return res.status(500).json({ error: 'JWT_CONFIG_ERROR', errorCode: 'JWT_CONFIG_ERROR' });
     }
 
     const token = jwt.sign(
@@ -117,7 +117,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   } catch (error) {
     console.error('Erreur lors de la connexion:', error);
     return res.status(500).json({
-      error: 'Erreur serveur lors de la connexion',
+      error: 'SERVER_ERROR',
+      errorCode: 'SERVER_ERROR',
       details: error instanceof Error ? error.message : 'Unknown error'
     });
   }
