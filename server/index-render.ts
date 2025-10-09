@@ -52,7 +52,7 @@ const { doubleCsrfProtection } = doubleCsrf({
   getSecret: () => process.env.CSRF_SECRET || 'default-csrf-secret-please-change-in-production',
   cookieName: 'x-csrf-token',
   cookieOptions: {
-    sameSite: 'lax',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     path: '/',
     secure: process.env.NODE_ENV === 'production',
     httpOnly: true

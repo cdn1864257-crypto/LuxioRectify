@@ -100,9 +100,9 @@ const { doubleCsrfProtection } = doubleCsrf({
   getSecret: () => process.env.CSRF_SECRET,
   cookieName: 'x-csrf-token',
   cookieOptions: {
-    sameSite: 'lax',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',  // 'none' required for cross-domain
     path: '/',
-    secure: process.env.NODE_ENV === 'production',
+    secure: process.env.NODE_ENV === 'production',  // Must be true with sameSite: 'none'
     httpOnly: true
   },
   size: 64,
@@ -112,6 +112,11 @@ const { doubleCsrfProtection } = doubleCsrf({
   }
 });
 ```
+
+⚠️ **CRITICAL for Cross-Domain Setup**: 
+- Frontend (Vercel) and Backend (Render) are on different domains = cross-site requests
+- `sameSite: 'none'` is **REQUIRED** in production for cross-domain cookie transmission
+- `secure: true` is **MANDATORY** when using `sameSite: 'none'` (enforced by browsers)
 
 **Protected Routes**:
 - ✅ `/api/auth/signup` - Rate limited + CSRF

@@ -2,27 +2,50 @@
 
 ## 🎯 Problème Identifié
 
-L'erreur `"Unexpected token '<', "<!DOCTYPE "... is not valid JSON"` que vous rencontriez lors de l'inscription, du paiement et de la suppression de commandes était causée par un **header CORS manquant** dans le backend sur Render.
+L'erreur `"Unexpected token '<', "<!DOCTYPE "... is not valid JSON"` et les erreurs **"ForbiddenError: invalid csrf token"** dans les logs Render étaient causées par une **mauvaise configuration du cookie CSRF** pour un environnement cross-domain.
 
-### Cause du Problème
+### Cause Racine du Problème
 
-Dans `server/index-render.ts`, le header CORS `Access-Control-Allow-Headers` ne contenait **PAS** `X-CSRF-Token` :
+Votre application utilise **deux domaines différents** :
+- Frontend : `https://luxios.vercel.app` (Vercel)
+- Backend : `https://luxio.onrender.com` (Render)
+
+Dans `server/index-render.ts`, le cookie CSRF utilisait `sameSite: 'lax'` :
 
 ```javascript
-// ❌ AVANT (INCORRECT)
-res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie');
+// ❌ AVANT (INCORRECT pour cross-domain)
+cookieOptions: {
+  sameSite: 'lax',  // ← Le problème !
+  path: '/',
+  secure: process.env.NODE_ENV === 'production',
+  httpOnly: true
+}
 ```
 
-Sans ce header, les navigateurs **bloquent** l'envoi du token CSRF depuis le frontend (Vercel) vers le backend (Render), ce qui cause le rejet de toutes les requêtes POST/PUT/DELETE par la protection CSRF.
+**Pourquoi ça ne marchait pas** :
+- Avec `sameSite: 'lax'`, les navigateurs **bloquent** l'envoi du cookie CSRF lors de requêtes POST cross-site
+- Le backend ne recevait jamais le cookie CSRF
+- Le token CSRF était donc considéré comme "invalide"
+- Toutes les requêtes POST/PUT/DELETE étaient rejetées
 
-### Correction Appliquée
+### Corrections Appliquées
 
+**1. Configuration du cookie CSRF pour cross-domain** :
 ```javascript
 // ✅ APRÈS (CORRECT)
-res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie, X-CSRF-Token');
+cookieOptions: {
+  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',  // ← 'none' en prod
+  path: '/',
+  secure: process.env.NODE_ENV === 'production',  // ← Obligatoire avec sameSite: 'none'
+  httpOnly: true
+}
 ```
 
-Le header `X-CSRF-Token` a été ajouté à la liste des headers autorisés par CORS.
+**2. Header CORS pour accepter X-CSRF-Token** :
+```javascript
+// ✅ Ajout de X-CSRF-Token dans les headers autorisés
+res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie, X-CSRF-Token');
+```
 
 ---
 
