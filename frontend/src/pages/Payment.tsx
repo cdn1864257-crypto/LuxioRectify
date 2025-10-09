@@ -136,6 +136,7 @@ export default function Payment() {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({
           customerEmail: user.email,
           customerName: user.firstName + ' ' + user.lastName,
@@ -190,6 +191,7 @@ export default function Payment() {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({
           customerEmail: user.email,
           customerName: user.firstName + ' ' + user.lastName,
@@ -246,6 +248,7 @@ export default function Payment() {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({
           customerEmail: user.email,
           customerName: user.firstName + ' ' + user.lastName,
