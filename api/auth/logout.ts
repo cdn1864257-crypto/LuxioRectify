@@ -23,10 +23,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    const isProduction = process.env.NODE_ENV === 'production';
     const cookie = serialize('auth_token', '', {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
       maxAge: 0,
       path: '/'
     });
