@@ -79,10 +79,10 @@ const allowedOrigins = process.env.NODE_ENV === 'production'
 
 ---
 
-### 3. ✅ Missing CSRF Protection (HIGH)
+### 3. ⚠️ Missing CSRF Protection (HIGH)
 **Severity**: High  
-**Status**: Fixed  
-**Date Fixed**: October 9, 2025
+**Status**: Temporarily Disabled in Production  
+**Date**: October 9, 2025
 
 #### Vulnerability Description
 No CSRF protection existed, allowing attackers to:
@@ -113,10 +113,19 @@ const { doubleCsrfProtection } = doubleCsrf({
 });
 ```
 
-⚠️ **CRITICAL for Cross-Domain Setup**: 
-- Frontend (Vercel) and Backend (Render) are on different domains = cross-site requests
-- `sameSite: 'none'` is **REQUIRED** in production for cross-domain cookie transmission
-- `secure: true` is **MANDATORY** when using `sameSite: 'none'` (enforced by browsers)
+⚠️ **CSRF DISABLED IN PRODUCTION** (October 9, 2025):
+- Cookie-based CSRF does NOT work reliably in cross-domain setups (Vercel ↔ Render)
+- CSRF protection is **DISABLED** in production (`NODE_ENV=production`)
+- CSRF remains **ENABLED** in development for testing
+- **See `CSRF-CROSS-DOMAIN-ISSUE.md`** for detailed explanation and permanent solutions
+
+**Temporary Risk Mitigation**:
+- ✅ CORS restricted to frontend domain only
+- ✅ JWT authentication required for all actions
+- ✅ Rate limiting on sensitive routes
+- ✅ httpOnly cookies prevent XSS token theft
+
+**Action Required**: Implement permanent CSRF solution within 4 weeks (see alternatives in CSRF-CROSS-DOMAIN-ISSUE.md)
 
 **Protected Routes**:
 - ✅ `/api/auth/signup` - Rate limited + CSRF

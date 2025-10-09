@@ -47,28 +47,38 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Configuration CSRF
-const { doubleCsrfProtection } = doubleCsrf({
-  getSecret: () => process.env.CSRF_SECRET || 'default-csrf-secret-please-change-in-production',
-  cookieName: 'x-csrf-token',
-  cookieOptions: {
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-    path: '/',
-    secure: process.env.NODE_ENV === 'production',
-    httpOnly: true
-  },
-  size: 64,
-  ignoredMethods: ['GET', 'HEAD', 'OPTIONS'],
-  getSessionIdentifier: (req) => {
-    // Utiliser l'IP comme identifiant de session pour CSRF
-    return req.headers['x-forwarded-for'] as string || req.socket?.remoteAddress || 'unknown';
-  }
-});
+// Configuration CSRF - Temporairement désactivé en production pour environnement cross-domain
+// TODO: Implémenter une solution CSRF compatible cross-domain (JWT-based ou custom headers)
+const csrfEnabled = process.env.NODE_ENV !== 'production';
+
+let doubleCsrfProtection: any;
+
+if (csrfEnabled) {
+  const csrfConfig = doubleCsrf({
+    getSecret: () => process.env.CSRF_SECRET || 'default-csrf-secret-please-change-in-production',
+    cookieName: 'x-csrf-token',
+    cookieOptions: {
+      sameSite: 'lax',
+      path: '/',
+      secure: false,
+      httpOnly: true
+    },
+    size: 64,
+    ignoredMethods: ['GET', 'HEAD', 'OPTIONS'],
+    getSessionIdentifier: (req) => {
+      return req.headers['x-forwarded-for'] as string || req.socket?.remoteAddress || 'unknown';
+    }
+  });
+  doubleCsrfProtection = csrfConfig.doubleCsrfProtection;
+} else {
+  // Middleware no-op en production
+  doubleCsrfProtection = (req: any, res: any, next: any) => next();
+}
 
 // Route pour obtenir le token CSRF
 app.get('/api/csrf-token', (req, res) => {
-  const token = req.csrfToken ? req.csrfToken() : '';
-  res.json({ csrfToken: token });
+  // Retourner un token factice en production (CSRF désactivé)
+  res.json({ csrfToken: 'no-csrf-in-production' });
 });
 
 // Rate limiting général
