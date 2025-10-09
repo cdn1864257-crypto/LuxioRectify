@@ -108,7 +108,7 @@ export function ProductDetailModal({ product, isOpen, onClose }: ProductDetailMo
             {/* Description */}
             <div>
               <h3 className="font-semibold text-lg mb-2 text-slate-900 dark:text-white">
-                Description
+                {t('description')}
               </h3>
               <p className="text-slate-600 dark:text-slate-400" data-testid={`modal-product-description-${product.id}`}>
                 {product.description}
@@ -119,7 +119,7 @@ export function ProductDetailModal({ product, isOpen, onClose }: ProductDetailMo
             {product.features && product.features.length > 0 && (
               <div>
                 <h3 className="font-semibold text-lg mb-3 text-slate-900 dark:text-white">
-                  Caractéristiques
+                  {t('specifications')}
                 </h3>
                 <ul className="space-y-2" data-testid={`modal-product-features-${product.id}`}>
                   {product.features.map((feature, index) => (
@@ -139,7 +139,7 @@ export function ProductDetailModal({ product, isOpen, onClose }: ProductDetailMo
                 {capacities.length > 0 && (
                   <div>
                     <p className="font-semibold text-slate-700 dark:text-slate-300 mb-3">
-                      Capacité:
+                      {t('capacity')}:
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {capacities.map(capacity => (
@@ -164,7 +164,7 @@ export function ProductDetailModal({ product, isOpen, onClose }: ProductDetailMo
                 {colors.length > 0 && (
                   <div>
                     <p className="font-semibold text-slate-700 dark:text-slate-300 mb-3">
-                      Couleur:
+                      {t('color')}:
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {colors.map(color => (
