@@ -180,8 +180,8 @@ export default function NewPayment() {
   const handleNowPayments = async () => {
     setIsProcessing(true);
     toast({
-      title: t.redirectingToCryptoPayment || "Redirection vers NOWPayments",
-      description: "Vous allez être redirigé vers la page de paiement sécurisée..."
+      title: t.redirectingToNowPayments || t.redirectingToCryptoPayment || "Redirection vers NOWPayments",
+      description: t.redirectingToNowPaymentsDescription || "Vous allez être redirigé vers la page de paiement sécurisée..."
     });
 
     try {
