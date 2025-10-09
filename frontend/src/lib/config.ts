@@ -1,6 +1,8 @@
 // Configuration de l'API backend
-// Backend hébergé sur Render par défaut
-const DEFAULT_BACKEND_URL = 'https://luxio.onrender.com';
+// En développement, utiliser le backend local sur le port 3001
+// En production, utiliser l'URL du backend déployé
+const isDevelopment = import.meta.env.DEV;
+const DEFAULT_BACKEND_URL = isDevelopment ? 'http://localhost:3001' : 'https://luxio.onrender.com';
 
 // VITE_API_URL peut être configuré pour override (staging, tests, etc.)
 export const API_BASE_URL = import.meta.env.VITE_API_URL || DEFAULT_BACKEND_URL;
