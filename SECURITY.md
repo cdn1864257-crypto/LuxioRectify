@@ -259,6 +259,12 @@ app.use(helmet({
 - ✅ **X-DNS-Prefetch-Control**: Controls DNS prefetching
 - ✅ **X-Download-Options**: Prevents IE downloads
 
+**CORS Headers** (CRITICAL):
+```javascript
+res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie, X-CSRF-Token');
+```
+⚠️ **IMPORTANT**: `X-CSRF-Token` MUST be in the `Access-Control-Allow-Headers` list, otherwise browsers will block CSRF token transmission and all POST/PUT/DELETE requests will fail in production.
+
 ---
 
 ## Known Limitations & Recommendations
