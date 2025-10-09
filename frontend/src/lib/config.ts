@@ -12,3 +12,51 @@ export function getApiUrl(path: string): string {
   // car le backend et le frontend sont déployés séparément
   return `${API_BASE_URL}${path}`;
 }
+
+// CSRF Token Management
+let csrfToken: string | null = null;
+
+export async function getCsrfToken(): Promise<string> {
+  if (csrfToken) {
+    return csrfToken;
+  }
+
+  try {
+    const response = await fetch(getApiUrl('/api/csrf-token'), {
+      credentials: 'include'
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch CSRF token');
+    }
+
+    const data = await response.json();
+    csrfToken = data.csrfToken;
+    
+    if (!csrfToken) {
+      throw new Error('Invalid CSRF token received');
+    }
+    
+    return csrfToken;
+  } catch (error) {
+    console.error('Error fetching CSRF token:', error);
+    throw error;
+  }
+}
+
+export async function fetchWithCsrf(url: string, options: RequestInit = {}): Promise<Response> {
+  const token = await getCsrfToken();
+  
+  const headers = new Headers(options.headers || {});
+  
+  // Add CSRF token for state-changing methods
+  if (options.method && ['POST', 'PUT', 'PATCH', 'DELETE'].includes(options.method.toUpperCase())) {
+    headers.set('X-CSRF-Token', token);
+  }
+  
+  return fetch(url, {
+    ...options,
+    headers,
+    credentials: 'include'
+  });
+}
