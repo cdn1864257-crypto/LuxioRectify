@@ -99,6 +99,19 @@ export async function sendEmailWithSendGrid(options: EmailOptions): Promise<bool
     
     if (error instanceof Error) {
       console.error(`   Error message: ${error.message}`);
+      console.error(`   Error stack: ${error.stack}`);
+    }
+    
+    // Log SendGrid-specific error details
+    if (typeof error === 'object' && error !== null) {
+      const sgError = error as any;
+      if (sgError.response) {
+        console.error(`   SendGrid Response Status: ${sgError.response.statusCode}`);
+        console.error(`   SendGrid Response Body:`, sgError.response.body);
+      }
+      if (sgError.code) {
+        console.error(`   Error Code: ${sgError.code}`);
+      }
     }
     
     return false;
