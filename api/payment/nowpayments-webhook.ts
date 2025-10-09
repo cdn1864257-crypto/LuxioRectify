@@ -77,20 +77,24 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const ipnSecret = process.env.NOWPAYMENTS_IPN_SECRET;
     
-    if (ipnSecret) {
-      const signature = req.headers['x-nowpayments-sig'];
-      
-      if (!verifyNowPaymentsSignature(req.body, signature, ipnSecret)) {
-        console.error('[NowPayments Webhook] Invalid signature - potential security threat!');
-        return res.status(401).json({
-          error: 'Signature invalide'
-        });
-      }
-      
-      console.log('[NowPayments Webhook] Signature verified successfully');
-    } else {
-      console.warn('[NowPayments Webhook] IPN_SECRET not configured - webhook security disabled!');
+    // SECURITY: IPN_SECRET est OBLIGATOIRE pour valider les webhooks
+    if (!ipnSecret) {
+      console.error('[NowPayments Webhook] NOWPAYMENTS_IPN_SECRET non configuré - CRITIQUE!');
+      return res.status(500).json({
+        error: 'Configuration de sécurité manquante'
+      });
     }
+    
+    const signature = req.headers['x-nowpayments-sig'];
+    
+    if (!verifyNowPaymentsSignature(req.body, signature, ipnSecret)) {
+      console.error('[NowPayments Webhook] Invalid signature - potential security threat!');
+      return res.status(401).json({
+        error: 'Signature invalide'
+      });
+    }
+    
+    console.log('[NowPayments Webhook] Signature verified successfully');
 
     const {
       order_id,
