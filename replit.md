@@ -8,6 +8,52 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (October 2025)
 
+### Security Hardening & Audit (October 9, 2025)
+**Status**: ✅ All critical vulnerabilities fixed
+
+#### Critical Security Fixes Applied:
+1. **Password Reset Poisoning** (CRITICAL)
+   - Fixed Host Header Poisoning vulnerability in password reset flow
+   - Replaced `req.headers.origin` with trusted `FRONTEND_URL` environment variable
+   - Prevents attackers from redirecting reset links to malicious domains
+
+2. **CORS Misconfiguration** (HIGH)
+   - Blocked localhost origins in production environment
+   - Ensures only `FRONTEND_URL` is allowed in production
+   - Prevents CSRF attacks from malicious localhost applications
+
+3. **CSRF Protection** (HIGH)
+   - Implemented double-submit cookie pattern using `csrf-csrf` package
+   - Protected all state-changing routes (auth, payment, orders)
+   - Added `/api/csrf-token` endpoint for token retrieval
+   - NowPayments webhook exempt (validated via HMAC instead)
+
+4. **Rate Limiting** (MEDIUM)
+   - Auth endpoints: 5 attempts per 15 minutes (login, signup, password reset)
+   - General endpoints: 100 requests per 15 minutes
+   - Prevents brute force and DoS attacks
+
+5. **NowPayments Webhook Security** (CRITICAL)
+   - Made `NOWPAYMENTS_IPN_SECRET` mandatory in production
+   - Implemented HMAC SHA-512 signature verification
+   - Rejects webhooks with invalid signatures
+
+6. **Security Headers** (MEDIUM)
+   - Implemented Helmet.js for comprehensive HTTP security headers
+   - Content Security Policy (CSP) prevents XSS attacks
+   - HSTS enforces HTTPS (1 year max-age)
+   - Anti-clickjacking and MIME-sniffing protections
+
+#### New Required Environment Variables:
+- `CSRF_SECRET` - 32+ character random string for CSRF token generation
+- `BACKEND_URL` - Backend URL (e.g., `https://luxio.onrender.com`) for NowPayments callbacks
+- `NOWPAYMENTS_IPN_SECRET` - IPN secret for webhook verification (now MANDATORY)
+
+#### Documentation Added:
+- `SECURITY.md` - Comprehensive security audit report and deployment checklist
+- `.env.example` - Updated with all required security variables
+- Production deployment verification steps
+
 ### NowPayments Integration Fixes
 - **Critical Fix**: Corrected callback URLs to point to backend (`BACKEND_URL`) instead of frontend, preventing redirect failures after payment
 - **Environment Variable**: Added mandatory `BACKEND_URL` environment variable for Render deployment
