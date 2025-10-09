@@ -235,7 +235,10 @@ export interface Translations {
   
   // Product Details
   productDetails: string;
+  description: string;
   specifications: string;
+  capacity: string;
+  color: string;
   inStock: string;
   outOfStock: string;
   addedToCart: string;
@@ -672,7 +675,10 @@ export const translations: Record<Language, Translations> = {
     
     // Product Details
     productDetails: 'Product Details',
+    description: 'Description',
     specifications: 'Specifications',
+    capacity: 'Capacity',
+    color: 'Color',
     inStock: 'In Stock',
     outOfStock: 'Out of Stock',
     addedToCart: 'Added to Cart',
@@ -1215,7 +1221,10 @@ export const translations: Record<Language, Translations> = {
     
     // Product Details
     productDetails: 'Détails du produit',
-    specifications: 'Spécifications',
+    description: 'Description',
+    specifications: 'Caractéristiques',
+    capacity: 'Capacité',
+    color: 'Couleur',
     inStock: 'En stock',
     outOfStock: 'Rupture de stock',
     addedToCart: 'Ajouté au panier',
@@ -1758,7 +1767,10 @@ export const translations: Record<Language, Translations> = {
     
     // Product Details
     productDetails: 'Detalles del producto',
+    description: 'Descripción',
     specifications: 'Especificaciones',
+    capacity: 'Capacidad',
+    color: 'Color',
     inStock: 'En stock',
     outOfStock: 'Agotado',
     addedToCart: 'Añadido al carrito',
@@ -2301,7 +2313,10 @@ export const translations: Record<Language, Translations> = {
     
     // Product Details
     productDetails: 'Detalhes do produto',
+    description: 'Descrição',
     specifications: 'Especificações',
+    capacity: 'Capacidade',
+    color: 'Cor',
     inStock: 'Em stock',
     outOfStock: 'Esgotado',
     addedToCart: 'Adicionado ao carrinho',
@@ -2844,7 +2859,10 @@ export const translations: Record<Language, Translations> = {
     
     // Product Details
     productDetails: 'Szczegóły produktu',
+    description: 'Opis',
     specifications: 'Specyfikacje',
+    capacity: 'Pojemność',
+    color: 'Kolor',
     inStock: 'Na stanie',
     outOfStock: 'Brak na stanie',
     addedToCart: 'Dodano do koszyka',
@@ -3387,7 +3405,10 @@ export const translations: Record<Language, Translations> = {
     
     // Product Details
     productDetails: 'Dettagli prodotto',
+    description: 'Descrizione',
     specifications: 'Specifiche',
+    capacity: 'Capacità',
+    color: 'Colore',
     inStock: 'Disponibile',
     outOfStock: 'Esaurito',
     addedToCart: 'Aggiunto al carrello',
@@ -3930,7 +3951,10 @@ export const translations: Record<Language, Translations> = {
     
     // Product Details
     productDetails: 'Termék részletek',
+    description: 'Leírás',
     specifications: 'Specifikációk',
+    capacity: 'Kapacitás',
+    color: 'Szín',
     inStock: 'Raktáron',
     outOfStock: 'Elfogyott',
     addedToCart: 'Kosárba helyezve',
