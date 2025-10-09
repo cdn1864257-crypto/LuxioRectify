@@ -67,10 +67,9 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         }
       );
 
-      // Construire l'URL de réinitialisation
-      const replitDomain = process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS}` : '';
-      const baseUrl = req.headers.origin || replitDomain || 'https://luxios.vercel.app';
-      const resetUrl = `${baseUrl}/reset-password?token=${resetToken}`;
+      // Construire l'URL de réinitialisation - IMPORTANT: Utiliser uniquement l'URL de confiance
+      const TRUSTED_FRONTEND_URL = process.env.FRONTEND_URL || 'https://luxios.vercel.app';
+      const resetUrl = `${TRUSTED_FRONTEND_URL}/reset-password?token=${resetToken}`;
 
       const language = user.language || 'fr';
       const t = getTranslation(language);

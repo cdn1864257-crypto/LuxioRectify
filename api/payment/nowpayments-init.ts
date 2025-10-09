@@ -114,9 +114,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       // URLs pour les callbacks
       // IMPORTANT: Les callbacks API (success_url, ipn_callback_url) doivent pointer vers le BACKEND
       // car les routes /api/* n'existent que sur le backend
-      const replitDomain = process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS}` : '';
-      const backendUrl = process.env.BACKEND_URL || replitDomain || 'https://luxio.onrender.com';
-      const frontendUrl = req.headers.origin || process.env.FRONTEND_URL || 'https://luxios.vercel.app';
+      const backendUrl = process.env.BACKEND_URL || 'https://luxio.onrender.com';
+      const frontendUrl = process.env.FRONTEND_URL || 'https://luxios.vercel.app';
       
       // Les URLs de callback API doivent pointer vers le backend
       const successUrl = `${backendUrl}/api/payment/nowpayments-return?status=finished`;
