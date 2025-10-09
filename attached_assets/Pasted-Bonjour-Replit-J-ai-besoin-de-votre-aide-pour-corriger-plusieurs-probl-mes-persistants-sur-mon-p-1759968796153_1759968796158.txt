@@ -1,0 +1,79 @@
+Bonjour Replit 👋
+
+J’ai besoin de votre aide pour corriger plusieurs problèmes persistants sur mon projet Luxio, un site e-commerce dont :
+
+le frontend est déployé sur Vercel,
+
+et le backend est hébergé sur Render, où toutes les clés et variables d’environnement sont déjà configurées.
+
+
+Voici les liens :
+
+Frontend : https://luxios.vercel.app/
+
+Backend : https://luxio.onrender.com
+
+
+
+---
+
+⚙️ Problèmes à corriger
+
+1️⃣ Connexion automatique après déconnexion
+
+Après s’être déconnecté, si on actualise la page, l’utilisateur se retrouve à nouveau connecté automatiquement.
+👉 Merci de corriger cela pour que la déconnexion soit réelle et persistante — le token ou la session doivent être complètement invalidés après le logout.
+
+
+---
+
+2️⃣ Pop-up de redirection de paiement (NowPayments)
+
+Dans la page de paiement, lorsqu’on clique sur “Payer via NowPayments”, le pop-up de redirection s’affiche uniquement en français.
+👉 Corriger cela pour qu’il soit multilingue, c’est-à-dire qu’il s’affiche automatiquement dans la langue actuelle du site.
+
+Exemple :
+
+Si le site est en anglais → le pop-up doit s’afficher en anglais.
+
+Si le site est en français → il reste en français.
+
+
+
+---
+
+3️⃣ Réinitialisation du mot de passe (Login)
+
+La réinitialisation du mot de passe depuis la page Login ne fonctionne toujours pas.
+Le message d’erreur suivant apparaît :
+
+> “Error sending email.”
+
+
+
+👉 Merci d’investiguer et de corriger ce problème.
+
+Information utile :
+J’utilise déjà SendGrid, configuré sur Render, pour :
+
+l’envoi des emails de bienvenue,
+
+et les confirmations de commande.
+
+
+Vous pouvez vous appuyer sur cette même configuration SendGrid pour envoyer le lien de réinitialisation du mot de passe.
+
+
+---
+
+✅ Attentes finales
+
+Corriger les trois problèmes mentionnés ci-dessus,
+
+Et vérifier le bon fonctionnement global (frontend + backend).
+
+
+💡 Important :
+S’il y a la moindre configuration à effectuer de mon côté (sur Render, Vercel, ou dans les variables d’environnement), merci de me le préciser clairement afin que je puisse l’ajuster immédiatement.
+
+Merci beaucoup 🙏
