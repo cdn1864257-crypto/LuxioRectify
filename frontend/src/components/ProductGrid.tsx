@@ -7,6 +7,7 @@ import { showToast } from './ToastNotifications';
 import { LazyImage } from './LazyImage';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { ProductDetailModal } from './ProductDetailModal';
 
 interface ProductGridProps {
   title: string;
@@ -20,6 +21,7 @@ function ProductCard({ product }: { product: Product }) {
   const { addToCart } = useCart();
   const { t } = useLanguage();
   const [addedToCart, setAddedToCart] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     product.hasVariants && product.variants ? product.variants[0] : null
   );
@@ -79,7 +81,11 @@ function ProductCard({ product }: { product: Product }) {
     >
       <div className="p-4 flex-1">
         {/* Product Image */}
-        <div className="relative aspect-square mb-4 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800">
+        <div 
+          className="relative aspect-square mb-4 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800 cursor-pointer"
+          onClick={() => setIsModalOpen(true)}
+          data-testid={`product-image-container-${product.id}`}
+        >
           <LazyImage 
             src={currentImage}
             alt={product.name}
@@ -191,6 +197,13 @@ function ProductCard({ product }: { product: Product }) {
           )}
         </Button>
       </div>
+
+      {/* Product Detail Modal */}
+      <ProductDetailModal 
+        product={product}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }
