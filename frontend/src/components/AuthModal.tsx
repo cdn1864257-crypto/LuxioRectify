@@ -1,8 +1,6 @@
-import { useState } from 'react';
 import { X } from 'lucide-react';
 import { SignupForm } from './SignupForm';
 import { LoginForm } from './LoginForm';
-import { ForgotPasswordForm } from './ForgotPasswordForm';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useLocation } from 'wouter';
 
@@ -16,7 +14,6 @@ interface AuthModalProps {
 export function AuthModal({ open, mode, onClose, onSwitchMode }: AuthModalProps) {
   const { t } = useLanguage();
   const [, navigate] = useLocation();
-  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   if (!open) return null;
 
@@ -26,20 +23,10 @@ export function AuthModal({ open, mode, onClose, onSwitchMode }: AuthModalProps)
   };
 
   const handleSwitchMode = () => {
-    setShowForgotPassword(false);
     onSwitchMode(mode === 'login' ? 'signup' : 'login');
   };
 
-  const handleForgotPassword = () => {
-    setShowForgotPassword(true);
-  };
-
-  const handleBackToLogin = () => {
-    setShowForgotPassword(false);
-  };
-
   const getTitle = () => {
-    if (showForgotPassword) return t('forgotPasswordTitle');
     return mode === 'login' ? t('login') : t('signup');
   };
 
@@ -51,10 +38,7 @@ export function AuthModal({ open, mode, onClose, onSwitchMode }: AuthModalProps)
             {getTitle()}
           </h2>
           <button 
-            onClick={() => {
-              setShowForgotPassword(false);
-              onClose();
-            }}
+            onClick={onClose}
             className="text-muted-foreground hover:text-foreground"
             data-testid="button-close-auth"
           >
@@ -62,13 +46,10 @@ export function AuthModal({ open, mode, onClose, onSwitchMode }: AuthModalProps)
           </button>
         </div>
         
-        {showForgotPassword ? (
-          <ForgotPasswordForm onBack={handleBackToLogin} />
-        ) : mode === 'login' ? (
+        {mode === 'login' ? (
           <LoginForm 
             onSuccess={handleSuccess}
             onSwitchToSignup={handleSwitchMode}
-            onForgotPassword={handleForgotPassword}
           />
         ) : (
           <SignupForm 
