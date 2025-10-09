@@ -32,9 +32,15 @@ app.use(cookieParser());
 // CORS middleware configuré pour Vercel
 app.use((req, res, next) => {
   const origin = req.headers.origin;
+  const isProduction = process.env.NODE_ENV === 'production';
   
-  // Autoriser le frontend Vercel et localhost pour les tests
-  if (origin && (origin === FRONTEND_URL || origin.includes('localhost') || origin.includes('127.0.0.1'))) {
+  // En production: autoriser UNIQUEMENT le frontend Vercel
+  // En développement: autoriser aussi localhost pour les tests
+  const allowedOrigins = isProduction 
+    ? [FRONTEND_URL]
+    : [FRONTEND_URL, 'http://localhost:5000', 'http://localhost:3000', 'http://127.0.0.1:5000', 'http://127.0.0.1:3000'];
+  
+  if (origin && allowedOrigins.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', 'true');
   }
