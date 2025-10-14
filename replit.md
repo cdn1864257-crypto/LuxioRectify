@@ -8,6 +8,32 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (October 2025)
 
+### CORS Configuration Fix (October 14, 2025)
+**Status**: ✅ Fixed
+**Issue**: Payment endpoints returning "Failed to fetch" errors in production due to CORS misconfiguration.
+
+#### Problem Identified:
+- Backend CORS middleware required exact `FRONTEND_URL` match to allow requests
+- If `FRONTEND_URL` was undefined or incorrect on Render, it defaulted to `'*'`
+- The wildcard `'*'` in `allowedOrigins.includes(origin)` check always returned `false`
+- Result: CORS headers not set, all cross-domain requests rejected
+
+#### Solutions Implemented:
+1. **Intelligent Fallback**: Changed `FRONTEND_URL` default from `'*'` to `'https://luxios.vercel.app'`
+2. **Wildcard Support**: Added special handling for `FRONTEND_URL === '*'` to allow all origins
+3. **CSRF Status**: Confirmed CSRF is disabled in production (cross-domain incompatibility)
+
+#### Files Modified:
+- `server/index-render.ts`: Updated CORS middleware and FRONTEND_URL fallback
+
+#### Cart Image Issue Investigation:
+**Status**: ⚠️ Likely due to cached localStorage data
+- All product images are correctly configured in `frontend/src/lib/products.ts`
+- Product variant images properly assigned via `selectedVariant.image || product.image`
+- No coffee/cup images found in project assets
+- **Root Cause**: Old cart data in browser localStorage with incorrect images
+- **User Action Required**: Clear browser cache/localStorage or empty cart to resolve
+
 ### Security Hardening & Audit (October 9, 2025)
 **Status**: ✅ All critical vulnerabilities fixed
 

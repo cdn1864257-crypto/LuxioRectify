@@ -27,7 +27,8 @@ const __dirname = dirname(__filename);
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '10000', 10);
-const FRONTEND_URL = process.env.FRONTEND_URL || '*';
+// Fallback intelligent pour FRONTEND_URL
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://luxios.vercel.app';
 
 // Middleware de sécurité
 app.use(helmet({
@@ -111,7 +112,10 @@ app.use((req, res, next) => {
     ? [FRONTEND_URL]
     : [FRONTEND_URL, 'http://localhost:5000', 'http://localhost:3000', 'http://127.0.0.1:5000', 'http://127.0.0.1:3000'];
   
-  if (origin && allowedOrigins.includes(origin)) {
+  // Gérer le cas spécial où FRONTEND_URL vaut '*' (autoriser toutes les origines)
+  const allowAllOrigins = FRONTEND_URL === '*';
+  
+  if (origin && (allowAllOrigins || allowedOrigins.includes(origin))) {
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', 'true');
   }
