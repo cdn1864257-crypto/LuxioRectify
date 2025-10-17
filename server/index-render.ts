@@ -68,6 +68,35 @@ if (store) {
   });
 }
 
+// CORS middleware configuré pour Vercel (DOIT ÊTRE AVANT SESSION/CSRF/RATE LIMITING)
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  const isProduction = process.env.NODE_ENV === 'production';
+  
+  // En production: autoriser UNIQUEMENT le frontend Vercel
+  // En développement: autoriser aussi localhost pour les tests
+  const allowedOrigins = isProduction 
+    ? [FRONTEND_URL]
+    : [FRONTEND_URL, 'http://localhost:5000', 'http://localhost:3000', 'http://127.0.0.1:5000', 'http://127.0.0.1:3000'];
+  
+  // Gérer le cas spécial où FRONTEND_URL vaut '*' (autoriser toutes les origines)
+  const allowAllOrigins = FRONTEND_URL === '*';
+  
+  if (origin && (allowAllOrigins || allowedOrigins.includes(origin))) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', 'true');
+  }
+  
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie, X-CSRF-Token');
+  
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  
+  next();
+});
+
 // Session configuration with MongoDB store
 app.use(
   session({
@@ -125,42 +154,13 @@ const generalLimiter = rateLimit({
 
 // Rate limiting strict pour l'authentification
 const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 60 * 1000, // 15 minutes
   max: 5, // Limite à 5 tentatives
   message: 'Trop de tentatives de connexion, veuillez réessayer dans 15 minutes.',
   skipSuccessfulRequests: true,
 });
 
 app.use(generalLimiter);
-
-// CORS middleware configuré pour Vercel
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  const isProduction = process.env.NODE_ENV === 'production';
-  
-  // En production: autoriser UNIQUEMENT le frontend Vercel
-  // En développement: autoriser aussi localhost pour les tests
-  const allowedOrigins = isProduction 
-    ? [FRONTEND_URL]
-    : [FRONTEND_URL, 'http://localhost:5000', 'http://localhost:3000', 'http://127.0.0.1:5000', 'http://127.0.0.1:3000'];
-  
-  // Gérer le cas spécial où FRONTEND_URL vaut '*' (autoriser toutes les origines)
-  const allowAllOrigins = FRONTEND_URL === '*';
-  
-  if (origin && (allowAllOrigins || allowedOrigins.includes(origin))) {
-    res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Credentials', 'true');
-  }
-  
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie, X-CSRF-Token');
-  
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
-  }
-  
-  next();
-});
 
 // Convert Vercel handlers to Express middleware
 const convertVercelHandler = (handler: any) => {
