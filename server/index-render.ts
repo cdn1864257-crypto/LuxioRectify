@@ -93,9 +93,17 @@ const csrfProtection = csrf({
   }
 });
 
+// Route to provide CSRF token to frontend (MUST be before CSRF middleware)
+app.get('/api/csrf-token', (req: any, res) => {
+  res.json({ csrfToken: req.csrfToken ? req.csrfToken() : 'no-csrf-available' });
+});
+
 // Middleware to conditionally apply CSRF protection
 app.use((req, res, next) => {
   const exemptRoutes = [
+    /^\/api\/csrf-token/,
+    /^\/api\/auth\/signup/,
+    /^\/api\/auth\/login/,
     /^\/api\/payment\/nowpayments-webhook/,
     /^\/api\/payment\/nowpayments-return/,
   ];
@@ -104,11 +112,6 @@ app.use((req, res, next) => {
     return next();
   }
   return csrfProtection(req, res, next);
-});
-
-// Route to provide CSRF token to frontend
-app.get('/api/csrf-token', (req: any, res) => {
-  res.json({ csrfToken: req.csrfToken ? req.csrfToken() : 'no-csrf-available' });
 });
 
 // Rate limiting général
