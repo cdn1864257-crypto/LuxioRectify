@@ -24,7 +24,9 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const isProduction = process.env.NODE_ENV === 'production';
-    const cookie = serialize('auth_token', '', {
+    
+    // Clear auth_token cookie
+    const authCookie = serialize('auth_token', '', {
       httpOnly: true,
       secure: isProduction,
       sameSite: isProduction ? 'none' : 'lax',
@@ -32,9 +34,19 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       path: '/'
     });
 
-    res.setHeader('Set-Cookie', cookie);
+    // Clear session cookie (connect.sid)
+    const sessionCookie = serialize('connect.sid', '', {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
+      maxAge: 0,
+      path: '/'
+    });
+
+    res.setHeader('Set-Cookie', [authCookie, sessionCookie]);
 
     return res.status(200).json({
+      ok: true,
       message: 'Déconnexion réussie'
     });
 

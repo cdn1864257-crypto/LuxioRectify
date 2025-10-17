@@ -1,8 +1,10 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import connectMongo from 'connect-mongodb-session';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
-import { doubleCsrf } from 'csrf-csrf';
+import csrf from 'csurf';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import healthHandler from '../api/health.js';
@@ -27,7 +29,6 @@ const __dirname = dirname(__filename);
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '10000', 10);
-// Fallback intelligent pour FRONTEND_URL
 const FRONTEND_URL = process.env.FRONTEND_URL || 'https://luxios.vercel.app';
 
 // Middleware de sécurité
@@ -48,38 +49,57 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Configuration CSRF - Temporairement désactivé en production pour environnement cross-domain
-// TODO: Implémenter une solution CSRF compatible cross-domain (JWT-based ou custom headers)
-const csrfEnabled = process.env.NODE_ENV !== 'production';
+// MongoDB session store configuration
+const MongoDBStore = connectMongo(session);
+const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URL;
 
-let doubleCsrfProtection: any;
+const store = mongoUri ? new MongoDBStore({
+  uri: mongoUri,
+  collection: 'sessions',
+  expires: 1000 * 60 * 60 * 24, // 24 hours
+}) : undefined;
 
-if (csrfEnabled) {
-  const csrfConfig = doubleCsrf({
-    getSecret: () => process.env.CSRF_SECRET || 'default-csrf-secret-please-change-in-production',
-    cookieName: 'x-csrf-token',
-    cookieOptions: {
-      sameSite: 'lax',
-      path: '/',
-      secure: false,
-      httpOnly: true
-    },
-    size: 64,
-    ignoredMethods: ['GET', 'HEAD', 'OPTIONS'],
-    getSessionIdentifier: (req) => {
-      return req.headers['x-forwarded-for'] as string || req.socket?.remoteAddress || 'unknown';
-    }
+if (store) {
+  store.on('error', (error: Error) => {
+    console.error('MongoDB session store error:', error);
   });
-  doubleCsrfProtection = csrfConfig.doubleCsrfProtection;
-} else {
-  // Middleware no-op en production
-  doubleCsrfProtection = (req: any, res: any, next: any) => next();
 }
 
-// Route pour obtenir le token CSRF
-app.get('/api/csrf-token', (req, res) => {
-  // Retourner un token factice en production (CSRF désactivé)
-  res.json({ csrfToken: 'no-csrf-in-production' });
+// Session configuration with MongoDB store
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || process.env.JWT_SECRET || 'default-secret-change-in-production',
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+    cookie: {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    },
+  })
+);
+
+// CSRF Protection with exception for payment webhooks
+const csrfProtection = csrf({ cookie: false });
+
+// Middleware to conditionally apply CSRF protection
+app.use((req, res, next) => {
+  const exemptRoutes = [
+    /^\/api\/payment\/nowpayments-webhook/,
+    /^\/api\/payment\/nowpayments-return/,
+  ];
+  
+  if (exemptRoutes.some((rx) => rx.test(req.path))) {
+    return next();
+  }
+  return csrfProtection(req, res, next);
+});
+
+// Route to provide CSRF token to frontend
+app.get('/api/csrf-token', (req: any, res) => {
+  res.json({ csrfToken: req.csrfToken ? req.csrfToken() : 'no-csrf-available' });
 });
 
 // Rate limiting général
@@ -170,28 +190,28 @@ const convertVercelHandler = (handler: any) => {
 
 // API routes
 app.use('/api/health', convertVercelHandler(healthHandler));
-app.use('/api/users', doubleCsrfProtection, convertVercelHandler(usersHandler));
+app.use('/api/users', convertVercelHandler(usersHandler));
 
-// Auth routes avec rate limiting et protection CSRF
-app.use('/api/auth/signup', authLimiter, doubleCsrfProtection, convertVercelHandler(signupHandler));
-app.use('/api/auth/login', authLimiter, doubleCsrfProtection, convertVercelHandler(loginHandler));
-app.use('/api/auth/logout', doubleCsrfProtection, convertVercelHandler(logoutHandler));
+// Auth routes avec rate limiting (CSRF protection applied globally via middleware)
+app.use('/api/auth/signup', authLimiter, convertVercelHandler(signupHandler));
+app.use('/api/auth/login', authLimiter, convertVercelHandler(loginHandler));
+app.use('/api/auth/logout', convertVercelHandler(logoutHandler));
 app.use('/api/auth/me', convertVercelHandler(meHandler));
-app.use('/api/auth/change-password', doubleCsrfProtection, convertVercelHandler(changePasswordHandler));
-app.use('/api/auth/forgot-password', authLimiter, doubleCsrfProtection, convertVercelHandler(forgotPasswordHandler));
-app.use('/api/auth/reset-password', authLimiter, doubleCsrfProtection, convertVercelHandler(resetPasswordHandler));
+app.use('/api/auth/change-password', convertVercelHandler(changePasswordHandler));
+app.use('/api/auth/forgot-password', authLimiter, convertVercelHandler(forgotPasswordHandler));
+app.use('/api/auth/reset-password', authLimiter, convertVercelHandler(resetPasswordHandler));
 
-// Payment routes avec protection CSRF (sauf webhook qui vient de NowPayments)
-app.use('/api/payment/submit-order', doubleCsrfProtection, convertVercelHandler(submitOrderHandler));
-app.use('/api/payment/bank-transfer', doubleCsrfProtection, convertVercelHandler(bankTransferHandler));
-app.use('/api/payment/nowpayments-init', doubleCsrfProtection, convertVercelHandler(nowpaymentsInitHandler));
+// Payment routes (CSRF protection applied globally except for webhook and return)
+app.use('/api/payment/submit-order', convertVercelHandler(submitOrderHandler));
+app.use('/api/payment/bank-transfer', convertVercelHandler(bankTransferHandler));
+app.use('/api/payment/nowpayments-init', convertVercelHandler(nowpaymentsInitHandler));
 app.use('/api/payment/nowpayments-return', convertVercelHandler(nowpaymentsReturnHandler));
 // Webhook NowPayments : PAS de CSRF car les requêtes viennent de NowPayments (validées par signature HMAC)
 app.post('/api/payment/nowpayments-webhook', convertVercelHandler(nowpaymentsWebhookHandler));
 
-// Orders routes avec protection CSRF
-app.delete('/api/orders/:orderId', doubleCsrfProtection, convertVercelHandler(deleteOrderHandler));
-app.use('/api/orders', doubleCsrfProtection, convertVercelHandler(ordersHandler));
+// Orders routes (CSRF protection applied globally via middleware)
+app.delete('/api/orders/:orderId', convertVercelHandler(deleteOrderHandler));
+app.use('/api/orders', convertVercelHandler(ordersHandler));
 
 // Health check route
 app.get('/', (req, res) => {

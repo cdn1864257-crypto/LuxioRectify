@@ -1,0 +1,276 @@
+🚨 CONTEXTE :
+
+Projet fullstack JavaScript
+
+Frontend déployé sur Vercel → https://luxios.vercel.app
+
+Backend hébergé sur Render → https://luxio.onrender.com
+
+Sessions gérées avec MongoDB Atlas
+
+Panier stocké en localStorage côté client
+
+Paiements disponibles :
+
+Crypto via NOWPayments
+
+Paiement par ticket Transcash / PCS
+
+Virement bancaire
+
+
+
+Depuis la mise en place de la sécurité CSRF, plusieurs dysfonctionnements sont apparus.
+Lis le fichier sécurité.md pour t’assurer que la configuration actuelle est cohérente, puis applique les correctifs suivants.
+
+
+
+
+---
+
+⚙️ TÂCHES À EFFECTUER (PAR PRIORITÉ)
+
+
+---
+
+🧩 1. Corriger le problème de CSRF / CORS / Cookies
+
+Les requêtes de paiement échouent avec Failed to fetch.
+Ceci provient d’un blocage CORS combiné à une mauvaise gestion des cookies et tokens CSRF entre Vercel (front) et Render (back).
+
+✅ À faire dans le backend (Express / app.js) :
+
+import cors from "cors";
+import session from "express-session";
+import connectMongo from "connect-mongodb-session";
+import csrf from "csurf";
+import cookieParser from "cookie-parser";
+
+const MongoDBStore = connectMongo(session);
+const store = new MongoDBStore({
+  uri: process.env.MONGO_URL, // MongoDB Atlas
+  collection: "sessions",
+});
+
+app.use(cookieParser());
+
+// ✅ Autoriser les requêtes du domaine Vercel
+app.use(
+  cors({
+    origin: "https://luxios.vercel.app",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-CSRF-Token"],
+  })
+);
+
+// ✅ Configuration de la session MongoDB
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+    cookie: {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+  })
+);
+
+// ✅ CSRF — exclure les routes de paiement et webhooks
+const csrfProtection = csrf();
+
+app.use((req, res, next) => {
+  const exemptRoutes = [
+    /^\/api\/payment\/nowpayments/,
+    /^\/api\/payment\/transcash/,
+    /^\/api\/payment\/webhook/,
+    /^\/api\/payment\/bank/,
+  ];
+  if (exemptRoutes.some((rx) => rx.test(req.path))) return next();
+  return csrfProtection(req, res, next);
+});
+
+// ✅ Route pour fournir le token CSRF au frontend
+app.get("/api/csrf-token", (req, res) => {
+  res.json({ csrfToken: req.csrfToken() });
+});
+
+✅ Côté frontend (Vercel)
+Toujours inclure les cookies et le token CSRF avant les requêtes POST :
+
+const resToken = await fetch("https://luxio.onrender.com/api/csrf-token", {
+  credentials: "include",
+});
+const { csrfToken } = await resToken.json();
+
+await fetch("https://luxio.onrender.com/api/payment/init", {
+  method: "POST",
+  credentials: "include",
+  headers: {
+    "Content-Type": "application/json",
+    "X-CSRF-Token": csrfToken,
+  },
+  body: JSON.stringify(paymentData),
+});
+
+
+---
+
+💸 2. Paiements (Crypto, Transcash/PCS, Virement)
+
+✅ a. Crypto — NOWPayments
+
+Vérifier que l’appel API à NOWPayments se fait depuis le backend (Render), et non directement depuis le front.
+
+Exclure les routes de création et de webhook du CSRF.
+
+Vérifier que process.env.NOWPAYMENTS_API_KEY est bien configurée sur Render.
+
+
+✅ b. Transcash / PCS
+
+Vérifier que les boutons “Pay” et les fonctions associées (handlers JS) ne sont pas désactivés.
+
+Inspecter la console JS : s’il y a une erreur avant exécution, corriger le script.
+
+S’assurer que le bouton n’est pas recouvert par un overlay invisible (z-index et pointer-events).
+
+
+✅ c. Virement bancaire
+
+Le bouton “Yes, I proceed with the transfer” doit déclencher un onClick ou une action définie. Exemple :
+
+
+<button
+  type="button"
+  onClick={handleConfirmTransfer}
+  className="btn-primary"
+>
+  Yes, I proceed with the transfer
+</button>
+
+Vérifier que handleConfirmTransfer() effectue bien la requête POST vers /api/payment/bank/init.
+
+
+
+---
+
+📱 3. Corriger le scroll bloqué sur mobile pour le sélecteur de langues
+
+Problème : impossible de défiler la liste des langues sur petits écrans.
+
+✅ Correctif CSS à appliquer :
+
+.lang-dropdown {
+  max-height: 40vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+Vérifier également qu’aucun overflow: hidden permanent n’est appliqué sur <body> ou .root.
+
+
+---
+
+📲 4. Améliorer l’affichage du virement bancaire sur mobile
+
+Rendre la section responsive et élégante sur petit écran.
+
+✅ Exemple CSS :
+
+.bank-transfer-modal .content {
+  width: 90%;
+  max-width: 500px;
+  margin: 1.5rem auto;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+@media (max-width: 420px) {
+  .bank-transfer-modal .content {
+    width: 96%;
+    padding: 0.75rem;
+    font-size: 14px;
+  }
+
+  .bank-transfer-modal .bank-details {
+    display: block;
+    white-space: normal;
+    word-break: break-word;
+  }
+}
+
+
+---
+
+🧹 5. Déconnexion → suppression automatique du panier
+
+Actuellement, les produits restent en localStorage après logout.
+
+✅ À faire côté frontend : Lors du logout :
+
+await fetch("https://luxio.onrender.com/api/auth/logout", {
+  method: "POST",
+  credentials: "include",
+});
+localStorage.removeItem("cart");
+window.location.href = "/";
+
+✅ Et côté backend :
+
+app.post("/api/auth/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.clearCookie("connect.sid", { sameSite: "None", secure: true });
+    res.json({ ok: true });
+  });
+});
+
+
+---
+
+🧪 6. Tests à effectuer avant validation
+
+1. Depuis un mobile (petit écran), vérifier :
+
+Défilement des langues.
+
+Affichage du virement bancaire.
+
+
+
+2. Tester les trois paiements :
+
+Crypto (NOWPayments)
+
+Transcash / PCS
+
+Virement bancaire
+✅ Tous doivent désormais déclencher leur action sans erreur Failed to fetch.
+
+
+
+3. Déconnexion → le panier doit être vide.
+
+
+
+
+---
+
+🎯 OBJECTIF FINAL
+
+> Obtenir un site parfaitement fonctionnel et responsive où :
+
+Les paiements (Crypto, Transcash, Virement) fonctionnent sans erreur.
+
+Le scroll du sélecteur de langues est fluide sur mobile.
+
+Le virement bancaire est bien mis en page sur petit écran.
+
+La déconnexion vide le panier.
+
+Les protections CSRF restent actives sans bloquer les paiements.
+
