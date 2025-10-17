@@ -57,7 +57,7 @@ export function LanguageSelector() {
             onClick={() => setIsOpen(false)}
           />
           <div className="absolute right-0 top-full mt-2 w-48 bg-card border border-border rounded-md shadow-lg z-50">
-            <div className="py-1">
+            <div className="py-1 max-h-[40vh] overflow-y-auto [-webkit-overflow-scrolling:touch]">
               {Object.entries(languageFlags).map(([lang, flag]) => (
                 <button
                   key={lang}

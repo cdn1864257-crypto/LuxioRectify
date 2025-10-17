@@ -534,7 +534,7 @@ export default function NewPayment() {
       </main>
 
       <Dialog open={showBankConfirmModal} onOpenChange={setShowBankConfirmModal}>
-        <DialogContent className="max-w-lg" data-testid="dialog-bank-confirm">
+        <DialogContent className="w-[90%] sm:w-[96%] md:max-w-lg" data-testid="dialog-bank-confirm">
           <DialogHeader>
             <div className="flex justify-center mb-4">
               <div className="text-3xl font-bold text-primary">Luxio</div>
@@ -549,12 +549,12 @@ export default function NewPayment() {
               <div className="p-4 bg-accent rounded-lg space-y-3">
                 <div>
                   <Label className="text-sm text-muted-foreground">{t.beneficiary}</Label>
-                  <p className="font-semibold">{bankDetails.bankName}</p>
+                  <p className="font-semibold break-words">{bankDetails.bankName}</p>
                 </div>
                 <div>
                   <Label className="text-sm text-muted-foreground">IBAN</Label>
                   <div className="flex items-center gap-2">
-                    <p className="font-mono font-semibold flex-1">{bankDetails.iban}</p>
+                    <p className="font-mono font-semibold flex-1 break-all">{bankDetails.iban}</p>
                     <Button
                       size="icon"
                       variant="ghost"
@@ -567,11 +567,11 @@ export default function NewPayment() {
                 </div>
                 <div>
                   <Label className="text-sm text-muted-foreground">BIC</Label>
-                  <p className="font-mono font-semibold">{bankDetails.bic}</p>
+                  <p className="font-mono font-semibold break-all">{bankDetails.bic}</p>
                 </div>
                 <div>
                   <Label className="text-sm text-muted-foreground">{t.orderReference}</Label>
-                  <p className="font-semibold text-primary">{bankDetails.orderReference}</p>
+                  <p className="font-semibold text-primary break-words">{bankDetails.orderReference}</p>
                 </div>
                 <div className="pt-2 border-t">
                   <Label className="text-sm text-muted-foreground">{t.amountToTransfer}</Label>
@@ -627,7 +627,7 @@ export default function NewPayment() {
           navigate('/dashboard');
         }
       }}>
-        <DialogContent className="max-w-lg" data-testid="dialog-bank-transfer">
+        <DialogContent className="w-[90%] sm:w-[96%] md:max-w-lg" data-testid="dialog-bank-transfer">
           <DialogHeader>
             <div className="flex justify-center mb-4">
               <div className="text-3xl font-bold text-primary">Luxio</div>
@@ -641,17 +641,17 @@ export default function NewPayment() {
             <div className="space-y-4">
               <div className="text-center pb-3 border-b">
                 <Label className="text-sm text-muted-foreground">{t.orderNumber}</Label>
-                <p className="font-bold text-lg text-primary">{bankDetails.orderReference}</p>
+                <p className="font-bold text-lg text-primary break-words">{bankDetails.orderReference}</p>
               </div>
               <div className="p-4 bg-accent rounded-lg space-y-3">
                 <div>
                   <Label className="text-sm text-muted-foreground">{t.name}</Label>
-                  <p className="font-semibold">{bankDetails.bankName}</p>
+                  <p className="font-semibold break-words">{bankDetails.bankName}</p>
                 </div>
                 <div>
                   <Label className="text-sm text-muted-foreground">IBAN</Label>
                   <div className="flex items-center gap-2">
-                    <p className="font-mono font-semibold flex-1">{bankDetails.iban}</p>
+                    <p className="font-mono font-semibold flex-1 break-all">{bankDetails.iban}</p>
                     <Button
                       size="icon"
                       variant="ghost"
@@ -664,11 +664,11 @@ export default function NewPayment() {
                 </div>
                 <div>
                   <Label className="text-sm text-muted-foreground">BIC</Label>
-                  <p className="font-mono font-semibold">{bankDetails.bic}</p>
+                  <p className="font-mono font-semibold break-all">{bankDetails.bic}</p>
                 </div>
                 <div>
                   <Label className="text-sm text-muted-foreground">{t.reference}</Label>
-                  <p className="font-semibold text-destructive">{bankDetails.reference}</p>
+                  <p className="font-semibold text-destructive break-words">{bankDetails.reference}</p>
                 </div>
                 <div className="pt-2 border-t">
                   <Label className="text-sm text-muted-foreground">{t.amount}</Label>
