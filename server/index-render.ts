@@ -34,6 +34,36 @@ const FRONTEND_URL = process.env.FRONTEND_URL || 'https://luxios.vercel.app';
 // Trust proxy for Render deployment (TLS terminates at load balancer)
 app.set('trust proxy', 1);
 
+// CORS middleware - DOIT ÊTRE LE TOUT PREMIER (avant helmet, body parsers, etc.)
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  const isProduction = process.env.NODE_ENV === 'production';
+  
+  // En production: autoriser UNIQUEMENT le frontend Vercel
+  // En développement: autoriser aussi localhost pour les tests
+  const allowedOrigins = isProduction 
+    ? [FRONTEND_URL]
+    : [FRONTEND_URL, 'http://localhost:5000', 'http://localhost:3000', 'http://127.0.0.1:5000', 'http://127.0.0.1:3000'];
+  
+  // Gérer le cas spécial où FRONTEND_URL vaut '*' (autoriser toutes les origines)
+  const allowAllOrigins = FRONTEND_URL === '*';
+  
+  if (origin && (allowAllOrigins || allowedOrigins.includes(origin))) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', 'true');
+  }
+  
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie, X-CSRF-Token');
+  
+  // Traiter les requêtes preflight OPTIONS immédiatement
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  
+  next();
+});
+
 // Middleware de sécurité
 app.use(helmet({
   contentSecurityPolicy: {
@@ -68,35 +98,6 @@ if (store) {
   });
 }
 
-// CORS middleware configuré pour Vercel (DOIT ÊTRE AVANT SESSION/CSRF/RATE LIMITING)
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  const isProduction = process.env.NODE_ENV === 'production';
-  
-  // En production: autoriser UNIQUEMENT le frontend Vercel
-  // En développement: autoriser aussi localhost pour les tests
-  const allowedOrigins = isProduction 
-    ? [FRONTEND_URL]
-    : [FRONTEND_URL, 'http://localhost:5000', 'http://localhost:3000', 'http://127.0.0.1:5000', 'http://127.0.0.1:3000'];
-  
-  // Gérer le cas spécial où FRONTEND_URL vaut '*' (autoriser toutes les origines)
-  const allowAllOrigins = FRONTEND_URL === '*';
-  
-  if (origin && (allowAllOrigins || allowedOrigins.includes(origin))) {
-    res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Credentials', 'true');
-  }
-  
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie, X-CSRF-Token');
-  
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
-  }
-  
-  next();
-});
-
 // Session configuration with MongoDB store
 app.use(
   session({
@@ -122,15 +123,15 @@ const csrfProtection = csrf({
   }
 });
 
-// Route to provide CSRF token to frontend (MUST be before CSRF middleware)
-app.get('/api/csrf-token', (req: any, res) => {
-  res.json({ csrfToken: req.csrfToken ? req.csrfToken() : 'no-csrf-available' });
+// Route to provide CSRF token to frontend - protected by CSRF to generate token
+app.get('/api/csrf-token', csrfProtection, (req: any, res) => {
+  res.json({ csrfToken: req.csrfToken() });
 });
 
-// Middleware to conditionally apply CSRF protection
+// Middleware to conditionally apply CSRF protection to other routes
 app.use((req, res, next) => {
   const exemptRoutes = [
-    /^\/api\/csrf-token/,
+    /^\/api\/csrf-token/,  // Already has csrfProtection above
     /^\/api\/auth\/signup/,
     /^\/api\/auth\/login/,
     /^\/api\/payment\/nowpayments-webhook/,

@@ -2,25 +2,33 @@
 
 ## ✅ Corrections effectuées
 
-### 1. Ordre des middlewares corrigé
+### 1. Ordre des middlewares corrigé (CRITIQUE)
 L'ordre d'exécution est maintenant optimal :
 ```
-1. Helmet (sécurité)
-2. express.json/urlencoded/cookieParser
-3. CORS ← DÉPLACÉ EN PREMIER (critique pour preflight)
-4. Sessions MongoDB
-5. CSRF (avec exemptions)
-6. Rate limiting
-7. Routes API
+1. Trust proxy (pour Render)
+2. CORS ← VRAIMENT LE PREMIER (critique pour preflight OPTIONS)
+3. Helmet (sécurité)
+4. express.json/urlencoded/cookieParser
+5. Sessions MongoDB
+6. CSRF (avec exemptions)
+7. Rate limiting
+8. Routes API
 ```
 
-### 2. Routes exemptées de CSRF
-Les routes suivantes **ne nécessitent plus de token CSRF** :
-- `/api/csrf-token` - Pour récupérer le token
-- `/api/auth/signup` - Inscription
-- `/api/auth/login` - Connexion
-- `/api/payment/nowpayments-webhook` - Webhook NowPayments
-- `/api/payment/nowpayments-return` - Retour paiement
+**Pourquoi CORS doit être premier** :
+- Les requêtes OPTIONS (preflight) doivent recevoir les headers CORS immédiatement
+- Si helmet ou body parsers s'exécutent avant, ils peuvent bloquer la requête
+- CORS doit s'appliquer AVANT toute validation, parsing ou rate limiting
+
+### 2. Gestion CSRF optimisée
+- **`/api/csrf-token`** : Protégée par CSRF pour **générer** un token valide
+- **Routes exemptées de CSRF** (pas besoin de token) :
+  - `/api/auth/signup` - Inscription
+  - `/api/auth/login` - Connexion
+  - `/api/payment/nowpayments-webhook` - Webhook NowPayments
+  - `/api/payment/nowpayments-return` - Retour paiement
+
+**Note importante** : `/api/csrf-token` est protégée par csrfProtection mais exemptée du middleware global, permettant au frontend de récupérer un token initial sans en avoir un au départ.
 
 ### 3. Configuration CORS
 ✅ `Access-Control-Allow-Origin`: dynamique selon l'environnement
