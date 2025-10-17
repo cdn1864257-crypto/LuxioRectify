@@ -31,6 +31,9 @@ const app = express();
 const PORT = parseInt(process.env.PORT || '10000', 10);
 const FRONTEND_URL = process.env.FRONTEND_URL || 'https://luxios.vercel.app';
 
+// Trust proxy for Render deployment (TLS terminates at load balancer)
+app.set('trust proxy', 1);
+
 // Middleware de sécurité
 app.use(helmet({
   contentSecurityPolicy: {
