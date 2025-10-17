@@ -82,7 +82,13 @@ app.use(
 );
 
 // CSRF Protection with exception for payment webhooks
-const csrfProtection = csrf({ cookie: false });
+const csrfProtection = csrf({ 
+  cookie: false,
+  value: (req) => {
+    // Accept CSRF token from X-CSRF-Token header or _csrf body field
+    return req.headers['x-csrf-token'] as string || req.body._csrf;
+  }
+});
 
 // Middleware to conditionally apply CSRF protection
 app.use((req, res, next) => {
