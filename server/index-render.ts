@@ -208,7 +208,51 @@ app.use('/api/users', convertVercelHandler(usersHandler));
 // Auth routes avec rate limiting (CSRF protection applied globally via middleware)
 app.use('/api/auth/signup', authLimiter, convertVercelHandler(signupHandler));
 app.use('/api/auth/login', authLimiter, convertVercelHandler(loginHandler));
-app.use('/api/auth/logout', convertVercelHandler(logoutHandler));
+
+// Logout route - native Express to handle session destruction
+app.post('/api/auth/logout', (req: any, res) => {
+  try {
+    // Détruire la session MongoDB
+    req.session.destroy((err: any) => {
+      if (err) {
+        console.error('Erreur destruction session:', err);
+        return res.status(500).json({ 
+          ok: false,
+          error: 'Erreur lors de la déconnexion' 
+        });
+      }
+
+      // Supprimer le cookie de session avec les bons paramètres
+      const isProduction = process.env.NODE_ENV === 'production';
+      res.clearCookie('connect.sid', {
+        path: '/',
+        httpOnly: true,
+        secure: isProduction, // true en production (HTTPS)
+        sameSite: isProduction ? 'none' : 'lax', // 'none' requis pour cross-domain
+      });
+
+      // Supprimer aussi le cookie auth_token s'il existe
+      res.clearCookie('auth_token', {
+        path: '/',
+        httpOnly: true,
+        secure: isProduction,
+        sameSite: isProduction ? 'none' : 'lax',
+      });
+
+      return res.status(200).json({
+        ok: true,
+        message: 'Déconnexion réussie'
+      });
+    });
+  } catch (error) {
+    console.error('Erreur lors de la déconnexion:', error);
+    return res.status(500).json({
+      ok: false,
+      error: 'Erreur serveur lors de la déconnexion'
+    });
+  }
+});
+
 app.use('/api/auth/me', convertVercelHandler(meHandler));
 app.use('/api/auth/change-password', convertVercelHandler(changePasswordHandler));
 app.use('/api/auth/forgot-password', authLimiter, convertVercelHandler(forgotPasswordHandler));
