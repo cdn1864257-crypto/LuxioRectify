@@ -1,5 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import csrf from 'csurf';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import healthHandler from '../api/health';
@@ -25,8 +27,56 @@ const PORT = parseInt(process.env.BACKEND_PORT || '3001', 10);
 
 // Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true}));
 app.use(cookieParser());
+
+// Session configuration (in-memory for development)
+app.use(
+  session({
+    secret: 'dev-secret-change-in-production',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: false,  // HTTP in development
+      sameSite: 'lax',
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    },
+  })
+);
+
+// CSRF Protection
+const csrfProtection = csrf({ 
+  cookie: false,
+  value: (req) => {
+    return req.headers['x-csrf-token'] as string || req.body._csrf;
+  }
+});
+
+// Special CSRF middleware for token generation endpoint
+const csrfTokenGenerator = csrf({ cookie: false });
+
+// Route to provide CSRF token to frontend - MUST be BEFORE other routes
+app.get('/api/csrf-token', csrfTokenGenerator, (req: any, res) => {
+  res.json({ csrfToken: req.csrfToken() });
+});
+
+// Middleware to conditionally apply CSRF protection to other routes
+app.use((req, res, next) => {
+  const exemptRoutes = [
+    /^\/api\/csrf-token/,  // Already handled above
+    /^\/api\/auth\/signup/,
+    /^\/api\/auth\/login/,
+    /^\/api\/auth\/logout/,
+    /^\/api\/payment\/nowpayments-webhook/,
+    /^\/api\/payment\/nowpayments-return/,
+  ];
+  
+  if (exemptRoutes.some((rx) => rx.test(req.path))) {
+    return next();
+  }
+  return csrfProtection(req, res, next);
+});
 
 // CORS middleware for development
 app.use((req, res, next) => {
@@ -189,6 +239,35 @@ if (process.env.NODE_ENV === 'production') {
     });
   });
 }
+
+// 404 Handler - Catch all unmatched routes and return JSON instead of HTML
+app.use((req, res) => {
+  res.status(404).json({ 
+    error: 'Route not found',
+    path: req.path,
+    message: `The endpoint ${req.method} ${req.path} does not exist`
+  });
+});
+
+// Global Error Handler - Ensure all errors return JSON, not HTML
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error('Global error handler:', err);
+  
+  // CSRF token errors
+  if (err.code === 'EBADCSRFTOKEN') {
+    return res.status(403).json({
+      error: 'Invalid CSRF token',
+      message: 'Session invalide ou token CSRF manquant/incorrect'
+    });
+  }
+  
+  // Default error response
+  const statusCode = err.statusCode || err.status || 500;
+  res.status(statusCode).json({
+    error: err.message || 'Internal server error',
+    details: process.env.NODE_ENV === 'development' ? err.stack : undefined
+  });
+});
 
 app.listen(PORT, 'localhost', () => {
   console.log(`Backend API Server running on http://localhost:${PORT}`);

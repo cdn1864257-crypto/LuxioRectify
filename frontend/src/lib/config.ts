@@ -18,8 +18,8 @@ export function getApiUrl(path: string): string {
 // CSRF Token Management
 let csrfToken: string | null = null;
 
-export async function getCsrfToken(): Promise<string> {
-  if (csrfToken) {
+export async function getCsrfToken(forceRefresh: boolean = false): Promise<string> {
+  if (csrfToken && !forceRefresh) {
     return csrfToken;
   }
 
@@ -46,7 +46,13 @@ export async function getCsrfToken(): Promise<string> {
   }
 }
 
+// Reset CSRF token (useful when session changes)
+export function resetCsrfToken() {
+  csrfToken = null;
+}
+
 export async function fetchWithCsrf(url: string, options: RequestInit = {}): Promise<Response> {
+  // Get token (will fetch if not cached)
   const token = await getCsrfToken();
   
   const headers = new Headers(options.headers || {});
@@ -56,9 +62,34 @@ export async function fetchWithCsrf(url: string, options: RequestInit = {}): Pro
     headers.set('X-CSRF-Token', token);
   }
   
-  return fetch(url, {
+  const response = await fetch(url, {
     ...options,
     headers,
     credentials: 'include'
   });
+
+  // If we get a CSRF error, refresh the token and retry once
+  if (response.status === 403) {
+    try {
+      const errorData = await response.clone().json();
+      if (errorData.error === 'Invalid CSRF token') {
+        console.warn('CSRF token expired, refreshing...');
+        
+        // Force refresh the token
+        const newToken = await getCsrfToken(true);
+        headers.set('X-CSRF-Token', newToken);
+        
+        // Retry the request with new token
+        return fetch(url, {
+          ...options,
+          headers,
+          credentials: 'include'
+        });
+      }
+    } catch (e) {
+      // If we can't parse the error, just return the original response
+    }
+  }
+  
+  return response;
 }

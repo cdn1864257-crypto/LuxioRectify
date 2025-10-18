@@ -123,15 +123,19 @@ const csrfProtection = csrf({
   }
 });
 
-// Route to provide CSRF token to frontend - protected by CSRF to generate token
-app.get('/api/csrf-token', csrfProtection, (req: any, res) => {
+// Special CSRF middleware for token generation endpoint
+const csrfTokenGenerator = csrf({ cookie: false });
+
+// Route to provide CSRF token to frontend - MUST be BEFORE other routes
+app.get('/api/csrf-token', csrfTokenGenerator, (req: any, res) => {
+  // csrfTokenGenerator middleware adds csrfToken() method to request
   res.json({ csrfToken: req.csrfToken() });
 });
 
 // Middleware to conditionally apply CSRF protection to other routes
 app.use((req, res, next) => {
   const exemptRoutes = [
-    /^\/api\/csrf-token/,  // Already has csrfProtection above
+    /^\/api\/csrf-token/,  // Already handled above
     /^\/api\/auth\/signup/,
     /^\/api\/auth\/login/,
     /^\/api\/auth\/logout/,  // Logout should work without CSRF token

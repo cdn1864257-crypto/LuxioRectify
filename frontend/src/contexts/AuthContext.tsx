@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { getApiUrl } from '@/lib/config';
+import { getApiUrl, getCsrfToken, resetCsrfToken } from '@/lib/config';
 
 export interface AuthUser {
   id: string;
@@ -47,6 +47,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const checkAuth = async () => {
     try {
+      // Initialize CSRF token first
+      try {
+        await getCsrfToken();
+        console.log('CSRF token initialized successfully');
+      } catch (csrfError) {
+        console.error('Failed to initialize CSRF token:', csrfError);
+        // Continue anyway - CSRF will be fetched on first protected request
+      }
+
       const response = await fetch(getApiUrl('/api/auth/me'), {
         credentials: 'include',
       });
@@ -119,6 +128,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         phone: userData.phone,
       });
 
+      // Refresh CSRF token for new session
+      try {
+        await getCsrfToken();
+        console.log('CSRF token refreshed after login');
+      } catch (csrfError) {
+        console.error('Failed to refresh CSRF token after login:', csrfError);
+      }
+
       return { success: true };
     } catch (error: any) {
       return { success: false, error: error.message || 'Erreur de connexion' };
@@ -159,12 +176,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       localStorage.clear();
       sessionStorage.clear();
       
+      // Reset CSRF token since session is destroyed
+      resetCsrfToken();
+      
       setUser(null);
       return { success: true };
     } catch (error: any) {
       // Vider le cache même en cas d'erreur
       localStorage.clear();
       sessionStorage.clear();
+      
+      // Reset CSRF token
+      resetCsrfToken();
       
       setUser(null);
       return { success: false, error: error.message || 'Erreur lors de la déconnexion' };
