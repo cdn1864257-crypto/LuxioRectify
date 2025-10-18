@@ -134,6 +134,7 @@ app.use((req, res, next) => {
     /^\/api\/csrf-token/,  // Already has csrfProtection above
     /^\/api\/auth\/signup/,
     /^\/api\/auth\/login/,
+    /^\/api\/auth\/logout/,  // Logout should work without CSRF token
     /^\/api\/payment\/nowpayments-webhook/,
     /^\/api\/payment\/nowpayments-return/,
   ];
@@ -277,6 +278,35 @@ app.get('/', (req, res) => {
     message: 'Luxio Backend API is running',
     environment: process.env.NODE_ENV || 'production',
     timestamp: new Date().toISOString()
+  });
+});
+
+// 404 Handler - Catch all unmatched routes and return JSON instead of HTML
+app.use((req, res) => {
+  res.status(404).json({ 
+    error: 'Route not found',
+    path: req.path,
+    message: `The endpoint ${req.method} ${req.path} does not exist`
+  });
+});
+
+// Global Error Handler - Ensure all errors return JSON, not HTML
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error('Global error handler:', err);
+  
+  // CSRF token errors
+  if (err.code === 'EBADCSRFTOKEN') {
+    return res.status(403).json({
+      error: 'Invalid CSRF token',
+      message: 'Session invalide ou token CSRF manquant/incorrect'
+    });
+  }
+  
+  // Default error response
+  const statusCode = err.statusCode || err.status || 500;
+  res.status(statusCode).json({
+    error: err.message || 'Internal server error',
+    details: process.env.NODE_ENV === 'development' ? err.stack : undefined
   });
 });
 

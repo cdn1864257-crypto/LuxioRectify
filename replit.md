@@ -8,6 +8,34 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (October 2025)
 
+### Backend JSON Response Fix & Logout Improvement (October 18, 2025)
+**Status**: ✅ Fixed
+
+#### Problems Resolved:
+1. **Cancel Order Error** - Fixed "Unexpected token '<'" error when canceling orders
+   - **Issue**: Backend was returning HTML error pages instead of JSON responses
+   - **Solution**: Added global 404 handler and error handler that always return JSON
+   
+2. **Automatic Re-login After Logout** - Fixed users being automatically logged back in after logout
+   - **Issue**: Logout route required CSRF token, causing silent failures
+   - **Solution**: Added `/api/auth/logout` to CSRF exempt routes list
+
+#### Changes Applied:
+- **Global 404 Handler**: All unmatched API routes now return JSON instead of HTML
+- **Global Error Handler**: All server errors now return JSON with proper error messages
+- **CSRF Exemption for Logout**: Logout now works without CSRF token requirement
+- **Improved Error Messages**: CSRF errors now return clear JSON responses
+
+#### Files Modified:
+- `server/index-render.ts`: Added 404 handler, error handler, and logout CSRF exemption
+
+#### Impact:
+- ✅ Cancel Order button works correctly
+- ✅ Logout properly destroys session and clears cookies
+- ✅ No more "Unexpected token '<'" errors
+- ✅ All API errors return valid JSON responses
+- ✅ Users remain logged out after page refresh
+
 ### CORS Configuration Fix (October 14, 2025)
 **Status**: ✅ Fixed
 **Issue**: Payment endpoints returning "Failed to fetch" errors in production due to CORS misconfiguration.
