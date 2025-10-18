@@ -235,9 +235,15 @@ export default function Dashboard() {
   const handleCancelOrder = async (orderId: string, orderReference: string) => {
     setCancellingOrder(true);
     try {
+      const { getCsrfToken } = await import('@/lib/config');
+      const token = await getCsrfToken();
+      
       const response = await fetch(getApiUrl(`/api/orders/${orderId}`), {
         method: 'DELETE',
         credentials: 'include',
+        headers: {
+          'X-CSRF-Token': token,
+        },
       });
 
       const data = await response.json();
@@ -841,30 +847,30 @@ export default function Dashboard() {
               {instructionsModal.order.paymentMethod === 'bank_transfer' && (
                 <>
                   <div className="space-y-3 text-sm">
-                    <div className="p-4 bg-muted rounded-lg space-y-2">
-                      <div className="flex justify-between">
-                        <span className="font-medium">{t('beneficiary')}:</span>
-                        <span>Matt Luxio</span>
+                    <div className="w-full max-w-full p-3 sm:p-4 bg-muted rounded-lg space-y-2 box-border">
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
+                        <span className="font-medium text-xs sm:text-sm">{t('beneficiary')}:</span>
+                        <span className="text-xs sm:text-sm break-all">Matt Luxio</span>
                       </div>
                       <Separator />
-                      <div className="flex justify-between">
-                        <span className="font-medium">IBAN:</span>
-                        <span className="font-mono text-xs">ES6115632626383268707364</span>
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
+                        <span className="font-medium text-xs sm:text-sm">IBAN:</span>
+                        <span className="font-mono text-xs break-all">ES6115632626383268707364</span>
                       </div>
                       <Separator />
-                      <div className="flex justify-between">
-                        <span className="font-medium">BIC:</span>
-                        <span>NTSBESM1XXX</span>
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
+                        <span className="font-medium text-xs sm:text-sm">BIC:</span>
+                        <span className="text-xs sm:text-sm break-all">NTSBESM1XXX</span>
                       </div>
                       <Separator />
-                      <div className="flex justify-between">
-                        <span className="font-medium">{t('paymentReference')}:</span>
-                        <span>Dépôt + {user?.firstName || 'votre nom'}</span>
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
+                        <span className="font-medium text-xs sm:text-sm">{t('paymentReference')}:</span>
+                        <span className="text-xs sm:text-sm break-all">Dépôt + {user?.firstName || 'votre nom'}</span>
                       </div>
                       <Separator />
-                      <div className="flex justify-between">
-                        <span className="font-medium">{t('uniqueOrderNumber')}:</span>
-                        <span className="font-mono text-xs">{instructionsModal.order.orderReference}</span>
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
+                        <span className="font-medium text-xs sm:text-sm">{t('uniqueOrderNumber')}:</span>
+                        <span className="font-mono text-xs break-all">{instructionsModal.order.orderReference}</span>
                       </div>
                     </div>
                     

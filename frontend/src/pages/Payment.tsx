@@ -485,87 +485,92 @@ export default function Payment() {
           ) : bankTransferData && (
             <div className="space-y-6 py-4">
               {/* Informations bancaires */}
-              <div className="bg-blue-50 dark:bg-blue-950 rounded-lg p-6 space-y-4">
-                <h3 className="font-semibold text-lg mb-4">Coordonnées bancaires</h3>
+              <div className="w-full max-w-full bg-blue-50 dark:bg-blue-950 rounded-lg p-4 sm:p-6 space-y-4 box-border">
+                <h3 className="font-semibold text-base sm:text-lg mb-4">Coordonnées bancaires</h3>
                 
                 <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">Nom :</span>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-2">
+                    <span className="text-muted-foreground text-sm sm:text-base">Nom :</span>
                     <div className="flex items-center gap-2">
-                      <span className="font-mono font-semibold">Matt Luxio</span>
+                      <span className="font-mono font-semibold text-sm sm:text-base break-all">Matt Luxio</span>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => copyToClipboard('Matt Luxio', 'Nom')}
+                        className="flex-shrink-0"
                       >
                         <Copy className="h-4 w-4" />
                       </Button>
                     </div>
                   </div>
 
-                  <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">IBAN :</span>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-2">
+                    <span className="text-muted-foreground text-sm sm:text-base">IBAN :</span>
                     <div className="flex items-center gap-2">
-                      <span className="font-mono font-semibold">ES6115632626383268707364</span>
+                      <span className="font-mono font-semibold text-xs sm:text-sm break-all">ES6115632626383268707364</span>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => copyToClipboard('ES6115632626383268707364', 'IBAN')}
+                        className="flex-shrink-0"
                       >
                         <Copy className="h-4 w-4" />
                       </Button>
                     </div>
                   </div>
 
-                  <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">BIC :</span>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-2">
+                    <span className="text-muted-foreground text-sm sm:text-base">BIC :</span>
                     <div className="flex items-center gap-2">
-                      <span className="font-mono font-semibold">NTSBESM1XXX</span>
+                      <span className="font-mono font-semibold text-sm sm:text-base break-all">NTSBESM1XXX</span>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => copyToClipboard('NTSBESM1XXX', 'BIC')}
+                        className="flex-shrink-0"
                       >
                         <Copy className="h-4 w-4" />
                       </Button>
                     </div>
                   </div>
 
-                  <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">Motif :</span>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-2">
+                    <span className="text-muted-foreground text-sm sm:text-base">Motif :</span>
                     <div className="flex items-center gap-2">
-                      <span className="font-mono font-semibold text-red-600 dark:text-red-400">
+                      <span className="font-mono font-semibold text-red-600 dark:text-red-400 text-sm sm:text-base break-all">
                         Dépôt+{user.firstName} {user.lastName}
                       </span>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => copyToClipboard(`Dépôt+${user.firstName} ${user.lastName}`, 'Motif')}
+                        className="flex-shrink-0"
                       >
                         <Copy className="h-4 w-4" />
                       </Button>
                     </div>
                   </div>
 
-                  <div className="flex justify-between items-center pt-3 border-t">
-                    <span className="text-muted-foreground">Numéro de commande :</span>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-2 pt-3 border-t">
+                    <span className="text-muted-foreground text-sm sm:text-base">Numéro de commande :</span>
                     <div className="flex items-center gap-2">
-                      <span className="font-mono font-bold text-primary">
+                      <span className="font-mono font-bold text-primary text-xs sm:text-sm break-all">
                         {bankTransferData.orderReference}
                       </span>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => copyToClipboard(bankTransferData.orderReference, 'Numéro de commande')}
+                        className="flex-shrink-0"
                       >
                         <Copy className="h-4 w-4" />
                       </Button>
                     </div>
                   </div>
 
-                  <div className="flex justify-between items-center pt-3 border-t">
-                    <span className="font-semibold">Montant :</span>
-                    <span className="font-bold text-2xl text-green-600 dark:text-green-400">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-2 pt-3 border-t">
+                    <span className="font-semibold text-sm sm:text-base">Montant :</span>
+                    <span className="font-bold text-xl sm:text-2xl text-green-600 dark:text-green-400">
                       {total.toFixed(2)} €
                     </span>
                   </div>

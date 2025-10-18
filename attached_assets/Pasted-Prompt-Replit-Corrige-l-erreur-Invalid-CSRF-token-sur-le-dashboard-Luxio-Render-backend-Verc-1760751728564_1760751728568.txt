@@ -1,0 +1,85 @@
+Prompt Replit :
+
+Corrige l’erreur “Invalid CSRF token” sur le dashboard Luxio (Render backend + Vercel frontend).
+
+1. Ajoute une route publique /api/csrf-token dans le backend qui renvoie req.csrfToken().
+
+
+2. Mets à jour le frontend pour :
+
+Récupérer le token CSRF via /api/csrf-token avant chaque requête POST/DELETE (comme “Cancel Order”).
+
+Ajouter ce token dans l’en-tête CSRF-Token.
+
+
+
+3. Ne désactive aucune protection CSRF : le but est que tout fonctionne avec le CSRF actif.
+
+
+
+L’objectif : supprimer l’erreur “Invalid CSRF token” sans altérer la sécurité.
+
+
+
+
+---
+
+📱 2. Affichage mobile du virement bancaire
+
+Sur ton image, on voit que le bloc orange déborde un peu et ne s’adapte pas au viewport mobile.
+
+Tu peux corriger ça en CSS facilement dans la section de ton composant BankTransferInfo (ou équivalent) :
+
+.bank-transfer-card {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: #ff7a00;
+  color: white;
+  word-wrap: break-word;
+}
+
+.bank-transfer-card p,
+.bank-transfer-card span {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .bank-transfer-card {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+  .bank-transfer-card strong {
+    display: block;
+    margin-top: 0.25rem;
+  }
+}
+
+Et en JSX/HTML :
+
+<div className="bank-transfer-card">
+  <p><strong>Beneficiary:</strong> Matt Luxio</p>
+  <p><strong>IBAN:</strong> ES6115632626383268707364</p>
+  <p><strong>BIC:</strong> NTSBESM1XXX</p>
+  <p><strong>Order reference:</strong> LX-1760750409134-W42V8W</p>
+  <p><strong>Amount:</strong> 1099.00 €</p>
+</div>
+
+✅ Résultat attendu :
+
+Sur mobile : padding réduit, texte lisible, aucun débordement horizontal.
+
+Sur desktop : style inchangé, alignement parfait.
+
+
+
+---
+
+🧾 Résumé clair
+
+Problème	Cause	Solution
+
+Invalid CSRF token	Le frontend n’envoie pas le token CSRF	Ajouter /api/csrf-token côté backend + envoyer token dans chaque requête
+Mauvais affichage virement sur mobile	CSS non responsive	Ajouter des règles max-width, box-sizing, et media query
