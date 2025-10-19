@@ -1,0 +1,45 @@
+Tout fonctionne désormais parfaitement sur mon projet (frontend déployé sur Vercel et backend sur Render).  
+Il ne reste qu’un seul problème : **le modal d’affichage des instructions de virement bancaire** n’est pas correctement affiché sur les petits téléphones.
+
+🧩 Problème
+Sur les smartphones comme le **Tecno Spark 5 Pro**, le modal de virement bancaire (le bloc orange affichant le bénéficiaire, IBAN, BIC, référence, montant, etc.) dépasse de l’écran.  
+- Le contenu déborde horizontalement.  
+- Le modal n’est pas bien centré.  
+- Une partie du texte est coupée ou inaccessible sans défilement latéral.  
+
+Pourtant :
+- L’affichage sur **tablette** est parfait.  
+- L’affichage sur **ordinateur** est également parfait.  
+Il s’agit donc uniquement d’un **problème de responsivité sur mobile**.
+
+🎯 Objectif attendu
+Adapter le modal pour qu’il s’affiche correctement sur tous les types d’écrans, y compris les plus petits téléphones.
+
+Les améliorations attendues :
+1. Le modal doit rester **parfaitement centré verticalement et horizontalement** sur tous les écrans.  
+2. Le contenu (bloc orange, instructions, boutons, etc.) doit **s’ajuster à la largeur de l’écran sans débordement horizontal**.  
+3. Si le contenu est trop long, il doit être **défilable verticalement** à l’intérieur du modal (overflow-y-auto).  
+4. Ajouter un **espacement intérieur (padding)** suffisant pour éviter que le texte touche les bords.  
+5. **Ne pas modifier la mise en page, les couleurs, ni la logique métier** — seulement les classes CSS ou Tailwind pour améliorer la responsivité.
+
+📘 Exemple d’approche (si vous utilisez TailwindCSS) :
+```jsx
+<div className="fixed inset-0 flex items-center justify-center bg-black/50 p-3 z-50 overflow-y-auto">
+  <div className="bg-white rounded-2xl shadow-lg w-full max-w-sm sm:max-w-md md:max-w-lg mx-auto">
+    <div className="bg-orange-500 text-white p-4 rounded-t-2xl">
+      <p><strong>Bénéficiaire :</strong> Matt Luxio</p>
+      <p><strong>IBAN :</strong> ES6115632626383268707364</p>
+      <p><strong>BIC :</strong> NTSBESM1XXX</p>
+      <p><strong>Référence :</strong> LX-XXXXXXXXXXXX</p>
+      <p><strong>Montant :</strong> 1299.00 €</p>
+    </div>
+    <div className="p-4 text-sm leading-relaxed">
+      <p><strong>Instructions :</strong></p>
+      <ul className="list-disc list-inside space-y-1">
+        <li>Effectuer le virement vers le compte ci-dessus</li>
+        <li>Indiquer la référence mentionnée</li>
+        <li>Un email de confirmation sera envoyé</li>
+      </ul>
+    </div>
+  </div>
+</div>

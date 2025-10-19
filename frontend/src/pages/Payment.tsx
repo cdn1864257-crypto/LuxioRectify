@@ -448,15 +448,15 @@ export default function Payment() {
           setBankTransferData(null);
         }
       }}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto w-[95vw] sm:w-full">
-          <DialogHeader>
-            <div className="text-center mb-4">
-              <h1 className="text-3xl font-bold text-primary mb-2">Luxio</h1>
+        <DialogContent className="w-[96vw] max-w-[480px] sm:max-w-2xl max-h-[92vh] overflow-y-auto p-3 sm:p-6">
+          <DialogHeader className="space-y-2 sm:space-y-3">
+            <div className="text-center mb-2 sm:mb-4">
+              <h1 className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">Luxio</h1>
             </div>
-            <DialogTitle className="text-2xl text-center">
+            <DialogTitle className="text-lg sm:text-xl md:text-2xl text-center">
               Informations de virement
             </DialogTitle>
-            <DialogDescription className="text-center">
+            <DialogDescription className="text-center text-xs sm:text-sm">
               Effectuez votre virement bancaire avec les informations ci-dessous
             </DialogDescription>
           </DialogHeader>
@@ -483,114 +483,116 @@ export default function Payment() {
               </div>
             </div>
           ) : bankTransferData && (
-            <div className="space-y-6 py-4 px-2 sm:px-0">
+            <div className="space-y-4 sm:space-y-6 py-2 sm:py-4">
               {/* Informations bancaires */}
-              <div className="w-full bg-gradient-to-br from-orange-400 to-orange-600 dark:from-orange-600 dark:to-orange-800 rounded-lg p-4 sm:p-6 space-y-4 overflow-hidden">
+              <div className="w-full bg-gradient-to-br from-orange-400 to-orange-600 dark:from-orange-600 dark:to-orange-800 rounded-lg p-3 sm:p-6 space-y-3 sm:space-y-4 overflow-hidden">
                 <h3 className="font-semibold text-base sm:text-lg mb-4 text-white">Coordonnées bancaires</h3>
                 
-                <div className="space-y-3">
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-2">
-                    <span className="text-blue-100 text-sm sm:text-base">Bénéficiaire</span>
-                    <div className="flex items-center gap-2 min-w-0 flex-1 sm:flex-initial">
-                      <span className="font-mono font-bold text-sm sm:text-base text-black dark:text-white break-all">Matt Luxio</span>
+                <div className="space-y-2 sm:space-y-3">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-blue-100 text-xs sm:text-sm">Bénéficiaire</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2 bg-white/10 rounded px-2 py-1.5 sm:px-3 sm:py-2">
+                      <span className="font-mono font-bold text-xs sm:text-sm text-white break-all flex-1">Matt Luxio</span>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => copyToClipboard('Matt Luxio', 'Bénéficiaire')}
-                        className="flex-shrink-0 text-white hover:bg-white/20"
+                        className="flex-shrink-0 text-white hover:bg-white/20 h-7 w-7 p-0"
                       >
-                        <Copy className="h-4 w-4" />
+                        <Copy className="h-3.5 w-3.5" />
                       </Button>
                     </div>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-2">
-                    <span className="text-blue-100 text-sm sm:text-base">IBAN</span>
-                    <div className="flex items-center gap-2 min-w-0 flex-1 sm:flex-initial">
-                      <span className="font-mono font-bold text-xs sm:text-sm text-black dark:text-white break-all">ES6115632626383268707364</span>
+                  <div className="flex flex-col gap-1">
+                    <span className="text-blue-100 text-xs sm:text-sm">IBAN</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2 bg-white/10 rounded px-2 py-1.5 sm:px-3 sm:py-2">
+                      <span className="font-mono font-bold text-[10px] sm:text-xs text-white break-all flex-1">ES6115632626383268707364</span>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => copyToClipboard('ES6115632626383268707364', 'IBAN')}
-                        className="flex-shrink-0 text-white hover:bg-white/20"
+                        className="flex-shrink-0 text-white hover:bg-white/20 h-7 w-7 p-0"
                       >
-                        <Copy className="h-4 w-4" />
+                        <Copy className="h-3.5 w-3.5" />
                       </Button>
                     </div>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-2">
-                    <span className="text-blue-100 text-sm sm:text-base">BIC</span>
-                    <div className="flex items-center gap-2 min-w-0 flex-1 sm:flex-initial">
-                      <span className="font-mono font-bold text-sm sm:text-base text-black dark:text-white break-all">NTSBESM1XXX</span>
+                  <div className="flex flex-col gap-1">
+                    <span className="text-blue-100 text-xs sm:text-sm">BIC</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2 bg-white/10 rounded px-2 py-1.5 sm:px-3 sm:py-2">
+                      <span className="font-mono font-bold text-xs sm:text-sm text-white break-all flex-1">NTSBESM1XXX</span>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => copyToClipboard('NTSBESM1XXX', 'BIC')}
-                        className="flex-shrink-0 text-white hover:bg-white/20"
+                        className="flex-shrink-0 text-white hover:bg-white/20 h-7 w-7 p-0"
                       >
-                        <Copy className="h-4 w-4" />
+                        <Copy className="h-3.5 w-3.5" />
                       </Button>
                     </div>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-2">
-                    <span className="text-blue-100 text-sm sm:text-base">Référence de commande</span>
-                    <div className="flex items-center gap-2 min-w-0 flex-1 sm:flex-initial">
-                      <span className="font-mono font-bold text-sm sm:text-base text-black dark:text-white break-all">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-blue-100 text-xs sm:text-sm">Référence de commande</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2 bg-white/10 rounded px-2 py-1.5 sm:px-3 sm:py-2">
+                      <span className="font-mono font-bold text-xs sm:text-sm text-white break-all flex-1">
                         {bankTransferData.orderReference}
                       </span>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => copyToClipboard(bankTransferData.orderReference, 'Référence de commande')}
-                        className="flex-shrink-0 text-white hover:bg-white/20"
+                        className="flex-shrink-0 text-white hover:bg-white/20 h-7 w-7 p-0"
                       >
-                        <Copy className="h-4 w-4" />
+                        <Copy className="h-3.5 w-3.5" />
                       </Button>
                     </div>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-2 pt-3 border-t border-white/30">
-                    <span className="text-blue-100 text-sm sm:text-base">Montant à virer</span>
-                    <span className="font-bold text-2xl sm:text-3xl text-black dark:text-white">
-                      {total.toFixed(2)} €
-                    </span>
+                  <div className="flex flex-col gap-1 pt-2 sm:pt-3 border-t border-white/30">
+                    <span className="text-blue-100 text-xs sm:text-sm">Montant à virer</span>
+                    <div className="bg-white/10 rounded px-2 py-2 sm:px-3 sm:py-3">
+                      <span className="font-bold text-xl sm:text-2xl md:text-3xl text-white">
+                        {total.toFixed(2)} €
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Instructions */}
-              <div className="bg-blue-50 dark:bg-blue-950 rounded-lg p-4 space-y-3">
-                <h4 className="font-semibold flex items-center gap-2 text-sm sm:text-base">
-                  📋 Instructions:
+              <div className="bg-blue-50 dark:bg-blue-950 rounded-lg p-3 sm:p-4 space-y-2 sm:space-y-3">
+                <h4 className="font-semibold flex items-center gap-2 text-xs sm:text-sm md:text-base">
+                  📋 Instructions
                 </h4>
-                <ul className="space-y-2 text-sm sm:text-base">
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-0.5">•</span>
+                <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm leading-relaxed">
+                  <li className="flex items-start gap-1.5 sm:gap-2">
+                    <span className="text-primary mt-0.5 flex-shrink-0">•</span>
                     <span>Effectuez le virement vers le compte ci-dessus</span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-0.5">•</span>
+                  <li className="flex items-start gap-1.5 sm:gap-2">
+                    <span className="text-primary mt-0.5 flex-shrink-0">•</span>
                     <span>Veillez à indiquer la référence : <strong className="text-primary break-all">{bankTransferData.orderReference}</strong></span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-0.5">•</span>
+                  <li className="flex items-start gap-1.5 sm:gap-2">
+                    <span className="text-primary mt-0.5 flex-shrink-0">•</span>
                     <span>Vous recevrez un email de confirmation</span>
                   </li>
                 </ul>
               </div>
 
               {/* Délais de livraison */}
-              <div className="bg-green-50 dark:bg-green-950 rounded-lg p-4 space-y-2">
-                <div className="flex items-start gap-2 text-sm sm:text-base">
-                  <span className="text-green-600 dark:text-green-400 font-bold">✓</span>
+              <div className="bg-green-50 dark:bg-green-950 rounded-lg p-3 sm:p-4 space-y-1.5 sm:space-y-2">
+                <div className="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm">
+                  <span className="text-green-600 dark:text-green-400 font-bold flex-shrink-0">✓</span>
                   <p className="font-semibold text-green-800 dark:text-green-200">
                     Virement immédiat : Livraison en 24h
                   </p>
                 </div>
-                <div className="flex items-start gap-2 text-sm">
-                  <span className="text-orange-600 dark:text-orange-400 mt-0.5">⏱</span>
+                <div className="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm">
+                  <span className="text-orange-600 dark:text-orange-400 mt-0.5 flex-shrink-0">⏱</span>
                   <p className="text-muted-foreground">
                     Virement standard : 48-72h selon votre banque
                   </p>
@@ -598,9 +600,9 @@ export default function Payment() {
               </div>
 
               {/* Boutons de confirmation */}
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3 pt-2">
                 <Button
-                  className="w-full"
+                  className="w-full text-sm sm:text-base"
                   size="lg"
                   onClick={handleBankTransferConfirm}
                   disabled={bankTransferLoading}
@@ -608,17 +610,17 @@ export default function Payment() {
                 >
                   {bankTransferLoading ? (
                     <>
-                      <Loader2 className="h-5 w-5 mr-2 animate-spin" />
-                      Envoi en cours...
+                      <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 mr-2 animate-spin" />
+                      <span className="text-sm sm:text-base">Envoi en cours...</span>
                     </>
                   ) : (
-                    'Oui, je procède au virement'
+                    <span className="text-sm sm:text-base">Oui, je procède au virement</span>
                   )}
                 </Button>
                 
                 <Button
                   variant="outline"
-                  className="w-full"
+                  className="w-full text-sm sm:text-base"
                   size="lg"
                   onClick={() => {
                     setBankTransferOpen(false);
