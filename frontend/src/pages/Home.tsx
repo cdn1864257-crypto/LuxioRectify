@@ -7,6 +7,7 @@ import { ProductGrid } from '../components/ProductGrid';
 import { TestimonialsCarousel } from '../components/TestimonialsCarousel';
 import { Footer } from '../components/Footer';
 import { CartSidebar } from '../components/CartSidebar';
+import { SEO } from '../components/SEO';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getProductsByCategory } from '../lib/products';
 import { Button } from '../components/ui/button';
@@ -17,6 +18,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO />
       <Header 
         onToggleCart={() => setCartOpen(!cartOpen)}
       />
