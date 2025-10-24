@@ -7,15 +7,6 @@ Allow: /
 # Sitemap location
 Sitemap: https://luxios.vercel.app/sitemap.xml
 
-# Allow all language versions
-Allow: /en/
-Allow: /fr/
-Allow: /es/
-Allow: /pt/
-Allow: /pl/
-Allow: /it/
-Allow: /hu/
-
 # Allow main pages
 Allow: /premium
 Allow: /cart

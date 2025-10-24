@@ -37,7 +37,8 @@ export function SEO({
   const seoDescription = description || t(`seo${page.charAt(0).toUpperCase() + page.slice(1)}Description` as any);
   const seoKeywords = keywords || t(`seo${page.charAt(0).toUpperCase() + page.slice(1)}Keywords` as any);
   
-  const canonicalUrl = `${SITE_URL}/${language}${page === 'home' ? '' : `/${page}`}`;
+  const pagePath = page === 'home' ? '/' : `/${page}`;
+  const canonicalUrl = `${SITE_URL}${pagePath}?lang=${language}`;
   const siteName = t('seoOgSiteName');
   
   const robotsContent = noindex 
@@ -60,10 +61,10 @@ export function SEO({
           key={lang}
           rel="alternate"
           hrefLang={lang}
-          href={`${SITE_URL}/${lang}${page === 'home' ? '' : `/${page}`}`}
+          href={`${SITE_URL}${pagePath}?lang=${lang}`}
         />
       ))}
-      <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}/en${page === 'home' ? '' : `/${page}`}`} />
+      <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}${pagePath}?lang=en`} />
       
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={siteName} />
