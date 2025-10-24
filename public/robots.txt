@@ -1,0 +1,30 @@
+# Luxio Market - Robots.txt
+# This file tells search engines which pages to crawl and which to avoid
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://luxios.vercel.app/sitemap.xml
+
+# Allow all language versions
+Allow: /en/
+Allow: /fr/
+Allow: /es/
+Allow: /pt/
+Allow: /pl/
+Allow: /it/
+Allow: /hu/
+
+# Allow main pages
+Allow: /premium
+Allow: /cart
+Allow: /dashboard
+Allow: /payment
+
+# Disallow private/admin areas (if any in future)
+# Disallow: /admin/
+# Disallow: /api/
+
+# Crawl delay (optional, adjust as needed)
+Crawl-delay: 1

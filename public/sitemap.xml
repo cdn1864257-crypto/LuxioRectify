@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- English Pages -->
+  <url>
+    <loc>https://luxios.vercel.app/en</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/en/premium</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/premium" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/premium" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/premium" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/premium" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/premium" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/premium" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/premium" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/premium" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/en/dashboard</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/dashboard" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/dashboard" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/dashboard" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/dashboard" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/dashboard" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/dashboard" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/dashboard" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/dashboard" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/en/cart</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/cart" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/cart" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/cart" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/cart" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/cart" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/cart" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/cart" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/cart" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/en/payment</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/payment" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/payment" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/payment" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/payment" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/payment" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/payment" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/payment" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/payment" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- French Pages -->
+  <url>
+    <loc>https://luxios.vercel.app/fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/fr/premium</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/premium" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/premium" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/premium" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/premium" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/premium" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/premium" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/premium" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/premium" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/fr/dashboard</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/dashboard" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/dashboard" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/dashboard" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/dashboard" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/dashboard" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/dashboard" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/dashboard" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/dashboard" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/fr/cart</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/cart" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/cart" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/cart" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/cart" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/cart" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/cart" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/cart" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/cart" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/fr/payment</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/payment" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/payment" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/payment" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/payment" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/payment" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/payment" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/payment" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/payment" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Spanish Pages -->
+  <url>
+    <loc>https://luxios.vercel.app/es</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/es/premium</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/premium" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/premium" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/premium" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/premium" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/premium" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/premium" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/premium" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/premium" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/es/dashboard</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/dashboard" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/dashboard" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/dashboard" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/dashboard" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/dashboard" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/dashboard" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/dashboard" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/dashboard" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/es/cart</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/cart" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/cart" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/cart" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/cart" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/cart" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/cart" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/cart" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/cart" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/es/payment</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/payment" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/payment" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/payment" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/payment" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/payment" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/payment" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/payment" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/payment" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Portuguese Pages -->
+  <url>
+    <loc>https://luxios.vercel.app/pt</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/pt/premium</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/premium" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/premium" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/premium" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/premium" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/premium" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/premium" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/premium" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/premium" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/pt/dashboard</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/dashboard" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/dashboard" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/dashboard" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/dashboard" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/dashboard" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/dashboard" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/dashboard" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/dashboard" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/pt/cart</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/cart" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/cart" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/cart" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/cart" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/cart" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/cart" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/cart" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/cart" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/pt/payment</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/payment" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/payment" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/payment" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/payment" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/payment" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/payment" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/payment" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/payment" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Polish Pages -->
+  <url>
+    <loc>https://luxios.vercel.app/pl</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/pl/premium</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/premium" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/premium" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/premium" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/premium" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/premium" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/premium" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/premium" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/premium" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/pl/dashboard</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/dashboard" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/dashboard" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/dashboard" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/dashboard" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/dashboard" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/dashboard" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/dashboard" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/dashboard" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/pl/cart</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/cart" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/cart" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/cart" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/cart" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/cart" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/cart" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/cart" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/cart" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/pl/payment</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/payment" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/payment" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/payment" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/payment" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/payment" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/payment" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/payment" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/payment" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Italian Pages -->
+  <url>
+    <loc>https://luxios.vercel.app/it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/it/premium</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/premium" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/premium" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/premium" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/premium" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/premium" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/premium" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/premium" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/premium" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/it/dashboard</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/dashboard" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/dashboard" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/dashboard" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/dashboard" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/dashboard" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/dashboard" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/dashboard" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/dashboard" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/it/cart</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/cart" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/cart" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/cart" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/cart" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/cart" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/cart" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/cart" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/cart" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/it/payment</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/payment" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/payment" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/payment" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/payment" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/payment" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/payment" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/payment" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/payment" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Hungarian Pages -->
+  <url>
+    <loc>https://luxios.vercel.app/hu</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/hu/premium</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/premium" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/premium" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/premium" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/premium" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/premium" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/premium" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/premium" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/premium" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/hu/dashboard</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/dashboard" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/dashboard" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/dashboard" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/dashboard" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/dashboard" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/dashboard" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/dashboard" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/dashboard" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/hu/cart</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/cart" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/cart" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/cart" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/cart" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/cart" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/cart" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/cart" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/cart" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://luxios.vercel.app/hu/payment</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://luxios.vercel.app/en/payment" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://luxios.vercel.app/fr/payment" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/es/payment" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://luxios.vercel.app/pt/payment" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/pl/payment" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/it/payment" />
+    <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/hu/payment" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/en/payment" />
+    <lastmod>2025-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+</urlset>
