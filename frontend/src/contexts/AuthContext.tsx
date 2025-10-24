@@ -144,6 +144,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signup = async (userData: SignupData) => {
     try {
+      console.log('🚀 Tentative d\'inscription:', { email: userData.email, firstName: userData.firstName });
+      
       const response = await fetch(getApiUrl('/api/auth/signup'), {
         method: 'POST',
         headers: {
@@ -153,15 +155,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         body: JSON.stringify(userData),
       });
 
+      console.log('📡 Réponse reçue:', response.status, response.statusText);
+
       const data = await response.json();
+      console.log('📦 Données:', data);
 
       if (!response.ok) {
+        console.error('❌ Erreur d\'inscription:', data.error);
         return { success: false, error: data.error || "Erreur lors de l'inscription" };
       }
 
+      console.log('✅ Inscription réussie!');
       return { success: true };
     } catch (error: any) {
-      return { success: false, error: error.message || "Erreur lors de l'inscription" };
+      console.error('❌ Erreur fetch inscription:', error);
+      return { success: false, error: error.message || "Erreur de connexion au serveur" };
     }
   };
 

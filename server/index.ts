@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import healthHandler from '../api/health';
 import usersHandler from '../api/users';
-import signupHandler from '../api/auth/signup';
+import signupHandler from '../api/auth/signup-memstorage';
 import loginHandler from '../api/auth/login';
 import meHandler from '../api/auth/me';
 import logoutHandler from '../api/auth/logout';
@@ -35,7 +35,10 @@ app.use((req, res, next) => {
     'http://127.0.0.1:3000'
   ];
   
-  if (origin && allowedOrigins.includes(origin)) {
+  // Allow Replit domains (*.replit.dev)
+  const isReplitDomain = origin && origin.match(/^https?:\/\/[a-zA-Z0-9-]+\.replit\.dev$/);
+  
+  if ((origin && allowedOrigins.includes(origin)) || isReplitDomain) {
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', 'true');
   }
