@@ -438,6 +438,27 @@ export interface Translations {
     text: string;
     verified: boolean;
   }>;
+  
+  // SEO Meta Tags
+  seoHomeTitle: string;
+  seoHomeDescription: string;
+  seoHomeKeywords: string;
+  seoPremiumTitle: string;
+  seoPremiumDescription: string;
+  seoPremiumKeywords: string;
+  seoDashboardTitle: string;
+  seoDashboardDescription: string;
+  seoCartTitle: string;
+  seoCartDescription: string;
+  seoPaymentTitle: string;
+  seoPaymentDescription: string;
+  seoOgSiteName: string;
+  seoImageAltLogo: string;
+  seoImageAltProduct: string;
+  seoImageAltSmartphone: string;
+  seoImageAltWatch: string;
+  seoImageAltSneaker: string;
+  seoImageAltGadget: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -984,7 +1005,28 @@ export const translations: Record<Language, Translations> = {
         text: 'Best online shopping experience I\'ve had. The website is easy to navigate and checkout was super quick and secure.',
         verified: true
       }
-    ]
+    ],
+    
+    // SEO Meta Tags
+    seoHomeTitle: 'Luxio Market - Premium Smartphones, Watches, Sneakers | Up to 37% Off',
+    seoHomeDescription: 'Discover the latest smartphones, smartwatches, premium sneakers and high-tech gadgets with up to 37% off. Free shipping, secure payment with crypto and bank cards.',
+    seoHomeKeywords: 'smartphone, smartwatch, sneakers, gadgets, high-tech, iPhone, Samsung, luxury, premium, discount',
+    seoPremiumTitle: 'Premium Products - Smartphones, Watches, Sneakers | Luxio Market',
+    seoPremiumDescription: 'Explore our exclusive collection of premium smartphones, luxury watches and designer sneakers. Authentic products with manufacturer warranty and fast delivery.',
+    seoPremiumKeywords: 'premium smartphone, luxury watch, designer sneakers, authentic products, warranty',
+    seoDashboardTitle: 'My Dashboard - Order Tracking | Luxio Market',
+    seoDashboardDescription: 'Track your orders, manage your account and view your order history on Luxio Market.',
+    seoCartTitle: 'Shopping Cart - Review Your Order | Luxio Market',
+    seoCartDescription: 'Review your shopping cart and proceed to secure checkout. Free shipping on all orders.',
+    seoPaymentTitle: 'Secure Payment - Complete Your Order | Luxio Market',
+    seoPaymentDescription: 'Complete your order securely with crypto payment, bank transfer or prepaid cards. All transactions are encrypted and secure.',
+    seoOgSiteName: 'Luxio Market',
+    seoImageAltLogo: 'Luxio Market - Premium tech products',
+    seoImageAltProduct: 'Premium product at discount price',
+    seoImageAltSmartphone: 'Latest generation smartphone',
+    seoImageAltWatch: 'Premium smartwatch',
+    seoImageAltSneaker: 'Designer premium sneakers',
+    seoImageAltGadget: 'Smart home gadget'
   },
   
   fr: {
@@ -1530,7 +1572,28 @@ export const translations: Record<Language, Translations> = {
         text: 'Meilleure expérience d\'achat en ligne que j\'ai eue. Le site est facile à naviguer et le paiement était super rapide et sécurisé.',
         verified: true
       }
-    ]
+    ],
+    
+    // SEO Meta Tags
+    seoHomeTitle: 'Luxio Market - Smartphones, Montres, Baskets Premium | Jusqu\'à 37% de Réduction',
+    seoHomeDescription: 'Découvrez les derniers smartphones, montres connectées, baskets premium et gadgets high-tech avec jusqu\'à 37% de réduction. Livraison gratuite, paiement sécurisé crypto et carte bancaire.',
+    seoHomeKeywords: 'smartphone, montre connectée, baskets, gadgets, high-tech, iPhone, Samsung, luxe, premium, réduction',
+    seoPremiumTitle: 'Produits Premium - Smartphones, Montres, Baskets | Luxio Market',
+    seoPremiumDescription: 'Explorez notre collection exclusive de smartphones premium, montres de luxe et baskets de créateur. Produits authentiques avec garantie constructeur et livraison rapide.',
+    seoPremiumKeywords: 'smartphone premium, montre luxe, baskets créateur, produits authentiques, garantie',
+    seoDashboardTitle: 'Mon Tableau de Bord - Suivi de Commandes | Luxio Market',
+    seoDashboardDescription: 'Suivez vos commandes, gérez votre compte et consultez l\'historique de vos achats sur Luxio Market.',
+    seoCartTitle: 'Panier - Vérifiez Votre Commande | Luxio Market',
+    seoCartDescription: 'Consultez votre panier et procédez au paiement sécurisé. Livraison gratuite sur toutes les commandes.',
+    seoPaymentTitle: 'Paiement Sécurisé - Finalisez Votre Commande | Luxio Market',
+    seoPaymentDescription: 'Finalisez votre commande en toute sécurité avec paiement crypto, virement bancaire ou cartes prépayées. Toutes les transactions sont chiffrées et sécurisées.',
+    seoOgSiteName: 'Luxio Market',
+    seoImageAltLogo: 'Luxio Market - Produits tech premium',
+    seoImageAltProduct: 'Produit premium à prix réduit',
+    seoImageAltSmartphone: 'Smartphone dernière génération',
+    seoImageAltWatch: 'Montre connectée premium',
+    seoImageAltSneaker: 'Baskets premium de créateur',
+    seoImageAltGadget: 'Gadget maison connectée'
   },
   
   es: {
@@ -2076,7 +2139,28 @@ export const translations: Record<Language, Translations> = {
         text: 'La mejor experiencia de compra online que he tenido. El sitio es fácil de navegar y el pago fue rápido y seguro.',
         verified: true
       }
-    ]
+    ],
+    
+    // SEO Meta Tags
+    seoHomeTitle: 'Luxio Market - Smartphones, Relojes, Zapatillas Premium | Hasta 37% de Descuento',
+    seoHomeDescription: 'Descubre los últimos smartphones, relojes inteligentes, zapatillas premium y gadgets high-tech con hasta 37% de descuento. Envío gratis, pago seguro con crypto y tarjeta bancaria.',
+    seoHomeKeywords: 'smartphone, reloj inteligente, zapatillas, gadgets, high-tech, iPhone, Samsung, lujo, premium, descuento',
+    seoPremiumTitle: 'Productos Premium - Smartphones, Relojes, Zapatillas | Luxio Market',
+    seoPremiumDescription: 'Explora nuestra colección exclusiva de smartphones premium, relojes de lujo y zapatillas de diseñador. Productos auténticos con garantía del fabricante y entrega rápida.',
+    seoPremiumKeywords: 'smartphone premium, reloj lujo, zapatillas diseñador, productos auténticos, garantía',
+    seoDashboardTitle: 'Mi Panel de Control - Seguimiento de Pedidos | Luxio Market',
+    seoDashboardDescription: 'Rastrea tus pedidos, gestiona tu cuenta y consulta el historial de tus compras en Luxio Market.',
+    seoCartTitle: 'Carrito de Compras - Revisa Tu Pedido | Luxio Market',
+    seoCartDescription: 'Consulta tu carrito y procede al pago seguro. Envío gratis en todos los pedidos.',
+    seoPaymentTitle: 'Pago Seguro - Completa Tu Pedido | Luxio Market',
+    seoPaymentDescription: 'Completa tu pedido de forma segura con pago crypto, transferencia bancaria o tarjetas prepagadas. Todas las transacciones están cifradas y son seguras.',
+    seoOgSiteName: 'Luxio Market',
+    seoImageAltLogo: 'Luxio Market - Productos tech premium',
+    seoImageAltProduct: 'Producto premium a precio reducido',
+    seoImageAltSmartphone: 'Smartphone de última generación',
+    seoImageAltWatch: 'Reloj inteligente premium',
+    seoImageAltSneaker: 'Zapatillas premium de diseñador',
+    seoImageAltGadget: 'Gadget para casa inteligente'
   },
   
   pt: {
@@ -2622,7 +2706,28 @@ export const translations: Record<Language, Translations> = {
         text: 'A melhor experiência de compra online que já tive. O site é fácil de navegar e o pagamento foi rápido e seguro.',
         verified: true
       }
-    ]
+    ],
+    
+    // SEO Meta Tags
+    seoHomeTitle: 'Luxio Market - Smartphones, Relógios, Ténis Premium | Até 37% de Desconto',
+    seoHomeDescription: 'Descubra os mais recentes smartphones, relógios inteligentes, ténis premium e gadgets high-tech com até 37% de desconto. Envio gratuito, pagamento seguro com crypto e cartão bancário.',
+    seoHomeKeywords: 'smartphone, relógio inteligente, ténis, gadgets, high-tech, iPhone, Samsung, luxo, premium, desconto',
+    seoPremiumTitle: 'Produtos Premium - Smartphones, Relógios, Ténis | Luxio Market',
+    seoPremiumDescription: 'Explore a nossa coleção exclusiva de smartphones premium, relógios de luxo e ténis de designer. Produtos autênticos com garantia do fabricante e entrega rápida.',
+    seoPremiumKeywords: 'smartphone premium, relógio luxo, ténis designer, produtos autênticos, garantia',
+    seoDashboardTitle: 'Meu Painel de Controlo - Rastreamento de Pedidos | Luxio Market',
+    seoDashboardDescription: 'Rastreie os seus pedidos, gira a sua conta e consulte o histórico das suas compras na Luxio Market.',
+    seoCartTitle: 'Carrinho de Compras - Reveja o Seu Pedido | Luxio Market',
+    seoCartDescription: 'Consulte o seu carrinho e proceda ao pagamento seguro. Envio gratuito em todos os pedidos.',
+    seoPaymentTitle: 'Pagamento Seguro - Complete o Seu Pedido | Luxio Market',
+    seoPaymentDescription: 'Complete o seu pedido de forma segura com pagamento crypto, transferência bancária ou cartões pré-pagos. Todas as transações são encriptadas e seguras.',
+    seoOgSiteName: 'Luxio Market',
+    seoImageAltLogo: 'Luxio Market - Produtos tech premium',
+    seoImageAltProduct: 'Produto premium a preço reduzido',
+    seoImageAltSmartphone: 'Smartphone de última geração',
+    seoImageAltWatch: 'Relógio inteligente premium',
+    seoImageAltSneaker: 'Ténis premium de designer',
+    seoImageAltGadget: 'Gadget para casa inteligente'
   },
   
   pl: {
@@ -3168,7 +3273,28 @@ export const translations: Record<Language, Translations> = {
         text: 'Najlepsze doświadczenie zakupowe online. Strona jest łatwa w nawigacji a płatność była szybka i bezpieczna.',
         verified: true
       }
-    ]
+    ],
+    
+    // SEO Meta Tags
+    seoHomeTitle: 'Luxio Market - Smartfony, Zegarki, Buty Premium | Do 37% Zniżki',
+    seoHomeDescription: 'Odkryj najnowsze smartfony, inteligentne zegarki, buty premium i gadżety high-tech ze zniżkami do 37%. Darmowa dostawa, bezpieczna płatność crypto i kartą bankową.',
+    seoHomeKeywords: 'smartfon, inteligentny zegarek, buty, gadżety, high-tech, iPhone, Samsung, luksus, premium, zniżka',
+    seoPremiumTitle: 'Produkty Premium - Smartfony, Zegarki, Buty | Luxio Market',
+    seoPremiumDescription: 'Poznaj naszą ekskluzywną kolekcję smartfonów premium, luksusowych zegarków i markowych butów. Autentyczne produkty z gwarancją producenta i szybką dostawą.',
+    seoPremiumKeywords: 'smartfon premium, luksusowy zegarek, markowe buty, autentyczne produkty, gwarancja',
+    seoDashboardTitle: 'Mój Panel Kontrolny - Śledzenie Zamówień | Luxio Market',
+    seoDashboardDescription: 'Śledź swoje zamówienia, zarządzaj kontem i przeglądaj historię zakupów w Luxio Market.',
+    seoCartTitle: 'Koszyk - Sprawdź Swoje Zamówienie | Luxio Market',
+    seoCartDescription: 'Sprawdź swój koszyk i przejdź do bezpiecznego płacenia. Darmowa dostawa na wszystkie zamówienia.',
+    seoPaymentTitle: 'Bezpieczna Płatność - Dokończ Zamówienie | Luxio Market',
+    seoPaymentDescription: 'Dokończ zamówienie bezpiecznie z płatnością crypto, przelewem bankowym lub kartami przedpłaconymi. Wszystkie transakcje są zaszyfrowane i bezpieczne.',
+    seoOgSiteName: 'Luxio Market',
+    seoImageAltLogo: 'Luxio Market - Produkty tech premium',
+    seoImageAltProduct: 'Produkt premium w obniżonej cenie',
+    seoImageAltSmartphone: 'Smartfon najnowszej generacji',
+    seoImageAltWatch: 'Inteligentny zegarek premium',
+    seoImageAltSneaker: 'Markowe buty premium',
+    seoImageAltGadget: 'Gadżet dla inteligentnego domu'
   },
   
   it: {
@@ -3714,7 +3840,28 @@ export const translations: Record<Language, Translations> = {
         text: 'La migliore esperienza di acquisto online che ho avuto. Il sito è facile da navigare e il pagamento è stato veloce e sicuro.',
         verified: true
       }
-    ]
+    ],
+    
+    // SEO Meta Tags
+    seoHomeTitle: 'Luxio Market - Smartphone, Orologi, Sneakers Premium | Fino al 37% di Sconto',
+    seoHomeDescription: 'Scopri gli ultimi smartphone, smartwatch, sneakers premium e gadget high-tech con sconti fino al 37%. Spedizione gratuita, pagamento sicuro con crypto e carta bancaria.',
+    seoHomeKeywords: 'smartphone, smartwatch, sneakers, gadget, high-tech, iPhone, Samsung, lusso, premium, sconto',
+    seoPremiumTitle: 'Prodotti Premium - Smartphone, Orologi, Sneakers | Luxio Market',
+    seoPremiumDescription: 'Esplora la nostra collezione esclusiva di smartphone premium, orologi di lusso e sneakers di design. Prodotti autentici con garanzia del produttore e consegna rapida.',
+    seoPremiumKeywords: 'smartphone premium, orologio lusso, sneakers designer, prodotti autentici, garanzia',
+    seoDashboardTitle: 'Il Mio Cruscotto - Tracciamento Ordini | Luxio Market',
+    seoDashboardDescription: 'Traccia i tuoi ordini, gestisci il tuo account e consulta la cronologia degli acquisti su Luxio Market.',
+    seoCartTitle: 'Carrello - Verifica il Tuo Ordine | Luxio Market',
+    seoCartDescription: 'Consulta il tuo carrello e procedi al pagamento sicuro. Spedizione gratuita su tutti gli ordini.',
+    seoPaymentTitle: 'Pagamento Sicuro - Completa il Tuo Ordine | Luxio Market',
+    seoPaymentDescription: 'Completa il tuo ordine in sicurezza con pagamento crypto, bonifico bancario o carte prepagate. Tutte le transazioni sono crittografate e sicure.',
+    seoOgSiteName: 'Luxio Market',
+    seoImageAltLogo: 'Luxio Market - Prodotti tech premium',
+    seoImageAltProduct: 'Prodotto premium a prezzo scontato',
+    seoImageAltSmartphone: 'Smartphone di ultima generazione',
+    seoImageAltWatch: 'Smartwatch premium',
+    seoImageAltSneaker: 'Sneakers premium di design',
+    seoImageAltGadget: 'Gadget per casa intelligente'
   },
   
   hu: {
@@ -4260,7 +4407,28 @@ export const translations: Record<Language, Translations> = {
         text: 'A legjobb online vásárlási élményem. A weboldal könnyen navigálható és a fizetés gyors és biztonságos volt.',
         verified: true
       }
-    ]
+    ],
+    
+    // SEO Meta Tags
+    seoHomeTitle: 'Luxio Market - Okostelefonok, Órák, Prémium Cipők | Akár 37% Kedvezmény',
+    seoHomeDescription: 'Fedezze fel a legújabb okostelefonokat, okosórákat, prémium cipőket és high-tech kütyüket akár 37% kedvezménnyel. Ingyenes szállítás, biztonságos fizetés crypto-val és bankkártyával.',
+    seoHomeKeywords: 'okostelefon, okosóra, cipők, kütyük, high-tech, iPhone, Samsung, luxus, prémium, kedvezmény',
+    seoPremiumTitle: 'Prémium Termékek - Okostelefonok, Órák, Cipők | Luxio Market',
+    seoPremiumDescription: 'Fedezze fel exkluzív prémium okostelefonok, luxus órák és designer cipők kollekcióját. Hiteles termékek gyártói garanciával és gyors szállítással.',
+    seoPremiumKeywords: 'prémium okostelefon, luxus óra, designer cipők, hiteles termékek, garancia',
+    seoDashboardTitle: 'Irányítópult - Rendelések Nyomon Követése | Luxio Market',
+    seoDashboardDescription: 'Kövesse nyomon rendeléseit, kezelje fiókját és tekintse meg vásárlási előzményeit a Luxio Market-en.',
+    seoCartTitle: 'Kosár - Ellenőrizze Rendelését | Luxio Market',
+    seoCartDescription: 'Tekintse meg kosarát és lépjen tovább a biztonságos fizetéshez. Ingyenes szállítás minden rendelésnél.',
+    seoPaymentTitle: 'Biztonságos Fizetés - Végezze El Rendelését | Luxio Market',
+    seoPaymentDescription: 'Végezze el rendelését biztonságosan crypto fizetéssel, banki átutalással vagy előre fizetett kártyákkal. Minden tranzakció titkosított és biztonságos.',
+    seoOgSiteName: 'Luxio Market',
+    seoImageAltLogo: 'Luxio Market - Prémium tech termékek',
+    seoImageAltProduct: 'Prémium termék kedvezményes áron',
+    seoImageAltSmartphone: 'Legújabb generációs okostelefon',
+    seoImageAltWatch: 'Prémium okosóra',
+    seoImageAltSneaker: 'Designer prémium cipők',
+    seoImageAltGadget: 'Okos otthon kütyü'
   }
 };
 
