@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import healthHandler from '../api/health';
 import usersHandler from '../api/users';
-import signupHandler from '../api/auth/signup-memstorage';
+import signupHandler from '../api/auth/signup';
 import loginHandler from '../api/auth/login';
 import meHandler from '../api/auth/me';
 import logoutHandler from '../api/auth/logout';
