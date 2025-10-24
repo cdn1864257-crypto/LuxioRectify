@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'wouter';
 import { useCart } from '@/contexts/CartContext';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SEO } from '@/components/SEO';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CartSidebar } from '@/components/CartSidebar';
@@ -23,6 +24,7 @@ export default function Cart() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <SEO page="cart" />
       <Header onToggleCart={() => setCartOpen(!cartOpen)} />
       
       <main className="flex-1 py-8">

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'wouter';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
 import { getApiUrl } from '@/lib/config';
+import { SEO } from '@/components/SEO';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CartSidebar } from '@/components/CartSidebar';
@@ -293,6 +294,7 @@ export default function Payment() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <SEO page="payment" />
       <Header onToggleCart={() => setCartOpen(!cartOpen)} />
       
       <main className="flex-1 py-12">

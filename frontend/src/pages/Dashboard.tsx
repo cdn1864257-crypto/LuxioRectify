@@ -1,6 +1,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { getApiUrl } from '@/lib/config';
+import { SEO } from '@/components/SEO';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
@@ -344,6 +345,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <SEO page="dashboard" />
       <Header onToggleCart={() => setCartOpen(!cartOpen)} />
       
       <main className="flex-1 py-8">

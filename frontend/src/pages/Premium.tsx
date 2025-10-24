@@ -8,6 +8,7 @@ import { Footer } from '../components/Footer';
 import { CartSidebar } from '../components/CartSidebar';
 import { CheckoutModal } from '../components/CheckoutModal';
 import { showToast } from '../components/ToastNotifications';
+import { SEO } from '../components/SEO';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
@@ -255,6 +256,7 @@ export default function Premium() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO page="premium" />
       <Header 
         onToggleCart={() => setCartOpen(!cartOpen)} 
       />
