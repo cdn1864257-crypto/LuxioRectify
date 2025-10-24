@@ -1,41 +1,84 @@
 import { Helmet } from 'react-helmet-async';
+import { useLanguage } from '@/contexts/LanguageContext';
+import type { Language } from '@/lib/translations';
 
 interface SEOProps {
   title?: string;
   description?: string;
   keywords?: string;
-  canonicalUrl?: string;
+  page?: 'home' | 'premium' | 'dashboard' | 'cart' | 'payment';
   ogImage?: string;
   noindex?: boolean;
 }
 
+const SITE_URL = 'https://luxios.vercel.app';
+
+const languageLocales: Record<Language, string> = {
+  en: 'en_US',
+  fr: 'fr_FR',
+  es: 'es_ES',
+  pt: 'pt_PT',
+  pl: 'pl_PL',
+  it: 'it_IT',
+  hu: 'hu_HU',
+};
+
 export function SEO({
-  title = 'Luxio Market - Smartphones, Montres, Sneakers Premium | Jusqu\'à 37% de Réduction',
-  description = 'Découvrez les derniers smartphones, montres connectées, sneakers premium et gadgets high-tech avec jusqu\'à 37% de réduction. Livraison gratuite, paiement sécurisé crypto et carte bancaire.',
-  keywords = 'smartphone, montre connectée, sneakers, gadgets, high-tech, iPhone, Samsung, luxe, premium, réduction',
-  canonicalUrl = 'https://www.luxiomarket.shop/',
-  ogImage = 'https://www.luxiomarket.shop/og-image.jpg',
+  title,
+  description,
+  keywords,
+  page = 'home',
+  ogImage = `${SITE_URL}/og-image.jpg`,
   noindex = false,
 }: SEOProps) {
+  const { language, t } = useLanguage();
+  
+  const seoTitle = title || t(`seo${page.charAt(0).toUpperCase() + page.slice(1)}Title` as any);
+  const seoDescription = description || t(`seo${page.charAt(0).toUpperCase() + page.slice(1)}Description` as any);
+  const seoKeywords = keywords || t(`seo${page.charAt(0).toUpperCase() + page.slice(1)}Keywords` as any);
+  
+  const canonicalUrl = `${SITE_URL}/${language}${page === 'home' ? '' : `/${page}`}`;
+  const siteName = t('seoOgSiteName');
+  
   const robotsContent = noindex 
     ? 'noindex, nofollow' 
     : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
 
+  const languages: Language[] = ['en', 'fr', 'es', 'pt', 'pl', 'it', 'hu'];
+
   return (
     <Helmet>
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      <meta name="keywords" content={keywords} />
+      <html lang={language} />
+      <title>{seoTitle}</title>
+      <meta name="description" content={seoDescription} />
+      <meta name="keywords" content={seoKeywords} />
       <meta name="robots" content={robotsContent} />
       <link rel="canonical" href={canonicalUrl} />
       
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
+      {languages.map((lang) => (
+        <link
+          key={lang}
+          rel="alternate"
+          hrefLang={lang}
+          href={`${SITE_URL}/${lang}${page === 'home' ? '' : `/${page}`}`}
+        />
+      ))}
+      <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}/en${page === 'home' ? '' : `/${page}`}`} />
+      
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content={siteName} />
+      <meta property="og:title" content={seoTitle} />
+      <meta property="og:description" content={seoDescription} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:image" content={ogImage} />
+      <meta property="og:locale" content={languageLocales[language]} />
+      {languages.filter(lang => lang !== language).map((lang) => (
+        <meta key={lang} property="og:locale:alternate" content={languageLocales[lang]} />
+      ))}
       
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={seoTitle} />
+      <meta name="twitter:description" content={seoDescription} />
       <meta name="twitter:image" content={ogImage} />
     </Helmet>
   );
