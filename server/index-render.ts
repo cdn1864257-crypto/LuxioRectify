@@ -23,6 +23,7 @@ import nowpaymentsInitHandler from '../api/payment/nowpayments-init.js';
 import nowpaymentsWebhookHandler from '../api/payment/nowpayments-webhook.js';
 import ordersHandler from '../api/orders.js';
 import deleteOrderHandler from '../api/orders/[orderId].js';
+import { getErrorMessage, getLanguageFromRequest } from './utils/multilingual-messages.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -39,11 +40,24 @@ app.use((req, res, next) => {
   const origin = req.headers.origin;
   const isProduction = process.env.NODE_ENV === 'production';
   
-  // En production: autoriser UNIQUEMENT le frontend Vercel
-  // En développement: autoriser aussi localhost pour les tests
+  // Production: autoriser les 3 domaines principaux de Luxio Market
+  // Développement: autoriser aussi localhost pour les tests
+  const productionOrigins = [
+    'https://luxiomarket.shop',
+    'https://www.luxiomarket.shop',
+    'https://luxios.vercel.app'
+  ];
+  
+  const developmentOrigins = [
+    'http://localhost:5000',
+    'http://localhost:3000',
+    'http://127.0.0.1:5000',
+    'http://127.0.0.1:3000'
+  ];
+  
   const allowedOrigins = isProduction 
-    ? [FRONTEND_URL]
-    : [FRONTEND_URL, 'http://localhost:5000', 'http://localhost:3000', 'http://127.0.0.1:5000', 'http://127.0.0.1:3000'];
+    ? productionOrigins
+    : [...productionOrigins, ...developmentOrigins];
   
   // Gérer le cas spécial où FRONTEND_URL vaut '*' (autoriser toutes les origines)
   const allowAllOrigins = FRONTEND_URL === '*';
@@ -53,7 +67,7 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Credentials', 'true');
   }
   
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie, X-CSRF-Token');
   
   // Traiter les requêtes preflight OPTIONS immédiatement
@@ -153,7 +167,14 @@ app.use((req, res, next) => {
 const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limite à 100 requêtes par IP
-  message: 'Trop de requêtes, veuillez réessayer plus tard.',
+  handler: (req, res) => {
+    const lang = getLanguageFromRequest(req);
+    res.status(429).json({
+      success: false,
+      error: 'TOO_MANY_REQUESTS',
+      message: getErrorMessage('TOO_MANY_REQUESTS', lang)
+    });
+  },
   standardHeaders: true,
   legacyHeaders: false,
 });
@@ -162,7 +183,14 @@ const generalLimiter = rateLimit({
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 60 * 1000, // 15 minutes
   max: 5, // Limite à 5 tentatives
-  message: 'Trop de tentatives de connexion, veuillez réessayer dans 15 minutes.',
+  handler: (req, res) => {
+    const lang = getLanguageFromRequest(req);
+    res.status(429).json({
+      success: false,
+      error: 'TOO_MANY_LOGIN_ATTEMPTS',
+      message: getErrorMessage('TOO_MANY_LOGIN_ATTEMPTS', lang)
+    });
+  },
   skipSuccessfulRequests: true,
 });
 
@@ -287,29 +315,36 @@ app.get('/', (req, res) => {
 
 // 404 Handler - Catch all unmatched routes and return JSON instead of HTML
 app.use((req, res) => {
+  const lang = getLanguageFromRequest(req);
   res.status(404).json({ 
-    error: 'Route not found',
+    success: false,
+    error: 'ROUTE_NOT_FOUND',
+    message: getErrorMessage('ROUTE_NOT_FOUND', lang),
     path: req.path,
-    message: `The endpoint ${req.method} ${req.path} does not exist`
+    method: req.method
   });
 });
 
 // Global Error Handler - Ensure all errors return JSON, not HTML
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error('Global error handler:', err);
+  const lang = getLanguageFromRequest(req);
   
   // CSRF token errors
   if (err.code === 'EBADCSRFTOKEN') {
     return res.status(403).json({
-      error: 'Invalid CSRF token',
-      message: 'Session invalide ou token CSRF manquant/incorrect'
+      success: false,
+      error: 'CSRF_INVALID',
+      message: getErrorMessage('CSRF_INVALID', lang)
     });
   }
   
   // Default error response
   const statusCode = err.statusCode || err.status || 500;
   res.status(statusCode).json({
-    error: err.message || 'Internal server error',
+    success: false,
+    error: err.message || 'INTERNAL_SERVER_ERROR',
+    message: err.message || getErrorMessage('INTERNAL_SERVER_ERROR', lang),
     details: process.env.NODE_ENV === 'development' ? err.stack : undefined
   });
 });

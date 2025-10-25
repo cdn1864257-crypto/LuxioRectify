@@ -2,6 +2,7 @@ import { MongoClient } from 'mongodb';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { serialize } from 'cookie';
+import { getErrorMessage, getLanguageFromRequest } from '../../server/utils/multilingual-messages.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -57,14 +58,24 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       user = await usersCollection.findOne({ email: email.toLowerCase() });
       
       if (!user) {
-        return res.status(401).json({ error: 'INVALID_CREDENTIALS', errorCode: 'INVALID_CREDENTIALS' });
+        const lang = getLanguageFromRequest(req);
+        return res.status(401).json({ 
+          success: false,
+          error: 'INVALID_CREDENTIALS',
+          message: getErrorMessage('INVALID_CREDENTIALS', lang)
+        });
       }
 
       // Vérifier le mot de passe
       const isPasswordValid = await bcrypt.compare(password, user.password);
       
       if (!isPasswordValid) {
-        return res.status(401).json({ error: 'INVALID_CREDENTIALS', errorCode: 'INVALID_CREDENTIALS' });
+        const lang = getLanguageFromRequest(req);
+        return res.status(401).json({ 
+          success: false,
+          error: 'INVALID_CREDENTIALS',
+          message: getErrorMessage('INVALID_CREDENTIALS', lang)
+        });
       }
     } finally {
       await client.close();

@@ -1,6 +1,7 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import jwt from 'jsonwebtoken';
 import { parse } from 'cookie';
+import { getErrorMessage, getLanguageFromRequest } from '../../server/utils/multilingual-messages.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -49,7 +50,12 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     if (!token) {
-      return res.status(401).json({ error: 'Non authentifié - Token manquant' });
+      const lang = getLanguageFromRequest(req);
+      return res.status(401).json({ 
+        success: false,
+        error: 'TOKEN_MISSING',
+        message: getErrorMessage('TOKEN_MISSING', lang)
+      });
     }
 
     // Vérifier le JWT
@@ -62,7 +68,12 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     try {
       decoded = jwt.verify(token, jwtSecret) as JWTPayload;
     } catch (error) {
-      return res.status(401).json({ error: 'Token invalide ou expiré' });
+      const lang = getLanguageFromRequest(req);
+      return res.status(401).json({ 
+        success: false,
+        error: 'TOKEN_INVALID',
+        message: getErrorMessage('TOKEN_INVALID', lang)
+      });
     }
 
     // Connexion à MongoDB
