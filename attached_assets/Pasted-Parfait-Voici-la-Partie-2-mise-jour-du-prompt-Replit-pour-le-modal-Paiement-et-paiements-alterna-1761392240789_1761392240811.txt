@@ -1,0 +1,92 @@
+Parfait ! Voici la Partie 2 mise à jour du prompt Replit pour le modal Paiement et paiements alternatifs, avec le message email professionnel, cliquable et multilingue :
+
+
+---
+
+🔹 Partie 2 — Modal Paiement et Paiements Alternatifs (Mise à jour)
+
+4️⃣ Modal Paiement — Virement bancaire
+
+Corriger le centrage et les dimensions du modal, en mode responsive (desktop et mobile).
+
+Conserver les couleurs, styles et actions existants.
+
+Ne pas toucher NOWPayments.
+
+
+
+---
+
+5️⃣ Paiements alternatifs
+
+Sur la page Paiement, proposer les options :
+
+PayPal
+
+Western Union
+
+MoneyGram
+
+Ria
+
+
+Pour chacune : Afficher un message multilingue et cliquable :
+
+
+Exemple :
+
+FR : « Pour utiliser ce moyen de paiement, veuillez contacter notre service client à : infos@luxiomarket.shop. Nous vous répondrons rapidement. »
+
+EN : « To use this payment method, please contact our customer service at: infos@luxiomarket.shop. We will respond promptly. »
+
+Autres langues : traduire le message correctement.
+
+Aucune intégration directe nécessaire pour ces paiements.
+
+
+
+---
+
+6️⃣ Tâches techniques Replit
+
+Scanner le code pour le modal paiement et la page Paiement.
+
+Corriger le style et props pour le modal virement bancaire.
+
+Ajouter les sections pour les paiements alternatifs avec message email cliquable et multilingue.
+
+Tester l’affichage sur toutes les pages et langues.
+
+Générer un rapport partiel UX_PAYMENT_REPORT.md listant :
+
+Fichiers modifiés
+
+Modal virement bancaire corrigé
+
+Paiements alternatifs ajoutés avec message email multilingue
+
+Résultat des tests (responsive, multilingue)
+
+
+
+
+---
+
+✅ RÉSULTAT ATTENDU
+
+Modal virement bancaire centré et responsive, couleurs et actions conservées.
+
+Paiements alternatifs visibles avec message email cliquable et multilingue.
+
+Aucun conflit avec NOWPayments.
+
+Rapport clair et complet des modifications.
+
+
+
+---
+
+Si tu veux, je peux maintenant préparer le prompt Replit pour intégrer un Chatbot IA multilingue, directement compatible avec ton frontend sur Vercel et backend sur Render, multilingue et sécurisé.
+
+Veux‑tu que je fasse ce prompt Chatbot maintenant ?
+

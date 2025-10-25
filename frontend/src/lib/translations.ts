@@ -99,6 +99,14 @@ export interface Translations {
   removeTicketCode: string;
   sendTicketCodes: string;
   
+  // Alternative Payment Methods
+  alternativePaymentMethods: string;
+  paypal: string;
+  westernUnion: string;
+  moneyGram: string;
+  ria: string;
+  alternativePaymentMessage: string;
+  
   // Order Confirmation
   paymentInstructions: string;
   orderReceived: string;
@@ -567,6 +575,14 @@ export const translations: Record<Language, Translations> = {
     addTicketCode: 'Add Ticket Code',
     removeTicketCode: 'Remove Code',
     sendTicketCodes: 'Send Ticket Codes',
+    
+    // Alternative Payment Methods
+    alternativePaymentMethods: 'Alternative Payment Methods',
+    paypal: 'PayPal',
+    westernUnion: 'Western Union',
+    moneyGram: 'MoneyGram',
+    ria: 'Ria',
+    alternativePaymentMessage: 'To use this payment method, please contact our customer service at: infos@luxiomarket.shop. We will respond promptly.',
     
     // Order Confirmation
     paymentInstructions: 'After receiving payment, you will receive an email confirmation. Your order will be delivered within 24-48 hours.',
@@ -1142,6 +1158,14 @@ export const translations: Record<Language, Translations> = {
     removeTicketCode: 'Supprimer le code',
     sendTicketCodes: 'Envoyer les codes',
     
+    // Alternative Payment Methods
+    alternativePaymentMethods: 'Moyens de paiement alternatifs',
+    paypal: 'PayPal',
+    westernUnion: 'Western Union',
+    moneyGram: 'MoneyGram',
+    ria: 'Ria',
+    alternativePaymentMessage: 'Pour utiliser ce moyen de paiement, veuillez contacter notre service client à : infos@luxiomarket.shop. Nous vous répondrons rapidement.',
+    
     // Order Confirmation
     paymentInstructions: 'Après réception du paiement, vous recevrez une confirmation par email. Votre commande sera livrée sous 24-48 h.',
     orderReceived: 'Commande reçue',
@@ -1715,6 +1739,14 @@ export const translations: Record<Language, Translations> = {
     addTicketCode: 'Añadir código',
     removeTicketCode: 'Eliminar código',
     sendTicketCodes: 'Enviar códigos',
+    
+    // Alternative Payment Methods
+    alternativePaymentMethods: 'Métodos de pago alternativos',
+    paypal: 'PayPal',
+    westernUnion: 'Western Union',
+    moneyGram: 'MoneyGram',
+    ria: 'Ria',
+    alternativePaymentMessage: 'Para utilizar este método de pago, por favor contacte a nuestro servicio de atención al cliente en: infos@luxiomarket.shop. Le responderemos rápidamente.',
     
     // Order Confirmation
     paymentInstructions: 'Después de recibir el pago, recibirás una confirmación por email. Tu pedido será entregado en 24-48 horas.',
@@ -2290,6 +2322,14 @@ export const translations: Record<Language, Translations> = {
     removeTicketCode: 'Remover código',
     sendTicketCodes: 'Enviar códigos',
     
+    // Alternative Payment Methods
+    alternativePaymentMethods: 'Métodos de pagamento alternativos',
+    paypal: 'PayPal',
+    westernUnion: 'Western Union',
+    moneyGram: 'MoneyGram',
+    ria: 'Ria',
+    alternativePaymentMessage: 'Para utilizar este método de pagamento, por favor contacte o nosso serviço de apoio ao cliente em: infos@luxiomarket.shop. Responderemos rapidamente.',
+    
     // Order Confirmation
     paymentInstructions: 'Após receber o pagamento, receberá uma confirmação por email. O seu pedido será entregue em 24-48 horas.',
     orderReceived: 'Pedido recebido',
@@ -2863,6 +2903,14 @@ export const translations: Record<Language, Translations> = {
     addTicketCode: 'Dodaj kod',
     removeTicketCode: 'Usuń kod',
     sendTicketCodes: 'Wyślij kody',
+    
+    // Alternative Payment Methods
+    alternativePaymentMethods: 'Alternatywne metody płatności',
+    paypal: 'PayPal',
+    westernUnion: 'Western Union',
+    moneyGram: 'MoneyGram',
+    ria: 'Ria',
+    alternativePaymentMessage: 'Aby skorzystać z tej metody płatności, skontaktuj się z naszą obsługą klienta pod adresem: infos@luxiomarket.shop. Odpowiemy szybko.',
     
     // Order Confirmation
     paymentInstructions: 'Po otrzymaniu płatności otrzymasz potwierdzenie przez email. Twoje zamówienie zostanie dostarczone w ciągu 24-48 godzin.',
@@ -3438,6 +3486,14 @@ export const translations: Record<Language, Translations> = {
     removeTicketCode: 'Rimuovi codice',
     sendTicketCodes: 'Invia codici',
     
+    // Alternative Payment Methods
+    alternativePaymentMethods: 'Metodi di pagamento alternativi',
+    paypal: 'PayPal',
+    westernUnion: 'Western Union',
+    moneyGram: 'MoneyGram',
+    ria: 'Ria',
+    alternativePaymentMessage: 'Per utilizzare questo metodo di pagamento, contatta il nostro servizio clienti a: infos@luxiomarket.shop. Risponderemo prontamente.',
+    
     // Order Confirmation
     paymentInstructions: 'Dopo aver ricevuto il pagamento, riceverai una conferma via email. Il tuo ordine sarà consegnato entro 24-48 ore.',
     orderReceived: 'Ordine ricevuto',
@@ -4011,6 +4067,14 @@ export const translations: Record<Language, Translations> = {
     addTicketCode: 'Kód hozzáadása',
     removeTicketCode: 'Kód eltávolítása',
     sendTicketCodes: 'Kódok küldése',
+    
+    // Alternative Payment Methods
+    alternativePaymentMethods: 'Alternatív fizetési módok',
+    paypal: 'PayPal',
+    westernUnion: 'Western Union',
+    moneyGram: 'MoneyGram',
+    ria: 'Ria',
+    alternativePaymentMessage: 'A fizetési mód használatához kérjük, lépjen kapcsolatba ügyfélszolgálatunkkal: infos@luxiomarket.shop. Gyorsan válaszolunk.',
     
     // Order Confirmation
     paymentInstructions: 'A fizetés kézhezvétele után e-mail megerősítést kap. Rendelését 24-48 órán belül kiszállítjuk.',

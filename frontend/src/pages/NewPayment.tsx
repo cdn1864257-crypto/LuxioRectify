@@ -13,7 +13,7 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, ShoppingBag, CreditCard, Building2, Ticket, Zap, X, Copy, Check } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, CreditCard, Building2, Ticket, Zap, X, Copy, Check, DollarSign } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/lib/translations';
 
@@ -433,6 +433,37 @@ export default function NewPayment() {
                 </div>
               </RadioGroup>
 
+              <div className="p-4 border rounded-lg bg-accent/50">
+                <h3 className="text-base font-semibold mb-3 flex items-center gap-2">
+                  <DollarSign className="h-5 w-5 text-primary" />
+                  {t.alternativePaymentMethods}
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {[
+                    { name: t.paypal, icon: '💳' },
+                    { name: t.westernUnion, icon: '💰' },
+                    { name: t.moneyGram, icon: '💵' },
+                    { name: t.ria, icon: '🏦' }
+                  ].map((method) => (
+                    <button
+                      key={method.name}
+                      type="button"
+                      className="p-3 border rounded-lg bg-background hover:bg-accent transition-colors text-center"
+                      onClick={() => {
+                        window.location.href = 'mailto:infos@luxiomarket.shop?subject=' + encodeURIComponent(`Payment via ${method.name}`);
+                      }}
+                      data-testid={`button-${method.name.toLowerCase().replace(/\s+/g, '-')}`}
+                    >
+                      <div className="text-2xl mb-1">{method.icon}</div>
+                      <div className="text-xs font-medium">{method.name}</div>
+                    </button>
+                  ))}
+                </div>
+                <p className="text-xs sm:text-sm text-muted-foreground mt-3 text-center">
+                  {t.alternativePaymentMessage}
+                </p>
+              </div>
+
               {paymentMethod === 'pcs-transcash' && (
                 <div className="space-y-4 p-4 bg-accent rounded-lg">
                   <div className="space-y-2">
@@ -534,13 +565,13 @@ export default function NewPayment() {
       </main>
 
       <Dialog open={showBankConfirmModal} onOpenChange={setShowBankConfirmModal}>
-        <DialogContent className="w-[90%] sm:w-[96%] md:max-w-lg" data-testid="dialog-bank-confirm">
+        <DialogContent className="w-[95vw] max-w-[95vw] sm:w-[90vw] sm:max-w-[90vw] md:w-full md:max-w-lg mx-auto" data-testid="dialog-bank-confirm">
           <DialogHeader>
             <div className="flex justify-center mb-4">
-              <div className="text-3xl font-bold text-primary">Luxio</div>
+              <div className="text-2xl sm:text-3xl font-bold text-primary">Luxio</div>
             </div>
-            <DialogTitle className="text-center">{t.bankTransferTitle}</DialogTitle>
-            <DialogDescription className="text-center">
+            <DialogTitle className="text-center text-lg sm:text-xl">{t.bankTransferTitle}</DialogTitle>
+            <DialogDescription className="text-center text-sm sm:text-base">
               {t.verifyTransferDetails}
             </DialogDescription>
           </DialogHeader>
@@ -627,13 +658,13 @@ export default function NewPayment() {
           navigate('/dashboard');
         }
       }}>
-        <DialogContent className="w-[90%] sm:w-[96%] md:max-w-lg" data-testid="dialog-bank-transfer">
+        <DialogContent className="w-[95vw] max-w-[95vw] sm:w-[90vw] sm:max-w-[90vw] md:w-full md:max-w-lg mx-auto" data-testid="dialog-bank-transfer">
           <DialogHeader>
             <div className="flex justify-center mb-4">
-              <div className="text-3xl font-bold text-primary">Luxio</div>
+              <div className="text-2xl sm:text-3xl font-bold text-primary">Luxio</div>
             </div>
-            <DialogTitle className="text-center">{t.bankTransferTitle}</DialogTitle>
-            <DialogDescription className="text-center">
+            <DialogTitle className="text-center text-lg sm:text-xl">{t.bankTransferTitle}</DialogTitle>
+            <DialogDescription className="text-center text-sm sm:text-base">
               {t.transferInstructions}
             </DialogDescription>
           </DialogHeader>
