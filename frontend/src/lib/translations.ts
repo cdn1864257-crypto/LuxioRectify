@@ -98,8 +98,11 @@ export interface Translations {
   addTicketCode: string;
   removeTicketCode: string;
   sendTicketCodes: string;
+  dataProtection: string;
+  verifiedPayment: string;
   
   // Alternative Payment Methods
+  mainPaymentMethod: string;
   alternativePaymentMethods: string;
   paypal: string;
   westernUnion: string;
@@ -587,8 +590,11 @@ export const translations: Record<Language, Translations> = {
     addTicketCode: 'Add Ticket Code',
     removeTicketCode: 'Remove Code',
     sendTicketCodes: 'Send Ticket Codes',
+    dataProtection: 'Data Protection',
+    verifiedPayment: 'Verified Payment',
     
     // Alternative Payment Methods
+    mainPaymentMethod: 'Main Payment Method',
     alternativePaymentMethods: 'Alternative Payment Methods',
     paypal: 'PayPal',
     westernUnion: 'Western Union',
@@ -1181,8 +1187,11 @@ export const translations: Record<Language, Translations> = {
     addTicketCode: 'Ajouter un code',
     removeTicketCode: 'Supprimer le code',
     sendTicketCodes: 'Envoyer les codes',
+    dataProtection: 'Données Protégées',
+    verifiedPayment: 'Paiement Vérifié',
     
     // Alternative Payment Methods
+    mainPaymentMethod: 'Méthode de paiement principale',
     alternativePaymentMethods: 'Moyens de paiement alternatifs',
     paypal: 'PayPal',
     westernUnion: 'Western Union',
@@ -1775,8 +1784,11 @@ export const translations: Record<Language, Translations> = {
     addTicketCode: 'Añadir código',
     removeTicketCode: 'Eliminar código',
     sendTicketCodes: 'Enviar códigos',
+    dataProtection: 'Protección de Datos',
+    verifiedPayment: 'Pago Verificado',
     
     // Alternative Payment Methods
+    mainPaymentMethod: 'Método de pago principal',
     alternativePaymentMethods: 'Métodos de pago alternativos',
     paypal: 'PayPal',
     westernUnion: 'Western Union',
@@ -2369,8 +2381,11 @@ export const translations: Record<Language, Translations> = {
     addTicketCode: 'Adicionar código',
     removeTicketCode: 'Remover código',
     sendTicketCodes: 'Enviar códigos',
+    dataProtection: 'Proteção de Dados',
+    verifiedPayment: 'Pagamento Verificado',
     
     // Alternative Payment Methods
+    mainPaymentMethod: 'Método de pagamento principal',
     alternativePaymentMethods: 'Métodos de pagamento alternativos',
     paypal: 'PayPal',
     westernUnion: 'Western Union',
@@ -2963,8 +2978,11 @@ export const translations: Record<Language, Translations> = {
     addTicketCode: 'Dodaj kod',
     removeTicketCode: 'Usuń kod',
     sendTicketCodes: 'Wyślij kody',
+    dataProtection: 'Ochrona Danych',
+    verifiedPayment: 'Zweryfikowana Płatność',
     
     // Alternative Payment Methods
+    mainPaymentMethod: 'Główna metoda płatności',
     alternativePaymentMethods: 'Alternatywne metody płatności',
     paypal: 'PayPal',
     westernUnion: 'Western Union',
@@ -3557,8 +3575,11 @@ export const translations: Record<Language, Translations> = {
     addTicketCode: 'Aggiungi codice',
     removeTicketCode: 'Rimuovi codice',
     sendTicketCodes: 'Invia codici',
+    dataProtection: 'Protezione Dati',
+    verifiedPayment: 'Pagamento Verificato',
     
     // Alternative Payment Methods
+    mainPaymentMethod: 'Metodo di pagamento principale',
     alternativePaymentMethods: 'Metodi di pagamento alternativi',
     paypal: 'PayPal',
     westernUnion: 'Western Union',
@@ -4151,8 +4172,11 @@ export const translations: Record<Language, Translations> = {
     addTicketCode: 'Kód hozzáadása',
     removeTicketCode: 'Kód eltávolítása',
     sendTicketCodes: 'Kódok küldése',
+    dataProtection: 'Adatvédelem',
+    verifiedPayment: 'Ellenőrzött Fizetés',
     
     // Alternative Payment Methods
+    mainPaymentMethod: 'Fő fizetési mód',
     alternativePaymentMethods: 'Alternatív fizetési módok',
     paypal: 'PayPal',
     westernUnion: 'Western Union',

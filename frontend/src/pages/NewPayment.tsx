@@ -307,47 +307,67 @@ export default function NewPayment() {
                 </div>
               </div>
 
-              <div className="p-4 border rounded-lg bg-accent/50">
-                <h3 className="text-base font-semibold mb-3 flex items-center gap-2">
-                  <DollarSign className="h-5 w-5 text-primary" />
-                  {t.alternativePaymentMethods}
-                </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+              <div className="space-y-6">
+                {/* Main Payment Method - Bank Transfer */}
+                <div className="p-4 border-2 border-primary rounded-lg bg-accent/50">
+                  <h3 className="text-base font-semibold mb-3 flex items-center gap-2">
+                    <Building2 className="h-5 w-5 text-primary" />
+                    {t.mainPaymentMethod || 'Main Payment Method'}
+                  </h3>
                   <button
                     type="button"
-                    className="p-3 border-2 border-primary rounded-lg bg-background hover:bg-accent transition-colors text-center"
+                    className="w-full p-4 border-2 border-primary rounded-lg bg-background hover:bg-accent transition-colors"
                     onClick={handleBankTransferClick}
                     data-testid="button-bank-transfer"
                   >
-                    <div className="text-2xl mb-1"><Building2 className="h-6 w-6 mx-auto text-primary" /></div>
-                    <div className="text-xs font-medium">{t.bankTransfer}</div>
+                    <div className="flex items-center justify-center gap-3">
+                      <Building2 className="h-8 w-8 text-primary" />
+                      <div className="text-left">
+                        <div className="font-semibold text-lg">{t.bankTransfer}</div>
+                        <div className="text-sm text-muted-foreground">{t.bankTransferDescription}</div>
+                      </div>
+                    </div>
                   </button>
-                  {[
-                    { name: 'PayPal', icon: '💳', key: 'paypal' },
-                    { name: 'Worldremit', icon: '🌍', key: 'worldremit' },
-                    { name: 'Wise', icon: '💚', key: 'wise' },
-                    { name: 'Binance', icon: '🟡', key: 'binance' },
-                    { name: 'Western Union', icon: '💰', key: 'western-union' },
-                    { name: 'MoneyGram', icon: '💵', key: 'moneygram' },
-                    { name: 'Ria', icon: '🏦', key: 'ria' }
-                  ].map((method) => (
-                    <button
-                      key={method.key}
-                      type="button"
-                      className="p-3 border rounded-lg bg-background hover:bg-accent transition-colors text-center"
-                      onClick={() => {
-                        window.location.href = 'mailto:infos@luxiomarket.shop?subject=' + encodeURIComponent(`Payment via ${method.name}`);
-                      }}
-                      data-testid={`button-${method.key}`}
-                    >
-                      <div className="text-2xl mb-1">{method.icon}</div>
-                      <div className="text-xs font-medium">{method.name}</div>
-                    </button>
-                  ))}
                 </div>
-                <p className="text-xs sm:text-sm text-muted-foreground text-center">
-                  {t.alternativePaymentMessage}
-                </p>
+
+                {/* Alternative Payment Methods */}
+                <div className="p-4 border rounded-lg bg-accent/30">
+                  <h3 className="text-base font-semibold mb-3 flex items-center gap-2">
+                    <DollarSign className="h-5 w-5 text-primary" />
+                    {t.alternativePaymentMethods}
+                  </h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+                    {[
+                      { name: 'PayPal', icon: '💳', key: 'paypal' },
+                      { name: 'Worldremit', icon: '🌍', key: 'worldremit' },
+                      { name: 'Wise', icon: '💚', key: 'wise' },
+                      { name: 'Binance', icon: '🟡', key: 'binance' },
+                      { name: 'Western Union', icon: '💰', key: 'western-union' },
+                      { name: 'MoneyGram', icon: '💵', key: 'moneygram' },
+                      { name: 'Ria', icon: '🏦', key: 'ria' },
+                      { name: 'Transcash', icon: '🎫', key: 'transcash' },
+                      { name: 'PCS', icon: '💎', key: 'pcs' }
+                    ].map((method) => (
+                      <button
+                        key={method.key}
+                        type="button"
+                        className="p-3 border rounded-lg bg-background hover:bg-accent transition-colors text-center"
+                        onClick={() => {
+                          window.location.href = 'mailto:infos@luxiomarket.shop?subject=' + encodeURIComponent(`Payment via ${method.name}`);
+                        }}
+                        data-testid={`button-${method.key}`}
+                      >
+                        <div className="text-2xl mb-1">{method.icon}</div>
+                        <div className="text-xs font-medium">{method.name}</div>
+                      </button>
+                    ))}
+                  </div>
+                  <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 p-3 rounded-lg">
+                    <p className="text-xs sm:text-sm text-blue-800 dark:text-blue-200 text-center font-medium">
+                      📧 {t.alternativePaymentMessage}
+                    </p>
+                  </div>
+                </div>
               </div>
 
 
