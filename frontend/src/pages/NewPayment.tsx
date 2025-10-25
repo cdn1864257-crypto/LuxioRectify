@@ -52,8 +52,8 @@ export default function NewPayment() {
         clearCart();
       }
       toast({
-        title: "Paiement réussi !",
-        description: orderRef ? `Commande ${orderRef} confirmée` : "Votre commande a été confirmée",
+        title: t.paymentSuccessTitle,
+        description: orderRef ? `${t.orderConfirmed} ${orderRef}` : t.paymentSuccessDescription,
       });
       setTimeout(() => navigate('/dashboard'), 3000);
       return;
@@ -62,8 +62,8 @@ export default function NewPayment() {
     // If returning from NowPayments with cancellation
     if (paymentCancelled) {
       toast({
-        title: "Paiement annulé",
-        description: "Le paiement a été annulé. Votre panier est toujours disponible.",
+        title: t.paymentCancelledTitle,
+        description: t.paymentCancelledDescription,
         variant: "destructive",
       });
       return;
@@ -72,8 +72,8 @@ export default function NewPayment() {
     // If returning from NowPayments with pending status
     if (paymentPending) {
       toast({
-        title: "Paiement en attente",
-        description: "Votre paiement est en cours de traitement. Vous recevrez une confirmation par email.",
+        title: t.paymentPendingTitle,
+        description: t.paymentPendingDescription,
       });
       return;
     }
@@ -82,7 +82,7 @@ export default function NewPayment() {
     if (paymentError) {
       toast({
         title: t.error,
-        description: "Une erreur s'est produite lors du paiement. Veuillez réessayer.",
+        description: t.paymentErrorDescription,
         variant: "destructive",
       });
       return;
@@ -165,8 +165,8 @@ export default function NewPayment() {
   const handleNowPayments = async () => {
     setIsProcessing(true);
     toast({
-      title: t.redirectingToCryptoPayment || "Redirection vers NOWPayments",
-      description: (t as any).redirectingToNowPaymentsDescription || "Vous allez être redirigé vers la page de paiement sécurisée..."
+      title: t.redirectingToCryptoPayment,
+      description: t.redirectingToNowPaymentsDescription
     });
 
     try {
@@ -287,7 +287,7 @@ export default function NewPayment() {
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Check className="h-4 w-4 text-green-600" />
-                  <span className="font-medium">{t.verifiedPayment || 'Paiement Vérifié'}</span>
+                  <span className="font-medium">{t.verifiedPayment}</span>
                 </div>
               </div>
             </CardHeader>

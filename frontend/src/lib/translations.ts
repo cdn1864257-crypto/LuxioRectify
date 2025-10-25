@@ -110,6 +110,18 @@ export interface Translations {
   ria: string;
   alternativePaymentMessage: string;
   
+  // Payment Notifications
+  paymentSuccessTitle: string;
+  paymentSuccessDescription: string;
+  orderConfirmed: string;
+  paymentCancelledTitle: string;
+  paymentCancelledDescription: string;
+  paymentPendingTitle: string;
+  paymentPendingDescription: string;
+  paymentErrorDescription: string;
+  redirectingToCryptoPayment: string;
+  redirectingToNowPaymentsDescription: string;
+  
   // Payment Modal
   paymentModalTitle: string;
   paymentModalBankTransferTitle: string;
@@ -601,6 +613,18 @@ export const translations: Record<Language, Translations> = {
     moneyGram: 'MoneyGram',
     ria: 'Ria',
     alternativePaymentMessage: 'To use this payment method, please contact our customer service at: infos@luxiomarket.shop. We will respond promptly.',
+    
+    // Payment Notifications
+    paymentSuccessTitle: 'Payment successful!',
+    paymentSuccessDescription: 'Your order has been confirmed',
+    orderConfirmed: 'Order confirmed',
+    paymentCancelledTitle: 'Payment cancelled',
+    paymentCancelledDescription: 'Payment was cancelled. Your cart is still available.',
+    paymentPendingTitle: 'Payment pending',
+    paymentPendingDescription: 'Your payment is being processed. You will receive an email confirmation.',
+    paymentErrorDescription: 'An error occurred during payment. Please try again.',
+    redirectingToCryptoPayment: 'Redirecting to NOWPayments',
+    redirectingToNowPaymentsDescription: 'You will be redirected to the secure payment page...',
     
     // Payment Modal
     paymentModalTitle: 'Payment Instructions',
@@ -1199,6 +1223,18 @@ export const translations: Record<Language, Translations> = {
     ria: 'Ria',
     alternativePaymentMessage: 'Pour utiliser ce moyen de paiement, veuillez contacter notre service client à : infos@luxiomarket.shop. Nous vous répondrons rapidement.',
     
+    // Payment Notifications
+    paymentSuccessTitle: 'Paiement réussi !',
+    paymentSuccessDescription: 'Votre commande a été confirmée',
+    orderConfirmed: 'Commande confirmée',
+    paymentCancelledTitle: 'Paiement annulé',
+    paymentCancelledDescription: 'Le paiement a été annulé. Votre panier est toujours disponible.',
+    paymentPendingTitle: 'Paiement en attente',
+    paymentPendingDescription: 'Votre paiement est en cours de traitement. Vous recevrez une confirmation par email.',
+    paymentErrorDescription: 'Une erreur s\'est produite lors du paiement. Veuillez réessayer.',
+    redirectingToCryptoPayment: 'Redirection vers NOWPayments',
+    redirectingToNowPaymentsDescription: 'Vous allez être redirigé vers la page de paiement sécurisée...',
+    
     // Payment Modal
     paymentModalTitle: 'Instructions de paiement',
     paymentModalBankTransferTitle: 'Paiement par virement bancaire',
@@ -1795,6 +1831,18 @@ export const translations: Record<Language, Translations> = {
     moneyGram: 'MoneyGram',
     ria: 'Ria',
     alternativePaymentMessage: 'Para utilizar este método de pago, por favor contacte a nuestro servicio de atención al cliente en: infos@luxiomarket.shop. Le responderemos rápidamente.',
+    
+    // Payment Notifications
+    paymentSuccessTitle: '¡Pago exitoso!',
+    paymentSuccessDescription: 'Su pedido ha sido confirmado',
+    orderConfirmed: 'Pedido confirmado',
+    paymentCancelledTitle: 'Pago cancelado',
+    paymentCancelledDescription: 'El pago ha sido cancelado. Su carrito sigue disponible.',
+    paymentPendingTitle: 'Pago pendiente',
+    paymentPendingDescription: 'Su pago está siendo procesado. Recibirá una confirmación por correo electrónico.',
+    paymentErrorDescription: 'Se produjo un error durante el pago. Por favor, inténtelo de nuevo.',
+    redirectingToCryptoPayment: 'Redirigiendo a NOWPayments',
+    redirectingToNowPaymentsDescription: 'Será redirigido a la página de pago segura...',
     
     // Payment Modal
     paymentModalTitle: 'Instrucciones de pago',
@@ -2393,6 +2441,18 @@ export const translations: Record<Language, Translations> = {
     ria: 'Ria',
     alternativePaymentMessage: 'Para utilizar este método de pagamento, por favor contacte o nosso serviço de apoio ao cliente em: infos@luxiomarket.shop. Responderemos rapidamente.',
     
+    // Payment Notifications
+    paymentSuccessTitle: 'Pagamento bem-sucedido!',
+    paymentSuccessDescription: 'Seu pedido foi confirmado',
+    orderConfirmed: 'Pedido confirmado',
+    paymentCancelledTitle: 'Pagamento cancelado',
+    paymentCancelledDescription: 'O pagamento foi cancelado. Seu carrinho ainda está disponível.',
+    paymentPendingTitle: 'Pagamento pendente',
+    paymentPendingDescription: 'Seu pagamento está sendo processado. Você receberá uma confirmação por e-mail.',
+    paymentErrorDescription: 'Ocorreu um erro durante o pagamento. Por favor, tente novamente.',
+    redirectingToCryptoPayment: 'Redirecionando para NOWPayments',
+    redirectingToNowPaymentsDescription: 'Você será redirecionado para a página de pagamento segura...',
+    
     // Payment Modal
     paymentModalTitle: 'Instruções de pagamento',
     paymentModalBankTransferTitle: 'Pagamento por transferência bancária',
@@ -2989,6 +3049,18 @@ export const translations: Record<Language, Translations> = {
     moneyGram: 'MoneyGram',
     ria: 'Ria',
     alternativePaymentMessage: 'Aby skorzystać z tej metody płatności, skontaktuj się z naszą obsługą klienta pod adresem: infos@luxiomarket.shop. Odpowiemy szybko.',
+    
+    // Payment Notifications
+    paymentSuccessTitle: 'Płatność zakończona sukcesem!',
+    paymentSuccessDescription: 'Twoje zamówienie zostało potwierdzone',
+    orderConfirmed: 'Zamówienie potwierdzone',
+    paymentCancelledTitle: 'Płatność anulowana',
+    paymentCancelledDescription: 'Płatność została anulowana. Twój koszyk jest nadal dostępny.',
+    paymentPendingTitle: 'Płatność oczekująca',
+    paymentPendingDescription: 'Twoja płatność jest przetwarzana. Otrzymasz potwierdzenie e-mailem.',
+    paymentErrorDescription: 'Wystąpił błąd podczas płatności. Spróbuj ponownie.',
+    redirectingToCryptoPayment: 'Przekierowanie do NOWPayments',
+    redirectingToNowPaymentsDescription: 'Zostaniesz przekierowany na bezpieczną stronę płatności...',
     
     // Payment Modal
     paymentModalTitle: 'Instrukcje płatności',
@@ -3587,6 +3659,18 @@ export const translations: Record<Language, Translations> = {
     ria: 'Ria',
     alternativePaymentMessage: 'Per utilizzare questo metodo di pagamento, contatta il nostro servizio clienti a: infos@luxiomarket.shop. Risponderemo prontamente.',
     
+    // Payment Notifications
+    paymentSuccessTitle: 'Pagamento riuscito!',
+    paymentSuccessDescription: 'Il tuo ordine è stato confermato',
+    orderConfirmed: 'Ordine confermato',
+    paymentCancelledTitle: 'Pagamento annullato',
+    paymentCancelledDescription: 'Il pagamento è stato annullato. Il tuo carrello è ancora disponibile.',
+    paymentPendingTitle: 'Pagamento in sospeso',
+    paymentPendingDescription: 'Il tuo pagamento è in elaborazione. Riceverai una conferma via email.',
+    paymentErrorDescription: 'Si è verificato un errore durante il pagamento. Riprova.',
+    redirectingToCryptoPayment: 'Reindirizzamento a NOWPayments',
+    redirectingToNowPaymentsDescription: 'Sarai reindirizzato alla pagina di pagamento sicura...',
+    
     // Payment Modal
     paymentModalTitle: 'Istruzioni di pagamento',
     paymentModalBankTransferTitle: 'Pagamento tramite bonifico bancario',
@@ -4183,6 +4267,18 @@ export const translations: Record<Language, Translations> = {
     moneyGram: 'MoneyGram',
     ria: 'Ria',
     alternativePaymentMessage: 'A fizetési mód használatához kérjük, lépjen kapcsolatba ügyfélszolgálatunkkal: infos@luxiomarket.shop. Gyorsan válaszolunk.',
+    
+    // Payment Notifications
+    paymentSuccessTitle: 'Sikeres fizetés!',
+    paymentSuccessDescription: 'Rendelése megerősítve lett',
+    orderConfirmed: 'Rendelés megerősítve',
+    paymentCancelledTitle: 'Fizetés megszakítva',
+    paymentCancelledDescription: 'A fizetés megszakításra került. A kosara továbbra is elérhető.',
+    paymentPendingTitle: 'Függőben lévő fizetés',
+    paymentPendingDescription: 'Fizetése feldolgozás alatt áll. E-mailben megerősítést kap.',
+    paymentErrorDescription: 'Hiba történt a fizetés során. Kérjük, próbálja újra.',
+    redirectingToCryptoPayment: 'Átirányítás a NOWPayments-hez',
+    redirectingToNowPaymentsDescription: 'Hamarosan átirányítjuk a biztonságos fizetési oldalra...',
     
     // Payment Modal
     paymentModalTitle: 'Fizetési útmutató',
