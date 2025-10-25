@@ -21,6 +21,7 @@ import ResetPassword from "@/pages/ResetPassword";
 import LegalNotice from "@/pages/LegalNotice";
 import TermsOfService from "@/pages/TermsOfService";
 import GdprDashboard from "@/pages/GdprDashboard";
+import AdminProducts from "@/pages/AdminProducts";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -426,6 +427,13 @@ function Router() {
         <LanguageRedirect />
         <ProtectedRoute>
           <NewPayment />
+        </ProtectedRoute>
+      </Route>
+      
+      {/* Admin Routes */}
+      <Route path="/admin/products">
+        <ProtectedRoute>
+          <AdminProducts />
         </ProtectedRoute>
       </Route>
 

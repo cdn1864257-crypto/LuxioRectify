@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Link } from 'wouter';
-import { products, type Product } from '../lib/products';
+import { type Product } from '../lib/products';
+import { useProducts } from '../hooks/use-products';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Header } from '../components/Header';
@@ -27,6 +28,9 @@ const ITEMS_PER_PAGE = 12;
 export default function Premium() {
   const { t } = useLanguage();
   const { addToCart } = useCart();
+  
+  // Load products dynamically from MongoDB (with static fallback)
+  const { products, loading } = useProducts();
 
   // UI States
   const [cartOpen, setCartOpen] = useState(false);
@@ -40,29 +44,32 @@ export default function Premium() {
   const [selectedColor, setSelectedColor] = useState<string>('all');
   const [currentPage, setCurrentPage] = useState(1);
 
+  // Get all smartphones - recompute when products change
+  const smartphones = useMemo(() => {
+    return products.filter(p => p.category === 'smartphones');
+  }, [products]);
+
   // Product variant selections (phoneId -> {capacity, color})
-  const [variantSelections, setVariantSelections] = useState<Record<string, { capacity?: string; color?: string }>>(() => {
-    // Initialize with first variant for each product that has variants
-    const initialSelections: Record<string, { capacity?: string; color?: string }> = {};
-    const smartphones = products.filter(p => p.category === 'smartphones');
-    
-    smartphones.forEach(phone => {
-      if (phone.hasVariants && phone.variants && phone.variants.length > 0) {
-        const firstVariant = phone.variants[0];
-        initialSelections[phone.id] = {
-          capacity: firstVariant.capacity,
-          color: firstVariant.color
-        };
-      }
-    });
-    
-    return initialSelections;
-  });
+  const [variantSelections, setVariantSelections] = useState<Record<string, { capacity?: string; color?: string }>>({});
 
-  // Get all smartphones
-  const smartphones = products.filter(p => p.category === 'smartphones');
+  // Initialize variant selections when smartphones load
+  useEffect(() => {
+    if (smartphones.length > 0) {
+      const initialSelections: Record<string, { capacity?: string; color?: string }> = {};
+      smartphones.forEach(phone => {
+        if (phone.hasVariants && phone.variants && phone.variants.length > 0) {
+          const firstVariant = phone.variants[0];
+          initialSelections[phone.id] = {
+            capacity: firstVariant.capacity,
+            color: firstVariant.color
+          };
+        }
+      });
+      setVariantSelections(initialSelections);
+    }
+  }, [smartphones]);
 
-  // Extract unique brands, capacities, and colors
+  // Extract unique brands, capacities, and colors - recompute when smartphones change
   const brands = useMemo(() => {
     const brandSet = new Set<string>();
     smartphones.forEach(phone => {
@@ -70,7 +77,7 @@ export default function Premium() {
       brandSet.add(brand);
     });
     return Array.from(brandSet).sort();
-  }, []);
+  }, [smartphones]);
 
   const capacities = useMemo(() => {
     const capacitySet = new Set<string>();
@@ -88,7 +95,7 @@ export default function Premium() {
       const bNum = parseInt(b);
       return aNum - bNum;
     });
-  }, []);
+  }, [smartphones]);
 
   const colors = useMemo(() => {
     const colorSet = new Set<string>();
@@ -102,7 +109,7 @@ export default function Premium() {
       }
     });
     return Array.from(colorSet).sort();
-  }, []);
+  }, [smartphones]);
 
   // Filter smartphones
   const filteredSmartphones = useMemo(() => {
