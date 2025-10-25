@@ -8,40 +8,25 @@ import { Footer } from '@/components/Footer';
 import { CartSidebar } from '@/components/CartSidebar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, ShoppingBag, CreditCard, Building2, Ticket, Zap, X, Copy, Check, DollarSign, Info } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, CreditCard, Zap, Copy, Check, DollarSign, Building2, Shield, Lock } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/lib/translations';
-import { PaymentModal } from '@/components/PaymentModal';
 
-type PaymentMethod = 'bank-transfer' | 'nowpayments' | 'pcs-transcash';
-type TicketType = 'PCS' | 'TransCash';
-
-interface TicketCode {
-  code: string;
-  amount: number;
-}
 
 export default function NewPayment() {
   const { user } = useAuth();
   const { cart, total, clearCart } = useCart();
   const [, navigate] = useLocation();
   const [cartOpen, setCartOpen] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('nowpayments');
   const [isProcessing, setIsProcessing] = useState(false);
   const [showBankModal, setShowBankModal] = useState(false);
   const [showBankConfirmModal, setShowBankConfirmModal] = useState(false);
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [bankDetails, setBankDetails] = useState<any>(null);
   const [copied, setCopied] = useState(false);
-  const [ticketType, setTicketType] = useState<TicketType>('PCS');
-  const [ticketCodes, setTicketCodes] = useState<TicketCode[]>([{ code: '', amount: 0 }]);
   const [isConfirmingOrder, setIsConfirmingOrder] = useState(false);
-  const [showTicketModal, setShowTicketModal] = useState(false);
   const { toast } = useToast();
   const { language } = useLanguage();
   const t = translations[language] || translations.en;
@@ -104,22 +89,20 @@ export default function NewPayment() {
     }
     
     // Only redirect to cart if cart is empty AND we're not returning from NowPayments
-    if (cart.length === 0 && !isConfirmingOrder && !showBankModal && !showTicketModal && !fromNowPayments) {
+    if (cart.length === 0 && !isConfirmingOrder && !showBankModal && !fromNowPayments) {
       navigate('/cart');
       return;
     }
-  }, [user, cart, navigate, isConfirmingOrder, showBankModal, showTicketModal, paymentSuccess, paymentCancelled, paymentPending, paymentError, orderRef, clearCart, toast, fromNowPayments, t]);
+  }, [user, cart, navigate, isConfirmingOrder, showBankModal, paymentSuccess, paymentCancelled, paymentPending, paymentError, orderRef, clearCart, toast, fromNowPayments, t]);
 
   if (!user) {
     return null;
   }
 
   // Allow rendering if cart has items OR if returning from NowPayments OR if confirming order
-  if (cart.length === 0 && !isConfirmingOrder && !showBankModal && !showTicketModal && !fromNowPayments) {
+  if (cart.length === 0 && !isConfirmingOrder && !showBankModal && !fromNowPayments) {
     return null;
   }
-
-  const ticketTotal = ticketCodes.reduce((sum, ticket) => sum + (ticket.amount || 0), 0);
 
   const handleBankTransferClick = () => {
     const orderReference = `LX-${Date.now()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
@@ -220,105 +203,11 @@ export default function NewPayment() {
     }
   };
 
-  const handleTicketPayment = async () => {
-    const validCodes = ticketCodes.filter(t => t.code.trim() !== '' && t.amount > 0);
-    
-    if (validCodes.length === 0) {
-      toast({
-        title: t.error,
-        description: t.enterTicketCode,
-        variant: 'destructive'
-      });
-      return;
-    }
-
-    if (ticketTotal < total) {
-      toast({
-        title: t.error,
-        description: t.insufficientAmount,
-        variant: 'destructive'
-      });
-      return;
-    }
-
-    setIsProcessing(true);
-    try {
-      const response = await fetchWithCsrf(getApiUrl('/api/payment/submit-order'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          customerEmail: user.email,
-          customerName: `${user.firstName} ${user.lastName}`,
-          productId: cart[0]?.id || 'multi',
-          productName: cart.length === 1 ? cart[0].name : `${cart.length} produits`,
-          productModel: undefined,
-          productPrice: total,
-          totalAmount: total,
-          codeType: ticketType,
-          codes: validCodes.map(t => t.code)
-        })
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        clearCart();
-        setShowTicketModal(true);
-      } else {
-        throw new Error(data.error);
-      }
-    } catch (error) {
-      toast({
-        title: t.error,
-        description: error instanceof Error ? error.message : t.orderFailed,
-        variant: 'destructive'
-      });
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
-  const handlePayment = () => {
-    if (paymentMethod === 'bank-transfer') {
-      handleBankTransferClick();
-    } else if (paymentMethod === 'nowpayments') {
-      handleNowPayments();
-    } else if (paymentMethod === 'pcs-transcash') {
-      handleTicketPayment();
-    }
-  };
-
-  const addTicketCode = () => {
-    setTicketCodes([...ticketCodes, { code: '', amount: 0 }]);
-  };
-
-  const removeTicketCode = (index: number) => {
-    if (ticketCodes.length > 1) {
-      setTicketCodes(ticketCodes.filter((_, i) => i !== index));
-    }
-  };
-
-  const updateTicketCode = (index: number, field: 'code' | 'amount', value: string | number) => {
-    const updated = [...ticketCodes];
-    if (field === 'code') {
-      updated[index].code = value as string;
-    } else {
-      updated[index].amount = Number(value);
-    }
-    setTicketCodes(updated);
-  };
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-  };
-
-  const isPaymentReady = () => {
-    if (paymentMethod === 'pcs-transcash') {
-      return ticketTotal >= total && ticketCodes.some(t => t.code.trim() !== '');
-    }
-    return true;
   };
 
   return (
@@ -387,196 +276,84 @@ export default function NewPayment() {
               <CardDescription>
                 {t.allTransactionsSecured}
               </CardDescription>
+              <div className="flex flex-wrap gap-3 mt-4 pt-4 border-t">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Shield className="h-4 w-4 text-green-600" />
+                  <span className="font-medium">SSL {t.securePayment || 'Sécurisé'}</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Lock className="h-4 w-4 text-green-600" />
+                  <span className="font-medium">{t.dataProtection || 'Données Protégées'}</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Check className="h-4 w-4 text-green-600" />
+                  <span className="font-medium">{t.verifiedPayment || 'Paiement Vérifié'}</span>
+                </div>
+              </div>
             </CardHeader>
             <CardContent className="space-y-6">
-              <RadioGroup value={paymentMethod} onValueChange={(value) => setPaymentMethod(value as PaymentMethod)}>
-                <div className="flex items-center space-x-2 p-4 border rounded-lg cursor-pointer hover:bg-accent" onClick={() => setPaymentMethod('nowpayments')}>
-                  <RadioGroupItem value="nowpayments" id="nowpayments" data-testid="radio-nowpayments" />
-                  <Label htmlFor="nowpayments" className="flex-1 cursor-pointer">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <Zap className="h-5 w-5 text-primary" />
-                        <div>
-                          <p className="font-semibold">{t.nowPayments}</p>
-                          <p className="text-sm text-muted-foreground">{t.nowPaymentsDescription}</p>
-                        </div>
-                      </div>
-                      <span className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded">
-                        {t.recommended}
-                      </span>
+              <div className="p-4 border rounded-lg bg-accent/50">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Zap className="h-5 w-5 text-primary" />
+                    <div>
+                      <p className="font-semibold">{t.nowPayments}</p>
+                      <p className="text-sm text-muted-foreground">{t.nowPaymentsDescription}</p>
                     </div>
-                  </Label>
+                  </div>
+                  <span className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded">
+                    {t.recommended}
+                  </span>
                 </div>
-
-                <div className="flex items-center space-x-2 p-4 border rounded-lg cursor-pointer hover:bg-accent" onClick={() => setPaymentMethod('bank-transfer')}>
-                  <RadioGroupItem value="bank-transfer" id="bank-transfer" data-testid="radio-bank-transfer" />
-                  <Label htmlFor="bank-transfer" className="flex-1 cursor-pointer">
-                    <div className="flex items-center gap-2">
-                      <Building2 className="h-5 w-5" />
-                      <div>
-                        <p className="font-semibold">{t.bankTransfer}</p>
-                        <p className="text-sm text-muted-foreground">{t.bankTransferDescription}</p>
-                      </div>
-                    </div>
-                  </Label>
-                </div>
-
-                <div className="flex items-center space-x-2 p-4 border rounded-lg cursor-pointer hover:bg-accent" onClick={() => setPaymentMethod('pcs-transcash')}>
-                  <RadioGroupItem value="pcs-transcash" id="pcs-transcash" data-testid="radio-pcs-transcash" />
-                  <Label htmlFor="pcs-transcash" className="flex-1 cursor-pointer">
-                    <div className="flex items-center gap-2">
-                      <Ticket className="h-5 w-5" />
-                      <div>
-                        <p className="font-semibold">{t.ticketsPCS}</p>
-                        <p className="text-sm text-muted-foreground">{t.prepaidTicketsDescription}</p>
-                      </div>
-                    </div>
-                  </Label>
-                </div>
-              </RadioGroup>
+              </div>
 
               <div className="p-4 border rounded-lg bg-accent/50">
                 <h3 className="text-base font-semibold mb-3 flex items-center gap-2">
                   <DollarSign className="h-5 w-5 text-primary" />
                   {t.alternativePaymentMethods}
                 </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+                  <button
+                    type="button"
+                    className="p-3 border-2 border-primary rounded-lg bg-background hover:bg-accent transition-colors text-center"
+                    onClick={handleBankTransferClick}
+                    data-testid="button-bank-transfer"
+                  >
+                    <div className="text-2xl mb-1"><Building2 className="h-6 w-6 mx-auto text-primary" /></div>
+                    <div className="text-xs font-medium">{t.bankTransfer}</div>
+                  </button>
                   {[
-                    { name: t.paypal, icon: '💳' },
-                    { name: t.westernUnion, icon: '💰' },
-                    { name: t.moneyGram, icon: '💵' },
-                    { name: t.ria, icon: '🏦' }
+                    { name: 'PayPal', icon: '💳', key: 'paypal' },
+                    { name: 'Worldremit', icon: '🌍', key: 'worldremit' },
+                    { name: 'Wise', icon: '💚', key: 'wise' },
+                    { name: 'Binance', icon: '🟡', key: 'binance' },
+                    { name: 'Western Union', icon: '💰', key: 'western-union' },
+                    { name: 'MoneyGram', icon: '💵', key: 'moneygram' },
+                    { name: 'Ria', icon: '🏦', key: 'ria' }
                   ].map((method) => (
                     <button
-                      key={method.name}
+                      key={method.key}
                       type="button"
                       className="p-3 border rounded-lg bg-background hover:bg-accent transition-colors text-center"
                       onClick={() => {
                         window.location.href = 'mailto:infos@luxiomarket.shop?subject=' + encodeURIComponent(`Payment via ${method.name}`);
                       }}
-                      data-testid={`button-${method.name.toLowerCase().replace(/\s+/g, '-')}`}
+                      data-testid={`button-${method.key}`}
                     >
                       <div className="text-2xl mb-1">{method.icon}</div>
                       <div className="text-xs font-medium">{method.name}</div>
                     </button>
                   ))}
                 </div>
-                <p className="text-xs sm:text-sm text-muted-foreground mt-3 text-center">
+                <p className="text-xs sm:text-sm text-muted-foreground text-center">
                   {t.alternativePaymentMessage}
                 </p>
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="w-full mt-3"
-                  onClick={() => {
-                    // Generate bank details for the modal
-                    const orderReference = `LX-${Date.now()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
-                    setBankDetails({
-                      bankName: 'Matt Luxio',
-                      iban: 'ES6115632626383268707364',
-                      bic: 'NTSBESM1XXX',
-                      reference: orderReference,
-                      orderReference: orderReference,
-                      amount: total
-                    });
-                    setShowPaymentModal(true);
-                  }}
-                  data-testid="button-view-payment-instructions"
-                >
-                  <Info className="h-4 w-4 mr-2" />
-                  {t.viewPaymentInstructions || 'View Payment Instructions'}
-                </Button>
               </div>
 
-              {paymentMethod === 'pcs-transcash' && (
-                <div className="space-y-4 p-4 bg-accent rounded-lg">
-                  <div className="space-y-2">
-                    <Label>{t.ticketCode}</Label>
-                    <RadioGroup value={ticketType} onValueChange={(value) => setTicketType(value as TicketType)}>
-                      <div className="flex gap-4">
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="PCS" id="pcs" />
-                          <Label htmlFor="pcs">PCS</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="TransCash" id="transcash" />
-                          <Label htmlFor="transcash">TransCash</Label>
-                        </div>
-                      </div>
-                    </RadioGroup>
-                  </div>
-
-                  <div className="space-y-3">
-                    {ticketCodes.map((ticket, index) => (
-                      <div key={index} className="flex gap-2 items-end">
-                        <div className="flex-1">
-                          <Label htmlFor={`code-${index}`}>Code {index + 1}</Label>
-                          <Input
-                            id={`code-${index}`}
-                            placeholder={t.ticketCodePlaceholder}
-                            value={ticket.code}
-                            onChange={(e) => updateTicketCode(index, 'code', e.target.value)}
-                            data-testid={`input-ticket-code-${index}`}
-                          />
-                        </div>
-                        <div className="w-32">
-                          <Label htmlFor={`amount-${index}`}>{t.amount}</Label>
-                          <Input
-                            id={`amount-${index}`}
-                            type="number"
-                            placeholder="0.00"
-                            value={ticket.amount || ''}
-                            onChange={(e) => updateTicketCode(index, 'amount', e.target.value)}
-                            data-testid={`input-ticket-amount-${index}`}
-                          />
-                        </div>
-                        {ticketCodes.length > 1 && (
-                          <Button
-                            type="button"
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => removeTicketCode(index)}
-                            data-testid={`button-remove-ticket-${index}`}
-                          >
-                            <X className="h-4 w-4" />
-                          </Button>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={addTicketCode}
-                    className="w-full"
-                    data-testid="button-add-ticket"
-                  >
-                    {t.addTicketCode}
-                  </Button>
-
-                  <div className="pt-4 border-t">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="font-medium">{t.ticketsTotal}:</span>
-                      <span className="font-bold text-lg">{ticketTotal.toFixed(2)} €</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">{t.requiredAmount}:</span>
-                      <span className="text-sm">{total.toFixed(2)} €</span>
-                    </div>
-                    {ticketTotal > 0 && ticketTotal < total && (
-                      <p className="text-sm text-destructive mt-2">{t.missingAmount}: {(total - ticketTotal).toFixed(2)} €</p>
-                    )}
-                    {ticketTotal >= total && (
-                      <p className="text-sm text-green-600 mt-2">✓ {t.amountValidated}</p>
-                    )}
-                  </div>
-                </div>
-              )}
 
               <Button
-                onClick={handlePayment}
-                disabled={isProcessing || !isPaymentReady()}
+                onClick={handleNowPayments}
+                disabled={isProcessing}
                 className="w-full"
                 size="lg"
                 data-testid="button-pay-now"
@@ -754,44 +531,6 @@ export default function NewPayment() {
           )}
         </DialogContent>
       </Dialog>
-
-      <Dialog open={showTicketModal} onOpenChange={(open) => {
-        if (!open) {
-          setShowTicketModal(false);
-          navigate('/dashboard');
-        }
-      }}>
-        <DialogContent className="max-w-lg" data-testid="dialog-ticket-confirmation">
-          <DialogHeader>
-            <div className="flex justify-center mb-4">
-              <div className="text-3xl font-bold text-primary">Luxio</div>
-            </div>
-            <DialogTitle className="text-center">{t.orderSent}</DialogTitle>
-            <DialogDescription className="text-center text-base">
-              {t.ticketPaymentMessage}
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4">
-            <div className="bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 p-4 rounded-lg text-center">
-              <p className="text-sm text-green-800 dark:text-green-200 font-medium">
-                ✅ {t.ticketCodeSent}
-              </p>
-            </div>
-            <Button onClick={() => {
-              setShowTicketModal(false);
-              navigate('/dashboard');
-            }} className="w-full" data-testid="button-close-ticket-modal">
-              {t.viewMyOrders}
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      <PaymentModal 
-        open={showPaymentModal} 
-        onOpenChange={setShowPaymentModal}
-        bankDetails={bankDetails}
-      />
 
       <Footer />
 
