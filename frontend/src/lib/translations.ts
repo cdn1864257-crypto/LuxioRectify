@@ -107,6 +107,14 @@ export interface Translations {
   ria: string;
   alternativePaymentMessage: string;
   
+  // Payment Modal
+  paymentModalTitle: string;
+  paymentModalBankTransferTitle: string;
+  paymentModalBankInstructions: string;
+  paymentModalOtherMethodsTitle: string;
+  paymentModalOtherMethodsMessage: string;
+  paymentModalContactEmail: string;
+  
   // Order Confirmation
   paymentInstructions: string;
   orderReceived: string;
@@ -586,6 +594,14 @@ export const translations: Record<Language, Translations> = {
     moneyGram: 'MoneyGram',
     ria: 'Ria',
     alternativePaymentMessage: 'To use this payment method, please contact our customer service at: infos@luxiomarket.shop. We will respond promptly.',
+    
+    // Payment Modal
+    paymentModalTitle: 'Payment Instructions',
+    paymentModalBankTransferTitle: 'Bank Transfer Payment',
+    paymentModalBankInstructions: 'Please make a bank transfer to the following account with your order reference:',
+    paymentModalOtherMethodsTitle: 'Other Payment Methods',
+    paymentModalOtherMethodsMessage: 'For PayPal, Western Union, MoneyGram, or Ria payments, please contact our customer service at:',
+    paymentModalContactEmail: 'infos@luxiomarket.shop',
     
     // Order Confirmation
     paymentInstructions: 'After receiving payment, you will receive an email confirmation. Your order will be delivered within 24-48 hours.',
@@ -1172,6 +1188,14 @@ export const translations: Record<Language, Translations> = {
     ria: 'Ria',
     alternativePaymentMessage: 'Pour utiliser ce moyen de paiement, veuillez contacter notre service client à : infos@luxiomarket.shop. Nous vous répondrons rapidement.',
     
+    // Payment Modal
+    paymentModalTitle: 'Instructions de paiement',
+    paymentModalBankTransferTitle: 'Paiement par virement bancaire',
+    paymentModalBankInstructions: 'Veuillez effectuer un virement bancaire sur le compte suivant avec votre référence de commande :',
+    paymentModalOtherMethodsTitle: 'Autres moyens de paiement',
+    paymentModalOtherMethodsMessage: 'Pour les paiements PayPal, Western Union, MoneyGram ou Ria, veuillez contacter notre service client à :',
+    paymentModalContactEmail: 'infos@luxiomarket.shop',
+    
     // Order Confirmation
     paymentInstructions: 'Après réception du paiement, vous recevrez une confirmation par email. Votre commande sera livrée sous 24-48 h.',
     orderReceived: 'Commande reçue',
@@ -1756,6 +1780,14 @@ export const translations: Record<Language, Translations> = {
     moneyGram: 'MoneyGram',
     ria: 'Ria',
     alternativePaymentMessage: 'Para utilizar este método de pago, por favor contacte a nuestro servicio de atención al cliente en: infos@luxiomarket.shop. Le responderemos rápidamente.',
+    
+    // Payment Modal
+    paymentModalTitle: 'Instrucciones de pago',
+    paymentModalBankTransferTitle: 'Pago por transferencia bancaria',
+    paymentModalBankInstructions: 'Por favor realice una transferencia bancaria a la siguiente cuenta con su referencia de pedido:',
+    paymentModalOtherMethodsTitle: 'Otros métodos de pago',
+    paymentModalOtherMethodsMessage: 'Para pagos con PayPal, Western Union, MoneyGram o Ria, por favor contacte a nuestro servicio al cliente en:',
+    paymentModalContactEmail: 'infos@luxiomarket.shop',
     
     // Order Confirmation
     paymentInstructions: 'Después de recibir el pago, recibirás una confirmación por email. Tu pedido será entregado en 24-48 horas.',
@@ -2342,6 +2374,14 @@ export const translations: Record<Language, Translations> = {
     ria: 'Ria',
     alternativePaymentMessage: 'Para utilizar este método de pagamento, por favor contacte o nosso serviço de apoio ao cliente em: infos@luxiomarket.shop. Responderemos rapidamente.',
     
+    // Payment Modal
+    paymentModalTitle: 'Instruções de pagamento',
+    paymentModalBankTransferTitle: 'Pagamento por transferência bancária',
+    paymentModalBankInstructions: 'Por favor efetue uma transferência bancária para a seguinte conta com a sua referência de pedido:',
+    paymentModalOtherMethodsTitle: 'Outros métodos de pagamento',
+    paymentModalOtherMethodsMessage: 'Para pagamentos PayPal, Western Union, MoneyGram ou Ria, por favor contacte o nosso serviço de apoio ao cliente em:',
+    paymentModalContactEmail: 'infos@luxiomarket.shop',
+    
     // Order Confirmation
     paymentInstructions: 'Após receber o pagamento, receberá uma confirmação por email. O seu pedido será entregue em 24-48 horas.',
     orderReceived: 'Pedido recebido',
@@ -2926,6 +2966,14 @@ export const translations: Record<Language, Translations> = {
     moneyGram: 'MoneyGram',
     ria: 'Ria',
     alternativePaymentMessage: 'Aby skorzystać z tej metody płatności, skontaktuj się z naszą obsługą klienta pod adresem: infos@luxiomarket.shop. Odpowiemy szybko.',
+    
+    // Payment Modal
+    paymentModalTitle: 'Instrukcje płatności',
+    paymentModalBankTransferTitle: 'Płatność przelewem bankowym',
+    paymentModalBankInstructions: 'Proszę dokonać przelewu bankowego na następujące konto z numerem zamówienia jako tytułem:',
+    paymentModalOtherMethodsTitle: 'Inne metody płatności',
+    paymentModalOtherMethodsMessage: 'W przypadku płatności PayPal, Western Union, MoneyGram lub Ria prosimy o kontakt z naszą obsługą klienta pod adresem:',
+    paymentModalContactEmail: 'infos@luxiomarket.shop',
     
     // Order Confirmation
     paymentInstructions: 'Po otrzymaniu płatności otrzymasz potwierdzenie przez email. Twoje zamówienie zostanie dostarczone w ciągu 24-48 godzin.',
@@ -3512,6 +3560,14 @@ export const translations: Record<Language, Translations> = {
     ria: 'Ria',
     alternativePaymentMessage: 'Per utilizzare questo metodo di pagamento, contatta il nostro servizio clienti a: infos@luxiomarket.shop. Risponderemo prontamente.',
     
+    // Payment Modal
+    paymentModalTitle: 'Istruzioni di pagamento',
+    paymentModalBankTransferTitle: 'Pagamento tramite bonifico bancario',
+    paymentModalBankInstructions: 'Si prega di effettuare un bonifico bancario sul seguente conto con il riferimento dell\'ordine:',
+    paymentModalOtherMethodsTitle: 'Altri metodi di pagamento',
+    paymentModalOtherMethodsMessage: 'Per i pagamenti PayPal, Western Union, MoneyGram o Ria, si prega di contattare il nostro servizio clienti a:',
+    paymentModalContactEmail: 'infos@luxiomarket.shop',
+    
     // Order Confirmation
     paymentInstructions: 'Dopo aver ricevuto il pagamento, riceverai una conferma via email. Il tuo ordine sarà consegnato entro 24-48 ore.',
     orderReceived: 'Ordine ricevuto',
@@ -4096,6 +4152,14 @@ export const translations: Record<Language, Translations> = {
     moneyGram: 'MoneyGram',
     ria: 'Ria',
     alternativePaymentMessage: 'A fizetési mód használatához kérjük, lépjen kapcsolatba ügyfélszolgálatunkkal: infos@luxiomarket.shop. Gyorsan válaszolunk.',
+    
+    // Payment Modal
+    paymentModalTitle: 'Fizetési útmutató',
+    paymentModalBankTransferTitle: 'Banki átutalással történő fizetés',
+    paymentModalBankInstructions: 'Kérjük, utalja át az összeget a következő bankszámlára a rendelésszámával együtt:',
+    paymentModalOtherMethodsTitle: 'Egyéb fizetési módok',
+    paymentModalOtherMethodsMessage: 'PayPal, Western Union, MoneyGram vagy Ria fizetéshez kérjük, lépjen kapcsolatba ügyfélszolgálatunkkal:',
+    paymentModalContactEmail: 'infos@luxiomarket.shop',
     
     // Order Confirmation
     paymentInstructions: 'A fizetés kézhezvétele után e-mail megerősítést kap. Rendelését 24-48 órán belül kiszállítjuk.',
