@@ -46,8 +46,8 @@ export function SEO({
   const defaultOgImage = `${SITE_URL}/og-image-${ogLanguage}.png`;
   const finalOgImage = ogImage || defaultOgImage;
   
-  const robotsContent = noindex 
-    ? 'noindex, nofollow' 
+  const robotsContent = noindex
+    ? 'noindex, nofollow'
     : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
 
   return (

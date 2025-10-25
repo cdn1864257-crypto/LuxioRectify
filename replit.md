@@ -20,14 +20,17 @@ User authentication uses JWT-based session management with email/password regist
 ### Internationalization
 The platform supports multiple languages (English, French, Polish, Spanish, Portuguese, Italian, Hungarian) with dynamic switching and IP-based detection. All payment modals and content are fully internationalized.
 
-### SEO Optimization (Added: October 24, 2025)
-Complete multilingual SEO implementation for Google indexing across all 6 supported languages:
-- **Comprehensive SEO Translations**: All pages have optimized title tags, meta descriptions, keywords, and Open Graph data in all 7 languages (translations.ts)
-- **SEO Component (SEO.tsx)**: Dynamic multilingual SEO with automatic hreflang tag generation, og:locale support, canonical URLs, and dynamic HTML lang attribute
+### SEO Optimization (Updated: October 25, 2025)
+Complete multilingual SEO implementation for Google indexing and social media sharing across 6 primary languages (FR, EN, PT, ES, IT, HU):
+- **Comprehensive SEO Translations**: All pages have optimized title tags, meta descriptions, keywords, and Open Graph data in all supported languages (translations.ts)
+- **SEO Component (SEO.tsx)**: Dynamic multilingual SEO with automatic hreflang tag generation, og:locale support, canonical URLs, dynamic HTML lang attribute, and language-specific Open Graph images
+- **Multilingual Open Graph Images**: 6 localized OG images (1200x630px) stored in `frontend/public/` with translated slogans for optimal social media sharing (Facebook, Twitter, LinkedIn)
 - **Hreflang Implementation**: Proper hreflang tags on all pages pointing to language variants via query parameters (?lang=en, ?lang=fr, etc.)
-- **Sitemap.xml**: Complete XML sitemap with all pages and language variants, including hreflang alternate links
-- **Robots.txt**: Optimized robots.txt allowing all pages and referencing the sitemap
-- **Pages Optimized**: Home, Premium, Dashboard, Cart, and Payment pages all have complete SEO implementation
+- **Sitemap.xml**: Complete XML sitemap with all pages and 6 language variants, including hreflang alternate links and proper priorities
+- **Robots.txt**: Optimized robots.txt allowing all pages and referencing the sitemap URL
+- **Vercel Configuration**: Updated vercel.json with proper rewrites for SEO static files (robots.txt, sitemap.xml, og-image-*.png) and appropriate headers
+- **Pages Optimized**: Home, Premium, Dashboard, Cart, and Payment pages all have complete SEO implementation with enriched Open Graph meta tags (dimensions, type)
+- **Fallback Strategy**: Automatic fallback to English OG image for languages without dedicated images (e.g., Polish)
 - **Alt Tags Infrastructure**: Translated alt tag system ready for all images (seoImageAltLogo, seoImageAltProduct, etc.)
 - URL structure uses query parameters to maintain compatibility with existing routing while providing proper language targeting for search engines.
 
