@@ -11,6 +11,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { RouteWrapper } from "./components/RouteWrapper";
 import { LanguageRedirect } from "./components/LanguageRedirect";
 import { ToastNotifications } from "./components/ToastNotifications";
+import { CookieConsent } from "./components/CookieConsent";
 import Home from "@/pages/Home";
 import Premium from "@/pages/Premium";
 import Dashboard from "@/pages/Dashboard";
@@ -322,6 +323,7 @@ function App() {
               <TooltipProvider>
                 <Toaster />
                 <ToastNotifications />
+                <CookieConsent />
                 <Router />
               </TooltipProvider>
             </CartProvider>

@@ -78,7 +78,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Middleware de sécurité
+// Middleware de sécurité avec Helmet
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -89,8 +89,49 @@ app.use(helmet({
       connectSrc: ["'self'", "https://api.nowpayments.io"],
       frameSrc: ["https://nowpayments.io"],
     }
-  }
+  },
+  // HSTS: Force HTTPS for 1 year, including subdomains
+  hsts: {
+    maxAge: 31536000, // 1 year in seconds
+    includeSubDomains: true,
+    preload: true
+  },
+  // Prevent clickjacking
+  frameguard: {
+    action: 'deny'
+  },
+  // Prevent MIME-type sniffing
+  noSniff: true,
+  // Referrer policy for privacy
+  referrerPolicy: {
+    policy: 'strict-origin-when-cross-origin'
+  },
+  // Hide X-Powered-By header
+  hidePoweredBy: true
 }));
+
+// Additional security headers for GDPR and HTTPS compliance
+app.use((req, res, next) => {
+  // Ensure HSTS is set (redundant with helmet but explicit)
+  res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
+  
+  // Prevent clickjacking
+  res.setHeader("X-Frame-Options", "DENY");
+  
+  // Prevent MIME-type sniffing
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  
+  // Control referrer information
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  
+  // XSS Protection (legacy browsers)
+  res.setHeader("X-XSS-Protection", "1; mode=block");
+  
+  // Permissions Policy (formerly Feature-Policy)
+  res.setHeader("Permissions-Policy", "geolocation=(), microphone=(), camera=()");
+  
+  next();
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

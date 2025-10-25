@@ -1,6 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import helmet from 'helmet';
 import csrf from 'csurf';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -49,6 +50,54 @@ app.use((req, res, next) => {
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200);
   }
+  
+  next();
+});
+
+// Security middleware with Helmet (development mode)
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://nowpayments.io"], // unsafe-eval for dev tools
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "https:", "http:"],
+      connectSrc: ["'self'", "https://api.nowpayments.io", "ws:", "wss:"], // WebSocket for HMR
+      frameSrc: ["https://nowpayments.io"],
+    }
+  },
+  // HSTS disabled in development (using HTTP)
+  hsts: false,
+  // Prevent clickjacking
+  frameguard: {
+    action: 'deny'
+  },
+  // Prevent MIME-type sniffing
+  noSniff: true,
+  // Referrer policy for privacy
+  referrerPolicy: {
+    policy: 'strict-origin-when-cross-origin'
+  },
+  // Hide X-Powered-By header
+  hidePoweredBy: true
+}));
+
+// Additional security headers
+app.use((req, res, next) => {
+  // Skip HSTS in development (using HTTP)
+  // res.setHeader("Strict-Transport-Security", "...");  // Only for production HTTPS
+  
+  // Prevent clickjacking
+  res.setHeader("X-Frame-Options", "DENY");
+  
+  // Prevent MIME-type sniffing
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  
+  // Control referrer information
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  
+  // XSS Protection (legacy browsers)
+  res.setHeader("X-XSS-Protection", "1; mode=block");
   
   next();
 });
