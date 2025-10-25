@@ -14,7 +14,7 @@ import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, ShoppingBag, CreditCard, Zap, Copy, Check, DollarSign, Building2, Shield, Lock, ChevronDown, ChevronUp, Mail } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/lib/translations';
-import { SiPaypal, SiWise, SiBinance } from 'react-icons/si';
+import { SiPaypal, SiWise, SiBinance, SiWesternunion, SiMoneygram } from 'react-icons/si';
 
 
 export default function NewPayment() {
@@ -150,9 +150,10 @@ export default function NewPayment() {
           description: t.orderConfirmationEmail
         });
       } else {
-        throw new Error(data.error);
+        throw new Error(data.error || t.orderFailed);
       }
     } catch (error) {
+      console.error('Bank transfer error:', error);
       toast({
         title: t.error,
         description: error instanceof Error ? error.message : t.orderFailed,
@@ -196,6 +197,7 @@ export default function NewPayment() {
         throw new Error(data.error || t.paymentInitError);
       }
     } catch (error) {
+      console.error('NowPayments error:', error);
       toast({
         title: t.error,
         description: error instanceof Error ? error.message : t.orderFailed,
@@ -212,12 +214,18 @@ export default function NewPayment() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  // Get translated email subject
+  const getEmailSubject = (methodName: string) => {
+    return t.alternativePaymentEmailSubject?.replace('{method}', methodName).replace('{amount}', total.toFixed(2)) 
+      || `Paiement via ${methodName} - Commande ${total.toFixed(2)}€`;
+  };
+
   const alternativePaymentMethods = [
     { name: 'PayPal', icon: SiPaypal, key: 'paypal', color: '#003087' },
     { name: 'Wise', icon: SiWise, key: 'wise', color: '#37517E' },
     { name: 'Binance', icon: SiBinance, key: 'binance', color: '#F3BA2F' },
-    { name: 'Western Union', icon: DollarSign, key: 'western-union', color: '#FFCC00' },
-    { name: 'MoneyGram', icon: DollarSign, key: 'moneygram', color: '#E2231A' },
+    { name: 'Western Union', icon: SiWesternunion, key: 'western-union', color: '#FFCC00' },
+    { name: 'MoneyGram', icon: SiMoneygram, key: 'moneygram', color: '#E2231A' },
     { name: 'Worldremit', icon: DollarSign, key: 'worldremit', color: '#813FD6' },
     { name: 'Ria', icon: DollarSign, key: 'ria', color: '#ED1C24' },
     { name: 'Transcash', icon: CreditCard, key: 'transcash', color: '#0066CC' },
@@ -307,56 +315,61 @@ export default function NewPayment() {
             </CardHeader>
             <CardContent className="space-y-4 sm:space-y-6">
               <div className="space-y-4 sm:space-y-6">
-                {/* NowPayments Method */}
-                <div className="p-3 sm:p-4 border-2 border-primary rounded-lg bg-accent/50">
-                  <h3 className="text-sm sm:text-base font-semibold mb-3 flex items-center gap-2">
-                    <Zap className="h-5 w-5 text-primary flex-shrink-0" />
-                    <span className="flex-1">{t.recommendedMethod || 'Méthode Recommandée'}</span>
-                    <span className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded whitespace-nowrap">
-                      {t.recommended}
-                    </span>
-                  </h3>
-                  <button
-                    type="button"
-                    className="w-full p-3 sm:p-4 border-2 border-primary rounded-lg bg-background hover:bg-accent transition-colors"
-                    onClick={handleNowPayments}
-                    disabled={isProcessing}
-                    data-testid="button-nowpayments"
-                  >
-                    <div className="flex items-center justify-center gap-3">
-                      <Zap className="h-6 w-6 sm:h-8 sm:w-8 text-primary flex-shrink-0" />
-                      <div className="text-left flex-1 min-w-0">
-                        <div className="font-semibold text-base sm:text-lg">{t.nowPayments}</div>
-                        <div className="text-xs sm:text-sm text-muted-foreground">{t.nowPaymentsDescription}</div>
-                      </div>
-                    </div>
-                  </button>
-                </div>
-
                 {/* Bank Transfer Method */}
-                <div className="p-3 sm:p-4 border-2 border-primary rounded-lg bg-accent/50">
-                  <h3 className="text-sm sm:text-base font-semibold mb-3 flex items-center gap-2">
-                    <Building2 className="h-5 w-5 text-primary flex-shrink-0" />
-                    {t.mainPaymentMethod || 'Virement Bancaire'}
-                  </h3>
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-sm sm:text-base font-semibold flex items-center gap-2">
+                      <Building2 className="h-5 w-5 text-primary flex-shrink-0" />
+                      {t.mainPaymentMethod || 'Virement Bancaire'}
+                    </h3>
+                  </div>
                   <button
                     type="button"
-                    className="w-full p-3 sm:p-4 border-2 border-primary rounded-lg bg-background hover:bg-accent transition-colors"
+                    className="w-full p-3 sm:p-4 border-2 border-muted rounded-lg bg-background hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     onClick={handleBankTransferClick}
+                    disabled={isProcessing}
                     data-testid="button-bank-transfer"
                   >
-                    <div className="flex items-center justify-center gap-3">
-                      <Building2 className="h-6 w-6 sm:h-8 sm:w-8 text-primary flex-shrink-0" />
+                    <div className="flex items-center justify-start gap-3 sm:gap-4">
+                      <Building2 className="h-6 w-6 sm:h-8 sm:w-8 text-foreground flex-shrink-0" />
                       <div className="text-left flex-1 min-w-0">
-                        <div className="font-semibold text-base sm:text-lg">{t.bankTransfer}</div>
+                        <div className="font-semibold text-base sm:text-lg text-foreground">{t.bankTransfer}</div>
                         <div className="text-xs sm:text-sm text-muted-foreground">{t.bankTransferDescription}</div>
                       </div>
                     </div>
                   </button>
                 </div>
 
+                {/* NowPayments Method */}
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-sm sm:text-base font-semibold flex items-center gap-2">
+                      <Zap className="h-5 w-5 text-primary flex-shrink-0" />
+                      {t.recommendedMethod || 'Méthode Recommandée'}
+                    </h3>
+                    <span className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded whitespace-nowrap">
+                      {t.recommended}
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    className="w-full p-3 sm:p-4 border-2 border-muted rounded-lg bg-background hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    onClick={handleNowPayments}
+                    disabled={isProcessing}
+                    data-testid="button-nowpayments"
+                  >
+                    <div className="flex items-center justify-start gap-3 sm:gap-4">
+                      <Zap className="h-6 w-6 sm:h-8 sm:w-8 text-foreground flex-shrink-0" />
+                      <div className="text-left flex-1 min-w-0">
+                        <div className="font-semibold text-base sm:text-lg text-foreground">{t.nowPayments}</div>
+                        <div className="text-xs sm:text-sm text-muted-foreground">{t.nowPaymentsDescription}</div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+
                 {/* Alternative Payment Methods - Collapsible */}
-                <div className="p-3 sm:p-4 border rounded-lg bg-accent/30">
+                <div className="pt-4 border-t">
                   <button
                     type="button"
                     onClick={() => setShowAlternativeMethods(!showAlternativeMethods)}
@@ -383,9 +396,9 @@ export default function NewPayment() {
                             <button
                               key={method.key}
                               type="button"
-                              className="p-3 sm:p-4 border-2 rounded-lg bg-background hover:bg-accent transition-colors text-center group"
+                              className="p-3 sm:p-4 border-2 border-muted rounded-lg bg-background hover:bg-accent transition-colors text-center group"
                               onClick={() => {
-                                window.location.href = 'mailto:infos@luxiomarket.shop?subject=' + encodeURIComponent(`Paiement via ${method.name} - Commande ${total.toFixed(2)}€`);
+                                window.location.href = `mailto:infos@luxiomarket.shop?subject=${encodeURIComponent(getEmailSubject(method.name))}`;
                               }}
                               data-testid={`button-${method.key}`}
                             >

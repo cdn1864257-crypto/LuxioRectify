@@ -114,6 +114,7 @@ export interface Translations {
   alternativePaymentInstructions: string;
   clickToViewAlternativeMethods: string;
   understood: string;
+  alternativePaymentEmailSubject: string;
   
   // Payment Notifications
   paymentSuccessTitle: string;
@@ -219,7 +220,6 @@ export interface Translations {
   ticketCodeSent: string;
   enterTicketCode: string;
   orderFailed: string;
-  redirectingToCryptoPayment: string;
   paymentInitFailed: string;
   
   // Search & Filters
@@ -354,7 +354,6 @@ export interface Translations {
   orderConfirmationEmail: string;
   orderRegistered: string;
   completeTransferWithReference: string;
-  redirectingToNowPaymentsDescription: string;
   missingAmount: string;
   nowPaymentsInstructionsTitle: string;
   nowPaymentsInstruction1: string;
@@ -623,6 +622,7 @@ export const translations: Record<Language, Translations> = {
     alternativePaymentInstructions: 'Click on your preferred payment method above. This will open your email application with a pre-filled message. Send this message to our service to finalize your order. Our team will respond as soon as possible with detailed payment instructions.',
     clickToViewAlternativeMethods: 'Click to view other available payment methods',
     understood: 'Understood',
+    alternativePaymentEmailSubject: 'Payment via {method} - Order {amount}€',
     
     // Payment Notifications
     paymentSuccessTitle: 'Payment successful!',
@@ -728,7 +728,6 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Ticket codes sent successfully',
     enterTicketCode: 'Please enter at least one ticket code',
     orderFailed: 'Order failed. Please try again.',
-    redirectingToNowPayments: 'Redirecting to NowPayments...',
     
     // Search & Filters
     searchPlaceholder: 'Search products...',
@@ -862,7 +861,6 @@ export const translations: Record<Language, Translations> = {
     orderConfirmationEmail: 'You will receive a confirmation email.',
     orderRegistered: 'Order registered',
     completeTransferWithReference: 'Complete the transfer with the indicated reference',
-    redirectingToNowPaymentsDescription: 'You will be redirected to the secure payment platform',
     missingAmount: 'missing',
     nowPaymentsInstructionsTitle: 'NowPayments Instructions',
     nowPaymentsInstruction1: 'Instant and secure payment by cryptocurrency or bank card',
@@ -1237,6 +1235,7 @@ export const translations: Record<Language, Translations> = {
     alternativePaymentInstructions: 'Cliquez sur le moyen de paiement de votre choix ci-dessus. Cela ouvrira votre application email avec un message pré-rempli. Envoyez ce message à notre service pour finaliser votre commande. Notre équipe vous répondra dans les plus brefs délais avec les instructions de paiement détaillées.',
     clickToViewAlternativeMethods: 'Cliquez pour voir les autres moyens de paiement disponibles',
     understood: 'Compris',
+    alternativePaymentEmailSubject: 'Paiement via {method} - Commande {amount}€',
     
     // Payment Notifications
     paymentSuccessTitle: 'Paiement réussi !',
@@ -1342,7 +1341,6 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Codes tickets envoyés avec succès',
     enterTicketCode: 'Veuillez entrer au moins un code ticket',
     orderFailed: 'Commande échouée. Veuillez réessayer.',
-    redirectingToNowPayments: 'Redirection vers NowPayments...',
     
     // Search & Filters
     searchPlaceholder: 'Rechercher des produits...',
@@ -1476,7 +1474,6 @@ export const translations: Record<Language, Translations> = {
     orderConfirmationEmail: 'Vous recevrez un email de confirmation.',
     orderRegistered: 'Commande enregistrée',
     completeTransferWithReference: 'Effectuez le virement avec la référence indiquée',
-    redirectingToNowPaymentsDescription: 'Vous allez être redirigé vers la plateforme de paiement sécurisée',
     missingAmount: 'manquant',
     nowPaymentsInstructionsTitle: 'Instructions pour NowPayments',
     nowPaymentsInstruction1: 'Paiement instantané et sécurisé par cryptomonnaies ou carte bancaire',
@@ -1851,6 +1848,7 @@ export const translations: Record<Language, Translations> = {
     alternativePaymentInstructions: 'Haga clic en su método de pago preferido arriba. Esto abrirá su aplicación de correo electrónico con un mensaje prellenado. Envíe este mensaje a nuestro servicio para finalizar su pedido. Nuestro equipo responderá lo antes posible con instrucciones de pago detalladas.',
     clickToViewAlternativeMethods: 'Haga clic para ver otros métodos de pago disponibles',
     understood: 'Entendido',
+    alternativePaymentEmailSubject: 'Pago mediante {method} - Pedido {amount}€',
     
     // Payment Notifications
     paymentSuccessTitle: '¡Pago exitoso!',
@@ -1956,7 +1954,6 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Códigos de tickets enviados correctamente',
     enterTicketCode: 'Por favor, introduce al menos un código de ticket',
     orderFailed: 'Pedido fallido. Por favor, inténtalo de nuevo.',
-    redirectingToNowPayments: 'Redirigiendo a NowPayments...',
     
     // Search & Filters
     searchPlaceholder: 'Buscar productos...',
@@ -2090,7 +2087,6 @@ export const translations: Record<Language, Translations> = {
     orderConfirmationEmail: 'Recibirá un correo de confirmación.',
     orderRegistered: 'Pedido registrado',
     completeTransferWithReference: 'Complete la transferencia con la referencia indicada',
-    redirectingToNowPaymentsDescription: 'Será redirigido a la plataforma de pago segura',
     missingAmount: 'faltante',
     nowPaymentsInstructionsTitle: 'Instrucciones para NowPayments',
     nowPaymentsInstruction1: 'Pago instantáneo y seguro por criptomonedas o tarjeta bancaria',
@@ -2465,6 +2461,7 @@ export const translations: Record<Language, Translations> = {
     alternativePaymentInstructions: 'Clique no seu método de pagamento preferido acima. Isso abrirá seu aplicativo de e-mail com uma mensagem pré-preenchida. Envie esta mensagem ao nosso serviço para finalizar seu pedido. Nossa equipe responderá o mais rápido possível com instruções de pagamento detalhadas.',
     clickToViewAlternativeMethods: 'Clique para ver outros métodos de pagamento disponíveis',
     understood: 'Compreendido',
+    alternativePaymentEmailSubject: 'Pagamento via {method} - Pedido {amount}€',
     
     // Payment Notifications
     paymentSuccessTitle: 'Pagamento bem-sucedido!',
@@ -2570,7 +2567,6 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Códigos de tickets enviados com sucesso',
     enterTicketCode: 'Por favor, insira pelo menos um código de ticket',
     orderFailed: 'Pedido falhou. Por favor, tente novamente.',
-    redirectingToNowPayments: 'Redirecionando para NowPayments...',
     
     // Search & Filters
     searchPlaceholder: 'Pesquisar produtos...',
@@ -2704,7 +2700,6 @@ export const translations: Record<Language, Translations> = {
     orderConfirmationEmail: 'Receberá um email de confirmação.',
     orderRegistered: 'Pedido registado',
     completeTransferWithReference: 'Complete a transferência com a referência indicada',
-    redirectingToNowPaymentsDescription: 'Será redirecionado para a plataforma de pagamento segura',
     missingAmount: 'em falta',
     nowPaymentsInstructionsTitle: 'Instruções para NowPayments',
     nowPaymentsInstruction1: 'Pagamento instantâneo e seguro por criptomoedas ou cartão bancário',
@@ -3079,6 +3074,7 @@ export const translations: Record<Language, Translations> = {
     alternativePaymentInstructions: 'Kliknij preferowaną metodę płatności powyżej. Spowoduje to otwarcie aplikacji e-mail z wstępnie wypełnioną wiadomością. Wyślij tę wiadomość do naszego serwisu, aby sfinalizować zamówienie. Nasz zespół odpowie jak najszybciej ze szczegółowymi instrukcjami płatności.',
     clickToViewAlternativeMethods: 'Kliknij, aby zobaczyć inne dostępne metody płatności',
     understood: 'Rozumiem',
+    alternativePaymentEmailSubject: 'Płatność przez {method} - Zamówienie {amount}€',
     
     // Payment Notifications
     paymentSuccessTitle: 'Płatność zakończona sukcesem!',
@@ -3184,7 +3180,6 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Kody kart wysłane pomyślnie',
     enterTicketCode: 'Proszę wprowadzić co najmniej jeden kod karty',
     orderFailed: 'Zamówienie nie powiodło się. Spróbuj ponownie.',
-    redirectingToNowPayments: 'Przekierowanie do NowPayments...',
     
     // Search & Filters
     searchPlaceholder: 'Szukaj produktów...',
@@ -3318,7 +3313,6 @@ export const translations: Record<Language, Translations> = {
     orderConfirmationEmail: 'Otrzymasz email potwierdzający.',
     orderRegistered: 'Zamówienie zarejestrowane',
     completeTransferWithReference: 'Wykonaj przelew z podanym numerem referencyjnym',
-    redirectingToNowPaymentsDescription: 'Zostaniesz przekierowany na bezpieczną platformę płatności',
     missingAmount: 'brakuje',
     nowPaymentsInstructionsTitle: 'Instrukcje NowPayments',
     nowPaymentsInstruction1: 'Natychmiastowa i bezpieczna płatność kryptowalutą lub kartą bankową',
@@ -3693,6 +3687,7 @@ export const translations: Record<Language, Translations> = {
     alternativePaymentInstructions: 'Clicca sul tuo metodo di pagamento preferito sopra. Questo aprirà la tua applicazione email con un messaggio precompilato. Invia questo messaggio al nostro servizio per finalizzare il tuo ordine. Il nostro team risponderà il prima possibile con istruzioni di pagamento dettagliate.',
     clickToViewAlternativeMethods: 'Clicca per vedere altri metodi di pagamento disponibili',
     understood: 'Compreso',
+    alternativePaymentEmailSubject: 'Pagamento tramite {method} - Ordine {amount}€',
     
     // Payment Notifications
     paymentSuccessTitle: 'Pagamento riuscito!',
@@ -3798,7 +3793,6 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Codici ticket inviati con successo',
     enterTicketCode: 'Inserisci almeno un codice ticket',
     orderFailed: 'Ordine fallito. Riprova.',
-    redirectingToNowPayments: 'Reindirizzamento a NowPayments...',
     
     // Search & Filters
     searchPlaceholder: 'Cerca prodotti...',
@@ -3932,7 +3926,6 @@ export const translations: Record<Language, Translations> = {
     orderConfirmationEmail: 'Riceverai un\'email di conferma.',
     orderRegistered: 'Ordine registrato',
     completeTransferWithReference: 'Completa il bonifico con il riferimento indicato',
-    redirectingToNowPaymentsDescription: 'Sarai reindirizzato alla piattaforma di pagamento sicura',
     missingAmount: 'mancante',
     nowPaymentsInstructionsTitle: 'Istruzioni NowPayments',
     nowPaymentsInstruction1: 'Pagamento istantaneo e sicuro tramite criptovaluta o carta bancaria',
@@ -4307,6 +4300,7 @@ export const translations: Record<Language, Translations> = {
     alternativePaymentInstructions: 'Kattintson a fenti preferált fizetési módra. Ez megnyitja az e-mail alkalmazást egy előre kitöltött üzenettel. Küldje el ezt az üzenetet szolgáltatásunknak a rendelés véglegesítéséhez. Csapatunk a lehető leghamarabb válaszol részletes fizetési utasításokkal.',
     clickToViewAlternativeMethods: 'Kattintson más elérhető fizetési módok megtekintéséhez',
     understood: 'Értettem',
+    alternativePaymentEmailSubject: 'Fizetés {method} által - Rendelés {amount}€',
     
     // Payment Notifications
     paymentSuccessTitle: 'Sikeres fizetés!',
@@ -4412,7 +4406,6 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Kártya kódok sikeresen elküldve',
     enterTicketCode: 'Kérjük, adjon meg legalább egy kártya kódot',
     orderFailed: 'Rendelés sikertelen. Kérjük, próbálja újra.',
-    redirectingToNowPayments: 'Átirányítás NowPayments-ra...',
     
     // Search & Filters
     searchPlaceholder: 'Termékek keresése...',
@@ -4546,7 +4539,6 @@ export const translations: Record<Language, Translations> = {
     orderConfirmationEmail: 'Megerősítő e-mailt fog kapni.',
     orderRegistered: 'Rendelés rögzítve',
     completeTransferWithReference: 'Végezze el az átutalást a megadott hivatkozással',
-    redirectingToNowPaymentsDescription: 'Átirányítjuk a biztonságos fizetési platformra',
     missingAmount: 'hiányzik',
     nowPaymentsInstructionsTitle: 'NowPayments utasítások',
     nowPaymentsInstruction1: 'Azonnali és biztonságos fizetés kriptovalutával vagy bankkártyával',
