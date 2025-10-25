@@ -1,6 +1,7 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import jwt from 'jsonwebtoken';
 import { parse } from 'cookie';
+import { getErrorMessage, getLanguageFromRequest } from '../../server/utils/multilingual-messages.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -46,19 +47,33 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     if (!token) {
-      return res.status(401).json({ error: 'Non authentifié - Token manquant' });
+      const lang = getLanguageFromRequest(req);
+      return res.status(401).json({ 
+        success: false,
+        error: 'TOKEN_MISSING',
+        message: getErrorMessage('TOKEN_MISSING', lang)
+      });
     }
 
     const jwtSecret = process.env.JWT_SECRET;
     if (!jwtSecret) {
-      return res.status(500).json({ error: 'Configuration JWT manquante' });
+      return res.status(500).json({ 
+        success: false,
+        error: 'INTERNAL_SERVER_ERROR',
+        message: 'Configuration JWT manquante' 
+      });
     }
 
     let decoded: JWTPayload;
     try {
       decoded = jwt.verify(token, jwtSecret) as JWTPayload;
     } catch (error) {
-      return res.status(401).json({ error: 'Token invalide ou expiré' });
+      const lang = getLanguageFromRequest(req);
+      return res.status(401).json({ 
+        success: false,
+        error: 'TOKEN_INVALID',
+        message: getErrorMessage('TOKEN_INVALID', lang)
+      });
     }
 
     const userEmail = decoded.email;
@@ -70,7 +85,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
-      return res.status(500).json({ error: 'Configuration MongoDB manquante' });
+      return res.status(500).json({ 
+        success: false,
+        error: 'INTERNAL_SERVER_ERROR',
+        message: 'Configuration MongoDB manquante' 
+      });
     }
 
     const client = new MongoClient(mongoUri);
@@ -117,9 +136,12 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       }
 
       if (deletedCount === 0) {
+        const lang = getLanguageFromRequest(req);
         return res.status(404).json({ 
-          error: 'Commande non trouvée ou impossible à annuler',
-          details: 'La commande n\'existe pas, ne vous appartient pas, ou a déjà été expédiée/livrée'
+          success: false,
+          error: 'ORDER_NOT_FOUND',
+          message: getErrorMessage('ORDER_NOT_FOUND', lang),
+          details: 'The order does not exist, does not belong to you, or has already been shipped/delivered'
         });
       }
 

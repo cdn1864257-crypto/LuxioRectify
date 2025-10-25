@@ -2,6 +2,7 @@ import { MongoClient, ObjectId } from 'mongodb';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { parse } from 'cookie';
+import { getErrorMessage, getLanguageFromRequest } from '../../server/utils/multilingual-messages.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -57,24 +58,42 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     }
     
     if (!token) {
-      return res.status(401).json({ error: 'Non authentifié - Token manquant' });
+      const lang = getLanguageFromRequest(req);
+      return res.status(401).json({ 
+        success: false,
+        error: 'TOKEN_MISSING',
+        message: getErrorMessage('TOKEN_MISSING', lang)
+      });
     }
 
     const jwtSecret = process.env.JWT_SECRET;
     if (!jwtSecret) {
-      return res.status(500).json({ error: 'Configuration JWT manquante' });
+      return res.status(500).json({ 
+        success: false,
+        error: 'INTERNAL_SERVER_ERROR',
+        message: 'Configuration JWT manquante' 
+      });
     }
 
     let decoded: any;
     try {
       decoded = jwt.verify(token, jwtSecret);
     } catch (error) {
-      return res.status(401).json({ error: 'Votre session a expiré, veuillez vous reconnecter' });
+      const lang = getLanguageFromRequest(req);
+      return res.status(401).json({ 
+        success: false,
+        error: 'SESSION_EXPIRED',
+        message: getErrorMessage('SESSION_EXPIRED', lang)
+      });
     }
 
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
-      return res.status(500).json({ error: 'Configuration MongoDB manquante' });
+      return res.status(500).json({ 
+        success: false,
+        error: 'INTERNAL_SERVER_ERROR',
+        message: 'Configuration MongoDB manquante' 
+      });
     }
 
     const client = new MongoClient(mongoUri);
@@ -88,13 +107,23 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const user = await usersCollection.findOne({ _id: new ObjectId(decoded.userId) });
       
       if (!user) {
-        return res.status(404).json({ error: 'Utilisateur non trouvé' });
+        const lang = getLanguageFromRequest(req);
+        return res.status(404).json({ 
+          success: false,
+          error: 'USER_NOT_FOUND',
+          message: getErrorMessage('USER_NOT_FOUND', lang)
+        });
       }
 
       const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
       
       if (!isPasswordValid) {
-        return res.status(401).json({ error: 'Mot de passe actuel incorrect' });
+        const lang = getLanguageFromRequest(req);
+        return res.status(401).json({ 
+          success: false,
+          error: 'INCORRECT_CURRENT_PASSWORD',
+          message: getErrorMessage('INCORRECT_CURRENT_PASSWORD', lang)
+        });
       }
 
       const hashedNewPassword = await bcrypt.hash(newPassword, 10);
@@ -115,7 +144,13 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
   } catch (error) {
     console.error('Erreur lors du changement de mot de passe:', error);
-    return res.status(500).json({ error: 'Erreur serveur lors du changement de mot de passe' });
+    const lang = getLanguageFromRequest(req);
+    return res.status(500).json({ 
+      success: false,
+      error: 'INTERNAL_SERVER_ERROR',
+      message: getErrorMessage('INTERNAL_SERVER_ERROR', lang),
+      details: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : 'Unknown error') : undefined
+    });
   }
 }
 

@@ -61,7 +61,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     // Vérifier le JWT
     const jwtSecret = process.env.JWT_SECRET;
     if (!jwtSecret) {
-      return res.status(500).json({ error: 'Configuration JWT manquante' });
+      return res.status(500).json({ 
+        success: false,
+        error: 'INTERNAL_SERVER_ERROR',
+        message: 'Configuration JWT manquante' 
+      });
     }
 
     let decoded: JWTPayload;
@@ -79,7 +83,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     // Connexion à MongoDB
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
-      return res.status(500).json({ error: 'Configuration MongoDB manquante' });
+      return res.status(500).json({ 
+        success: false,
+        error: 'INTERNAL_SERVER_ERROR',
+        message: 'Configuration MongoDB manquante' 
+      });
     }
 
     const client = new MongoClient(mongoUri);
@@ -94,7 +102,12 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const user = await usersCollection.findOne({ _id: new ObjectId(decoded.userId) });
 
       if (!user) {
-        return res.status(404).json({ error: 'Utilisateur non trouvé' });
+        const lang = getLanguageFromRequest(req);
+        return res.status(404).json({ 
+          success: false,
+          error: 'USER_NOT_FOUND',
+          message: getErrorMessage('USER_NOT_FOUND', lang)
+        });
       }
 
       // Retourner les infos utilisateur sans le mot de passe
@@ -111,6 +124,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       };
 
       return res.status(200).json({
+        success: true,
         user: userResponse
       });
     } finally {
@@ -119,9 +133,12 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
   } catch (error) {
     console.error('Erreur lors de la récupération de l\'utilisateur:', error);
+    const lang = getLanguageFromRequest(req);
     return res.status(500).json({
-      error: 'Erreur serveur',
-      details: error instanceof Error ? error.message : 'Unknown error'
+      success: false,
+      error: 'INTERNAL_SERVER_ERROR',
+      message: getErrorMessage('INTERNAL_SERVER_ERROR', lang),
+      details: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : 'Unknown error') : undefined
     });
   }
 }

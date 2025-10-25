@@ -97,6 +97,46 @@ export const ERROR_MESSAGES = {
     it: 'Troppi tentativi di accesso, riprova tra 15 minuti',
     hu: 'Túl sok bejelentkezési kísérlet, próbálja újra 15 perc múlva',
     pl: 'Zbyt wiele prób logowania, spróbuj ponownie za 15 minut'
+  } as MultilingualMessage,
+  
+  USER_NOT_FOUND: {
+    en: 'User not found',
+    fr: 'Utilisateur non trouvé',
+    es: 'Usuario no encontrado',
+    pt: 'Usuário não encontrado',
+    it: 'Utente non trovato',
+    hu: 'A felhasználó nem található',
+    pl: 'Użytkownik nie znaleziony'
+  } as MultilingualMessage,
+  
+  ORDER_NOT_FOUND: {
+    en: 'Order not found or cannot be cancelled',
+    fr: 'Commande non trouvée ou impossible à annuler',
+    es: 'Pedido no encontrado o no se puede cancelar',
+    pt: 'Pedido não encontrado ou não pode ser cancelado',
+    it: 'Ordine non trovato o non può essere annullato',
+    hu: 'A rendelés nem található vagy nem törölhető',
+    pl: 'Zamówienie nie znalezione lub nie można anulować'
+  } as MultilingualMessage,
+  
+  INCORRECT_CURRENT_PASSWORD: {
+    en: 'Current password is incorrect',
+    fr: 'Mot de passe actuel incorrect',
+    es: 'La contraseña actual es incorrecta',
+    pt: 'A senha atual está incorreta',
+    it: 'La password attuale non è corretta',
+    hu: 'A jelenlegi jelszó helytelen',
+    pl: 'Aktualne hasło jest nieprawidłowe'
+  } as MultilingualMessage,
+  
+  SESSION_EXPIRED: {
+    en: 'Your session has expired, please log in again',
+    fr: 'Votre session a expiré, veuillez vous reconnecter',
+    es: 'Su sesión ha caducado, inicie sesión de nuevo',
+    pt: 'Sua sessão expirou, faça login novamente',
+    it: 'La sessione è scaduta, effettua nuovamente l\'accesso',
+    hu: 'A munkamenete lejárt, jelentkezzen be újra',
+    pl: 'Sesja wygasła, zaloguj się ponownie'
   } as MultilingualMessage
 };
 

@@ -42,7 +42,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     // Connexion à MongoDB
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
-      return res.status(500).json({ error: 'DATABASE_CONFIG_ERROR', errorCode: 'DATABASE_CONFIG_ERROR' });
+      return res.status(500).json({ 
+        success: false,
+        error: 'INTERNAL_SERVER_ERROR',
+        message: 'Configuration MongoDB manquante' 
+      });
     }
 
     const client = new MongoClient(mongoUri);
@@ -84,7 +88,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     // Générer le JWT
     const jwtSecret = process.env.JWT_SECRET;
     if (!jwtSecret) {
-      return res.status(500).json({ error: 'JWT_CONFIG_ERROR', errorCode: 'JWT_CONFIG_ERROR' });
+      return res.status(500).json({ 
+        success: false,
+        error: 'INTERNAL_SERVER_ERROR',
+        message: 'Configuration JWT manquante' 
+      });
     }
 
     const token = jwt.sign(
@@ -121,16 +129,19 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     };
 
     return res.status(200).json({
+      success: true,
       message: 'Connexion réussie',
       user: userResponse
     });
 
   } catch (error) {
     console.error('Erreur lors de la connexion:', error);
+    const lang = getLanguageFromRequest(req);
     return res.status(500).json({
-      error: 'SERVER_ERROR',
-      errorCode: 'SERVER_ERROR',
-      details: error instanceof Error ? error.message : 'Unknown error'
+      success: false,
+      error: 'INTERNAL_SERVER_ERROR',
+      message: getErrorMessage('INTERNAL_SERVER_ERROR', lang),
+      details: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : 'Unknown error') : undefined
     });
   }
 }
