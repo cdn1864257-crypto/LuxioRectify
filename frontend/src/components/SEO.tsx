@@ -28,7 +28,7 @@ export function SEO({
   description,
   keywords,
   page = 'home',
-  ogImage = `${SITE_URL}/og-image.jpg`,
+  ogImage,
   noindex = false,
 }: SEOProps) {
   const { language, t } = useLanguage();
@@ -40,6 +40,9 @@ export function SEO({
   const pagePath = page === 'home' ? '/' : `/${page}`;
   const canonicalUrl = `${SITE_URL}${pagePath}?lang=${language}`;
   const siteName = t('seoOgSiteName');
+  
+  const defaultOgImage = `${SITE_URL}/og-image-${language}.png`;
+  const finalOgImage = ogImage || defaultOgImage;
   
   const robotsContent = noindex 
     ? 'noindex, nofollow' 
@@ -71,7 +74,10 @@ export function SEO({
       <meta property="og:title" content={seoTitle} />
       <meta property="og:description" content={seoDescription} />
       <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:image" content={ogImage} />
+      <meta property="og:image" content={finalOgImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:type" content="image/png" />
       <meta property="og:locale" content={languageLocales[language]} />
       {languages.filter(lang => lang !== language).map((lang) => (
         <meta key={lang} property="og:locale:alternate" content={languageLocales[lang]} />
@@ -80,7 +86,7 @@ export function SEO({
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={seoTitle} />
       <meta name="twitter:description" content={seoDescription} />
-      <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:image" content={finalOgImage} />
     </Helmet>
   );
 }
