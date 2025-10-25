@@ -33,21 +33,36 @@ export function LanguageSelector() {
     setIsOpen(false);
     
     const supportedLanguages = ['fr', 'en', 'pt', 'es', 'it', 'hu', 'pl'];
-    const pathParts = location.split('/').filter(Boolean);
+    
+    // Parse location to preserve query parameters and hash fragments
+    // Split on # first to get hash fragment
+    const hashIndex = location.indexOf('#');
+    const hashFragment = hashIndex !== -1 ? location.substring(hashIndex) : '';
+    const pathAndQuery = hashIndex !== -1 ? location.substring(0, hashIndex) : location;
+    
+    // Split on ? to get query parameters
+    const queryIndex = pathAndQuery.indexOf('?');
+    const queryString = queryIndex !== -1 ? pathAndQuery.substring(queryIndex) : '';
+    const pathname = queryIndex !== -1 ? pathAndQuery.substring(0, queryIndex) : pathAndQuery;
+    
+    const pathParts = pathname.split('/').filter(Boolean);
     const currentLangPrefix = supportedLanguages.find(l => pathParts[0] === l);
     
+    let newPath: string;
     if (currentLangPrefix) {
       // Replace existing language prefix
       pathParts[0] = lang;
-      const newPath = '/' + pathParts.join('/');
-      setLocation(newPath);
-    } else if (location === '/' || location === '') {
+      newPath = '/' + pathParts.join('/');
+    } else if (pathname === '/' || pathname === '') {
       // Handle root path
-      setLocation(`/${lang}`);
+      newPath = `/${lang}`;
     } else {
       // Add language prefix to path without prefix
-      setLocation(`/${lang}${location}`);
+      newPath = `/${lang}${pathname}`;
     }
+    
+    // Preserve query parameters and hash fragment
+    setLocation(newPath + queryString + hashFragment);
   };
 
   return (
