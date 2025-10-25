@@ -184,6 +184,9 @@ export interface Translations {
   pleaseCompleteThisField: string;
   invalidEmail: string;
   invalidPhone: string;
+  invalidCountry: string;
+  invalidCity: string;
+  invalidAddress: string;
   ticketCodeSent: string;
   enterTicketCode: string;
   orderFailed: string;
@@ -661,6 +664,9 @@ export const translations: Record<Language, Translations> = {
     pleaseCompleteThisField: 'Please complete this field',
     invalidEmail: 'Please enter a valid email address',
     invalidPhone: 'Please enter a valid phone number',
+    invalidCountry: 'Please enter a valid country',
+    invalidCity: 'Please enter a valid city',
+    invalidAddress: 'Address must contain a number and street name',
     ticketCodeSent: 'Ticket codes sent successfully',
     enterTicketCode: 'Please enter at least one ticket code',
     orderFailed: 'Order failed. Please try again.',
@@ -1243,6 +1249,9 @@ export const translations: Record<Language, Translations> = {
     pleaseCompleteThisField: 'Veuillez renseigner ce champ',
     invalidEmail: 'Veuillez saisir une adresse email valide',
     invalidPhone: 'Veuillez saisir un numéro de téléphone valide',
+    invalidCountry: 'Veuillez entrer un pays valide',
+    invalidCity: 'Veuillez entrer une ville valide',
+    invalidAddress: 'L\'adresse doit contenir un numéro et un nom de rue',
     ticketCodeSent: 'Codes tickets envoyés avec succès',
     enterTicketCode: 'Veuillez entrer au moins un code ticket',
     orderFailed: 'Commande échouée. Veuillez réessayer.',
@@ -1825,6 +1834,9 @@ export const translations: Record<Language, Translations> = {
     pleaseCompleteThisField: 'Por favor, completa este campo',
     invalidEmail: 'Por favor, introduce un email válido',
     invalidPhone: 'Por favor, introduce un teléfono válido',
+    invalidCountry: 'Por favor, introduce un país válido',
+    invalidCity: 'Por favor, introduce una ciudad válida',
+    invalidAddress: 'La dirección debe contener un número y el nombre de la calle',
     ticketCodeSent: 'Códigos de tickets enviados correctamente',
     enterTicketCode: 'Por favor, introduce al menos un código de ticket',
     orderFailed: 'Pedido fallido. Por favor, inténtalo de nuevo.',
@@ -2407,6 +2419,9 @@ export const translations: Record<Language, Translations> = {
     pleaseCompleteThisField: 'Por favor, preencha este campo',
     invalidEmail: 'Por favor, introduza um email válido',
     invalidPhone: 'Por favor, introduza um telefone válido',
+    invalidCountry: 'Por favor, introduza um país válido',
+    invalidCity: 'Por favor, introduza uma cidade válida',
+    invalidAddress: 'O endereço deve conter um número e o nome da rua',
     ticketCodeSent: 'Códigos de tickets enviados com sucesso',
     enterTicketCode: 'Por favor, insira pelo menos um código de ticket',
     orderFailed: 'Pedido falhou. Por favor, tente novamente.',
@@ -2989,6 +3004,9 @@ export const translations: Record<Language, Translations> = {
     pleaseCompleteThisField: 'Proszę wypełnić to pole',
     invalidEmail: 'Proszę wprowadzić poprawny adres email',
     invalidPhone: 'Proszę wprowadzić poprawny numer telefonu',
+    invalidCountry: 'Proszę wprowadzić prawidłowy kraj',
+    invalidCity: 'Proszę wprowadzić prawidłowe miasto',
+    invalidAddress: 'Adres musi zawierać numer i nazwę ulicy',
     ticketCodeSent: 'Kody kart wysłane pomyślnie',
     enterTicketCode: 'Proszę wprowadzić co najmniej jeden kod karty',
     orderFailed: 'Zamówienie nie powiodło się. Spróbuj ponownie.',
@@ -3571,6 +3589,9 @@ export const translations: Record<Language, Translations> = {
     pleaseCompleteThisField: 'Si prega di compilare questo campo',
     invalidEmail: 'Inserisci un indirizzo email valido',
     invalidPhone: 'Inserisci un numero di telefono valido',
+    invalidCountry: 'Inserisci un paese valido',
+    invalidCity: 'Inserisci una città valida',
+    invalidAddress: 'L\'indirizzo deve contenere un numero e il nome della via',
     ticketCodeSent: 'Codici ticket inviati con successo',
     enterTicketCode: 'Inserisci almeno un codice ticket',
     orderFailed: 'Ordine fallito. Riprova.',
@@ -4153,6 +4174,9 @@ export const translations: Record<Language, Translations> = {
     pleaseCompleteThisField: 'Kérjük, töltse ki ezt a mezőt',
     invalidEmail: 'Adjon meg érvényes e-mail címet',
     invalidPhone: 'Adjon meg érvényes telefonszámot',
+    invalidCountry: 'Adjon meg érvényes országot',
+    invalidCity: 'Adjon meg érvényes várost',
+    invalidAddress: 'A címnek tartalmaznia kell egy házszámot és utcanevet',
     ticketCodeSent: 'Kártya kódok sikeresen elküldve',
     enterTicketCode: 'Kérjük, adjon meg legalább egy kártya kódot',
     orderFailed: 'Rendelés sikertelen. Kérjük, próbálja újra.',
