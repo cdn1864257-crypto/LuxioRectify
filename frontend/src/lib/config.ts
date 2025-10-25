@@ -1,10 +1,11 @@
 // Configuration de l'API backend
 // En développement, utiliser le backend local sur le port 3001
-// En production, utiliser l'URL du backend déployé
+// En production, utiliser l'URL du backend déployé sur Render (api.luxiomarket.shop)
 const isDevelopment = import.meta.env.DEV;
-const DEFAULT_BACKEND_URL = isDevelopment ? 'http://localhost:3001' : 'https://luxio.onrender.com';
+const DEFAULT_BACKEND_URL = isDevelopment ? 'http://localhost:3001' : 'https://api.luxiomarket.shop';
 
-// VITE_API_URL peut être configuré pour override (staging, tests, etc.)
+// VITE_API_URL peut être configuré pour override (staging, tests, Replit, etc.)
+// Valeur de production recommandée: https://api.luxiomarket.shop
 export const API_BASE_URL = import.meta.env.VITE_API_URL || DEFAULT_BACKEND_URL;
 
 // Helper pour construire les URLs d'API
