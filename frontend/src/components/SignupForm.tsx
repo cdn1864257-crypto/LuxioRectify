@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Loader2, Check, X } from "lucide-react";
+import { Loader2, Check, X, Eye, EyeOff } from "lucide-react";
 import { validatePasswordStrength, isPasswordValid, type PasswordStrength } from "@/lib/password-strength";
 import { isValidCountry, isValidCity, isValidAddress, isValidRealEmail, isValidPhone, VALIDATION_MESSAGES } from "@/lib/validation";
 import { countriesCities, PHONE_PREFIXES } from "@/lib/countries-cities";
@@ -49,6 +49,8 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
   const [errors, setErrors] = useState<Partial<Record<keyof SignupFormData, string>>>({});
   const [passwordStrength, setPasswordStrength] = useState<PasswordStrength | null>(null);
   const [availableCities, setAvailableCities] = useState<{ en: string; fr: string; es: string }[]>([]);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // Set custom validation messages in the current language
   useEffect(() => {
@@ -410,19 +412,30 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
 
       <div className="space-y-2">
         <Label htmlFor="password">{t('password')} *</Label>
-        <Input
-          id="password"
-          name="password"
-          type="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="••••••••"
-          disabled={isLoading}
-          required
-          minLength={8}
-          data-testid="input-password"
-          className={errors.password ? "border-red-500" : ""}
-        />
+        <div className="relative">
+          <Input
+            id="password"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="••••••••"
+            disabled={isLoading}
+            required
+            minLength={8}
+            data-testid="input-password"
+            className={errors.password ? "border-red-500 pr-10" : "pr-10"}
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+            data-testid="button-toggle-password-visibility"
+            aria-label={showPassword ? t('hidePassword') : t('showPassword')}
+          >
+            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+          </button>
+        </div>
         {formData.password && passwordStrength && (
           <div className="space-y-2">
             <div className="flex items-center gap-2">
@@ -472,18 +485,29 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
 
       <div className="space-y-2">
         <Label htmlFor="confirmPassword">{t('confirmPassword')} *</Label>
-        <Input
-          id="confirmPassword"
-          name="confirmPassword"
-          type="password"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          placeholder="••••••••"
-          disabled={isLoading}
-          required
-          data-testid="input-confirmPassword"
-          className={errors.confirmPassword ? "border-red-500" : ""}
-        />
+        <div className="relative">
+          <Input
+            id="confirmPassword"
+            name="confirmPassword"
+            type={showConfirmPassword ? "text" : "password"}
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            placeholder="••••••••"
+            disabled={isLoading}
+            required
+            data-testid="input-confirmPassword"
+            className={errors.confirmPassword ? "border-red-500 pr-10" : "pr-10"}
+          />
+          <button
+            type="button"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+            data-testid="button-toggle-confirm-password-visibility"
+            aria-label={showConfirmPassword ? t('hidePassword') : t('showPassword')}
+          >
+            {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+          </button>
+        </div>
         {errors.confirmPassword && (
           <p className="text-sm text-red-500">{errors.confirmPassword}</p>
         )}

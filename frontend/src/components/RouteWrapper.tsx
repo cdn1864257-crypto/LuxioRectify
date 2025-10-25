@@ -8,7 +8,7 @@ interface RouteWrapperProps {
   lang: Language;
 }
 
-const SUPPORTED_LANGUAGES: Language[] = ['fr', 'en', 'pt', 'es', 'it', 'hu'];
+const SUPPORTED_LANGUAGES: Language[] = ['fr', 'en', 'pt', 'es', 'it', 'hu', 'pl'];
 
 export function RouteWrapper({ children, lang }: RouteWrapperProps) {
   const [location] = useLocation();

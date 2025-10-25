@@ -14,6 +14,7 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/?lang=es" />
     <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/?lang=it" />
     <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/?lang=hu" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/?lang=pl" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/?lang=en" />
   </url>
 
@@ -29,6 +30,7 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/premium?lang=es" />
     <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/premium?lang=it" />
     <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/premium?lang=hu" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/premium?lang=pl" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/premium?lang=en" />
   </url>
 
@@ -44,6 +46,7 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/dashboard?lang=es" />
     <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/dashboard?lang=it" />
     <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/dashboard?lang=hu" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/dashboard?lang=pl" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/dashboard?lang=en" />
   </url>
 
@@ -59,6 +62,7 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/cart?lang=es" />
     <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/cart?lang=it" />
     <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/cart?lang=hu" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/cart?lang=pl" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/cart?lang=en" />
   </url>
 
@@ -74,6 +78,7 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://luxios.vercel.app/payment?lang=es" />
     <xhtml:link rel="alternate" hreflang="it" href="https://luxios.vercel.app/payment?lang=it" />
     <xhtml:link rel="alternate" hreflang="hu" href="https://luxios.vercel.app/payment?lang=hu" />
+    <xhtml:link rel="alternate" hreflang="pl" href="https://luxios.vercel.app/payment?lang=pl" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://luxios.vercel.app/payment?lang=en" />
   </url>
 

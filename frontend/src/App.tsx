@@ -47,9 +47,7 @@ function Router() {
       </Route>
       <Route path="/fr/cart">
         <RouteWrapper lang="fr">
-          <ProtectedRoute>
-            <Cart />
-          </ProtectedRoute>
+          <Cart />
         </RouteWrapper>
       </Route>
       <Route path="/fr/payment">
@@ -85,9 +83,7 @@ function Router() {
       </Route>
       <Route path="/en/cart">
         <RouteWrapper lang="en">
-          <ProtectedRoute>
-            <Cart />
-          </ProtectedRoute>
+          <Cart />
         </RouteWrapper>
       </Route>
       <Route path="/en/payment">
@@ -123,9 +119,7 @@ function Router() {
       </Route>
       <Route path="/pt/cart">
         <RouteWrapper lang="pt">
-          <ProtectedRoute>
-            <Cart />
-          </ProtectedRoute>
+          <Cart />
         </RouteWrapper>
       </Route>
       <Route path="/pt/payment">
@@ -161,9 +155,7 @@ function Router() {
       </Route>
       <Route path="/es/cart">
         <RouteWrapper lang="es">
-          <ProtectedRoute>
-            <Cart />
-          </ProtectedRoute>
+          <Cart />
         </RouteWrapper>
       </Route>
       <Route path="/es/payment">
@@ -199,9 +191,7 @@ function Router() {
       </Route>
       <Route path="/it/cart">
         <RouteWrapper lang="it">
-          <ProtectedRoute>
-            <Cart />
-          </ProtectedRoute>
+          <Cart />
         </RouteWrapper>
       </Route>
       <Route path="/it/payment">
@@ -237,13 +227,47 @@ function Router() {
       </Route>
       <Route path="/hu/cart">
         <RouteWrapper lang="hu">
-          <ProtectedRoute>
-            <Cart />
-          </ProtectedRoute>
+          <Cart />
         </RouteWrapper>
       </Route>
       <Route path="/hu/payment">
         <RouteWrapper lang="hu">
+          <ProtectedRoute>
+            <NewPayment />
+          </ProtectedRoute>
+        </RouteWrapper>
+      </Route>
+
+      {/* Multilingual routes - Polish */}
+      <Route path="/pl">
+        <RouteWrapper lang="pl">
+          <Home />
+        </RouteWrapper>
+      </Route>
+      <Route path="/pl/premium">
+        <RouteWrapper lang="pl">
+          <Premium />
+        </RouteWrapper>
+      </Route>
+      <Route path="/pl/reset-password">
+        <RouteWrapper lang="pl">
+          <ResetPassword />
+        </RouteWrapper>
+      </Route>
+      <Route path="/pl/dashboard">
+        <RouteWrapper lang="pl">
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        </RouteWrapper>
+      </Route>
+      <Route path="/pl/cart">
+        <RouteWrapper lang="pl">
+          <Cart />
+        </RouteWrapper>
+      </Route>
+      <Route path="/pl/payment">
+        <RouteWrapper lang="pl">
           <ProtectedRoute>
             <NewPayment />
           </ProtectedRoute>

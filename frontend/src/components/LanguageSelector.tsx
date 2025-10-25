@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'wouter';
 import { Language } from '../lib/translations';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -24,11 +25,29 @@ const languageNames = {
 
 export function LanguageSelector() {
   const { language, changeLanguage } = useLanguage();
+  const [location, setLocation] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLanguageSelect = (lang: Language) => {
     changeLanguage(lang);
     setIsOpen(false);
+    
+    const supportedLanguages = ['fr', 'en', 'pt', 'es', 'it', 'hu', 'pl'];
+    const pathParts = location.split('/').filter(Boolean);
+    const currentLangPrefix = supportedLanguages.find(l => pathParts[0] === l);
+    
+    if (currentLangPrefix) {
+      // Replace existing language prefix
+      pathParts[0] = lang;
+      const newPath = '/' + pathParts.join('/');
+      setLocation(newPath);
+    } else if (location === '/' || location === '') {
+      // Handle root path
+      setLocation(`/${lang}`);
+    } else {
+      // Add language prefix to path without prefix
+      setLocation(`/${lang}${location}`);
+    }
   };
 
   return (

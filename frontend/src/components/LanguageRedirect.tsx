@@ -3,7 +3,7 @@ import { useLocation } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Language } from '@/lib/translations';
 
-const SUPPORTED_LANGUAGES: Language[] = ['fr', 'en', 'pt', 'es', 'it', 'hu'];
+const SUPPORTED_LANGUAGES: Language[] = ['fr', 'en', 'pt', 'es', 'it', 'hu', 'pl'];
 
 export function LanguageRedirect() {
   const [, setLocation] = useLocation();

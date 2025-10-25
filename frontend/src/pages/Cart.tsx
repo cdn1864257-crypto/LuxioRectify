@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
+import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SEO } from '@/components/SEO';
@@ -9,17 +10,43 @@ import { CartSidebar } from '@/components/CartSidebar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
 import { showToast } from '@/components/ToastNotifications';
 
 export default function Cart() {
-  const { cart, updateQuantity, removeFromCart, total } = useCart();
-  const { t } = useLanguage();
+  const { user } = useAuth();
+  const { cart, updateQuantity, removeFromCart, total} = useCart();
+  const { t, language } = useLanguage();
+  const [, setLocation] = useLocation();
   const [cartOpen, setCartOpen] = useState(false);
+  const [showLoginDialog, setShowLoginDialog] = useState(false);
 
   const handleRemoveItem = (productId: string, description: string) => {
     removeFromCart(productId, description);
     showToast(t('itemRemovedFromCart'), 'info');
+  };
+
+  const handleCheckout = () => {
+    if (!user) {
+      setShowLoginDialog(true);
+    } else {
+      setLocation(`/${language}/payment`);
+    }
+  };
+
+  const handleGoToLogin = () => {
+    setShowLoginDialog(false);
+    setLocation(`/${language}/?login=true`);
   };
 
   return (
@@ -164,12 +191,15 @@ export default function Cart() {
                       </span>
                     </div>
 
-                    <Link href="/payment">
-                      <Button className="w-full" size="lg" data-testid="button-checkout">
-                        {t('proceedToCheckout')}
-                        <ArrowRight className="h-5 w-5 ml-2" />
-                      </Button>
-                    </Link>
+                    <Button 
+                      className="w-full" 
+                      size="lg" 
+                      onClick={handleCheckout}
+                      data-testid="button-checkout"
+                    >
+                      {t('proceedToCheckout')}
+                      <ArrowRight className="h-5 w-5 ml-2" />
+                    </Button>
 
                     <Link href="/">
                       <Button variant="outline" className="w-full mt-3" data-testid="button-continue-shopping-summary">
@@ -195,6 +225,23 @@ export default function Cart() {
 
       <Footer />
       <CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+      
+      <AlertDialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
+        <AlertDialogContent data-testid="dialog-login-required">
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t('loginRequiredToCheckout')}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {t('pleaseLoginOrSignupToCheckout')}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel data-testid="button-cancel-login">{t('cancel')}</AlertDialogCancel>
+            <AlertDialogAction onClick={handleGoToLogin} data-testid="button-go-to-login">
+              {t('goToLogin')}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

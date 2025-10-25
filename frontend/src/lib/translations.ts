@@ -430,6 +430,13 @@ export interface Translations {
   passwordChangeSuccess: string;
   passwordChangeFailed: string;
   
+  // Password Visibility & Checkout
+  showPassword: string;
+  hidePassword: string;
+  loginRequiredToCheckout: string;
+  pleaseLoginOrSignupToCheckout: string;
+  goToLogin: string;
+  
   // Testimonials
   testimonials: Array<{
     name: string;
@@ -890,6 +897,13 @@ export const translations: Record<Language, Translations> = {
     confirmNewPassword: 'Confirm New Password',
     passwordChangeSuccess: 'Password changed successfully!',
     passwordChangeFailed: 'Failed to change password',
+    
+    // Password Visibility & Checkout
+    showPassword: 'Show password',
+    hidePassword: 'Hide password',
+    loginRequiredToCheckout: 'Login Required',
+    pleaseLoginOrSignupToCheckout: 'Please log in or sign up to place your order.',
+    goToLogin: 'Go to Login',
     
     // Testimonials
     testimonials: [
@@ -1458,6 +1472,13 @@ export const translations: Record<Language, Translations> = {
     passwordChangeSuccess: 'Mot de passe changé avec succès !',
     passwordChangeFailed: 'Échec du changement de mot de passe',
     
+    // Password Visibility & Checkout
+    showPassword: 'Afficher le mot de passe',
+    hidePassword: 'Masquer le mot de passe',
+    loginRequiredToCheckout: 'Connexion requise',
+    pleaseLoginOrSignupToCheckout: 'Veuillez vous connecter ou vous inscrire pour passer commande.',
+    goToLogin: 'Se connecter',
+    
     // Testimonials
     testimonials: [
       {
@@ -2024,6 +2045,13 @@ export const translations: Record<Language, Translations> = {
     confirmNewPassword: 'Confirmar contraseña',
     passwordChangeSuccess: '¡Contraseña cambiada con éxito!',
     passwordChangeFailed: 'Error al cambiar la contraseña',
+    
+    // Password Visibility & Checkout
+    showPassword: 'Mostrar contraseña',
+    hidePassword: 'Ocultar contraseña',
+    loginRequiredToCheckout: 'Inicio de sesión requerido',
+    pleaseLoginOrSignupToCheckout: 'Por favor inicie sesión o regístrese para realizar su pedido.',
+    goToLogin: 'Ir a Inicio de sesión',
     
     // Testimonials
     testimonials: [
@@ -2592,6 +2620,13 @@ export const translations: Record<Language, Translations> = {
     passwordChangeSuccess: 'Senha alterada com sucesso!',
     passwordChangeFailed: 'Falha ao alterar a senha',
     
+    // Password Visibility & Checkout
+    showPassword: 'Mostrar senha',
+    hidePassword: 'Ocultar senha',
+    loginRequiredToCheckout: 'Login necessário',
+    pleaseLoginOrSignupToCheckout: 'Por favor, faça login ou cadastre-se para fazer seu pedido.',
+    goToLogin: 'Ir para Login',
+    
     // Testimonials
     testimonials: [
       {
@@ -3158,6 +3193,13 @@ export const translations: Record<Language, Translations> = {
     confirmNewPassword: 'Potwierdź hasło',
     passwordChangeSuccess: 'Hasło zmienione pomyślnie!',
     passwordChangeFailed: 'Nie udało się zmienić hasła',
+    
+    // Password Visibility & Checkout
+    showPassword: 'Pokaż hasło',
+    hidePassword: 'Ukryj hasło',
+    loginRequiredToCheckout: 'Wymagane logowanie',
+    pleaseLoginOrSignupToCheckout: 'Zaloguj się lub zarejestruj, aby złożyć zamówienie.',
+    goToLogin: 'Przejdź do logowania',
     
     // Testimonials
     testimonials: [
@@ -3726,6 +3768,13 @@ export const translations: Record<Language, Translations> = {
     passwordChangeSuccess: 'Password cambiata con successo!',
     passwordChangeFailed: 'Impossibile cambiare la password',
     
+    // Password Visibility & Checkout
+    showPassword: 'Mostra password',
+    hidePassword: 'Nascondi password',
+    loginRequiredToCheckout: 'Accesso richiesto',
+    pleaseLoginOrSignupToCheckout: 'Effettua il login o registrati per effettuare l\'ordine.',
+    goToLogin: 'Vai al Login',
+    
     // Testimonials
     testimonials: [
       {
@@ -4292,6 +4341,13 @@ export const translations: Record<Language, Translations> = {
     confirmNewPassword: 'Jelszó megerősítése',
     passwordChangeSuccess: 'Jelszó sikeresen megváltoztatva!',
     passwordChangeFailed: 'Nem sikerült megváltoztatni a jelszót',
+    
+    // Password Visibility & Checkout
+    showPassword: 'Jelszó megjelenítése',
+    hidePassword: 'Jelszó elrejtése',
+    loginRequiredToCheckout: 'Bejelentkezés szükséges',
+    pleaseLoginOrSignupToCheckout: 'Kérjük, jelentkezzen be vagy regisztráljon a rendelés leadásához.',
+    goToLogin: 'Bejelentkezés',
     
     // Testimonials
     testimonials: [
