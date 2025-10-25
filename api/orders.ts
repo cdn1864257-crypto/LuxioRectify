@@ -69,10 +69,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
     const jwtSecret = process.env.JWT_SECRET;
     if (!jwtSecret) {
+      const lang = getLanguageFromRequest(req);
       return res.status(500).json({ 
         success: false,
         error: 'INTERNAL_SERVER_ERROR',
-        message: 'Configuration JWT manquante' 
+        message: getErrorMessage('INTERNAL_SERVER_ERROR', lang)
       });
     }
 
@@ -92,10 +93,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
+      const lang = getLanguageFromRequest(req);
       return res.status(500).json({ 
         success: false,
         error: 'INTERNAL_SERVER_ERROR',
-        message: 'Configuration MongoDB manquante' 
+        message: getErrorMessage('INTERNAL_SERVER_ERROR', lang)
       });
     }
 

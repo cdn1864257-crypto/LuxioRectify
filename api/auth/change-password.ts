@@ -35,11 +35,21 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     const { currentPassword, newPassword }: ChangePasswordData = req.body;
 
     if (!currentPassword || !newPassword) {
-      return res.status(400).json({ error: 'Mot de passe actuel et nouveau mot de passe requis' });
+      const lang = getLanguageFromRequest(req);
+      return res.status(400).json({ 
+        success: false,
+        error: 'REQUIRED_FIELDS',
+        message: getErrorMessage('REQUIRED_FIELDS', lang)
+      });
     }
 
     if (newPassword.length < 6) {
-      return res.status(400).json({ error: 'Le nouveau mot de passe doit contenir au moins 6 caractères' });
+      const lang = getLanguageFromRequest(req);
+      return res.status(400).json({ 
+        success: false,
+        error: 'PASSWORD_TOO_SHORT',
+        message: getErrorMessage('PASSWORD_TOO_SHORT', lang)
+      });
     }
 
     let token: string | undefined;
@@ -68,10 +78,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
     const jwtSecret = process.env.JWT_SECRET;
     if (!jwtSecret) {
+      const lang = getLanguageFromRequest(req);
       return res.status(500).json({ 
         success: false,
         error: 'INTERNAL_SERVER_ERROR',
-        message: 'Configuration JWT manquante' 
+        message: getErrorMessage('INTERNAL_SERVER_ERROR', lang)
       });
     }
 
@@ -89,10 +100,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
+      const lang = getLanguageFromRequest(req);
       return res.status(500).json({ 
         success: false,
         error: 'INTERNAL_SERVER_ERROR',
-        message: 'Configuration MongoDB manquante' 
+        message: getErrorMessage('INTERNAL_SERVER_ERROR', lang)
       });
     }
 

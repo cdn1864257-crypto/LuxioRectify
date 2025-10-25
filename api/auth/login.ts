@@ -36,16 +36,22 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Vérification des champs
     if (!email || !password) {
-      return res.status(400).json({ error: 'REQUIRED_FIELDS', errorCode: 'REQUIRED_FIELDS' });
+      const lang = getLanguageFromRequest(req);
+      return res.status(400).json({ 
+        success: false,
+        error: 'REQUIRED_FIELDS',
+        message: getErrorMessage('REQUIRED_FIELDS', lang)
+      });
     }
 
     // Connexion à MongoDB
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
+      const lang = getLanguageFromRequest(req);
       return res.status(500).json({ 
         success: false,
         error: 'INTERNAL_SERVER_ERROR',
-        message: 'Configuration MongoDB manquante' 
+        message: getErrorMessage('INTERNAL_SERVER_ERROR', lang)
       });
     }
 
@@ -88,10 +94,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     // Générer le JWT
     const jwtSecret = process.env.JWT_SECRET;
     if (!jwtSecret) {
+      const lang = getLanguageFromRequest(req);
       return res.status(500).json({ 
         success: false,
         error: 'INTERNAL_SERVER_ERROR',
-        message: 'Configuration JWT manquante' 
+        message: getErrorMessage('INTERNAL_SERVER_ERROR', lang)
       });
     }
 

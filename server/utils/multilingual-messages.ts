@@ -137,6 +137,36 @@ export const ERROR_MESSAGES = {
     it: 'La sessione è scaduta, effettua nuovamente l\'accesso',
     hu: 'A munkamenete lejárt, jelentkezzen be újra',
     pl: 'Sesja wygasła, zaloguj się ponownie'
+  } as MultilingualMessage,
+  
+  REQUIRED_FIELDS: {
+    en: 'Required fields are missing',
+    fr: 'Champs requis manquants',
+    es: 'Faltan campos obligatorios',
+    pt: 'Campos obrigatórios ausentes',
+    it: 'Campi obbligatori mancanti',
+    hu: 'Kötelező mezők hiányoznak',
+    pl: 'Brakuje wymaganych pól'
+  } as MultilingualMessage,
+  
+  PASSWORD_TOO_SHORT: {
+    en: 'Password must be at least 6 characters long',
+    fr: 'Le mot de passe doit contenir au moins 6 caractères',
+    es: 'La contraseña debe tener al menos 6 caracteres',
+    pt: 'A senha deve ter pelo menos 6 caracteres',
+    it: 'La password deve contenere almeno 6 caratteri',
+    hu: 'A jelszónak legalább 6 karakterből kell állnia',
+    pl: 'Hasło musi mieć co najmniej 6 znaków'
+  } as MultilingualMessage,
+  
+  ORDER_ID_REQUIRED: {
+    en: 'Order ID is required',
+    fr: 'ID de commande requis',
+    es: 'Se requiere ID de pedido',
+    pt: 'ID do pedido é obrigatório',
+    it: 'ID ordine obbligatorio',
+    hu: 'Rendelésazonosító szükséges',
+    pl: 'Wymagany identyfikator zamówienia'
   } as MultilingualMessage
 };
 

@@ -57,10 +57,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
     const jwtSecret = process.env.JWT_SECRET;
     if (!jwtSecret) {
+      const lang = getLanguageFromRequest(req);
       return res.status(500).json({ 
         success: false,
         error: 'INTERNAL_SERVER_ERROR',
-        message: 'Configuration JWT manquante' 
+        message: getErrorMessage('INTERNAL_SERVER_ERROR', lang)
       });
     }
 
@@ -80,15 +81,21 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     const orderId = req.query.orderId as string;
 
     if (!orderId) {
-      return res.status(400).json({ error: 'Order ID manquant' });
+      const lang = getLanguageFromRequest(req);
+      return res.status(400).json({ 
+        success: false,
+        error: 'ORDER_ID_REQUIRED',
+        message: getErrorMessage('ORDER_ID_REQUIRED', lang)
+      });
     }
 
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
+      const lang = getLanguageFromRequest(req);
       return res.status(500).json({ 
         success: false,
         error: 'INTERNAL_SERVER_ERROR',
-        message: 'Configuration MongoDB manquante' 
+        message: getErrorMessage('INTERNAL_SERVER_ERROR', lang)
       });
     }
 
@@ -156,9 +163,12 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
   } catch (error) {
     console.error('Erreur lors de l\'annulation de la commande:', error);
+    const lang = getLanguageFromRequest(req);
     return res.status(500).json({
-      error: 'Erreur serveur lors de l\'annulation de la commande',
-      details: error instanceof Error ? error.message : 'Unknown error',
+      success: false,
+      error: 'INTERNAL_SERVER_ERROR',
+      message: getErrorMessage('INTERNAL_SERVER_ERROR', lang),
+      details: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : 'Unknown error') : undefined
     });
   }
 }
