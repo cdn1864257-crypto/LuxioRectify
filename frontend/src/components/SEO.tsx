@@ -41,14 +41,14 @@ export function SEO({
   const canonicalUrl = `${SITE_URL}${pagePath}?lang=${language}`;
   const siteName = t('seoOgSiteName');
   
-  const defaultOgImage = `${SITE_URL}/og-image-${language}.png`;
+  const seoLanguages: Language[] = ['en', 'fr', 'es', 'pt', 'it', 'hu'];
+  const ogLanguage = seoLanguages.includes(language) ? language : 'en';
+  const defaultOgImage = `${SITE_URL}/og-image-${ogLanguage}.png`;
   const finalOgImage = ogImage || defaultOgImage;
   
   const robotsContent = noindex 
     ? 'noindex, nofollow' 
     : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
-
-  const languages: Language[] = ['en', 'fr', 'es', 'pt', 'pl', 'it', 'hu'];
 
   return (
     <Helmet>
@@ -59,7 +59,7 @@ export function SEO({
       <meta name="robots" content={robotsContent} />
       <link rel="canonical" href={canonicalUrl} />
       
-      {languages.map((lang) => (
+      {seoLanguages.map((lang) => (
         <link
           key={lang}
           rel="alternate"
@@ -79,7 +79,7 @@ export function SEO({
       <meta property="og:image:height" content="630" />
       <meta property="og:image:type" content="image/png" />
       <meta property="og:locale" content={languageLocales[language]} />
-      {languages.filter(lang => lang !== language).map((lang) => (
+      {seoLanguages.filter(lang => lang !== language).map((lang) => (
         <meta key={lang} property="og:locale:alternate" content={languageLocales[lang]} />
       ))}
       
