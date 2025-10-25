@@ -1,0 +1,112 @@
+Parfait 👌 Voici ton prompt complet Replit-friendly, court, clair et 100 % opérationnel, à coller directement dans Replit :
+
+
+---
+
+🚀 PROMPT REPLIT — Gestion multilingue automatique de NOWPayments + Sécurité complète
+
+🧠 Objectif Mettre à jour l’intégration NOWPayments pour :
+
+afficher la page de paiement dans la langue actuelle de l’utilisateur,
+
+garantir un fallback automatique vers l’anglais si la langue n’est pas supportée,
+
+maintenir la sécurité complète (HTTPS, JWT, SendGrid, webhooks, RGPD),
+
+et vérifier si les cookies sont réellement nécessaires.
+
+
+
+---
+
+🛠️ Tâches à effectuer
+
+1️⃣ Ajout du support multilingue pour la redirection NOWPayments
+
+Détecter la langue actuelle du site via la variable currentLanguage (ex : 'fr', 'en', 'es', 'pt', 'it', 'pl', 'hu').
+
+Ajouter dynamiquement le paramètre ?lang= à l’URL de redirection NOWPayments.
+
+Utiliser uniquement les langues supportées par NOWPayments : ["en", "fr", "es", "pt", "it"].
+
+Si la langue du site n’est pas supportée, utiliser en par défaut.
+
+
+👉 Exemple de code attendu :
+
+const supportedLangs = ["en", "fr", "es", "pt", "it"];
+const lang = supportedLangs.includes(currentLanguage) ? currentLanguage : "en";
+const redirectUrl = `${invoiceUrl}?lang=${lang}`;
+window.location.href = redirectUrl;
+
+
+---
+
+2️⃣ Maintien de la sécurité et conformité
+
+Vérifier que la communication entre le frontend (Vercel) et le backend (Render) reste 100 % HTTPS.
+
+S’assurer que le token JWT est transmis uniquement via header Authorization (pas dans les cookies).
+
+Vérifier si les cookies peuvent être entièrement supprimés sans affecter la session utilisateur.
+→ Si oui, retirer toute dépendance aux cookies et se baser sur localStorage pour le token.
+
+Appliquer la conformité RGPD (consentement cookies, politique de confidentialité visible, etc.).
+
+
+
+---
+
+3️⃣ Notifications SendGrid et Webhooks
+
+Conserver l’envoi de l’email SendGrid uniquement après validation du paiement par le webhook NOWPayments.
+
+Inclure dans l’email : le résumé de la commande, le nom de l’utilisateur, et la référence (ex : Jean123456).
+
+Vérifier que la signature du webhook NOWPayments est bien vérifiée avant tout traitement.
+
+
+
+---
+
+4️⃣ Tests finaux
+
+Vérifier que la page de paiement NOWPayments s’affiche dans la langue du site.
+
+Tester avec plusieurs langues (FR, EN, ES, PT, IT).
+
+Vérifier la réception correcte de l’email SendGrid après paiement confirmé.
+
+Confirmer qu’aucun cookie n’est requis pour la navigation et les paiements.
+
+Générer un rapport NOWPAYMENTS_LANG_SECURITY_REPORT.md résumant :
+
+les fichiers modifiés,
+
+les langues testées,
+
+le statut de sécurité (HTTPS, JWT, RGPD, SendGrid, Webhooks).
+
+
+
+
+---
+
+✅ Résultat attendu
+
+Page de paiement NOWPayments automatiquement traduite selon la langue du site.
+
+Envoi d’email SendGrid uniquement après validation du paiement.
+
+Conformité HTTPS + RGPD + JWT garantie.
+
+Cookies supprimables sans briser la logique du site.
+
+Rapport de sécurité généré.
+
+
+
+---
+
+Souhaites-tu que je te fasse maintenant le prompt complémentaire pour vérifier et supprimer les cookies s’ils ne sont pas nécessaires ?
+
