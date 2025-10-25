@@ -18,6 +18,9 @@ import Dashboard from "@/pages/Dashboard";
 import Cart from "@/pages/Cart";
 import NewPayment from "@/pages/NewPayment";
 import ResetPassword from "@/pages/ResetPassword";
+import LegalNotice from "@/pages/LegalNotice";
+import TermsOfService from "@/pages/TermsOfService";
+import GdprDashboard from "@/pages/GdprDashboard";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -58,6 +61,23 @@ function Router() {
           </ProtectedRoute>
         </RouteWrapper>
       </Route>
+      <Route path="/fr/legal-notice">
+        <RouteWrapper lang="fr">
+          <LegalNotice />
+        </RouteWrapper>
+      </Route>
+      <Route path="/fr/terms-of-service">
+        <RouteWrapper lang="fr">
+          <TermsOfService />
+        </RouteWrapper>
+      </Route>
+      <Route path="/fr/gdpr">
+        <RouteWrapper lang="fr">
+          <ProtectedRoute>
+            <GdprDashboard />
+          </ProtectedRoute>
+        </RouteWrapper>
+      </Route>
 
       {/* Multilingual routes - English */}
       <Route path="/en">
@@ -91,6 +111,23 @@ function Router() {
         <RouteWrapper lang="en">
           <ProtectedRoute>
             <NewPayment />
+          </ProtectedRoute>
+        </RouteWrapper>
+      </Route>
+      <Route path="/en/legal-notice">
+        <RouteWrapper lang="en">
+          <LegalNotice />
+        </RouteWrapper>
+      </Route>
+      <Route path="/en/terms-of-service">
+        <RouteWrapper lang="en">
+          <TermsOfService />
+        </RouteWrapper>
+      </Route>
+      <Route path="/en/gdpr">
+        <RouteWrapper lang="en">
+          <ProtectedRoute>
+            <GdprDashboard />
           </ProtectedRoute>
         </RouteWrapper>
       </Route>
@@ -130,6 +167,23 @@ function Router() {
           </ProtectedRoute>
         </RouteWrapper>
       </Route>
+      <Route path="/pt/legal-notice">
+        <RouteWrapper lang="pt">
+          <LegalNotice />
+        </RouteWrapper>
+      </Route>
+      <Route path="/pt/terms-of-service">
+        <RouteWrapper lang="pt">
+          <TermsOfService />
+        </RouteWrapper>
+      </Route>
+      <Route path="/pt/gdpr">
+        <RouteWrapper lang="pt">
+          <ProtectedRoute>
+            <GdprDashboard />
+          </ProtectedRoute>
+        </RouteWrapper>
+      </Route>
 
       {/* Multilingual routes - Spanish */}
       <Route path="/es">
@@ -163,6 +217,23 @@ function Router() {
         <RouteWrapper lang="es">
           <ProtectedRoute>
             <NewPayment />
+          </ProtectedRoute>
+        </RouteWrapper>
+      </Route>
+      <Route path="/es/legal-notice">
+        <RouteWrapper lang="es">
+          <LegalNotice />
+        </RouteWrapper>
+      </Route>
+      <Route path="/es/terms-of-service">
+        <RouteWrapper lang="es">
+          <TermsOfService />
+        </RouteWrapper>
+      </Route>
+      <Route path="/es/gdpr">
+        <RouteWrapper lang="es">
+          <ProtectedRoute>
+            <GdprDashboard />
           </ProtectedRoute>
         </RouteWrapper>
       </Route>
@@ -202,6 +273,23 @@ function Router() {
           </ProtectedRoute>
         </RouteWrapper>
       </Route>
+      <Route path="/it/legal-notice">
+        <RouteWrapper lang="it">
+          <LegalNotice />
+        </RouteWrapper>
+      </Route>
+      <Route path="/it/terms-of-service">
+        <RouteWrapper lang="it">
+          <TermsOfService />
+        </RouteWrapper>
+      </Route>
+      <Route path="/it/gdpr">
+        <RouteWrapper lang="it">
+          <ProtectedRoute>
+            <GdprDashboard />
+          </ProtectedRoute>
+        </RouteWrapper>
+      </Route>
 
       {/* Multilingual routes - Hungarian */}
       <Route path="/hu">
@@ -238,6 +326,23 @@ function Router() {
           </ProtectedRoute>
         </RouteWrapper>
       </Route>
+      <Route path="/hu/legal-notice">
+        <RouteWrapper lang="hu">
+          <LegalNotice />
+        </RouteWrapper>
+      </Route>
+      <Route path="/hu/terms-of-service">
+        <RouteWrapper lang="hu">
+          <TermsOfService />
+        </RouteWrapper>
+      </Route>
+      <Route path="/hu/gdpr">
+        <RouteWrapper lang="hu">
+          <ProtectedRoute>
+            <GdprDashboard />
+          </ProtectedRoute>
+        </RouteWrapper>
+      </Route>
 
       {/* Multilingual routes - Polish */}
       <Route path="/pl">
@@ -271,6 +376,23 @@ function Router() {
         <RouteWrapper lang="pl">
           <ProtectedRoute>
             <NewPayment />
+          </ProtectedRoute>
+        </RouteWrapper>
+      </Route>
+      <Route path="/pl/legal-notice">
+        <RouteWrapper lang="pl">
+          <LegalNotice />
+        </RouteWrapper>
+      </Route>
+      <Route path="/pl/terms-of-service">
+        <RouteWrapper lang="pl">
+          <TermsOfService />
+        </RouteWrapper>
+      </Route>
+      <Route path="/pl/gdpr">
+        <RouteWrapper lang="pl">
+          <ProtectedRoute>
+            <GdprDashboard />
           </ProtectedRoute>
         </RouteWrapper>
       </Route>
