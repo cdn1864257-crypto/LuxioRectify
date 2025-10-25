@@ -1,0 +1,156 @@
+PROMPT REPLIT — RGPD, Cookies, JWT & Sécurité HTTPS complète pour luxiomarket.shop
+
+🧠 OBJECTIF
+
+Mettre le site Luxio Market (frontend React sur Vercel, backend Node.js/Express sur Render) en conformité totale RGPD, renforcer la sécurité HTTPS, vérifier la gestion des cookies et la sécurisation des JWT, et générer un rapport d’audit de conformité.
+
+Domaine principal :
+https://luxiomarket.shop
+Sous-domaine backend :
+https://api.luxiomarket.shop
+
+
+---
+
+🔐 1️⃣ — Sécurité et conformité HTTPS
+
+Forcer toutes les connexions en HTTPS.
+
+Ajouter les headers de sécurité via Helmet :
+
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false,
+}));
+app.use((req, res, next) => {
+  res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+  res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  next();
+});
+
+Vérifier que toutes les ressources (API, images, scripts) utilisent https://.
+
+
+
+---
+
+🍪 2️⃣ — Vérification et gestion des cookies
+
+Scanner le projet pour identifier tous les cookies utilisés (authentification, consentement, tracking, session).
+
+Déterminer si ces cookies sont :
+
+essentiels (authentification, session),
+
+optionnels (analytics, consentement).
+
+
+Tester la suppression des cookies non essentiels et vérifier si le site fonctionne sans eux.
+
+Si possible, proposer une alternative sans cookies (ex : stockage JWT côté serveur + session sécurisée) sans altérer l’intégrité du site.
+
+Tous les cookies conservés doivent avoir :
+
+Secure: true,
+HttpOnly: true,
+SameSite: "Strict" ou "Lax",
+
+Générer un COOKIE_AUDIT_REPORT.md :
+
+Liste de tous les cookies détectés
+
+Leur utilité
+
+Résultat des tests avec/sans cookies
+
+Recommandations
+
+
+
+
+---
+
+🔑 3️⃣ — JWT (Authentification)
+
+Vérifier la sécurité du système JWT :
+
+Signé avec JWT_SECRET (déjà configuré dans Render)
+
+Non stocké en localStorage → doit être en cookie HTTPOnly + Secure
+
+Vérification de validité à chaque requête API
+
+Rafraîchissement automatique (refresh token)
+
+Suppression sécurisée du cookie JWT à la déconnexion
+
+
+Standardiser les erreurs JWT (401/403) avec messages multilingues.
+
+
+
+---
+
+🇪🇺 4️⃣ — Conformité RGPD
+
+Ajouter ou vérifier la bannière de consentement aux cookies (accepter/refuser avant stockage).
+
+Créer les pages suivantes :
+
+Politique de confidentialité
+
+Mentions légales
+
+
+Ajouter dans le tableau de bord utilisateur :
+
+Droit à l’oubli (suppression compte et données)
+
+Export des données personnelles
+
+
+Enregistrer le consentement via un cookie signé (consent=true/false).
+
+Multilingue : afficher les messages RGPD dans la langue active du site.
+
+
+
+---
+
+🧾 5️⃣ — Rapport final automatisé
+
+Générer un fichier GDPR_COMPLIANCE_REPORT.md contenant :
+
+Résumé complet des vérifications (HTTPS, JWT, cookies, RGPD)
+
+Liste des fichiers modifiés
+
+Tests de suppression des cookies
+
+État du consentement utilisateur
+
+Recommandations finales (ex : cookies non nécessaires, corrections possibles)
+
+
+
+---
+
+✅ RÉSULTAT ATTENDU
+
+HTTPS activé et headers de sécurité conformes
+
+Aucun cookie inutile (ou suppression possible sans bug)
+
+JWT sécurisé et conforme RGPD
+
+Bannière de consentement multilingue
+
+Droit à l’oubli et export de données disponibles
+
+Rapport complet d’audit généré :
+
+COOKIE_AUDIT_REPORT.md
+
+GDPR_COMPLIANCE_REPORT.md
