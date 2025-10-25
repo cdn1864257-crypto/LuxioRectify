@@ -166,9 +166,18 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       console.log('[NowPayments] Payment response:', JSON.stringify(paymentResponse, null, 2));
 
       // NowPayments invoice_url pour la redirection
-      const redirectUrl = paymentResponse.invoice_url || paymentResponse.payment_url || `https://nowpayments.io/payment/?iid=${paymentResponse.id}`;
+      let redirectUrl = paymentResponse.invoice_url || paymentResponse.payment_url || `https://nowpayments.io/payment/?iid=${paymentResponse.id}`;
       
-      console.log(`[NowPayments] Redirect URL: ${redirectUrl}`);
+      // Add language parameter to redirect URL
+      // NOWPayments supports: en, fr, es, pt, it
+      const supportedLangs = ['en', 'fr', 'es', 'pt', 'it'];
+      const lang = supportedLangs.includes(userLanguage) ? userLanguage : 'en';
+      
+      // Add lang parameter to URL
+      const urlSeparator = redirectUrl.includes('?') ? '&' : '?';
+      redirectUrl = `${redirectUrl}${urlSeparator}lang=${lang}`;
+      
+      console.log(`[NowPayments] Redirect URL with language (${lang}): ${redirectUrl}`);
 
       return res.status(200).json({
         success: true,
