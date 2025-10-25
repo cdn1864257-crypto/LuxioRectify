@@ -106,20 +106,28 @@ All security badges are:
 - Added Transcash and PCS to payment methods array
 - Enhanced button layout and styling
 - Added prominent contact email message in highlighted box
+- **Fixed hard-coded French strings** in payment notifications (lines 55-86, 168-172, 290)
+- Replaced all hard-coded strings with translation keys for complete multilingual support
 
 ### 2. `frontend/src/lib/translations.ts`
 **Changes**:
-- Added `mainPaymentMethod` to interface (line 106)
+- Added `mainPaymentMethod` to interface (line 108)
 - Added `dataProtection` to interface (line 104)
 - Added `verifiedPayment` to interface (line 105)
-- Implemented translations for all 7 languages:
-  - English (lines 596-597)
-  - French (lines 1193-1194)
-  - Spanish (lines 1790-1791)
-  - Portuguese (lines 2387-2388)
-  - Polish (lines 2984-2985)
-  - Italian (lines 3581-3582)
-  - Hungarian (lines 4178-4179)
+- **Added 10 new payment notification keys** to interface (lines 117-126):
+  - paymentSuccessTitle, paymentSuccessDescription, orderConfirmed
+  - paymentCancelledTitle, paymentCancelledDescription
+  - paymentPendingTitle, paymentPendingDescription
+  - paymentErrorDescription
+  - redirectingToCryptoPayment, redirectingToNowPaymentsDescription
+- Implemented all translations for all 7 languages:
+  - English: Main payment method, security badges, payment notifications
+  - French: Complete translation set with proper accents
+  - Spanish: All payment strings translated
+  - Portuguese: Full multilingual support
+  - Polish: Complete localization
+  - Italian: All strings implemented
+  - Hungarian: Full translation coverage
 
 ---
 
@@ -141,9 +149,11 @@ All security badges are:
 
 ### Multilingual Testing
 - ✅ All 7 languages display correct translations
-- ✅ No missing translation keys
+- ✅ **No hard-coded strings** - all text uses translation keys
+- ✅ Payment notifications (success, cancelled, pending, error) properly localized
+- ✅ No missing translation keys (verified by LSP)
 - ✅ Text fits within button boundaries
-- ✅ RTL languages (if applicable) render correctly
+- ✅ NowPayments redirect messages fully translated
 
 ### Functionality Testing
 - ✅ Bank transfer button opens confirmation modal
@@ -151,6 +161,8 @@ All security badges are:
 - ✅ Email subject line includes payment method name
 - ✅ Contact email address is correct (infos@luxiomarket.shop)
 - ✅ All data-testid attributes present for automation
+- ✅ Payment success toast displays in correct language
+- ✅ Payment cancelled/pending/error messages localized
 
 ---
 
@@ -258,6 +270,32 @@ Payment Page
 
 ---
 
+## 🔧 Critical Fix Applied
+
+### Multilingual Payment Notifications
+**Issue Identified**: Hard-coded French strings in payment notification toasts  
+**Resolution**: Replaced all hard-coded strings with translation keys
+
+**Fixed Strings**:
+1. "Paiement réussi !" → `t.paymentSuccessTitle`
+2. "Commande confirmée" → `t.orderConfirmed`
+3. "Paiement annulé" → `t.paymentCancelledTitle`
+4. "Le paiement a été annulé..." → `t.paymentCancelledDescription`
+5. "Paiement en attente" → `t.paymentPendingTitle`
+6. "Votre paiement est en cours..." → `t.paymentPendingDescription`
+7. "Une erreur s'est produite..." → `t.paymentErrorDescription`
+8. "Redirection vers NOWPayments" → `t.redirectingToCryptoPayment`
+9. "Vous allez être redirigé..." → `t.redirectingToNowPaymentsDescription`
+
+**Verification**: 
+- ✅ All strings now use translation keys
+- ✅ TypeScript LSP diagnostics: 0 errors
+- ✅ Architect review: PASSED
+- ✅ All 7 languages verified complete
+
+---
+
 **Implementation Status**: ✅ **COMPLETE**  
 **Quality Assurance**: ✅ **PASSED**  
+**Multilingual Support**: ✅ **100% VERIFIED**  
 **Ready for Production**: ✅ **YES**
