@@ -8,7 +8,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Loader2, Check, X, Eye, EyeOff } from "lucide-react";
 import { validatePasswordStrength, isPasswordValid, type PasswordStrength } from "@/lib/password-strength";
-import { isValidCountry, isValidCity, isValidAddress, isValidRealEmail, isValidPhone, VALIDATION_MESSAGES } from "@/lib/validation";
+import { isValidCountry, isValidCity, isValidAddress, isValidRealEmail, isValidPhone } from "@/lib/validation";
 import { countriesCities, PHONE_PREFIXES } from "@/lib/countries-cities";
 
 interface SignupFormData {
@@ -137,31 +137,31 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     if (!formData.country.trim()) {
       newErrors.country = t('countryRequired');
     } else if (!isValidCountry(formData.country)) {
-      newErrors.country = VALIDATION_MESSAGES.invalidCountry;
+      newErrors.country = t('invalidCountry');
     }
     
     if (!formData.city.trim()) {
       newErrors.city = t('cityRequired');
     } else if (!isValidCity(formData.city)) {
-      newErrors.city = VALIDATION_MESSAGES.invalidCity;
+      newErrors.city = t('invalidCity');
     }
     
     if (!formData.address.trim()) {
       newErrors.address = t('addressRequired');
     } else if (!isValidAddress(formData.address)) {
-      newErrors.address = VALIDATION_MESSAGES.invalidAddress;
+      newErrors.address = t('invalidAddress');
     }
     
     if (!formData.phone.trim()) {
       newErrors.phone = t('phoneRequired');
     } else if (!isValidPhone(formData.phone)) {
-      newErrors.phone = VALIDATION_MESSAGES.invalidPhone;
+      newErrors.phone = t('invalidPhone');
     }
     
     if (!formData.email.trim()) {
       newErrors.email = t('emailRequired');
     } else if (!isValidRealEmail(formData.email)) {
-      newErrors.email = VALIDATION_MESSAGES.invalidEmail;
+      newErrors.email = t('invalidEmail');
     }
 
     if (!formData.password) {

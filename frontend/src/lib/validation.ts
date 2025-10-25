@@ -3,7 +3,12 @@ import { countriesCities } from './countries-cities';
 // Liste des pays réels (depuis countriesCities)
 export const VALID_COUNTRIES = countriesCities.map(c => c.en);
 
-// Normaliser le texte pour comparaison
+// Liste de toutes les villes valides (noms EN canoniques depuis countriesCities)
+export const VALID_CITIES = countriesCities.flatMap(country => 
+  country.cities.map(city => city.en)
+);
+
+// Normaliser le texte pour comparaison (gère les accents et la casse)
 function normalizeText(text: string): string {
   return text.toLowerCase()
     .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
@@ -18,12 +23,13 @@ export function isValidCountry(country: string): boolean {
   );
 }
 
-// Vérifier si une ville semble réelle (longueur minimale et caractères valides)
+// Vérifier si une ville est valide (doit être dans la liste countriesCities)
 export function isValidCity(city: string): boolean {
-  if (city.length < 2) return false;
-  // Autoriser les lettres, espaces, tirets et apostrophes
-  const validCityPattern = /^[a-zA-ZÀ-ÿ\s\-']+$/;
-  return validCityPattern.test(city);
+  if (!city || city.length < 2) return false;
+  const normalized = normalizeText(city);
+  return VALID_CITIES.some(validCity => 
+    normalizeText(validCity) === normalized
+  );
 }
 
 // Vérifier si une adresse semble réelle
@@ -72,12 +78,3 @@ export function isValidPhone(phone: string): boolean {
   
   return internationalPattern.test(cleanPhone) || localPattern.test(cleanPhone);
 }
-
-// Messages d'erreur
-export const VALIDATION_MESSAGES = {
-  invalidCountry: "Veuillez entrer un pays valide",
-  invalidCity: "Veuillez entrer une ville valide",
-  invalidAddress: "L'adresse doit contenir un numéro et un nom de rue",
-  invalidEmail: "Veuillez utiliser une adresse email valide et non temporaire",
-  invalidPhone: "Veuillez entrer un numéro de téléphone valide (ex: +33612345678 ou 0612345678)"
-};
