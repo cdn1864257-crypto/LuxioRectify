@@ -114,6 +114,7 @@ export interface Translations {
   paymentModalOtherMethodsTitle: string;
   paymentModalOtherMethodsMessage: string;
   paymentModalContactEmail: string;
+  viewPaymentInstructions: string;
   
   // Order Confirmation
   paymentInstructions: string;
@@ -602,6 +603,7 @@ export const translations: Record<Language, Translations> = {
     paymentModalOtherMethodsTitle: 'Other Payment Methods',
     paymentModalOtherMethodsMessage: 'For PayPal, Western Union, MoneyGram, or Ria payments, please contact our customer service at:',
     paymentModalContactEmail: 'infos@luxiomarket.shop',
+    viewPaymentInstructions: 'View Payment Instructions',
     
     // Order Confirmation
     paymentInstructions: 'After receiving payment, you will receive an email confirmation. Your order will be delivered within 24-48 hours.',
@@ -1195,6 +1197,7 @@ export const translations: Record<Language, Translations> = {
     paymentModalOtherMethodsTitle: 'Autres moyens de paiement',
     paymentModalOtherMethodsMessage: 'Pour les paiements PayPal, Western Union, MoneyGram ou Ria, veuillez contacter notre service client à :',
     paymentModalContactEmail: 'infos@luxiomarket.shop',
+    viewPaymentInstructions: 'Voir les instructions de paiement',
     
     // Order Confirmation
     paymentInstructions: 'Après réception du paiement, vous recevrez une confirmation par email. Votre commande sera livrée sous 24-48 h.',
@@ -1788,6 +1791,7 @@ export const translations: Record<Language, Translations> = {
     paymentModalOtherMethodsTitle: 'Otros métodos de pago',
     paymentModalOtherMethodsMessage: 'Para pagos con PayPal, Western Union, MoneyGram o Ria, por favor contacte a nuestro servicio al cliente en:',
     paymentModalContactEmail: 'infos@luxiomarket.shop',
+    viewPaymentInstructions: 'Ver instrucciones de pago',
     
     // Order Confirmation
     paymentInstructions: 'Después de recibir el pago, recibirás una confirmación por email. Tu pedido será entregado en 24-48 horas.',
@@ -2381,6 +2385,7 @@ export const translations: Record<Language, Translations> = {
     paymentModalOtherMethodsTitle: 'Outros métodos de pagamento',
     paymentModalOtherMethodsMessage: 'Para pagamentos PayPal, Western Union, MoneyGram ou Ria, por favor contacte o nosso serviço de apoio ao cliente em:',
     paymentModalContactEmail: 'infos@luxiomarket.shop',
+    viewPaymentInstructions: 'Ver instruções de pagamento',
     
     // Order Confirmation
     paymentInstructions: 'Após receber o pagamento, receberá uma confirmação por email. O seu pedido será entregue em 24-48 horas.',
@@ -2974,6 +2979,7 @@ export const translations: Record<Language, Translations> = {
     paymentModalOtherMethodsTitle: 'Inne metody płatności',
     paymentModalOtherMethodsMessage: 'W przypadku płatności PayPal, Western Union, MoneyGram lub Ria prosimy o kontakt z naszą obsługą klienta pod adresem:',
     paymentModalContactEmail: 'infos@luxiomarket.shop',
+    viewPaymentInstructions: 'Zobacz instrukcje płatności',
     
     // Order Confirmation
     paymentInstructions: 'Po otrzymaniu płatności otrzymasz potwierdzenie przez email. Twoje zamówienie zostanie dostarczone w ciągu 24-48 godzin.',
@@ -3567,6 +3573,7 @@ export const translations: Record<Language, Translations> = {
     paymentModalOtherMethodsTitle: 'Altri metodi di pagamento',
     paymentModalOtherMethodsMessage: 'Per i pagamenti PayPal, Western Union, MoneyGram o Ria, si prega di contattare il nostro servizio clienti a:',
     paymentModalContactEmail: 'infos@luxiomarket.shop',
+    viewPaymentInstructions: 'Visualizza istruzioni di pagamento',
     
     // Order Confirmation
     paymentInstructions: 'Dopo aver ricevuto il pagamento, riceverai una conferma via email. Il tuo ordine sarà consegnato entro 24-48 ore.',
@@ -4160,6 +4167,7 @@ export const translations: Record<Language, Translations> = {
     paymentModalOtherMethodsTitle: 'Egyéb fizetési módok',
     paymentModalOtherMethodsMessage: 'PayPal, Western Union, MoneyGram vagy Ria fizetéshez kérjük, lépjen kapcsolatba ügyfélszolgálatunkkal:',
     paymentModalContactEmail: 'infos@luxiomarket.shop',
+    viewPaymentInstructions: 'Fizetési útmutató megtekintése',
     
     // Order Confirmation
     paymentInstructions: 'A fizetés kézhezvétele után e-mail megerősítést kap. Rendelését 24-48 órán belül kiszállítjuk.',

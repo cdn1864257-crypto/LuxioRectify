@@ -48,7 +48,7 @@ export function PaymentModal({ open, onOpenChange, bankDetails }: PaymentModalPr
           </div>
           <DialogTitle className="text-center text-lg sm:text-xl">{t.paymentModalTitle}</DialogTitle>
           <DialogDescription className="text-center text-sm sm:text-base">
-            {t.chooseYourPaymentMethod}
+            {t.choosePaymentMethod}
           </DialogDescription>
         </DialogHeader>
 

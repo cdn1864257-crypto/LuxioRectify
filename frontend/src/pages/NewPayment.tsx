@@ -13,9 +13,10 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, ShoppingBag, CreditCard, Building2, Ticket, Zap, X, Copy, Check, DollarSign } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, CreditCard, Building2, Ticket, Zap, X, Copy, Check, DollarSign, Info } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/lib/translations';
+import { PaymentModal } from '@/components/PaymentModal';
 
 type PaymentMethod = 'bank-transfer' | 'nowpayments' | 'pcs-transcash';
 type TicketType = 'PCS' | 'TransCash';
@@ -34,6 +35,7 @@ export default function NewPayment() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [showBankModal, setShowBankModal] = useState(false);
   const [showBankConfirmModal, setShowBankConfirmModal] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [bankDetails, setBankDetails] = useState<any>(null);
   const [copied, setCopied] = useState(false);
   const [ticketType, setTicketType] = useState<TicketType>('PCS');
@@ -462,6 +464,28 @@ export default function NewPayment() {
                 <p className="text-xs sm:text-sm text-muted-foreground mt-3 text-center">
                   {t.alternativePaymentMessage}
                 </p>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full mt-3"
+                  onClick={() => {
+                    // Generate bank details for the modal
+                    const orderReference = `LX-${Date.now()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
+                    setBankDetails({
+                      bankName: 'Matt Luxio',
+                      iban: 'ES6115632626383268707364',
+                      bic: 'NTSBESM1XXX',
+                      reference: orderReference,
+                      orderReference: orderReference,
+                      amount: total
+                    });
+                    setShowPaymentModal(true);
+                  }}
+                  data-testid="button-view-payment-instructions"
+                >
+                  <Info className="h-4 w-4 mr-2" />
+                  {t.viewPaymentInstructions || 'View Payment Instructions'}
+                </Button>
               </div>
 
               {paymentMethod === 'pcs-transcash' && (
@@ -762,6 +786,12 @@ export default function NewPayment() {
           </div>
         </DialogContent>
       </Dialog>
+
+      <PaymentModal 
+        open={showPaymentModal} 
+        onOpenChange={setShowPaymentModal}
+        bankDetails={bankDetails}
+      />
 
       <Footer />
 
