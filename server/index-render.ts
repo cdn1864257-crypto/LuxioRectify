@@ -24,6 +24,10 @@ import nowpaymentsWebhookHandler from '../api/payment/nowpayments-webhook.js';
 import ordersHandler from '../api/orders.js';
 import deleteOrderHandler from '../api/orders/[orderId].js';
 import { getErrorMessage, getLanguageFromRequest } from './utils/multilingual-messages.js';
+import getProductsHandler from '../api/products/index.js';
+import createProductHandler from '../api/products/create.js';
+import updateProductHandler from '../api/products/update.js';
+import deleteProductHandler from '../api/products/delete.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -343,6 +347,12 @@ app.post('/api/payment/nowpayments-webhook', convertVercelHandler(nowpaymentsWeb
 // Orders routes (CSRF protection applied globally via middleware)
 app.delete('/api/orders/:orderId', convertVercelHandler(deleteOrderHandler));
 app.use('/api/orders', convertVercelHandler(ordersHandler));
+
+// Product management routes (CSRF protection applied globally via middleware)
+app.get('/api/products', convertVercelHandler(getProductsHandler));
+app.post('/api/products/create', convertVercelHandler(createProductHandler));
+app.put('/api/products/update', convertVercelHandler(updateProductHandler));
+app.delete('/api/products/delete', convertVercelHandler(deleteProductHandler));
 
 // Health check route
 app.get('/', (req, res) => {

@@ -110,7 +110,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    // Check admin access
+    // Check admin access (CSRF protection handled by Express middleware)
     const adminCheck = await isAdmin(req);
     if (!adminCheck.isAdmin) {
       return res.status(403).json({
