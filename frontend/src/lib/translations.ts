@@ -109,6 +109,11 @@ export interface Translations {
   moneyGram: string;
   ria: string;
   alternativePaymentMessage: string;
+  recommendedMethod: string;
+  alternativePaymentInstructionsTitle: string;
+  alternativePaymentInstructions: string;
+  clickToViewAlternativeMethods: string;
+  understood: string;
   
   // Payment Notifications
   paymentSuccessTitle: string;
@@ -613,6 +618,11 @@ export const translations: Record<Language, Translations> = {
     moneyGram: 'MoneyGram',
     ria: 'Ria',
     alternativePaymentMessage: 'To use this payment method, please contact our customer service at: infos@luxiomarket.shop. We will respond promptly.',
+    recommendedMethod: 'Recommended Method',
+    alternativePaymentInstructionsTitle: 'How to Proceed?',
+    alternativePaymentInstructions: 'Click on your preferred payment method above. This will open your email application with a pre-filled message. Send this message to our service to finalize your order. Our team will respond as soon as possible with detailed payment instructions.',
+    clickToViewAlternativeMethods: 'Click to view other available payment methods',
+    understood: 'Understood',
     
     // Payment Notifications
     paymentSuccessTitle: 'Payment successful!',
@@ -1222,6 +1232,11 @@ export const translations: Record<Language, Translations> = {
     moneyGram: 'MoneyGram',
     ria: 'Ria',
     alternativePaymentMessage: 'Pour utiliser ce moyen de paiement, veuillez contacter notre service client à : infos@luxiomarket.shop. Nous vous répondrons rapidement.',
+    recommendedMethod: 'Méthode Recommandée',
+    alternativePaymentInstructionsTitle: 'Comment procéder ?',
+    alternativePaymentInstructions: 'Cliquez sur le moyen de paiement de votre choix ci-dessus. Cela ouvrira votre application email avec un message pré-rempli. Envoyez ce message à notre service pour finaliser votre commande. Notre équipe vous répondra dans les plus brefs délais avec les instructions de paiement détaillées.',
+    clickToViewAlternativeMethods: 'Cliquez pour voir les autres moyens de paiement disponibles',
+    understood: 'Compris',
     
     // Payment Notifications
     paymentSuccessTitle: 'Paiement réussi !',
@@ -1831,6 +1846,11 @@ export const translations: Record<Language, Translations> = {
     moneyGram: 'MoneyGram',
     ria: 'Ria',
     alternativePaymentMessage: 'Para utilizar este método de pago, por favor contacte a nuestro servicio de atención al cliente en: infos@luxiomarket.shop. Le responderemos rápidamente.',
+    recommendedMethod: 'Método Recomendado',
+    alternativePaymentInstructionsTitle: '¿Cómo proceder?',
+    alternativePaymentInstructions: 'Haga clic en su método de pago preferido arriba. Esto abrirá su aplicación de correo electrónico con un mensaje prellenado. Envíe este mensaje a nuestro servicio para finalizar su pedido. Nuestro equipo responderá lo antes posible con instrucciones de pago detalladas.',
+    clickToViewAlternativeMethods: 'Haga clic para ver otros métodos de pago disponibles',
+    understood: 'Entendido',
     
     // Payment Notifications
     paymentSuccessTitle: '¡Pago exitoso!',
@@ -2440,6 +2460,11 @@ export const translations: Record<Language, Translations> = {
     moneyGram: 'MoneyGram',
     ria: 'Ria',
     alternativePaymentMessage: 'Para utilizar este método de pagamento, por favor contacte o nosso serviço de apoio ao cliente em: infos@luxiomarket.shop. Responderemos rapidamente.',
+    recommendedMethod: 'Método Recomendado',
+    alternativePaymentInstructionsTitle: 'Como proceder?',
+    alternativePaymentInstructions: 'Clique no seu método de pagamento preferido acima. Isso abrirá seu aplicativo de e-mail com uma mensagem pré-preenchida. Envie esta mensagem ao nosso serviço para finalizar seu pedido. Nossa equipe responderá o mais rápido possível com instruções de pagamento detalhadas.',
+    clickToViewAlternativeMethods: 'Clique para ver outros métodos de pagamento disponíveis',
+    understood: 'Compreendido',
     
     // Payment Notifications
     paymentSuccessTitle: 'Pagamento bem-sucedido!',
@@ -3049,6 +3074,11 @@ export const translations: Record<Language, Translations> = {
     moneyGram: 'MoneyGram',
     ria: 'Ria',
     alternativePaymentMessage: 'Aby skorzystać z tej metody płatności, skontaktuj się z naszą obsługą klienta pod adresem: infos@luxiomarket.shop. Odpowiemy szybko.',
+    recommendedMethod: 'Zalecana metoda',
+    alternativePaymentInstructionsTitle: 'Jak postępować?',
+    alternativePaymentInstructions: 'Kliknij preferowaną metodę płatności powyżej. Spowoduje to otwarcie aplikacji e-mail z wstępnie wypełnioną wiadomością. Wyślij tę wiadomość do naszego serwisu, aby sfinalizować zamówienie. Nasz zespół odpowie jak najszybciej ze szczegółowymi instrukcjami płatności.',
+    clickToViewAlternativeMethods: 'Kliknij, aby zobaczyć inne dostępne metody płatności',
+    understood: 'Rozumiem',
     
     // Payment Notifications
     paymentSuccessTitle: 'Płatność zakończona sukcesem!',
@@ -3658,6 +3688,11 @@ export const translations: Record<Language, Translations> = {
     moneyGram: 'MoneyGram',
     ria: 'Ria',
     alternativePaymentMessage: 'Per utilizzare questo metodo di pagamento, contatta il nostro servizio clienti a: infos@luxiomarket.shop. Risponderemo prontamente.',
+    recommendedMethod: 'Metodo Consigliato',
+    alternativePaymentInstructionsTitle: 'Come procedere?',
+    alternativePaymentInstructions: 'Clicca sul tuo metodo di pagamento preferito sopra. Questo aprirà la tua applicazione email con un messaggio precompilato. Invia questo messaggio al nostro servizio per finalizzare il tuo ordine. Il nostro team risponderà il prima possibile con istruzioni di pagamento dettagliate.',
+    clickToViewAlternativeMethods: 'Clicca per vedere altri metodi di pagamento disponibili',
+    understood: 'Compreso',
     
     // Payment Notifications
     paymentSuccessTitle: 'Pagamento riuscito!',
@@ -4267,6 +4302,11 @@ export const translations: Record<Language, Translations> = {
     moneyGram: 'MoneyGram',
     ria: 'Ria',
     alternativePaymentMessage: 'A fizetési mód használatához kérjük, lépjen kapcsolatba ügyfélszolgálatunkkal: infos@luxiomarket.shop. Gyorsan válaszolunk.',
+    recommendedMethod: 'Ajánlott módszer',
+    alternativePaymentInstructionsTitle: 'Hogyan kell eljárni?',
+    alternativePaymentInstructions: 'Kattintson a fenti preferált fizetési módra. Ez megnyitja az e-mail alkalmazást egy előre kitöltött üzenettel. Küldje el ezt az üzenetet szolgáltatásunknak a rendelés véglegesítéséhez. Csapatunk a lehető leghamarabb válaszol részletes fizetési utasításokkal.',
+    clickToViewAlternativeMethods: 'Kattintson más elérhető fizetési módok megtekintéséhez',
+    understood: 'Értettem',
     
     // Payment Notifications
     paymentSuccessTitle: 'Sikeres fizetés!',
