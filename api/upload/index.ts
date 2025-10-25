@@ -1,19 +1,33 @@
 import { v2 as cloudinary } from 'cloudinary';
 import formidable, { File } from 'formidable';
 import fs from 'fs';
-import { IncomingMessage, ServerResponse } from 'http';
+import jwt from 'jsonwebtoken';
+import { parse } from 'cookie';
 
-interface VercelRequest extends IncomingMessage {
+interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
   body: any;
   cookies: { [key: string]: string };
+  method: string;
+  url: string;
+  headers: { [key: string]: string };
 }
 
-interface VercelResponse extends ServerResponse {
+interface VercelResponse {
   status: (code: number) => VercelResponse;
   json: (object: any) => VercelResponse;
   setHeader: (name: string, value: string | string[]) => VercelResponse;
+  end: (chunk?: any) => void;
 }
+
+interface JWTPayload {
+  userId: string;
+  email: string;
+}
+
+const ADMIN_EMAILS = [
+  'replitprojet97@gmail.com',
+];
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -21,7 +35,51 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const parseForm = (req: IncomingMessage): Promise<{ fields: formidable.Fields; files: formidable.Files }> => {
+async function isAdmin(req: VercelRequest): Promise<{ isAdmin: boolean; error?: string }> {
+  try {
+    let token: string | undefined;
+    
+    const cookieHeader = req.headers.cookie;
+    if (cookieHeader) {
+      const cookies = parse(cookieHeader);
+      token = cookies.auth_token;
+    }
+    
+    if (!token && req.headers.authorization) {
+      const authHeader = req.headers.authorization;
+      if (authHeader.startsWith('Bearer ')) {
+        token = authHeader.substring(7);
+      }
+    }
+
+    if (!token) {
+      return { isAdmin: false, error: 'No authentication token' };
+    }
+
+    const jwtSecret = process.env.JWT_SECRET;
+    if (!jwtSecret) {
+      return { isAdmin: false, error: 'JWT configuration error' };
+    }
+
+    let decoded: JWTPayload;
+    try {
+      decoded = jwt.verify(token, jwtSecret) as JWTPayload;
+    } catch (error) {
+      return { isAdmin: false, error: 'Invalid or expired token' };
+    }
+
+    const isUserAdmin = ADMIN_EMAILS.includes(decoded.email.toLowerCase());
+    return { 
+      isAdmin: isUserAdmin, 
+      error: isUserAdmin ? undefined : 'Admin access required'
+    };
+  } catch (error) {
+    console.error('Admin check error:', error);
+    return { isAdmin: false, error: 'Authentication error' };
+  }
+}
+
+const parseForm = (req: any): Promise<{ fields: formidable.Fields; files: formidable.Files }> => {
   return new Promise((resolve, reject) => {
     const form = formidable({ multiples: false });
     form.parse(req, (err, fields, files) => {
@@ -41,6 +99,14 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    const adminCheck = await isAdmin(req);
+    if (!adminCheck.isAdmin) {
+      return res.status(403).json({
+        success: false,
+        error: adminCheck.error || 'Accès non autorisé'
+      });
+    }
+
     if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
       return res.status(500).json({
         success: false,

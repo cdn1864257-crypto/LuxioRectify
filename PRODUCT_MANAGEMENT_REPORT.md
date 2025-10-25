@@ -616,11 +616,61 @@ curl -X POST https://api.luxiomarket.shop/api/products/create \
 
 ## 11. Future Enhancements
 
-### 11.1 Recommended Improvements
+### 11.1 ✅ Completed Enhancements
+
+| Enhancement | Status | Description |
+|-------------|--------|-------------|
+| **Image Upload** | ✅ Complete | Direct file upload via Cloudinary integration |
+| **Dual Upload Method** | ✅ Complete | Support both URL and file upload |
+| **Image Preview** | ✅ Complete | Live preview in admin forms |
+| **Cloud Storage** | ✅ Complete | Images hosted on Cloudinary CDN |
+
+#### Cloudinary Integration Details
+
+**Packages Installed:**
+- `cloudinary` - Official Cloudinary SDK
+- `multer` - File upload handling
+- `formidable` - Form parsing with file support
+
+**API Endpoint Created:**
+- `POST /api/upload` - Upload images to Cloudinary
+
+**Frontend Component:**
+- `ImageUpload.tsx` - Dual-mode upload component (URL/File)
+
+**Features:**
+- Tab-based interface (URL vs Upload)
+- File size validation (max 5 MB)
+- Image type validation (JPG, PNG, WebP)
+- Loading states during upload
+- Error handling and toasts
+- Live image preview
+
+**Configuration Required:**
+```env
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+```
+
+**Usage in Admin Panel:**
+1. Click "Upload" tab in image field
+2. Click "Choisir une image" button
+3. Select image file (max 5 MB)
+4. Image uploads to Cloudinary automatically
+5. Secure URL saved to database
+
+**Benefits:**
+- Professional cloud hosting
+- Automatic CDN delivery
+- Image optimization
+- No server storage needed
+- Secure URLs (HTTPS)
+
+### 11.2 Recommended Future Improvements
 
 | Enhancement | Priority | Effort | Impact |
 |-------------|----------|--------|--------|
-| **Image Upload** | High | Medium | Allow direct file upload vs URLs |
 | **Bulk Import** | Medium | Low | Import products via CSV/JSON |
 | **Product Variants UI** | High | High | Visual variant management |
 | **Product Categories** | Medium | Low | Dynamic category management |

@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ImageUpload } from '@/components/ImageUpload';
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Edit, Trash2, Package, AlertCircle } from 'lucide-react';
 
@@ -487,16 +488,11 @@ export default function AdminProducts() {
                 />
               </div>
             </div>
-            <div>
-              <Label htmlFor="image">URL de l'image *</Label>
-              <Input 
-                id="image"
-                value={formData.image}
-                onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                placeholder="/attached_assets/product.jpg"
-                data-testid="input-image"
-              />
-            </div>
+            <ImageUpload
+              label="Image du produit *"
+              value={formData.image}
+              onChange={(url) => setFormData({ ...formData, image: url })}
+            />
             <div>
               <Label htmlFor="category">Catégorie *</Label>
               <Select 
@@ -595,14 +591,11 @@ export default function AdminProducts() {
                 />
               </div>
             </div>
-            <div>
-              <Label htmlFor="edit-image">URL de l'image *</Label>
-              <Input 
-                id="edit-image"
-                value={formData.image}
-                onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-              />
-            </div>
+            <ImageUpload
+              label="Image du produit *"
+              value={formData.image}
+              onChange={(url) => setFormData({ ...formData, image: url })}
+            />
             <div>
               <Label htmlFor="edit-category">Catégorie *</Label>
               <Select 
