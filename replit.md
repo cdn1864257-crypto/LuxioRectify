@@ -3,6 +3,8 @@
 ## Overview
 Luxio is a premium e-commerce platform built with React and TypeScript, designed for selling premium electronics. It provides a robust e-commerce experience with a focus on modern UI/UX, comprehensive product variant management, and secure payment processing. The platform uses MongoDB Atlas for user authentication and order storage, an Express.js backend API, and integrates with external payment gateways. Its ambition is to offer a seamless and secure online shopping experience for high-end electronic gadgets.
 
+**Official Domain**: luxiomarket.shop
+
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
@@ -39,6 +41,15 @@ Product and order data are managed client-side using a static product database o
 
 ### Payment Processing
 A complete payment system offers three secure methods: Bank Transfer, Maxelpay (redirect-based), and PCS/Transcash Tickets (with AES-256 encryption). All payment methods are protected routes, require authentication and a non-empty cart, and trigger email notifications via SendGrid. NowPayments integration includes HMAC SHA-512 signature verification for webhooks and automatic dashboard refresh for order updates.
+
+### Email System (Updated: October 26, 2025)
+All automated emails are sent via SendGrid with full multilingual support:
+- **Welcome Email**: Sent upon successful registration with platform introduction
+- **Order Confirmation Emails**: For Bank Transfer, NowPayments (crypto), and Ticket payments
+- **Admin Notifications**: Sent to admin for new orders
+- **Domain Configuration**: All email links default to https://luxiomarket.shop (overridable via REPLIT_DEV_DOMAIN)
+- **Privacy**: Email addresses removed from footer and instructions to maintain privacy
+- **Languages**: Full support for FR, EN, ES, PT, PL, HU with localized content
 
 ### Technical Implementations
 The project is configured for the Replit environment: a `start-dev.js` script runs both backend (Express on port 3001) and frontend (Vite dev server on port 5000) with API proxying. Vite is configured with `host: '0.0.0.0'` and `allowedHosts: true` for Replit proxy support. Deployment builds the frontend and serves via `serve` on port 5000. A `copy-images.js` script syncs product images. Backend error handling ensures all API errors return valid JSON responses.
