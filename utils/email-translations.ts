@@ -68,7 +68,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     // Common
     hello: 'Bonjour',
     team_signature: 'Cordialement,\nL\'équipe Luxio\nVotre partenaire de confiance pour des produits premium',
-    footer_note: 'Cet email a été envoyé automatiquement. Pour toute question, notre équipe est disponible 7j/7 à infos@luxioshopping.com',
+    footer_note: 'Cet email a été envoyé automatiquement. Pour toute question, notre équipe est disponible 7j/7.',
     access_dashboard: 'Accéder à mon espace client',
     
     // Welcome Email
@@ -91,7 +91,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC / SWIFT',
     transfer_reason: 'Motif du virement (obligatoire)',
     delivery_time: '📦 Livraison express sous 24-72h après validation de votre virement\n🔒 Emballage sécurisé et discret\n📍 Suivi de colis en temps réel',
-    proof_instruction: '⚡ ASTUCE : Pour un traitement prioritaire, envoyez-nous votre justificatif de virement à infos@luxioshopping.com. Cela nous permettra de traiter votre commande jusqu\'à 48h plus rapidement.',
+    proof_instruction: '⚡ ASTUCE : Pour un traitement prioritaire, envoyez-nous votre justificatif de virement par email. Cela nous permettra de traiter votre commande jusqu\'à 48h plus rapidement.',
     
     // Ticket Payment
     ticket_type: 'Type de ticket prépayé',
@@ -123,7 +123,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     // Common
     hello: 'Hello',
     team_signature: 'Best regards,\nThe Luxio Team\nYour trusted partner for premium products',
-    footer_note: 'This email was sent automatically. For any questions, our team is available 7 days a week at infos@luxioshopping.com',
+    footer_note: 'This email was sent automatically. For any questions, our team is available 7 days a week.',
     access_dashboard: 'Access my customer area',
     
     // Welcome Email
@@ -146,7 +146,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC / SWIFT',
     transfer_reason: 'Transfer reference (required)',
     delivery_time: '📦 Express delivery within 24-72h after payment validation\n🔒 Secure and discreet packaging\n📍 Real-time parcel tracking',
-    proof_instruction: '⚡ TIP: For priority processing, send us your payment proof to infos@luxioshopping.com. This will allow us to process your order up to 48 hours faster.',
+    proof_instruction: '⚡ TIP: For priority processing, send us your payment proof by email. This will allow us to process your order up to 48 hours faster.',
     
     // Ticket Payment
     ticket_type: 'Prepaid ticket type',
@@ -178,7 +178,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     // Common
     hello: 'Hola',
     team_signature: 'Cordialmente,\nEl equipo Luxio\nSu socio de confianza para productos premium',
-    footer_note: 'Este correo fue enviado automáticamente. Para cualquier pregunta, nuestro equipo está disponible 7 días a la semana en infos@luxioshopping.com',
+    footer_note: 'Este correo fue enviado automáticamente. Para cualquier pregunta, nuestro equipo está disponible 7 días a la semana.',
     access_dashboard: 'Acceder a mi área de cliente',
     
     // Welcome Email
@@ -201,7 +201,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC / SWIFT',
     transfer_reason: 'Referencia de transferencia (obligatoria)',
     delivery_time: '📦 Entrega exprés en 24-72h después de la validación del pago\n🔒 Embalaje seguro y discreto\n📍 Seguimiento de paquete en tiempo real',
-    proof_instruction: '⚡ CONSEJO: Para un procesamiento prioritario, envíenos su comprobante de pago a infos@luxioshopping.com. Esto nos permitirá procesar su pedido hasta 48 horas más rápido.',
+    proof_instruction: '⚡ CONSEJO: Para un procesamiento prioritario, envíenos su comprobante de pago por correo electrónico. Esto nos permitirá procesar su pedido hasta 48 horas más rápido.',
     
     // Ticket Payment
     ticket_type: 'Tipo de ticket prepago',
@@ -233,7 +233,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     // Common
     hello: 'Olá',
     team_signature: 'Cordialmente,\nA equipe Luxio\nSeu parceiro de confiança para produtos premium',
-    footer_note: 'Este email foi enviado automaticamente. Para qualquer pergunta, nossa equipe está disponível 7 dias por semana em infos@luxioshopping.com',
+    footer_note: 'Este email foi enviado automaticamente. Para qualquer pergunta, nossa equipe está disponível 7 dias por semana.',
     access_dashboard: 'Acessar minha área de cliente',
     
     // Welcome Email
@@ -256,7 +256,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC / SWIFT',
     transfer_reason: 'Referência da transferência (obrigatória)',
     delivery_time: '📦 Entrega expressa em 24-72h após validação do pagamento\n🔒 Embalagem segura e discreta\n📍 Rastreamento de pacote em tempo real',
-    proof_instruction: '⚡ DICA: Para processamento prioritário, envie-nos seu comprovante de pagamento para infos@luxioshopping.com. Isso nos permitirá processar seu pedido até 48 horas mais rápido.',
+    proof_instruction: '⚡ DICA: Para processamento prioritário, envie-nos seu comprovante de pagamento por e-mail. Isso nos permitirá processar seu pedido até 48 horas mais rápido.',
     
     // Ticket Payment
     ticket_type: 'Tipo de ticket pré-pago',
@@ -288,7 +288,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     // Common
     hello: 'Cześć',
     team_signature: 'Z poważaniem,\nZespół Luxio\nTwój zaufany partner dla produktów premium',
-    footer_note: 'Ten email został wysłany automatycznie. W razie pytań, nasz zespół jest dostępny 7 dni w tygodniu pod adresem infos@luxioshopping.com',
+    footer_note: 'Ten email został wysłany automatycznie. W razie pytań, nasz zespół jest dostępny 7 dni w tygodniu.',
     access_dashboard: 'Dostęp do mojego obszaru klienta',
     
     // Welcome Email
@@ -311,7 +311,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC / SWIFT',
     transfer_reason: 'Tytuł przelewu (wymagany)',
     delivery_time: '📦 Dostawa ekspresowa w ciągu 24-72h po walidacji płatności\n🔒 Bezpieczne i dyskretne opakowanie\n📍 Śledzenie paczki w czasie rzeczywistym',
-    proof_instruction: '⚡ WSKAZÓWKA: Dla priorytetowego przetwarzania, wyślij nam potwierdzenie płatności na infos@luxioshopping.com. Pozwoli nam to przetworzyć Twoje zamówienie nawet o 48 godzin szybciej.',
+    proof_instruction: '⚡ WSKAZÓWKA: Dla priorytetowego przetwarzania, wyślij nam potwierdzenie płatności e-mailem. Pozwoli nam to przetworzyć Twoje zamówienie nawet o 48 godzin szybciej.',
     
     // Ticket Payment
     ticket_type: 'Typ biletu przedpłaconego',
@@ -343,7 +343,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     // Common
     hello: 'Helló',
     team_signature: 'Tisztelettel,\nA Luxio Csapat\nAz Ön megbízható partnere prémium termékekhez',
-    footer_note: 'Ez az email automatikusan lett elküldve. Bármilyen kérdés esetén csapatunk elérhető a héten 7 napja az infos@luxioshopping.com címen',
+    footer_note: 'Ez az email automatikusan lett elküldve. Bármilyen kérdés esetén csapatunk elérhető a héten 7 napja.',
     access_dashboard: 'Hozzáférés az ügyfél területhez',
     
     // Welcome Email
@@ -366,7 +366,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC / SWIFT',
     transfer_reason: 'Átutalási közlemény (kötelező)',
     delivery_time: '📦 Expressz szállítás 24-72 órán belül a fizetés jóváhagyása után\n🔒 Biztonságos és diszkrét csomagolás\n📍 Valós idejű csomag követés',
-    proof_instruction: '⚡ TIPP: Prioritásos feldolgozáshoz küldje el fizetési igazolását az infos@luxioshopping.com címre. Ez lehetővé teszi számunkra, hogy akár 48 órával gyorsabban feldolgozzuk rendelését.',
+    proof_instruction: '⚡ TIPP: Prioritásos feldolgozáshoz küldje el fizetési igazolását e-mailben. Ez lehetővé teszi számunkra, hogy akár 48 órával gyorsabban feldolgozzuk rendelését.',
     
     // Ticket Payment
     ticket_type: 'Előre fizetett jegy típusa',
