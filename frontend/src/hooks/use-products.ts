@@ -15,32 +15,43 @@ export function useProducts(): UseProductsResult {
   const [error, setError] = useState<string | null>(null);
 
   const fetchProducts = async () => {
-    try {
-      setLoading(true);
-      setError(null);
+    setLoading(true);
+    setError(null);
 
+    try {
       const response = await fetch(getApiUrl('/api/products'), {
         credentials: 'include'
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch products');
+        console.warn('API products unavailable, using static products');
+        throw new Error('Failed to fetch products from API');
       }
 
       const data = await response.json();
 
-      if (data.success && data.products) {
+      if (data.success && data.products && data.products.length > 0) {
         setProducts(data.products);
+        console.log(`✅ Loaded ${data.products.length} products from API`);
       } else {
-        throw new Error(data.error || 'Failed to load products');
+        throw new Error(data.error || 'No products returned from API');
       }
     } catch (err) {
-      console.error('Error fetching products:', err);
-      setError(err instanceof Error ? err.message : 'Failed to load products');
+      console.error('Error fetching products from API:', err);
+      console.log('📦 Loading static products as fallback...');
       
-      // Fallback to static products if API fails
-      const { products: staticProducts } = await import('@/lib/products');
-      setProducts(staticProducts);
+      try {
+        const { products: staticProducts } = await import('@/lib/products');
+        if (staticProducts && staticProducts.length > 0) {
+          setProducts(staticProducts);
+          console.log(`✅ Loaded ${staticProducts.length} static products`);
+        } else {
+          setError('No products available');
+        }
+      } catch (importErr) {
+        console.error('Failed to load static products:', importErr);
+        setError('Unable to load products');
+      }
     } finally {
       setLoading(false);
     }
