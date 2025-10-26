@@ -42,10 +42,10 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const db = client.db('luxio');
       const productsCollection = db.collection('products');
 
-      // Get all products, sorted by creation date (newest first)
+      // Get all products, sorted by position (if available), then by creation date
       const products = await productsCollection
         .find({ available: { $ne: false } }) // Only show available products
-        .sort({ createdAt: -1 })
+        .sort({ position: 1, createdAt: -1 })
         .toArray();
 
       return res.status(200).json({
