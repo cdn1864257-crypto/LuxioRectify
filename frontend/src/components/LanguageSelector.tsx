@@ -90,25 +90,25 @@ export function LanguageSelector() {
             className="fixed inset-0 z-40" 
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute right-0 top-full mt-2 w-48 bg-card border border-border rounded-md shadow-lg z-50">
-            <div className="py-1 max-h-[40vh] overflow-y-auto [-webkit-overflow-scrolling:touch]">
+          <div className="absolute right-0 top-full mt-2 w-56 bg-card border border-border rounded-md shadow-lg z-50">
+            <div className="py-1 max-h-[60vh] overflow-y-auto overflow-x-hidden [-webkit-overflow-scrolling:touch] scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
               {Object.entries(languageFlags).map(([lang, flag]) => (
                 <button
                   key={lang}
                   onClick={() => handleLanguageSelect(lang as Language)}
-                  className={`w-full px-4 py-2 text-left hover:bg-accent transition-colors flex items-center space-x-3 ${
+                  className={`w-full px-4 py-2.5 text-left hover:bg-accent transition-colors flex items-center space-x-3 ${
                     language === lang ? 'bg-accent' : ''
                   }`}
                   data-testid={`language-option-${lang}`}
                 >
-                  <span className="text-lg">{flag}</span>
-                  <div className="flex flex-col">
-                    <span className="text-sm font-medium">{languageNames[lang as Language]}</span>
+                  <span className="text-lg flex-shrink-0">{flag}</span>
+                  <div className="flex flex-col flex-grow min-w-0">
+                    <span className="text-sm font-medium truncate">{languageNames[lang as Language]}</span>
                     <span className="text-xs text-muted-foreground">{lang.toUpperCase()}</span>
                   </div>
                   {language === lang && (
                     <svg 
-                      className="w-4 h-4 ml-auto text-primary" 
+                      className="w-4 h-4 flex-shrink-0 text-primary" 
                       fill="currentColor" 
                       viewBox="0 0 20 20"
                     >
