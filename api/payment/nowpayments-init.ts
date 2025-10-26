@@ -21,6 +21,7 @@ interface NowPaymentsInitData {
   customerEmail: string;
   customerName: string;
   totalAmount: number;
+  language?: string;
   cartItems: Array<{
     id: string;
     name: string;
@@ -46,6 +47,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       customerEmail,
       customerName,
       totalAmount,
+      language,
       cartItems
     }: NowPaymentsInitData = req.body;
 
@@ -86,9 +88,9 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const ordersCollection = db.collection('nowpayments_orders');
       const usersCollection = db.collection('users');
 
-      // Récupérer la langue de l'utilisateur
+      // Utiliser la langue envoyée par le frontend, ou récupérer celle de l'utilisateur en fallback
       const user = await usersCollection.findOne({ email: customerEmail.toLowerCase() });
-      const userLanguage = user?.language || 'fr';
+      const userLanguage = language || user?.language || 'fr';
 
       const orderReference = generateOrderReference();
 
@@ -117,12 +119,12 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const backendUrl = process.env.BACKEND_URL || 'https://luxio.onrender.com';
       const frontendUrl = process.env.FRONTEND_URL || 'https://luxios.vercel.app';
       
-      // Les URLs de callback API doivent pointer vers le backend
-      const successUrl = `${backendUrl}/api/payment/nowpayments-return?status=finished`;
+      // Les URLs de callback API doivent pointer vers le backend avec la langue
+      const successUrl = `${backendUrl}/api/payment/nowpayments-return?status=finished&lang=${userLanguage}`;
       const ipnCallbackUrl = `${backendUrl}/api/payment/nowpayments-webhook`;
       
-      // L'URL d'annulation redirige vers le frontend
-      const cancelUrl = `${frontendUrl}/payment?cancelled=true`;
+      // L'URL d'annulation redirige vers le frontend avec la langue
+      const cancelUrl = `${frontendUrl}/payment?cancelled=true&lang=${userLanguage}`;
       
       console.log(`[NowPayments] Backend URL: ${backendUrl}`);
       console.log(`[NowPayments] Frontend URL: ${frontendUrl}`);

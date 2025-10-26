@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { getApiUrl } from '@/lib/config';
 import { SEO } from '@/components/SEO';
 import { Header } from '@/components/Header';
@@ -16,10 +17,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ArrowLeft, ShoppingBag, CreditCard, Building2, Ticket, Check, Copy, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { queryClient } from '@/lib/queryClient';
+import type { Language } from '@/lib/translations';
 
 export default function Payment() {
   const { user } = useAuth();
   const { cart, total, clearCart } = useCart();
+  const { language, changeLanguage } = useLanguage();
   const [, navigate] = useLocation();
   const [cartOpen, setCartOpen] = useState(false);
   const { toast } = useToast();
@@ -47,7 +50,19 @@ export default function Payment() {
   const paymentPending = urlParams.get('pending') === 'true';
   const paymentError = urlParams.get('error') === 'true';
   const orderRef = urlParams.get('order');
+  const langParam = urlParams.get('lang');
   const fromNowPayments = paymentSuccess || paymentCancelled || paymentPending || paymentError;
+
+  // Restore language from URL if returning from NowPayments
+  useEffect(() => {
+    if (langParam && fromNowPayments) {
+      const validLangs: Language[] = ['en', 'fr', 'es', 'pt', 'pl', 'it', 'hu'];
+      if (validLangs.includes(langParam as Language)) {
+        changeLanguage(langParam as Language);
+        console.log(`[Payment] Restored language from URL: ${langParam}`);
+      }
+    }
+  }, [langParam, fromNowPayments, changeLanguage]);
 
   useEffect(() => {
     if (!user) {
@@ -197,6 +212,7 @@ export default function Payment() {
           customerEmail: user.email,
           customerName: user.firstName + ' ' + user.lastName,
           totalAmount: total,
+          language: language,
           cartItems: cart.map(item => ({
             id: item.id,
             name: item.name,

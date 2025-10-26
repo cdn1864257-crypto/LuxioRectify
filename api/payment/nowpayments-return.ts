@@ -28,8 +28,9 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     
     const status = params.status;
     const orderId = params.order || params.order_id;
+    const lang = params.lang || 'fr';
 
-    console.log('[NowPayments Return] Params:', { status, orderId });
+    console.log('[NowPayments Return] Params:', { status, orderId, lang });
 
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
@@ -49,18 +50,18 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         order = await ordersCollection.findOne({ orderReference: orderId });
       }
 
-      // Déterminer le statut de redirection
+      // Déterminer le statut de redirection avec la langue
       let paymentSuccess = false;
       let redirectPath = '/payment';
 
       if (status === 'finished' || status === 'confirmed') {
         paymentSuccess = true;
-        redirectPath = order ? `/payment?success=true&order=${order.orderReference}` : '/payment?success=true';
+        redirectPath = order ? `/payment?success=true&order=${order.orderReference}&lang=${lang}` : `/payment?success=true&lang=${lang}`;
       } else if (status === 'failed' || status === 'expired') {
-        redirectPath = '/payment?cancelled=true';
+        redirectPath = `/payment?cancelled=true&lang=${lang}`;
       } else {
         // Status 'waiting', 'confirming', etc. - considéré comme en attente
-        redirectPath = order ? `/payment?pending=true&order=${order.orderReference}` : '/payment?pending=true';
+        redirectPath = order ? `/payment?pending=true&order=${order.orderReference}&lang=${lang}` : `/payment?pending=true&lang=${lang}`;
       }
 
       // Rediriger vers le frontend (pas le backend)
@@ -90,7 +91,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     
     const replitDomain = process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS}` : '';
     const frontendUrl = process.env.FRONTEND_URL || replitDomain || 'https://luxios.vercel.app';
-    const errorRedirectUrl = `${frontendUrl}/payment?error=true`;
+    const lang = req.query?.lang || 'fr';
+    const errorRedirectUrl = `${frontendUrl}/payment?error=true&lang=${lang}`;
     
     console.error('[NowPayments Return] Error redirect to:', errorRedirectUrl);
     
