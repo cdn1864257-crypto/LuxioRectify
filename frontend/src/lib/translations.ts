@@ -116,6 +116,11 @@ export interface Translations {
   clickToViewAlternativeMethods: string;
   understood: string;
   alternativePaymentEmailSubject: string;
+  emailBodyIntro: string;
+  orderDetails: string;
+  customerName: string;
+  emailBodyClosing: string;
+  regards: string;
   
   // Payment Notifications
   paymentSuccessTitle: string;
@@ -625,6 +630,11 @@ export const translations: Record<Language, Translations> = {
     clickToViewAlternativeMethods: 'Click to view other available payment methods',
     understood: 'Understood',
     alternativePaymentEmailSubject: 'Payment via {method} - Order {amount}€',
+    emailBodyIntro: 'I would like to finalize my order with the following payment method',
+    orderDetails: 'Order Details',
+    customerName: 'Full Name',
+    emailBodyClosing: 'Thank you for providing payment instructions to finalize this order.',
+    regards: 'Best regards',
     
     // Payment Notifications
     paymentSuccessTitle: 'Payment successful!',
@@ -1239,6 +1249,11 @@ export const translations: Record<Language, Translations> = {
     clickToViewAlternativeMethods: 'Cliquez pour voir les autres moyens de paiement disponibles',
     understood: 'Compris',
     alternativePaymentEmailSubject: 'Paiement via {method} - Commande {amount}€',
+    emailBodyIntro: 'Je souhaite finaliser ma commande avec le moyen de paiement suivant',
+    orderDetails: 'Détails de la commande',
+    customerName: 'Nom complet',
+    emailBodyClosing: 'Merci de me fournir les instructions de paiement pour finaliser cette commande.',
+    regards: 'Cordialement',
     
     // Payment Notifications
     paymentSuccessTitle: 'Paiement réussi !',
@@ -1853,6 +1868,11 @@ export const translations: Record<Language, Translations> = {
     clickToViewAlternativeMethods: 'Haga clic para ver otros métodos de pago disponibles',
     understood: 'Entendido',
     alternativePaymentEmailSubject: 'Pago mediante {method} - Pedido {amount}€',
+    emailBodyIntro: 'Me gustaría finalizar mi pedido con el siguiente método de pago',
+    orderDetails: 'Detalles del pedido',
+    customerName: 'Nombre completo',
+    emailBodyClosing: 'Gracias por proporcionar las instrucciones de pago para finalizar este pedido.',
+    regards: 'Saludos',
     
     // Payment Notifications
     paymentSuccessTitle: '¡Pago exitoso!',
@@ -2467,6 +2487,11 @@ export const translations: Record<Language, Translations> = {
     clickToViewAlternativeMethods: 'Clique para ver outros métodos de pagamento disponíveis',
     understood: 'Compreendido',
     alternativePaymentEmailSubject: 'Pagamento via {method} - Pedido {amount}€',
+    emailBodyIntro: 'Gostaria de finalizar meu pedido com o seguinte método de pagamento',
+    orderDetails: 'Detalhes do pedido',
+    customerName: 'Nome completo',
+    emailBodyClosing: 'Obrigado por fornecer as instruções de pagamento para finalizar este pedido.',
+    regards: 'Atenciosamente',
     
     // Payment Notifications
     paymentSuccessTitle: 'Pagamento bem-sucedido!',
@@ -3081,6 +3106,11 @@ export const translations: Record<Language, Translations> = {
     clickToViewAlternativeMethods: 'Kliknij, aby zobaczyć inne dostępne metody płatności',
     understood: 'Rozumiem',
     alternativePaymentEmailSubject: 'Płatność przez {method} - Zamówienie {amount}€',
+    emailBodyIntro: 'Chciałbym sfinalizować moje zamówienie za pomocą następującej metody płatności',
+    orderDetails: 'Szczegóły zamówienia',
+    customerName: 'Imię i nazwisko',
+    emailBodyClosing: 'Dziękuję za podanie instrukcji płatności, aby sfinalizować to zamówienie.',
+    regards: 'Pozdrawiam',
     
     // Payment Notifications
     paymentSuccessTitle: 'Płatność zakończona sukcesem!',
@@ -3695,6 +3725,11 @@ export const translations: Record<Language, Translations> = {
     clickToViewAlternativeMethods: 'Clicca per vedere altri metodi di pagamento disponibili',
     understood: 'Compreso',
     alternativePaymentEmailSubject: 'Pagamento tramite {method} - Ordine {amount}€',
+    emailBodyIntro: 'Vorrei finalizzare il mio ordine con il seguente metodo di pagamento',
+    orderDetails: 'Dettagli dell\'ordine',
+    customerName: 'Nome completo',
+    emailBodyClosing: 'Grazie per aver fornito le istruzioni di pagamento per finalizzare questo ordine.',
+    regards: 'Cordiali saluti',
     
     // Payment Notifications
     paymentSuccessTitle: 'Pagamento riuscito!',
@@ -4309,6 +4344,11 @@ export const translations: Record<Language, Translations> = {
     clickToViewAlternativeMethods: 'Kattintson más elérhető fizetési módok megtekintéséhez',
     understood: 'Értettem',
     alternativePaymentEmailSubject: 'Fizetés {method} által - Rendelés {amount}€',
+    emailBodyIntro: 'Szeretném véglegesíteni rendelésemet a következő fizetési móddal',
+    orderDetails: 'Rendelés részletei',
+    customerName: 'Teljes név',
+    emailBodyClosing: 'Köszönöm a fizetési utasítások megadását a rendelés véglegesítéséhez.',
+    regards: 'Üdvözlettel',
     
     // Payment Notifications
     paymentSuccessTitle: 'Sikeres fizetés!',

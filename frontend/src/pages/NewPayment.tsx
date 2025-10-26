@@ -106,8 +106,36 @@ export default function NewPayment() {
     return null;
   }
 
+  const generateOrderReference = () => {
+    const firstName = user?.firstName || 'user';
+    const randomDigits = Math.floor(1000 + Math.random() * 9000);
+    return `${firstName.toLowerCase()}${randomDigits}`;
+  };
+
+  const generateEmailBody = (methodName: string, orderReference: string) => {
+    const customerName = `${user?.firstName || ''} ${user?.lastName || ''}`.trim();
+    
+    let emailBody = `${t.hello || 'Bonjour'},\n\n`;
+    emailBody += `${t.emailBodyIntro || 'Je souhaite finaliser ma commande avec le moyen de paiement suivant'} : ${methodName}\n\n`;
+    emailBody += `--- ${t.orderDetails || 'Détails de la commande'} ---\n`;
+    emailBody += `${t.orderReference || 'Référence'} : ${orderReference}\n`;
+    emailBody += `${t.customerName || 'Nom complet'} : ${customerName}\n`;
+    emailBody += `${t.email || 'Email'} : ${user?.email || ''}\n\n`;
+    emailBody += `${t.orderSummary || 'Récapitulatif de la commande'} :\n`;
+    
+    cart.forEach((item, index) => {
+      emailBody += `${index + 1}. ${item.name} - ${t.quantity || 'Quantité'}: ${item.quantity} - ${(item.price * item.quantity).toFixed(2)} €\n`;
+    });
+    
+    emailBody += `\n${t.total || 'Total'} : ${total.toFixed(2)} €\n\n`;
+    emailBody += `${t.emailBodyClosing || 'Merci de me fournir les instructions de paiement pour finaliser cette commande.'}\n\n`;
+    emailBody += `${t.regards || 'Cordialement'},\n${customerName}`;
+    
+    return emailBody;
+  };
+
   const handleBankTransferClick = () => {
-    const orderReference = `LX-${Date.now()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
+    const orderReference = generateOrderReference();
     setBankDetails({
       bankName: 'Matt Luxio',
       iban: 'ES6115632626383268707364',
@@ -423,7 +451,10 @@ export default function NewPayment() {
                               type="button"
                               className="p-3 sm:p-4 border-2 border-muted rounded-lg bg-background hover:bg-accent transition-colors text-center group"
                               onClick={() => {
-                                window.location.href = `mailto:infos@luxiomarket.shop?subject=${encodeURIComponent(getEmailSubject(method.name))}`;
+                                const orderReference = generateOrderReference();
+                                const emailSubject = getEmailSubject(method.name);
+                                const emailBody = generateEmailBody(method.name, orderReference);
+                                window.location.href = `mailto:infos@luxiomarket.shop?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
                               }}
                               data-testid={`button-${method.key}`}
                             >
