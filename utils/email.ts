@@ -147,6 +147,63 @@ function getEmailLayout(content: string, language: EmailLanguage = 'fr'): string
   `;
 }
 
+// ==================== EMAIL VERIFICATION ====================
+
+export async function sendVerificationEmail(
+  userEmail: string,
+  firstName: string,
+  verificationToken: string,
+  language?: string
+): Promise<boolean> {
+  const lang = language?.toLowerCase() || 'fr';
+  const validLanguages = ['fr', 'en', 'es', 'pt', 'pl', 'hu'];
+  const emailLang = validLanguages.includes(lang) ? lang as EmailLanguage : 'fr';
+  const t = getTranslation(emailLang);
+  const baseUrl = process.env.REPLIT_DEV_DOMAIN || 'https://luxiomarket.shop';
+  const verificationUrl = `${baseUrl}/verify-email?token=${verificationToken}`;
+  
+  const htmlContent = getEmailLayout(`
+    <h2>${t.verify_email_title}</h2>
+    <p>${t.hello} <strong>${firstName}</strong>,</p>
+    <p style="white-space: pre-line; line-height: 1.8;">${t.verify_email_message}</p>
+    
+    <div style="text-align: center; margin: 32px 0;">
+      <a href="${verificationUrl}" class="button">${t.verify_email_button}</a>
+    </div>
+    
+    <div style="background-color: #f9fafb; padding: 16px; border-radius: 6px; font-size: 13px; color: #6b7280; margin: 24px 0;">
+      <p style="margin: 0;">${t.verify_email_expiration}</p>
+      <p style="margin: 8px 0 0 0; word-break: break-all; font-family: 'Courier New', monospace;">${verificationUrl}</p>
+    </div>
+    
+    <div class="divider"></div>
+    
+    <p style="color: #6b7280; font-size: 14px; white-space: pre-line;">${t.team_signature}</p>
+  `, emailLang);
+
+  const textContent = `
+${t.verify_email_title}
+
+${t.hello} ${firstName},
+
+${t.verify_email_message}
+
+${t.verify_email_button}: ${verificationUrl}
+
+${t.verify_email_expiration}
+
+${t.team_signature}
+  `.trim();
+
+  return sendEmail({
+    to: userEmail,
+    subject: t.subject_verify_email,
+    html: htmlContent,
+    text: textContent,
+    from: DEFAULT_FROM
+  });
+}
+
 // ==================== WELCOME EMAIL ====================
 
 export async function sendWelcomeEmail(

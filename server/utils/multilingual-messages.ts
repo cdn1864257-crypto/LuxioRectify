@@ -29,6 +29,16 @@ export const ERROR_MESSAGES = {
     pl: 'Nieprawidłowy adres e-mail lub hasło'
   } as MultilingualMessage,
   
+  EMAIL_NOT_VERIFIED: {
+    en: 'Please verify your email address before logging in. Check your inbox for the verification link.',
+    fr: 'Veuillez vérifier votre adresse email avant de vous connecter. Consultez votre boîte de réception pour le lien de vérification.',
+    es: 'Por favor, verifique su dirección de correo electrónico antes de iniciar sesión. Revise su bandeja de entrada para el enlace de verificación.',
+    pt: 'Por favor, verifique seu endereço de e-mail antes de fazer login. Verifique sua caixa de entrada para o link de verificação.',
+    it: 'Si prega di verificare il proprio indirizzo email prima di accedere. Controllare la casella di posta per il link di verifica.',
+    hu: 'Kérjük, ellenőrizze email címét a bejelentkezés előtt. Ellenőrizze postafiókját az ellenőrző linkért.',
+    pl: 'Proszę zweryfikować swój adres e-mail przed zalogowaniem. Sprawdź skrzynkę odbiorczą pod kątem linku weryfikacyjnego.'
+  } as MultilingualMessage,
+  
   TOKEN_MISSING: {
     en: 'Authentication token is missing',
     fr: 'Token d\'authentification manquant',

@@ -1,8 +1,9 @@
 import { MongoClient } from 'mongodb';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
 import { serialize } from 'cookie';
-import { sendWelcomeEmail } from '../../utils/email.js';
+import { sendVerificationEmail } from '../../utils/email.js';
 import { detectLanguageFromIP, getClientIP } from '../../utils/language-detection.js';
 
 interface VercelRequest {
@@ -106,6 +107,10 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         ? language.toLowerCase() 
         : (validLanguages.includes(detectedLanguage) ? detectedLanguage : 'fr');
 
+      // Générer un token de vérification d'email
+      const emailVerificationToken = crypto.randomBytes(32).toString('hex');
+      const emailVerificationExpires = new Date(Date.now() + 24 * 60 * 60 * 1000);
+
       // Création de l'utilisateur
       const newUser = {
         firstName,
@@ -117,6 +122,9 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         email: email.toLowerCase(),
         password: hashedPassword,
         language: userLanguage,
+        isEmailVerified: false,
+        emailVerificationToken,
+        emailVerificationExpires,
         createdAt: new Date(),
         updatedAt: new Date()
       };
@@ -136,46 +144,16 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         createdAt: newUser.createdAt
       };
 
-      // Envoyer l'email de bienvenue dans la langue de l'utilisateur (sans bloquer la réponse)
-      console.log(`📧 Envoi de l'email de bienvenue à ${email.toLowerCase()} en langue: ${userLanguage}`);
-      sendWelcomeEmail(email.toLowerCase(), firstName, userLanguage).catch((error: Error) => {
-        console.error('❌ Erreur lors de l\'envoi de l\'email de bienvenue:', error);
+      // Envoyer l'email de vérification dans la langue de l'utilisateur (sans bloquer la réponse)
+      console.log(`📧 Envoi de l'email de vérification à ${email.toLowerCase()} en langue: ${userLanguage}`);
+      sendVerificationEmail(email.toLowerCase(), firstName, emailVerificationToken, userLanguage).catch((error: Error) => {
+        console.error('❌ Erreur lors de l\'envoi de l\'email de vérification:', error);
       });
-
-      // Générer un JWT pour connexion automatique
-      const jwtSecret = process.env.JWT_SECRET;
-      if (!jwtSecret) {
-        console.warn('JWT_SECRET manquant - connexion automatique impossible');
-        return res.status(201).json({
-          message: 'Inscription réussie',
-          user: userResponse
-        });
-      }
-
-      const token = jwt.sign(
-        {
-          userId: result.insertedId.toString(),
-          email: email.toLowerCase()
-        },
-        jwtSecret,
-        { expiresIn: '7d' }
-      );
-
-      // Créer le cookie httpOnly et secure
-      const isProduction = process.env.NODE_ENV === 'production';
-      const cookie = serialize('auth_token', token, {
-        httpOnly: true,
-        secure: isProduction,
-        sameSite: isProduction ? 'none' : 'lax', // 'none' requis pour cross-domain en production
-        maxAge: 60 * 60 * 24 * 7, // 7 jours
-        path: '/'
-      });
-
-      res.setHeader('Set-Cookie', cookie);
 
       return res.status(201).json({
-        message: 'Inscription réussie',
-        user: userResponse
+        message: 'Inscription réussie. Veuillez vérifier votre email pour activer votre compte.',
+        user: userResponse,
+        emailSent: true
       });
     } finally {
       await client.close();

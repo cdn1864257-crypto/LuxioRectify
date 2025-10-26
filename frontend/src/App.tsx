@@ -18,6 +18,7 @@ import Dashboard from "@/pages/Dashboard";
 import Cart from "@/pages/Cart";
 import NewPayment from "@/pages/NewPayment";
 import ResetPassword from "@/pages/ResetPassword";
+import VerifyEmailPage from "@/pages/VerifyEmailPage";
 import LegalNotice from "@/pages/LegalNotice";
 import TermsOfService from "@/pages/TermsOfService";
 import GdprDashboard from "@/pages/GdprDashboard";
@@ -410,6 +411,9 @@ function Router() {
       <Route path="/reset-password">
         <LanguageRedirect />
         <ResetPassword />
+      </Route>
+      <Route path="/verify-email">
+        <VerifyEmailPage />
       </Route>
       <Route path="/dashboard">
         <LanguageRedirect />

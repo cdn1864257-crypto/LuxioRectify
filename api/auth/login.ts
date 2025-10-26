@@ -76,6 +76,17 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         });
       }
 
+      // Vérifier si l'email est vérifié (pour les nouveaux comptes uniquement)
+      // Les anciens comptes sans le champ isEmailVerified sont traités comme vérifiés (backward compatibility)
+      if (user.isEmailVerified === false) {
+        const lang = getLanguageFromRequest(req);
+        return res.status(403).json({ 
+          success: false,
+          error: 'EMAIL_NOT_VERIFIED',
+          message: getErrorMessage('EMAIL_NOT_VERIFIED', lang)
+        });
+      }
+
       // Vérifier le mot de passe
       const isPasswordValid = await bcrypt.compare(password, user.password);
       

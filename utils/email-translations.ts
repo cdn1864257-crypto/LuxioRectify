@@ -3,6 +3,7 @@ export type EmailLanguage = 'fr' | 'en' | 'es' | 'pt' | 'pl' | 'hu';
 export interface EmailTranslations {
   // Subjects
   subject_welcome: string;
+  subject_verify_email: string;
   subject_order_confirm: string;
   subject_ticket_confirm: string;
   subject_crypto_confirm: string;
@@ -13,6 +14,12 @@ export interface EmailTranslations {
   team_signature: string;
   footer_note: string;
   access_dashboard: string;
+  
+  // Email Verification
+  verify_email_title: string;
+  verify_email_message: string;
+  verify_email_button: string;
+  verify_email_expiration: string;
   
   // Welcome Email
   welcome_title: string;
@@ -60,6 +67,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
   fr: {
     // Subjects
     subject_welcome: 'Bienvenue chez Luxio – Votre compte a été créé avec succès',
+    subject_verify_email: 'Vérifiez votre adresse email – Luxio',
     subject_order_confirm: 'Confirmation de commande – Luxio',
     subject_ticket_confirm: 'Confirmation de commande – Luxio',
     subject_crypto_confirm: 'Confirmation de commande – Luxio',
@@ -70,6 +78,12 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     team_signature: 'Cordialement,\nL\'équipe Luxio\nVotre partenaire de confiance pour des produits premium',
     footer_note: 'Cet email a été envoyé automatiquement. Pour toute question, notre équipe est disponible 7j/7.',
     access_dashboard: 'Accéder à mon espace client',
+    
+    // Email Verification
+    verify_email_title: 'Confirmez votre adresse email',
+    verify_email_message: 'Merci de vous être inscrit chez Luxio !\n\nPour activer votre compte et accéder à notre catalogue exclusif de produits premium, veuillez confirmer votre adresse email en cliquant sur le bouton ci-dessous.',
+    verify_email_button: 'Vérifier mon email',
+    verify_email_expiration: 'Ce lien de vérification expirera dans 24 heures. Si le bouton ne fonctionne pas, copiez et collez ce lien dans votre navigateur :',
     
     // Welcome Email
     welcome_title: 'Bienvenue dans l\'univers Luxio ! 🎉',
@@ -115,6 +129,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
   en: {
     // Subjects
     subject_welcome: 'Welcome to Luxio – Your account has been created successfully',
+    subject_verify_email: 'Verify your email address – Luxio',
     subject_order_confirm: 'Order Confirmation – Luxio',
     subject_ticket_confirm: 'Order Confirmation – Luxio',
     subject_crypto_confirm: 'Order Confirmation – Luxio',
@@ -125,6 +140,12 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     team_signature: 'Best regards,\nThe Luxio Team\nYour trusted partner for premium products',
     footer_note: 'This email was sent automatically. For any questions, our team is available 7 days a week.',
     access_dashboard: 'Access my customer area',
+    
+    // Email Verification
+    verify_email_title: 'Confirm your email address',
+    verify_email_message: 'Thank you for signing up with Luxio!\n\nTo activate your account and access our exclusive catalog of premium products, please confirm your email address by clicking the button below.',
+    verify_email_button: 'Verify my email',
+    verify_email_expiration: 'This verification link will expire in 24 hours. If the button doesn\'t work, copy and paste this link into your browser:',
     
     // Welcome Email
     welcome_title: 'Welcome to the Luxio universe! 🎉',
@@ -170,6 +191,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
   es: {
     // Subjects
     subject_welcome: 'Bienvenido a Luxio – Su cuenta ha sido creada con éxito',
+    subject_verify_email: 'Verifique su dirección de correo electrónico – Luxio',
     subject_order_confirm: 'Confirmación de pedido – Luxio',
     subject_ticket_confirm: 'Confirmación de pedido – Luxio',
     subject_crypto_confirm: 'Confirmación de pedido – Luxio',
@@ -180,6 +202,12 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     team_signature: 'Cordialmente,\nEl equipo Luxio\nSu socio de confianza para productos premium',
     footer_note: 'Este correo fue enviado automáticamente. Para cualquier pregunta, nuestro equipo está disponible 7 días a la semana.',
     access_dashboard: 'Acceder a mi área de cliente',
+    
+    // Email Verification
+    verify_email_title: 'Confirme su dirección de correo electrónico',
+    verify_email_message: '¡Gracias por registrarse en Luxio!\n\nPara activar su cuenta y acceder a nuestro catálogo exclusivo de productos premium, confirme su dirección de correo electrónico haciendo clic en el botón a continuación.',
+    verify_email_button: 'Verificar mi correo',
+    verify_email_expiration: 'Este enlace de verificación expirará en 24 horas. Si el botón no funciona, copie y pegue este enlace en su navegador:',
     
     // Welcome Email
     welcome_title: '¡Bienvenido al universo Luxio! 🎉',
@@ -225,6 +253,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
   pt: {
     // Subjects
     subject_welcome: 'Bem-vindo ao Luxio – Sua conta foi criada com sucesso',
+    subject_verify_email: 'Verifique seu endereço de e-mail – Luxio',
     subject_order_confirm: 'Confirmação de pedido – Luxio',
     subject_ticket_confirm: 'Confirmação de pedido – Luxio',
     subject_crypto_confirm: 'Confirmação de pedido – Luxio',
@@ -235,6 +264,12 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     team_signature: 'Cordialmente,\nA equipe Luxio\nSeu parceiro de confiança para produtos premium',
     footer_note: 'Este email foi enviado automaticamente. Para qualquer pergunta, nossa equipe está disponível 7 dias por semana.',
     access_dashboard: 'Acessar minha área de cliente',
+    
+    // Email Verification
+    verify_email_title: 'Confirme seu endereço de e-mail',
+    verify_email_message: 'Obrigado por se registrar no Luxio!\n\nPara ativar sua conta e acessar nosso catálogo exclusivo de produtos premium, confirme seu endereço de e-mail clicando no botão abaixo.',
+    verify_email_button: 'Verificar meu e-mail',
+    verify_email_expiration: 'Este link de verificação expirará em 24 horas. Se o botão não funcionar, copie e cole este link em seu navegador:',
     
     // Welcome Email
     welcome_title: 'Bem-vindo ao universo Luxio! 🎉',
@@ -280,6 +315,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
   pl: {
     // Subjects
     subject_welcome: 'Witamy w Luxio – Twoje konto zostało pomyślnie utworzone',
+    subject_verify_email: 'Zweryfikuj swój adres e-mail – Luxio',
     subject_order_confirm: 'Potwierdzenie zamówienia – Luxio',
     subject_ticket_confirm: 'Potwierdzenie zamówienia – Luxio',
     subject_crypto_confirm: 'Potwierdzenie zamówienia – Luxio',
@@ -290,6 +326,12 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     team_signature: 'Z poważaniem,\nZespół Luxio\nTwój zaufany partner dla produktów premium',
     footer_note: 'Ten email został wysłany automatycznie. W razie pytań, nasz zespół jest dostępny 7 dni w tygodniu.',
     access_dashboard: 'Dostęp do mojego obszaru klienta',
+    
+    // Email Verification
+    verify_email_title: 'Potwierdź swój adres e-mail',
+    verify_email_message: 'Dziękujemy za rejestrację w Luxio!\n\nAby aktywować swoje konto i uzyskać dostęp do naszego ekskluzywnego katalogu produktów premium, potwierdź swój adres e-mail, klikając przycisk poniżej.',
+    verify_email_button: 'Zweryfikuj mój e-mail',
+    verify_email_expiration: 'Ten link weryfikacyjny wygaśnie za 24 godziny. Jeśli przycisk nie działa, skopiuj i wklej ten link do przeglądarki:',
     
     // Welcome Email
     welcome_title: 'Witamy w uniwersum Luxio! 🎉',
@@ -335,6 +377,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
   hu: {
     // Subjects
     subject_welcome: 'Üdvözöljük a Luxio-nál – Fiókja sikeresen létrejött',
+    subject_verify_email: 'Igazolja email címét – Luxio',
     subject_order_confirm: 'Rendelés megerősítése – Luxio',
     subject_ticket_confirm: 'Rendelés megerősítése – Luxio',
     subject_crypto_confirm: 'Rendelés megerősítése – Luxio',
@@ -345,6 +388,12 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     team_signature: 'Tisztelettel,\nA Luxio Csapat\nAz Ön megbízható partnere prémium termékekhez',
     footer_note: 'Ez az email automatikusan lett elküldve. Bármilyen kérdés esetén csapatunk elérhető a héten 7 napja.',
     access_dashboard: 'Hozzáférés az ügyfél területhez',
+    
+    // Email Verification
+    verify_email_title: 'Erősítse meg email címét',
+    verify_email_message: 'Köszönjük, hogy regisztrált a Luxio-nál!\n\nFiókja aktiválásához és exkluzív prémium termékkatalógusunkhoz való hozzáféréshez erősítse meg email címét az alábbi gombra kattintva.',
+    verify_email_button: 'Email megerősítése',
+    verify_email_expiration: 'Ez az ellenőrző link 24 órán belül lejár. Ha a gomb nem működik, másolja és illessze be ezt a linket a böngészőjébe:',
     
     // Welcome Email
     welcome_title: 'Üdvözöljük a Luxio univerzumban! 🎉',

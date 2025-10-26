@@ -13,6 +13,7 @@ import signupHandler from '../api/auth/signup.js';
 import loginHandler from '../api/auth/login.js';
 import meHandler from '../api/auth/me.js';
 import logoutHandler from '../api/auth/logout.js';
+import verifyEmailHandler from '../api/auth/verify-email.js';
 import changePasswordHandler from '../api/auth/change-password.js';
 import forgotPasswordHandler from '../api/auth/forgot-password.js';
 import resetPasswordHandler from '../api/auth/reset-password.js';
@@ -196,6 +197,7 @@ app.use((req, res, next) => {
   const exemptRoutes = [
     /^\/api\/csrf-token/,  // Already handled above
     /^\/api\/auth\/signup/,
+    /^\/api\/auth\/verify-email/,  // Email verification can be accessed via GET link
     /^\/api\/auth\/login/,
     /^\/api\/auth\/logout/,  // Logout should work without CSRF token
     /^\/api\/payment\/nowpayments-webhook/,
@@ -285,6 +287,7 @@ app.use('/api/users', convertVercelHandler(usersHandler));
 
 // Auth routes avec rate limiting (CSRF protection applied globally via middleware)
 app.use('/api/auth/signup', authLimiter, convertVercelHandler(signupHandler));
+app.use('/api/auth/verify-email', convertVercelHandler(verifyEmailHandler));
 app.use('/api/auth/login', authLimiter, convertVercelHandler(loginHandler));
 
 // Logout route - native Express to handle session destruction
