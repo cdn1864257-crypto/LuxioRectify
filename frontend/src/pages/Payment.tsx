@@ -407,6 +407,13 @@ export default function Payment() {
                 </div>
               </Button>
 
+              {/* Separator */}
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-border" />
+                </div>
+              </div>
+
               {/* NowPayments */}
               <Button
                 variant="outline"
@@ -431,6 +438,13 @@ export default function Payment() {
                   {nowpaymentsLoading && <Loader2 className="h-5 w-5 animate-spin" />}
                 </div>
               </Button>
+
+              {/* Separator */}
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-border" />
+                </div>
+              </div>
 
               {/* Tickets PCS/TransCash */}
               <Button

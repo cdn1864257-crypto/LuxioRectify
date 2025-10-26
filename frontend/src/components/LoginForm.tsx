@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { ForgotPasswordForm } from "./ForgotPasswordForm";
 import { Loader2 } from "lucide-react";
 
 interface LoginFormData {
@@ -22,6 +23,7 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
   const { login, user } = useAuth();
   const { t } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [formData, setFormData] = useState<LoginFormData>({
     email: "",
     password: ""
@@ -100,6 +102,15 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
     }
   };
 
+  // Show forgot password form if toggled
+  if (showForgotPassword) {
+    return (
+      <ForgotPasswordForm 
+        onBack={() => setShowForgotPassword(false)}
+      />
+    );
+  }
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4" data-testid="form-login">
       <div className="space-y-2">
@@ -121,7 +132,17 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="login-password">{t('password')}</Label>
+        <div className="flex items-center justify-between">
+          <Label htmlFor="login-password">{t('password')}</Label>
+          <button
+            type="button"
+            onClick={() => setShowForgotPassword(true)}
+            className="text-sm text-primary hover:underline"
+            data-testid="button-forgot-password"
+          >
+            {t('forgotPassword')}
+          </button>
+        </div>
         <Input
           id="login-password"
           name="password"

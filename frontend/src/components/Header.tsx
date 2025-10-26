@@ -98,13 +98,19 @@ export function Header({ onToggleCart }: HeaderProps) {
                     <span className="sr-only">Menu</span>
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="left" className="w-[280px] sm:w-[320px]">
+                <SheetContent side="left" className="w-[280px] sm:w-[320px] overflow-y-auto">
                   <SheetHeader>
                     <SheetTitle className="text-left">{t('navigation')}</SheetTitle>
                     <SheetDescription className="text-left">
                       {t('accessSections')}
                     </SheetDescription>
                   </SheetHeader>
+                  
+                  {/* Language Selector at top */}
+                  <div className="mt-6 pb-4 border-b border-border">
+                    <LanguageSelector />
+                  </div>
+                  
                   <nav className="flex flex-col gap-4 mt-6">
                     <Link 
                       href="/" 
@@ -207,10 +213,6 @@ export function Header({ onToggleCart }: HeaderProps) {
                         </button>
                       </>
                     )}
-                    
-                    <div className="border-t border-border pt-4 mt-2">
-                      <LanguageSelector />
-                    </div>
                   </nav>
                 </SheetContent>
               </Sheet>
