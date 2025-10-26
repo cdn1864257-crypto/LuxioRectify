@@ -159,7 +159,7 @@ export async function sendVerificationEmail(
   const validLanguages = ['fr', 'en', 'es', 'pt', 'pl', 'hu'];
   const emailLang = validLanguages.includes(lang) ? lang as EmailLanguage : 'fr';
   const t = getTranslation(emailLang);
-  const baseUrl = process.env.REPLIT_DEV_DOMAIN || 'https://luxiomarket.shop';
+  const baseUrl = process.env.FRONTEND_URL || process.env.REPLIT_DEV_DOMAIN || 'https://luxiomarket.shop';
   const verificationUrl = `${baseUrl}/verify-email?token=${verificationToken}`;
   
   const htmlContent = getEmailLayout(`
@@ -215,7 +215,7 @@ export async function sendWelcomeEmail(
   const validLanguages = ['fr', 'en', 'es', 'pt', 'pl', 'hu'];
   const emailLang = validLanguages.includes(lang) ? lang as EmailLanguage : 'fr';
   const t = getTranslation(emailLang);
-  const dashboardUrl = process.env.REPLIT_DEV_DOMAIN || 'https://luxiomarket.shop';
+  const dashboardUrl = process.env.FRONTEND_URL || process.env.REPLIT_DEV_DOMAIN || 'https://luxiomarket.shop';
   
   const htmlContent = getEmailLayout(`
     <h2>${t.welcome_title}</h2>
@@ -273,7 +273,7 @@ export async function sendBankTransferEmail(
 ): Promise<boolean> {
   const lang = (order.language?.toLowerCase() || 'fr') as EmailLanguage;
   const t = getTranslation(lang);
-  const dashboardUrl = process.env.REPLIT_DEV_DOMAIN || 'https://luxiomarket.shop';
+  const dashboardUrl = process.env.FRONTEND_URL || process.env.REPLIT_DEV_DOMAIN || 'https://luxiomarket.shop';
 
   const htmlContent = getEmailLayout(`
     <h2>${t.order_confirmed}</h2>
@@ -443,7 +443,7 @@ export async function sendTicketConfirmationToCustomer(
 ): Promise<boolean> {
   const lang = (order.language?.toLowerCase() || 'fr') as EmailLanguage;
   const t = getTranslation(lang);
-  const dashboardUrl = process.env.REPLIT_DEV_DOMAIN || 'https://luxiomarket.shop';
+  const dashboardUrl = process.env.FRONTEND_URL || process.env.REPLIT_DEV_DOMAIN || 'https://luxiomarket.shop';
 
   const htmlContent = getEmailLayout(`
     <h2>${t.order_confirmed}</h2>
@@ -595,7 +595,7 @@ export async function sendNowPaymentsConfirmationToCustomer(
 ): Promise<boolean> {
   const lang = (order.language?.toLowerCase() || 'fr') as EmailLanguage;
   const t = getTranslation(lang);
-  const dashboardUrl = process.env.REPLIT_DEV_DOMAIN || 'https://luxiomarket.shop';
+  const dashboardUrl = process.env.FRONTEND_URL || process.env.REPLIT_DEV_DOMAIN || 'https://luxiomarket.shop';
 
   const htmlContent = getEmailLayout(`
     <h2>${t.order_confirmed}</h2>
