@@ -504,9 +504,11 @@ export default function AdminProducts() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="smartphones">Smartphones</SelectItem>
+                  <SelectItem value="watches">Montres connectées</SelectItem>
+                  <SelectItem value="sneakers">Sneakers</SelectItem>
+                  <SelectItem value="home-gadgets">Gadgets maison</SelectItem>
                   <SelectItem value="laptops">Laptops</SelectItem>
                   <SelectItem value="tablets">Tablets</SelectItem>
-                  <SelectItem value="watches">Montres</SelectItem>
                   <SelectItem value="audio">Audio</SelectItem>
                 </SelectContent>
               </Select>
@@ -607,9 +609,11 @@ export default function AdminProducts() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="smartphones">Smartphones</SelectItem>
+                  <SelectItem value="watches">Montres connectées</SelectItem>
+                  <SelectItem value="sneakers">Sneakers</SelectItem>
+                  <SelectItem value="home-gadgets">Gadgets maison</SelectItem>
                   <SelectItem value="laptops">Laptops</SelectItem>
                   <SelectItem value="tablets">Tablets</SelectItem>
-                  <SelectItem value="watches">Montres</SelectItem>
                   <SelectItem value="audio">Audio</SelectItem>
                 </SelectContent>
               </Select>

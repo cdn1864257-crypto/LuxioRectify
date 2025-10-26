@@ -5,7 +5,7 @@ import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { AuthModal } from './AuthModal';
 import { LanguageSelector } from './LanguageSelector';
-import { Search, ShoppingCart as ShoppingCartIcon, Menu, LayoutDashboard, LogOut } from 'lucide-react';
+import { Search, ShoppingCart as ShoppingCartIcon, Menu, LayoutDashboard, LogOut, Package } from 'lucide-react';
 import { Button } from './ui/button';
 import {
   Sheet,
@@ -128,6 +128,19 @@ export function Header({ onToggleCart }: HeaderProps) {
                             {t('dashboard')}
                           </div>
                         </Link>
+                        {user.email.toLowerCase() === 'replitprojet97@gmail.com' && (
+                          <Link 
+                            href="/admin/products"
+                            className="text-base font-medium text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-500 transition-colors py-2 bg-amber-50 dark:bg-amber-950/30 px-3 rounded-md -mx-3"
+                            data-testid="mobile-nav-admin"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            <div className="flex items-center gap-2">
+                              <Package className="h-4 w-4" />
+                              Admin - Produits
+                            </div>
+                          </Link>
+                        )}
                         <Link 
                           href="/cart"
                           className="text-base font-medium text-foreground hover:text-primary transition-colors py-2"
@@ -226,6 +239,16 @@ export function Header({ onToggleCart }: HeaderProps) {
                     >
                       {t('dashboard')}
                     </Link>
+                    {user.email.toLowerCase() === 'replitprojet97@gmail.com' && (
+                      <Link 
+                        href="/admin/products"
+                        className="text-sm xl:text-base text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-500 transition-colors whitespace-nowrap font-medium flex items-center gap-1"
+                        data-testid="nav-admin"
+                      >
+                        <Package className="h-3.5 w-3.5" />
+                        Admin
+                      </Link>
+                    )}
                     <Link 
                       href="/cart"
                       className="text-sm xl:text-base text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
