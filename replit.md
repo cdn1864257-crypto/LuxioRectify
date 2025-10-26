@@ -16,8 +16,17 @@ The frontend uses React 18 with TypeScript, Vite for building, Wouter for routin
 ### State Management
 State is managed using React Query for server data, AuthContext for authentication, CartContext for the shopping cart, LanguageContext for internationalization, Local Storage for cart persistence and order history, and React Context API for toast notifications.
 
-### Authentication System
+### Authentication System (Updated: October 26, 2025)
 User authentication uses JWT-based session management with email/password registration and login. Secure password hashing is done with bcrypt, and JWT tokens are stored in httpOnly cookies. The system supports dynamic navigation and protects sensitive pages. Security hardening includes CSRF protection (double-submit cookie), rate limiting on auth endpoints, and secure handling of sensitive data.
+
+**Email Verification**: Implemented complete email verification flow for new registrations:
+- New users receive verification email with secure token (24-hour expiry, crypto.randomBytes generation)
+- Login is blocked until email is verified (with backward compatibility for legacy accounts)
+- Verification endpoint (`/api/auth/verify-email`) validates tokens and triggers welcome email
+- Frontend verification page (`/verify-email`) handles verification link clicks with loading/success/error states
+- MongoDB schema includes `isEmailVerified`, `verificationToken`, and `verificationTokenExpiry` fields
+- Multilingual verification emails sent via SendGrid (FR, EN, ES, PT, PL, HU, IT)
+- Secure token validation with expiry checks and automatic cleanup after successful verification
 
 ### Internationalization
 The platform supports multiple languages (English, French, Polish, Spanish, Portuguese, Italian, Hungarian) with dynamic switching and IP-based detection. All payment modals and content are fully internationalized.
@@ -44,12 +53,13 @@ A complete payment system offers three secure methods: Bank Transfer, Maxelpay (
 
 ### Email System (Updated: October 26, 2025)
 All automated emails are sent via SendGrid with full multilingual support:
-- **Welcome Email**: Sent upon successful registration with platform introduction
+- **Verification Email**: Sent upon registration with secure verification link (24-hour token expiry)
+- **Welcome Email**: Sent after successful email verification
 - **Order Confirmation Emails**: For Bank Transfer, NowPayments (crypto), and Ticket payments
 - **Admin Notifications**: Sent to admin for new orders
 - **Domain Configuration**: All email links default to https://luxiomarket.shop (overridable via REPLIT_DEV_DOMAIN)
 - **Privacy**: Email addresses removed from footer and instructions to maintain privacy
-- **Languages**: Full support for FR, EN, ES, PT, PL, HU with localized content
+- **Languages**: Full support for FR, EN, ES, PT, PL, HU, IT with localized content
 
 ### Technical Implementations
 The project is configured for the Replit environment: a `start-dev.js` script runs both backend (Express on port 3001) and frontend (Vite dev server on port 5000) with API proxying. Vite is configured with `host: '0.0.0.0'` and `allowedHosts: true` for Replit proxy support. Deployment builds the frontend and serves via `serve` on port 5000. A `copy-images.js` script syncs product images. Backend error handling ensures all API errors return valid JSON responses.
