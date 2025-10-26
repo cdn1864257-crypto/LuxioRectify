@@ -10,7 +10,9 @@
     "start": "npx serve frontend/dist -s -p 5000",
     "start:backend": "npx tsx server/index-render.ts",
     "check": "tsc",
-    "db:push": "drizzle-kit push"
+    "db:push": "drizzle-kit push",
+    "seed:products": "tsx utils/seed-products.ts",
+    "seed:products:upsert": "tsx utils/seed-products.ts upsert"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
