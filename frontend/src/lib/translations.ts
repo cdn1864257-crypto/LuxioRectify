@@ -31,6 +31,7 @@ export interface Translations {
   shipping: string;
   free: string;
   discount: string;
+  or: string;
   
   // Hero section
   heroTitle: string;
@@ -539,6 +540,7 @@ export const translations: Record<Language, Translations> = {
     shipping: 'Shipping',
     free: 'Free',
     discount: 'Discount',
+    or: 'or',
     
     // Hero section
     heroTitle: 'Premium Tech at Unbeatable Prices',
@@ -1152,6 +1154,7 @@ export const translations: Record<Language, Translations> = {
     shipping: 'Livraison',
     free: 'Gratuit',
     discount: 'Remise',
+    or: 'ou',
     
     // Hero section
     heroTitle: 'Technologie premium à prix imbattables',
@@ -1765,6 +1768,7 @@ export const translations: Record<Language, Translations> = {
     shipping: 'Envío',
     free: 'Gratis',
     discount: 'Descuento',
+    or: 'o',
     
     // Hero section
     heroTitle: 'Tecnología premium a precios inmejorables',
@@ -2378,6 +2382,7 @@ export const translations: Record<Language, Translations> = {
     shipping: 'Envio',
     free: 'Grátis',
     discount: 'Desconto',
+    or: 'ou',
     
     // Hero section
     heroTitle: 'Tecnologia premium a preços imbatíveis',
@@ -2991,6 +2996,7 @@ export const translations: Record<Language, Translations> = {
     shipping: 'Dostawa',
     free: 'Darmowa',
     discount: 'Zniżka',
+    or: 'lub',
     
     // Hero section
     heroTitle: 'Technologia premium w niezbijanej cenie',
@@ -3604,6 +3610,7 @@ export const translations: Record<Language, Translations> = {
     shipping: 'Spedizione',
     free: 'Gratis',
     discount: 'Sconto',
+    or: 'o',
     
     // Hero section
     heroTitle: 'Tecnologia premium a prezzi imbattibili',
@@ -4217,6 +4224,7 @@ export const translations: Record<Language, Translations> = {
     shipping: 'Szállítás',
     free: 'Ingyenes',
     discount: 'Kedvezmény',
+    or: 'vagy',
     
     // Hero section
     heroTitle: 'Prémium technológia verhetetlen áron',

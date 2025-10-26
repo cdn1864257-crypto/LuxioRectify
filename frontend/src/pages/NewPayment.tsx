@@ -340,6 +340,18 @@ export default function NewPayment() {
                   </button>
                 </div>
 
+                {/* Payment Method Separator */}
+                <div className="relative py-4 sm:py-5">
+                  <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                    <div className="w-full border-t border-border"></div>
+                  </div>
+                  <div className="relative flex justify-center text-xs sm:text-sm uppercase">
+                    <span className="bg-background px-3 sm:px-4 text-muted-foreground font-medium">
+                      {t.or || 'ou'}
+                    </span>
+                  </div>
+                </div>
+
                 {/* NowPayments Method */}
                 <div>
                   <div className="flex items-center justify-between mb-3">
@@ -368,8 +380,20 @@ export default function NewPayment() {
                   </button>
                 </div>
 
+                {/* Payment Method Separator */}
+                <div className="relative py-4 sm:py-5">
+                  <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                    <div className="w-full border-t border-border"></div>
+                  </div>
+                  <div className="relative flex justify-center text-xs sm:text-sm uppercase">
+                    <span className="bg-background px-3 sm:px-4 text-muted-foreground font-medium">
+                      {t.or || 'ou'}
+                    </span>
+                  </div>
+                </div>
+
                 {/* Alternative Payment Methods - Collapsible */}
-                <div className="pt-4 border-t">
+                <div>
                   <button
                     type="button"
                     onClick={() => setShowAlternativeMethods(!showAlternativeMethods)}
