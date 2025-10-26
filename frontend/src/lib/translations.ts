@@ -4802,11 +4802,37 @@ export const translations: Record<Language, Translations> = {
 
 const countryToLanguageMap: { [key: string]: Language } = {
   FR: 'fr',
+  BE: 'fr',
+  CH: 'fr',
+  LU: 'fr',
+  MC: 'fr',
+  CA: 'fr',
+  
   ES: 'es',
+  MX: 'es',
+  AR: 'es',
+  CO: 'es',
+  CL: 'es',
+  PE: 'es',
+  VE: 'es',
+  
   PT: 'pt',
+  BR: 'pt',
+  
   PL: 'pl',
+  
   IT: 'it',
+  
   HU: 'hu',
+  
+  US: 'en',
+  GB: 'en',
+  IE: 'en',
+  AU: 'en',
+  NZ: 'en',
+  IN: 'en',
+  SG: 'en',
+  ZA: 'en',
 };
 
 async function detectLanguageFromIP(): Promise<Language | null> {

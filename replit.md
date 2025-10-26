@@ -28,8 +28,21 @@ User authentication uses JWT-based session management with email/password regist
 - Multilingual verification emails sent via SendGrid (FR, EN, ES, PT, PL, HU, IT)
 - Secure token validation with expiry checks and automatic cleanup after successful verification
 
-### Internationalization
-The platform supports multiple languages (English, French, Polish, Spanish, Portuguese, Italian, Hungarian) with dynamic switching and IP-based detection. All payment modals and content are fully internationalized.
+### Internationalization (Updated: October 26, 2025)
+The platform supports 7 languages (English, French, Polish, Spanish, Portuguese, Italian, Hungarian) with:
+- **Automatic IP-based Language Detection**: Uses `https://ipapi.co/country_code/` to detect user's country and automatically redirect to appropriate language route
+- **Country-to-Language Mapping**:
+  - French (fr): France, Belgium, Switzerland, Luxembourg, Monaco, Canada
+  - English (en): USA, UK, Ireland, Australia, New Zealand, India, Singapore, South Africa (default for unlisted countries)
+  - Spanish (es): Spain, Mexico, Argentina, Colombia, Chile, Peru, Venezuela
+  - Portuguese (pt): Portugal, Brazil
+  - Polish (pl): Poland
+  - Italian (it): Italy
+  - Hungarian (hu): Hungary
+- **Detection Priority**: URL parameter (?lang=) → localStorage → IP detection → browser language → English default
+- **Automatic Redirection**: Routes users to `/{language}` based on detected language (e.g., /fr, /pl, /en)
+- **Session Caching**: Country detection cached in sessionStorage to avoid repeated API calls
+- **Full Internationalization**: All payment modals, UI content, and emails are fully internationalized
 
 ### SEO Optimization (Updated: October 25, 2025)
 Complete multilingual SEO implementation for Google indexing and social media sharing across 6 primary languages (FR, EN, PT, ES, IT, HU):
