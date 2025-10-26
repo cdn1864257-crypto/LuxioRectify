@@ -180,6 +180,7 @@ export default function NewPayment() {
           customerEmail: user.email,
           customerName: `${user.firstName} ${user.lastName}`,
           totalAmount: total,
+          language: language,
           cartItems: cart.map(item => ({
             id: item.id,
             name: item.name,
