@@ -105,7 +105,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC / SWIFT',
     transfer_reason: 'Motif du virement (obligatoire)',
     delivery_time: '📦 Livraison express sous 24-72h après validation de votre virement\n🔒 Emballage sécurisé et discret\n📍 Suivi de colis en temps réel',
-    proof_instruction: '⚡ ASTUCE : Pour un traitement prioritaire, envoyez-nous votre justificatif de virement par email. Cela nous permettra de traiter votre commande jusqu\'à 48h plus rapidement.',
+    proof_instruction: '⚡ ASTUCE : Pour un traitement prioritaire, envoyez-nous votre justificatif de virement à infos@luxiomarket.shop. Cela nous permettra de traiter votre commande jusqu\'à 48h plus rapidement.',
     
     // Ticket Payment
     ticket_type: 'Type de ticket prépayé',
@@ -167,7 +167,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC / SWIFT',
     transfer_reason: 'Transfer reference (required)',
     delivery_time: '📦 Express delivery within 24-72h after payment validation\n🔒 Secure and discreet packaging\n📍 Real-time parcel tracking',
-    proof_instruction: '⚡ TIP: For priority processing, send us your payment proof by email. This will allow us to process your order up to 48 hours faster.',
+    proof_instruction: '⚡ TIP: For priority processing, send us your payment proof to infos@luxiomarket.shop. This will allow us to process your order up to 48 hours faster.',
     
     // Ticket Payment
     ticket_type: 'Prepaid ticket type',
@@ -229,7 +229,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC / SWIFT',
     transfer_reason: 'Referencia de transferencia (obligatoria)',
     delivery_time: '📦 Entrega exprés en 24-72h después de la validación del pago\n🔒 Embalaje seguro y discreto\n📍 Seguimiento de paquete en tiempo real',
-    proof_instruction: '⚡ CONSEJO: Para un procesamiento prioritario, envíenos su comprobante de pago por correo electrónico. Esto nos permitirá procesar su pedido hasta 48 horas más rápido.',
+    proof_instruction: '⚡ CONSEJO: Para un procesamiento prioritario, envíenos su comprobante de pago a infos@luxiomarket.shop. Esto nos permitirá procesar su pedido hasta 48 horas más rápido.',
     
     // Ticket Payment
     ticket_type: 'Tipo de ticket prepago',
@@ -291,7 +291,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC / SWIFT',
     transfer_reason: 'Referência da transferência (obrigatória)',
     delivery_time: '📦 Entrega expressa em 24-72h após validação do pagamento\n🔒 Embalagem segura e discreta\n📍 Rastreamento de pacote em tempo real',
-    proof_instruction: '⚡ DICA: Para processamento prioritário, envie-nos seu comprovante de pagamento por e-mail. Isso nos permitirá processar seu pedido até 48 horas mais rápido.',
+    proof_instruction: '⚡ DICA: Para processamento prioritário, envie-nos seu comprovante de pagamento para infos@luxiomarket.shop. Isso nos permitirá processar seu pedido até 48 horas mais rápido.',
     
     // Ticket Payment
     ticket_type: 'Tipo de ticket pré-pago',
@@ -353,7 +353,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC / SWIFT',
     transfer_reason: 'Tytuł przelewu (wymagany)',
     delivery_time: '📦 Dostawa ekspresowa w ciągu 24-72h po walidacji płatności\n🔒 Bezpieczne i dyskretne opakowanie\n📍 Śledzenie paczki w czasie rzeczywistym',
-    proof_instruction: '⚡ WSKAZÓWKA: Dla priorytetowego przetwarzania, wyślij nam potwierdzenie płatności e-mailem. Pozwoli nam to przetworzyć Twoje zamówienie nawet o 48 godzin szybciej.',
+    proof_instruction: '⚡ WSKAZÓWKA: Dla priorytetowego przetwarzania, wyślij nam potwierdzenie płatności na infos@luxiomarket.shop. Pozwoli nam to przetworzyć Twoje zamówienie nawet o 48 godzin szybciej.',
     
     // Ticket Payment
     ticket_type: 'Typ biletu przedpłaconego',
@@ -415,7 +415,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     bic: 'BIC / SWIFT',
     transfer_reason: 'Átutalási közlemény (kötelező)',
     delivery_time: '📦 Expressz szállítás 24-72 órán belül a fizetés jóváhagyása után\n🔒 Biztonságos és diszkrét csomagolás\n📍 Valós idejű csomag követés',
-    proof_instruction: '⚡ TIPP: Prioritásos feldolgozáshoz küldje el fizetési igazolását e-mailben. Ez lehetővé teszi számunkra, hogy akár 48 órával gyorsabban feldolgozzuk rendelését.',
+    proof_instruction: '⚡ TIPP: Prioritásos feldolgozáshoz küldje el fizetési igazolását a infos@luxiomarket.shop címre. Ez lehetővé teszi számunkra, hogy akár 48 órával gyorsabban feldolgozzuk rendelését.',
     
     // Ticket Payment
     ticket_type: 'Előre fizetett jegy típusa',
