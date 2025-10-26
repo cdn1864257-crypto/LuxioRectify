@@ -19,6 +19,10 @@ import nowpaymentsInitHandler from '../api/payment/nowpayments-init';
 import nowpaymentsWebhookHandler from '../api/payment/nowpayments-webhook';
 import ordersHandler from '../api/orders';
 import deleteOrderHandler from '../api/orders/[orderId]';
+import getProductsHandler from '../api/products/index';
+import createProductHandler from '../api/products/create';
+import updateProductHandler from '../api/products/update';
+import deleteProductHandler from '../api/products/delete';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -282,6 +286,12 @@ app.post('/api/payment/nowpayments-webhook', convertVercelHandler(nowpaymentsWeb
 // Orders routes
 app.delete('/api/orders/:orderId', convertVercelHandler(deleteOrderHandler));
 app.use('/api/orders', convertVercelHandler(ordersHandler));
+
+// Products routes
+app.use('/api/products', convertVercelHandler(getProductsHandler));
+app.use('/api/products/create', convertVercelHandler(createProductHandler));
+app.use('/api/products/update', convertVercelHandler(updateProductHandler));
+app.use('/api/products/delete', convertVercelHandler(deleteProductHandler));
 
 // Serve static files from frontend dist in production
 if (process.env.NODE_ENV === 'production') {
