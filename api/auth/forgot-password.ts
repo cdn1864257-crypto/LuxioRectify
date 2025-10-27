@@ -177,11 +177,17 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
       const emailText = `${language === 'fr' ? 'Réinitialisation de mot de passe' : language === 'es' ? 'Restablecimiento de contraseña' : 'Password Reset'}\n\n${language === 'fr' ? `Bonjour ${user.firstName},` : language === 'es' ? `Hola ${user.firstName},` : `Hello ${user.firstName},`}\n\n${language === 'fr' ? 'Nous avons reçu une demande de réinitialisation de mot de passe pour votre compte Luxio.' : language === 'es' ? 'Hemos recibido una solicitud de restablecimiento de contraseña para tu cuenta Luxio.' : 'We received a request to reset your Luxio account password.'}\n\n${language === 'fr' ? 'Cliquez sur ce lien pour réinitialiser votre mot de passe :' : language === 'es' ? 'Haz clic en este enlace para restablecer tu contraseña:' : 'Click this link to reset your password:'}\n${resetUrl}\n\n${language === 'fr' ? 'Ce lien expirera dans 1 heure pour des raisons de sécurité.' : language === 'es' ? 'Este enlace caducará en 1 hora por razones de seguridad.' : 'This link will expire in 1 hour for security reasons.'}\n\n${language === 'fr' ? "Si vous n'avez pas demandé de réinitialisation de mot de passe, ignorez cet email." : language === 'es' ? 'Si no solicitaste este restablecimiento de contraseña, ignora este correo.' : 'If you did not request a password reset, please ignore this email.'}`;
 
+      console.log('[Forgot Password] Attempting to send reset email...');
+      console.log('[Forgot Password] To:', user.email);
+      console.log('[Forgot Password] Language:', language);
+      console.log('[Forgot Password] Reset URL:', resetUrl);
+
       const emailSent = await sendEmail({
         to: user.email,
         subject: language === 'fr' ? 'Réinitialisation de votre mot de passe Luxio' : language === 'es' ? 'Restablecimiento de contraseña Luxio' : 'Reset Your Luxio Password',
         html: emailHtml,
-        text: emailText
+        text: emailText,
+        from: 'replitprojet97@gmail.com'
       });
 
       if (!emailSent) {
