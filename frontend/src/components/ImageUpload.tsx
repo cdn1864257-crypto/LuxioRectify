@@ -19,6 +19,13 @@ export function ImageUpload({ value, onChange, label = "Image" }: ImageUploadPro
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
+  const errorPlaceholder = `data:image/svg+xml;base64,${btoa(`
+    <svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#fee2e2"/>
+      <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="#dc2626" font-family="Arial, sans-serif" font-size="14">Image invalid</text>
+    </svg>
+  `)}`;
+
   useEffect(() => {
     setImageUrl(value);
   }, [value]);
@@ -118,7 +125,7 @@ export function ImageUpload({ value, onChange, label = "Image" }: ImageUploadPro
                 alt="Preview"
                 className="w-full max-w-xs h-32 object-cover rounded border"
                 onError={(e) => {
-                  e.currentTarget.src = 'https://via.placeholder.com/400x200?text=Image+invalide';
+                  e.currentTarget.src = errorPlaceholder;
                 }}
               />
             </div>
@@ -166,7 +173,7 @@ export function ImageUpload({ value, onChange, label = "Image" }: ImageUploadPro
                 alt="Preview"
                 className="w-full max-w-xs h-32 object-cover rounded border"
                 onError={(e) => {
-                  e.currentTarget.src = 'https://via.placeholder.com/400x200?text=Image+invalide';
+                  e.currentTarget.src = errorPlaceholder;
                 }}
               />
             </div>
