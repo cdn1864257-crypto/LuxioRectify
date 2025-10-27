@@ -1,5 +1,8 @@
 import { sendEmail as sendEmailViaSMTP } from './mailer.js';
 import { getTranslation, type EmailLanguage } from './email-translations.js';
+import crypto from 'crypto';
+import sgMail from '@sendgrid/mail';
+import type { Db } from 'mongodb';
 
 interface EmailOptions {
   to: string | string[];
@@ -254,112 +257,125 @@ ${t.team_signature}
 
 // ==================== PASSWORD RESET EMAIL ====================
 
+const FROM_EMAIL = process.env.SENDGRID_FROM_EMAIL || DEFAULT_FROM;
+const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY as string;
+const FRONTEND_URL = (process.env.CLIENT_URL || process.env.FRONTEND_URL || 'https://luxiomarket.shop').replace(/\/$/, '');
+const TOKEN_TTL_MINUTES = Number(process.env.RESET_TOKEN_TTL_MINUTES || '60');
+
+if (!FROM_EMAIL || !SENDGRID_API_KEY) {
+  console.warn('Warning: SENDGRID_FROM_EMAIL or SENDGRID_API_KEY not set. Email sending will fail.');
+}
+
+if (SENDGRID_API_KEY) {
+  sgMail.setApiKey(SENDGRID_API_KEY);
+}
+
+function generateUrlSafeToken(bytes = 32) {
+  const raw = crypto.randomBytes(bytes).toString('base64');
+  return raw.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
+}
+
+function hashToken(token: string) {
+  return crypto.createHash('sha256').update(token).digest('hex');
+}
+
+type SendPasswordResetOpts = {
+  firstName?: string;
+  locale?: string;
+  db?: Db;
+};
+
 export async function sendPasswordResetEmail(
   userEmail: string,
-  firstName: string,
-  resetToken: string,
-  language?: string
+  opts: SendPasswordResetOpts = {}
 ): Promise<boolean> {
+  const { firstName = '', locale = 'en', db } = opts;
+
+  if (!userEmail) { 
+    console.error('[sendPasswordResetEmail] Missing userEmail'); 
+    return false; 
+  }
+
+  let database: Db | undefined = db;
   try {
-    const lang = language?.toLowerCase() || 'fr';
-    const validLanguages = ['fr', 'en', 'es', 'pt', 'pl', 'hu'];
-    const emailLang: EmailLanguage = validLanguages.includes(lang) ? (lang as EmailLanguage) : 'fr';
-    const t = getTranslation(emailLang);
-
-    // --- PRO: build URL sécurisé ---
-    const frontendUrl =
-      (process.env.CLIENT_URL || process.env.FRONTEND_URL || 'https://luxiomarket.shop').replace(/\/$/, '');
-    const resetUrl = `${frontendUrl}/reset-password?token=${resetToken}`;
-
-    console.log('[sendPasswordResetEmail] Reset URL:', resetUrl);
-
-    // --- HTML Content ---
-    const htmlContent = getEmailLayout(`
-      <h2>${emailLang === 'fr' ? 'Réinitialisation de mot de passe' :
-            emailLang === 'es' ? 'Restablecimiento de contraseña' : 'Password Reset'}</h2>
-      <p>${t.hello} <strong>${firstName}</strong>,</p>
-      <p style="line-height: 1.8;">
-        ${emailLang === 'fr' ? 'Nous avons reçu une demande de réinitialisation de mot de passe pour votre compte Luxio.' :
-          emailLang === 'es' ? 'Hemos recibido una solicitud de restablecimiento de contraseña para tu cuenta Luxio.' :
-          'We received a request to reset your Luxio account password.'}
-      </p>
-      <p style="line-height: 1.8;">
-        ${emailLang === 'fr' ? 'Cliquez sur le bouton ci-dessous pour réinitialiser votre mot de passe :' :
-          emailLang === 'es' ? 'Haz clic en el botón de abajo para restablecer tu contraseña:' :
-          'Click the button below to reset your password:'}
-      </p>
-      <div style="text-align: center; margin: 32px 0;">
-        <a href="${resetUrl}" class="button">
-          ${emailLang === 'fr' ? 'Réinitialiser le mot de passe' :
-            emailLang === 'es' ? 'Restablecer contraseña' : 'Reset Password'}
-        </a>
-      </div>
-      <div style="background-color: #fef3c7; padding: 16px; border-radius: 6px; font-size: 13px; color: #92400e; margin: 24px 0; border-left: 4px solid #f59e0b;">
-        <p style="margin: 0;"><strong>${emailLang === 'fr' ? '⚠️ Important :' : '⚠️ Important:'}</strong></p>
-        <p style="margin: 8px 0 0 0;">
-          ${emailLang === 'fr' ? 'Ce lien expirera dans 1 heure pour des raisons de sécurité.' :
-            emailLang === 'es' ? 'Este enlace caducará en 1 hora por razones de seguridad.' :
-            'This link will expire in 1 hour for security reasons.'}
-        </p>
-      </div>
-      <p style="color: #6b7280; font-size: 14px;">
-        ${emailLang === 'fr' ? "Si vous n'avez pas demandé de réinitialisation de mot de passe, ignorez cet email." :
-          emailLang === 'es' ? 'Si no solicitaste este restablecimiento de contraseña, ignora este correo.' :
-          'If you did not request a password reset, please ignore this email.'}
-      </p>
-      <div class="divider"></div>
-      <p style="color: #6b7280; font-size: 14px; white-space: pre-line;">${t.team_signature}</p>
-    `, emailLang);
-
-    // --- Text Content fallback ---
-    const textContent = `
-${emailLang === 'fr' ? 'Réinitialisation de mot de passe' : emailLang === 'es' ? 'Restablecimiento de contraseña' : 'Password Reset'}
-
-${t.hello} ${firstName},
-
-${emailLang === 'fr' ? 'Nous avons reçu une demande de réinitialisation de mot de passe pour votre compte Luxio.' :
-  emailLang === 'es' ? 'Hemos recibido una solicitud de restablecimiento de contraseña para tu cuenta Luxio.' :
-  'We received a request to reset your Luxio account password.'}
-
-${emailLang === 'fr' ? 'Cliquez sur ce lien pour réinitialiser votre mot de passe :' :
-  emailLang === 'es' ? 'Haz clic en este enlace pour restablecer tu contraseña:' :
-  'Click this link to reset your password:'}
-${resetUrl}
-
-${emailLang === 'fr' ? "Ce lien expirera dans 1 heure pour des raisons de sécurité." :
-  emailLang === 'es' ? 'Este enlace caducará en 1 hora por razones de seguridad.' :
-  'This link will expire in 1 hour for security reasons.'}
-
-${emailLang === 'fr' ? "Si vous n'avez pas demandé de réinitialisation de mot de passe, ignorez cet email." :
-  emailLang === 'es' ? 'Si no solicitaste este restablecimiento de contraseña, ignora este correo.' :
-  'If you did not request a password reset, please ignore this email.'}
-
-${t.team_signature}
-    `.trim();
-
-    // --- Send email via SendGrid ---
-    const sent = await sendEmail({
-      to: userEmail,
-      subject: emailLang === 'fr' ? 'Réinitialisation de votre mot de passe Luxio' :
-               emailLang === 'es' ? 'Restablecimiento de contraseña Luxio' :
-               'Reset Your Luxio Password',
-      html: htmlContent,
-      text: textContent,
-      from: DEFAULT_FROM
-    });
-
-    if (!sent) {
-      console.error('[sendPasswordResetEmail] SendGrid returned false for:', userEmail);
-    } else {
-      console.log('[sendPasswordResetEmail] Email sent successfully to:', userEmail);
+    if (!database) {
+      throw new Error('No DB instance provided. Pass db in opts or adapt fallback.');
     }
 
-    return sent;
+    const users = database.collection('users');
+    const user = await users.findOne({ email: userEmail.toLowerCase() });
+    if (!user) {
+      console.info('[sendPasswordResetEmail] No user found — returning success to avoid enumeration.');
+      return true;
+    }
 
-  } catch (err) {
-    console.error('[sendPasswordResetEmail] ERROR:', err);
+    const resetToken = generateUrlSafeToken(32);
+    const resetTokenHash = hashToken(resetToken);
+    const expiresAt = new Date(Date.now() + TOKEN_TTL_MINUTES * 60_000);
+
+    await users.updateOne(
+      { _id: user._id },
+      { $set: { 'security.resetPassword': { tokenHash: resetTokenHash, expiresAt, createdAt: new Date() } } }
+    );
+
+    const encodedToken = encodeURIComponent(resetToken);
+    const resetUrl = `${FRONTEND_URL}/reset-password?token=${encodedToken}`;
+
+    const subjects: Record<string,string> = {
+      en:'Reset your password', fr:'Réinitialiser votre mot de passe', es:'Restablece tu contraseña',
+      pt:'Redefinir sua senha', hu:'Jelszó visszaállítása', it:'Reimposta la tua password', pl:'Zresetuj swoje hasło'
+    };
+    const subject = subjects[locale] || subjects.en;
+
+    const plainText = `${firstName ? `Hi ${firstName},\n\n` : ''}You (or someone else) requested a password reset.\nVisit: ${resetUrl}\n\nIf you didn't request this, ignore this email.`;
+
+    const html = `
+      <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#111;font-size:16px;">
+        <h2>${subject}</h2>
+        <p>${firstName ? `Hello ${firstName},` : 'Hello,'}</p>
+        <p>Click below to reset your password (expires in ${TOKEN_TTL_MINUTES} minutes):</p>
+        <p style="text-align:center;">
+          <a href="${resetUrl}" target="_blank" rel="noopener noreferrer" data-sg-omit="true"
+             style="padding:12px 20px;border-radius:6px;background:#2563eb;color:#fff;text-decoration:none;font-weight:600;">
+             Reset password
+          </a>
+        </p>
+        <p>If button doesn't work, copy & paste this URL:</p>
+        <p><small><a href="${resetUrl}" target="_blank" data-sg-omit="true">${resetUrl}</a></small></p>
+      </div>
+    `;
+
+    const msg = { 
+      to: userEmail, 
+      from: FROM_EMAIL, 
+      subject, 
+      text: plainText, 
+      html,
+      trackingSettings: { 
+        clickTracking: { enable: false, enable_text: false }, 
+        openTracking: { enable: true } 
+      } 
+    };
+
+    await sgMail.send(msg);
+    console.info('[sendPasswordResetEmail] Email sent successfully to:', userEmail);
+    return true;
+
+  } catch (err: any) {
+    console.error('[sendPasswordResetEmail] Error:', err);
     return false;
   }
+}
+
+export async function verifyResetToken(db: Db, token: string) {
+  const tokenHash = hashToken(token);
+  const users = db.collection('users');
+  const user = await users.findOne({ 'security.resetPassword.tokenHash': tokenHash });
+  if (!user) return null;
+  const meta = user.security?.resetPassword;
+  if (!meta || !meta.expiresAt) return null;
+  if (new Date(meta.expiresAt) < new Date()) return null;
+  return user;
 }
 
 // ==================== BANK TRANSFER EMAILS ====================

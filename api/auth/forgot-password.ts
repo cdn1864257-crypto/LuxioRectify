@@ -1,5 +1,4 @@
 import { MongoClient } from 'mongodb';
-import crypto from 'crypto';
 import { sendPasswordResetEmail } from '../../utils/email.js';
 
 interface VercelRequest {
@@ -44,51 +43,31 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const usersCollection = db.collection('users');
 
       const user = await usersCollection.findOne({ email: email.toLowerCase() });
+      const language = user?.language || 'en';
+      const firstName = user?.firstName || '';
 
-      // Pour la sécurité, on retourne toujours success même si l'email n'existe pas
-      if (!user) {
-        return res.status(200).json({ success: true });
-      }
+      console.log('[Forgot Password] Attempting to send reset email...');
+      console.log('[Forgot Password] To:', email);
+      console.log('[Forgot Password] Language:', language);
 
-      // Générer un token de réinitialisation
-      const resetToken = crypto.randomBytes(32).toString('hex');
-      const resetTokenExpiry = new Date(Date.now() + 3600000); // 1 heure
-
-      // Sauvegarder le token
-      await usersCollection.updateOne(
-        { email: email.toLowerCase() },
+      const emailSent = await sendPasswordResetEmail(
+        email.toLowerCase(),
         {
-          $set: {
-            resetToken,
-            resetTokenExpiry,
-            updatedAt: new Date()
-          }
+          firstName,
+          locale: language,
+          db
         }
       );
 
-      const language = user.language || 'fr';
-
-      console.log('[Forgot Password] Attempting to send reset email...');
-      console.log('[Forgot Password] To:', user.email);
-      console.log('[Forgot Password] Language:', language);
-      console.log('[Forgot Password] Reset Token:', resetToken);
-
-      const emailSent = await sendPasswordResetEmail(
-        user.email,
-        user.firstName,
-        resetToken,
-        language
-      );
-
       if (!emailSent) {
-        console.error('[Forgot Password] Failed to send reset email to:', user.email);
+        console.error('[Forgot Password] Failed to send reset email to:', email);
         return res.status(500).json({ 
           error: 'Error sending email',
           details: 'Failed to send password reset email. Please check SendGrid configuration.'
         });
       }
 
-      console.log('[Forgot Password] Reset email sent successfully to:', user.email);
+      console.log('[Forgot Password] Reset email sent successfully to:', email);
       return res.status(200).json({ success: true });
     } finally {
       await client.close();

@@ -1,5 +1,6 @@
 import { MongoClient } from 'mongodb';
 import bcrypt from 'bcrypt';
+import { verifyResetToken } from '../../utils/email.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -46,10 +47,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const db = client.db('luxio');
       const usersCollection = db.collection('users');
 
-      const user = await usersCollection.findOne({
-        resetToken: token,
-        resetTokenExpiry: { $gt: new Date() }
-      });
+      const user = await verifyResetToken(db, token);
 
       if (!user) {
         return res.status(400).json({ error: 'INVALID_OR_EXPIRED_TOKEN' });
@@ -65,8 +63,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
             updatedAt: new Date()
           },
           $unset: {
-            resetToken: "",
-            resetTokenExpiry: ""
+            'security.resetPassword': ""
           }
         }
       );
