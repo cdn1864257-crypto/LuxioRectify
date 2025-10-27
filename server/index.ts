@@ -12,6 +12,8 @@ import loginHandler from '../api/auth/login';
 import meHandler from '../api/auth/me';
 import logoutHandler from '../api/auth/logout';
 import changePasswordHandler from '../api/auth/change-password';
+import forgotPasswordHandler from '../api/auth/forgot-password';
+import resetPasswordHandler from '../api/auth/reset-password';
 import submitOrderHandler from '../api/payment/submit-order';
 import bankTransferHandler from '../api/payment/bank-transfer';
 import nowpaymentsReturnHandler from '../api/payment/nowpayments-return';
@@ -149,6 +151,7 @@ app.use((req, res, next) => {
     /^\/api\/auth\/signup/,
     /^\/api\/auth\/login/,
     /^\/api\/auth\/logout/,
+    /^\/api\/auth\/forgot-password/,  // Password reset email can be requested without CSRF
     /^\/api\/payment\/nowpayments-webhook/,
     /^\/api\/payment\/nowpayments-return/,
   ];
@@ -275,6 +278,8 @@ app.post('/api/auth/logout', (req: any, res) => {
 
 app.use('/api/auth/me', convertVercelHandler(meHandler));
 app.use('/api/auth/change-password', convertVercelHandler(changePasswordHandler));
+app.use('/api/auth/forgot-password', convertVercelHandler(forgotPasswordHandler));
+app.use('/api/auth/reset-password', convertVercelHandler(resetPasswordHandler));
 
 // Payment routes
 app.use('/api/payment/submit-order', convertVercelHandler(submitOrderHandler));
