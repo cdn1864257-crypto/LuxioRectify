@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 import crypto from 'crypto';
-import { sendEmail } from '../../utils/email.js';
+import { sendEmail, DEFAULT_FROM } from '../../utils/email.js';
 import { getTranslation } from '../../utils/email-translations.js';
 
 interface VercelRequest {
@@ -180,14 +180,13 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       console.log('[Forgot Password] Attempting to send reset email...');
       console.log('[Forgot Password] To:', user.email);
       console.log('[Forgot Password] Language:', language);
-      console.log('[Forgot Password] Reset URL:', resetUrl);
 
       const emailSent = await sendEmail({
         to: user.email,
         subject: language === 'fr' ? 'Réinitialisation de votre mot de passe Luxio' : language === 'es' ? 'Restablecimiento de contraseña Luxio' : 'Reset Your Luxio Password',
         html: emailHtml,
         text: emailText,
-        from: 'replitprojet97@gmail.com'
+        from: DEFAULT_FROM
       });
 
       if (!emailSent) {

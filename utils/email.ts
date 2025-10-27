@@ -13,7 +13,7 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
   return sendEmailViaSMTP(options);
 }
 
-const DEFAULT_FROM = 'replitprojet97@gmail.com';
+export const DEFAULT_FROM = 'replitprojet97@gmail.com';
 const DEFAULT_ADMIN = 'replitprojet97@gmail.com';
 
 function getEmailLayout(content: string, language: EmailLanguage = 'fr'): string {
