@@ -1,13 +1,63 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'wouter';
-import { CheckCircle2, XCircle, Loader2, Mail } from 'lucide-react';
+import { CheckCircle2, XCircle, Loader2 } from 'lucide-react';
 import { getApiUrl } from '@/lib/config';
+import { useAuth } from '@/contexts/AuthContext';
+
+const MESSAGES: Record<string, Record<string, string>> = {
+  verifying: {
+    en: 'Verifying your email...',
+    fr: 'Vérification de votre email...',
+    es: 'Verificando su correo electrónico...',
+    pt: 'Verificando seu e-mail...',
+    it: 'Verifica della tua email...',
+    hu: 'Az e-mail ellenőrzése...',
+    pl: 'Weryfikacja e-maila...'
+  },
+  success: {
+    en: 'Email verified successfully!',
+    fr: 'Email vérifié avec succès !',
+    es: '¡Correo electrónico verificado con éxito!',
+    pt: 'E-mail verificado com sucesso!',
+    it: 'Email verificata con successo!',
+    hu: 'Az e-mail sikeresen ellenőrizve!',
+    pl: 'E-mail został pomyślnie zweryfikowany!'
+  },
+  redirecting: {
+    en: 'Redirecting to homepage...',
+    fr: 'Redirection vers la page d\'accueil...',
+    es: 'Redirigiendo a la página de inicio...',
+    pt: 'Redirecionando para a página inicial...',
+    it: 'Reindirizzamento alla home page...',
+    hu: 'Átirányítás a kezdőlapra...',
+    pl: 'Przekierowywanie na stronę główną...'
+  },
+  alreadyVerified: {
+    en: 'Your email is already verified',
+    fr: 'Votre email est déjà vérifié',
+    es: 'Su correo electrónico ya está verificado',
+    pt: 'Seu e-mail já está verificado',
+    it: 'La tua email è già verificata',
+    hu: 'Az e-mail címe már ellenőrzött',
+    pl: 'Twój e-mail jest już zweryfikowany'
+  },
+  error: {
+    en: 'Verification failed',
+    fr: 'Échec de la vérification',
+    es: 'Verificación fallida',
+    pt: 'Falha na verificação',
+    it: 'Verifica non riuscita',
+    hu: 'Az ellenőrzés sikertelen',
+    pl: 'Weryfikacja nie powiodła się'
+  }
+};
 
 export default function VerifyEmailPage() {
   const [, setLocation] = useLocation();
+  const { refreshUser } = useAuth();
   const [status, setStatus] = useState<'loading' | 'success' | 'error' | 'already-verified'>('loading');
   const [message, setMessage] = useState('');
-  const [userName, setUserName] = useState('');
+  const [language, setLanguage] = useState('en');
 
   useEffect(() => {
     const verifyEmail = async () => {
@@ -16,7 +66,7 @@ export default function VerifyEmailPage() {
 
       if (!token) {
         setStatus('error');
-        setMessage('Token de vérification manquant');
+        setMessage('Verification token is missing');
         return;
       }
 
@@ -33,130 +83,110 @@ export default function VerifyEmailPage() {
         const data = await response.json();
 
         if (response.ok) {
+          const userLang = data.language || 'en';
+          setLanguage(userLang);
+
           if (data.alreadyVerified) {
             setStatus('already-verified');
-            setMessage(data.message || 'Votre email est déjà vérifié');
+            setMessage(data.message || MESSAGES.alreadyVerified[userLang]);
+            setTimeout(() => setLocation('/'), 3000);
           } else {
             setStatus('success');
-            setMessage(data.message || 'Email vérifié avec succès !');
-            if (data.user) {
-              setUserName(data.user.firstName);
+            setMessage(data.message || MESSAGES.success[userLang]);
+            
+            if (data.autoLogin && data.user) {
+              await refreshUser();
             }
+            
+            setTimeout(() => setLocation('/'), 3000);
           }
         } else {
           setStatus('error');
-          setMessage(data.error || 'Erreur lors de la vérification');
+          setMessage(data.message || 'Verification failed');
         }
       } catch (error) {
         setStatus('error');
-        setMessage('Erreur de connexion au serveur');
+        setMessage('Connection error');
       }
     };
 
     verifyEmail();
-  }, []);
-
-  const redirectToLogin = () => {
-    setLocation('/');
-  };
+  }, [refreshUser, setLocation]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-blue-950 dark:to-indigo-950 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8">
-        <div className="text-center">
-          {status === 'loading' && (
-            <>
-              <div className="flex justify-center mb-6">
-                <Loader2 className="w-16 h-16 text-blue-600 dark:text-blue-400 animate-spin" data-testid="icon-loading" />
-              </div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4" data-testid="text-title">
-                Vérification en cours...
-              </h1>
-              <p className="text-gray-600 dark:text-gray-300" data-testid="text-message">
-                Veuillez patienter pendant que nous vérifions votre adresse email.
-              </p>
-            </>
-          )}
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-blue-950 flex items-center justify-center p-4">
+      <div className="max-w-md w-full bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-3xl shadow-2xl p-12 text-center">
+        {status === 'loading' && (
+          <div className="space-y-6">
+            <div className="flex justify-center">
+              <Loader2 className="w-20 h-20 text-blue-600 dark:text-blue-400 animate-spin" data-testid="icon-loading" />
+            </div>
+            <p className="text-lg text-gray-700 dark:text-gray-200" data-testid="text-message">
+              {MESSAGES.verifying[language]}
+            </p>
+          </div>
+        )}
 
-          {status === 'success' && (
-            <>
-              <div className="flex justify-center mb-6">
-                <div className="rounded-full bg-green-100 dark:bg-green-900 p-4">
-                  <CheckCircle2 className="w-16 h-16 text-green-600 dark:text-green-400" data-testid="icon-success" />
-                </div>
+        {status === 'success' && (
+          <div className="space-y-6">
+            <div className="flex justify-center">
+              <div className="rounded-full bg-green-100 dark:bg-green-900/50 p-6">
+                <CheckCircle2 className="w-20 h-20 text-green-600 dark:text-green-400" data-testid="icon-success" />
               </div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4" data-testid="text-title">
-                Email vérifié avec succès ! 🎉
+            </div>
+            <div className="space-y-3">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white" data-testid="text-title">
+                {MESSAGES.success[language]}
+              </h1>
+              <p className="text-gray-600 dark:text-gray-300" data-testid="text-redirect">
+                {MESSAGES.redirecting[language]}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {status === 'already-verified' && (
+          <div className="space-y-6">
+            <div className="flex justify-center">
+              <div className="rounded-full bg-blue-100 dark:bg-blue-900/50 p-6">
+                <CheckCircle2 className="w-20 h-20 text-blue-600 dark:text-blue-400" data-testid="icon-already-verified" />
+              </div>
+            </div>
+            <div className="space-y-3">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white" data-testid="text-title">
+                {MESSAGES.alreadyVerified[language]}
+              </h1>
+              <p className="text-gray-600 dark:text-gray-300" data-testid="text-redirect">
+                {MESSAGES.redirecting[language]}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {status === 'error' && (
+          <div className="space-y-6">
+            <div className="flex justify-center">
+              <div className="rounded-full bg-red-100 dark:bg-red-900/50 p-6">
+                <XCircle className="w-20 h-20 text-red-600 dark:text-red-400" data-testid="icon-error" />
+              </div>
+            </div>
+            <div className="space-y-3">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white" data-testid="text-title">
+                {MESSAGES.error[language]}
               </h1>
               <p className="text-gray-600 dark:text-gray-300 mb-6" data-testid="text-message">
-                {userName ? `Bienvenue ${userName} ! ` : ''}
                 {message}
-              </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6" data-testid="text-welcome-email">
-                <Mail className="inline w-4 h-4 mr-1" />
-                Un email de bienvenue vous a été envoyé avec plus d'informations.
               </p>
               <button
-                onClick={redirectToLogin}
-                className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
-                data-testid="button-login"
+                onClick={() => setLocation('/')}
+                className="mt-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
+                data-testid="button-back"
               >
-                Se connecter
+                {language === 'fr' ? 'Retour' : language === 'es' ? 'Volver' : language === 'pt' ? 'Voltar' : language === 'it' ? 'Torna' : language === 'hu' ? 'Vissza' : language === 'pl' ? 'Wróć' : 'Go back'}
               </button>
-            </>
-          )}
-
-          {status === 'already-verified' && (
-            <>
-              <div className="flex justify-center mb-6">
-                <div className="rounded-full bg-blue-100 dark:bg-blue-900 p-4">
-                  <CheckCircle2 className="w-16 h-16 text-blue-600 dark:text-blue-400" data-testid="icon-already-verified" />
-                </div>
-              </div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4" data-testid="text-title">
-                Email déjà vérifié
-              </h1>
-              <p className="text-gray-600 dark:text-gray-300 mb-6" data-testid="text-message">
-                {message}
-              </p>
-              <button
-                onClick={redirectToLogin}
-                className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
-                data-testid="button-login"
-              >
-                Se connecter
-              </button>
-            </>
-          )}
-
-          {status === 'error' && (
-            <>
-              <div className="flex justify-center mb-6">
-                <div className="rounded-full bg-red-100 dark:bg-red-900 p-4">
-                  <XCircle className="w-16 h-16 text-red-600 dark:text-red-400" data-testid="icon-error" />
-                </div>
-              </div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4" data-testid="text-title">
-                Erreur de vérification
-              </h1>
-              <p className="text-gray-600 dark:text-gray-300 mb-6" data-testid="text-message">
-                {message}
-              </p>
-              <div className="space-y-3">
-                <p className="text-sm text-gray-500 dark:text-gray-400" data-testid="text-help">
-                  Le lien de vérification peut avoir expiré ou être invalide. Veuillez vous inscrire à nouveau ou contacter le support.
-                </p>
-                <button
-                  onClick={redirectToLogin}
-                  className="w-full bg-gray-600 hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
-                  data-testid="button-back"
-                >
-                  Retour à l'accueil
-                </button>
-              </div>
-            </>
-          )}
-        </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
