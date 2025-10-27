@@ -1,0 +1,106 @@
+Merci de mettre à jour l’API de réinitialisation de mot de passe pour qu’elle utilise la version sécurisée de sendPasswordResetEmail() et gère automatiquement la langue du site.
+
+
+---
+
+1️⃣ Fichier à remplacer
+
+Chemin : backend/api/auth/forgot-password.ts
+
+Contenu à copier-coller :
+
+import { Request, Response } from 'express';
+import { sendPasswordResetEmail } from '@/utils/email';
+import { Db } from 'mongodb';
+
+// --- Assurez-vous d'avoir votre instance DB importée / disponible ---
+import { getDb } from '@/lib/mongo'; // adapter selon votre projet
+
+export default async function forgotPasswordHandler(req: Request, res: Response) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method not allowed' });
+  }
+
+  try {
+    const { email, locale = 'fr' } = req.body; // récupère la langue côté frontend
+    if (!email) {
+      return res.status(400).json({ message: 'Email is required' });
+    }
+
+    // Récupération de la DB
+    const db: Db = await getDb();
+
+    // Envoi du mail de réinitialisation
+    const success = await sendPasswordResetEmail(email, { locale, db });
+
+    // Toujours renvoyer succès pour éviter la fuite d'existence d’un compte
+    return res.status(200).json({ message: 'If this email exists, a reset link has been sent.' });
+
+  } catch (err: any) {
+    console.error('[forgotPassword] Error:', err);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+}
+
+
+---
+
+2️⃣ Vérifications importantes
+
+1. Instance DB
+
+La fonction getDb() doit retourner l’instance MongoDB.
+
+Adapter l’import si nécessaire.
+
+
+
+2. Variables d’environnement (déjà configurées sur Render, pas sur Replit) :
+
+
+
+CLIENT_URL=https://luxiomarket.shop
+FRONTEND_URL=https://luxiomarket.shop
+SENDGRID_FROM_EMAIL=replitprojet97@gmail.com
+SENDGRID_API_KEY=********
+RESET_TOKEN_TTL_MINUTES=60
+
+3. Frontend
+
+La requête POST vers /api/auth/forgot-password doit envoyer email + langue :
+
+
+
+
+fetch('/api/auth/forgot-password', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ email: userEmail, locale: currentLang })
+});
+
+4. Fonction sendPasswordResetEmail()
+
+Version sécurisée PRO avec token hashé, click-tracking désactivé et TTL respecté.
+
+Le lien doit contenir le préfixe de langue :
+
+
+
+
+const resetUrl = `${FRONTEND_URL}/${locale}/reset-password?token=${encodedToken}`;
+
+5. Tests à effectuer
+
+Envoyer un email via “Mot de passe oublié”.
+
+Cliquer sur le lien → le formulaire doit s’afficher dans la langue correcte.
+
+Soumettre un nouveau mot de passe → vérifier que la DB est mise à jour et que le token est supprimé.
+
+
+
+
+
+---
+
+Merci de confirmer lorsque cette mise à jour est effectuée et testée ✅

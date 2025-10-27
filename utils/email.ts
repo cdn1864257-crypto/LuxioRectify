@@ -319,7 +319,7 @@ export async function sendPasswordResetEmail(
     );
 
     const encodedToken = encodeURIComponent(resetToken);
-    const resetUrl = `${FRONTEND_URL}/reset-password?token=${encodedToken}`;
+    const resetUrl = `${FRONTEND_URL}/${locale}/reset-password?token=${encodedToken}`;
 
     const subjects: Record<string,string> = {
       en:'Reset your password', fr:'Réinitialiser votre mot de passe', es:'Restablece tu contraseña',

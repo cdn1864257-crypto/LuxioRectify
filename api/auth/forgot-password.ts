@@ -24,7 +24,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { email } = req.body;
+    const { email, locale } = req.body;
 
     if (!email) {
       return res.status(400).json({ error: 'REQUIRED_FIELDS' });
@@ -43,12 +43,14 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const usersCollection = db.collection('users');
 
       const user = await usersCollection.findOne({ email: email.toLowerCase() });
-      const language = user?.language || 'en';
+      // Utiliser la langue fournie par le frontend, sinon celle de l'utilisateur, sinon 'en'
+      const language = locale || user?.language || 'en';
       const firstName = user?.firstName || '';
 
       console.log('[Forgot Password] Attempting to send reset email...');
       console.log('[Forgot Password] To:', email);
       console.log('[Forgot Password] Language:', language);
+      console.log('[Forgot Password] Locale from frontend:', locale);
 
       const emailSent = await sendPasswordResetEmail(
         email.toLowerCase(),
@@ -68,7 +70,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       }
 
       console.log('[Forgot Password] Reset email sent successfully to:', email);
-      return res.status(200).json({ success: true });
+      // Toujours renvoyer succès pour éviter la fuite d'existence d'un compte
+      return res.status(200).json({ 
+        success: true,
+        message: 'If this email exists, a reset link has been sent.'
+      });
     } finally {
       await client.close();
     }

@@ -13,7 +13,7 @@ interface ForgotPasswordFormProps {
 
 export function ForgotPasswordForm({ onBack }: ForgotPasswordFormProps) {
   const { toast } = useToast();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -45,7 +45,7 @@ export function ForgotPasswordForm({ onBack }: ForgotPasswordFormProps) {
       const response = await fetch(getApiUrl('/api/auth/forgot-password'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email, locale: language })
       });
 
       if (!response.ok) {
