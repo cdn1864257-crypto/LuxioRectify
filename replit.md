@@ -61,8 +61,15 @@ Complete multilingual SEO implementation for Google indexing and social media sh
 - **Alt Tags Infrastructure**: Translated alt tag system ready for all images (seoImageAltLogo, seoImageAltProduct, etc.)
 - URL structure uses query parameters to maintain compatibility with existing routing while providing proper language targeting for search engines.
 
-### Data Management
+### Data Management (Updated: October 27, 2025)
 Product and order data are managed client-side using a static product database organized by categories. Local storage maintains cart persistence and order history. The product catalog includes extensive smartphone data with variant matrices, pricing, and professional images. Product images are synced from an `attached_assets/` folder to `frontend/public/attached_assets/`.
+
+**Image Asset Optimization** (October 27, 2025): Cleaned up image assets to eliminate cart image mismatches:
+- Removed 164 unused generic stock images from `frontend/public/attached_assets/stock_images/`
+- Maintained only 11 actively used product images referenced in `products.ts`
+- Eliminated all external placeholder dependencies (via.placeholder.com) by replacing with inline SVG placeholders
+- Updated `ImageUpload.tsx` and `AdminProducts.tsx` to use self-contained SVG error placeholders
+- Ensured all cart images correctly correspond to their products with no generic fallbacks
 
 ### Payment Processing
 A complete payment system offers three secure methods: Bank Transfer, Maxelpay (redirect-based), and PCS/Transcash Tickets (with AES-256 encryption). All payment methods are protected routes, require authentication and a non-empty cart, and trigger email notifications via SendGrid. NowPayments integration includes HMAC SHA-512 signature verification for webhooks and automatic dashboard refresh for order updates.
