@@ -200,6 +200,7 @@ app.use((req, res, next) => {
     /^\/api\/auth\/verify-email/,  // Email verification can be accessed via GET link
     /^\/api\/auth\/login/,
     /^\/api\/auth\/logout/,  // Logout should work without CSRF token
+    /^\/api\/auth\/forgot-password/,  // Password reset email can be requested without CSRF
     /^\/api\/payment\/nowpayments-webhook/,
     /^\/api\/payment\/nowpayments-return/,
   ];
