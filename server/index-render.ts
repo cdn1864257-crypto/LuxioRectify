@@ -245,39 +245,49 @@ app.use(generalLimiter);
 
 // Convert Vercel handlers to Express middleware
 const convertVercelHandler = (handler: any) => {
-  return (req: express.Request, res: express.Response) => {
-    const vercelReq = {
-      query: { ...req.query, ...req.params },
-      body: req.body,
-      cookies: req.cookies || {},
-      method: req.method,
-      url: req.url,
-      headers: req.headers as { [key: string]: string }
-    };
+  return async (req: express.Request, res: express.Response) => {
+    try {
+      const vercelReq = {
+        query: { ...req.query, ...req.params },
+        body: req.body,
+        cookies: req.cookies || {},
+        method: req.method,
+        url: req.url,
+        headers: req.headers as { [key: string]: string }
+      };
 
-    const vercelRes = {
-      status: (code: number) => {
-        res.status(code);
-        return vercelRes;
-      },
-      json: (object: any) => {
-        res.json(object);
-        return vercelRes;
-      },
-      setHeader: (name: string, value: string | string[]) => {
-        res.setHeader(name, value);
-        return vercelRes;
-      },
-      end: (chunk?: any) => {
-        if (chunk) {
-          res.send(chunk);
-        } else {
-          res.end();
+      const vercelRes = {
+        status: (code: number) => {
+          res.status(code);
+          return vercelRes;
+        },
+        json: (object: any) => {
+          res.json(object);
+          return vercelRes;
+        },
+        setHeader: (name: string, value: string | string[]) => {
+          res.setHeader(name, value);
+          return vercelRes;
+        },
+        end: (chunk?: any) => {
+          if (chunk) {
+            res.send(chunk);
+          } else {
+            res.end();
+          }
         }
-      }
-    };
+      };
 
-    handler(vercelReq, vercelRes);
+      await handler(vercelReq, vercelRes);
+    } catch (error) {
+      console.error('[convertVercelHandler] Uncaught error in handler:', error);
+      if (!res.headersSent) {
+        res.status(500).json({
+          error: 'Internal Server Error',
+          details: error instanceof Error ? error.message : 'Unknown error'
+        });
+      }
+    }
   };
 };
 
