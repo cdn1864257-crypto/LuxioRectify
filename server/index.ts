@@ -152,6 +152,7 @@ app.use((req, res, next) => {
     /^\/api\/auth\/login/,
     /^\/api\/auth\/logout/,
     /^\/api\/auth\/forgot-password/,  // Password reset email can be requested without CSRF
+    /^\/api\/auth\/reset-password/,   // Password reset form is public (uses secure token)
     /^\/api\/payment\/nowpayments-webhook/,
     /^\/api\/payment\/nowpayments-return/,
   ];

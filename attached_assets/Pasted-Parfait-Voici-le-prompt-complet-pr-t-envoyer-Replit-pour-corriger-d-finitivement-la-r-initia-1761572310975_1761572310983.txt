@@ -1,0 +1,184 @@
+Parfait 😎. Voici le prompt complet prêt à envoyer à Replit pour corriger définitivement la réinitialisation de mot de passe :
+
+
+---
+
+🚨 Objectif :
+
+Corriger la réinitialisation de mot de passe pour qu’elle fonctionne correctement avec SendGrid, MongoDB, frontend multilingue, token sécurisé et sans erreur CSRF.
+
+
+---
+
+1️⃣ Backend : Exclusion CSRF pour les routes publiques
+
+import express from 'express';
+import csurf from 'csurf';
+import forgotPasswordHandler from '@/api/auth/forgot-password';
+import resetPasswordHandler from '@/api/auth/reset-password';
+
+const app = express();
+const csrfProtection = csurf({ cookie: true });
+
+app.use(express.json());
+
+// 🚫 Exclure CSRF pour les routes publiques
+app.post('/api/auth/forgot-password', forgotPasswordHandler);
+app.post('/api/auth/reset-password', resetPasswordHandler);
+
+// ✅ Appliquer CSRF sur le reste du site
+app.use(csrfProtection);
+
+
+---
+
+2️⃣ Utils : sendPasswordResetEmail PRO (TypeScript + Render + SendGrid + MongoDB)
+
+import crypto from 'crypto';
+import sgMail from '@sendgrid/mail';
+import { Db } from 'mongodb';
+
+const FROM_EMAIL = process.env.SENDGRID_FROM_EMAIL as string;
+const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY as string;
+const FRONTEND_URL = (process.env.CLIENT_URL || process.env.FRONTEND_URL || 'https://luxiomarket.shop').replace(/\/$/, '');
+const TOKEN_TTL_MINUTES = Number(process.env.RESET_TOKEN_TTL_MINUTES || '60');
+
+if (!FROM_EMAIL || !SENDGRID_API_KEY) {
+  console.warn('Warning: SENDGRID_FROM_EMAIL or SENDGRID_API_KEY not set.');
+}
+
+sgMail.setApiKey(SENDGRID_API_KEY);
+
+function generateUrlSafeToken(bytes = 32) {
+  const raw = crypto.randomBytes(bytes).toString('base64');
+  return raw.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
+}
+
+function hashToken(token: string) {
+  return crypto.createHash('sha256').update(token).digest('hex');
+}
+
+type SendPasswordResetOpts = {
+  firstName?: string;
+  locale?: string; // 'fr', 'en', 'es', etc.
+  db?: Db;
+};
+
+export async function sendPasswordResetEmail(userEmail: string, opts: SendPasswordResetOpts = {}): Promise<boolean> {
+  const { firstName = '', locale = 'fr', db } = opts;
+
+  if (!userEmail) return false;
+  let database: Db | undefined = db;
+
+  try {
+    if (!database) throw new Error('No DB instance provided. Pass db in opts.');
+
+    const users = database.collection('users');
+    const user = await users.findOne({ email: userEmail.toLowerCase() });
+    if (!user) return true; // éviter la fuite d’existence de compte
+
+    const resetToken = generateUrlSafeToken(32);
+    const resetTokenHash = hashToken(resetToken);
+    const expiresAt = new Date(Date.now() + TOKEN_TTL_MINUTES * 60_000);
+
+    await users.updateOne(
+      { _id: user._id },
+      { $set: { 'security.resetPassword': { tokenHash: resetTokenHash, expiresAt, createdAt: new Date() } } }
+    );
+
+    const encodedToken = encodeURIComponent(resetToken);
+    const resetUrl = `${FRONTEND_URL}/${locale}/reset-password?token=${encodedToken}`;
+
+    const subjects: Record<string, string> = {
+      en: 'Reset your password',
+      fr: 'Réinitialiser votre mot de passe',
+      es: 'Restablece tu contraseña',
+      pt: 'Redefinir sua senha',
+      hu: 'Jelszó visszaállítása',
+      it: 'Reimposta la tua password',
+      pl: 'Zresetuj swoje hasło',
+    };
+    const subject = subjects[locale] || subjects.fr;
+
+    const plainText = `${firstName ? `Hi ${firstName},\n\n` : ''}You (or someone else) requested a password reset:\n${resetUrl}`;
+
+    const html = `
+      <html><body>
+        <h2>${subject}</h2>
+        <p>${firstName ? `Hello ${firstName},` : 'Hello,'}</p>
+        <p>Click the button below to reset your password. Expires in ${TOKEN_TTL_MINUTES} minutes.</p>
+        <p style="text-align:center;">
+          <a href="${resetUrl}" target="_blank" rel="noopener noreferrer" data-sg-omit="true" 
+             style="padding:12px 20px;background:#2563eb;color:#fff;text-decoration:none;border-radius:6px;font-weight:600;">
+            Reset password
+          </a>
+        </p>
+        <p>If button doesn't work, copy & paste: <a href="${resetUrl}" data-sg-omit="true">${resetUrl}</a></p>
+      </body></html>
+    `;
+
+    await sgMail.send({
+      to: userEmail,
+      from: FROM_EMAIL,
+      subject,
+      text: plainText,
+      html,
+      trackingSettings: { clickTracking: { enable: false }, openTracking: { enable: true } },
+    });
+
+    return true;
+
+  } catch (err: any) {
+    console.error('[sendPasswordResetEmail] Error:', err);
+    return false;
+  }
+}
+
+export async function verifyResetToken(db: Db, token: string) {
+  const users = db.collection('users');
+  const tokenHash = hashToken(token);
+  const user = await users.findOne({ 'security.resetPassword.tokenHash': tokenHash });
+  if (!user) return null;
+  const meta = user.security?.resetPassword;
+  if (!meta?.expiresAt || new Date(meta.expiresAt) < new Date()) return null;
+  return user;
+}
+
+
+---
+
+✅ Instructions à donner à Replit :
+
+1. Remplacer l’ancienne fonction sendPasswordResetEmail() dans utils/email.ts par ce code PRO.
+
+
+2. Adapter la récupération de la DB dans forgot-password.ts et reset-password.ts si nécessaire (getDb()).
+
+
+3. Vérifier que les routes /api/auth/forgot-password et /api/auth/reset-password sont exemptées de CSRF.
+
+
+4. S’assurer que les variables d’environnement sur Render sont présentes :
+
+
+
+CLIENT_URL=https://luxiomarket.shop
+FRONTEND_URL=https://luxiomarket.shop
+SENDGRID_FROM_EMAIL=tonmail@gmail.com
+SENDGRID_API_KEY=*********
+RESET_TOKEN_TTL_MINUTES=60
+
+5. Tester :
+
+
+
+Cliquer sur “Mot de passe oublié” → recevoir email → cliquer sur lien → page multilangue s’affiche → soumettre nouveau mot de passe → DB mise à jour.
+
+
+
+---
+
+Si tu veux, je peux aussi te préparer la version encore plus compacte “copier-coller” pour Replit, qui combine CSRF, multilangue et email dans un seul fichier prêt à déployer.
+
+Veux‑tu que je fasse ça ?
+
