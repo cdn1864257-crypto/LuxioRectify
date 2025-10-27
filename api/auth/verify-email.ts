@@ -1,5 +1,8 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import { sendWelcomeEmail } from '../../utils/email.js';
+import jwt from 'jsonwebtoken';
+import { serialize } from 'cookie';
+import { getErrorMessage } from '../../server/utils/multilingual-messages.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -28,14 +31,18 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
     if (!token || typeof token !== 'string') {
       return res.status(400).json({ 
-        error: 'Token de vérification manquant',
+        error: 'VERIFICATION_TOKEN_MISSING',
+        message: getErrorMessage('VERIFICATION_TOKEN_MISSING', 'en'),
         success: false 
       });
     }
 
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
-      return res.status(500).json({ error: 'Configuration MongoDB manquante' });
+      return res.status(500).json({ 
+        error: 'INTERNAL_SERVER_ERROR',
+        message: getErrorMessage('INTERNAL_SERVER_ERROR', 'en')
+      });
     }
 
     const client = new MongoClient(mongoUri);
@@ -53,16 +60,20 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
       if (!user) {
         return res.status(400).json({ 
-          error: 'Token de vérification invalide ou expiré',
+          error: 'VERIFICATION_TOKEN_INVALID',
+          message: getErrorMessage('VERIFICATION_TOKEN_INVALID', 'en'),
           success: false 
         });
       }
 
+      const userLanguage = user.language || 'en';
+
       if (user.isEmailVerified) {
         return res.status(200).json({ 
-          message: 'Votre email est déjà vérifié',
+          message: getErrorMessage('EMAIL_ALREADY_VERIFIED', userLanguage),
           success: true,
-          alreadyVerified: true
+          alreadyVerified: true,
+          language: userLanguage
         });
       }
 
@@ -82,18 +93,61 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
       console.log(`✅ Email vérifié pour l'utilisateur: ${user.email}`);
       
-      sendWelcomeEmail(user.email, user.firstName, user.language || 'fr').catch((error: Error) => {
+      sendWelcomeEmail(user.email, user.firstName, userLanguage).catch((error: Error) => {
         console.error('❌ Erreur lors de l\'envoi de l\'email de bienvenue:', error);
       });
 
+      const jwtSecret = process.env.JWT_SECRET;
+      if (!jwtSecret) {
+        console.error('⚠️ JWT_SECRET not configured, user will need to login manually');
+        return res.status(200).json({
+          message: getErrorMessage('EMAIL_VERIFIED_SUCCESS', userLanguage),
+          success: true,
+          language: userLanguage,
+          autoLogin: false,
+          user: {
+            id: user._id.toString(),
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email
+          }
+        });
+      }
+
+      const authToken = jwt.sign(
+        {
+          userId: user._id.toString(),
+          email: user.email
+        },
+        jwtSecret,
+        { expiresIn: '7d' }
+      );
+
+      const isProduction = process.env.NODE_ENV === 'production';
+      const cookie = serialize('auth_token', authToken, {
+        httpOnly: true,
+        secure: isProduction,
+        sameSite: isProduction ? 'none' : 'lax',
+        maxAge: 60 * 60 * 24 * 7,
+        path: '/'
+      });
+
+      res.setHeader('Set-Cookie', cookie);
+
       return res.status(200).json({
-        message: 'Email vérifié avec succès ! Un email de bienvenue vous a été envoyé.',
+        message: getErrorMessage('EMAIL_VERIFIED_SUCCESS', userLanguage),
         success: true,
+        language: userLanguage,
+        autoLogin: true,
         user: {
           id: user._id.toString(),
           firstName: user.firstName,
           lastName: user.lastName,
-          email: user.email
+          email: user.email,
+          country: user.country,
+          city: user.city,
+          address: user.address,
+          phone: user.phone
         }
       });
     } finally {
@@ -103,7 +157,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   } catch (error) {
     console.error('Erreur lors de la vérification de l\'email:', error);
     return res.status(500).json({
-      error: 'Erreur serveur lors de la vérification',
+      error: 'INTERNAL_SERVER_ERROR',
+      message: getErrorMessage('INTERNAL_SERVER_ERROR', 'en'),
       details: error instanceof Error ? error.message : 'Unknown error'
     });
   }
