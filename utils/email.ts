@@ -260,59 +260,106 @@ export async function sendPasswordResetEmail(
   resetToken: string,
   language?: string
 ): Promise<boolean> {
-  const lang = language?.toLowerCase() || 'fr';
-  const validLanguages = ['fr', 'en', 'es', 'pt', 'pl', 'hu'];
-  const emailLang = validLanguages.includes(lang) ? lang as EmailLanguage : 'fr';
-  const t = getTranslation(emailLang);
-  const baseUrl = process.env.FRONTEND_URL || process.env.REPLIT_DEV_DOMAIN || 'https://luxiomarket.shop';
-  const resetUrl = `${baseUrl}/reset-password?token=${resetToken}`;
-  
-  const htmlContent = getEmailLayout(`
-    <h2>${emailLang === 'fr' ? 'Réinitialisation de mot de passe' : emailLang === 'es' ? 'Restablecimiento de contraseña' : 'Password Reset'}</h2>
-    <p>${t.hello} <strong>${firstName}</strong>,</p>
-    <p style="line-height: 1.8;">${emailLang === 'fr' ? 'Nous avons reçu une demande de réinitialisation de mot de passe pour votre compte Luxio.' : emailLang === 'es' ? 'Hemos recibido una solicitud de restablecimiento de contraseña para tu cuenta Luxio.' : 'We received a request to reset your Luxio account password.'}</p>
-    <p style="line-height: 1.8;">${emailLang === 'fr' ? 'Cliquez sur le bouton ci-dessous pour réinitialiser votre mot de passe :' : emailLang === 'es' ? 'Haz clic en el botón de abajo para restablecer tu contraseña:' : 'Click the button below to reset your password:'}</p>
-    
-    <div style="text-align: center; margin: 32px 0;">
-      <a href="${resetUrl}" class="button">${emailLang === 'fr' ? 'Réinitialiser le mot de passe' : emailLang === 'es' ? 'Restablecer contraseña' : 'Reset Password'}</a>
-    </div>
-    
-    <div style="background-color: #fef3c7; padding: 16px; border-radius: 6px; font-size: 13px; color: #92400e; margin: 24px 0; border-left: 4px solid #f59e0b;">
-      <p style="margin: 0;"><strong>${emailLang === 'fr' ? '⚠️ Important :' : emailLang === 'es' ? '⚠️ Importante:' : '⚠️ Important:'}</strong></p>
-      <p style="margin: 8px 0 0 0;">${emailLang === 'fr' ? 'Ce lien expirera dans 1 heure pour des raisons de sécurité.' : emailLang === 'es' ? 'Este enlace caducará en 1 hora por razones de seguridad.' : 'This link will expire in 1 hour for security reasons.'}</p>
-    </div>
-    
-    <p style="color: #6b7280; font-size: 14px;">${emailLang === 'fr' ? "Si vous n'avez pas demandé de réinitialisation de mot de passe, ignorez cet email." : emailLang === 'es' ? 'Si no solicitaste este restablecimiento de contraseña, ignora este correo.' : 'If you did not request a password reset, please ignore this email.'}</p>
-    
-    <div class="divider"></div>
-    
-    <p style="color: #6b7280; font-size: 14px; white-space: pre-line;">${t.team_signature}</p>
-  `, emailLang);
+  try {
+    const lang = language?.toLowerCase() || 'fr';
+    const validLanguages = ['fr', 'en', 'es', 'pt', 'pl', 'hu'];
+    const emailLang: EmailLanguage = validLanguages.includes(lang) ? (lang as EmailLanguage) : 'fr';
+    const t = getTranslation(emailLang);
 
-  const textContent = `
+    // --- PRO: build URL sécurisé ---
+    const frontendUrl =
+      (process.env.CLIENT_URL || process.env.FRONTEND_URL || 'https://luxiomarket.shop').replace(/\/$/, '');
+    const resetUrl = `${frontendUrl}/reset-password?token=${resetToken}`;
+
+    console.log('[sendPasswordResetEmail] Reset URL:', resetUrl);
+
+    // --- HTML Content ---
+    const htmlContent = getEmailLayout(`
+      <h2>${emailLang === 'fr' ? 'Réinitialisation de mot de passe' :
+            emailLang === 'es' ? 'Restablecimiento de contraseña' : 'Password Reset'}</h2>
+      <p>${t.hello} <strong>${firstName}</strong>,</p>
+      <p style="line-height: 1.8;">
+        ${emailLang === 'fr' ? 'Nous avons reçu une demande de réinitialisation de mot de passe pour votre compte Luxio.' :
+          emailLang === 'es' ? 'Hemos recibido una solicitud de restablecimiento de contraseña para tu cuenta Luxio.' :
+          'We received a request to reset your Luxio account password.'}
+      </p>
+      <p style="line-height: 1.8;">
+        ${emailLang === 'fr' ? 'Cliquez sur le bouton ci-dessous pour réinitialiser votre mot de passe :' :
+          emailLang === 'es' ? 'Haz clic en el botón de abajo para restablecer tu contraseña:' :
+          'Click the button below to reset your password:'}
+      </p>
+      <div style="text-align: center; margin: 32px 0;">
+        <a href="${resetUrl}" class="button">
+          ${emailLang === 'fr' ? 'Réinitialiser le mot de passe' :
+            emailLang === 'es' ? 'Restablecer contraseña' : 'Reset Password'}
+        </a>
+      </div>
+      <div style="background-color: #fef3c7; padding: 16px; border-radius: 6px; font-size: 13px; color: #92400e; margin: 24px 0; border-left: 4px solid #f59e0b;">
+        <p style="margin: 0;"><strong>${emailLang === 'fr' ? '⚠️ Important :' : '⚠️ Important:'}</strong></p>
+        <p style="margin: 8px 0 0 0;">
+          ${emailLang === 'fr' ? 'Ce lien expirera dans 1 heure pour des raisons de sécurité.' :
+            emailLang === 'es' ? 'Este enlace caducará en 1 hora por razones de seguridad.' :
+            'This link will expire in 1 hour for security reasons.'}
+        </p>
+      </div>
+      <p style="color: #6b7280; font-size: 14px;">
+        ${emailLang === 'fr' ? "Si vous n'avez pas demandé de réinitialisation de mot de passe, ignorez cet email." :
+          emailLang === 'es' ? 'Si no solicitaste este restablecimiento de contraseña, ignora este correo.' :
+          'If you did not request a password reset, please ignore this email.'}
+      </p>
+      <div class="divider"></div>
+      <p style="color: #6b7280; font-size: 14px; white-space: pre-line;">${t.team_signature}</p>
+    `, emailLang);
+
+    // --- Text Content fallback ---
+    const textContent = `
 ${emailLang === 'fr' ? 'Réinitialisation de mot de passe' : emailLang === 'es' ? 'Restablecimiento de contraseña' : 'Password Reset'}
 
 ${t.hello} ${firstName},
 
-${emailLang === 'fr' ? 'Nous avons reçu une demande de réinitialisation de mot de passe pour votre compte Luxio.' : emailLang === 'es' ? 'Hemos recibido una solicitud de restablecimiento de contraseña para tu cuenta Luxio.' : 'We received a request to reset your Luxio account password.'}
+${emailLang === 'fr' ? 'Nous avons reçu une demande de réinitialisation de mot de passe pour votre compte Luxio.' :
+  emailLang === 'es' ? 'Hemos recibido una solicitud de restablecimiento de contraseña para tu cuenta Luxio.' :
+  'We received a request to reset your Luxio account password.'}
 
-${emailLang === 'fr' ? 'Cliquez sur ce lien pour réinitialiser votre mot de passe :' : emailLang === 'es' ? 'Haz clic en este enlace para restablecer tu contraseña:' : 'Click this link to reset your password:'}
+${emailLang === 'fr' ? 'Cliquez sur ce lien pour réinitialiser votre mot de passe :' :
+  emailLang === 'es' ? 'Haz clic en este enlace pour restablecer tu contraseña:' :
+  'Click this link to reset your password:'}
 ${resetUrl}
 
-${emailLang === 'fr' ? 'Ce lien expirera dans 1 heure pour des raisons de sécurité.' : emailLang === 'es' ? 'Este enlace caducará en 1 hora por razones de seguridad.' : 'This link will expire in 1 hour for security reasons.'}
+${emailLang === 'fr' ? "Ce lien expirera dans 1 heure pour des raisons de sécurité." :
+  emailLang === 'es' ? 'Este enlace caducará en 1 hora por razones de seguridad.' :
+  'This link will expire in 1 hour for security reasons.'}
 
-${emailLang === 'fr' ? "Si vous n'avez pas demandé de réinitialisation de mot de passe, ignorez cet email." : emailLang === 'es' ? 'Si no solicitaste este restablecimiento de contraseña, ignora este correo.' : 'If you did not request a password reset, please ignore this email.'}
+${emailLang === 'fr' ? "Si vous n'avez pas demandé de réinitialisation de mot de passe, ignorez cet email." :
+  emailLang === 'es' ? 'Si no solicitaste este restablecimiento de contraseña, ignora este correo.' :
+  'If you did not request a password reset, please ignore this email.'}
 
 ${t.team_signature}
-  `.trim();
+    `.trim();
 
-  return sendEmail({
-    to: userEmail,
-    subject: emailLang === 'fr' ? 'Réinitialisation de votre mot de passe Luxio' : emailLang === 'es' ? 'Restablecimiento de contraseña Luxio' : 'Reset Your Luxio Password',
-    html: htmlContent,
-    text: textContent,
-    from: DEFAULT_FROM
-  });
+    // --- Send email via SendGrid ---
+    const sent = await sendEmail({
+      to: userEmail,
+      subject: emailLang === 'fr' ? 'Réinitialisation de votre mot de passe Luxio' :
+               emailLang === 'es' ? 'Restablecimiento de contraseña Luxio' :
+               'Reset Your Luxio Password',
+      html: htmlContent,
+      text: textContent,
+      from: DEFAULT_FROM
+    });
+
+    if (!sent) {
+      console.error('[sendPasswordResetEmail] SendGrid returned false for:', userEmail);
+    } else {
+      console.log('[sendPasswordResetEmail] Email sent successfully to:', userEmail);
+    }
+
+    return sent;
+
+  } catch (err) {
+    console.error('[sendPasswordResetEmail] ERROR:', err);
+    return false;
+  }
 }
 
 // ==================== BANK TRANSFER EMAILS ====================
