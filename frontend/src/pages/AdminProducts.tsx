@@ -44,6 +44,13 @@ export default function AdminProducts() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
+  const errorPlaceholder = `data:image/svg+xml;base64,${btoa(`
+    <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#fee2e2"/>
+      <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="#dc2626" font-family="Arial, sans-serif" font-size="14">No Image</text>
+    </svg>
+  `)}`;
+
   // Form state
   const [formData, setFormData] = useState({
     name: '',
@@ -358,7 +365,7 @@ export default function AdminProducts() {
                       alt={product.name}
                       className="w-full h-full object-cover"
                       onError={(e) => {
-                        e.currentTarget.src = 'https://via.placeholder.com/400?text=No+Image';
+                        e.currentTarget.src = errorPlaceholder;
                       }}
                     />
                     {!product.available && (
