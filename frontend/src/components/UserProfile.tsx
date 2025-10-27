@@ -1,11 +1,8 @@
 import { useState } from 'react';
-import { X, ShoppingBag, LogOut, Lock } from 'lucide-react';
-import { useLocation } from 'wouter';
+import { X, ShoppingBag, LogOut } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { loadOrders, Order } from '../lib/cart';
-import { showToast } from './ToastNotifications';
-import { getApiUrl } from '@/lib/config';
 
 interface UserProfileProps {
   isOpen: boolean;
@@ -15,75 +12,14 @@ interface UserProfileProps {
 export function UserProfile({ isOpen, onClose }: UserProfileProps) {
   const { user, logout } = useAuth();
   const { t } = useLanguage();
-  const [, navigate] = useLocation();
   const [activeTab, setActiveTab] = useState<'profile' | 'orders' | 'settings'>('profile');
   const [orders] = useState<Order[]>(loadOrders());
-  const [showPasswordModal, setShowPasswordModal] = useState(false);
-  const [isChangingPassword, setIsChangingPassword] = useState(false);
-  const [passwordData, setPasswordData] = useState({
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: ''
-  });
 
   if (!isOpen || !user) return null;
 
   const handleLogout = async () => {
     await logout();
     onClose();
-  };
-
-  const handleChangePassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (passwordData.newPassword !== passwordData.confirmPassword) {
-      showToast(t('passwordsDontMatch'), 'error');
-      return;
-    }
-
-    if (passwordData.newPassword.length < 6) {
-      showToast(t('passwordMinLength'), 'error');
-      return;
-    }
-
-    setIsChangingPassword(true);
-
-    try {
-      const response = await fetch(getApiUrl('/api/auth/change-password'), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          currentPassword: passwordData.currentPassword,
-          newPassword: passwordData.newPassword,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        if (response.status === 401 && data.error?.includes('session a expiré')) {
-          showToast(data.error, 'error');
-          await logout();
-          onClose();
-          navigate('/');
-          return;
-        }
-        
-        showToast(data.error || t('passwordChangeFailed'), 'error');
-        return;
-      }
-
-      showToast(t('passwordChangeSuccess'), 'success');
-      setShowPasswordModal(false);
-      setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
-    } catch (error) {
-      showToast(t('passwordChangeFailed'), 'error');
-    } finally {
-      setIsChangingPassword(false);
-    }
   };
 
   return (
@@ -239,18 +175,6 @@ export function UserProfile({ isOpen, onClose }: UserProfileProps) {
               
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-medium mb-2">{t('security')}</h4>
-                  <button 
-                    onClick={() => setShowPasswordModal(true)}
-                    className="w-full md:w-auto bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90 transition-colors inline-flex items-center gap-2"
-                    data-testid="button-change-password"
-                  >
-                    <Lock className="h-4 w-4" />
-                    {t('changePassword')}
-                  </button>
-                </div>
-                
-                <div>
                   <h4 className="font-medium mb-2">{t('notifications')}</h4>
                   <div className="space-y-2">
                     <label className="flex items-center space-x-2">
@@ -283,78 +207,6 @@ export function UserProfile({ isOpen, onClose }: UserProfileProps) {
           )}
         </div>
       </div>
-
-      {/* Password Change Modal */}
-      {showPasswordModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-[60] flex items-center justify-center p-4">
-          <div className="bg-card rounded-lg shadow-xl max-w-md w-full p-6">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-bold">{t('changePassword')}</h3>
-              <button 
-                onClick={() => setShowPasswordModal(false)}
-                className="text-muted-foreground hover:text-foreground"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-
-            <form onSubmit={handleChangePassword} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-2">{t('currentPassword')}</label>
-                <input 
-                  type="password"
-                  value={passwordData.currentPassword}
-                  onChange={(e) => setPasswordData({...passwordData, currentPassword: e.target.value})}
-                  className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">{t('newPassword')}</label>
-                <input 
-                  type="password"
-                  value={passwordData.newPassword}
-                  onChange={(e) => setPasswordData({...passwordData, newPassword: e.target.value})}
-                  className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-                  required
-                  minLength={6}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">{t('confirmNewPassword')}</label>
-                <input 
-                  type="password"
-                  value={passwordData.confirmPassword}
-                  onChange={(e) => setPasswordData({...passwordData, confirmPassword: e.target.value})}
-                  className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-                  required
-                  minLength={6}
-                />
-              </div>
-
-              <div className="flex gap-3 pt-4">
-                <button
-                  type="button"
-                  onClick={() => setShowPasswordModal(false)}
-                  className="flex-1 px-4 py-2 border border-border rounded-md hover:bg-muted transition-colors"
-                  disabled={isChangingPassword}
-                >
-                  {t('cancel')}
-                </button>
-                <button
-                  type="submit"
-                  className="flex-1 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={isChangingPassword}
-                >
-                  {isChangingPassword ? t('loading') : t('confirm')}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </>
   );
 }
