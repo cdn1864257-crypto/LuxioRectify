@@ -177,6 +177,66 @@ export const ERROR_MESSAGES = {
     it: 'ID ordine obbligatorio',
     hu: 'Rendelésazonosító szükséges',
     pl: 'Wymagany identyfikator zamówienia'
+  } as MultilingualMessage,
+  
+  VERIFICATION_TOKEN_MISSING: {
+    en: 'Verification token is missing',
+    fr: 'Token de vérification manquant',
+    es: 'Falta el token de verificación',
+    pt: 'Token de verificação ausente',
+    it: 'Token di verifica mancante',
+    hu: 'Hiányzik az ellenőrző token',
+    pl: 'Brak tokenu weryfikacyjnego'
+  } as MultilingualMessage,
+  
+  VERIFICATION_TOKEN_INVALID: {
+    en: 'Verification link is invalid or has expired',
+    fr: 'Le lien de vérification est invalide ou a expiré',
+    es: 'El enlace de verificación no es válido o ha caducado',
+    pt: 'O link de verificação é inválido ou expirou',
+    it: 'Il link di verifica non è valido o è scaduto',
+    hu: 'Az ellenőrző link érvénytelen vagy lejárt',
+    pl: 'Link weryfikacyjny jest nieprawidłowy lub wygasł'
+  } as MultilingualMessage,
+  
+  EMAIL_ALREADY_VERIFIED: {
+    en: 'Your email is already verified',
+    fr: 'Votre email est déjà vérifié',
+    es: 'Su correo electrónico ya está verificado',
+    pt: 'Seu e-mail já está verificado',
+    it: 'La tua email è già verificata',
+    hu: 'Az e-mail címe már ellenőrzött',
+    pl: 'Twój e-mail jest już zweryfikowany'
+  } as MultilingualMessage,
+  
+  EMAIL_VERIFIED_SUCCESS: {
+    en: 'Email verified successfully!',
+    fr: 'Email vérifié avec succès !',
+    es: '¡Correo electrónico verificado con éxito!',
+    pt: 'E-mail verificado com sucesso!',
+    it: 'Email verificata con successo!',
+    hu: 'Az e-mail sikeresen ellenőrizve!',
+    pl: 'E-mail został pomyślnie zweryfikowany!'
+  } as MultilingualMessage,
+  
+  VERIFYING_EMAIL: {
+    en: 'Verifying your email...',
+    fr: 'Vérification de votre email...',
+    es: 'Verificando su correo electrónico...',
+    pt: 'Verificando seu e-mail...',
+    it: 'Verifica della tua email...',
+    hu: 'Az e-mail ellenőrzése...',
+    pl: 'Weryfikacja e-maila...'
+  } as MultilingualMessage,
+  
+  REDIRECTING: {
+    en: 'Redirecting you to the homepage...',
+    fr: 'Redirection vers la page d\'accueil...',
+    es: 'Redirigiendo a la página de inicio...',
+    pt: 'Redirecionando para a página inicial...',
+    it: 'Reindirizzamento alla home page...',
+    hu: 'Átirányítás a kezdőlapra...',
+    pl: 'Przekierowywanie na stronę główną...'
   } as MultilingualMessage
 };
 
