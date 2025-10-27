@@ -64,15 +64,22 @@ Product and order data are managed client-side using a static product database o
 ### Payment Processing
 A complete payment system offers three secure methods: Bank Transfer, Maxelpay (redirect-based), and PCS/Transcash Tickets (with AES-256 encryption). All payment methods are protected routes, require authentication and a non-empty cart, and trigger email notifications via SendGrid. NowPayments integration includes HMAC SHA-512 signature verification for webhooks and automatic dashboard refresh for order updates.
 
-### Email System (Updated: October 26, 2025)
+### Email System (Updated: October 27, 2025)
 All automated emails are sent via SendGrid with full multilingual support:
 - **Verification Email**: Sent upon registration with secure verification link (24-hour token expiry)
 - **Welcome Email**: Sent after successful email verification
+- **Password Reset Email**: Sent when user requests password reset (1-hour token expiry, secure logging without token exposure)
 - **Order Confirmation Emails**: For Bank Transfer, NowPayments (crypto), and Ticket payments
 - **Admin Notifications**: Sent to admin for new orders
 - **Domain Configuration**: All email links default to https://luxiomarket.shop (overridable via REPLIT_DEV_DOMAIN)
 - **Privacy**: Email addresses removed from footer and instructions to maintain privacy
 - **Languages**: Full support for FR, EN, ES, PT, PL, HU, IT with localized content
+- **Security**: All email functions use shared DEFAULT_FROM constant; sensitive data (tokens, reset URLs) never logged
+
+**Recent Fix (October 27, 2025)**: Password reset email was failing due to missing `from` parameter. Fixed by:
+1. Adding DEFAULT_FROM parameter to forgot-password endpoint
+2. Implementing secure logging (email destination and language only, no tokens)
+3. Centralizing email sender configuration across all email functions
 
 ### Technical Implementations
 The project is configured for the Replit environment: a `start-dev.js` script runs both backend (Express on port 3001) and frontend (Vite dev server on port 5000) with API proxying. Vite is configured with `host: '0.0.0.0'` and `allowedHosts: true` for Replit proxy support. Deployment builds the frontend and serves via `serve` on port 5000. A `copy-images.js` script syncs product images. Backend error handling ensures all API errors return valid JSON responses.
