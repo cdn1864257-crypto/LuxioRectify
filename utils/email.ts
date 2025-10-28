@@ -321,26 +321,33 @@ export async function sendPasswordResetEmail(
     const encodedToken = encodeURIComponent(resetToken);
     const resetUrl = `${FRONTEND_URL}/${locale}/reset-password?token=${encodedToken}`;
 
-    const subjects: Record<string,string> = {
-      en:'Reset your password', fr:'Réinitialiser votre mot de passe', es:'Restablece tu contraseña',
-      pt:'Redefinir sua senha', hu:'Jelszó visszaállítása', it:'Reimposta la tua password', pl:'Zresetuj swoje hasło'
-    };
-    const subject = subjects[locale] || subjects.en;
+    const { getPasswordResetMessage } = require('../server/utils/multilingual-messages');
+    
+    const subject = getPasswordResetMessage('SUBJECT', locale);
+    const hello = getPasswordResetMessage('HELLO', locale);
+    const hi = getPasswordResetMessage('HI', locale);
+    const clickToReset = getPasswordResetMessage('CLICK_TO_RESET', locale);
+    const minutes = getPasswordResetMessage('MINUTES', locale);
+    const buttonText = getPasswordResetMessage('BUTTON_TEXT', locale);
+    const buttonAlt = getPasswordResetMessage('BUTTON_ALTERNATIVE', locale);
+    const requested = getPasswordResetMessage('EMAIL_PLAIN_TEXT_REQUESTED', locale);
+    const visit = getPasswordResetMessage('EMAIL_PLAIN_TEXT_VISIT', locale);
+    const ignore = getPasswordResetMessage('EMAIL_PLAIN_TEXT_IGNORE', locale);
 
-    const plainText = `${firstName ? `Hi ${firstName},\n\n` : ''}You (or someone else) requested a password reset.\nVisit: ${resetUrl}\n\nIf you didn't request this, ignore this email.`;
+    const plainText = `${firstName ? `${hi} ${firstName},\n\n` : ''}${requested}\n${visit} ${resetUrl}\n\n${ignore}`;
 
     const html = `
       <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#111;font-size:16px;">
         <h2>${subject}</h2>
-        <p>${firstName ? `Hello ${firstName},` : 'Hello,'}</p>
-        <p>Click below to reset your password (expires in ${TOKEN_TTL_MINUTES} minutes):</p>
+        <p>${firstName ? `${hello} ${firstName},` : `${hello},`}</p>
+        <p>${clickToReset} ${TOKEN_TTL_MINUTES} ${minutes}</p>
         <p style="text-align:center;">
           <a href="${resetUrl}" target="_blank" rel="noopener noreferrer" data-sg-omit="true"
              style="padding:12px 20px;border-radius:6px;background:#2563eb;color:#fff;text-decoration:none;font-weight:600;">
-             Reset password
+             ${buttonText}
           </a>
         </p>
-        <p>If button doesn't work, copy & paste this URL:</p>
+        <p>${buttonAlt}</p>
         <p><small><a href="${resetUrl}" target="_blank" data-sg-omit="true">${resetUrl}</a></small></p>
       </div>
     `;

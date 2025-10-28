@@ -240,8 +240,116 @@ export const ERROR_MESSAGES = {
   } as MultilingualMessage
 };
 
+export const PASSWORD_RESET_MESSAGES = {
+  SUBJECT: {
+    en: 'Reset your password',
+    fr: 'Réinitialiser votre mot de passe',
+    es: 'Restablece tu contraseña',
+    pt: 'Redefinir sua senha',
+    it: 'Reimposta la tua password',
+    hu: 'Jelszó visszaállítása',
+    pl: 'Zresetuj swoje hasło'
+  } as MultilingualMessage,
+  
+  HELLO: {
+    en: 'Hello',
+    fr: 'Bonjour',
+    es: 'Hola',
+    pt: 'Olá',
+    it: 'Ciao',
+    hu: 'Helló',
+    pl: 'Witaj'
+  } as MultilingualMessage,
+  
+  HI: {
+    en: 'Hi',
+    fr: 'Bonjour',
+    es: 'Hola',
+    pt: 'Olá',
+    it: 'Ciao',
+    hu: 'Szia',
+    pl: 'Cześć'
+  } as MultilingualMessage,
+  
+  CLICK_TO_RESET: {
+    en: 'Click below to reset your password (expires in',
+    fr: 'Cliquez ci-dessous pour réinitialiser votre mot de passe (expire dans',
+    es: 'Haga clic a continuación para restablecer su contraseña (caduca en',
+    pt: 'Clique abaixo para redefinir sua senha (expira em',
+    it: 'Clicca qui sotto per reimpostare la tua password (scade tra',
+    hu: 'Kattintson az alábbiakra a jelszó visszaállításához (lejár',
+    pl: 'Kliknij poniżej, aby zresetować hasło (wygasa za'
+  } as MultilingualMessage,
+  
+  MINUTES: {
+    en: 'minutes):',
+    fr: 'minutes) :',
+    es: 'minutos):',
+    pt: 'minutos):',
+    it: 'minuti):',
+    hu: 'perc múlva):',
+    pl: 'minut):'
+  } as MultilingualMessage,
+  
+  BUTTON_TEXT: {
+    en: 'Reset password',
+    fr: 'Réinitialiser le mot de passe',
+    es: 'Restablecer contraseña',
+    pt: 'Redefinir senha',
+    it: 'Reimposta password',
+    hu: 'Jelszó visszaállítása',
+    pl: 'Zresetuj hasło'
+  } as MultilingualMessage,
+  
+  BUTTON_ALTERNATIVE: {
+    en: "If button doesn't work, copy & paste this URL:",
+    fr: "Si le bouton ne fonctionne pas, copiez et collez cette URL :",
+    es: "Si el botón no funciona, copie y pegue esta URL:",
+    pt: "Se o botão não funcionar, copie e cole este URL:",
+    it: "Se il pulsante non funziona, copia e incolla questo URL:",
+    hu: "Ha a gomb nem működik, másolja és illessze be ezt az URL-t:",
+    pl: "Jeśli przycisk nie działa, skopiuj i wklej ten adres URL:"
+  } as MultilingualMessage,
+  
+  EMAIL_PLAIN_TEXT_REQUESTED: {
+    en: 'You (or someone else) requested a password reset.',
+    fr: 'Vous (ou quelqu\'un d\'autre) avez demandé une réinitialisation de mot de passe.',
+    es: 'Usted (o alguien más) solicitó un restablecimiento de contraseña.',
+    pt: 'Você (ou outra pessoa) solicitou uma redefinição de senha.',
+    it: 'Tu (o qualcun altro) hai richiesto un ripristino della password.',
+    hu: 'Ön (vagy valaki más) jelszó-visszaállítást kért.',
+    pl: 'Ty (lub ktoś inny) zażądałeś zresetowania hasła.'
+  } as MultilingualMessage,
+  
+  EMAIL_PLAIN_TEXT_VISIT: {
+    en: 'Visit:',
+    fr: 'Visitez :',
+    es: 'Visite:',
+    pt: 'Visite:',
+    it: 'Visita:',
+    hu: 'Látogasson el:',
+    pl: 'Odwiedź:'
+  } as MultilingualMessage,
+  
+  EMAIL_PLAIN_TEXT_IGNORE: {
+    en: "If you didn't request this, ignore this email.",
+    fr: "Si vous n'avez pas demandé ceci, ignorez cet email.",
+    es: "Si no solicitó esto, ignore este correo electrónico.",
+    pt: "Se você não solicitou isso, ignore este e-mail.",
+    it: "Se non hai richiesto questo, ignora questa email.",
+    hu: "Ha nem kérte ezt, hagyja figyelmen kívül ezt az e-mailt.",
+    pl: "Jeśli tego nie żądałeś, zignoruj ten e-mail."
+  } as MultilingualMessage
+};
+
 export function getErrorMessage(messageKey: keyof typeof ERROR_MESSAGES, lang: string = 'en'): string {
   const message = ERROR_MESSAGES[messageKey];
+  const supportedLang = ['en', 'fr', 'es', 'pt', 'it', 'hu', 'pl'].includes(lang) ? lang : 'en';
+  return message[supportedLang as keyof MultilingualMessage];
+}
+
+export function getPasswordResetMessage(messageKey: keyof typeof PASSWORD_RESET_MESSAGES, lang: string = 'en'): string {
+  const message = PASSWORD_RESET_MESSAGES[messageKey];
   const supportedLang = ['en', 'fr', 'es', 'pt', 'it', 'hu', 'pl'].includes(lang) ? lang : 'en';
   return message[supportedLang as keyof MultilingualMessage];
 }
