@@ -54,8 +54,8 @@ SMTP_HOST=smtp.sendgrid.net
 SMTP_PORT=587
 SMTP_USER=apikey
 SMTP_PASS=votre_cle_api_sendgrid
-EMAIL_FROM=replitprojet97@gmail.com
-ADMIN_EMAIL=support@luxio-shop.eu
+EMAIL_FROM=support@luxiomarket.shop
+ADMIN_EMAIL=support@luxiomarket.shop
 ```
 
 #### Maxelpay (Paiement en ligne)
@@ -92,8 +92,8 @@ ENCRYPTION_KEY=votre_cle_de_chiffrement_minimum_32_caracteres
    - `SMTP_PORT` : `587`
    - `SMTP_USER` : `apikey`
    - `SMTP_PASS` : votre clé API SendGrid
-   - `EMAIL_FROM` : `replitprojet97@gmail.com`
-   - `ADMIN_EMAIL` : `support@luxio-shop.eu`
+   - `EMAIL_FROM` : `support@luxiomarket.shop`
+   - `ADMIN_EMAIL` : `support@luxiomarket.shop`
 
 ⚠️ **Important** : Gardez votre clé API SendGrid en sécurité et ne la partagez jamais.
 
@@ -101,8 +101,8 @@ ENCRYPTION_KEY=votre_cle_de_chiffrement_minimum_32_caracteres
 
 Configurez vos adresses email d'expéditeur :
 ```bash
-EMAIL_FROM=replitprojet97@gmail.com  # Email d'expédition
-ADMIN_EMAIL=support@luxio-shop.eu # Email support pour notifications
+EMAIL_FROM=support@luxiomarket.shop  # Email d'expédition
+ADMIN_EMAIL=support@luxiomarket.shop # Email support pour notifications
 ```
 
 Avantages de SendGrid :

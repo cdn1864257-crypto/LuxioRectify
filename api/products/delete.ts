@@ -24,7 +24,7 @@ interface JWTPayload {
 }
 
 const ADMIN_EMAILS = [
-  'replitprojet97@gmail.com',
+  'support@luxiomarket.shop',
 ];
 
 async function isAdmin(req: VercelRequest): Promise<{ isAdmin: boolean; error?: string }> {

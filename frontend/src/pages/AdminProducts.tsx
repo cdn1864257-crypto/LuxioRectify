@@ -64,7 +64,7 @@ export default function AdminProducts() {
     available: true
   });
 
-  const ADMIN_EMAIL = 'replitprojet97@gmail.com';
+  const ADMIN_EMAIL = 'support@luxiomarket.shop';
 
   useEffect(() => {
     if (!user) {

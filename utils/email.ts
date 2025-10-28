@@ -16,8 +16,8 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
   return sendEmailViaSMTP(options);
 }
 
-export const DEFAULT_FROM = 'replitprojet97@gmail.com';
-const DEFAULT_ADMIN = 'replitprojet97@gmail.com';
+export const DEFAULT_FROM = 'support@luxiomarket.shop';
+const DEFAULT_ADMIN = 'support@luxiomarket.shop';
 
 function getEmailLayout(content: string, language: EmailLanguage = 'fr'): string {
   const t = getTranslation(language);

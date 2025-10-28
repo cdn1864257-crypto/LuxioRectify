@@ -134,7 +134,7 @@ export function Header({ onToggleCart }: HeaderProps) {
                             {t('dashboard')}
                           </div>
                         </Link>
-                        {user.email.toLowerCase() === 'replitprojet97@gmail.com' && (
+                        {user.email.toLowerCase() === 'support@luxiomarket.shop' && (
                           <Link 
                             href="/admin/products"
                             className="text-base font-medium text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-500 transition-colors py-2 bg-amber-50 dark:bg-amber-950/30 px-3 rounded-md -mx-3"
@@ -241,7 +241,7 @@ export function Header({ onToggleCart }: HeaderProps) {
                     >
                       {t('dashboard')}
                     </Link>
-                    {user.email.toLowerCase() === 'replitprojet97@gmail.com' && (
+                    {user.email.toLowerCase() === 'support@luxiomarket.shop' && (
                       <Link 
                         href="/admin/products"
                         className="text-sm xl:text-base text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-500 transition-colors whitespace-nowrap font-medium flex items-center gap-1"

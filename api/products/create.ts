@@ -25,7 +25,7 @@ interface JWTPayload {
 
 // Admin email whitelist
 const ADMIN_EMAILS = [
-  'replitprojet97@gmail.com',
+  'support@luxiomarket.shop',
   // Add more admin emails here
 ];
 

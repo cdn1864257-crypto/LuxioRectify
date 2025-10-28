@@ -26,7 +26,7 @@ interface JWTPayload {
 }
 
 const ADMIN_EMAILS = [
-  'replitprojet97@gmail.com',
+  'support@luxiomarket.shop',
 ];
 
 cloudinary.config({
