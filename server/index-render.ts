@@ -201,6 +201,7 @@ app.use((req, res, next) => {
     /^\/api\/auth\/login/,
     /^\/api\/auth\/logout/,  // Logout should work without CSRF token
     /^\/api\/auth\/forgot-password/,  // Password reset email can be requested without CSRF
+    /^\/api\/auth\/reset-password/,  // Password reset accessed via email link without active session
     /^\/api\/payment\/nowpayments-webhook/,
     /^\/api\/payment\/nowpayments-return/,
   ];
