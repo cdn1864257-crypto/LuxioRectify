@@ -381,6 +381,47 @@ export default function NewPayment() {
                   </div>
                 </div>
 
+                {/* Stripe Method */}
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-sm sm:text-base font-semibold flex items-center gap-2">
+                      <CreditCard className="h-5 w-5 text-primary flex-shrink-0" />
+                      Carte Bancaire
+                    </h3>
+                    <span className="text-xs bg-green-600 text-white px-2 py-1 rounded whitespace-nowrap">
+                      {t.immediate}
+                    </span>
+                  </div>
+                  <Link href={`/${language}/payment/stripe`}>
+                    <button
+                      type="button"
+                      className="w-full p-3 sm:p-4 border-2 border-muted rounded-lg bg-background hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      disabled={isProcessing}
+                      data-testid="button-stripe"
+                    >
+                      <div className="flex items-center justify-start gap-3 sm:gap-4">
+                        <CreditCard className="h-6 w-6 sm:h-8 sm:w-8 text-foreground flex-shrink-0" />
+                        <div className="text-left flex-1 min-w-0">
+                          <div className="font-semibold text-base sm:text-lg text-foreground">Stripe</div>
+                          <div className="text-xs sm:text-sm text-muted-foreground">Paiement par carte bancaire sécurisé</div>
+                        </div>
+                      </div>
+                    </button>
+                  </Link>
+                </div>
+
+                {/* Payment Method Separator */}
+                <div className="relative py-4 sm:py-5">
+                  <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                    <div className="w-full border-t border-border"></div>
+                  </div>
+                  <div className="relative flex justify-center text-xs sm:text-sm uppercase">
+                    <span className="bg-background px-3 sm:px-4 text-muted-foreground font-medium">
+                      {t.or || 'ou'}
+                    </span>
+                  </div>
+                </div>
+
                 {/* NowPayments Method */}
                 <div>
                   <div className="flex items-center justify-between mb-3">
@@ -454,7 +495,7 @@ export default function NewPayment() {
                                 const orderReference = generateOrderReference();
                                 const emailSubject = getEmailSubject(method.name);
                                 const emailBody = generateEmailBody(method.name, orderReference);
-                                window.location.href = `mailto:infos@luxiomarket.shop?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                                window.location.href = `mailto:support@luxiomarket.shop?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
                               }}
                               data-testid={`button-${method.key}`}
                             >
