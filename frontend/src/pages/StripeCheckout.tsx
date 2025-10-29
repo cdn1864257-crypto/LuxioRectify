@@ -13,59 +13,41 @@ import { Loader2, CreditCard, ShoppingCart, Lock, ArrowLeft, Shield, CheckCircle
 import { useToast } from '@/hooks/use-toast';
 import { Link, useLocation } from 'wouter';
 import { SEO } from '@/components/SEO';
+import { SiVisa, SiMastercard, SiAmericanexpress, SiApplepay, SiGooglepay } from 'react-icons/si';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY || '');
 
-// Premium Card Logos SVG Components
-const VisaLogo = () => (
-  <svg viewBox="0 0 48 32" className="h-7 w-auto">
+// Logos des cartes avec composants SVG personnalisés
+const MaestroLogo = () => (
+  <svg viewBox="0 0 48 32" className="h-6 w-auto">
     <rect width="48" height="32" rx="4" fill="white"/>
-    <path d="M19.5 11.5h-2.7l-4.2 9h2.8l.8-2h3.9l.4 2h2.6l-3.6-9zm-2.1 5.5l1.4-3.8.8 3.8h-2.2z" fill="#1434CB"/>
-    <path d="M24.8 11.5l-2.1 9h2.6l2.1-9h-2.6z" fill="#1434CB"/>
-    <path d="M32.5 11.4c-.5-.2-1.4-.4-2.4-.4-2.6 0-4.5 1.4-4.5 3.4 0 1.5 1.3 2.3 2.3 2.8.9.5 1.3.8 1.3 1.3 0 .7-.8 1-1.6 1-1.1 0-1.6-.2-2.5-.5l-.3-.2-.4 2.3c.6.3 1.8.5 3 .5 2.8 0 4.6-1.4 4.6-3.5 0-1.2-.7-2.1-2.3-2.8-.9-.5-1.5-.8-1.5-1.3s.5-1 1.4-1c.8 0 1.4.2 1.9.4l.2.1.4-2.1z" fill="#1434CB"/>
-    <path d="M39.5 11.5h-2.1c-.6 0-1.1.4-1.4 1l-3.9 8h2.8s.5-1.3.6-1.6h3.4c.1.4.3 1.6.3 1.6h2.5l-2.2-9zm-3.3 5.8c.2-.5 1-2.8 1-2.8s.2-.5.3-.9l.2.8s.4 2.1.5 2.9h-2z" fill="#1434CB"/>
+    <circle cx="18" cy="16" r="7" fill="#0099DF"/>
+    <circle cx="30" cy="16" r="7" fill="#CC0000"/>
+    <path d="M24 10c1.4 1.2 2.3 3 2.3 5s-.9 3.8-2.3 5c-1.4-1.2-2.3-3-2.3-5s.9-3.8 2.3-5z" fill="#6C6C6C"/>
   </svg>
 );
 
-const MastercardLogo = () => (
-  <svg viewBox="0 0 48 32" className="h-7 w-auto">
-    <rect width="48" height="32" rx="4" fill="white"/>
-    <circle cx="18" cy="16" r="7.5" fill="#EB001B"/>
-    <circle cx="30" cy="16" r="7.5" fill="#FF5F00"/>
-    <path d="M24 9.8c-1.6 1.3-2.6 3.3-2.6 5.5s1 4.2 2.6 5.5c1.6-1.3 2.6-3.3 2.6-5.5s-1-4.2-2.6-5.5z" fill="#F79E1B"/>
+const CBLogo = () => (
+  <svg viewBox="0 0 48 32" className="h-6 w-auto">
+    <rect width="48" height="32" rx="4" fill="#0055A4"/>
+    <text x="8" y="19" fontFamily="Arial, sans-serif" fontSize="8" fontWeight="bold" fill="white">CB</text>
   </svg>
 );
 
-const AmexLogo = () => (
-  <svg viewBox="0 0 48 32" className="h-7 w-auto">
-    <rect width="48" height="32" rx="4" fill="#006FCF"/>
-    <path d="M10 12h3.5l.8 2 .8-2h3.5v5.5l2.5-5.5h3l2.5 5.5V12h8.4l1 2.5 1-2.5H40l-3.5 8h-3l-1-2.5-1 2.5h-8.5l-.5-1.5h-2l-.5 1.5h-3.5v-5l-2.5 5h-2l-2.5-5v5H10v-8zm23 2l1.5 3.5h-3L33 14zm-16.5 0l1.5 3.5h-3l1.5-3.5z" fill="white"/>
-  </svg>
-);
-
-const DiscoverLogo = () => (
-  <svg viewBox="0 0 48 32" className="h-7 w-auto">
-    <rect width="48" height="32" rx="4" fill="white"/>
-    <path d="M35 10h8c2 0 3.5 1.5 3.5 3.5v5c0 2-1.5 3.5-3.5 3.5h-8V10z" fill="#FF6000"/>
-    <text x="7" y="19" fontFamily="Arial, sans-serif" fontSize="7.5" fontWeight="bold" fill="#231F20">DISCOVER</text>
+const UnionPayLogo = () => (
+  <svg viewBox="0 0 48 32" className="h-6 w-auto">
+    <rect width="48" height="32" rx="4" fill="#E21836"/>
+    <rect x="12" y="10" width="24" height="12" rx="1" fill="#00447C"/>
+    <rect x="14" y="12" width="20" height="8" rx="1" fill="#E21836"/>
   </svg>
 );
 
 const DinersLogo = () => (
-  <svg viewBox="0 0 48 32" className="h-7 w-auto">
+  <svg viewBox="0 0 48 32" className="h-6 w-auto">
     <rect width="48" height="32" rx="4" fill="white"/>
-    <circle cx="24" cy="16" r="9" fill="none" stroke="#0079BE" strokeWidth="1.8"/>
-    <path d="M18.5 16c0-3 2.5-5.5 5.5-5.5v11c-3 0-5.5-2.5-5.5-5.5z" fill="#0079BE"/>
-    <path d="M29.5 16c0 3-2.5 5.5-5.5 5.5v-11c3 0 5.5 2.5 5.5 5.5z" fill="#0079BE"/>
-  </svg>
-);
-
-const JCBLogo = () => (
-  <svg viewBox="0 0 48 32" className="h-7 w-auto">
-    <rect width="48" height="32" rx="4" fill="white"/>
-    <rect x="9" y="11" width="9" height="10" rx="1" fill="#0E4C96"/>
-    <rect x="19.5" y="11" width="9" height="10" rx="1" fill="#CC0000"/>
-    <rect x="30" y="11" width="9" height="10" rx="1" fill="#00A04D"/>
+    <circle cx="24" cy="16" r="8" fill="none" stroke="#0079BE" strokeWidth="1.5"/>
+    <path d="M19 16c0-2.8 2.2-5 5-5v10c-2.8 0-5-2.2-5-5z" fill="#0079BE"/>
+    <path d="M29 16c0 2.8-2.2 5-5 5v-10c2.8 0 5 2.2 5 5z" fill="#0079BE"/>
   </svg>
 );
 
@@ -227,7 +209,7 @@ function CheckoutForm() {
       />
 
       <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Header avec Logo Luxio */}
         <div className="mb-10 max-w-7xl mx-auto">
           <Link href={`/${language}/payment`}>
             <Button variant="ghost" className="mb-6 group" data-testid="button-back">
@@ -236,10 +218,19 @@ function CheckoutForm() {
             </Button>
           </Link>
           
+          {/* Logo Luxio en évidence */}
+          <div className="text-center mb-6">
+            <Link href="/" className="inline-block">
+              <h1 className="text-5xl sm:text-6xl font-bold text-primary tracking-tight hover:opacity-80 transition-opacity">
+                Luxio
+              </h1>
+            </Link>
+          </div>
+
           <div className="text-center space-y-3 mb-8">
-            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
               {t('checkout')}
-            </h1>
+            </h2>
             <p className="text-base text-slate-600 dark:text-slate-400 flex items-center justify-center gap-2 font-medium">
               <Shield className="h-4 w-4 text-emerald-600 dark:text-emerald-500" />
               {t('securedPayment')} • {t('dataProtection')}
@@ -316,20 +307,42 @@ function CheckoutForm() {
                       />
                     </div>
                     
-                    {/* Card Logos */}
-                    <div className="pt-3">
-                      <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2.5 uppercase tracking-wide">
-                        Cartes acceptées
+                    {/* Cartes acceptées */}
+                    <div className="pt-4">
+                      <p className="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-3">
+                        Cartes de crédit et de débit
                       </p>
-                      <div className="flex flex-wrap items-center gap-2.5">
-                        {[VisaLogo, MastercardLogo, AmexLogo, DiscoverLogo, DinersLogo, JCBLogo].map((Logo, index) => (
-                          <div
-                            key={index}
-                            className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md p-1.5 hover:border-slate-300 dark:hover:border-slate-600 transition-all hover:shadow-sm"
-                          >
-                            <Logo />
-                          </div>
-                        ))}
+                      <p className="text-xs text-slate-600 dark:text-slate-400 mb-3">
+                        Avec la tarification par transaction, vous ne payez aucuns frais mensuels ou initiaux.
+                      </p>
+                      <div className="flex flex-wrap items-center gap-3">
+                        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md p-2 hover:border-slate-300 dark:hover:border-slate-600 transition-all hover:shadow-sm">
+                          <SiVisa className="h-6 w-auto text-[#1A1F71]" />
+                        </div>
+                        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md p-2 hover:border-slate-300 dark:hover:border-slate-600 transition-all hover:shadow-sm">
+                          <SiMastercard className="h-6 w-auto text-[#EB001B]" />
+                        </div>
+                        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md p-2 hover:border-slate-300 dark:hover:border-slate-600 transition-all hover:shadow-sm">
+                          <MaestroLogo />
+                        </div>
+                        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md p-2 hover:border-slate-300 dark:hover:border-slate-600 transition-all hover:shadow-sm">
+                          <SiAmericanexpress className="h-6 w-auto text-[#006FCF]" />
+                        </div>
+                        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md p-2 hover:border-slate-300 dark:hover:border-slate-600 transition-all hover:shadow-sm">
+                          <CBLogo />
+                        </div>
+                        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md p-2 hover:border-slate-300 dark:hover:border-slate-600 transition-all hover:shadow-sm">
+                          <UnionPayLogo />
+                        </div>
+                        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md p-2 hover:border-slate-300 dark:hover:border-slate-600 transition-all hover:shadow-sm">
+                          <SiApplepay className="h-6 w-auto text-slate-900 dark:text-white" />
+                        </div>
+                        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md p-2 hover:border-slate-300 dark:hover:border-slate-600 transition-all hover:shadow-sm">
+                          <SiGooglepay className="h-6 w-auto text-[#4285F4]" />
+                        </div>
+                        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md p-2 hover:border-slate-300 dark:hover:border-slate-600 transition-all hover:shadow-sm">
+                          <DinersLogo />
+                        </div>
                       </div>
                     </div>
                   </div>
