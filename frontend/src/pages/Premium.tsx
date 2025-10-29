@@ -30,7 +30,7 @@ export default function Premium() {
   const { addToCart } = useCart();
   
   // Load products dynamically from MongoDB (with static fallback)
-  const { products, loading } = useProducts();
+  const { products } = useProducts();
 
   // UI States
   const [cartOpen, setCartOpen] = useState(false);
