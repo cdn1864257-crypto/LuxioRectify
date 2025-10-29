@@ -71,8 +71,16 @@ Product and order data are managed client-side using a static product database o
 - Updated `ImageUpload.tsx` and `AdminProducts.tsx` to use self-contained SVG error placeholders
 - Ensured all cart images correctly correspond to their products with no generic fallbacks
 
-### Payment Processing
-A complete payment system offers three secure methods: Bank Transfer, Maxelpay (redirect-based), and PCS/Transcash Tickets (with AES-256 encryption). All payment methods are protected routes, require authentication and a non-empty cart, and trigger email notifications via SendGrid. NowPayments integration includes HMAC SHA-512 signature verification for webhooks and automatic dashboard refresh for order updates.
+### Payment Processing (Updated: October 29, 2025)
+A complete payment system offers secure payment methods: **Stripe** (credit/debit cards), Bank Transfer, Maxelpay (redirect-based), and PCS/Transcash Tickets (with AES-256 encryption). All payment methods are protected routes, require authentication and a non-empty cart, and trigger email notifications via SendGrid. NowPayments integration includes HMAC SHA-512 signature verification for webhooks and automatic dashboard refresh for order updates.
+
+**Stripe Payment Security** (October 29, 2025): Server-side validation of cart totals prevents price manipulation:
+- **Quantity Validation**: Enforces positive integers (1-999) to block fractional or negative quantity attacks
+- **Price Verification**: Server-side price lookup from static product catalog (`api/lib/products.ts`) validates all client-submitted prices
+- **Currency Whitelist**: Only EUR, USD, and GBP are accepted to prevent unexpected currency attacks
+- **Server-Calculated Amount**: Payment Intent created with server-calculated total, never trusting client-provided amount
+- **Variant Protection**: Product variants (colors, capacities) validated against server catalog
+- **Shared Product Data**: Product catalog duplicated in `api/lib/products.ts` for both Vercel serverless functions and Render Express server access
 
 ### Email System (Updated: October 27, 2025)
 All automated emails are sent via SendGrid with full multilingual support:

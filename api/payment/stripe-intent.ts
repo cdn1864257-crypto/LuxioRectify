@@ -1,16 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 // Import static products for server-side validation
-import { products as staticProducts, type Product, type ProductVariant } from '../frontend/src/lib/products.js';
-
-// Interface pour la réponse Vercel compatible
-interface CompatibleResponse extends VercelResponse {
-  send: (body: any) => CompatibleResponse;
-  json: (body: any) => CompatibleResponse;
-  status: (code: number) => CompatibleResponse;
-  setHeader: (name: string, value: string | string[]) => CompatibleResponse;
-  end: (chunk?: any) => void;
-}
+import { products as staticProducts, type Product, type ProductVariant } from '../lib/products';
 
 interface StripeIntentData {
   amount: number; // en centimes
@@ -87,7 +78,7 @@ function validateCartTotal(cart: StripeIntentData['cart']): { valid: boolean; se
 
 export default async function handler(
   req: VercelRequest,
-  res: CompatibleResponse
+  res: VercelResponse
 ) {
   console.log('[Stripe Intent] Début de la requête');
   
