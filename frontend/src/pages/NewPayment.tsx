@@ -386,7 +386,7 @@ export default function NewPayment() {
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="text-sm sm:text-base font-semibold flex items-center gap-2">
                       <CreditCard className="h-5 w-5 text-primary flex-shrink-0" />
-                      Carte Bancaire
+                      {t.cardPayment}
                     </h3>
                     <span className="text-xs bg-green-600 text-white px-2 py-1 rounded whitespace-nowrap">
                       {t.immediate}
@@ -402,8 +402,8 @@ export default function NewPayment() {
                       <div className="flex items-center justify-start gap-3 sm:gap-4">
                         <CreditCard className="h-6 w-6 sm:h-8 sm:w-8 text-foreground flex-shrink-0" />
                         <div className="text-left flex-1 min-w-0">
-                          <div className="font-semibold text-base sm:text-lg text-foreground">Stripe</div>
-                          <div className="text-xs sm:text-sm text-muted-foreground">Paiement par carte bancaire sécurisé</div>
+                          <div className="font-semibold text-base sm:text-lg text-foreground">{t.stripe}</div>
+                          <div className="text-xs sm:text-sm text-muted-foreground">{t.stripeDescription}</div>
                         </div>
                       </div>
                     </button>
