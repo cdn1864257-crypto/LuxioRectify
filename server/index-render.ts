@@ -22,6 +22,7 @@ import bankTransferHandler from '../api/payment/bank-transfer.js';
 import nowpaymentsReturnHandler from '../api/payment/nowpayments-return.js';
 import nowpaymentsInitHandler from '../api/payment/nowpayments-init.js';
 import nowpaymentsWebhookHandler from '../api/payment/nowpayments-webhook.js';
+import stripeIntentHandler from '../api/payment/stripe-intent.js';
 import ordersHandler from '../api/orders.js';
 import deleteOrderHandler from '../api/orders/[orderId].js';
 import { getErrorMessage, getLanguageFromRequest } from './utils/multilingual-messages.js';
@@ -358,6 +359,8 @@ app.use('/api/payment/nowpayments-init', convertVercelHandler(nowpaymentsInitHan
 app.use('/api/payment/nowpayments-return', convertVercelHandler(nowpaymentsReturnHandler));
 // Webhook NowPayments : PAS de CSRF car les requêtes viennent de NowPayments (validées par signature HMAC)
 app.post('/api/payment/nowpayments-webhook', convertVercelHandler(nowpaymentsWebhookHandler));
+// Stripe payment routes
+app.use('/api/payment/stripe-intent', convertVercelHandler(stripeIntentHandler));
 
 // Orders routes (CSRF protection applied globally via middleware)
 app.delete('/api/orders/:orderId', convertVercelHandler(deleteOrderHandler));
