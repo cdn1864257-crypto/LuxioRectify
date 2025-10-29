@@ -740,6 +740,7 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Ticket codes sent successfully',
     enterTicketCode: 'Please enter at least one ticket code',
     orderFailed: 'Order failed. Please try again.',
+    paymentInitFailed: 'Payment initialization failed. Please try again.',
     
     // Search & Filters
     searchPlaceholder: 'Search products...',
@@ -1359,6 +1360,7 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Codes tickets envoyés avec succès',
     enterTicketCode: 'Veuillez entrer au moins un code ticket',
     orderFailed: 'Commande échouée. Veuillez réessayer.',
+    paymentInitFailed: 'Échec de l\'initialisation du paiement. Veuillez réessayer.',
     
     // Search & Filters
     searchPlaceholder: 'Rechercher des produits...',
@@ -1978,6 +1980,7 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Códigos de tickets enviados correctamente',
     enterTicketCode: 'Por favor, introduce al menos un código de ticket',
     orderFailed: 'Pedido fallido. Por favor, inténtalo de nuevo.',
+    paymentInitFailed: 'Error al inicializar el pago. Por favor, inténtalo de nuevo.',
     
     // Search & Filters
     searchPlaceholder: 'Buscar productos...',
@@ -2597,6 +2600,7 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Códigos de tickets enviados com sucesso',
     enterTicketCode: 'Por favor, insira pelo menos um código de ticket',
     orderFailed: 'Pedido falhou. Por favor, tente novamente.',
+    paymentInitFailed: 'Falha ao inicializar o pagamento. Por favor, tente novamente.',
     
     // Search & Filters
     searchPlaceholder: 'Pesquisar produtos...',
@@ -3216,6 +3220,7 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Kody kart wysłane pomyślnie',
     enterTicketCode: 'Proszę wprowadzić co najmniej jeden kod karty',
     orderFailed: 'Zamówienie nie powiodło się. Spróbuj ponownie.',
+    paymentInitFailed: 'Nie udało się zainicjować płatności. Spróbuj ponownie.',
     
     // Search & Filters
     searchPlaceholder: 'Szukaj produktów...',
@@ -3835,6 +3840,7 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Codici ticket inviati con successo',
     enterTicketCode: 'Inserisci almeno un codice ticket',
     orderFailed: 'Ordine fallito. Riprova.',
+    paymentInitFailed: 'Inizializzazione del pagamento fallita. Riprova.',
     
     // Search & Filters
     searchPlaceholder: 'Cerca prodotti...',
@@ -4454,6 +4460,7 @@ export const translations: Record<Language, Translations> = {
     ticketCodeSent: 'Kártya kódok sikeresen elküldve',
     enterTicketCode: 'Kérjük, adjon meg legalább egy kártya kódot',
     orderFailed: 'Rendelés sikertelen. Kérjük, próbálja újra.',
+    paymentInitFailed: 'A fizetés inicializálása sikertelen. Kérjük, próbálja újra.',
     
     // Search & Filters
     searchPlaceholder: 'Termékek keresése...',
