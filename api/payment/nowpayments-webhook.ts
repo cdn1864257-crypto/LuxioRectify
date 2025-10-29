@@ -1,6 +1,7 @@
 import { MongoClient } from 'mongodb';
 import { createHmac } from 'crypto';
 import { sendNowPaymentsConfirmationToCustomer, sendNowPaymentsNotificationToAdmin } from '../../utils/email.js';
+import { webhookCache, isNowPaymentsIP, getClientIP } from '../../utils/webhook-security.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -75,9 +76,19 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    const clientIP = getClientIP(req.headers);
+    
+    if (!isNowPaymentsIP(clientIP)) {
+      console.error(`[NowPayments Webhook] Unauthorized IP: ${clientIP}`);
+      return res.status(403).json({
+        error: 'IP non autorisée'
+      });
+    }
+    
+    console.log(`[NowPayments Webhook] IP verified: ${clientIP}`);
+    
     const ipnSecret = process.env.NOWPAYMENTS_IPN_SECRET;
     
-    // SECURITY: IPN_SECRET est OBLIGATOIRE pour valider les webhooks
     if (!ipnSecret) {
       console.error('[NowPayments Webhook] NOWPAYMENTS_IPN_SECRET non configuré - CRITIQUE!');
       return res.status(500).json({
@@ -119,6 +130,19 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         error: 'Données webhook NowPayments incomplètes'
       });
     }
+
+    const eventId = `nowpayments_${payment_id || order_id}_${payment_status}`;
+    
+    if (webhookCache.isProcessed(eventId)) {
+      console.warn(`[NowPayments Webhook] Duplicate event detected: ${eventId}`);
+      return res.status(200).json({
+        success: true,
+        message: 'Event already processed (deduplicated)'
+      });
+    }
+    
+    webhookCache.markAsProcessed(eventId);
+    console.log(`[NowPayments Webhook] Event marked as processed: ${eventId}`);
 
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {

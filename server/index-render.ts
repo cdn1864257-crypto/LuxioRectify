@@ -2,7 +2,6 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import connectMongo from 'connect-mongodb-session';
-import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import csrf from 'csurf';
 import { fileURLToPath } from 'url';
@@ -23,6 +22,7 @@ import nowpaymentsReturnHandler from '../api/payment/nowpayments-return.js';
 import nowpaymentsInitHandler from '../api/payment/nowpayments-init.js';
 import nowpaymentsWebhookHandler from '../api/payment/nowpayments-webhook.js';
 import stripeIntentHandler from '../api/payment/stripe-intent.js';
+import stripeWebhookHandler from '../api/payment/stripe-webhook.js';
 import ordersHandler from '../api/orders.js';
 import deleteOrderHandler from '../api/orders/[orderId].js';
 import { getErrorMessage, getLanguageFromRequest } from './utils/multilingual-messages.js';
@@ -30,6 +30,8 @@ import getProductsHandler from '../api/products/index.js';
 import createProductHandler from '../api/products/create.js';
 import updateProductHandler from '../api/products/update.js';
 import deleteProductHandler from '../api/products/delete.js';
+import { hybridGeneralLimiter, hybridAuthLimiter } from '../utils/hybrid-rate-limiter.js';
+import { initializeServices } from './bootstrap.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -213,38 +215,7 @@ app.use((req, res, next) => {
   return csrfProtection(req, res, next);
 });
 
-// Rate limiting général
-const generalLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limite à 100 requêtes par IP
-  handler: (req, res) => {
-    const lang = getLanguageFromRequest(req);
-    res.status(429).json({
-      success: false,
-      error: 'TOO_MANY_REQUESTS',
-      message: getErrorMessage('TOO_MANY_REQUESTS', lang)
-    });
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
-// Rate limiting strict pour l'authentification
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 60 * 1000, // 15 minutes
-  max: 5, // Limite à 5 tentatives
-  handler: (req, res) => {
-    const lang = getLanguageFromRequest(req);
-    res.status(429).json({
-      success: false,
-      error: 'TOO_MANY_LOGIN_ATTEMPTS',
-      message: getErrorMessage('TOO_MANY_LOGIN_ATTEMPTS', lang)
-    });
-  },
-  skipSuccessfulRequests: true,
-});
-
-app.use(generalLimiter);
+app.use(hybridGeneralLimiter.middleware());
 
 // Convert Vercel handlers to Express middleware
 const convertVercelHandler = (handler: any) => {
@@ -299,9 +270,9 @@ app.use('/api/health', convertVercelHandler(healthHandler));
 app.use('/api/users', convertVercelHandler(usersHandler));
 
 // Auth routes avec rate limiting (CSRF protection applied globally via middleware)
-app.use('/api/auth/signup', authLimiter, convertVercelHandler(signupHandler));
+app.use('/api/auth/signup', hybridAuthLimiter.middleware(), convertVercelHandler(signupHandler));
 app.use('/api/auth/verify-email', convertVercelHandler(verifyEmailHandler));
-app.use('/api/auth/login', authLimiter, convertVercelHandler(loginHandler));
+app.use('/api/auth/login', hybridAuthLimiter.middleware(), convertVercelHandler(loginHandler));
 
 // Logout route - native Express to handle session destruction
 app.post('/api/auth/logout', (req: any, res) => {
@@ -349,8 +320,8 @@ app.post('/api/auth/logout', (req: any, res) => {
 
 app.use('/api/auth/me', convertVercelHandler(meHandler));
 app.use('/api/auth/change-password', convertVercelHandler(changePasswordHandler));
-app.use('/api/auth/forgot-password', authLimiter, convertVercelHandler(forgotPasswordHandler));
-app.use('/api/auth/reset-password', authLimiter, convertVercelHandler(resetPasswordHandler));
+app.use('/api/auth/forgot-password', hybridAuthLimiter.middleware(), convertVercelHandler(forgotPasswordHandler));
+app.use('/api/auth/reset-password', hybridAuthLimiter.middleware(), convertVercelHandler(resetPasswordHandler));
 
 // Payment routes (CSRF protection applied globally except for webhook and return)
 app.use('/api/payment/submit-order', convertVercelHandler(submitOrderHandler));
@@ -361,6 +332,8 @@ app.use('/api/payment/nowpayments-return', convertVercelHandler(nowpaymentsRetur
 app.post('/api/payment/nowpayments-webhook', convertVercelHandler(nowpaymentsWebhookHandler));
 // Stripe payment routes
 app.use('/api/payment/stripe-intent', convertVercelHandler(stripeIntentHandler));
+// Stripe webhook : Requires raw body for signature verification
+app.post('/api/payment/stripe-webhook', express.raw({ type: 'application/json' }), convertVercelHandler(stripeWebhookHandler));
 
 // Orders routes (CSRF protection applied globally via middleware)
 app.delete('/api/orders/:orderId', convertVercelHandler(deleteOrderHandler));
@@ -418,13 +391,19 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   });
 });
 
-// Écouter sur 0.0.0.0 pour Render
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`✅ Backend API Server running on port ${PORT}`);
-  console.log(`   Environment: ${process.env.NODE_ENV || 'production'}`);
-  console.log(`   Frontend URL: ${FRONTEND_URL}`);
-  console.log(`   MongoDB URI configured: ${process.env.MONGODB_URI ? 'Yes' : 'No'}`);
-  console.log(`   JWT Secret configured: ${process.env.JWT_SECRET ? 'Yes' : 'No'}`);
-  console.log(`   SendGrid configured: ${process.env.SENDGRID_API_KEY ? 'Yes' : 'No'}`);
-  console.log(`   NowPayments configured: ${process.env.NOWPAYMENTS_API_KEY ? 'Yes' : 'No'}`);
+// Initialize services before starting server
+initializeServices().then(() => {
+  // Écouter sur 0.0.0.0 pour Render
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`✅ Backend API Server running on port ${PORT}`);
+    console.log(`   Environment: ${process.env.NODE_ENV || 'production'}`);
+    console.log(`   Frontend URL: ${FRONTEND_URL}`);
+    console.log(`   MongoDB URI configured: ${process.env.MONGODB_URI ? 'Yes' : 'No'}`);
+    console.log(`   JWT Secret configured: ${process.env.JWT_SECRET ? 'Yes' : 'No'}`);
+    console.log(`   SendGrid configured: ${process.env.SENDGRID_API_KEY ? 'Yes' : 'No'}`);
+    console.log(`   NowPayments configured: ${process.env.NOWPAYMENTS_API_KEY ? 'Yes' : 'No'}`);
+  });
+}).catch(error => {
+  console.error('[Server] Fatal error during initialization:', error);
+  process.exit(1);
 });
