@@ -101,6 +101,15 @@ export interface Translations {
   sendTicketCodes: string;
   dataProtection: string;
   verifiedPayment: string;
+  stripe: string;
+  stripeDescription: string;
+  cardPayment: string;
+  cardNumber: string;
+  expiryDate: string;
+  cvc: string;
+  cardholderName: string;
+  paymentProcessing: string;
+  immediate: string;
   
   // Alternative Payment Methods
   mainPaymentMethod: string;
@@ -615,6 +624,15 @@ export const translations: Record<Language, Translations> = {
     sendTicketCodes: 'Send Ticket Codes',
     dataProtection: 'Data Protection',
     verifiedPayment: 'Verified Payment',
+    stripe: 'Stripe',
+    stripeDescription: 'Secure credit card payment',
+    cardPayment: 'Card Payment',
+    cardNumber: 'Card number',
+    expiryDate: 'Expiry date',
+    cvc: 'CVC',
+    cardholderName: 'Cardholder name',
+    paymentProcessing: 'Processing payment...',
+    immediate: 'Instant',
     
     // Alternative Payment Methods
     mainPaymentMethod: 'Main Payment Method',
@@ -1235,6 +1253,15 @@ export const translations: Record<Language, Translations> = {
     sendTicketCodes: 'Envoyer les codes',
     dataProtection: 'Données Protégées',
     verifiedPayment: 'Paiement Vérifié',
+    stripe: 'Stripe',
+    stripeDescription: 'Paiement sécurisé par carte bancaire',
+    cardPayment: 'Carte Bancaire',
+    cardNumber: 'Numéro de carte',
+    expiryDate: 'Date d\'expiration',
+    cvc: 'CVC',
+    cardholderName: 'Nom du titulaire',
+    paymentProcessing: 'Traitement du paiement...',
+    immediate: 'Immédiat',
     
     // Alternative Payment Methods
     mainPaymentMethod: 'Méthode de paiement principale',
@@ -1855,6 +1882,15 @@ export const translations: Record<Language, Translations> = {
     sendTicketCodes: 'Enviar códigos',
     dataProtection: 'Protección de Datos',
     verifiedPayment: 'Pago Verificado',
+    stripe: 'Stripe',
+    stripeDescription: 'Pago seguro con tarjeta de crédito',
+    cardPayment: 'Tarjeta de Crédito',
+    cardNumber: 'Número de tarjeta',
+    expiryDate: 'Fecha de vencimiento',
+    cvc: 'CVC',
+    cardholderName: 'Nombre del titular',
+    paymentProcessing: 'Procesando pago...',
+    immediate: 'Inmediato',
     
     // Alternative Payment Methods
     mainPaymentMethod: 'Método de pago principal',
@@ -2475,6 +2511,15 @@ export const translations: Record<Language, Translations> = {
     sendTicketCodes: 'Enviar códigos',
     dataProtection: 'Proteção de Dados',
     verifiedPayment: 'Pagamento Verificado',
+    stripe: 'Stripe',
+    stripeDescription: 'Pagamento seguro com cartão de crédito',
+    cardPayment: 'Cartão de Crédito',
+    cardNumber: 'Número do cartão',
+    expiryDate: 'Data de validade',
+    cvc: 'CVC',
+    cardholderName: 'Nome do titular',
+    paymentProcessing: 'Processando pagamento...',
+    immediate: 'Imediato',
     
     // Alternative Payment Methods
     mainPaymentMethod: 'Método de pagamento principal',
@@ -3095,6 +3140,15 @@ export const translations: Record<Language, Translations> = {
     sendTicketCodes: 'Wyślij kody',
     dataProtection: 'Ochrona Danych',
     verifiedPayment: 'Zweryfikowana Płatność',
+    stripe: 'Stripe',
+    stripeDescription: 'Bezpieczna płatność kartą kredytową',
+    cardPayment: 'Karta Kredytowa',
+    cardNumber: 'Numer karty',
+    expiryDate: 'Data ważności',
+    cvc: 'CVC',
+    cardholderName: 'Nazwisko posiadacza karty',
+    paymentProcessing: 'Przetwarzanie płatności...',
+    immediate: 'Natychmiastowy',
     
     // Alternative Payment Methods
     mainPaymentMethod: 'Główna metoda płatności',
@@ -3715,6 +3769,15 @@ export const translations: Record<Language, Translations> = {
     sendTicketCodes: 'Invia codici',
     dataProtection: 'Protezione Dati',
     verifiedPayment: 'Pagamento Verificato',
+    stripe: 'Stripe',
+    stripeDescription: 'Pagamento sicuro con carta di credito',
+    cardPayment: 'Carta di Credito',
+    cardNumber: 'Numero della carta',
+    expiryDate: 'Data di scadenza',
+    cvc: 'CVC',
+    cardholderName: 'Nome del titolare',
+    paymentProcessing: 'Elaborazione pagamento...',
+    immediate: 'Immediato',
     
     // Alternative Payment Methods
     mainPaymentMethod: 'Metodo di pagamento principale',
@@ -4335,6 +4398,15 @@ export const translations: Record<Language, Translations> = {
     sendTicketCodes: 'Kódok küldése',
     dataProtection: 'Adatvédelem',
     verifiedPayment: 'Ellenőrzött Fizetés',
+    stripe: 'Stripe',
+    stripeDescription: 'Biztonságos bankkártya fizetés',
+    cardPayment: 'Bankkártya',
+    cardNumber: 'Kártyaszám',
+    expiryDate: 'Lejárati dátum',
+    cvc: 'CVC',
+    cardholderName: 'Kártyabirtokos neve',
+    paymentProcessing: 'Fizetés feldolgozása...',
+    immediate: 'Azonnali',
     
     // Alternative Payment Methods
     mainPaymentMethod: 'Fő fizetési mód',
