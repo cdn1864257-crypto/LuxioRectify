@@ -109,7 +109,6 @@ export interface Translations {
   cvc: string;
   cardholderName: string;
   paymentProcessing: string;
-  immediate: string;
   
   // Alternative Payment Methods
   mainPaymentMethod: string;
@@ -632,7 +631,6 @@ export const translations: Record<Language, Translations> = {
     cvc: 'CVC',
     cardholderName: 'Cardholder name',
     paymentProcessing: 'Processing payment...',
-    immediate: 'Instant',
     
     // Alternative Payment Methods
     mainPaymentMethod: 'Main Payment Method',
@@ -1261,7 +1259,6 @@ export const translations: Record<Language, Translations> = {
     cvc: 'CVC',
     cardholderName: 'Nom du titulaire',
     paymentProcessing: 'Traitement du paiement...',
-    immediate: 'Immédiat',
     
     // Alternative Payment Methods
     mainPaymentMethod: 'Méthode de paiement principale',
@@ -1890,7 +1887,6 @@ export const translations: Record<Language, Translations> = {
     cvc: 'CVC',
     cardholderName: 'Nombre del titular',
     paymentProcessing: 'Procesando pago...',
-    immediate: 'Inmediato',
     
     // Alternative Payment Methods
     mainPaymentMethod: 'Método de pago principal',
@@ -2519,7 +2515,6 @@ export const translations: Record<Language, Translations> = {
     cvc: 'CVC',
     cardholderName: 'Nome do titular',
     paymentProcessing: 'Processando pagamento...',
-    immediate: 'Imediato',
     
     // Alternative Payment Methods
     mainPaymentMethod: 'Método de pagamento principal',
@@ -3148,7 +3143,6 @@ export const translations: Record<Language, Translations> = {
     cvc: 'CVC',
     cardholderName: 'Nazwisko posiadacza karty',
     paymentProcessing: 'Przetwarzanie płatności...',
-    immediate: 'Natychmiastowy',
     
     // Alternative Payment Methods
     mainPaymentMethod: 'Główna metoda płatności',
@@ -3777,7 +3771,6 @@ export const translations: Record<Language, Translations> = {
     cvc: 'CVC',
     cardholderName: 'Nome del titolare',
     paymentProcessing: 'Elaborazione pagamento...',
-    immediate: 'Immediato',
     
     // Alternative Payment Methods
     mainPaymentMethod: 'Metodo di pagamento principale',
@@ -4406,7 +4399,6 @@ export const translations: Record<Language, Translations> = {
     cvc: 'CVC',
     cardholderName: 'Kártyabirtokos neve',
     paymentProcessing: 'Fizetés feldolgozása...',
-    immediate: 'Azonnali',
     
     // Alternative Payment Methods
     mainPaymentMethod: 'Fő fizetési mód',

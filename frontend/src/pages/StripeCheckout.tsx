@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCart } from '@/contexts/CartContext';
@@ -56,11 +56,11 @@ function CheckoutForm() {
         setClientSecret(data.clientSecret);
       } catch (err) {
         console.error('Error creating payment intent:', err);
-        setError(t.paymentInitFailed);
+        setError(t('paymentInitFailed'));
         toast({
           variant: 'destructive',
-          title: t.errorOccurred,
-          description: t.paymentInitFailed,
+          title: t('errorOccurred'),
+          description: t('paymentInitFailed'),
         });
       }
     };
@@ -76,11 +76,11 @@ function CheckoutForm() {
     }
 
     if (!cardholderName.trim()) {
-      setError(t.pleaseCompleteThisField);
+      setError(t('pleaseCompleteThisField'));
       toast({
         variant: 'destructive',
-        title: t.errorOccurred,
-        description: t.fillRequiredFields,
+        title: t('errorOccurred'),
+        description: t('fillRequiredFields'),
       });
       return;
     }
@@ -106,10 +106,10 @@ function CheckoutForm() {
       });
 
       if (stripeError) {
-        setError(stripeError.message || t.paymentInitFailed);
+        setError(stripeError.message || t('paymentInitFailed'));
         toast({
           variant: 'destructive',
-          title: t.errorOccurred,
+          title: t('errorOccurred'),
           description: stripeError.message,
         });
         setProcessing(false);
@@ -119,8 +119,8 @@ function CheckoutForm() {
       if (paymentIntent && paymentIntent.status === 'succeeded') {
         // Paiement réussi
         toast({
-          title: t.paymentSuccessful,
-          description: t.orderConfirmed,
+          title: t('paymentSuccessful'),
+          description: t('orderConfirmed'),
         });
 
         // Vider le panier
@@ -133,11 +133,11 @@ function CheckoutForm() {
       }
     } catch (err) {
       console.error('Payment error:', err);
-      setError(t.orderFailed);
+      setError(t('orderFailed'));
       toast({
         variant: 'destructive',
-        title: t.errorOccurred,
-        description: t.orderFailed,
+        title: t('errorOccurred'),
+        description: t('orderFailed'),
       });
     } finally {
       setProcessing(false);
@@ -164,8 +164,8 @@ function CheckoutForm() {
   return (
     <div className="min-h-screen bg-background py-8 px-4 sm:px-6 lg:px-8">
       <SEO 
-        title={`${t.stripe} - ${t.paymentMethod}`}
-        description={t.stripeDescription}
+        title={`${t('stripe')} - ${t('paymentMethod')}`}
+        description={t('stripeDescription')}
       />
 
       <div className="max-w-2xl mx-auto">
@@ -174,14 +174,14 @@ function CheckoutForm() {
           <Link href={`/${language}/payment`}>
             <Button variant="ghost" className="mb-4" data-testid="button-back">
               <ArrowLeft className="h-4 w-4 mr-2" />
-              {t.previous || 'Retour'}
+              {t('previous') || 'Retour'}
             </Button>
           </Link>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground flex items-center gap-2">
             <CreditCard className="h-6 w-6 sm:h-8 sm:w-8" />
-            {t.cardPayment}
+            {t('cardPayment')}
           </h1>
-          <p className="text-muted-foreground mt-2">{t.stripeDescription}</p>
+          <p className="text-muted-foreground mt-2">{t('stripeDescription')}</p>
         </div>
 
         {/* Résumé de la commande */}
@@ -189,7 +189,7 @@ function CheckoutForm() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <ShoppingCart className="h-5 w-5" />
-              {t.orderSummary}
+              {t('orderSummary')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -204,7 +204,7 @@ function CheckoutForm() {
               ))}
               <div className="border-t pt-2 mt-2">
                 <div className="flex justify-between font-bold text-lg">
-                  <span>{t.total}</span>
+                  <span>{t('total')}</span>
                   <span>€{total.toFixed(2)}</span>
                 </div>
               </div>
@@ -217,19 +217,19 @@ function CheckoutForm() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Lock className="h-5 w-5" />
-              {t.paymentMethod}
+              {t('paymentMethod')}
             </CardTitle>
-            <CardDescription>{t.allTransactionsSecured || 'Toutes les transactions sont sécurisées'}</CardDescription>
+            <CardDescription>{t('allTransactionsSecured') || 'Toutes les transactions sont sécurisées'}</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Nom du titulaire */}
               <div className="space-y-2">
-                <Label htmlFor="cardholderName">{t.cardholderName}</Label>
+                <Label htmlFor="cardholderName">{t('cardholderName')}</Label>
                 <Input
                   id="cardholderName"
                   type="text"
-                  placeholder={t.cardholderName}
+                  placeholder={t('cardholderName')}
                   value={cardholderName}
                   onChange={(e) => setCardholderName(e.target.value)}
                   disabled={processing}
@@ -240,12 +240,12 @@ function CheckoutForm() {
 
               {/* Stripe Card Element */}
               <div className="space-y-2">
-                <Label>{t.cardNumber}</Label>
+                <Label>{t('cardNumber')}</Label>
                 <div className="border rounded-md p-3 bg-background">
                   <CardElement options={cardElementOptions} />
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  {t.dataProtection || 'Vos données sont protégées'}
+                  {t('dataProtection') || 'Vos données sont protégées'}
                 </p>
               </div>
 
@@ -266,18 +266,18 @@ function CheckoutForm() {
                 {processing ? (
                   <>
                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    {t.paymentProcessing}
+                    {t('paymentProcessing')}
                   </>
                 ) : (
                   <>
                     <Lock className="h-4 w-4 mr-2" />
-                    {t.placeOrder} - €{total.toFixed(2)}
+                    {t('placeOrder')} - €{total.toFixed(2)}
                   </>
                 )}
               </Button>
 
               <p className="text-xs text-center text-muted-foreground">
-                {t.securePayment || 'Paiement sécurisé'} • SSL • {t.dataProtection}
+                {t('securePayment') || 'Paiement sécurisé'} • SSL • {t('dataProtection')}
               </p>
             </form>
           </CardContent>
