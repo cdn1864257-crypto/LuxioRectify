@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 // Import static products for server-side validation
-import { products as staticProducts } from '../frontend/src/lib/products.js';
+import { products as staticProducts, type Product, type ProductVariant } from '../frontend/src/lib/products.js';
 
 // Interface pour la réponse Vercel compatible
 interface CompatibleResponse extends VercelResponse {
@@ -26,7 +26,7 @@ interface StripeIntentData {
 
 // Helper function to find product and variant price
 function getProductPrice(productId: string, description?: string): number | null {
-  const product = staticProducts.find(p => p.id === productId);
+  const product = staticProducts.find((p: Product) => p.id === productId);
   
   if (!product) {
     return null;
@@ -38,7 +38,7 @@ function getProductPrice(productId: string, description?: string): number | null
   }
 
   // Find variant price based on description
-  const variant = product.variants?.find(v => 
+  const variant = product.variants?.find((v: ProductVariant) => 
     description.includes(v.color || '') && description.includes(v.capacity || '')
   );
 
@@ -50,6 +50,16 @@ function validateCartTotal(cart: StripeIntentData['cart']): { valid: boolean; se
   let serverTotal = 0;
 
   for (const item of cart) {
+    // SECURITY: Validate quantity is a positive integer with reasonable max
+    const MAX_QUANTITY = 999;
+    if (!Number.isInteger(item.quantity) || item.quantity <= 0 || item.quantity > MAX_QUANTITY) {
+      return {
+        valid: false,
+        serverTotal: 0,
+        error: `Quantité invalide pour ${item.name}`
+      };
+    }
+
     const serverPrice = getProductPrice(item.id, item.description);
     
     if (serverPrice === null) {
@@ -102,11 +112,13 @@ export default async function handler(
       });
     }
 
-    if (!currency) {
-      console.log('[Stripe Intent] Devise invalide');
+    // SECURITY: Whitelist accepted currencies
+    const ALLOWED_CURRENCIES = ['EUR', 'USD', 'GBP'];
+    if (!currency || !ALLOWED_CURRENCIES.includes(currency.toUpperCase())) {
+      console.log(`[Stripe Intent] Devise non autorisée: ${currency}`);
       return res.status(400).json({
         ok: false,
-        error: 'Devise invalide'
+        error: 'Devise non autorisée'
       });
     }
 
