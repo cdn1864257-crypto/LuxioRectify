@@ -235,6 +235,8 @@ export interface Translations {
   enterTicketCode: string;
   orderFailed: string;
   paymentInitFailed: string;
+  stripeUnavailable: string;
+  stripeUnavailableMessage: string;
   
   // Search & Filters
   searchPlaceholder: string;
@@ -757,6 +759,8 @@ export const translations: Record<Language, Translations> = {
     enterTicketCode: 'Please enter at least one ticket code',
     orderFailed: 'Order failed. Please try again.',
     paymentInitFailed: 'Payment initialization failed. Please try again.',
+    stripeUnavailable: 'Payment method unavailable',
+    stripeUnavailableMessage: 'This payment method is temporarily unavailable. Please choose another payment method.',
     
     // Search & Filters
     searchPlaceholder: 'Search products...',
@@ -1385,6 +1389,8 @@ export const translations: Record<Language, Translations> = {
     enterTicketCode: 'Veuillez entrer au moins un code ticket',
     orderFailed: 'Commande échouée. Veuillez réessayer.',
     paymentInitFailed: 'Échec de l\'initialisation du paiement. Veuillez réessayer.',
+    stripeUnavailable: 'Moyen de paiement indisponible',
+    stripeUnavailableMessage: 'Ce moyen de paiement est temporairement indisponible. Veuillez choisir un autre moyen de paiement.',
     
     // Search & Filters
     searchPlaceholder: 'Rechercher des produits...',
@@ -2013,6 +2019,8 @@ export const translations: Record<Language, Translations> = {
     enterTicketCode: 'Por favor, introduce al menos un código de ticket',
     orderFailed: 'Pedido fallido. Por favor, inténtalo de nuevo.',
     paymentInitFailed: 'Error al inicializar el pago. Por favor, inténtalo de nuevo.',
+    stripeUnavailable: 'Método de pago no disponible',
+    stripeUnavailableMessage: 'Este método de pago no está disponible temporalmente. Por favor, elija otro método de pago.',
     
     // Search & Filters
     searchPlaceholder: 'Buscar productos...',
@@ -2641,6 +2649,8 @@ export const translations: Record<Language, Translations> = {
     enterTicketCode: 'Por favor, insira pelo menos um código de ticket',
     orderFailed: 'Pedido falhou. Por favor, tente novamente.',
     paymentInitFailed: 'Falha ao inicializar o pagamento. Por favor, tente novamente.',
+    stripeUnavailable: 'Método de pagamento indisponível',
+    stripeUnavailableMessage: 'Este método de pagamento está temporariamente indisponível. Por favor, escolha outro método de pagamento.',
     
     // Search & Filters
     searchPlaceholder: 'Pesquisar produtos...',
@@ -3269,6 +3279,8 @@ export const translations: Record<Language, Translations> = {
     enterTicketCode: 'Proszę wprowadzić co najmniej jeden kod karty',
     orderFailed: 'Zamówienie nie powiodło się. Spróbuj ponownie.',
     paymentInitFailed: 'Nie udało się zainicjować płatności. Spróbuj ponownie.',
+    stripeUnavailable: 'Metoda płatności niedostępna',
+    stripeUnavailableMessage: 'Ta metoda płatności jest tymczasowo niedostępna. Proszę wybrać inną metodę płatności.',
     
     // Search & Filters
     searchPlaceholder: 'Szukaj produktów...',
@@ -3897,6 +3909,8 @@ export const translations: Record<Language, Translations> = {
     enterTicketCode: 'Inserisci almeno un codice ticket',
     orderFailed: 'Ordine fallito. Riprova.',
     paymentInitFailed: 'Inizializzazione del pagamento fallita. Riprova.',
+    stripeUnavailable: 'Metodo di pagamento non disponibile',
+    stripeUnavailableMessage: 'Questo metodo di pagamento è temporaneamente non disponibile. Si prega di scegliere un altro metodo di pagamento.',
     
     // Search & Filters
     searchPlaceholder: 'Cerca prodotti...',
@@ -4525,6 +4539,8 @@ export const translations: Record<Language, Translations> = {
     enterTicketCode: 'Kérjük, adjon meg legalább egy kártya kódot',
     orderFailed: 'Rendelés sikertelen. Kérjük, próbálja újra.',
     paymentInitFailed: 'A fizetés inicializálása sikertelen. Kérjük, próbálja újra.',
+    stripeUnavailable: 'Fizetési mód nem elérhető',
+    stripeUnavailableMessage: 'Ez a fizetési mód átmenetileg nem elérhető. Kérjük, válasszon másik fizetési módot.',
     
     // Search & Filters
     searchPlaceholder: 'Termékek keresése...',

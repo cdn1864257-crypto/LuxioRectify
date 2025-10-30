@@ -388,26 +388,31 @@ export default function NewPayment() {
                       <CreditCard className="h-5 w-5 text-primary flex-shrink-0" />
                       {t.cardPayment}
                     </h3>
-                    <span className="text-xs bg-green-600 text-white px-2 py-1 rounded whitespace-nowrap">
-                      {t.immediate}
+                    <span className="text-xs bg-red-600 text-white px-2 py-1 rounded whitespace-nowrap">
+                      {t.stripeUnavailable}
                     </span>
                   </div>
-                  <Link href={`/${language}/payment/stripe`}>
-                    <button
-                      type="button"
-                      className="w-full p-3 sm:p-4 border-2 border-muted rounded-lg bg-background hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                      disabled={isProcessing}
-                      data-testid="button-stripe"
-                    >
-                      <div className="flex items-center justify-start gap-3 sm:gap-4">
-                        <CreditCard className="h-6 w-6 sm:h-8 sm:w-8 text-foreground flex-shrink-0" />
-                        <div className="text-left flex-1 min-w-0">
-                          <div className="font-semibold text-base sm:text-lg text-foreground">{t.stripe}</div>
-                          <div className="text-xs sm:text-sm text-muted-foreground">{t.stripeDescription}</div>
-                        </div>
+                  <button
+                    type="button"
+                    className="w-full p-3 sm:p-4 border-2 border-muted rounded-lg bg-muted/50 cursor-not-allowed opacity-60"
+                    disabled
+                    onClick={() => {
+                      toast({
+                        title: t.stripeUnavailable,
+                        description: t.stripeUnavailableMessage,
+                        variant: 'destructive'
+                      });
+                    }}
+                    data-testid="button-stripe"
+                  >
+                    <div className="flex items-center justify-start gap-3 sm:gap-4">
+                      <CreditCard className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground flex-shrink-0" />
+                      <div className="text-left flex-1 min-w-0">
+                        <div className="font-semibold text-base sm:text-lg text-muted-foreground">{t.stripe}</div>
+                        <div className="text-xs sm:text-sm text-muted-foreground">{t.stripeDescription}</div>
                       </div>
-                    </button>
-                  </Link>
+                    </div>
+                  </button>
                 </div>
 
                 {/* Payment Method Separator */}
