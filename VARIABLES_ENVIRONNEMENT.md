@@ -62,15 +62,30 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 |----------|---------|--------------|
 | `NOWPAYMENTS_API_KEY` | `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` | NowPayments Dashboard → Settings → API Keys |
 | `NOWPAYMENTS_IPN_SECRET` | `your_ipn_secret_key` | NowPayments Dashboard → Settings → IPN Settings |
+| `NOWPAYMENTS_MODE` | `Sandbox` ou `Production` | Choix manuel (utilisez "Sandbox" pour les tests) |
+| `NOWPAYMENTS_TEST_URL` | `https://api-sandbox.nowpayments.io/v1` | URL fixe pour sandbox |
+| `NOWPAYMENTS_LIVE_URL` | `https://api.nowpayments.io/v1` | URL fixe pour production |
 
 **Comment obtenir :**
-1. Créer un compte sur [nowpayments.io](https://nowpayments.io)
+
+**Pour le SANDBOX (tests sans argent réel) :**
+1. Créer un compte sur [account-sandbox.nowpayments.io](https://account-sandbox.nowpayments.io)
 2. Dashboard → Settings → API
-3. Générer une nouvelle API Key
+3. Générer une nouvelle API Key SANDBOX
 4. Copier l'API Key
 5. IPN Settings → Enable IPN
-6. IPN Callback URL : `https://votre-backend-render.onrender.com/api/payment/nowpayments-webhook`
+6. IPN Callback URL : `https://votre-backend.onrender.com/api/payment/nowpayments-webhook`
 7. Générer et copier l'IPN Secret
+8. Définir `NOWPAYMENTS_MODE=Sandbox`
+
+**Pour la PRODUCTION (argent réel) :**
+1. Créer un compte sur [nowpayments.io](https://nowpayments.io)
+2. Suivre les mêmes étapes avec l'API de production
+3. Définir `NOWPAYMENTS_MODE=Production`
+
+**⚠️ IMPORTANT** : 
+- L'URL webhook correcte est : `/api/payment/nowpayments-webhook`
+- Ne pas utiliser `/nowpayments/webhook`
 
 ### 6. URLs Frontend et Backend ⚠️ IMPORTANT
 
@@ -132,14 +147,19 @@ ENCRYPTION_KEY=1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e2f
 SENDGRID_API_KEY=SG.xxxxxxxxxxxxxxxxxxx.yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 SENDGRID_FROM_EMAIL=noreply@luxio-shop.com
 
-# NowPayments
+# NowPayments (Sandbox)
 NOWPAYMENTS_API_KEY=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 NOWPAYMENTS_IPN_SECRET=your_ipn_secret_here
+NOWPAYMENTS_MODE=Sandbox
+NOWPAYMENTS_TEST_URL=https://api-sandbox.nowpayments.io/v1
+NOWPAYMENTS_LIVE_URL=https://api.nowpayments.io/v1
 
 # Frontend et Backend
 FRONTEND_URL=https://luxios.vercel.app
 BACKEND_URL=https://luxio.onrender.com
 ```
+
+**Pour passer en PRODUCTION** : Changez `NOWPAYMENTS_MODE=Production` et utilisez votre clé API de production.
 
 ## Vérification après déploiement
 

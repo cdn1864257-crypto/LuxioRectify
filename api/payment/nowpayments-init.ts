@@ -110,8 +110,22 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const result = await ordersCollection.insertOne(newOrder);
       const orderId = result.insertedId.toString();
 
-      // Initialize NowPayments API client
-      const npApi = new NowPaymentsApi({ apiKey: nowpaymentsApiKey });
+      // Initialize NowPayments API client with sandbox/production mode
+      const nowpaymentsMode = process.env.NOWPAYMENTS_MODE || 'Production';
+      const isSandbox = nowpaymentsMode.toLowerCase() === 'sandbox';
+      
+      const baseURL = isSandbox 
+        ? (process.env.NOWPAYMENTS_TEST_URL || 'https://api-sandbox.nowpayments.io/v1')
+        : (process.env.NOWPAYMENTS_LIVE_URL || 'https://api.nowpayments.io/v1');
+      
+      console.log(`[NowPayments] 🔧 Mode: ${nowpaymentsMode}`);
+      console.log(`[NowPayments] 🌐 Base URL: ${baseURL}`);
+      console.log(`[NowPayments] ${isSandbox ? '⚠️  SANDBOX MODE - Test payments only' : '✅ PRODUCTION MODE - Real payments'}`);
+      
+      const npApi = new NowPaymentsApi({ 
+        apiKey: nowpaymentsApiKey,
+        baseURL: baseURL
+      } as any);
 
       // URLs pour les callbacks
       // IMPORTANT: Les callbacks API (success_url, ipn_callback_url) doivent pointer vers le BACKEND
