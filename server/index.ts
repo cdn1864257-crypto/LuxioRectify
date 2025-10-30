@@ -16,9 +16,9 @@ import forgotPasswordHandler from '../api/auth/forgot-password';
 import resetPasswordHandler from '../api/auth/reset-password';
 import submitOrderHandler from '../api/payment/submit-order';
 import bankTransferHandler from '../api/payment/bank-transfer';
-import nowpaymentsReturnHandler from '../api/payment/nowpayments-return';
-import nowpaymentsInitHandler from '../api/payment/nowpayments-init';
-import nowpaymentsWebhookHandler from '../api/payment/nowpayments-webhook';
+import oxapayReturnHandler from '../api/payment/oxapay-return';
+import oxapayInitHandler from '../api/payment/oxapay-init';
+import oxapayWebhookHandler from '../api/payment/oxapay-webhook';
 import ordersHandler from '../api/orders';
 import deleteOrderHandler from '../api/orders/[orderId]';
 import getProductsHandler from '../api/products/index';
@@ -65,11 +65,11 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://nowpayments.io"], // unsafe-eval for dev tools
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://api.oxapay.com"], // unsafe-eval for dev tools
       styleSrc: ["'self'", "'unsafe-inline'"],
       imgSrc: ["'self'", "data:", "https:", "http:"],
-      connectSrc: ["'self'", "https://api.nowpayments.io", "ws:", "wss:"], // WebSocket for HMR
-      frameSrc: ["https://nowpayments.io"],
+      connectSrc: ["'self'", "https://api.oxapay.com", "ws:", "wss:"], // WebSocket for HMR
+      frameSrc: ["https://api.oxapay.com"],
     }
   },
   // HSTS disabled in development (using HTTP)
@@ -153,8 +153,8 @@ app.use((req, res, next) => {
     /^\/api\/auth\/logout/,
     /^\/api\/auth\/forgot-password/,  // Password reset email can be requested without CSRF
     /^\/api\/auth\/reset-password/,   // Password reset form is public (uses secure token)
-    /^\/api\/payment\/nowpayments-webhook/,
-    /^\/api\/payment\/nowpayments-return/,
+    /^\/api\/payment\/oxapay-webhook/,
+    /^\/api\/payment\/oxapay-return/,
   ];
   
   if (exemptRoutes.some((rx) => rx.test(req.path))) {
@@ -285,9 +285,9 @@ app.use('/api/auth/reset-password', convertVercelHandler(resetPasswordHandler));
 // Payment routes
 app.use('/api/payment/submit-order', convertVercelHandler(submitOrderHandler));
 app.use('/api/payment/bank-transfer', convertVercelHandler(bankTransferHandler));
-app.use('/api/payment/nowpayments-init', convertVercelHandler(nowpaymentsInitHandler));
-app.use('/api/payment/nowpayments-return', convertVercelHandler(nowpaymentsReturnHandler));
-app.post('/api/payment/nowpayments-webhook', convertVercelHandler(nowpaymentsWebhookHandler));
+app.use('/api/payment/oxapay-init', convertVercelHandler(oxapayInitHandler));
+app.use('/api/payment/oxapay-return', convertVercelHandler(oxapayReturnHandler));
+app.post('/api/payment/oxapay-webhook', convertVercelHandler(oxapayWebhookHandler));
 
 // Orders routes
 app.delete('/api/orders/:orderId', convertVercelHandler(deleteOrderHandler));

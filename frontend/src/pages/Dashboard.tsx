@@ -75,7 +75,7 @@ interface OrderStats {
 interface Order {
   orderId: string;
   orderReference: string;
-  paymentMethod: 'bank_transfer' | 'nowpayments' | 'pcs_transcash';
+  paymentMethod: 'bank_transfer' | 'oxapay' | 'pcs_transcash';
   status: string;
   totalAmount: number;
   createdAt: string;
@@ -215,7 +215,7 @@ export default function Dashboard() {
   const getPaymentMethodLabel = (method: string) => {
     const methodMap: Record<string, string> = {
       bank_transfer: t('bankTransfer'),
-      nowpayments: t('nowPayments'),
+      nowpayments: t('oxaPay'),
       pcs_transcash: t('prepaidTickets'),
     };
     return methodMap[method] || method;
@@ -719,10 +719,10 @@ export default function Dashboard() {
                 </div>
               )}
 
-              {instructionsModal.order.paymentMethod === 'nowpayments' && (
+              {instructionsModal.order.paymentMethod === 'oxapay' && (
                 <div className="p-4 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
                   <p className="text-purple-900 dark:text-purple-100 text-sm">
-                    {t('nowpaymentsConfirmationMessage')}
+                    {t('oxapayConfirmationMessage')}
                   </p>
                 </div>
               )}

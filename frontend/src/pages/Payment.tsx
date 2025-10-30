@@ -33,8 +33,8 @@ export default function Payment() {
   const [bankTransferConfirmed, setBankTransferConfirmed] = useState(false);
   const [bankTransferData, setBankTransferData] = useState<any>(null);
 
-  // NowPayments Modal
-  const [nowpaymentsLoading, setNowpaymentsLoading] = useState(false);
+  // OxaPay Modal
+  const [oxapayLoading, setNowpaymentsLoading] = useState(false);
 
   // Tickets Modal
   const [ticketsOpen, setTicketsOpen] = useState(false);
@@ -43,7 +43,7 @@ export default function Payment() {
   const [ticketCodes, setTicketCodes] = useState<string[]>(['', '', '']);
   const [ticketsSuccess, setTicketsSuccess] = useState(false);
 
-  // Check for NowPayments return
+  // Check for OxaPay return
   const urlParams = new URLSearchParams(window.location.search);
   const paymentSuccess = urlParams.get('success') === 'true';
   const paymentCancelled = urlParams.get('cancelled') === 'true';
@@ -51,18 +51,18 @@ export default function Payment() {
   const paymentError = urlParams.get('error') === 'true';
   const orderRef = urlParams.get('order');
   const langParam = urlParams.get('lang');
-  const fromNowPayments = paymentSuccess || paymentCancelled || paymentPending || paymentError;
+  const fromOxaPay = paymentSuccess || paymentCancelled || paymentPending || paymentError;
 
-  // Restore language from URL if returning from NowPayments
+  // Restore language from URL if returning from OxaPay
   useEffect(() => {
-    if (langParam && fromNowPayments) {
+    if (langParam && fromOxaPay) {
       const validLangs: Language[] = ['en', 'fr', 'es', 'pt', 'pl', 'it', 'hu'];
       if (validLangs.includes(langParam as Language)) {
         changeLanguage(langParam as Language);
         console.log(`[Payment] Restored language from URL: ${langParam}`);
       }
     }
-  }, [langParam, fromNowPayments, changeLanguage]);
+  }, [langParam, fromOxaPay, changeLanguage]);
 
   useEffect(() => {
     if (!user) {
@@ -70,7 +70,7 @@ export default function Payment() {
       return;
     }
 
-    // If returning from NowPayments with success, clear cart and show success message
+    // If returning from OxaPay with success, clear cart and show success message
     if (paymentSuccess) {
       if (cart.length > 0) {
         clearCart();
@@ -85,7 +85,7 @@ export default function Payment() {
       return;
     }
 
-    // If returning from NowPayments with cancellation
+    // If returning from OxaPay with cancellation
     if (paymentCancelled) {
       toast({
         title: "Paiement annulé",
@@ -95,7 +95,7 @@ export default function Payment() {
       return;
     }
 
-    // If returning from NowPayments with pending status
+    // If returning from OxaPay with pending status
     if (paymentPending) {
       toast({
         title: "Paiement en attente",
@@ -104,7 +104,7 @@ export default function Payment() {
       return;
     }
 
-    // If returning from NowPayments with error
+    // If returning from OxaPay with error
     if (paymentError) {
       toast({
         title: "Erreur de paiement",
@@ -114,19 +114,19 @@ export default function Payment() {
       return;
     }
     
-    // Only redirect to cart if cart is empty AND we're not returning from NowPayments
-    if (cart.length === 0 && !fromNowPayments) {
+    // Only redirect to cart if cart is empty AND we're not returning from OxaPay
+    if (cart.length === 0 && !fromOxaPay) {
       navigate('/cart');
       return;
     }
-  }, [user, cart, navigate, paymentSuccess, paymentCancelled, paymentPending, paymentError, orderRef, clearCart, toast, fromNowPayments]);
+  }, [user, cart, navigate, paymentSuccess, paymentCancelled, paymentPending, paymentError, orderRef, clearCart, toast, fromOxaPay]);
 
   if (!user) {
     return null;
   }
 
-  // Allow rendering if cart has items OR if returning from NowPayments
-  if (cart.length === 0 && !fromNowPayments) {
+  // Allow rendering if cart has items OR if returning from OxaPay
+  if (cart.length === 0 && !fromOxaPay) {
     return null;
   }
 
@@ -199,10 +199,10 @@ export default function Payment() {
     }
   };
 
-  const handleNowPayments = async () => {
+  const handleOxaPay = async () => {
     setNowpaymentsLoading(true);
     try {
-      const response = await fetch(getApiUrl('/api/payment/nowpayments-init'), {
+      const response = await fetch(getApiUrl('/api/payment/oxapay-init'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -229,16 +229,16 @@ export default function Payment() {
       } else {
         toast({
           title: "Erreur",
-          description: data.error || "Impossible d'initialiser le paiement NowPayments",
+          description: data.error || "Impossible d'initialiser le paiement OxaPay",
           variant: "destructive",
         });
         setNowpaymentsLoading(false);
       }
     } catch (error) {
-      console.error('Erreur NowPayments:', error);
+      console.error('Erreur OxaPay:', error);
       toast({
         title: "Erreur",
-        description: "Impossible de se connecter à NowPayments",
+        description: "Impossible de se connecter à OxaPay",
         variant: "destructive",
       });
       setNowpaymentsLoading(false);
@@ -414,19 +414,19 @@ export default function Payment() {
                 </div>
               </div>
 
-              {/* NowPayments */}
+              {/* OxaPay */}
               <Button
                 variant="outline"
                 className="w-full justify-start h-auto py-6 px-6 border-2 border-primary/20 bg-primary/5"
-                onClick={handleNowPayments}
-                disabled={nowpaymentsLoading}
-                data-testid="button-nowpayments"
+                onClick={handleOxaPay}
+                disabled={oxapayLoading}
+                data-testid="button-oxapay"
               >
                 <div className="flex items-center gap-4 w-full">
                   <CreditCard className="h-6 w-6 text-primary" />
                   <div className="flex-1 text-left">
                     <div className="font-semibold text-base flex items-center gap-2">
-                      NowPayments
+                      OxaPay
                       <span className="text-xs bg-primary text-primary-foreground px-2 py-0.5 rounded-full">
                         Recommandé
                       </span>
@@ -435,7 +435,7 @@ export default function Payment() {
                       Paiement par cryptocurrency sécurisé
                     </div>
                   </div>
-                  {nowpaymentsLoading && <Loader2 className="h-5 w-5 animate-spin" />}
+                  {oxapayLoading && <Loader2 className="h-5 w-5 animate-spin" />}
                 </div>
               </Button>
 

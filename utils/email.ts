@@ -863,3 +863,164 @@ ${t.transaction_id}: ${order.transactionId}
     from: DEFAULT_FROM
   });
 }
+
+
+// ==================== OXAPAY/CRYPTO EMAILS ====================
+
+interface OxaPayOrder {
+  orderReference: string;
+  customerEmail: string;
+  customerName: string;
+  totalAmount: number;
+  transactionId: string;
+  payAmount?: number;
+  payCurrency?: string;
+  cartItems?: Array<{
+    id: string;
+    name: string;
+    price: number;
+    quantity: number;
+  }>;
+  language?: string;
+}
+
+export async function sendOxaPayConfirmationToCustomer(
+  order: OxaPayOrder
+): Promise<boolean> {
+  const lang = (order.language?.toLowerCase() || 'fr') as EmailLanguage;
+  const t = getTranslation(lang);
+  const dashboardUrl = process.env.FRONTEND_URL || process.env.REPLIT_DEV_DOMAIN || 'https://luxiomarket.shop';
+
+  const htmlContent = getEmailLayout(`
+    <h2>${t.order_confirmed}</h2>
+    <p>${t.hello} <strong>${order.customerName}</strong>,</p>
+    <p style="line-height: 1.8; color: #059669; font-weight: 500;">${t.payment_received}</p>
+    
+    <div class="details">
+      <table>
+        <tr>
+          <td>${t.order_number}</td>
+          <td style="font-weight: 600;">#${order.orderReference}</td>
+        </tr>
+        <tr>
+          <td>${t.total_amount}</td>
+          <td style="font-size: 18px; font-weight: 600; color: #059669;">${order.totalAmount.toFixed(2)} €</td>
+        </tr>
+        ${order.payAmount && order.payCurrency ? `
+        <tr>
+          <td>Montant payé</td>
+          <td style="font-family: 'Courier New', monospace; font-size: 12px; font-weight: 600;">${order.payAmount} ${order.payCurrency.toUpperCase()}</td>
+        </tr>
+        ` : ''}
+        <tr>
+          <td>${t.transaction_id}</td>
+          <td style="font-family: 'Courier New', monospace; font-size: 12px; font-weight: 600;">${order.transactionId}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div style="background-color: #ecfdf5; padding: 16px; border-radius: 6px; font-size: 14px; color: #065f46; margin: 24px 0; border-left: 4px solid #059669;">
+      <p style="margin: 0; white-space: pre-line; line-height: 1.6;">${t.verification_message}</p>
+    </div>
+    
+    <div style="text-align: center;">
+      <a href="${dashboardUrl}/dashboard" class="button">${t.access_dashboard}</a>
+    </div>
+    
+    <div class="divider"></div>
+    
+    <p style="color: #6b7280; font-size: 14px; margin-top: 24px; white-space: pre-line;">${t.team_signature}</p>
+  `, lang);
+
+  const textContent = `
+${t.order_confirmed}
+
+${t.hello} ${order.customerName},
+
+${t.payment_received}
+
+${t.order_number}: #${order.orderReference}
+${t.total_amount}: ${order.totalAmount.toFixed(2)} €
+${order.payAmount && order.payCurrency ? `Montant payé: ${order.payAmount} ${order.payCurrency.toUpperCase()}` : ''}
+${t.transaction_id}: ${order.transactionId}
+
+${t.verification_message}
+
+${t.access_dashboard}: ${dashboardUrl}/dashboard
+
+${t.team_signature}
+  `.trim();
+
+  return sendEmail({
+    to: order.customerEmail,
+    subject: t.subject_crypto_confirm,
+    html: htmlContent,
+    text: textContent,
+    from: DEFAULT_FROM
+  });
+}
+
+export async function sendOxaPayNotificationToAdmin(
+  order: OxaPayOrder
+): Promise<boolean> {
+  const t = getTranslation('fr');
+  
+  const adminHtml = getEmailLayout(`
+    <h2>${t.new_order_received}</h2>
+    
+    <div class="details">
+      <table>
+        <tr>
+          <td>${t.order_number}</td>
+          <td>#${order.orderReference}</td>
+        </tr>
+        <tr>
+          <td>${t.customer_name}</td>
+          <td>${order.customerName}</td>
+        </tr>
+        <tr>
+          <td>${t.customer_email}</td>
+          <td>${order.customerEmail}</td>
+        </tr>
+        <tr>
+          <td>${t.total_amount}</td>
+          <td style="font-size: 18px; font-weight: 600; color: #059669;">${order.totalAmount.toFixed(2)} €</td>
+        </tr>
+        ${order.payAmount && order.payCurrency ? `
+        <tr>
+          <td>Montant payé (crypto)</td>
+          <td style="font-family: 'Courier New', monospace;">${order.payAmount} ${order.payCurrency.toUpperCase()}</td>
+        </tr>
+        ` : ''}
+        <tr>
+          <td>${t.payment_method}</td>
+          <td>${t.crypto_payment} (OxaPay)</td>
+        </tr>
+        <tr>
+          <td>${t.transaction_id}</td>
+          <td style="font-family: 'Courier New', monospace; font-size: 13px;">${order.transactionId}</td>
+        </tr>
+      </table>
+    </div>
+  `, 'fr');
+
+  const adminText = `
+${t.new_order_received}
+
+${t.order_number}: #${order.orderReference}
+${t.customer_name}: ${order.customerName}
+${t.customer_email}: ${order.customerEmail}
+${t.total_amount}: ${order.totalAmount.toFixed(2)} €
+${order.payAmount && order.payCurrency ? `Montant payé: ${order.payAmount} ${order.payCurrency.toUpperCase()}` : ''}
+${t.payment_method}: ${t.crypto_payment} (OxaPay)
+${t.transaction_id}: ${order.transactionId}
+  `.trim();
+
+  return sendEmail({
+    to: DEFAULT_ADMIN,
+    subject: t.subject_admin_new_order,
+    html: adminHtml,
+    text: adminText,
+    from: DEFAULT_FROM
+  });
+}

@@ -1,5 +1,4 @@
 import { MongoClient } from 'mongodb';
-import { sendNowPaymentsConfirmationToCustomer, sendNowPaymentsNotificationToAdmin } from '../../utils/email.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -27,10 +26,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     const params = req.method === 'GET' ? req.query : req.body;
     
     const status = params.status;
-    const orderId = params.order || params.order_id;
+    const orderId = params.orderId;
+    const trackId = params.trackId;
     const lang = params.lang || 'fr';
 
-    console.log('[NowPayments Return] Params:', { status, orderId, lang });
+    console.log('[OxaPay Return] Params:', { status, orderId, trackId, lang });
 
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
@@ -43,33 +43,32 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       await client.connect();
 
       const db = client.db('luxio');
-      const ordersCollection = db.collection('nowpayments_orders');
+      const ordersCollection = db.collection('oxapay_orders');
 
-      let order = null;
+      let order: any = null;
       if (orderId) {
         order = await ordersCollection.findOne({ orderReference: orderId });
+      } else if (trackId) {
+        order = await ordersCollection.findOne({ oxapayTrackId: trackId });
       }
 
-      // Déterminer le statut de redirection avec la langue
       let paymentSuccess = false;
       let redirectPath = '/payment';
 
-      if (status === 'finished' || status === 'confirmed') {
+      if (status === 'Paid') {
         paymentSuccess = true;
         redirectPath = order ? `/payment?success=true&order=${order.orderReference}&lang=${lang}` : `/payment?success=true&lang=${lang}`;
-      } else if (status === 'failed' || status === 'expired') {
+      } else if (status === 'Expired' || status === 'Canceled') {
         redirectPath = `/payment?cancelled=true&lang=${lang}`;
       } else {
-        // Status 'waiting', 'confirming', etc. - considéré comme en attente
         redirectPath = order ? `/payment?pending=true&order=${order.orderReference}&lang=${lang}` : `/payment?pending=true&lang=${lang}`;
       }
 
-      // Rediriger vers le frontend (pas le backend)
       const replitDomain = process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS}` : '';
       const frontendUrl = process.env.FRONTEND_URL || replitDomain || 'https://luxios.vercel.app';
       const redirectUrl = `${frontendUrl}${redirectPath}`;
       
-      console.log(`[NowPayments Return] Redirecting to: ${redirectUrl}`);
+      console.log(`[OxaPay Return] Redirecting to: ${redirectUrl}`);
 
       if (req.method === 'GET') {
         res.setHeader('Location', redirectUrl);
@@ -87,23 +86,21 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
   } catch (error) {
-    console.error('Erreur lors du traitement du retour NowPayments:', error);
-    
+    console.error('Erreur lors du traitement du retour OxaPay:', error);
+
     const replitDomain = process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS}` : '';
     const frontendUrl = process.env.FRONTEND_URL || replitDomain || 'https://luxios.vercel.app';
-    const lang = req.query?.lang || 'fr';
-    const errorRedirectUrl = `${frontendUrl}/payment?error=true&lang=${lang}`;
-    
-    console.error('[NowPayments Return] Error redirect to:', errorRedirectUrl);
-    
+    const errorRedirectUrl = `${frontendUrl}/payment?error=true&lang=${req.query?.lang || 'fr'}`;
+
     if (req.method === 'GET') {
       res.setHeader('Location', errorRedirectUrl);
       return res.status(302).end();
     }
-    
+
     return res.status(500).json({
       error: 'Erreur serveur',
-      details: error instanceof Error ? error.message : 'Unknown error'
+      details: error instanceof Error ? error.message : 'Unknown error',
+      redirectUrl: errorRedirectUrl
     });
   }
 }

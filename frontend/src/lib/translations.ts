@@ -84,8 +84,8 @@ export interface Translations {
   // Payment Methods
   bankTransfer: string;
   prepaidTickets: string;
-  nowPayments: string;
-  nowPaymentsDescription: string;
+  oxaPay: string;
+  oxaPayDescription: string;
   selectPaymentMethod: string;
   bankTransferTitle: string;
   bankTransferDescription: string;
@@ -140,7 +140,7 @@ export interface Translations {
   paymentPendingDescription: string;
   paymentErrorDescription: string;
   redirectingToCryptoPayment: string;
-  redirectingToNowPaymentsDescription: string;
+  redirectingToOxaPayDescription: string;
   
   // Payment Modal
   paymentModalTitle: string;
@@ -371,13 +371,13 @@ export interface Translations {
   orderRegistered: string;
   completeTransferWithReference: string;
   missingAmount: string;
-  nowPaymentsInstructionsTitle: string;
-  nowPaymentsInstruction1: string;
-  nowPaymentsInstruction2: string;
-  nowPaymentsInstruction3: string;
-  nowPaymentsInstruction4: string;
-  nowPaymentsInstruction5: string;
-  nowPaymentsRecommendation: string;
+  oxaPayInstructionsTitle: string;
+  oxaPayInstruction1: string;
+  oxaPayInstruction2: string;
+  oxaPayInstruction3: string;
+  oxaPayInstruction4: string;
+  oxaPayInstruction5: string;
+  oxaPayRecommendation: string;
   
   // Bank Transfer Modal
   verifyTransferDetails: string;
@@ -426,7 +426,7 @@ export interface Translations {
   fulfilled: string;
   completeBankTransfer: string;
   submitPCSCodes: string;
-  openNowPayments: string;
+  openOxaPay: string;
   viewInstructions: string;
   payWithin24h: string;
   unpaidOrders: string;
@@ -446,7 +446,7 @@ export interface Translations {
   paymentInstructionsTitle: string;
   bankTransferInstructionsMessage: string;
   ticketPaymentMessage: string;
-  nowpaymentsConfirmationMessage: string;
+  oxapayConfirmationMessage: string;
   contactSupportEmail: string;
   confirmCancellation: string;
   cancelAction: string;
@@ -608,8 +608,8 @@ export const translations: Record<Language, Translations> = {
     // Payment Methods
     bankTransfer: 'Bank Transfer',
     prepaidTickets: 'Prepaid Tickets',
-    nowPayments: 'NowPayments',
-    nowPaymentsDescription: 'Fast and secure online payment',
+    oxaPay: 'OxaPay',
+    oxaPayDescription: 'Fast and secure crypto payment gateway',
     selectPaymentMethod: 'Select Payment Method',
     bankTransferTitle: 'Bank Transfer',
     bankTransferDescription: 'Transfer the amount to our bank account',
@@ -663,8 +663,8 @@ export const translations: Record<Language, Translations> = {
     paymentPendingTitle: 'Payment pending',
     paymentPendingDescription: 'Your payment is being processed. You will receive an email confirmation.',
     paymentErrorDescription: 'An error occurred during payment. Please try again.',
-    redirectingToCryptoPayment: 'Redirecting to NOWPayments',
-    redirectingToNowPaymentsDescription: 'You will be redirected to the secure payment page...',
+    redirectingToCryptoPayment: 'Redirecting to OxaPay',
+    redirectingToOxaPayDescription: 'You will be redirected to the secure payment page...',
     
     // Payment Modal
     paymentModalTitle: 'Payment Instructions',
@@ -809,7 +809,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Privacy Policy',
     privacyPolicyContent: 'We only collect data necessary for order processing (name, address, email, phone). This information is never resold and can be deleted upon request via our contact email.',
     termsOfServiceTitle: 'Terms of Service',
-    termsOfServiceContent: 'Prices are in euros including VAT. Accepted payments: SEPA bank transfer, Crypto via NowPayments, and alternative methods like PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, and prepaid tickets Transcash/PCS. Orders are shipped within 24 hours after immediate payment confirmation, except for regular bank transfer (24-72h depending on banks). For complaints, please contact us via email.',
+    termsOfServiceContent: 'Prices are in euros including VAT. Accepted payments: SEPA bank transfer, Crypto via OxaPay, and alternative methods like PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, and prepaid tickets Transcash/PCS. Orders are shipped within 24 hours after immediate payment confirmation, except for regular bank transfer (24-72h depending on banks). For complaints, please contact us via email.',
     contactTitle: 'Contact',
     contactContent: 'For any questions: support@luxiomarket.shop',
     
@@ -895,13 +895,13 @@ export const translations: Record<Language, Translations> = {
     orderRegistered: 'Order registered',
     completeTransferWithReference: 'Complete the transfer with the indicated reference',
     missingAmount: 'missing',
-    nowPaymentsInstructionsTitle: 'NowPayments Instructions',
-    nowPaymentsInstruction1: 'Instant and secure payment by cryptocurrency or bank card',
-    nowPaymentsInstruction2: 'You will be redirected to the NowPayments platform',
-    nowPaymentsInstruction3: 'Accepts: Bitcoin, Ethereum, USDT, Visa, Mastercard',
-    nowPaymentsInstruction4: 'Your order will be confirmed immediately after payment',
-    nowPaymentsInstruction5: 'Secure transaction with 256-bit SSL encryption',
-    nowPaymentsRecommendation: 'Recommended method for fast processing',
+    oxaPayInstructionsTitle: 'OxaPay Instructions',
+    oxaPayInstruction1: 'Instant and secure payment by cryptocurrency or bank card',
+    oxaPayInstruction2: 'You will be redirected to the OxaPay platform',
+    oxaPayInstruction3: 'Accepts: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    oxaPayInstruction4: 'Your order will be confirmed immediately after payment',
+    oxaPayInstruction5: 'Secure transaction with 256-bit SSL encryption',
+    oxaPayRecommendation: 'Recommended method for fast processing',
     
     // Bank Transfer Modal
     verifyTransferDetails: 'Please verify your wire transfer details before confirming your order',
@@ -950,7 +950,7 @@ export const translations: Record<Language, Translations> = {
     fulfilled: 'Fulfilled',
     completeBankTransfer: 'Complete Bank Transfer',
     submitPCSCodes: 'Submit PCS Codes',
-    openNowPayments: 'Open NowPayments',
+    openOxaPay: 'Open OxaPay',
     viewInstructions: 'View Instructions',
     payWithin24h: 'Pay within 24h to reserve stock',
     unpaidOrders: 'Unpaid Orders',
@@ -970,7 +970,7 @@ export const translations: Record<Language, Translations> = {
     paymentInstructionsTitle: 'Payment Instructions',
     bankTransferInstructionsMessage: 'Thank you for your order! For delivery within 24h, make the transfer immediately. For standard transfer, processing may take 48 to 72h depending on your bank.',
     ticketPaymentMessage: 'We have received your notification following the order. We are currently verifying the payment. You will receive final confirmation within a few minutes.',
-    nowpaymentsConfirmationMessage: 'Payment confirmed via NowPayments. Your order is being processed.',
+    oxapayConfirmationMessage: 'Payment confirmed via OxaPay. Your order is being processed.',
     contactSupportEmail: 'Contact us at support@luxio-shop.eu if you have already paid.',
     confirmCancellation: 'Confirm Cancellation',
     cancelAction: 'Cancel',
@@ -1238,8 +1238,8 @@ export const translations: Record<Language, Translations> = {
     // Payment Methods
     bankTransfer: 'Virement bancaire',
     prepaidTickets: 'Tickets prépayés',
-    nowPayments: 'NowPayments',
-    nowPaymentsDescription: 'Paiement en ligne rapide et sécurisé',
+    oxaPay: 'OxaPay',
+    oxaPayDescription: 'Passerelle de paiement crypto rapide et sécurisée',
     selectPaymentMethod: 'Choisir le mode de paiement',
     bankTransferTitle: 'Virement bancaire',
     bankTransferDescription: 'Transférez le montant sur notre compte bancaire',
@@ -1293,8 +1293,8 @@ export const translations: Record<Language, Translations> = {
     paymentPendingTitle: 'Paiement en attente',
     paymentPendingDescription: 'Votre paiement est en cours de traitement. Vous recevrez une confirmation par email.',
     paymentErrorDescription: 'Une erreur s\'est produite lors du paiement. Veuillez réessayer.',
-    redirectingToCryptoPayment: 'Redirection vers NOWPayments',
-    redirectingToNowPaymentsDescription: 'Vous allez être redirigé vers la page de paiement sécurisée...',
+    redirectingToCryptoPayment: 'Redirection vers OxaPay',
+    redirectingToOxaPayDescription: 'Vous allez être redirigé vers la page de paiement sécurisée...',
     
     // Payment Modal
     paymentModalTitle: 'Instructions de paiement',
@@ -1439,7 +1439,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Politique de confidentialité',
     privacyPolicyContent: 'Nous collectons uniquement les données nécessaires au traitement des commandes (nom, adresse, email, téléphone). Ces informations ne sont jamais revendues et peuvent être supprimées sur demande via notre email de contact.',
     termsOfServiceTitle: 'Conditions générales de vente',
-    termsOfServiceContent: 'Les prix sont en euros TTC. Paiements acceptés : Virement bancaire SEPA, Crypto via NowPayments, et moyens alternatifs comme PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, et tickets prépayés Transcash/PCS. Les commandes sont expédiées sous 24h après confirmation du paiement immédiat, sauf virement ordinaire (24-72h selon banques). Réclamations → email de contact.',
+    termsOfServiceContent: 'Les prix sont en euros TTC. Paiements acceptés : Virement bancaire SEPA, Crypto via OxaPay, et moyens alternatifs comme PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, et tickets prépayés Transcash/PCS. Les commandes sont expédiées sous 24h après confirmation du paiement immédiat, sauf virement ordinaire (24-72h selon banques). Réclamations → email de contact.',
     contactTitle: 'Contact',
     contactContent: 'Pour toute question : support@luxiomarket.shop',
     
@@ -1525,13 +1525,13 @@ export const translations: Record<Language, Translations> = {
     orderRegistered: 'Commande enregistrée',
     completeTransferWithReference: 'Effectuez le virement avec la référence indiquée',
     missingAmount: 'manquant',
-    nowPaymentsInstructionsTitle: 'Instructions pour NowPayments',
-    nowPaymentsInstruction1: 'Paiement instantané et sécurisé par cryptomonnaies ou carte bancaire',
-    nowPaymentsInstruction2: 'Vous serez redirigé vers la plateforme NowPayments',
-    nowPaymentsInstruction3: 'Accepte : Bitcoin, Ethereum, USDT, Visa, Mastercard',
-    nowPaymentsInstruction4: 'Votre commande sera confirmée immédiatement après paiement',
-    nowPaymentsInstruction5: 'Transaction sécurisée avec cryptage SSL 256 bits',
-    nowPaymentsRecommendation: 'Méthode recommandée pour un traitement rapide',
+    oxaPayInstructionsTitle: 'Instructions pour OxaPay',
+    oxaPayInstruction1: 'Paiement instantané et sécurisé par cryptomonnaies ou carte bancaire',
+    oxaPayInstruction2: 'Vous serez redirigé vers la plateforme OxaPay',
+    oxaPayInstruction3: 'Accepte : Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    oxaPayInstruction4: 'Votre commande sera confirmée immédiatement après paiement',
+    oxaPayInstruction5: 'Transaction sécurisée avec cryptage SSL 256 bits',
+    oxaPayRecommendation: 'Méthode recommandée pour un traitement rapide',
     
     // Bank Transfer Modal
     verifyTransferDetails: 'Veuillez vérifier les détails de votre virement avant de confirmer votre commande',
@@ -1580,7 +1580,7 @@ export const translations: Record<Language, Translations> = {
     fulfilled: 'Livré',
     completeBankTransfer: 'Effectuer le virement',
     submitPCSCodes: 'Soumettre les codes PCS',
-    openNowPayments: 'Ouvrir NowPayments',
+    openOxaPay: 'Ouvrir OxaPay',
     viewInstructions: 'Voir les instructions',
     payWithin24h: 'Payez sous 24h pour réserver le stock',
     unpaidOrders: 'Commandes non payées',
@@ -1600,7 +1600,7 @@ export const translations: Record<Language, Translations> = {
     paymentInstructionsTitle: 'Instructions de paiement',
     bankTransferInstructionsMessage: 'Merci pour votre commande ! Pour une livraison en 24h, effectuez le virement immédiatement. En cas de virement ordinaire, le traitement peut prendre 48 à 72h selon la banque.',
     ticketPaymentMessage: 'Nous avons bien reçu votre notification suite à la commande. Nous procédons actuellement à la vérification du paiement. Vous recevrez une confirmation définitive d\'ici quelques minutes.',
-    nowpaymentsConfirmationMessage: 'Paiement confirmé via NowPayments. Votre commande est en cours de traitement.',
+    oxapayConfirmationMessage: 'Paiement confirmé via OxaPay. Votre commande est en cours de traitement.',
     contactSupportEmail: 'Contactez-nous à support@luxio-shop.eu si vous avez déjà payé.',
     confirmCancellation: 'Confirmer l\'annulation',
     cancelAction: 'Annuler',
@@ -1868,8 +1868,10 @@ export const translations: Record<Language, Translations> = {
     // Payment Methods
     bankTransfer: 'Transferencia bancaria',
     prepaidTickets: 'Tickets prepagados',
-    nowPayments: 'NowPayments',
-    nowPaymentsDescription: 'Pago en línea rápido y seguro',
+    oxaPay: 'OxaPay',
+    oxaPayDescription: 'Pago en línea rápido y seguro',
+    oxaPay: 'OxaPay',
+    oxaPayDescription: 'Pasarela de pago cripto rápida y segura',
     selectPaymentMethod: 'Seleccionar método de pago',
     bankTransferTitle: 'Transferencia bancaria',
     bankTransferDescription: 'Transfiere el importe a nuestra cuenta bancaria',
@@ -1923,8 +1925,8 @@ export const translations: Record<Language, Translations> = {
     paymentPendingTitle: 'Pago pendiente',
     paymentPendingDescription: 'Su pago está siendo procesado. Recibirá una confirmación por correo electrónico.',
     paymentErrorDescription: 'Se produjo un error durante el pago. Por favor, inténtelo de nuevo.',
-    redirectingToCryptoPayment: 'Redirigiendo a NOWPayments',
-    redirectingToNowPaymentsDescription: 'Será redirigido a la página de pago segura...',
+    redirectingToCryptoPayment: 'Redirigiendo a OxaPay',
+    redirectingToOxaPayDescription: 'Será redirigido a la página de pago segura...',
     
     // Payment Modal
     paymentModalTitle: 'Instrucciones de pago',
@@ -2069,7 +2071,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Política de privacidad',
     privacyPolicyContent: 'Solo recopilamos los datos necesarios para el procesamiento de pedidos (nombre, dirección, email, teléfono). Esta información nunca se revende y puede ser eliminada bajo petición a través de nuestro email de contacto.',
     termsOfServiceTitle: 'Términos de servicio',
-    termsOfServiceContent: 'Los precios están en euros con IVA incluido. Pagos aceptados: Transferencia bancaria SEPA, Cripto vía NowPayments, y métodos alternativos como PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, y tickets prepagados Transcash/PCS. Los pedidos se envían en 24 horas tras confirmación del pago inmediato, excepto transferencia ordinaria (24-72h según bancos). Reclamaciones → email de contacto.',
+    termsOfServiceContent: 'Los precios están en euros con IVA incluido. Pagos aceptados: Transferencia bancaria SEPA, Cripto vía OxaPay, y métodos alternativos como PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, y tickets prepagados Transcash/PCS. Los pedidos se envían en 24 horas tras confirmación del pago inmediato, excepto transferencia ordinaria (24-72h según bancos). Reclamaciones → email de contacto.',
     contactTitle: 'Contacto',
     contactContent: 'Para cualquier pregunta: support@luxiomarket.shop',
     
@@ -2155,13 +2157,13 @@ export const translations: Record<Language, Translations> = {
     orderRegistered: 'Pedido registrado',
     completeTransferWithReference: 'Complete la transferencia con la referencia indicada',
     missingAmount: 'faltante',
-    nowPaymentsInstructionsTitle: 'Instrucciones para NowPayments',
-    nowPaymentsInstruction1: 'Pago instantáneo y seguro por criptomonedas o tarjeta bancaria',
-    nowPaymentsInstruction2: 'Será redirigido a la plataforma NowPayments',
-    nowPaymentsInstruction3: 'Acepta: Bitcoin, Ethereum, USDT, Visa, Mastercard',
-    nowPaymentsInstruction4: 'Su pedido será confirmado inmediatamente después del pago',
-    nowPaymentsInstruction5: 'Transacción segura con encriptación SSL de 256 bits',
-    nowPaymentsRecommendation: 'Método recomendado para procesamiento rápido',
+    oxaPayInstructionsTitle: 'Instrucciones para OxaPay',
+    oxaPayInstruction1: 'Pago instantáneo y seguro por criptomonedas o tarjeta bancaria',
+    oxaPayInstruction2: 'Será redirigido a la plataforma OxaPay',
+    oxaPayInstruction3: 'Acepta: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    oxaPayInstruction4: 'Su pedido será confirmado inmediatamente después del pago',
+    oxaPayInstruction5: 'Transacción segura con encriptación SSL de 256 bits',
+    oxaPayRecommendation: 'Método recomendado para procesamiento rápido',
     
     // Bank Transfer Modal
     verifyTransferDetails: 'Por favor verifique los detalles de su transferencia antes de confirmar su pedido',
@@ -2210,7 +2212,7 @@ export const translations: Record<Language, Translations> = {
     fulfilled: 'Completado',
     completeBankTransfer: 'Completar Transferencia',
     submitPCSCodes: 'Enviar Códigos PCS',
-    openNowPayments: 'Abrir NowPayments',
+    openOxaPay: 'Abrir OxaPay',
     viewInstructions: 'Ver Instrucciones',
     payWithin24h: 'Paga en 24h para reservar stock',
     unpaidOrders: 'Pedidos No Pagados',
@@ -2230,7 +2232,7 @@ export const translations: Record<Language, Translations> = {
     paymentInstructionsTitle: 'Instrucciones de Pago',
     bankTransferInstructionsMessage: '¡Gracias por su pedido! Para entrega en 24h, realice la transferencia inmediatamente. En caso de transferencia estándar, el procesamiento puede tardar 48 a 72h según su banco.',
     ticketPaymentMessage: 'Hemos recibido su notificación del pedido. Actualmente estamos verificando el pago. Recibirá una confirmación definitiva en unos minutos.',
-    nowpaymentsConfirmationMessage: 'Pago confirmado a través de NowPayments. Su pedido está siendo procesado.',
+    oxapayConfirmationMessage: 'Pago confirmado a través de OxaPay. Su pedido está siendo procesado.',
     contactSupportEmail: 'Contáctenos en support@luxio-shop.eu si ya ha pagado.',
     confirmCancellation: 'Confirmar Cancelación',
     cancelAction: 'Cancelar',
@@ -2498,8 +2500,10 @@ export const translations: Record<Language, Translations> = {
     // Payment Methods
     bankTransfer: 'Transferência bancária',
     prepaidTickets: 'Tickets pré-pagos',
-    nowPayments: 'NowPayments',
-    nowPaymentsDescription: 'Pagamento online rápido e seguro',
+    oxaPay: 'OxaPay',
+    oxaPayDescription: 'Pagamento online rápido e seguro',
+    oxaPay: 'OxaPay',
+    oxaPayDescription: 'Gateway de pagamento cripto rápido e seguro',
     selectPaymentMethod: 'Selecionar método de pagamento',
     bankTransferTitle: 'Transferência bancária',
     bankTransferDescription: 'Transfira o valor para a nossa conta bancária',
@@ -2553,8 +2557,8 @@ export const translations: Record<Language, Translations> = {
     paymentPendingTitle: 'Pagamento pendente',
     paymentPendingDescription: 'Seu pagamento está sendo processado. Você receberá uma confirmação por e-mail.',
     paymentErrorDescription: 'Ocorreu um erro durante o pagamento. Por favor, tente novamente.',
-    redirectingToCryptoPayment: 'Redirecionando para NOWPayments',
-    redirectingToNowPaymentsDescription: 'Você será redirecionado para a página de pagamento segura...',
+    redirectingToCryptoPayment: 'Redirecionando para OxaPay',
+    redirectingToOxaPayDescription: 'Você será redirecionado para a página de pagamento segura...',
     
     // Payment Modal
     paymentModalTitle: 'Instruções de pagamento',
@@ -2699,7 +2703,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Política de privacidade',
     privacyPolicyContent: 'Recolhemos apenas os dados necessários para o processamento de pedidos (nome, morada, email, telefone). Esta informação nunca é revendida e pode ser eliminada mediante pedido através do nosso email de contacto.',
     termsOfServiceTitle: 'Termos de serviço',
-    termsOfServiceContent: 'Os preços estão em euros com IVA incluído. Pagamentos aceites: Transferência bancária SEPA, Cripto via NowPayments, e métodos alternativos como PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, e tickets pré-pagos Transcash/PCS. Os pedidos são enviados em 24 horas após confirmação do pagamento imediato, exceto transferência ordinária (24-72h conforme bancos). Reclamações → email de contacto.',
+    termsOfServiceContent: 'Os preços estão em euros com IVA incluído. Pagamentos aceites: Transferência bancária SEPA, Cripto via OxaPay, e métodos alternativos como PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, e tickets pré-pagos Transcash/PCS. Os pedidos são enviados em 24 horas após confirmação do pagamento imediato, exceto transferência ordinária (24-72h conforme bancos). Reclamações → email de contacto.',
     contactTitle: 'Contacto',
     contactContent: 'Para qualquer questão: support@luxiomarket.shop',
     
@@ -2785,13 +2789,13 @@ export const translations: Record<Language, Translations> = {
     orderRegistered: 'Pedido registado',
     completeTransferWithReference: 'Complete a transferência com a referência indicada',
     missingAmount: 'em falta',
-    nowPaymentsInstructionsTitle: 'Instruções para NowPayments',
-    nowPaymentsInstruction1: 'Pagamento instantâneo e seguro por criptomoedas ou cartão bancário',
-    nowPaymentsInstruction2: 'Você será redirecionado para a plataforma NowPayments',
-    nowPaymentsInstruction3: 'Aceita: Bitcoin, Ethereum, USDT, Visa, Mastercard',
-    nowPaymentsInstruction4: 'Seu pedido será confirmado imediatamente após o pagamento',
-    nowPaymentsInstruction5: 'Transação segura com criptografia SSL de 256 bits',
-    nowPaymentsRecommendation: 'Método recomendado para processamento rápido',
+    oxaPayInstructionsTitle: 'Instruções para OxaPay',
+    oxaPayInstruction1: 'Pagamento instantâneo e seguro por criptomoedas ou cartão bancário',
+    oxaPayInstruction2: 'Você será redirecionado para a plataforma OxaPay',
+    oxaPayInstruction3: 'Aceita: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    oxaPayInstruction4: 'Seu pedido será confirmado imediatamente após o pagamento',
+    oxaPayInstruction5: 'Transação segura com criptografia SSL de 256 bits',
+    oxaPayRecommendation: 'Método recomendado para processamento rápido',
     
     // Bank Transfer Modal
     verifyTransferDetails: 'Por favor verifique os detalhes da sua transferência antes de confirmar o pedido',
@@ -2840,7 +2844,7 @@ export const translations: Record<Language, Translations> = {
     fulfilled: 'Concluído',
     completeBankTransfer: 'Completar Transferência',
     submitPCSCodes: 'Enviar Códigos PCS',
-    openNowPayments: 'Abrir NowPayments',
+    openOxaPay: 'Abrir OxaPay',
     viewInstructions: 'Ver Instruções',
     payWithin24h: 'Pague em 24h para reservar stock',
     unpaidOrders: 'Pedidos Não Pagos',
@@ -2860,7 +2864,7 @@ export const translations: Record<Language, Translations> = {
     paymentInstructionsTitle: 'Instruções de Pagamento',
     bankTransferInstructionsMessage: 'Obrigado pelo seu pedido! Para entrega em 24h, efetue a transferência imediatamente. Em caso de transferência normal, o processamento pode demorar 48 a 72h dependendo do seu banco.',
     ticketPaymentMessage: 'Recebemos a sua notificação do pedido. Estamos atualmente a verificar o pagamento. Receberá uma confirmação final dentro de alguns minutos.',
-    nowpaymentsConfirmationMessage: 'Pagamento confirmado via NowPayments. O seu pedido está a ser processado.',
+    oxapayConfirmationMessage: 'Pagamento confirmado via OxaPay. O seu pedido está a ser processado.',
     contactSupportEmail: 'Contacte-nos em support@luxio-shop.eu se já pagou.',
     confirmCancellation: 'Confirmar Cancelamento',
     cancelAction: 'Cancelar',
@@ -3128,8 +3132,10 @@ export const translations: Record<Language, Translations> = {
     // Payment Methods
     bankTransfer: 'Przelew bankowy',
     prepaidTickets: 'Karty przedpłacone',
-    nowPayments: 'NowPayments',
-    nowPaymentsDescription: 'Szybka i bezpieczna płatność online',
+    oxaPay: 'OxaPay',
+    oxaPayDescription: 'Szybka i bezpieczna płatność online',
+    oxaPay: 'OxaPay',
+    oxaPayDescription: 'Szybka i bezpieczna brama płatności kryptowalut',
     selectPaymentMethod: 'Wybierz metodę płatności',
     bankTransferTitle: 'Przelew bankowy',
     bankTransferDescription: 'Przelej kwotę na nasze konto bankowe',
@@ -3183,8 +3189,8 @@ export const translations: Record<Language, Translations> = {
     paymentPendingTitle: 'Płatność oczekująca',
     paymentPendingDescription: 'Twoja płatność jest przetwarzana. Otrzymasz potwierdzenie e-mailem.',
     paymentErrorDescription: 'Wystąpił błąd podczas płatności. Spróbuj ponownie.',
-    redirectingToCryptoPayment: 'Przekierowanie do NOWPayments',
-    redirectingToNowPaymentsDescription: 'Zostaniesz przekierowany na bezpieczną stronę płatności...',
+    redirectingToCryptoPayment: 'Przekierowanie do OxaPay',
+    redirectingToOxaPayDescription: 'Zostaniesz przekierowany na bezpieczną stronę płatności...',
     
     // Payment Modal
     paymentModalTitle: 'Instrukcje płatności',
@@ -3329,7 +3335,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Polityka prywatności',
     privacyPolicyContent: 'Zbieramy tylko dane niezbędne do realizacji zamówień (imię, adres, email, telefon). Te informacje nigdy nie są odsprzedawane i mogą być usunięte na żądanie przez nasz email kontaktowy.',
     termsOfServiceTitle: 'Warunki usługi',
-    termsOfServiceContent: 'Ceny podane są w euro z VAT. Akceptowane płatności: Przelew bankowy SEPA, Kryptowaluty przez NowPayments, i metody alternatywne jak PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, i karty przedpłacone Transcash/PCS. Zamówienia są wysyłane w ciągu 24 godzin po natychmiastowym potwierdzeniu płatności, z wyjątkiem zwykłego przelewu (24-72h w zależności od banków). Reklamacje → email kontaktowy.',
+    termsOfServiceContent: 'Ceny podane są w euro z VAT. Akceptowane płatności: Przelew bankowy SEPA, Kryptowaluty przez OxaPay, i metody alternatywne jak PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, i karty przedpłacone Transcash/PCS. Zamówienia są wysyłane w ciągu 24 godzin po natychmiastowym potwierdzeniu płatności, z wyjątkiem zwykłego przelewu (24-72h w zależności od banków). Reklamacje → email kontaktowy.',
     contactTitle: 'Kontakt',
     contactContent: 'W przypadku pytań: support@luxiomarket.shop',
     
@@ -3415,13 +3421,13 @@ export const translations: Record<Language, Translations> = {
     orderRegistered: 'Zamówienie zarejestrowane',
     completeTransferWithReference: 'Wykonaj przelew z podanym numerem referencyjnym',
     missingAmount: 'brakuje',
-    nowPaymentsInstructionsTitle: 'Instrukcje NowPayments',
-    nowPaymentsInstruction1: 'Natychmiastowa i bezpieczna płatność kryptowalutą lub kartą bankową',
-    nowPaymentsInstruction2: 'Zostaniesz przekierowany na platformę NowPayments',
-    nowPaymentsInstruction3: 'Akceptuje: Bitcoin, Ethereum, USDT, Visa, Mastercard',
-    nowPaymentsInstruction4: 'Twoje zamówienie zostanie potwierdzone natychmiast po płatności',
-    nowPaymentsInstruction5: 'Bezpieczna transakcja z szyfrowaniem SSL 256-bit',
-    nowPaymentsRecommendation: 'Zalecana metoda szybkiego przetwarzania',
+    oxaPayInstructionsTitle: 'Instrukcje OxaPay',
+    oxaPayInstruction1: 'Natychmiastowa i bezpieczna płatność kryptowalutą lub kartą bankową',
+    oxaPayInstruction2: 'Zostaniesz przekierowany na platformę OxaPay',
+    oxaPayInstruction3: 'Akceptuje: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    oxaPayInstruction4: 'Twoje zamówienie zostanie potwierdzone natychmiast po płatności',
+    oxaPayInstruction5: 'Bezpieczna transakcja z szyfrowaniem SSL 256-bit',
+    oxaPayRecommendation: 'Zalecana metoda szybkiego przetwarzania',
     
     // Bank Transfer Modal
     verifyTransferDetails: 'Prosimy zweryfikować szczegóły przelewu przed potwierdzeniem zamówienia',
@@ -3470,7 +3476,7 @@ export const translations: Record<Language, Translations> = {
     fulfilled: 'Zrealizowane',
     completeBankTransfer: 'Dokończ Przelew',
     submitPCSCodes: 'Wyślij Kody PCS',
-    openNowPayments: 'Otwórz NowPayments',
+    openOxaPay: 'Otwórz OxaPay',
     viewInstructions: 'Zobacz Instrukcje',
     payWithin24h: 'Zapłać w ciągu 24h, aby zarezerwować zapasy',
     unpaidOrders: 'Nieopłacone Zamówienia',
@@ -3490,7 +3496,7 @@ export const translations: Record<Language, Translations> = {
     paymentInstructionsTitle: 'Instrukcje Płatności',
     bankTransferInstructionsMessage: 'Dziękujemy za zamówienie! W celu dostawy w ciągu 24h, wykonaj przelew natychmiast. W przypadku przelewu standardowego, przetwarzanie może potrwać 48 do 72h w zależności od banku.',
     ticketPaymentMessage: 'Otrzymaliśmy Twoją notyfikację o zamówieniu. Obecnie weryfikujemy płatność. Otrzymasz ostateczne potwierdzenie w ciągu kilku minut.',
-    nowpaymentsConfirmationMessage: 'Płatność potwierdzona przez NowPayments. Twoje zamówienie jest w trakcie realizacji.',
+    oxapayConfirmationMessage: 'Płatność potwierdzona przez OxaPay. Twoje zamówienie jest w trakcie realizacji.',
     contactSupportEmail: 'Skontaktuj się z nami na support@luxio-shop.eu jeśli już zapłaciłeś.',
     confirmCancellation: 'Potwierdź Anulowanie',
     cancelAction: 'Anuluj',
@@ -3758,8 +3764,10 @@ export const translations: Record<Language, Translations> = {
     // Payment Methods
     bankTransfer: 'Bonifico bancario',
     prepaidTickets: 'Ticket prepagati',
-    nowPayments: 'NowPayments',
-    nowPaymentsDescription: 'Pagamento online veloce e sicuro',
+    oxaPay: 'OxaPay',
+    oxaPayDescription: 'Pagamento online veloce e sicuro',
+    oxaPay: 'OxaPay',
+    oxaPayDescription: 'Gateway di pagamento cripto veloce e sicuro',
     selectPaymentMethod: 'Seleziona metodo di pagamento',
     bankTransferTitle: 'Bonifico bancario',
     bankTransferDescription: 'Trasferisci l\'importo sul nostro conto bancario',
@@ -3813,8 +3821,8 @@ export const translations: Record<Language, Translations> = {
     paymentPendingTitle: 'Pagamento in sospeso',
     paymentPendingDescription: 'Il tuo pagamento è in elaborazione. Riceverai una conferma via email.',
     paymentErrorDescription: 'Si è verificato un errore durante il pagamento. Riprova.',
-    redirectingToCryptoPayment: 'Reindirizzamento a NOWPayments',
-    redirectingToNowPaymentsDescription: 'Sarai reindirizzato alla pagina di pagamento sicura...',
+    redirectingToCryptoPayment: 'Reindirizzamento a OxaPay',
+    redirectingToOxaPayDescription: 'Sarai reindirizzato alla pagina di pagamento sicura...',
     
     // Payment Modal
     paymentModalTitle: 'Istruzioni di pagamento',
@@ -3959,7 +3967,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Privacy policy',
     privacyPolicyContent: 'Raccogliamo solo i dati necessari per elaborare gli ordini (nome, indirizzo, email, telefono). Queste informazioni non vengono mai rivendute e possono essere cancellate su richiesta tramite la nostra email di contatto.',
     termsOfServiceTitle: 'Termini di servizio',
-    termsOfServiceContent: 'I prezzi sono in euro IVA inclusa. Pagamenti accettati: Bonifico bancario SEPA, Cripto tramite NowPayments, e metodi alternativi come PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, e ticket prepagati Transcash/PCS. Gli ordini vengono spediti entro 24 ore dopo la conferma del pagamento immediato, tranne bonifico ordinario (24-72h a seconda delle banche). Reclami → email di contatto.',
+    termsOfServiceContent: 'I prezzi sono in euro IVA inclusa. Pagamenti accettati: Bonifico bancario SEPA, Cripto tramite OxaPay, e metodi alternativi come PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, e ticket prepagati Transcash/PCS. Gli ordini vengono spediti entro 24 ore dopo la conferma del pagamento immediato, tranne bonifico ordinario (24-72h a seconda delle banche). Reclami → email di contatto.',
     contactTitle: 'Contatti',
     contactContent: 'Per qualsiasi domanda: support@luxiomarket.shop',
     
@@ -4045,13 +4053,13 @@ export const translations: Record<Language, Translations> = {
     orderRegistered: 'Ordine registrato',
     completeTransferWithReference: 'Completa il bonifico con il riferimento indicato',
     missingAmount: 'mancante',
-    nowPaymentsInstructionsTitle: 'Istruzioni NowPayments',
-    nowPaymentsInstruction1: 'Pagamento istantaneo e sicuro tramite criptovaluta o carta bancaria',
-    nowPaymentsInstruction2: 'Verrai reindirizzato alla piattaforma NowPayments',
-    nowPaymentsInstruction3: 'Accetta: Bitcoin, Ethereum, USDT, Visa, Mastercard',
-    nowPaymentsInstruction4: 'Il tuo ordine sarà confermato immediatamente dopo il pagamento',
-    nowPaymentsInstruction5: 'Transazione sicura con crittografia SSL a 256 bit',
-    nowPaymentsRecommendation: 'Metodo consigliato per elaborazione rapida',
+    oxaPayInstructionsTitle: 'Istruzioni OxaPay',
+    oxaPayInstruction1: 'Pagamento istantaneo e sicuro tramite criptovaluta o carta bancaria',
+    oxaPayInstruction2: 'Verrai reindirizzato alla piattaforma OxaPay',
+    oxaPayInstruction3: 'Accetta: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    oxaPayInstruction4: 'Il tuo ordine sarà confermato immediatamente dopo il pagamento',
+    oxaPayInstruction5: 'Transazione sicura con crittografia SSL a 256 bit',
+    oxaPayRecommendation: 'Metodo consigliato per elaborazione rapida',
     
     // Bank Transfer Modal
     verifyTransferDetails: 'Si prega di verificare i dettagli del bonifico prima di confermare l\'ordine',
@@ -4100,7 +4108,7 @@ export const translations: Record<Language, Translations> = {
     fulfilled: 'Completato',
     completeBankTransfer: 'Completa Bonifico',
     submitPCSCodes: 'Invia Codici PCS',
-    openNowPayments: 'Apri NowPayments',
+    openOxaPay: 'Apri OxaPay',
     viewInstructions: 'Vedi Istruzioni',
     payWithin24h: 'Paga entro 24h per riservare le scorte',
     unpaidOrders: 'Ordini Non Pagati',
@@ -4120,7 +4128,7 @@ export const translations: Record<Language, Translations> = {
     paymentInstructionsTitle: 'Istruzioni di Pagamento',
     bankTransferInstructionsMessage: 'Grazie per il tuo ordine! Per la consegna entro 24h, effettua il bonifico immediatamente. In caso di bonifico standard, il processing può richiedere 48-72h a seconda della tua banca.',
     ticketPaymentMessage: 'Abbiamo ricevuto la tua notifica dell\'ordine. Stiamo attualmente verificando il pagamento. Riceverai una conferma definitiva entro pochi minuti.',
-    nowpaymentsConfirmationMessage: 'Pagamento confermato tramite NowPayments. Il tuo ordine è in elaborazione.',
+    oxapayConfirmationMessage: 'Pagamento confermato tramite OxaPay. Il tuo ordine è in elaborazione.',
     contactSupportEmail: 'Contattaci a support@luxio-shop.eu se hai già pagato.',
     confirmCancellation: 'Conferma Annullamento',
     cancelAction: 'Annulla',
@@ -4388,8 +4396,10 @@ export const translations: Record<Language, Translations> = {
     // Payment Methods
     bankTransfer: 'Banki átutalás',
     prepaidTickets: 'Feltöltőkártyák',
-    nowPayments: 'NowPayments',
-    nowPaymentsDescription: 'Gyors és biztonságos online fizetés',
+    oxaPay: 'OxaPay',
+    oxaPayDescription: 'Gyors és biztonságos online fizetés',
+    oxaPay: 'OxaPay',
+    oxaPayDescription: 'Gyors és biztonságos kripto fizetési kapu',
     selectPaymentMethod: 'Fizetési mód kiválasztása',
     bankTransferTitle: 'Banki átutalás',
     bankTransferDescription: 'Utalja át az összeget a bankszámlánkra',
@@ -4443,8 +4453,8 @@ export const translations: Record<Language, Translations> = {
     paymentPendingTitle: 'Függőben lévő fizetés',
     paymentPendingDescription: 'Fizetése feldolgozás alatt áll. E-mailben megerősítést kap.',
     paymentErrorDescription: 'Hiba történt a fizetés során. Kérjük, próbálja újra.',
-    redirectingToCryptoPayment: 'Átirányítás a NOWPayments-hez',
-    redirectingToNowPaymentsDescription: 'Hamarosan átirányítjuk a biztonságos fizetési oldalra...',
+    redirectingToCryptoPayment: 'Átirányítás a OxaPay-hez',
+    redirectingToOxaPayDescription: 'Hamarosan átirányítjuk a biztonságos fizetési oldalra...',
     
     // Payment Modal
     paymentModalTitle: 'Fizetési útmutató',
@@ -4589,7 +4599,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Adatvédelmi szabályzat',
     privacyPolicyContent: 'Csak a rendelések feldolgozásához szükséges adatokat gyűjtjük (név, cím, e-mail, telefon). Ezeket az információkat soha nem adjuk el, és kérésre törölhetők kapcsolati e-mailünkön keresztül.',
     termsOfServiceTitle: 'Szolgáltatási feltételek',
-    termsOfServiceContent: 'Az árak euróban vannak ÁFA-val. Elfogadott fizetések: SEPA banki átutalás, Kripto NowPayments-en keresztül, és alternatív módszerek mint PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, és Transcash/PCS feltöltőkártyák. A rendeléseket 24 órán belül szállítjuk ki az azonnali fizetés megerősítése után, kivéve rendes átutalást (24-72h bankoktól függően). Panaszok → kapcsolati e-mail.',
+    termsOfServiceContent: 'Az árak euróban vannak ÁFA-val. Elfogadott fizetések: SEPA banki átutalás, Kripto OxaPay-en keresztül, és alternatív módszerek mint PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, és Transcash/PCS feltöltőkártyák. A rendeléseket 24 órán belül szállítjuk ki az azonnali fizetés megerősítése után, kivéve rendes átutalást (24-72h bankoktól függően). Panaszok → kapcsolati e-mail.',
     contactTitle: 'Kapcsolat',
     contactContent: 'Bármilyen kérdés esetén: support@luxiomarket.shop',
     
@@ -4675,13 +4685,13 @@ export const translations: Record<Language, Translations> = {
     orderRegistered: 'Rendelés rögzítve',
     completeTransferWithReference: 'Végezze el az átutalást a megadott hivatkozással',
     missingAmount: 'hiányzik',
-    nowPaymentsInstructionsTitle: 'NowPayments utasítások',
-    nowPaymentsInstruction1: 'Azonnali és biztonságos fizetés kriptovalutával vagy bankkártyával',
-    nowPaymentsInstruction2: 'Átirányításra kerül a NowPayments platformra',
-    nowPaymentsInstruction3: 'Elfogad: Bitcoin, Ethereum, USDT, Visa, Mastercard',
-    nowPaymentsInstruction4: 'Rendelése azonnal megerősítésre kerül fizetés után',
-    nowPaymentsInstruction5: 'Biztonságos tranzakció 256 bites SSL titkosítással',
-    nowPaymentsRecommendation: 'Ajánlott módszer a gyors feldolgozáshoz',
+    oxaPayInstructionsTitle: 'OxaPay utasítások',
+    oxaPayInstruction1: 'Azonnali és biztonságos fizetés kriptovalutával vagy bankkártyával',
+    oxaPayInstruction2: 'Átirányításra kerül a OxaPay platformra',
+    oxaPayInstruction3: 'Elfogad: Bitcoin, Ethereum, USDT, Visa, Mastercard',
+    oxaPayInstruction4: 'Rendelése azonnal megerősítésre kerül fizetés után',
+    oxaPayInstruction5: 'Biztonságos tranzakció 256 bites SSL titkosítással',
+    oxaPayRecommendation: 'Ajánlott módszer a gyors feldolgozáshoz',
     
     // Bank Transfer Modal
     verifyTransferDetails: 'Kérjük, ellenőrizze az átutalás részleteit mielőtt megerősíti a rendelést',
@@ -4730,7 +4740,7 @@ export const translations: Record<Language, Translations> = {
     fulfilled: 'Teljesítve',
     completeBankTransfer: 'Átutalás Befejezése',
     submitPCSCodes: 'PCS Kódok Beküldése',
-    openNowPayments: 'NowPayments Megnyitása',
+    openOxaPay: 'OxaPay Megnyitása',
     viewInstructions: 'Utasítások Megtekintése',
     payWithin24h: 'Fizessen 24 órán belül a készlet lefoglalásához',
     unpaidOrders: 'Kifizetetlen Rendelések',
@@ -4750,7 +4760,7 @@ export const translations: Record<Language, Translations> = {
     paymentInstructionsTitle: 'Fizetési Utasítások',
     bankTransferInstructionsMessage: 'Köszönjük rendelését! A 24 órás kézbesítéshez azonnal hajtsa végre az átutalást. Normál átutalás esetén a feldolgozás 48-72 órát vehet igénybe a bankjától függően.',
     ticketPaymentMessage: 'Megkaptuk a rendelésről szóló értesítést. Jelenleg ellenőrizzük a fizetést. Pár percen belül végleges megerősítést kap.',
-    nowpaymentsConfirmationMessage: 'Fizetés megerősítve a NowPayments-en keresztül. Rendelése feldolgozás alatt áll.',
+    oxapayConfirmationMessage: 'Fizetés megerősítve a OxaPay-en keresztül. Rendelése feldolgozás alatt áll.',
     contactSupportEmail: 'Lépjen velünk kapcsolatba a support@luxio-shop.eu címen, ha már fizetett.',
     confirmCancellation: 'Törlés Megerősítése',
     cancelAction: 'Mégse',

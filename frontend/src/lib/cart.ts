@@ -215,7 +215,7 @@ export const generateOrderReference = (): string => {
 
 export const initializeNowPayment = async (order: Order, customerEmail: string, customerName: string): Promise<{ success: boolean; redirectUrl?: string; error?: string }> => {
   try {
-    const response = await fetch(getApiUrl('/api/payment/nowpayments-init'), {
+    const response = await fetch(getApiUrl('/api/payment/oxapay-init'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -242,7 +242,44 @@ export const initializeNowPayment = async (order: Order, customerEmail: string, 
       redirectUrl: data.redirectUrl
     };
   } catch (error) {
-    console.error('Error initializing NowPayments:', error);
+    console.error('Error initializing OxaPay:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error'
+    };
+  }
+};
+
+export const initializeOxaPayPayment = async (order: Order, customerEmail: string, customerName: string): Promise<{ success: boolean; redirectUrl?: string; error?: string }> => {
+  try {
+    const response = await fetch(getApiUrl('/api/payment/oxapay-init'), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        customerEmail,
+        customerName,
+        totalAmount: order.total,
+        cartItems: order.items
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      return {
+        success: false,
+        error: errorData.error || 'Payment initialization failed'
+      };
+    }
+
+    const data = await response.json();
+    return {
+      success: true,
+      redirectUrl: data.redirectUrl
+    };
+  } catch (error) {
+    console.error('Error initializing OxaPay payment:', error);
     return {
       success: false,
       error: error instanceof Error ? error.message : 'Unknown error'

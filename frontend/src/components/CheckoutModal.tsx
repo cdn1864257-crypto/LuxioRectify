@@ -3,7 +3,7 @@ import { X, CheckCircle, Building2, AlertTriangle, Info, Ticket, Plus, CreditCar
 import { useLocation } from 'wouter';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
-import { generateOrderReference, initializeNowPayment, saveOrder, Order } from '../lib/cart';
+import { generateOrderReference, initializeOxaPayPayment, saveOrder, Order } from '../lib/cart';
 import { showToast } from './ToastNotifications';
 import { queryClient } from '@/lib/queryClient';
 
@@ -12,7 +12,7 @@ interface CheckoutModalProps {
   onClose: () => void;
 }
 
-type PaymentMethod = 'bank-transfer' | 'prepaid-tickets' | 'nowpayments';
+type PaymentMethod = 'bank-transfer' | 'prepaid-tickets' | 'oxapay';
 
 export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
   const { cart, total, clearCart } = useCart();
@@ -101,9 +101,9 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
 
       saveOrder(order);
       
-      if (paymentMethod === 'nowpayments') {
+      if (paymentMethod === 'oxapay') {
         const customerName = `${formData.firstName} ${formData.lastName}`;
-        const paymentResult = await initializeNowPayment(order, formData.email, customerName);
+        const paymentResult = await initializeOxaPayPayment(order, formData.email, customerName);
         
         if (paymentResult.success && paymentResult.redirectUrl) {
           onClose();
@@ -532,25 +532,25 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                     </div>
                   )}
 
-                  {/* NowPayments */}
-                  <label className={`flex items-start p-4 border-2 rounded-xl cursor-pointer hover:bg-muted/50 transition-all ${paymentMethod === 'nowpayments' ? 'border-primary bg-primary/5 shadow-md' : 'border-border'}`}>
+                  {/* OxaPay */}
+                  <label className={`flex items-start p-4 border-2 rounded-xl cursor-pointer hover:bg-muted/50 transition-all ${paymentMethod === 'oxapay' ? 'border-primary bg-primary/5 shadow-md' : 'border-border'}`}>
                     <input 
                       type="radio" 
                       name="payment" 
-                      value="nowpayments" 
-                      checked={paymentMethod === 'nowpayments'}
+                      value="oxapay" 
+                      checked={paymentMethod === 'oxapay'}
                       onChange={(e) => setPaymentMethod(e.target.value as PaymentMethod)}
                       className="mr-3 mt-1 w-4 h-4 text-primary" 
                     />
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-1">
                         <CreditCard className="h-5 w-5 text-primary" />
-                        <span className="font-semibold">{t('nowPayments')}</span>
+                        <span className="font-semibold">{t('oxaPay')}</span>
                         <span className="ml-auto text-green-600 text-xs font-medium px-2 py-1 bg-green-50 dark:bg-green-950/30 rounded-full">
                           {t('active')}
                         </span>
                       </div>
-                      <p className="text-sm text-muted-foreground">{t('nowPaymentsDescription')}</p>
+                      <p className="text-sm text-muted-foreground">{t('oxaPayDescription')}</p>
                     </div>
                   </label>
                 </div>

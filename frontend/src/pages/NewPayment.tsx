@@ -33,14 +33,14 @@ export default function NewPayment() {
   const { language } = useLanguage();
   const t = translations[language] || translations.en;
 
-  // Check for NowPayments return
+  // Check for OxaPay return
   const urlParams = new URLSearchParams(window.location.search);
   const paymentSuccess = urlParams.get('success') === 'true';
   const paymentCancelled = urlParams.get('cancelled') === 'true';
   const paymentPending = urlParams.get('pending') === 'true';
   const paymentError = urlParams.get('error') === 'true';
   const orderRef = urlParams.get('order');
-  const fromNowPayments = paymentSuccess || paymentCancelled || paymentPending || paymentError;
+  const fromOxaPay = paymentSuccess || paymentCancelled || paymentPending || paymentError;
 
   useEffect(() => {
     if (!user) {
@@ -48,7 +48,7 @@ export default function NewPayment() {
       return;
     }
 
-    // If returning from NowPayments with success, clear cart and show success message
+    // If returning from OxaPay with success, clear cart and show success message
     if (paymentSuccess) {
       if (cart.length > 0) {
         clearCart();
@@ -61,7 +61,7 @@ export default function NewPayment() {
       return;
     }
 
-    // If returning from NowPayments with cancellation
+    // If returning from OxaPay with cancellation
     if (paymentCancelled) {
       toast({
         title: t.paymentCancelledTitle,
@@ -71,7 +71,7 @@ export default function NewPayment() {
       return;
     }
 
-    // If returning from NowPayments with pending status
+    // If returning from OxaPay with pending status
     if (paymentPending) {
       toast({
         title: t.paymentPendingTitle,
@@ -80,7 +80,7 @@ export default function NewPayment() {
       return;
     }
 
-    // If returning from NowPayments with error
+    // If returning from OxaPay with error
     if (paymentError) {
       toast({
         title: t.error,
@@ -90,19 +90,19 @@ export default function NewPayment() {
       return;
     }
     
-    // Only redirect to cart if cart is empty AND we're not returning from NowPayments
-    if (cart.length === 0 && !isConfirmingOrder && !showBankModal && !fromNowPayments) {
+    // Only redirect to cart if cart is empty AND we're not returning from OxaPay
+    if (cart.length === 0 && !isConfirmingOrder && !showBankModal && !fromOxaPay) {
       navigate('/cart');
       return;
     }
-  }, [user, cart, navigate, isConfirmingOrder, showBankModal, paymentSuccess, paymentCancelled, paymentPending, paymentError, orderRef, clearCart, toast, fromNowPayments, t]);
+  }, [user, cart, navigate, isConfirmingOrder, showBankModal, paymentSuccess, paymentCancelled, paymentPending, paymentError, orderRef, clearCart, toast, fromOxaPay, t]);
 
   if (!user) {
     return null;
   }
 
-  // Allow rendering if cart has items OR if returning from NowPayments OR if confirming order
-  if (cart.length === 0 && !isConfirmingOrder && !showBankModal && !fromNowPayments) {
+  // Allow rendering if cart has items OR if returning from OxaPay OR if confirming order
+  if (cart.length === 0 && !isConfirmingOrder && !showBankModal && !fromOxaPay) {
     return null;
   }
 
@@ -193,15 +193,15 @@ export default function NewPayment() {
     }
   };
 
-  const handleNowPayments = async () => {
+  const handleOxaPay = async () => {
     setIsProcessing(true);
     toast({
       title: t.redirectingToCryptoPayment,
-      description: t.redirectingToNowPaymentsDescription
+      description: t.redirectingToOxaPayDescription
     });
 
     try {
-      const response = await fetchWithCsrf(getApiUrl('/api/payment/nowpayments-init'), {
+      const response = await fetchWithCsrf(getApiUrl('/api/payment/oxapay-init'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -226,7 +226,7 @@ export default function NewPayment() {
         throw new Error(data.error || t.paymentInitError);
       }
     } catch (error) {
-      console.error('NowPayments error:', error);
+      console.error('OxaPay error:', error);
       toast({
         title: t.error,
         description: error instanceof Error ? error.message : t.orderFailed,
@@ -427,7 +427,7 @@ export default function NewPayment() {
                   </div>
                 </div>
 
-                {/* NowPayments Method */}
+                {/* OxaPay Method */}
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="text-sm sm:text-base font-semibold flex items-center gap-2">
@@ -441,9 +441,9 @@ export default function NewPayment() {
                   <button
                     type="button"
                     className="w-full p-3 sm:p-4 border-2 border-muted rounded-lg bg-background hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    onClick={handleNowPayments}
+                    onClick={handleOxaPay}
                     disabled={isProcessing}
-                    data-testid="button-nowpayments"
+                    data-testid="button-oxapay"
                   >
                     <div className="flex items-center justify-start gap-3 sm:gap-4">
                       <Zap className="h-6 w-6 sm:h-8 sm:w-8 text-foreground flex-shrink-0" />
