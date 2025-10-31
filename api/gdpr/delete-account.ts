@@ -68,7 +68,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       { $set: { customerEmail: 'deleted-user@luxio.com', deletedAt: new Date() } }
     );
 
-    await db.collection('nowpayments_orders').updateMany(
+    await db.collection('oxapay_orders').updateMany(
       { customerEmail: user.email },
       { $set: { customerEmail: 'deleted-user@luxio.com', deletedAt: new Date() } }
     );

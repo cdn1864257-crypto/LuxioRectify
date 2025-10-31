@@ -109,9 +109,9 @@ export default function Dashboard() {
   const { data: ordersData, isLoading, refetch } = useQuery<OrdersResponse>({
     queryKey: ['/api/orders'],
     enabled: !!user,
-    refetchOnWindowFocus: true, // Rafraîchir quand l'utilisateur revient sur la page
-    refetchInterval: 30000, // Rafraîchir toutes les 30 secondes pour capturer les paiements NowPayments
-    staleTime: 0, // Toujours considérer les données comme obsolètes pour forcer le refetch
+    refetchOnWindowFocus: true,
+    refetchInterval: 30000,
+    staleTime: 0,
   });
 
   const stats = ordersData?.stats || {

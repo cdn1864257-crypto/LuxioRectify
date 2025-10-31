@@ -1,0 +1,78 @@
+Prompt : Suppression totale de NowPayments et MaxelPay, correction de l’inscription et réinitialisation, et résolution erreur Render
+
+> Contexte :
+
+Front-end : luxiomarket.shop (Vercel)
+
+Back-end : api.luxiomarket.shop (Render)
+
+Les variables d’environnement sont correctement configurées côté Render et Vercel.
+
+Actuellement, l’inscription et la réinitialisation du mot de passe échouent avec "FAILED TO FETCH".
+
+Le projet utilise SendGrid pour l’envoi d’emails, ne pas toucher à SendGrid.
+
+Le projet utilise actuellement NowPayments et MaxelPay pour les paiements.
+
+Le log Render (image ci-jointe) montre une erreur qui empêche le déploiement. Corrige cette erreur ou indique précisément ce qu’il faut faire pour que le déploiement réussisse.
+
+
+
+
+Objectifs principaux :
+
+1. Supprimer complètement tout code lié à NowPayments et MaxelPay :
+
+Front-end : boutons, composants, pages, hooks, appels API, constantes, etc.
+
+Back-end : routes, contrôleurs, services, modules, configurations, clés API.
+
+Toute logique ou fonction associée à ces deux services doit être retirée sans laisser d’erreurs.
+
+
+
+2. Corriger l’erreur "FAILED TO FETCH" pour :
+
+L’inscription d’utilisateur
+
+La réinitialisation du mot de passe
+
+
+> Assurer que les formulaires fonctionnent correctement et que SendGrid continue d’envoyer les emails comme prévu.
+Résoudre les problèmes potentiels de CORS, URL API ou variables d’environnement.
+
+
+
+
+3. Optionnel : préparer le terrain pour remplacer NowPayments par OxaPay (crypto) pour les paiements.
+
+
+4. Résoudre ou indiquer la solution à l’erreur de déploiement indiquée dans le log Render fourni.
+
+
+
+Contraintes :
+
+Ne toucher en aucun cas à SendGrid.
+
+Le code doit rester fonctionnel et déployable sur Vercel et Render.
+
+Toutes les références à MaxelPay et NowPayments doivent être complètement supprimées.
+
+
+Livrables attendus :
+
+1. Code front-end et back-end sans aucune trace de MaxelPay et NowPayments.
+
+
+2. Fonctionnalité d’inscription fonctionnelle.
+
+
+3. Fonctionnalité de réinitialisation de mot de passe fonctionnelle.
+
+
+4. Déploiement Render fonctionnel ou instructions claires pour corriger l’erreur de log.
+
+
+5. Documentation rapide des changements effectués pour déploiement.
+

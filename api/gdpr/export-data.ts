@@ -34,7 +34,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const orders = await db.collection('orders').find({ customerEmail: user.email }).toArray();
     const bankTransferOrders = await db.collection('bank_transfer_orders').find({ customerEmail: user.email }).toArray();
-    const nowpaymentsOrders = await db.collection('nowpayments_orders').find({ customerEmail: user.email }).toArray();
+    const oxapayOrders = await db.collection('oxapay_orders').find({ customerEmail: user.email }).toArray();
 
     const sanitizedUser = {
       id: user._id,
@@ -55,7 +55,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       orders: {
         standard: orders,
         bankTransfer: bankTransferOrders,
-        crypto: nowpaymentsOrders
+        crypto: oxapayOrders
       },
       exportDate: new Date().toISOString(),
       exportedBy: user.email
