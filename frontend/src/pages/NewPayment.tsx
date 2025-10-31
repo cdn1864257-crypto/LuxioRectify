@@ -448,8 +448,8 @@ export default function NewPayment() {
                     <div className="flex items-center justify-start gap-3 sm:gap-4">
                       <Zap className="h-6 w-6 sm:h-8 sm:w-8 text-foreground flex-shrink-0" />
                       <div className="text-left flex-1 min-w-0">
-                        <div className="font-semibold text-base sm:text-lg text-foreground">{t.nowPayments}</div>
-                        <div className="text-xs sm:text-sm text-muted-foreground">{t.nowPaymentsDescription}</div>
+                        <div className="font-semibold text-base sm:text-lg text-foreground">{t.oxaPay}</div>
+                        <div className="text-xs sm:text-sm text-muted-foreground">{t.oxaPayDescription}</div>
                       </div>
                     </div>
                   </button>
