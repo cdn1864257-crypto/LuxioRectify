@@ -3,6 +3,7 @@ import { getTranslation, type EmailLanguage } from './email-translations.js';
 import crypto from 'crypto';
 import sgMail from '@sendgrid/mail';
 import type { Db } from 'mongodb';
+import { getPasswordResetMessage } from '../server/utils/multilingual-messages.js';
 
 interface EmailOptions {
   to: string | string[];
@@ -320,8 +321,6 @@ export async function sendPasswordResetEmail(
 
     const encodedToken = encodeURIComponent(resetToken);
     const resetUrl = `${FRONTEND_URL}/${locale}/reset-password?token=${encodedToken}`;
-
-    const { getPasswordResetMessage } = require('../server/utils/multilingual-messages');
     
     const subject = getPasswordResetMessage('SUBJECT', locale);
     const hello = getPasswordResetMessage('HELLO', locale);
