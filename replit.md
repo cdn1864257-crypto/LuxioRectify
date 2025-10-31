@@ -99,8 +99,27 @@ All automated emails are sent via SendGrid with full multilingual support:
 2. Implementing secure logging (email destination and language only, no tokens)
 3. Centralizing email sender configuration across all email functions
 
+### Cart & Checkout UX (Updated: October 31, 2025)
+**Automatic Login Redirect for Non-Authenticated Users**:
+- When a non-authenticated user attempts to checkout, a multilingual dialog appears with a login prompt
+- **Auto-redirect**: After 3.5 seconds, the user is automatically redirected to the login page with the language parameter
+- **Timeout Management**: The redirect timeout is properly cleared when:
+  - User clicks the "Login" button (immediate redirect)
+  - User clicks "Cancel" (dialog closes, no redirect)
+  - Dialog is closed via overlay or X button (no redirect)
+  - Component unmounts (cleanup to prevent memory leaks)
+- **Duplicate Prevention**: If the checkout button is clicked multiple times, any existing timeout is cleared before scheduling a new one
+- **Multilingual Support**: The dialog message is displayed in the user's current language (FR, EN, ES, PT, PL, IT, HU)
+
 ### Technical Implementations
 The project is configured for the Replit environment: a `start-dev.js` script runs both backend (Express on port 3001) and frontend (Vite dev server on port 5000) with API proxying. Vite is configured with `host: '0.0.0.0'` and `allowedHosts: true` for Replit proxy support. Deployment builds the frontend and serves via `serve` on port 5000. A `copy-images.js` script syncs product images. Backend error handling ensures all API errors return valid JSON responses.
+
+**Replit Development Configuration** (October 31, 2025):
+- `.env.development.example` provides template for local development configuration
+- `REPLIT_DEVELOPMENT_GUIDE.md` explains common development issues and solutions
+- **401 Error in Development**: When developing locally without MongoDB/JWT secrets configured, the frontend will show 401 errors
+  - **Recommended Solution**: Point `VITE_API_URL` to production backend (`https://api.luxiomarket.shop`) in `.env` file
+  - **Alternative**: Configure all required Replit secrets for full local backend (MONGODB_URI, JWT_SECRET, ENCRYPTION_KEY, SENDGRID_API_KEY, SENDGRID_FROM_EMAIL)
 
 ### Environment Variables
 Key environment variables are required for full functionality, including `MONGODB_URI`, `JWT_SECRET`, `BACKEND_URL`, `FRONTEND_URL`, `NOWPAYMENTS_API_KEY`, `SENDGRID_API_KEY`, `SENDGRID_FROM_EMAIL`, and `CSRF_SECRET`.
