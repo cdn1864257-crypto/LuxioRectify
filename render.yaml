@@ -22,9 +22,11 @@ services:
         sync: false
       - key: SENDGRID_FROM_EMAIL
         sync: false
-      - key: NOWPAYMENTS_API_KEY
+      - key: OXAPAY_API_KEY
         sync: false
-      - key: NOWPAYMENTS_IPN_SECRET
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
         sync: false
       - key: FRONTEND_URL
         sync: false

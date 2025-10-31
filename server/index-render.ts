@@ -18,11 +18,11 @@ import forgotPasswordHandler from '../api/auth/forgot-password.js';
 import resetPasswordHandler from '../api/auth/reset-password.js';
 import submitOrderHandler from '../api/payment/submit-order.js';
 import bankTransferHandler from '../api/payment/bank-transfer.js';
-import nowpaymentsReturnHandler from '../api/payment/nowpayments-return.js';
-import nowpaymentsInitHandler from '../api/payment/nowpayments-init.js';
-import nowpaymentsWebhookHandler from '../api/payment/nowpayments-webhook.js';
 import stripeIntentHandler from '../api/payment/stripe-intent.js';
 import stripeWebhookHandler from '../api/payment/stripe-webhook.js';
+import oxapayInitHandler from '../api/payment/oxapay-init.js';
+import oxapayWebhookHandler from '../api/payment/oxapay-webhook.js';
+import oxapayReturnHandler from '../api/payment/oxapay-return.js';
 import ordersHandler from '../api/orders.js';
 import deleteOrderHandler from '../api/orders/[orderId].js';
 import { getErrorMessage, getLanguageFromRequest } from './utils/multilingual-messages.js';
@@ -91,11 +91,11 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://nowpayments.io"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
       styleSrc: ["'self'", "'unsafe-inline'"],
       imgSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'", "https://api.nowpayments.io"],
-      frameSrc: ["https://nowpayments.io"],
+      connectSrc: ["'self'"],
+      frameSrc: ["'self'"],
     }
   },
   // HSTS: Force HTTPS for 1 year, including subdomains
@@ -205,8 +205,9 @@ app.use((req, res, next) => {
     /^\/api\/auth\/logout/,  // Logout should work without CSRF token
     /^\/api\/auth\/forgot-password/,  // Password reset email can be requested without CSRF
     /^\/api\/auth\/reset-password/,  // Password reset accessed via email link without active session
-    /^\/api\/payment\/nowpayments-webhook/,
-    /^\/api\/payment\/nowpayments-return/,
+    /^\/api\/payment\/oxapay-webhook/,
+    /^\/api\/payment\/oxapay-return/,
+    /^\/api\/payment\/stripe-webhook/,
   ];
   
   if (exemptRoutes.some((rx) => rx.test(req.path))) {
@@ -326,10 +327,12 @@ app.use('/api/auth/reset-password', hybridAuthLimiter.middleware(), convertVerce
 // Payment routes (CSRF protection applied globally except for webhook and return)
 app.use('/api/payment/submit-order', convertVercelHandler(submitOrderHandler));
 app.use('/api/payment/bank-transfer', convertVercelHandler(bankTransferHandler));
-app.use('/api/payment/nowpayments-init', convertVercelHandler(nowpaymentsInitHandler));
-app.use('/api/payment/nowpayments-return', convertVercelHandler(nowpaymentsReturnHandler));
-// Webhook NowPayments : PAS de CSRF car les requêtes viennent de NowPayments (validées par signature HMAC)
-app.post('/api/payment/nowpayments-webhook', convertVercelHandler(nowpaymentsWebhookHandler));
+
+// OxaPay crypto payment routes
+app.use('/api/payment/oxapay-init', convertVercelHandler(oxapayInitHandler));
+app.use('/api/payment/oxapay-return', convertVercelHandler(oxapayReturnHandler));
+app.post('/api/payment/oxapay-webhook', convertVercelHandler(oxapayWebhookHandler));
+
 // Stripe payment routes
 app.use('/api/payment/stripe-intent', convertVercelHandler(stripeIntentHandler));
 // Stripe webhook : Requires raw body for signature verification
