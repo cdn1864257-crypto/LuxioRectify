@@ -63,6 +63,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
       redirectTimeoutRef.current = null;
     }
     setShowLoginDialog(false);
+    onClose();
     setLocation(`/${language}/?login=true`);
   };
 
