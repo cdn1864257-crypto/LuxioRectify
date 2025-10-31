@@ -364,6 +364,7 @@ export async function sendPasswordResetEmail(
       } 
     };
 
+    console.log('RESET EMAIL MSG:', msg);
     await sgMail.send(msg);
     console.info('[sendPasswordResetEmail] Email sent successfully to:', userEmail);
     return true;
