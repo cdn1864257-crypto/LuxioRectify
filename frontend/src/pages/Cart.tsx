@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
@@ -13,7 +13,6 @@ import { Separator } from '@/components/ui/separator';
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -30,15 +29,6 @@ export default function Cart() {
   const [, setLocation] = useLocation();
   const [cartOpen, setCartOpen] = useState(false);
   const [showLoginDialog, setShowLoginDialog] = useState(false);
-  const redirectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (redirectTimeoutRef.current) {
-        clearTimeout(redirectTimeoutRef.current);
-      }
-    };
-  }, []);
 
   const handleRemoveItem = (productId: string, description: string) => {
     removeFromCart(productId, description);
@@ -47,32 +37,13 @@ export default function Cart() {
 
   const handleCheckout = () => {
     if (!user) {
-      if (redirectTimeoutRef.current) {
-        clearTimeout(redirectTimeoutRef.current);
-      }
       setShowLoginDialog(true);
-      redirectTimeoutRef.current = setTimeout(() => {
-        setLocation(`/${language}/?login=true`);
-      }, 3500);
     } else {
       setLocation(`/${language}/payment`);
     }
   };
 
-  const handleGoToLogin = () => {
-    if (redirectTimeoutRef.current) {
-      clearTimeout(redirectTimeoutRef.current);
-      redirectTimeoutRef.current = null;
-    }
-    setShowLoginDialog(false);
-    setLocation(`/${language}/?login=true`);
-  };
-
-  const handleCancelDialog = () => {
-    if (redirectTimeoutRef.current) {
-      clearTimeout(redirectTimeoutRef.current);
-      redirectTimeoutRef.current = null;
-    }
+  const handleCloseDialog = () => {
     setShowLoginDialog(false);
   };
 
@@ -253,9 +224,7 @@ export default function Cart() {
       <Footer />
       <CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} />
       
-      <AlertDialog open={showLoginDialog} onOpenChange={(open) => {
-        if (!open) handleCancelDialog();
-      }}>
+      <AlertDialog open={showLoginDialog} onOpenChange={handleCloseDialog}>
         <AlertDialogContent data-testid="dialog-login-required">
           <AlertDialogHeader>
             <AlertDialogTitle>{t('loginRequiredToCheckout')}</AlertDialogTitle>
@@ -264,9 +233,8 @@ export default function Cart() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel onClick={handleCancelDialog} data-testid="button-cancel-login">{t('cancel')}</AlertDialogCancel>
-            <AlertDialogAction onClick={handleGoToLogin} data-testid="button-go-to-login">
-              {t('goToLogin')}
+            <AlertDialogAction onClick={handleCloseDialog} data-testid="button-ok-login">
+              OK
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

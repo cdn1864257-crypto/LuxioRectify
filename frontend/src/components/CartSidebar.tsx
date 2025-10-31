@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { X, ShoppingCart, Minus, Plus, Trash2 } from 'lucide-react';
 import { useLocation } from 'wouter';
 import { useAuth } from '../contexts/AuthContext';
@@ -8,7 +8,6 @@ import { showToast } from './ToastNotifications';
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -27,15 +26,6 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   const { t, language } = useLanguage();
   const [, setLocation] = useLocation();
   const [showLoginDialog, setShowLoginDialog] = useState(false);
-  const redirectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (redirectTimeoutRef.current) {
-        clearTimeout(redirectTimeoutRef.current);
-      }
-    };
-  }, []);
 
   const handleRemoveItem = (productId: string, description: string) => {
     removeFromCart(productId, description);
@@ -44,34 +34,14 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
 
   const handleCheckout = () => {
     if (!user) {
-      if (redirectTimeoutRef.current) {
-        clearTimeout(redirectTimeoutRef.current);
-      }
       setShowLoginDialog(true);
-      redirectTimeoutRef.current = setTimeout(() => {
-        setLocation(`/${language}/?login=true`);
-      }, 3500);
     } else {
       onClose();
       setLocation(`/${language}/payment`);
     }
   };
 
-  const handleGoToLogin = () => {
-    if (redirectTimeoutRef.current) {
-      clearTimeout(redirectTimeoutRef.current);
-      redirectTimeoutRef.current = null;
-    }
-    setShowLoginDialog(false);
-    onClose();
-    setLocation(`/${language}/?login=true`);
-  };
-
-  const handleCancelDialog = () => {
-    if (redirectTimeoutRef.current) {
-      clearTimeout(redirectTimeoutRef.current);
-      redirectTimeoutRef.current = null;
-    }
+  const handleCloseDialog = () => {
     setShowLoginDialog(false);
   };
 
@@ -260,9 +230,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
         </div>
       </div>
       
-      <AlertDialog open={showLoginDialog} onOpenChange={(open) => {
-        if (!open) handleCancelDialog();
-      }}>
+      <AlertDialog open={showLoginDialog} onOpenChange={handleCloseDialog}>
         <AlertDialogContent data-testid="dialog-login-required-sidebar">
           <AlertDialogHeader>
             <AlertDialogTitle>{t('loginRequiredToCheckout')}</AlertDialogTitle>
@@ -271,9 +239,8 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel onClick={handleCancelDialog} data-testid="button-cancel-login-sidebar">{t('cancel')}</AlertDialogCancel>
-            <AlertDialogAction onClick={handleGoToLogin} data-testid="button-go-to-login-sidebar">
-              {t('goToLogin')}
+            <AlertDialogAction onClick={handleCloseDialog} data-testid="button-ok-login-sidebar">
+              OK
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
