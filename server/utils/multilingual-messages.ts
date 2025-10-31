@@ -210,13 +210,13 @@ export const ERROR_MESSAGES = {
   } as MultilingualMessage,
   
   EMAIL_VERIFIED_SUCCESS: {
-    en: 'Email verified successfully!',
-    fr: 'Email vérifié avec succès !',
-    es: '¡Correo electrónico verificado con éxito!',
-    pt: 'E-mail verificado com sucesso!',
-    it: 'Email verificata con successo!',
-    hu: 'Az e-mail sikeresen ellenőrizve!',
-    pl: 'E-mail został pomyślnie zweryfikowany!'
+    en: 'Your account has been successfully verified!',
+    fr: 'Votre compte a été validé avec succès !',
+    es: '¡Su cuenta ha sido verificada con éxito!',
+    pt: 'Sua conta foi verificada com sucesso!',
+    it: 'Il tuo account è stato verificato con successo!',
+    hu: 'Fiókja sikeresen ellenőrizve!',
+    pl: 'Twoje konto zostało pomyślnie zweryfikowane!'
   } as MultilingualMessage,
   
   VERIFYING_EMAIL: {
@@ -230,13 +230,13 @@ export const ERROR_MESSAGES = {
   } as MultilingualMessage,
   
   REDIRECTING: {
-    en: 'Redirecting you to the homepage...',
-    fr: 'Redirection vers la page d\'accueil...',
-    es: 'Redirigiendo a la página de inicio...',
-    pt: 'Redirecionando para a página inicial...',
-    it: 'Reindirizzamento alla home page...',
-    hu: 'Átirányítás a kezdőlapra...',
-    pl: 'Przekierowywanie na stronę główną...'
+    en: 'You are being redirected to your Luxio account...',
+    fr: 'Vous êtes redirigé vers votre compte Luxio...',
+    es: 'Está siendo redirigido a su cuenta Luxio...',
+    pt: 'Você está sendo redirecionado para sua conta Luxio...',
+    it: 'Verrai reindirizzato al tuo account Luxio...',
+    hu: 'Átirányítás a Luxio fiókjához...',
+    pl: 'Przekierowanie do konta Luxio...'
   } as MultilingualMessage
 };
 
