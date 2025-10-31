@@ -53,12 +53,26 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const db = client.db('luxio');
       const usersCollection = db.collection('users');
 
-      const user = await usersCollection.findOne({
+      let user = await usersCollection.findOne({
         emailVerificationToken: token,
         emailVerificationExpires: { $gt: new Date() }
       });
 
       if (!user) {
+        const userWithExpiredToken = await usersCollection.findOne({
+          emailVerificationToken: token
+        });
+
+        if (userWithExpiredToken && userWithExpiredToken.isEmailVerified) {
+          const userLanguage = userWithExpiredToken.language || 'en';
+          return res.status(200).json({ 
+            message: getErrorMessage('EMAIL_ALREADY_VERIFIED', userLanguage),
+            success: true,
+            alreadyVerified: true,
+            language: userLanguage
+          });
+        }
+
         return res.status(400).json({ 
           error: 'VERIFICATION_TOKEN_INVALID',
           message: getErrorMessage('VERIFICATION_TOKEN_INVALID', 'en'),
