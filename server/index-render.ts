@@ -47,43 +47,61 @@ app.set('trust proxy', 1);
 app.use((req, res, next) => {
   const origin = req.headers.origin;
   const isProduction = process.env.NODE_ENV === 'production';
-  
-  // Production: autoriser les 3 domaines principaux de Luxio Market
-  // Développement: autoriser aussi localhost pour les tests
+
   const productionOrigins = [
     'https://luxiomarket.shop',
     'https://www.luxiomarket.shop',
-    'https://luxios.vercel.app'
+    'https://luxios.vercel.app',
   ];
-  
+
   const developmentOrigins = [
     'http://localhost:5000',
     'http://localhost:3000',
     'http://127.0.0.1:5000',
-    'http://127.0.0.1:3000'
+    'http://127.0.0.1:3000',
   ];
-  
-  const allowedOrigins = isProduction 
+
+  const allowedOrigins = isProduction
     ? productionOrigins
     : [...productionOrigins, ...developmentOrigins];
-  
-  // Gérer le cas spécial où FRONTEND_URL vaut '*' (autoriser toutes les origines)
-  const allowAllOrigins = FRONTEND_URL === '*';
-  
-  if (origin && (allowAllOrigins || allowedOrigins.includes(origin))) {
+
+  // Toujours définir Vary pour éviter le cache d'origine incorrect
+  res.header('Vary', 'Origin');
+
+  // Vérifier si l'origine est autorisée
+  if (origin && allowedOrigins.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', 'true');
+  } else if (!isProduction) {
+    // Autoriser tout en dev uniquement
+    res.header('Access-Control-Allow-Origin', origin || '*');
+    res.header('Access-Control-Allow-Credentials', 'true');
   }
-  
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie, X-CSRF-Token');
-  
-  // Traiter les requêtes preflight OPTIONS immédiatement
+
+  res.header(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, PATCH, DELETE, OPTIONS'
+  );
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie, X-CSRF-Token'
+  );
+
+  // Répondre directement aux preflight OPTIONS
   if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
+    return res.sendStatus(204); // 204 = No Content (meilleur pour CORS)
   }
-  
+
   next();
+});
+
+// ✅ Forcer HTTPS (important pour cookies secure + Render)
+app.use((req, res, next) => {
+  if (req.secure || req.headers['x-forwarded-proto'] === 'https') {
+    next();
+  } else {
+    res.redirect(`https://${req.headers.host}${req.url}`);
+  }
 });
 
 // Middleware de sécurité avec Helmet
