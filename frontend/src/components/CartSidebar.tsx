@@ -1,8 +1,20 @@
+import { useState, useRef, useEffect } from 'react';
 import { X, ShoppingCart, Minus, Plus, Trash2 } from 'lucide-react';
 import { useLocation } from 'wouter';
+import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { showToast } from './ToastNotifications';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "./ui/alert-dialog";
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -10,13 +22,56 @@ interface CartSidebarProps {
 }
 
 export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
+  const { user } = useAuth();
   const { cart, updateQuantity, removeFromCart, total } = useCart();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [, setLocation] = useLocation();
+  const [showLoginDialog, setShowLoginDialog] = useState(false);
+  const redirectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (redirectTimeoutRef.current) {
+        clearTimeout(redirectTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleRemoveItem = (productId: string, description: string) => {
     removeFromCart(productId, description);
     showToast(t('itemRemovedFromCart'), 'info');
+  };
+
+  const handleCheckout = () => {
+    if (!user) {
+      if (redirectTimeoutRef.current) {
+        clearTimeout(redirectTimeoutRef.current);
+      }
+      setShowLoginDialog(true);
+      redirectTimeoutRef.current = setTimeout(() => {
+        setLocation(`/${language}/?login=true`);
+      }, 3500);
+    } else {
+      onClose();
+      setLocation(`/${language}/payment`);
+    }
+  };
+
+  const handleGoToLogin = () => {
+    if (redirectTimeoutRef.current) {
+      clearTimeout(redirectTimeoutRef.current);
+      redirectTimeoutRef.current = null;
+    }
+    setShowLoginDialog(false);
+    setLocation(`/${language}/?login=true`);
+  };
+
+  const handleCancelDialog = () => {
+    if (redirectTimeoutRef.current) {
+      clearTimeout(redirectTimeoutRef.current);
+      redirectTimeoutRef.current = null;
+    }
+    setShowLoginDialog(false);
   };
 
   return (
@@ -185,10 +240,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               
               {/* Checkout Button */}
               <button 
-                onClick={() => {
-                  onClose();
-                  setLocation('/payment');
-                }}
+                onClick={handleCheckout}
                 className="w-full bg-primary text-primary-foreground py-3.5 sm:py-4 rounded-xl font-semibold text-base sm:text-lg hover:bg-primary/90 active:scale-[0.98] transition-all shadow-lg hover:shadow-xl"
                 data-testid="button-proceed-checkout"
               >
@@ -206,6 +258,25 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
           )}
         </div>
       </div>
+      
+      <AlertDialog open={showLoginDialog} onOpenChange={(open) => {
+        if (!open) handleCancelDialog();
+      }}>
+        <AlertDialogContent data-testid="dialog-login-required-sidebar">
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t('loginRequiredToCheckout')}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {t('pleaseLoginOrSignupToCheckout')}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={handleCancelDialog} data-testid="button-cancel-login-sidebar">{t('cancel')}</AlertDialogCancel>
+            <AlertDialogAction onClick={handleGoToLogin} data-testid="button-go-to-login-sidebar">
+              {t('goToLogin')}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 }
