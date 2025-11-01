@@ -1,0 +1,219 @@
+Parfait ✅ — je vais te fusionner tous les prompts et instructions précédentes en un seul prompt précis et complet, parfaitement adapté à ton projet Luxio : front-end sur Vercel, back-end sur Render, avec SEO, bandeau cookies, documentation et monitoring, sans casser le code existant.
+
+Voici le prompt final :
+
+
+---
+
+💡 PROMPT OPTIMISÉ – LUXIOMARKET.SHOP
+
+> Contexte :
+Projet déployé sur :
+
+Front-end : https://luxiomarket.shop (Vercel)
+
+Back-end : https://api.luxiomarket.shop (Render)
+
+
+Objectif : améliorer et optimiser tout ce qui existe déjà dans le code (SEO, performance, accessibilité, bandeau cookies, documentation) sans casser le code, ni provoquer de Failed to fetch, ni toucher au CSRF ou aux connexions API.
+Toutes les améliorations doivent être non-destructives, incrémentales et compatibles Replit pour tests locaux.
+
+
+
+
+---
+
+🔹 1. Analyse et amélioration intelligente du code
+
+Détecte et optimise uniquement ce qui peut l’être :
+
+Balises <title>, <meta description>, <link rel="canonical">
+
+Balises OpenGraph (og:title, og:description, og:image) et Twitter Cards
+
+alt sur toutes les images
+
+Hiérarchie H1 → H2 → H3 et attribut lang
+
+Lazy loading des images et code splitting
+
+Minification et compression côté front-end
+
+Nettoyage de doublons CSS/JS
+
+
+Ne modifie jamais : routes, CORS, API, CSRF, base de données.
+
+Respecte la compatibilité Vercel et Render.
+
+
+
+---
+
+🔹 2. SEO et fichiers de référencement
+
+Vérifie et optimise les fichiers existants :
+
+robots.txt (autorisation Google, exclusion API/admin, lien vers sitemap)
+
+sitemap.xml (listing des pages principales, fréquences et priorités)
+
+
+Si absent, génère-les automatiquement, mais sans supprimer ou remplacer un fichier existant correct.
+
+S’assure que Google peut indexer toutes les pages publiques et ignore les endpoints sensibles.
+
+
+
+---
+
+🔹 3. Bandeau cookies amélioré et UX
+
+Si un bandeau existe déjà : améliore le style, la lisibilité et l’accessibilité
+
+Sinon, crée un bandeau moderne :
+
+Options : Accepter / Refuser / Personnaliser
+
+Texte clair et lien vers Politique de confidentialité
+
+Bloque les scripts analytics tant que l’utilisateur n’a pas donné son consentement
+
+Compatible SSR / React / Next.js / Vercel
+
+
+Ne déclenche aucun fetch ou requête réseau → pas de Failed to fetch.
+
+Animation et design responsive.
+
+
+
+---
+
+🔹 4. Script d’analyse post-build
+
+Vérifie automatiquement après build :
+
+Présence des balises <title>, <meta description>, alt sur images
+
+Présence et cohérence des balises OpenGraph
+
+Sitemap et robots.txt accessibles
+
+Performance et accessibilité (optionnel : Lighthouse si disponible)
+
+
+Ne modifie aucune ressource, affiche seulement les points d’amélioration.
+
+À intégrer dans package.json :
+
+
+"scripts": {
+  "build": "next build",
+  "postbuild": "node scripts/analyze.js"
+}
+
+
+---
+
+🔹 5. Monitoring backend
+
+Ajoute un endpoint santé (/health) côté Render pour vérifier disponibilité de l’API.
+
+Front-end peut faire des vérifications périodiques :
+
+
+async function checkAPIHealth() {
+  try {
+    const res = await fetch("https://api.luxiomarket.shop/health");
+    if (!res.ok) throw new Error("API non disponible");
+  } catch (err) {
+    console.warn("⚠️ Erreur API:", err.message);
+  }
+}
+
+
+---
+
+🔹 6. Documentation technique
+
+Améliore la documentation existante :
+
+Sections : Installation / Déploiement / API / FAQ / Troubleshooting
+
+Nettoie doublons et incohérences
+
+Ajoute sommaire automatique et exemples clairs
+
+
+Crée /docs/ si absent, compatible Markdown.
+
+
+
+---
+
+🔹 7. Contraintes strictes
+
+Aucune régression : tout doit fonctionner comme avant
+
+Aucune modification destructrice : routes, API, CSRF, CORS, DB
+
+Compatible Replit pour test local, Vercel pour front, Render pour back
+
+Tous scripts et fichiers doivent être non bloquants et ne générer aucune erreur réseau
+
+
+
+---
+
+🔹 8. Résultat attendu
+
+Site entièrement fonctionnel sur Vercel & Render
+
+SEO optimal (métadonnées, balises OG, sitemap et robots.txt)
+
+Bandeau cookies propre, fluide et conforme RGPD
+
+Documentation claire et lisible
+
+Monitoring API opérationnel
+
+Rapport post-build indiquant les points encore perfectibles
+
+Zéro bug réseau ou build (Failed to fetch)
+
+
+
+---
+
+💡 Prompt prêt à utiliser dans un assistant IA ou Replit :
+
+> Analyse et améliore le projet Luxiomarket.shop (front-end Vercel, back-end Render) sans casser le code existant.
+Optimise SEO, performance, bandeau cookies, accessibilité et documentation.
+Vérifie tous les fichiers existants (robots.txt, sitemap.xml, meta, alt, OpenGraph) et améliore-les si nécessaire.
+Ne modifie pas les routes, API, CORS, CSRF ou base de données.
+S’assure que tout build local sur Replit fonctionne et que le front déployé sur Vercel reste fonctionnel.
+Génère un rapport post-build des améliorations possibles, et un bandeau cookies moderne, fluide et conforme.
+Ajoute un monitoring léger pour le backend sur Render.
+
+
+
+
+---
+
+Si tu veux, je peux maintenant te générer un pack complet prêt à déposer dans ton repo :
+
+/public/robots.txt
+
+/public/sitemap.xml
+
+Composant React CookieBanner
+
+Script post-build analyze.js
+
+Template /docs/
+
+
+Tout prêt à Vercel + Render, avec tests Replit.
+
+Veux‑tu que je fasse ça ?

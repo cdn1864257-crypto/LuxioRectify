@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin/
 
-Sitemap: https://luxios.vercel.app/sitemap.xml
+Sitemap: https://luxiomarket.shop/sitemap.xml

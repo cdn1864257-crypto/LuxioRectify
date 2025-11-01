@@ -11,7 +11,7 @@ interface SEOProps {
   noindex?: boolean;
 }
 
-const SITE_URL = 'https://luxios.vercel.app';
+const SITE_URL = 'https://luxiomarket.shop';
 
 const languageLocales: Record<Language, string> = {
   en: 'en_US',
