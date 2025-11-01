@@ -3,6 +3,7 @@ import { Link, useLocation } from 'wouter';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
 import { getApiUrl, fetchWithCsrf } from '@/lib/config';
+import { generatePaymentReference } from '@/lib/payment-reference';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CartSidebar } from '@/components/CartSidebar';
@@ -106,10 +107,13 @@ export default function NewPayment() {
     return null;
   }
 
+  // Generate standardized payment reference using centralized function
   const generateOrderReference = () => {
-    const firstName = user?.firstName || 'user';
-    const randomDigits = Math.floor(1000 + Math.random() * 9000);
-    return `${firstName.toLowerCase()}${randomDigits}`;
+    const firstName = user?.firstName || 'User';
+    const lastName = user?.lastName || '';
+    const fullName = `${firstName} ${lastName}`.trim();
+    // Fallback to "User" if name is empty after trimming
+    return generatePaymentReference(fullName || 'User');
   };
 
   const generateEmailBody = (methodName: string, orderReference: string) => {

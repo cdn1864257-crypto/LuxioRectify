@@ -3,7 +3,8 @@ import { X, CheckCircle, Building2, AlertTriangle, Info, Ticket, Plus, CreditCar
 import { useLocation } from 'wouter';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
-import { generateOrderReference, initializeOxaPayPayment, saveOrder, Order } from '../lib/cart';
+import { initializeOxaPayPayment, saveOrder, Order } from '../lib/cart';
+import { generatePaymentReference } from '@/lib/payment-reference';
 import { showToast } from './ToastNotifications';
 import { queryClient } from '@/lib/queryClient';
 
@@ -80,7 +81,9 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
     setLoading(true);
 
     try {
-      const orderRef = generateOrderReference();
+      // Generate standardized payment reference: "FirstName LastName + 4 digits"
+      const customerName = `${formData.firstName} ${formData.lastName}`.trim();
+      const orderRef = generatePaymentReference(customerName);
       setOrderReference(orderRef);
       
       const order: Order = {

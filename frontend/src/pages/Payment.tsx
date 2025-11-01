@@ -4,6 +4,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { getApiUrl } from '@/lib/config';
+import { generatePaymentReference } from '@/lib/payment-reference';
 import { SEO } from '@/components/SEO';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -138,10 +139,13 @@ export default function Payment() {
     });
   };
 
+  // Generate standardized payment reference using centralized function
   const generateOrderReference = () => {
-    const timestamp = Date.now().toString(36);
-    const randomStr = Math.random().toString(36).substring(2, 8).toUpperCase();
-    return `LX-${timestamp}-${randomStr}`;
+    const firstName = user?.firstName || 'User';
+    const lastName = user?.lastName || '';
+    const fullName = `${firstName} ${lastName}`.trim();
+    // Fallback to "User" if name is empty after trimming
+    return generatePaymentReference(fullName || 'User');
   };
 
   const handleBankTransferConfirm = async () => {

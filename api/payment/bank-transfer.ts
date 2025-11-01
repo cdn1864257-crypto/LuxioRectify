@@ -1,5 +1,6 @@
 import { MongoClient } from 'mongodb';
 import { sendBankTransferEmail, sendBankTransferNotificationToAdmin } from '../../utils/email.js';
+import { generatePaymentReference } from '../../utils/payment-reference.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -29,11 +30,9 @@ interface BankTransferData {
   }>;
 }
 
-function generateOrderReference(): string {
-  const timestamp = Date.now().toString(36);
-  const randomStr = Math.random().toString(36).substring(2, 8).toUpperCase();
-  return `LX-${timestamp}-${randomStr}`;
-}
+// REMOVED: Old generateOrderReference() function
+// Now using centralized generatePaymentReference() from utils/payment-reference.ts
+// This ensures consistent format: "FirstName LastName + 4 digits" everywhere
 
 async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -84,14 +83,15 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const user = await usersCollection.findOne({ email: customerEmail.toLowerCase() });
       const userLanguage = user?.language || 'fr';
 
-      const orderReference = generateOrderReference();
+      // Generate standardized payment reference: "FirstName LastName + 4 digits"
+      const paymentReference = generatePaymentReference(customerName);
 
       const newOrder = {
         customerEmail: customerEmail.toLowerCase(),
         customerName,
         totalAmount,
         cartItems,
-        orderReference,
+        orderReference: paymentReference,  // Use the standardized reference
         paymentMethod: 'bank_transfer',
         status: 'pending',
         language: userLanguage,
@@ -104,14 +104,14 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
       const bankDetails = {
         orderId,
-        orderReference,
+        orderReference: paymentReference,  // Same reference everywhere
         customerEmail: customerEmail.toLowerCase(),
         customerName,
         totalAmount,
         bankName: 'Matt Luxio',
         iban: 'ES6115632626383268707364',
         bic: 'NTSBESM1XXX',
-        reference: `Dépôt+${customerName}`,
+        reference: paymentReference,  // ✅ NOW USES STANDARDIZED FORMAT: "Name + 4 digits"
         cartItems,
         language: userLanguage
       };
@@ -127,13 +127,13 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         success: true,
         message: 'Commande enregistrée avec succès',
         orderId,
-        orderReference,
+        orderReference: paymentReference,  // Consistent reference
         status: 'pending',
         bankDetails: {
           bankName: bankDetails.bankName,
           iban: bankDetails.iban,
           bic: bankDetails.bic,
-          reference: bankDetails.reference,
+          reference: paymentReference,  // ✅ Standardized format everywhere
           amount: totalAmount
         }
       });

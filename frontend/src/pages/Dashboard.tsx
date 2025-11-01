@@ -693,12 +693,7 @@ export default function Dashboard() {
                       <Separator />
                       <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
                         <span className="font-medium text-xs sm:text-sm">{t('paymentReference')}:</span>
-                        <span className="text-xs sm:text-sm break-all">Dépôt + {user?.firstName || 'votre nom'}</span>
-                      </div>
-                      <Separator />
-                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
-                        <span className="font-medium text-xs sm:text-sm">{t('uniqueOrderNumber')}:</span>
-                        <span className="font-mono text-xs break-all">{instructionsModal.order.orderReference}</span>
+                        <span className="font-mono text-xs sm:text-sm break-all text-primary font-semibold">{instructionsModal.order.orderReference}</span>
                       </div>
                     </div>
                     

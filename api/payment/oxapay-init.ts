@@ -1,5 +1,6 @@
 import { MongoClient } from 'mongodb';
 import axios from 'axios';
+import { generatePaymentReference } from '../../utils/payment-reference.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -30,11 +31,9 @@ interface OxaPayInitData {
   }>;
 }
 
-function generateOrderReference(): string {
-  const timestamp = Date.now().toString(36);
-  const randomStr = Math.random().toString(36).substring(2, 8).toUpperCase();
-  return `LX-${timestamp}-${randomStr}`;
-}
+// REMOVED: Old generateOrderReference() function
+// Now using centralized generatePaymentReference() from utils/payment-reference.ts
+// This ensures consistent format: "FirstName LastName + 4 digits" everywhere
 
 async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -91,14 +90,15 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const user = await usersCollection.findOne({ email: customerEmail.toLowerCase() });
       const userLanguage = language || user?.language || 'fr';
 
-      const orderReference = generateOrderReference();
+      // Generate standardized payment reference: "FirstName LastName + 4 digits"
+      const paymentReference = generatePaymentReference(customerName);
 
       const newOrder = {
         customerEmail: customerEmail.toLowerCase(),
         customerName,
         totalAmount,
         cartItems,
-        orderReference,
+        orderReference: paymentReference,  // Use standardized reference
         paymentMethod: 'oxapay',
         status: 'pending',
         language: userLanguage,
@@ -129,8 +129,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         underPaidCover: 2.5,
         callbackUrl: callbackUrl,
         returnUrl: returnUrl,
-        description: `Luxio Order - ${orderReference}`,
-        orderId: orderReference,
+        description: `Luxio Order - ${paymentReference}`,
+        orderId: paymentReference,  // ✅ Standardized reference
         email: customerEmail
       };
 
@@ -154,7 +154,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       }
 
       await ordersCollection.updateOne(
-        { orderReference: orderReference },
+        { orderReference: paymentReference },
         {
           $set: {
             oxapayTrackId: responseData.trackId,
@@ -164,13 +164,13 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         }
       );
 
-      console.log(`[OxaPay] Payment created: ${responseData.trackId} for order ${orderReference}`);
+      console.log(`[OxaPay] Payment created: ${responseData.trackId} for order ${paymentReference}`);
       console.log('[OxaPay] Payment response:', JSON.stringify(responseData, null, 2));
 
       return res.status(200).json({
         success: true,
         orderId,
-        orderReference,
+        orderReference: paymentReference,  // ✅ Standardized reference
         trackId: responseData.trackId,
         payLink: responseData.payLink,
         redirectUrl: responseData.payLink

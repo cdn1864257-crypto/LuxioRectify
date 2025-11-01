@@ -209,6 +209,11 @@ export const deleteOrder = (orderReference: string): boolean => {
   }
 };
 
+/**
+ * Legacy function - kept for backward compatibility
+ * @deprecated Use generatePaymentReference from '@/lib/payment-reference' instead
+ * For new code, pass customer name to generate proper reference: "FirstName LastName 1234"
+ */
 export const generateOrderReference = (): string => {
   return 'LX' + Date.now().toString().slice(-8);
 };
