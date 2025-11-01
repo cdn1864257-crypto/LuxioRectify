@@ -178,14 +178,16 @@ export default function Dashboard() {
     const created = new Date(order.createdAt);
     const minutesElapsed = differenceInMinutes(now, created);
 
-    if (order.paymentMethod === 'oxapay' && order.status === 'pending') {
+    const isUnpaidStatus = order.status === 'pending' || order.status === 'awaiting_payment';
+
+    if (order.paymentMethod === 'oxapay' && isUnpaidStatus) {
       const remaining = 30 - minutesElapsed;
       if (remaining <= 0) return null;
       return {
         minutes: Math.floor(remaining),
         label: remaining < 1 ? 'Expirant...' : `${Math.floor(remaining)} min restantes`
       };
-    } else if (order.paymentMethod === 'bank_transfer' && order.status === 'pending') {
+    } else if (order.paymentMethod === 'bank_transfer' && isUnpaidStatus) {
       const remaining = 1440 - minutesElapsed;
       if (remaining <= 0) return null;
       const hours = Math.floor(remaining / 60);
