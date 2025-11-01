@@ -8,6 +8,8 @@ export interface EmailTranslations {
   subject_ticket_confirm: string;
   subject_crypto_confirm: string;
   subject_admin_new_order: string;
+  subject_account_suspended: string;
+  subject_account_reactivated: string;
   
   // Common
   hello: string;
@@ -61,6 +63,16 @@ export interface EmailTranslations {
   bank_transfer: string;
   ticket_payment: string;
   crypto_payment: string;
+  
+  // Account Suspension
+  account_suspended_title: string;
+  account_suspended_message: string;
+  account_suspended_reason: string;
+  account_suspended_until: string;
+  account_suspended_actions: string;
+  account_reactivated_title: string;
+  account_reactivated_message: string;
+  account_reactivated_welcome: string;
 }
 
 export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
@@ -72,6 +84,8 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     subject_ticket_confirm: 'Confirmation de commande – Luxio',
     subject_crypto_confirm: 'Confirmation de commande – Luxio',
     subject_admin_new_order: 'Nouvelle commande reçue',
+    subject_account_suspended: 'Compte temporairement suspendu – Luxio',
+    subject_account_reactivated: 'Votre compte a été réactivé – Luxio',
     
     // Common
     hello: 'Bonjour',
@@ -124,7 +138,17 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     customer_email: 'Email',
     bank_transfer: 'Virement bancaire',
     ticket_payment: 'Paiement par tickets',
-    crypto_payment: 'Paiement crypto'
+    crypto_payment: 'Paiement crypto',
+    
+    // Account Suspension
+    account_suspended_title: 'Compte temporairement suspendu ⚠️',
+    account_suspended_message: 'Votre compte Luxio a été temporairement suspendu en raison de plusieurs commandes non payées.\n\nNous avons détecté que plusieurs de vos commandes ont expiré ou ont été annulées sans paiement au cours des derniers 30 jours. Pour maintenir un service de qualité pour tous nos clients, nous avons temporairement suspendu votre capacité à passer de nouvelles commandes.',
+    account_suspended_reason: 'Raison de la suspension : 3 commandes ou plus non payées sur les 30 derniers jours',
+    account_suspended_until: 'Votre compte sera automatiquement réactivé le',
+    account_suspended_actions: 'Pendant cette période :\n• Vous pouvez toujours consulter votre historique de commandes\n• Vous ne pouvez pas passer de nouvelles commandes\n• Votre compte sera automatiquement réactivé après 7 jours\n\nSi vous pensez qu\'il s\'agit d\'une erreur, n\'hésitez pas à contacter notre service client.',
+    account_reactivated_title: 'Votre compte a été réactivé ! ✅',
+    account_reactivated_message: 'Bonne nouvelle ! Votre compte Luxio a été réactivé avec succès.\n\nVous pouvez à nouveau profiter de notre catalogue complet et passer de nouvelles commandes sans restriction.',
+    account_reactivated_welcome: 'Nous sommes ravis de vous revoir parmi nous. N\'hésitez pas à découvrir nos derniers produits premium.'
   },
   en: {
     // Subjects
@@ -186,7 +210,17 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     customer_email: 'Email',
     bank_transfer: 'Bank Transfer',
     ticket_payment: 'Ticket Payment',
-    crypto_payment: 'Crypto Payment'
+    crypto_payment: 'Crypto Payment',
+    
+    // Account Suspension
+    account_suspended_title: 'Account Temporarily Suspended ⚠️',
+    account_suspended_message: 'Your Luxio account has been temporarily suspended due to multiple unpaid orders.\n\nWe have detected that several of your orders have expired or been canceled without payment in the last 30 days. To maintain quality service for all our customers, we have temporarily suspended your ability to place new orders.',
+    account_suspended_reason: 'Suspension reason: 3 or more unpaid orders in the last 30 days',
+    account_suspended_until: 'Your account will be automatically reactivated on',
+    account_suspended_actions: 'During this period:\n• You can still view your order history\n• You cannot place new orders\n• Your account will be automatically reactivated after 7 days\n\nIf you believe this is an error, please contact our customer service.',
+    account_reactivated_title: 'Your Account Has Been Reactivated! ✅',
+    account_reactivated_message: 'Good news! Your Luxio account has been successfully reactivated.\n\nYou can now enjoy our full catalog again and place new orders without restrictions.',
+    account_reactivated_welcome: 'We\'re happy to have you back with us. Feel free to discover our latest premium products.'
   },
   es: {
     // Subjects
@@ -248,7 +282,17 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     customer_email: 'Email',
     bank_transfer: 'Transferencia Bancaria',
     ticket_payment: 'Pago con Tickets',
-    crypto_payment: 'Pago Crypto'
+    crypto_payment: 'Pago Crypto',
+    
+    // Account Suspension
+    account_suspended_title: 'Cuenta Temporalmente Suspendida ⚠️',
+    account_suspended_message: 'Su cuenta de Luxio ha sido temporalmente suspendida debido a múltiples pedidos no pagados.\n\nHemos detectado que varios de sus pedidos han expirado o sido cancelados sin pago en los últimos 30 días. Para mantener un servicio de calidad para todos nuestros clientes, hemos suspendido temporalmente su capacidad de realizar nuevos pedidos.',
+    account_suspended_reason: 'Razón de la suspensión: 3 o más pedidos no pagados en los últimos 30 días',
+    account_suspended_until: 'Su cuenta será reactivada automáticamente el',
+    account_suspended_actions: 'Durante este período:\n• Puede consultar su historial de pedidos\n• No puede realizar nuevos pedidos\n• Su cuenta será reactivada automáticamente después de 7 días\n\nSi cree que esto es un error, no dude en contactar nuestro servicio al cliente.',
+    account_reactivated_title: '¡Su Cuenta Ha Sido Reactivada! ✅',
+    account_reactivated_message: '¡Buenas noticias! Su cuenta de Luxio ha sido reactivada con éxito.\n\nPuede volver a disfrutar de nuestro catálogo completo y realizar nuevos pedidos sin restricciones.',
+    account_reactivated_welcome: 'Estamos encantados de tenerle de vuelta. No dude en descubrir nuestros últimos productos premium.'
   },
   pt: {
     // Subjects
@@ -310,7 +354,17 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     customer_email: 'Email',
     bank_transfer: 'Transferência Bancária',
     ticket_payment: 'Pagamento por Tickets',
-    crypto_payment: 'Pagamento Crypto'
+    crypto_payment: 'Pagamento Crypto',
+    
+    // Account Suspension
+    account_suspended_title: 'Conta Temporariamente Suspensa ⚠️',
+    account_suspended_message: 'Sua conta Luxio foi temporariamente suspensa devido a vários pedidos não pagos.\n\nDetectamos que vários de seus pedidos expiraram ou foram cancelados sem pagamento nos últimos 30 dias. Para manter um serviço de qualidade para todos os nossos clientes, suspendemos temporariamente sua capacidade de fazer novos pedidos.',
+    account_suspended_reason: 'Motivo da suspensão: 3 ou mais pedidos não pagos nos últimos 30 dias',
+    account_suspended_until: 'Sua conta será reativada automaticamente em',
+    account_suspended_actions: 'Durante este período:\n• Você ainda pode visualizar seu histórico de pedidos\n• Você não pode fazer novos pedidos\n• Sua conta será reativada automaticamente após 7 dias\n\nSe você acha que isso é um erro, entre em contato com nosso atendimento ao cliente.',
+    account_reactivated_title: 'Sua Conta Foi Reativada! ✅',
+    account_reactivated_message: 'Boas notícias! Sua conta Luxio foi reativada com sucesso.\n\nVocê pode novamente desfrutar do nosso catálogo completo e fazer novos pedidos sem restrições.',
+    account_reactivated_welcome: 'Estamos felizes em tê-lo de volta. Sinta-se à vontade para descobrir nossos produtos premium mais recentes.'
   },
   pl: {
     // Subjects
@@ -372,7 +426,17 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     customer_email: 'Email',
     bank_transfer: 'Przelew Bankowy',
     ticket_payment: 'Płatność Biletami',
-    crypto_payment: 'Płatność Crypto'
+    crypto_payment: 'Płatność Crypto',
+    
+    // Account Suspension
+    account_suspended_title: 'Konto Tymczasowo Zawieszone ⚠️',
+    account_suspended_message: 'Twoje konto Luxio zostało tymczasowo zawieszone z powodu wielu niezapłaconych zamówień.\n\nWykryliśmy, że kilka Twoich zamówień wygasło lub zostało anulowanych bez płatności w ciągu ostatnich 30 dni. Aby utrzymać jakość usług dla wszystkich naszych klientów, tymczasowo zawiesiliśmy możliwość składania nowych zamówień.',
+    account_suspended_reason: 'Powód zawieszenia: 3 lub więcej niezapłaconych zamówień w ciągu ostatnich 30 dni',
+    account_suspended_until: 'Twoje konto zostanie automatycznie reaktywowane',
+    account_suspended_actions: 'W tym okresie:\n• Nadal możesz przeglądać historię zamówień\n• Nie możesz składać nowych zamówień\n• Twoje konto zostanie automatycznie reaktywowane po 7 dniach\n\nJeśli uważasz, że to błąd, skontaktuj się z naszą obsługą klienta.',
+    account_reactivated_title: 'Twoje Konto Zostało Reaktywowane! ✅',
+    account_reactivated_message: 'Dobre wieści! Twoje konto Luxio zostało pomyślnie reaktywowane.\n\nMożesz ponownie cieszyć się pełnym katalogiem i składać nowe zamówienia bez ograniczeń.',
+    account_reactivated_welcome: 'Cieszymy się, że jesteś z nami z powrotem. Zapraszamy do odkrywania naszych najnowszych produktów premium.'
   },
   hu: {
     // Subjects
@@ -434,7 +498,17 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     customer_email: 'Email',
     bank_transfer: 'Banki Átutalás',
     ticket_payment: 'Jegyes Fizetés',
-    crypto_payment: 'Kripto Fizetés'
+    crypto_payment: 'Kripto Fizetés',
+    
+    // Account Suspension
+    account_suspended_title: 'Fiók Ideiglenesen Felfüggesztve ⚠️',
+    account_suspended_message: 'Luxio fiókját ideiglenesen felfüggesztettük több fizetetlen rendelés miatt.\n\nÉszrevettük, hogy több rendelése lejárt vagy törlődött fizetés nélkül az elmúlt 30 napban. Az összes ügyfelünk számára minőségi szolgáltatás fenntartása érdekében ideiglenesen felfüggesztettük új rendelések leadásának lehetőségét.',
+    account_suspended_reason: 'Felfüggesztés oka: 3 vagy több fizetetlen rendelés az elmúlt 30 napban',
+    account_suspended_until: 'Fiókját automatikusan újraaktiváljuk',
+    account_suspended_actions: 'Ebben az időszakban:\n• Továbbra is megtekintheti rendelési előzményeit\n• Nem adhat le új rendeléseket\n• Fiókját 7 nap után automatikusan újraaktiváljuk\n\nHa úgy gondolja, hogy ez hiba, kérjük, lépjen kapcsolatba ügyfélszolgálatunkkal.',
+    account_reactivated_title: 'Fiókját Újraaktiváltuk! ✅',
+    account_reactivated_message: 'Jó hír! Luxio fiókját sikeresen újraaktiváltuk.\n\nÚjra élvezheti teljes katalógusunkat és korlátozások nélkül adhat le új rendeléseket.',
+    account_reactivated_welcome: 'Örülünk, hogy visszatért hozzánk. Fedezze fel legújabb prémium termékeinket.'
   }
 };
 

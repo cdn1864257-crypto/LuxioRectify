@@ -16,6 +16,8 @@ import { ArrowLeft, ShoppingBag, CreditCard, Zap, Copy, Check, DollarSign, Build
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/lib/translations';
 import { SiPaypal, SiWise, SiBinance, SiWesternunion, SiMoneygram } from 'react-icons/si';
+import { useSuspensionStatus } from '@/hooks/useSuspensionStatus';
+import { SuspensionWarning } from '@/components/SuspensionWarning';
 
 
 export default function NewPayment() {
@@ -33,6 +35,7 @@ export default function NewPayment() {
   const { toast } = useToast();
   const { language } = useLanguage();
   const t = translations[language] || translations.en;
+  const { suspensionStatus, loading: suspensionLoading } = useSuspensionStatus();
 
   // Check for OxaPay return
   const urlParams = new URLSearchParams(window.location.search);
@@ -287,6 +290,16 @@ export default function NewPayment() {
             </p>
           </div>
 
+          {suspensionStatus?.isSuspended && (
+            <div className="mb-6">
+              <SuspensionWarning
+                suspendedUntilFormatted={suspensionStatus.suspendedUntilFormatted}
+                unpaidOrdersCount={suspensionStatus.unpaidOrdersCount}
+                variant="error"
+              />
+            </div>
+          )}
+
           <Card className="mb-6">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
@@ -360,7 +373,7 @@ export default function NewPayment() {
                     type="button"
                     className="w-full p-3 sm:p-4 border-2 border-muted rounded-lg bg-background hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     onClick={handleBankTransferClick}
-                    disabled={isProcessing}
+                    disabled={isProcessing || suspensionStatus?.isSuspended}
                     data-testid="button-bank-transfer"
                   >
                     <div className="flex items-center justify-start gap-3 sm:gap-4">
@@ -446,7 +459,7 @@ export default function NewPayment() {
                     type="button"
                     className="w-full p-3 sm:p-4 border-2 border-muted rounded-lg bg-background hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     onClick={handleOxaPay}
-                    disabled={isProcessing}
+                    disabled={isProcessing || suspensionStatus?.isSuspended}
                     data-testid="button-oxapay"
                   >
                     <div className="flex items-center justify-start gap-3 sm:gap-4">

@@ -1,0 +1,160 @@
+Bonjour,
+
+Je souhaite ajouter sur mon site e-commerce (luxiomarket.shop) un système automatique de suspension temporaire des comptes utilisateurs après plusieurs commandes non payées, afin de décourager les comportements abusifs.
+
+Voici les fonctionnalités exactes à implémenter :
+
+
+---
+
+🧩 1. Principe général
+
+Lorsqu’un utilisateur crée plusieurs commandes mais ne les paie pas (statut “expired” ou “cancelled”), son compte doit être temporairement suspendu après un certain seuil.
+
+Le but est d’empêcher les utilisateurs qui abusent du système de passer de nouvelles commandes sans jamais les payer.
+
+
+
+---
+
+⚙️ 2. Règle de suspension
+
+Si un utilisateur atteint 3 commandes non payées sur une période glissante de 30 jours, son compte passe automatiquement au statut “suspended”.
+
+Pendant la suspension :
+
+L’utilisateur peut se connecter et consulter son historique, mais ne peut plus passer de nouvelle commande (le bouton “Commander” doit être désactivé).
+
+Le système doit afficher un message clair expliquant la raison de la suspension.
+
+
+La suspension dure 7 jours à partir de la date de déclenchement.
+
+Une fois ce délai écoulé, le compte redevient automatiquement “actif”.
+
+
+
+---
+
+🧱 3. Implémentation côté backend
+
+Modifications sur la base de données (MongoDB)
+
+Ajouter dans la collection users les champs suivants :
+
+status: "active" | "suspended" | "blocked",
+suspendedUntil: Date | null,
+unpaidHistory: [
+  { orderId, createdAt, amount, status }
+]
+
+
+Logique automatique :
+
+À chaque fois qu’une commande passe en statut expired ou cancelled :
+
+1. Ajouter un enregistrement dans user.unpaidHistory.
+
+
+2. Calculer le nombre de commandes non payées dans les 30 derniers jours.
+
+
+3. Si ce nombre ≥ 3 → appliquer la suspension :
+
+user.status = "suspended";
+user.suspendedUntil = Date.now() + 7*24*60*60*1000;
+
+
+
+
+Protection côté API :
+
+Dans la route de création de commande (/checkout ou équivalent), ajouter un contrôle :
+
+if (user.status === "suspended" && user.suspendedUntil > Date.now()) {
+    return res.status(403).json({ error: "Votre compte est temporairement suspendu suite à plusieurs commandes non payées. Réactivation automatique prévue le " + formatDate(user.suspendedUntil) });
+}
+
+
+
+---
+
+💻 4. Côté front-end / tableau de bord utilisateur
+
+Lorsqu’un utilisateur suspendu se connecte :
+
+Afficher une bannière visible en haut du dashboard :
+
+⚠️ Votre compte est temporairement suspendu suite à plusieurs commandes non payées.
+Réactivation automatique prévue le [date]. 
+Vous pouvez consulter vos anciennes commandes mais pas en créer de nouvelles.
+
+Le bouton “Commander” ou “Payer” doit être grisé et non cliquable.
+
+
+S’il essaie quand même d’accéder au checkout (via URL), afficher une page indiquant :
+
+> “Votre compte est temporairement suspendu. Vous pourrez à nouveau commander après le [date].”
+
+
+
+
+
+---
+
+🧰 5. Côté administrateur
+
+Dans le dashboard admin :
+
+Ajouter un filtre ou section “Comptes suspendus”.
+
+Pour chaque utilisateur suspendu, afficher :
+
+Son email
+
+Le nombre de commandes non payées
+
+La date de fin de suspension
+
+
+Ajouter un bouton “Réactiver maintenant” pour permettre à l’admin de lever la suspension avant la date prévue.
+
+
+
+
+---
+
+🔔 6. Notifications
+
+Lorsqu’un compte est suspendu :
+
+Envoyer un email automatique indiquant :
+
+> “Votre compte a été temporairement suspendu en raison de plusieurs commandes non payées. Vous pourrez à nouveau commander après le [date].”
+
+
+
+
+Lorsqu’un compte est réactivé automatiquement :
+
+Envoyer un autre email :
+
+> “Votre compte est désormais réactivé. Vous pouvez à nouveau effectuer des commandes sur Luxio Market.”
+
+
+
+
+
+
+---
+
+📜 7. Objectif UX
+
+L’objectif est que l’utilisateur comprenne clairement pourquoi il ne peut plus commander, et qu’il soit automatiquement notifié du retour à la normale.
+Aucune suppression de compte n’est prévue, seulement une suspension temporaire pour décourager les comportements malveillants.
+
+
+---
+
+Merci d’implémenter cette logique complète (backend + front + notifications + admin).
+Si possible, le système doit être compatible avec la logique de commande existante (virement et OxaPay) sans conflit.

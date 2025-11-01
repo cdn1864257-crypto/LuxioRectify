@@ -1024,3 +1024,107 @@ ${t.transaction_id}: ${order.transactionId}
     from: DEFAULT_FROM
   });
 }
+
+
+export async function sendSuspensionEmail(
+  email: string,
+  firstName: string,
+  suspendedUntil: Date,
+  language: EmailLanguage = 'fr'
+): Promise<boolean> {
+  const t = getTranslation(language);
+  const formattedDate = new Intl.DateTimeFormat(language === 'en' ? 'en-US' : `${language}-${language.toUpperCase()}`, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  }).format(new Date(suspendedUntil));
+
+  const html = getEmailLayout(`
+    <h2>${t.account_suspended_title}</h2>
+    <p><strong>${t.hello} ${firstName},</strong></p>
+    <p>${t.account_suspended_message.replace(/\n\n/g, '</p><p>')}</p>
+    
+    <div class="details" style="background: #fef2f2; padding: 20px; border-radius: 8px; border-left: 4px solid #dc2626; margin: 24px 0;">
+      <p style="margin: 0 0 12px 0; color: #991b1b; font-weight: 600;">${t.account_suspended_reason}</p>
+      <p style="margin: 0; color: #7f1d1d;"><strong>${t.account_suspended_until}:</strong> ${formattedDate}</p>
+    </div>
+    
+    <div class="details" style="background: #f9fafb; padding: 20px; border-radius: 8px; border-left: 4px solid #6b7280; margin: 24px 0;">
+      <p style="white-space: pre-line; margin: 0; color: #374151;">${t.account_suspended_actions}</p>
+    </div>
+    
+    <p style="margin-top: 24px; color: #6b7280;">${t.team_signature.replace(/\n/g, '<br>')}</p>
+  `, language);
+
+  const text = `
+${t.account_suspended_title}
+
+${t.hello} ${firstName},
+
+${t.account_suspended_message}
+
+${t.account_suspended_reason}
+${t.account_suspended_until}: ${formattedDate}
+
+${t.account_suspended_actions}
+
+${t.team_signature}
+  `.trim();
+
+  return sendEmail({
+    to: email,
+    subject: t.subject_account_suspended,
+    html,
+    text,
+    from: DEFAULT_FROM
+  });
+}
+
+export async function sendReactivationEmail(
+  email: string,
+  firstName: string,
+  language: EmailLanguage = 'fr'
+): Promise<boolean> {
+  const t = getTranslation(language);
+
+  const html = getEmailLayout(`
+    <h2>${t.account_reactivated_title}</h2>
+    <p><strong>${t.hello} ${firstName},</strong></p>
+    <p>${t.account_reactivated_message.replace(/\n\n/g, '</p><p>')}</p>
+    
+    <div class="details" style="background: #f0fdf4; padding: 20px; border-radius: 8px; border-left: 4px solid #059669; margin: 24px 0;">
+      <p style="margin: 0; color: #047857;">${t.account_reactivated_welcome}</p>
+    </div>
+    
+    <div style="text-align: center; margin: 32px 0;">
+      <a href="${process.env.FRONTEND_URL || 'https://luxiomarket.shop'}" class="button" style="background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: white; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; display: inline-block; box-shadow: 0 2px 4px rgba(5, 150, 105, 0.2);">${t.discover_products}</a>
+    </div>
+    
+    <p style="margin-top: 24px; color: #6b7280;">${t.team_signature.replace(/\n/g, '<br>')}</p>
+  `, language);
+
+  const text = `
+${t.account_reactivated_title}
+
+${t.hello} ${firstName},
+
+${t.account_reactivated_message}
+
+${t.account_reactivated_welcome}
+
+${t.discover_products}: ${process.env.FRONTEND_URL || 'https://luxiomarket.shop'}
+
+${t.team_signature}
+  `.trim();
+
+  return sendEmail({
+    to: email,
+    subject: t.subject_account_reactivated,
+    html,
+    text,
+    from: DEFAULT_FROM
+  });
+}
+

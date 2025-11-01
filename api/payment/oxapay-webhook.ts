@@ -1,6 +1,8 @@
 import { MongoClient } from 'mongodb';
 import crypto from 'crypto';
 import { sendOxaPayConfirmationToCustomer, sendOxaPayNotificationToAdmin } from '../../utils/email.js';
+import { addUnpaidOrder, checkAndApplySuspension } from '../../utils/account-suspension.js';
+import { sendSuspensionEmail } from '../../utils/email.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -186,6 +188,41 @@ async function handler(req: VercelRequest, res: VercelResponse) {
           }
         }
       );
+
+      if (status === 'Expired' || status === 'Canceled') {
+        const usersCollection = db.collection('users');
+        const customerEmail = order.customerEmail;
+        
+        if (customerEmail) {
+          try {
+            await addUnpaidOrder(
+              usersCollection,
+              customerEmail,
+              orderId,
+              order.totalAmount || 0,
+              status === 'Expired' ? 'expired' : 'cancelled'
+            );
+            
+            const suspensionResult = await checkAndApplySuspension(usersCollection, customerEmail);
+            
+            if (suspensionResult.suspended) {
+              const user = await usersCollection.findOne({ email: customerEmail.toLowerCase() });
+              if (user) {
+                await sendSuspensionEmail(
+                  customerEmail,
+                  user.firstName || 'Client',
+                  user.suspendedUntil,
+                  user.language || 'fr'
+                ).catch((error: Error) => {
+                  console.error('[Suspension] Error sending suspension email:', error);
+                });
+              }
+            }
+          } catch (error) {
+            console.error(`[OxaPay Webhook] Error tracking unpaid order for ${customerEmail}:`, error);
+          }
+        }
+      }
 
       if (paymentStatus === 'success') {
         const oxaPayOrder = {

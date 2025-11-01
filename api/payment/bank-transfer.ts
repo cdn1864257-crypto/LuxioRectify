@@ -1,6 +1,7 @@
 import { MongoClient } from 'mongodb';
 import { sendBankTransferEmail, sendBankTransferNotificationToAdmin } from '../../utils/email.js';
 import { generatePaymentReference } from '../../utils/payment-reference.js';
+import { getUserStatus, formatSuspensionEndDate, getSuspensionEndDate, autoReactivateExpiredSuspensions } from '../../utils/account-suspension.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -79,9 +80,37 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const ordersCollection = db.collection('bank_transfer_orders');
       const usersCollection = db.collection('users');
 
+      await autoReactivateExpiredSuspensions(usersCollection);
+
       // Récupérer la langue de l'utilisateur
       const user = await usersCollection.findOne({ email: customerEmail.toLowerCase() });
       const userLanguage = user?.language || 'fr';
+
+      if (user) {
+        const userStatus = getUserStatus(user);
+        if (userStatus === 'suspended') {
+          const suspensionEndDate = getSuspensionEndDate(user);
+          const formattedDate = suspensionEndDate 
+            ? formatSuspensionEndDate(suspensionEndDate, userLanguage)
+            : '';
+          
+          return res.status(403).json({
+            error: 'suspended',
+            message: userLanguage === 'fr' 
+              ? `Votre compte est temporairement suspendu suite à plusieurs commandes non payées. Réactivation automatique prévue le ${formattedDate}.`
+              : userLanguage === 'en'
+              ? `Your account is temporarily suspended due to multiple unpaid orders. Automatic reactivation scheduled for ${formattedDate}.`
+              : userLanguage === 'es'
+              ? `Su cuenta está temporalmente suspendida debido a múltiples pedidos no pagados. Reactivación automática prevista para el ${formattedDate}.`
+              : userLanguage === 'pt'
+              ? `Sua conta está temporariamente suspensa devido a vários pedidos não pagos. Reativação automática prevista para ${formattedDate}.`
+              : userLanguage === 'pl'
+              ? `Twoje konto jest tymczasowo zawieszone z powodu wielu niezapłaconych zamówień. Automatyczna reaktywacja zaplanowana na ${formattedDate}.`
+              : `Fiókja ideiglenesen fel van függesztve több fizetetlen rendelés miatt. Automatikus újraaktiválás tervezve: ${formattedDate}.`,
+            suspendedUntil: suspensionEndDate
+          });
+        }
+      }
 
       // Generate standardized payment reference: "FirstName LastName + 4 digits"
       const paymentReference = generatePaymentReference(customerName);
