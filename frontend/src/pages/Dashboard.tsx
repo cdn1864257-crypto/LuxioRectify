@@ -44,11 +44,13 @@ import {
   ChevronUp,
   Home,
   Sparkles,
-  LogOut
+  LogOut,
+  XCircle,
+  RefreshCw
 } from 'lucide-react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CartSidebar } from '@/components/CartSidebar';
 import { useQuery } from '@tanstack/react-query';
 import { format, differenceInMinutes, differenceInHours, differenceInDays } from 'date-fns';
@@ -114,6 +116,19 @@ export default function Dashboard() {
     staleTime: 0,
   });
 
+  useEffect(() => {
+    if (user) {
+      fetch(getApiUrl('/api/orders/check-status'), {
+        method: 'GET',
+        credentials: 'include',
+      }).then(() => {
+        refetch();
+      }).catch((error) => {
+        console.error('Error checking order status:', error);
+      });
+    }
+  }, [user]);
+
   const stats = ordersData?.stats || {
     totalOrders: 0,
     pendingOrders: 0,
@@ -142,6 +157,31 @@ export default function Dashboard() {
     } else {
       return t('createdMinutesAgo').replace('{minutes}', Math.max(1, minutes).toString());
     }
+  };
+
+  const getTimeRemaining = (order: Order) => {
+    const now = new Date();
+    const created = new Date(order.createdAt);
+    const minutesElapsed = differenceInMinutes(now, created);
+
+    if (order.paymentMethod === 'oxapay' && order.status === 'pending') {
+      const remaining = 30 - minutesElapsed;
+      if (remaining <= 0) return null;
+      return {
+        minutes: Math.floor(remaining),
+        label: remaining < 1 ? 'Expirant...' : `${Math.floor(remaining)} min restantes`
+      };
+    } else if (order.paymentMethod === 'bank_transfer' && order.status === 'pending') {
+      const remaining = 1440 - minutesElapsed;
+      if (remaining <= 0) return null;
+      const hours = Math.floor(remaining / 60);
+      const mins = Math.floor(remaining % 60);
+      return {
+        minutes: remaining,
+        label: hours > 0 ? `${hours}h ${mins}min restantes` : `${mins} min restantes`
+      };
+    }
+    return null;
   };
 
   const getStatusBadge = (status: string) => {
@@ -192,6 +232,24 @@ export default function Dashboard() {
         label: t('fulfilled'),
         icon: <CheckCircle2 className="h-3 w-3" />,
         className: 'bg-green-500 text-white'
+      },
+      success: { 
+        variant: 'default', 
+        label: 'Payé',
+        icon: <CheckCircle2 className="h-3 w-3" />,
+        className: 'bg-green-500 text-white'
+      },
+      expired: { 
+        variant: 'destructive', 
+        label: 'Expiré',
+        icon: <AlertCircle className="h-3 w-3" />,
+        className: 'bg-red-500 text-white'
+      },
+      cancelled: { 
+        variant: 'outline', 
+        label: 'Annulé',
+        icon: <XCircle className="h-3 w-3" />,
+        className: 'border-gray-500 text-gray-700 dark:text-gray-400'
       },
     };
 
@@ -565,6 +623,18 @@ export default function Dashboard() {
                                   {t('orderNumber')}: {order.orderReference}
                                 </p>
                                 {getStatusBadge(order.status)}
+                                {(() => {
+                                  const timeRemaining = getTimeRemaining(order);
+                                  if (timeRemaining) {
+                                    return (
+                                      <Badge variant="outline" className="text-orange-600 border-orange-600">
+                                        <Clock className="w-3 h-3 mr-1" />
+                                        {timeRemaining.label}
+                                      </Badge>
+                                    );
+                                  }
+                                  return null;
+                                })()}
                               </div>
                               <p className="text-xs text-muted-foreground">
                                 {getPaymentMethodLabel(order.paymentMethod)} • {order.itemCount || 1} {(order.itemCount || 1) === 1 ? t('item') : t('items')}
@@ -575,9 +645,32 @@ export default function Dashboard() {
                               <p className="text-xs text-muted-foreground">
                                 {format(new Date(order.createdAt), 'PPP', { locale: localeMap[language] })} • {getTimeAgo(order.createdAt)}
                               </p>
+                              {order.status === 'pending' && order.paymentMethod === 'bank_transfer' && (
+                                <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+                                  <Clock className="w-3 h-3 inline mr-1" />
+                                  Confirmation manuelle en attente
+                                </p>
+                              )}
+                              {order.status === 'expired' && order.paymentMethod === 'oxapay' && (
+                                <p className="text-xs text-red-600 dark:text-red-400 mt-1">
+                                  <AlertCircle className="w-3 h-3 inline mr-1" />
+                                  Paiement expiré - Vous pouvez relancer le paiement
+                                </p>
+                              )}
                             </div>
-                            <div className="text-right">
+                            <div className="text-right flex flex-col gap-2 items-end">
                               <p className="font-semibold text-lg">{order.totalAmount.toFixed(2)} €</p>
+                              {order.status === 'expired' && order.paymentMethod === 'oxapay' && (
+                                <Button 
+                                  size="sm" 
+                                  variant="outline"
+                                  onClick={() => navigate('/payment')}
+                                  data-testid={`button-retry-${order.orderId}`}
+                                >
+                                  <RefreshCw className="w-4 h-4 mr-1" />
+                                  Relancer
+                                </Button>
+                              )}
                             </div>
                           </div>
                         ))}

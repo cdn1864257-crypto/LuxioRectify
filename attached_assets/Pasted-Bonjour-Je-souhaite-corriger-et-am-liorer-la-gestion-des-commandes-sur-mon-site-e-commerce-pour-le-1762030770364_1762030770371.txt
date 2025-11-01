@@ -1,0 +1,70 @@
+Bonjour,
+
+Je souhaite corriger et améliorer la gestion des commandes sur mon site e-commerce pour les paiements via OxaPay (crypto) et virement bancaire, en intégrant des timeouts persistants et un accès admin pour validation manuelle. Voici les détails :
+
+1. Paiement via OxaPay (crypto) :
+
+Lorsqu’un utilisateur sélectionne un produit et va vers OxaPay, la commande est créée avec le statut « en attente de paiement ».
+
+Si le paiement n’est pas confirmé, la commande doit rester en attente et ne jamais afficher “Paiement confirmé”.
+
+Timeout persistant de 30 minutes :
+
+Le temps restant doit être calculé à partir du timestamp de création de la commande côté backend, et non depuis la page front-end.
+
+Même si l’utilisateur quitte et revient sur la page OxaPay, le décompte doit refléter le temps réel restant, sans redémarrage.
+
+Pendant ces 30 minutes, le dashboard utilisateur affiche « Paiement en attente – XX min restantes ».
+
+Si le paiement n’est pas reçu dans ce délai, la commande passe à « expirée » ou « annulée ».
+
+
+Si OxaPay confirme le paiement avant la fin du timeout, le statut passe à « payé », et le message affiché sera : « Paiement confirmé via OxaPay. Votre commande est en cours de traitement ».
+
+Permettre à l’utilisateur de relancer le paiement si la commande a expiré.
+
+
+2. Paiement via virement bancaire (manuel) :
+
+La commande est créée avec le statut « en attente de paiement ».
+
+Si aucune confirmation manuelle n’est reçue dans les 24 heures, la commande doit être automatiquement annulée.
+
+Dashboard utilisateur :
+
+Afficher « Paiement en attente – confirmation manuelle » tant que la commande n’est pas validée.
+
+Si la commande dépasse 24h sans paiement : afficher « Commande annulée – paiement non reçu ».
+
+
+Lorsqu’un administrateur valide le virement bancaire, le statut passe à « payé », déclenchant la livraison ou le service.
+
+
+3. Accès admin :
+
+Créer un espace admin sécurisé permettant de :
+
+Voir toutes les commandes en attente (OxaPay ou virement).
+
+Valider manuellement les paiements externes (virement bancaire).
+
+Mettre à jour le statut des commandes à « payé » ou « annulé ».
+
+
+
+4. Backend & frontend :
+
+La logique de timeout doit être côté backend, avec vérification régulière ou lors de chaque requête pour mettre à jour automatiquement le statut des commandes expirées.
+
+Le front-end ne fait qu’afficher le temps restant basé sur le timestamp de création pour OxaPay ou le délai de 24h pour virement.
+
+Tous les messages affichés côté utilisateur doivent refléter la réalité du paiement, et jamais afficher “Paiement confirmé” si la transaction n’a pas été validée.
+
+
+Merci de corriger le code backend et frontend afin que :
+
+Les statuts et messages reflètent exactement la réalité du paiement.
+
+Les timeouts automatiques fonctionnent correctement (30 min pour crypto, 24h pour virement).
+
+Le dashboard utilisateur et l’accès admin permettent de gérer les commandes et paiements manuellement ou automatiquement selon le type de paiement.

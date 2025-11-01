@@ -26,6 +26,7 @@ import LegalNotice from "@/pages/LegalNotice";
 import TermsOfService from "@/pages/TermsOfService";
 import GdprDashboard from "@/pages/GdprDashboard";
 import AdminProducts from "@/pages/AdminProducts";
+import AdminOrders from "@/pages/AdminOrders";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -496,6 +497,11 @@ function Router() {
       <Route path="/admin/products">
         <ProtectedRoute>
           <AdminProducts />
+        </ProtectedRoute>
+      </Route>
+      <Route path="/admin/orders">
+        <ProtectedRoute>
+          <AdminOrders />
         </ProtectedRoute>
       </Route>
 
