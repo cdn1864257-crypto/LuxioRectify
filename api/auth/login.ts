@@ -124,10 +124,12 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Créer le cookie httpOnly et secure
     const isProduction = process.env.NODE_ENV === 'production';
+    const cookieDomain = isProduction ? (process.env.COOKIE_DOMAIN || '.luxiomarket.shop') : undefined;
     const cookie = serialize('auth_token', token, {
+      domain: cookieDomain,
       httpOnly: true,
-      secure: isProduction, // HTTPS uniquement en production
-      sameSite: isProduction ? 'none' : 'lax', // 'none' requis pour cross-domain en production
+      secure: isProduction,
+      sameSite: 'lax',
       maxAge: 60 * 60 * 24 * 7, // 7 jours en secondes
       path: '/'
     });
@@ -153,7 +155,9 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     });
 
   } catch (error) {
-    console.error('Erreur lors de la connexion:', error);
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('Erreur lors de la connexion:', error);
+    }
     const lang = getLanguageFromRequest(req);
     return res.status(500).json({
       success: false,

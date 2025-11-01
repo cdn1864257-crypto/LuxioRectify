@@ -96,8 +96,10 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       
       if (clientIP) {
         detectedLanguage = await detectLanguageFromIP(clientIP);
-        console.log(`📍 IP détectée: ${clientIP} → Langue: ${detectedLanguage}`);
-      } else {
+        if (process.env.NODE_ENV !== 'production') {
+          console.log(`📍 IP détectée: ${clientIP} → Langue: ${detectedLanguage}`);
+        }
+      } else if (process.env.NODE_ENV !== 'production') {
         console.log('⚠️  Impossible de détecter l\'IP, langue par défaut: fr');
       }
 
@@ -145,9 +147,13 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       };
 
       // Envoyer l'email de vérification dans la langue de l'utilisateur (sans bloquer la réponse)
-      console.log(`📧 Envoi de l'email de vérification à ${email.toLowerCase()} en langue: ${userLanguage}`);
+      if (process.env.NODE_ENV !== 'production') {
+        console.log(`📧 Envoi de l'email de vérification à ${email.toLowerCase()} en langue: ${userLanguage}`);
+      }
       sendVerificationEmail(email.toLowerCase(), firstName, emailVerificationToken, userLanguage).catch((error: Error) => {
-        console.error('❌ Erreur lors de l\'envoi de l\'email de vérification:', error);
+        if (process.env.NODE_ENV !== 'production') {
+          console.error('❌ Erreur lors de l\'envoi de l\'email de vérification:', error);
+        }
       });
 
       return res.status(201).json({
@@ -160,10 +166,12 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
   } catch (error) {
-    console.error('Erreur lors de l\'inscription:', error);
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('Erreur lors de l\'inscription:', error);
+    }
     return res.status(500).json({
       error: 'Erreur serveur lors de l\'inscription',
-      details: error instanceof Error ? error.message : 'Unknown error'
+      details: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : 'Unknown error') : undefined
     });
   }
 }

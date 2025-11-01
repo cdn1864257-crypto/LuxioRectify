@@ -105,15 +105,21 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         }
       );
 
-      console.log(`✅ Email vérifié pour l'utilisateur: ${user.email}`);
+      if (process.env.NODE_ENV !== 'production') {
+        console.log(`✅ Email vérifié pour l'utilisateur: ${user.email}`);
+      }
       
       sendWelcomeEmail(user.email, user.firstName, userLanguage).catch((error: Error) => {
-        console.error('❌ Erreur lors de l\'envoi de l\'email de bienvenue:', error);
+        if (process.env.NODE_ENV !== 'production') {
+          console.error('❌ Erreur lors de l\'envoi de l\'email de bienvenue:', error);
+        }
       });
 
       const jwtSecret = process.env.JWT_SECRET;
       if (!jwtSecret) {
-        console.error('⚠️ JWT_SECRET not configured, user will need to login manually');
+        if (process.env.NODE_ENV !== 'production') {
+          console.error('⚠️ JWT_SECRET not configured, user will need to login manually');
+        }
         return res.status(200).json({
           message: getErrorMessage('EMAIL_VERIFIED_SUCCESS', userLanguage),
           success: true,
@@ -138,10 +144,12 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       );
 
       const isProduction = process.env.NODE_ENV === 'production';
+      const cookieDomain = isProduction ? (process.env.COOKIE_DOMAIN || '.luxiomarket.shop') : undefined;
       const cookie = serialize('auth_token', authToken, {
+        domain: cookieDomain,
         httpOnly: true,
         secure: isProduction,
-        sameSite: isProduction ? 'none' : 'lax',
+        sameSite: 'lax',
         maxAge: 60 * 60 * 24 * 7,
         path: '/'
       });
@@ -169,7 +177,9 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
   } catch (error) {
-    console.error('Erreur lors de la vérification de l\'email:', error);
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('Erreur lors de la vérification de l\'email:', error);
+    }
     return res.status(500).json({
       error: 'INTERNAL_SERVER_ERROR',
       message: getErrorMessage('INTERNAL_SERVER_ERROR', 'en'),

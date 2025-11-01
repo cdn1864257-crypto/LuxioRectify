@@ -38,7 +38,8 @@ const __dirname = dirname(__filename);
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '10000', 10);
-const FRONTEND_URL = process.env.FRONTEND_URL || 'https://luxios.vercel.app';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://luxiomarket.shop';
+const COOKIE_DOMAIN = process.env.COOKIE_DOMAIN || '.luxiomarket.shop';
 
 // Trust proxy for Render deployment (TLS terminates at load balancer)
 app.set('trust proxy', 1);
@@ -51,7 +52,6 @@ app.use((req, res, next) => {
   const productionOrigins = [
     'https://luxiomarket.shop',
     'https://www.luxiomarket.shop',
-    'https://luxios.vercel.app',
   ];
 
   const developmentOrigins = [
@@ -175,7 +175,9 @@ const store = mongoUri ? new MongoDBStore({
 
 if (store) {
   store.on('error', (error: Error) => {
-    console.error('MongoDB session store error:', error);
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('MongoDB session store error:', error);
+    }
   });
 }
 
@@ -187,9 +189,10 @@ app.use(
     saveUninitialized: false,
     store: store,
     cookie: {
+      domain: process.env.NODE_ENV === 'production' ? COOKIE_DOMAIN : undefined,
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      sameSite: process.env.NODE_ENV === 'production' ? 'lax' : 'lax',
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
     },
   })
@@ -273,11 +276,13 @@ const convertVercelHandler = (handler: any) => {
 
       await handler(vercelReq, vercelRes);
     } catch (error) {
-      console.error('[convertVercelHandler] Uncaught error in handler:', error);
+      if (process.env.NODE_ENV !== 'production') {
+        console.error('[convertVercelHandler] Uncaught error in handler:', error);
+      }
       if (!res.headersSent) {
         res.status(500).json({
           error: 'Internal Server Error',
-          details: error instanceof Error ? error.message : 'Unknown error'
+          details: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : 'Unknown error') : undefined
         });
       }
     }
@@ -309,18 +314,20 @@ app.post('/api/auth/logout', (req: any, res) => {
       // Supprimer le cookie de session avec les bons paramètres
       const isProduction = process.env.NODE_ENV === 'production';
       res.clearCookie('connect.sid', {
+        domain: isProduction ? COOKIE_DOMAIN : undefined,
         path: '/',
         httpOnly: true,
-        secure: isProduction, // true en production (HTTPS)
-        sameSite: isProduction ? 'none' : 'lax', // 'none' requis pour cross-domain
+        secure: isProduction,
+        sameSite: 'lax',
       });
 
       // Supprimer aussi le cookie auth_token s'il existe
       res.clearCookie('auth_token', {
+        domain: isProduction ? COOKIE_DOMAIN : undefined,
         path: '/',
         httpOnly: true,
         secure: isProduction,
-        sameSite: isProduction ? 'none' : 'lax',
+        sameSite: 'lax',
       });
 
       return res.status(200).json({
@@ -390,7 +397,9 @@ app.use((req, res) => {
 
 // Global Error Handler - Ensure all errors return JSON, not HTML
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  console.error('Global error handler:', err);
+  if (process.env.NODE_ENV !== 'production') {
+    console.error('Global error handler:', err);
+  }
   const lang = getLanguageFromRequest(req);
   
   // CSRF token errors
