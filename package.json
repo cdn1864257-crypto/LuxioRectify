@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "node start-dev.js",
     "build": "cd frontend && npm run build",
-    "postbuild": "node scripts/analyze-seo.js",
     "analyze:seo": "node scripts/analyze-seo.js",
     "build:backend": "echo 'No build needed - using tsx to run TypeScript directly'",
     "start": "npx serve frontend/dist -s -p 5000",

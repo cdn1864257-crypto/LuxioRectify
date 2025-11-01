@@ -30,7 +30,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     if (existingItem) {
       newCart = cart.map(item =>
         item.id === product.id && item.description === product.description
-          ? { ...item, quantity: item.quantity + 1 }
+          ? { 
+              ...item, 
+              quantity: item.quantity + 1,
+              image: product.image || item.image,
+              price: product.price !== undefined ? product.price : item.price,
+              originalPrice: product.originalPrice !== undefined ? product.originalPrice : item.originalPrice
+            }
           : item
       );
     } else {

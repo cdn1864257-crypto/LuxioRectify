@@ -1,17 +1,37 @@
 {
-  "builds": [
+  "buildCommand": "npm run build",
+  "outputDirectory": "frontend/dist",
+  "installCommand": "npm install",
+  "framework": null,
+  "rewrites": [
+    { "source": "/robots.txt", "destination": "/robots.txt" },
+    { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
+    { "source": "/og-image-fr.png", "destination": "/og-image-fr.png" },
+    { "source": "/og-image-en.png", "destination": "/og-image-en.png" },
+    { "source": "/og-image-pt.png", "destination": "/og-image-pt.png" },
+    { "source": "/og-image-es.png", "destination": "/og-image-es.png" },
+    { "source": "/og-image-it.png", "destination": "/og-image-it.png" },
+    { "source": "/og-image-hu.png", "destination": "/og-image-hu.png" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
     {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
+      "source": "/robots.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain"
+        }
+      ]
     },
     {
-      "src": "api/*.ts",
-      "use": "@vercel/node"
+      "source": "/sitemap.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml"
+        }
+      ]
     }
-  ],
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
