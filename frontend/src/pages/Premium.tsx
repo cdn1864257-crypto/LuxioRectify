@@ -268,42 +268,42 @@ export default function Premium() {
         onToggleCart={() => setCartOpen(!cartOpen)} 
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 overflow-x-hidden">
         {/* Header */}
-        <div className="bg-slate-900 dark:bg-slate-950 text-white py-16">
+        <div className="bg-slate-900 dark:bg-slate-950 text-white py-12 md:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <Link href="/">
               <Button
                 variant="ghost"
-                className="mb-6 text-white hover:bg-slate-800 hover:text-white -ml-2"
+                className="mb-4 md:mb-6 text-white hover:bg-slate-800 hover:text-white -ml-2"
                 data-testid="button-back-to-home"
               >
-                <ArrowLeft className="w-5 h-5 mr-2" />
-                {t('backToHome')}
+                <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+                <span className="text-sm md:text-base">{t('backToHome')}</span>
               </Button>
             </Link>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4" data-testid="text-premium-title">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 leading-tight" data-testid="text-premium-title">
               {t('premiumSmartphones') || 'Premium Smartphones'}
             </h1>
-            <p className="text-xl text-slate-300" data-testid="text-premium-subtitle">
+            <p className="text-base sm:text-lg md:text-xl text-slate-300 mb-4 md:mb-0" data-testid="text-premium-subtitle">
               {t('discoverLatest') || 'Discover the latest flagship smartphones with exclusive discounts'}
             </p>
-            <div className="mt-6">
-              <Badge variant="destructive" className="text-lg px-4 py-2">
+            <div className="mt-4 md:mt-6">
+              <Badge variant="destructive" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2">
                 {t('upTo') || 'Up to'} 37% {t('off') || 'OFF'}
               </Badge>
             </div>
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
           {/* Filters */}
-          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 mb-8">
-            <h2 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white">
+          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-4 md:p-6 mb-6 md:mb-8">
+            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-slate-900 dark:text-white">
               {t('filterResults') || 'Filter Results'}
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
               {/* Search */}
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-5 w-5" />

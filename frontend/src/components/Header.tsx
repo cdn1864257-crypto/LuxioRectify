@@ -5,7 +5,8 @@ import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { AuthModal } from './AuthModal';
 import { LanguageSelector } from './LanguageSelector';
-import { Search, ShoppingCart as ShoppingCartIcon, Menu, LayoutDashboard, LogOut, Package } from 'lucide-react';
+import { SearchAutocomplete } from './SearchAutocomplete';
+import { ShoppingCart as ShoppingCartIcon, Menu, LayoutDashboard, LogOut, Package } from 'lucide-react';
 import { Button } from './ui/button';
 import {
   Sheet,
@@ -313,15 +314,7 @@ export function Header({ onToggleCart }: HeaderProps) {
 
             {/* Search Bar - Hidden on mobile/tablet, visible on large screens */}
             <div className="hidden xl:flex flex-1 max-w-md">
-              <div className="relative w-full">
-                <input 
-                  type="text" 
-                  placeholder={t('searchPlaceholder')} 
-                  className="w-full pl-10 pr-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-                  data-testid="search-input"
-                />
-                <Search className="h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
-              </div>
+              <SearchAutocomplete className="w-full" />
             </div>
             
             {/* Right Section: Actions */}
