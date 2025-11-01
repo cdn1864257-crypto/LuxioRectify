@@ -20,6 +20,8 @@ import NewPayment from "@/pages/NewPayment";
 import StripeCheckout from "@/pages/StripeCheckout";
 import ResetPassword from "@/pages/ResetPassword";
 import VerifyEmailPage from "@/pages/VerifyEmailPage";
+import VerifySuccess from "@/pages/VerifySuccess";
+import VerifyFailed from "@/pages/VerifyFailed";
 import LegalNotice from "@/pages/LegalNotice";
 import TermsOfService from "@/pages/TermsOfService";
 import GdprDashboard from "@/pages/GdprDashboard";
@@ -464,6 +466,12 @@ function Router() {
       </Route>
       <Route path="/verify-email">
         <VerifyEmailPage />
+      </Route>
+      <Route path="/verify-success">
+        <VerifySuccess />
+      </Route>
+      <Route path="/verify-failed">
+        <VerifyFailed />
       </Route>
       <Route path="/dashboard">
         <LanguageRedirect />
