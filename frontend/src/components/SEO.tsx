@@ -45,11 +45,11 @@ export function SEO({
   const seoDescription = description || t(`seo${page.charAt(0).toUpperCase() + page.slice(1)}Description` as any);
   const seoKeywords = keywords || t(`seo${page.charAt(0).toUpperCase() + page.slice(1)}Keywords` as any);
   
-  const pagePath = page === 'home' ? '/' : `/${page}`;
-  const canonicalUrl = `${SITE_URL}${pagePath}?lang=${language}`;
+  const pagePath = page === 'home' ? '' : `/${page}`;
+  const canonicalUrl = `${SITE_URL}/${language}${pagePath}`;
   const siteName = t('seoOgSiteName');
   
-  const seoLanguages: Language[] = ['en', 'fr', 'es', 'pt', 'it', 'hu'];
+  const seoLanguages: Language[] = ['en', 'fr', 'es', 'pt', 'it', 'hu', 'pl'];
   const ogLanguage = seoLanguages.includes(language) ? language : 'en';
   const defaultOgImage = `${SITE_URL}/og-image-${ogLanguage}.png`;
   const finalOgImage = ogImage || defaultOgImage;
@@ -147,10 +147,10 @@ export function SEO({
           key={lang}
           rel="alternate"
           hrefLang={lang}
-          href={`${SITE_URL}${pagePath}?lang=${lang}`}
+          href={`${SITE_URL}/${lang}${pagePath}`}
         />
       ))}
-      <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}${pagePath}?lang=en`} />
+      <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}/en${pagePath}`} />
       
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={siteName} />

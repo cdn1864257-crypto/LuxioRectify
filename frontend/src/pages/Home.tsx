@@ -8,20 +8,30 @@ import { TestimonialsCarousel } from '../components/TestimonialsCarousel';
 import { Footer } from '../components/Footer';
 import { CartSidebar } from '../components/CartSidebar';
 import { SEO } from '../components/SEO';
+import { OrganizationSchema, WebSiteSchema, BreadcrumbSchema, OfferCatalogSchema } from '../components/StructuredData';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useProducts, getProductsByCategory } from '../hooks/use-products';
 import { Button } from '../components/ui/button';
 
 export default function Home() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [cartOpen, setCartOpen] = useState(false);
   
   // Load products dynamically from MongoDB (with static fallback)
   const { products, loading } = useProducts();
 
+  const breadcrumbItems = [
+    { name: 'Luxio', url: `https://luxiomarket.shop/${language}` },
+    { name: t('home') || 'Home', url: `https://luxiomarket.shop/${language}` }
+  ];
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEO />
+      <OrganizationSchema />
+      <WebSiteSchema language={language} />
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <OfferCatalogSchema />
       <Header 
         onToggleCart={() => setCartOpen(!cartOpen)}
       />
