@@ -160,6 +160,19 @@ export default function Dashboard() {
     }
   };
 
+  const isOrderExpired = (order: Order): boolean => {
+    const now = new Date();
+    const created = new Date(order.createdAt);
+    const minutesElapsed = differenceInMinutes(now, created);
+
+    if (order.paymentMethod === 'oxapay') {
+      return minutesElapsed >= 30;
+    } else if (order.paymentMethod === 'bank_transfer') {
+      return minutesElapsed >= 1440;
+    }
+    return false;
+  };
+
   const getTimeRemaining = (order: Order) => {
     const now = new Date();
     const created = new Date(order.createdAt);
@@ -183,6 +196,36 @@ export default function Dashboard() {
       };
     }
     return null;
+  };
+
+  const getActionRequiredMessage = (order: Order): string => {
+    const expired = isOrderExpired(order);
+    
+    if (expired) {
+      return language === 'fr' 
+        ? 'Commande expirée – paiement non reçu.' 
+        : 'Order expired – payment not received.';
+    }
+    
+    if (order.paymentMethod === 'oxapay') {
+      const timeRemaining = getTimeRemaining(order);
+      if (timeRemaining) {
+        return language === 'fr'
+          ? `Payer via OxaPay dans ${timeRemaining.label} pour confirmer votre commande.`
+          : `Pay via OxaPay within ${timeRemaining.label} to confirm your order.`;
+      }
+      return language === 'fr'
+        ? 'Commande expirée – paiement non reçu.'
+        : 'Order expired – payment not received.';
+    } else if (order.paymentMethod === 'bank_transfer') {
+      return language === 'fr'
+        ? 'Effectuez votre virement bancaire dans le délai indiqué pour confirmer votre commande.'
+        : 'Complete your bank transfer within the indicated time to confirm your order.';
+    }
+    
+    return language === 'fr'
+      ? 'Payez sous 24h pour réserver le stock'
+      : 'Pay within 24h to reserve stock';
   };
 
   const getStatusBadge = (status: string) => {
@@ -419,7 +462,11 @@ export default function Dashboard() {
                                 </Badge>
                               </CardTitle>
                               <CardDescription className="text-yellow-700 dark:text-yellow-300 text-sm mt-1">
-                                {t('payWithin24h')}
+                                {unpaidOrders.length === 1 
+                                  ? getActionRequiredMessage(unpaidOrders[0])
+                                  : (language === 'fr' 
+                                    ? 'Complétez vos paiements pour confirmer vos commandes.' 
+                                    : 'Complete your payments to confirm your orders.')}
                               </CardDescription>
                             </div>
                           </div>
