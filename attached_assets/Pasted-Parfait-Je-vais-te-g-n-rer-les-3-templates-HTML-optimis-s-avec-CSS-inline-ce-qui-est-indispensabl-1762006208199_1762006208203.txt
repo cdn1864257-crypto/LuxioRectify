@@ -1,0 +1,198 @@
+Parfait ! Je vais te générer les 3 templates HTML optimisés avec CSS inline, ce qui est indispensable pour une compatibilité totale avec Gmail, Outlook et la majorité des clients mail, tout en conservant le design Luxio premium.
+
+Voici la version optimisée :
+
+
+---
+
+1️⃣ Email d’inscription / validation de compte (CSS inline)
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirmez votre inscription</title>
+</head>
+<body style="margin:0; padding:0; font-family:'Poppins',sans-serif; background-color:#f9f9f9;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f9f9f9">
+  <tr>
+    <td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff; border-radius:8px; margin:20px 0; padding:20px;">
+        <tr>
+          <td align="center" style="padding-bottom:20px;">
+            <img src="[URL_LOGO]" alt="Luxio Logo" width="120" style="display:block;">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h1 style="color:#333333; font-size:24px; margin:0 0 15px 0;">Bonjour [Prénom],</h1>
+            <p style="color:#555555; font-size:16px; line-height:1.5; margin:0 0 15px 0;">
+              Merci d’avoir rejoint Luxio ✨<br>
+              Pour activer votre compte et accéder à nos offres premium, veuillez confirmer votre adresse e-mail en cliquant sur le bouton ci-dessous :
+            </p>
+            <p style="text-align:center; margin:20px 0;">
+              <a href="[LIEN_CONFIRMATION]" style="display:inline-block; padding:12px 24px; background-color:#003366; color:#ffffff; text-decoration:none; border-radius:6px; font-weight:bold;">Confirmer mon compte</a>
+            </p>
+            <p style="color:#555555; font-size:16px; line-height:1.5; margin:0 0 15px 0;">
+              Ce lien est valable pendant 24 heures.<br>
+              Si vous n’êtes pas à l’origine de cette inscription, vous pouvez ignorer ce message.
+            </p>
+            <p style="color:#555555; font-size:16px; line-height:1.5; margin:0;">
+              À très bientôt,<br>L’équipe Luxio
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding-top:20px; font-size:12px; color:#999999;">
+            &copy; 2025 Luxio. Tous droits réservés.
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
+
+
+---
+
+2️⃣ Email de confirmation de commande (en attente de paiement)
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commande reçue</title>
+</head>
+<body style="margin:0; padding:0; font-family:'Poppins',sans-serif; background-color:#f9f9f9;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f9f9f9">
+  <tr>
+    <td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff; border-radius:8px; margin:20px 0; padding:20px;">
+        <tr>
+          <td align="center" style="padding-bottom:20px;">
+            <img src="[URL_LOGO]" alt="Luxio Logo" width="120" style="display:block;">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h1 style="color:#333333; font-size:24px; margin:0 0 15px 0;">Bonjour [Prénom],</h1>
+            <p style="color:#555555; font-size:16px; line-height:1.5; margin:0 0 15px 0;">
+              Nous avons bien reçu votre commande #[NuméroCommande] sur Luxio.<br>
+              Votre paiement n’a pas encore été validé. Pour finaliser votre commande, merci de suivre les instructions correspondant à votre méthode de paiement :
+            </p>
+            <table width="100%" cellpadding="10" cellspacing="0" border="0" bgcolor="#f1f1f1" style="border-radius:6px; margin:15px 0;">
+              <tr>
+                <td style="color:#555555; font-size:16px;">
+                  <strong>Article(s) :</strong> [Liste des produits]<br>
+                  <strong>Montant total :</strong> [Montant]<br>
+                  <strong>Mode de paiement :</strong> [Moyen de paiement]
+                </td>
+              </tr>
+            </table>
+            <p style="text-align:center; margin:20px 0;">
+              <a href="[LIEN_PAIEMENT]" style="display:inline-block; padding:12px 24px; background-color:#003366; color:#ffffff; text-decoration:none; border-radius:6px; font-weight:bold;">Payer ma commande</a>
+            </p>
+            <p style="color:#555555; font-size:16px; line-height:1.5; margin:0 0 15px 0;">
+              Vous recevrez une notification dès que votre commande sera confirmée.<br>Merci pour votre confiance 💎
+            </p>
+            <p style="color:#555555; font-size:16px; line-height:1.5; margin:0;">
+              Cordialement,<br>L’équipe Luxio
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding-top:20px; font-size:12px; color:#999999;">
+            &copy; 2025 Luxio. Tous droits réservés.
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
+
+
+---
+
+3️⃣ Email de validation de commande (paiement confirmé)
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commande confirmée</title>
+</head>
+<body style="margin:0; padding:0; font-family:'Poppins',sans-serif; background-color:#f9f9f9;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f9f9f9">
+  <tr>
+    <td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff; border-radius:8px; margin:20px 0; padding:20px;">
+        <tr>
+          <td align="center" style="padding-bottom:20px;">
+            <img src="[URL_LOGO]" alt="Luxio Logo" width="120" style="display:block;">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h1 style="color:#333333; font-size:24px; margin:0 0 15px 0;">Bonjour [Prénom],</h1>
+            <p style="color:#555555; font-size:16px; line-height:1.5; margin:0 0 15px 0;">
+              Bonne nouvelle ! 🎉<br>
+              Votre commande #[NuméroCommande] a été validée avec succès.
+            </p>
+            <table width="100%" cellpadding="10" cellspacing="0" border="0" bgcolor="#f1f1f1" style="border-radius:6px; margin:15px 0;">
+              <tr>
+                <td style="color:#555555; font-size:16px;">
+                  <strong>Article(s) :</strong> [Liste des produits]<br>
+                  <strong>Montant total :</strong> [Montant]<br>
+                  <strong>Statut :</strong> Confirmée<br>
+                  <strong>Date :</strong> [Date]
+                </td>
+              </tr>
+            </table>
+            <p style="color:#555555; font-size:16px; line-height:1.5; margin:0 0 15px 0;">
+              Nous vous informerons dès que votre commande sera expédiée.<br>
+              Merci de votre confiance et bienvenue parmi les clients Luxio Premium 💎
+            </p>
+            <p style="color:#555555; font-size:16px; line-height:1.5; margin:0;">
+              À très bientôt,<br>L’équipe Luxio
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding-top:20px; font-size:12px; color:#999999;">
+            &copy; 2025 Luxio. Tous droits réservés.
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
+
+
+---
+
+✅ Caractéristiques de cette version inline :
+
+Compatible Gmail, Outlook, Yahoo, Apple Mail
+
+Responsive pour mobile et desktop
+
+Design premium Luxio : couleurs, boutons, marges aérées
+
+Facilement traduisible et personnalisable via [Prénom], [NuméroCommande], [LIEN_PAIEMENT], [URL_LOGO], etc.
+
+
+
+---
+
+Si tu veux, je peux aussi te créer une version encore plus avancée avec bouton CTA animé et fallback couleur pour Outlook, pour un rendu ultra-pro sur tous les clients mail.
+
+Veux‑tu que je fasse ça ?
