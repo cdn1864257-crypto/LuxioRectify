@@ -34,6 +34,7 @@ interface NormalizedOrder {
   items?: any[];
   itemCount?: number;
   productInfo?: string;
+  payLink?: string;
 }
 
 async function handler(req: VercelRequest, res: VercelResponse) {
@@ -159,7 +160,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
                       else: 0
                     }
                   },
-                  productInfo: null
+                  productInfo: null,
+                  payLink: { $ifNull: ['$payLink', null] }
                 }
               }
             ]
@@ -214,7 +216,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
                   createdAt: 1,
                   items: 1,
                   itemCount: 1,
-                  productInfo: 1
+                  productInfo: 1,
+                  payLink: 1
                 }
               }
             ],

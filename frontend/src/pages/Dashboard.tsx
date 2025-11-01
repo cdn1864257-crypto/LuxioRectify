@@ -84,6 +84,7 @@ interface Order {
   items?: any[];
   itemCount?: number;
   productInfo?: string;
+  payLink?: string;
 }
 
 interface OrdersResponse {

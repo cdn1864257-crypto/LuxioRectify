@@ -1,0 +1,72 @@
+Bonjour,
+
+Je souhaite rendre la section “Voir les instructions” et le message “Actions requises” du dashboard utilisateur interactifs et dynamiques, en fonction du statut réel de la commande, pour les paiements via OxaPay (crypto) et virement bancaire. Voici les modifications à apporter :
+
+1. Paiement via OxaPay (crypto) :
+
+Le bouton “Voir les instructions” doit afficher :
+
+Si la commande est en attente et dans le délai de 30 minutes :
+
+Un message clair expliquant les étapes restantes pour finaliser le paiement.
+
+Un bouton interactif permettant de reprendre le paiement sur la page OxaPay originale avec le décompte persistant (ne doit pas se réinitialiser).
+
+
+Si le paiement n’a pas été effectué dans le délai de 30 minutes :
+
+Afficher “Commande expirée” au lieu du texte actuel.
+
+Le bouton pour revenir sur OxaPay doit disparaître ou être désactivé.
+
+
+
+
+2. Paiement via virement bancaire :
+
+Le bouton “Voir les instructions” continue d’afficher les informations bancaires et instructions de paiement pendant le délai de 24h.
+
+Si le délai de 24h est dépassé sans confirmation manuelle du paiement :
+
+Afficher “Commande expirée” à la place des informations bancaires.
+
+Supprimer ou désactiver toute possibilité de valider ou relancer le virement pour cette commande.
+
+
+
+3. Section “Actions requises” :
+
+Actuellement affiché : “Payez sous 24h pour réserver le stock” → à remplacer par un message dynamique selon le type de paiement et le statut de la commande :
+
+Pour OxaPay :
+
+Si la commande est en attente : “Payer via OxaPay dans le temps restant pour confirmer votre commande.”
+
+Si expirée : “Commande expirée – paiement non reçu.”
+
+
+Pour virement bancaire :
+
+Si en attente : “Effectuez votre virement bancaire dans le délai indiqué pour confirmer votre commande.”
+
+Si expirée : “Commande expirée – paiement non reçu.”
+
+
+
+
+4. Logique backend / frontend :
+
+Le statut réel de la commande doit être utilisé pour afficher dynamiquement les messages et boutons.
+
+Pour OxaPay, la commande doit conserver le timestamp de création pour calculer le temps restant afin que le décompte persistant fonctionne même si l’utilisateur quitte la page.
+
+Pour le virement bancaire, le délai de 24h doit être respecté et reflété côté front-end dans la section “Voir les instructions” et “Actions requises”.
+
+
+Merci de corriger le code backend et frontend pour que :
+
+Les instructions affichées soient dynamiques et cohérentes avec le statut réel de la commande.
+
+Les boutons de reprise de paiement soient actifs uniquement si la commande est encore valable.
+
+Les messages de la section “Actions requises” soient clairs et adaptés au type de paiement et statut.
