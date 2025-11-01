@@ -815,35 +815,72 @@ export default function Dashboard() {
             <div className="space-y-4 py-4">
               {instructionsModal.order.paymentMethod === 'bank_transfer' && (
                 <>
-                  <div className="space-y-3 text-sm">
-                    <div className="w-full max-w-full p-3 sm:p-4 bg-muted rounded-lg space-y-2 box-border">
-                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
-                        <span className="font-medium text-xs sm:text-sm">{t('beneficiary')}:</span>
-                        <span className="text-xs sm:text-sm break-all">Matt Luxio</span>
+                  {isOrderExpired(instructionsModal.order) ? (
+                    <div className="p-4 bg-red-50 dark:bg-red-950/30 rounded-lg">
+                      <div className="flex items-center gap-3 mb-2">
+                        <XCircle className="h-5 w-5 text-red-600 dark:text-red-400" />
+                        <h3 className="font-semibold text-red-900 dark:text-red-100">
+                          {language === 'fr' ? 'Commande expirée' : 'Order expired'}
+                        </h3>
                       </div>
-                      <Separator />
-                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
-                        <span className="font-medium text-xs sm:text-sm">IBAN:</span>
-                        <span className="font-mono text-xs break-all">ES6115632626383268707364</span>
-                      </div>
-                      <Separator />
-                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
-                        <span className="font-medium text-xs sm:text-sm">BIC:</span>
-                        <span className="text-xs sm:text-sm break-all">NTSBESM1XXX</span>
-                      </div>
-                      <Separator />
-                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
-                        <span className="font-medium text-xs sm:text-sm">{t('paymentReference')}:</span>
-                        <span className="font-mono text-xs sm:text-sm break-all text-primary font-semibold">{instructionsModal.order.orderReference}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg text-sm">
-                      <p className="text-blue-900 dark:text-blue-100">
-                        {t('bankTransferInstructionsMessage')}
+                      <p className="text-red-900 dark:text-red-100 text-sm">
+                        {language === 'fr' 
+                          ? 'Le délai de 24h pour effectuer le virement bancaire est dépassé. Cette commande a expiré et ne peut plus être validée.'
+                          : 'The 24-hour period to complete the bank transfer has passed. This order has expired and can no longer be validated.'}
                       </p>
                     </div>
-                  </div>
+                  ) : (
+                    <>
+                      <div className="space-y-3 text-sm">
+                        <div className="w-full max-w-full p-3 sm:p-4 bg-muted rounded-lg space-y-2 box-border">
+                          <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
+                            <span className="font-medium text-xs sm:text-sm">{t('beneficiary')}:</span>
+                            <span className="text-xs sm:text-sm break-all">Matt Luxio</span>
+                          </div>
+                          <Separator />
+                          <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
+                            <span className="font-medium text-xs sm:text-sm">IBAN:</span>
+                            <span className="font-mono text-xs break-all">ES6115632626383268707364</span>
+                          </div>
+                          <Separator />
+                          <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
+                            <span className="font-medium text-xs sm:text-sm">BIC:</span>
+                            <span className="text-xs sm:text-sm break-all">NTSBESM1XXX</span>
+                          </div>
+                          <Separator />
+                          <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
+                            <span className="font-medium text-xs sm:text-sm">{t('paymentReference')}:</span>
+                            <span className="font-mono text-xs sm:text-sm break-all text-primary font-semibold">{instructionsModal.order.orderReference}</span>
+                          </div>
+                        </div>
+                        
+                        <div className="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg text-sm">
+                          <p className="text-blue-900 dark:text-blue-100">
+                            {t('bankTransferInstructionsMessage')}
+                          </p>
+                        </div>
+                        
+                        {(() => {
+                          const timeRemaining = getTimeRemaining(instructionsModal.order);
+                          if (timeRemaining) {
+                            return (
+                              <div className="p-3 bg-orange-50 dark:bg-orange-950/30 rounded-lg text-sm">
+                                <div className="flex items-center gap-2">
+                                  <Clock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
+                                  <p className="text-orange-900 dark:text-orange-100 font-medium">
+                                    {language === 'fr' 
+                                      ? `Temps restant : ${timeRemaining.label}`
+                                      : `Time remaining: ${timeRemaining.label}`}
+                                  </p>
+                                </div>
+                              </div>
+                            );
+                          }
+                          return null;
+                        })()}
+                      </div>
+                    </>
+                  )}
                 </>
               )}
 
@@ -856,11 +893,62 @@ export default function Dashboard() {
               )}
 
               {instructionsModal.order.paymentMethod === 'oxapay' && (
-                <div className="p-4 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
-                  <p className="text-purple-900 dark:text-purple-100 text-sm">
-                    {t('oxapayConfirmationMessage')}
-                  </p>
-                </div>
+                <>
+                  {isOrderExpired(instructionsModal.order) ? (
+                    <div className="p-4 bg-red-50 dark:bg-red-950/30 rounded-lg">
+                      <div className="flex items-center gap-3 mb-2">
+                        <XCircle className="h-5 w-5 text-red-600 dark:text-red-400" />
+                        <h3 className="font-semibold text-red-900 dark:text-red-100">
+                          {language === 'fr' ? 'Commande expirée' : 'Order expired'}
+                        </h3>
+                      </div>
+                      <p className="text-red-900 dark:text-red-100 text-sm mb-4">
+                        {language === 'fr' 
+                          ? 'Le délai de 30 minutes pour effectuer le paiement via OxaPay est dépassé. Cette commande a expiré.'
+                          : 'The 30-minute period to complete payment via OxaPay has passed. This order has expired.'}
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="p-4 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
+                        <p className="text-purple-900 dark:text-purple-100 text-sm mb-3">
+                          {language === 'fr'
+                            ? 'Pour finaliser votre paiement, cliquez sur le bouton ci-dessous pour accéder à la page de paiement OxaPay.'
+                            : 'To complete your payment, click the button below to access the OxaPay payment page.'}
+                        </p>
+                        {instructionsModal.order.payLink && (
+                          <Button 
+                            className="w-full"
+                            onClick={() => window.open(instructionsModal.order!.payLink!, '_blank')}
+                            data-testid="button-resume-oxapay"
+                          >
+                            <CreditCard className="h-4 w-4 mr-2" />
+                            {language === 'fr' ? 'Reprendre le paiement' : 'Resume payment'}
+                          </Button>
+                        )}
+                      </div>
+                      
+                      {(() => {
+                        const timeRemaining = getTimeRemaining(instructionsModal.order);
+                        if (timeRemaining) {
+                          return (
+                            <div className="p-3 bg-orange-50 dark:bg-orange-950/30 rounded-lg text-sm">
+                              <div className="flex items-center gap-2">
+                                <Clock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
+                                <p className="text-orange-900 dark:text-orange-100 font-medium">
+                                  {language === 'fr' 
+                                    ? `Temps restant : ${timeRemaining.label}`
+                                    : `Time remaining: ${timeRemaining.label}`}
+                                </p>
+                              </div>
+                            </div>
+                          );
+                        }
+                        return null;
+                      })()}
+                    </>
+                  )}
+                </>
               )}
             </div>
           )}
