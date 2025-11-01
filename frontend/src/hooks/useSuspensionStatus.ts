@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { getApiUrl } from '../lib/utils';
+import { getApiUrl } from '../lib/config';
 
 export interface SuspensionStatus {
   status: 'active' | 'suspended' | 'blocked';
