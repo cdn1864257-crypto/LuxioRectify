@@ -313,7 +313,7 @@ export function Header({ onToggleCart }: HeaderProps) {
             </div>
 
             {/* Search Bar - Hidden on mobile/tablet, visible on large screens */}
-            <div className="hidden xl:flex flex-1 max-w-md">
+            <div className="hidden xl:flex w-[220px]">
               <SearchAutocomplete className="w-full" />
             </div>
             
