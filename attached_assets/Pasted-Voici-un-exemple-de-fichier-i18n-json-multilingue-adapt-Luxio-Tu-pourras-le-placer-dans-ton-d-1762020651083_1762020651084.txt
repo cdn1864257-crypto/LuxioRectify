@@ -1,0 +1,102 @@
+Voici un exemple de fichier i18n.json multilingue adapté à Luxio 💎
+
+Tu pourras le placer dans ton dossier backend (par ex. /locales/i18n.json) et l’utiliser pour générer les emails dans la langue de l’utilisateur.
+
+
+---
+
+📄 i18n.json
+
+{
+  "fr": {
+    "email_verification": {
+      "subject": "Confirmez votre inscription sur Luxio",
+      "greeting": "Bonjour",
+      "message": "Merci d’avoir rejoint Luxio ✨ Pour activer votre compte et accéder à nos offres premium, veuillez confirmer votre adresse e-mail en cliquant sur le bouton ci-dessous :",
+      "button": "Confirmer mon compte",
+      "footer": "À très bientôt,<br><strong>L’équipe Luxio</strong>",
+      "link_expiry": "Ce lien est valable pendant 1 heure."
+    },
+    "order_confirmation": {
+      "subject": "Votre commande Luxio a bien été enregistrée 🕓",
+      "message": "Nous avons bien reçu votre commande. Elle est actuellement en attente de validation.",
+      "footer": "Merci pour votre confiance 💎"
+    },
+    "order_validated": {
+      "subject": "Votre commande Luxio est confirmée 🎉",
+      "message": "Bonne nouvelle ! Votre commande a été validée avec succès.",
+      "footer": "Bienvenue parmi les clients Luxio Premium 💎"
+    }
+  },
+
+  "en": {
+    "email_verification": {
+      "subject": "Confirm your registration on Luxio",
+      "greeting": "Hello",
+      "message": "Thank you for joining Luxio ✨ To activate your account and access our premium offers, please confirm your email address by clicking the button below:",
+      "button": "Confirm my account",
+      "footer": "See you soon,<br><strong>The Luxio Team</strong>",
+      "link_expiry": "This link is valid for 1 hour."
+    },
+    "order_confirmation": {
+      "subject": "Your Luxio order has been received 🕓",
+      "message": "We have successfully received your order. It is currently pending validation.",
+      "footer": "Thank you for your trust 💎"
+    },
+    "order_validated": {
+      "subject": "Your Luxio order is confirmed 🎉",
+      "message": "Good news! Your order has been successfully validated.",
+      "footer": "Welcome to Luxio Premium 💎"
+    }
+  },
+
+  "es": {
+    "email_verification": {
+      "subject": "Confirma tu registro en Luxio",
+      "greeting": "Hola",
+      "message": "Gracias por unirte a Luxio ✨ Para activar tu cuenta y acceder a nuestras ofertas premium, confirma tu correo electrónico haciendo clic en el botón de abajo:",
+      "button": "Confirmar mi cuenta",
+      "footer": "Hasta pronto,<br><strong>Equipo Luxio</strong>",
+      "link_expiry": "Este enlace es válido por 1 hora."
+    },
+    "order_confirmation": {
+      "subject": "Tu pedido en Luxio ha sido recibido 🕓",
+      "message": "Hemos recibido tu pedido. Está pendiente de validación.",
+      "footer": "Gracias por tu confianza 💎"
+    },
+    "order_validated": {
+      "subject": "Tu pedido en Luxio está confirmado 🎉",
+      "message": "¡Buenas noticias! Tu pedido ha sido validado con éxito.",
+      "footer": "Bienvenido a Luxio Premium 💎"
+    }
+  }
+}
+
+
+---
+
+⚙️ Comment l’utiliser côté Replit :
+
+Dans ton code backend, tu peux importer ce fichier et sélectionner la langue dynamiquement :
+
+import i18n from './locales/i18n.json' assert { type: "json" };
+
+const lang = user.language || 'fr';
+const t = i18n[lang].email_verification;
+
+sendMail({
+  to: user.email,
+  subject: t.subject,
+  html: template
+    .replace('[Prénom]', user.firstName)
+    .replace('Bonjour', t.greeting)
+    .replace('Merci d’avoir rejoint Luxio ✨...', t.message)
+    .replace('Confirmer mon compte', t.button)
+    .replace('À très bientôt,<br><strong>L’équipe Luxio</strong>', t.footer)
+});
+
+
+---
+
+Souhaites-tu que je t’ajoute les 3 sections complètes (inscription + commande reçue + commande validée) déjà traduites dans un fichier téléchargeable i18n.json ?
+👉 Ainsi tu pourras le mettre directement dans ton projet Replit.
