@@ -163,8 +163,8 @@ export async function sendVerificationEmail(
   const validLanguages = ['fr', 'en', 'es', 'pt', 'pl', 'hu'];
   const emailLang = validLanguages.includes(lang) ? lang as EmailLanguage : 'fr';
   const t = getTranslation(emailLang);
-  const baseUrl = process.env.FRONTEND_URL || process.env.REPLIT_DEV_DOMAIN || 'https://luxiomarket.shop';
-  const verificationUrl = `${baseUrl}/verify-email?token=${verificationToken}`;
+  const backendUrl = process.env.BACKEND_URL || 'https://api.luxiomarket.shop';
+  const verificationUrl = `${backendUrl}/api/auth/verify-email?token=${verificationToken}`;
   
   const htmlContent = getEmailLayout(`
     <h2>${t.verify_email_title}</h2>

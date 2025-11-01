@@ -28,8 +28,13 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const token = req.method === 'POST' ? req.body.token : req.query.token;
+    const frontendUrl = process.env.FRONTEND_URL || 'https://luxiomarket.shop';
 
     if (!token || typeof token !== 'string') {
+      if (req.method === 'GET') {
+        res.setHeader('Location', `${frontendUrl}/verify-failed`);
+        return res.status(302).end();
+      }
       return res.status(400).json({ 
         error: 'VERIFICATION_TOKEN_MISSING',
         message: getErrorMessage('VERIFICATION_TOKEN_MISSING', 'en'),
@@ -39,6 +44,10 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
+      if (req.method === 'GET') {
+        res.setHeader('Location', `${frontendUrl}/verify-failed`);
+        return res.status(302).end();
+      }
       return res.status(500).json({ 
         error: 'INTERNAL_SERVER_ERROR',
         message: getErrorMessage('INTERNAL_SERVER_ERROR', 'en')
@@ -64,6 +73,10 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         });
 
         if (userWithExpiredToken && userWithExpiredToken.isEmailVerified) {
+          if (req.method === 'GET') {
+            res.setHeader('Location', `${frontendUrl}/verify-success`);
+            return res.status(302).end();
+          }
           const userLanguage = userWithExpiredToken.language || 'en';
           return res.status(200).json({ 
             message: getErrorMessage('EMAIL_ALREADY_VERIFIED', userLanguage),
@@ -73,6 +86,10 @@ async function handler(req: VercelRequest, res: VercelResponse) {
           });
         }
 
+        if (req.method === 'GET') {
+          res.setHeader('Location', `${frontendUrl}/verify-failed`);
+          return res.status(302).end();
+        }
         return res.status(400).json({ 
           error: 'VERIFICATION_TOKEN_INVALID',
           message: getErrorMessage('VERIFICATION_TOKEN_INVALID', 'en'),
@@ -83,6 +100,10 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const userLanguage = user.language || 'en';
 
       if (user.isEmailVerified) {
+        if (req.method === 'GET') {
+          res.setHeader('Location', `${frontendUrl}/verify-success`);
+          return res.status(302).end();
+        }
         return res.status(200).json({ 
           message: getErrorMessage('EMAIL_ALREADY_VERIFIED', userLanguage),
           success: true,
@@ -120,6 +141,10 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         if (process.env.NODE_ENV !== 'production') {
           console.error('⚠️ JWT_SECRET not configured, user will need to login manually');
         }
+        if (req.method === 'GET') {
+          res.setHeader('Location', `${frontendUrl}/verify-success`);
+          return res.status(302).end();
+        }
         return res.status(200).json({
           message: getErrorMessage('EMAIL_VERIFIED_SUCCESS', userLanguage),
           success: true,
@@ -156,6 +181,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
       res.setHeader('Set-Cookie', cookie);
 
+      if (req.method === 'GET') {
+        res.setHeader('Location', `${frontendUrl}/verify-success`);
+        return res.status(302).end();
+      }
+
       return res.status(200).json({
         message: getErrorMessage('EMAIL_VERIFIED_SUCCESS', userLanguage),
         success: true,
@@ -179,6 +209,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   } catch (error) {
     if (process.env.NODE_ENV !== 'production') {
       console.error('Erreur lors de la vérification de l\'email:', error);
+    }
+    const frontendUrl = process.env.FRONTEND_URL || 'https://luxiomarket.shop';
+    if (req.method === 'GET') {
+      res.setHeader('Location', `${frontendUrl}/verify-failed`);
+      return res.status(302).end();
     }
     return res.status(500).json({
       error: 'INTERNAL_SERVER_ERROR',
