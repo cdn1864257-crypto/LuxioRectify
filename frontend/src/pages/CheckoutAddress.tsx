@@ -30,7 +30,6 @@ export default function CheckoutAddress() {
   const [, setLocation] = useLocation();
 
   const [useRegistered, setUseRegistered] = useState(false);
-  const [countryCode, setCountryCode] = useState('');
   const [formData, setFormData] = useState<AddressForm>({
     firstName: '',
     lastName: '',
@@ -246,7 +245,6 @@ export default function CheckoutAddress() {
                   disabled={useRegistered}
                   required
                   data-testid="input-phone"
-                  placeholder="+33 6 12 34 56 78"
                   className="w-full"
                 />
               </div>
@@ -273,14 +271,8 @@ export default function CheckoutAddress() {
                     handleChange('city', address.city || address.town || address.village || '');
                     handleChange('postalCode', address.postcode || '');
                     handleChange('country', address.country || '');
-                    // country_code n'est pas toujours disponible dans le type address
-                    const countryCodeValue = (address as any).country_code;
-                    if (countryCodeValue) {
-                      setCountryCode(countryCodeValue.toUpperCase());
-                    }
                   }}
                   disabled={useRegistered}
-                  placeholder="123 Rue de la Paix"
                   data-testid="input-address"
                 />
               </div>
@@ -311,7 +303,6 @@ export default function CheckoutAddress() {
                     onChange={(e) => handleChange('postalCode', e.target.value)}
                     disabled={useRegistered}
                     data-testid="input-postal-code"
-                    placeholder="75001"
                     className="w-full"
                   />
                 </div>
