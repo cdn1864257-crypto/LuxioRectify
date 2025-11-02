@@ -163,7 +163,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
       newErrors.address = t('addressRequired');
     } else if (!addressValidated && !manualAddressConfirmed) {
       newErrors.address = t('pleaseSelectAddressFromSuggestions');
-    } else if (!isValidAddress(formData.address)) {
+    } else if (manualAddressConfirmed && !isValidAddress(formData.address)) {
       newErrors.address = t('invalidAddress');
     }
     
