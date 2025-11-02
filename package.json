@@ -13,7 +13,9 @@
     "check": "tsc",
     "db:push": "drizzle-kit push",
     "seed:products": "tsx utils/seed-products.ts",
-    "seed:products:upsert": "tsx utils/seed-products.ts upsert"
+    "seed:products:upsert": "tsx utils/seed-products.ts upsert",
+    "pricing:apply": "tsx utils/apply-intelligent-discounts.ts",
+    "pricing:rules": "tsx -e \"import('./utils/intelligent-pricing.js').then(m => m.displayDiscountRules())\""
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

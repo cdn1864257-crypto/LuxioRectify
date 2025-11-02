@@ -21,1705 +21,4419 @@ export interface Product {
 }
 
 export const products: Product[] = [
-  // === SMARTPHONES - Latest 2025 Models from GSMArena ===
-  // iPhone 17 Pro Max with variants (Prix réel Apple: 1479€ - Prix officiel France 2025)
   {
-    id: 'iphone-17-pro-max',
-    name: 'iPhone 17 Pro Max',
+    id: "iphone-17-pro-max",
+    name: "iPhone 17 Pro Max",
     price: 1198,
     originalPrice: 1479,
     discount: 19,
-    image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.9" ProMotion Display',
-    features: ['Apple A19 Pro chip', '6.9" LTPO OLED 120Hz', '48MP triple camera', 'Ceramic Shield 2', 'Free shipping'],
+    image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg",
+    category: "smartphones",
+    description: "From 256GB - 6.9\" ProMotion Display",
+    features: [
+      "Apple A19 Pro chip",
+      "6.9\" LTPO OLED 120Hz",
+      "48MP triple camera",
+      "Ceramic Shield 2",
+      "Free shipping"
+    ],
     hasVariants: true,
     variants: [
-      { color: 'Silver', capacity: '256GB', price: 1198, originalPrice: 1479, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg' },
-      { color: 'Silver', capacity: '512GB', price: 1400, originalPrice: 1729, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg' },
-      { color: 'Silver', capacity: '1TB', price: 1603, originalPrice: 1979, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg' },
-      { color: 'Silver', capacity: '2TB', price: 2008, originalPrice: 2479, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg' },
-      { color: 'Cosmic Orange', capacity: '256GB', price: 1198, originalPrice: 1479, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg' },
-      { color: 'Cosmic Orange', capacity: '512GB', price: 1400, originalPrice: 1729, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg' },
-      { color: 'Cosmic Orange', capacity: '1TB', price: 1603, originalPrice: 1979, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg' },
-      { color: 'Cosmic Orange', capacity: '2TB', price: 2008, originalPrice: 2479, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg' },
-      { color: 'Deep Blue', capacity: '256GB', price: 1198, originalPrice: 1479, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg' },
-      { color: 'Deep Blue', capacity: '512GB', price: 1400, originalPrice: 1729, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg' },
-      { color: 'Deep Blue', capacity: '1TB', price: 1603, originalPrice: 1979, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg' },
-      { color: 'Deep Blue', capacity: '2TB', price: 2008, originalPrice: 2479, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg' },
+      {
+        color: "Silver",
+        capacity: "256GB",
+        price: 1198,
+        originalPrice: 1479,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg"
+      },
+      {
+        color: "Silver",
+        capacity: "512GB",
+        price: 1400,
+        originalPrice: 1729,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg"
+      },
+      {
+        color: "Silver",
+        capacity: "1TB",
+        price: 1603,
+        originalPrice: 1979,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg"
+      },
+      {
+        color: "Silver",
+        capacity: "2TB",
+        price: 2008,
+        originalPrice: 2479,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg"
+      },
+      {
+        color: "Cosmic Orange",
+        capacity: "256GB",
+        price: 1198,
+        originalPrice: 1479,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg"
+      },
+      {
+        color: "Cosmic Orange",
+        capacity: "512GB",
+        price: 1400,
+        originalPrice: 1729,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg"
+      },
+      {
+        color: "Cosmic Orange",
+        capacity: "1TB",
+        price: 1603,
+        originalPrice: 1979,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg"
+      },
+      {
+        color: "Cosmic Orange",
+        capacity: "2TB",
+        price: 2008,
+        originalPrice: 2479,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg"
+      },
+      {
+        color: "Deep Blue",
+        capacity: "256GB",
+        price: 1198,
+        originalPrice: 1479,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg"
+      },
+      {
+        color: "Deep Blue",
+        capacity: "512GB",
+        price: 1400,
+        originalPrice: 1729,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg"
+      },
+      {
+        color: "Deep Blue",
+        capacity: "1TB",
+        price: 1603,
+        originalPrice: 1979,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg"
+      },
+      {
+        color: "Deep Blue",
+        capacity: "2TB",
+        price: 2008,
+        originalPrice: 2479,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg"
+      }
     ]
   },
-  // iPhone 17 Pro with variants (Prix réel Apple: 1279€ - Prix officiel France 2025)
   {
-    id: 'iphone-17-pro',
-    name: 'iPhone 17 Pro',
-    price: 985,
+    id: "iphone-17-pro",
+    name: "iPhone 17 Pro",
+    price: 1036,
     originalPrice: 1279,
-    discount: 23,
-    image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.3" ProMotion Display',
-    features: ['Apple A19 Pro chip', '6.3" LTPO OLED 120Hz', '48MP triple camera', 'Aluminum frame', 'Free shipping'],
+    discount: 19,
+    image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg",
+    category: "smartphones",
+    description: "From 256GB - 6.3\" ProMotion Display",
+    features: [
+      "Apple A19 Pro chip",
+      "6.3\" LTPO OLED 120Hz",
+      "48MP triple camera",
+      "Aluminum frame",
+      "Free shipping"
+    ],
     hasVariants: true,
     variants: [
-      { color: 'Silver', capacity: '256GB', price: 985, originalPrice: 1279, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg' },
-      { color: 'Silver', capacity: '512GB', price: 1200, originalPrice: 1559, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg' },
-      { color: 'Silver', capacity: '1TB', price: 1462, originalPrice: 1899, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg' },
-      { color: 'Cosmic Orange', capacity: '256GB', price: 985, originalPrice: 1279, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg' },
-      { color: 'Cosmic Orange', capacity: '512GB', price: 1200, originalPrice: 1559, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg' },
-      { color: 'Cosmic Orange', capacity: '1TB', price: 1462, originalPrice: 1899, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg' },
-      { color: 'Deep Blue', capacity: '256GB', price: 985, originalPrice: 1279, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg' },
-      { color: 'Deep Blue', capacity: '512GB', price: 1200, originalPrice: 1559, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg' },
-      { color: 'Deep Blue', capacity: '1TB', price: 1462, originalPrice: 1899, image: '/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg' },
+      {
+        color: "Silver",
+        capacity: "256GB",
+        price: 1036,
+        originalPrice: 1279,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg"
+      },
+      {
+        color: "Silver",
+        capacity: "512GB",
+        price: 1263,
+        originalPrice: 1559,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg"
+      },
+      {
+        color: "Silver",
+        capacity: "1TB",
+        price: 1538,
+        originalPrice: 1899,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Argent_1759314457115.jpg"
+      },
+      {
+        color: "Cosmic Orange",
+        capacity: "256GB",
+        price: 1036,
+        originalPrice: 1279,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg"
+      },
+      {
+        color: "Cosmic Orange",
+        capacity: "512GB",
+        price: 1263,
+        originalPrice: 1559,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg"
+      },
+      {
+        color: "Cosmic Orange",
+        capacity: "1TB",
+        price: 1538,
+        originalPrice: 1899,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Orange-cosmique_1759310512498.jpg"
+      },
+      {
+        color: "Deep Blue",
+        capacity: "256GB",
+        price: 1036,
+        originalPrice: 1279,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg"
+      },
+      {
+        color: "Deep Blue",
+        capacity: "512GB",
+        price: 1263,
+        originalPrice: 1559,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg"
+      },
+      {
+        color: "Deep Blue",
+        capacity: "1TB",
+        price: 1538,
+        originalPrice: 1899,
+        image: "/attached_assets/Apple-iPhone-17-Pro-6-3-5G-Double-SIM-256-Go-Bleu-intense_1759314214762.jpg"
+      }
     ]
   },
-  // iPhone Air with variants (Prix estimé: 1129€ basé sur positionnement marché)
   {
-    id: 'iphone-air',
-    name: 'iPhone Air',
-    price: 937,
+    id: "iphone-air",
+    name: "iPhone Air",
+    price: 914,
     originalPrice: 1129,
-    discount: 17,
-    image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Noir-sideral_1759322561021.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Ultra-thin 5.6mm design',
-    features: ['Apple A19 Pro chip', '6.5" LTPO OLED 120Hz', '48MP camera', '5.6mm thickness', 'Free shipping'],
+    discount: 19,
+    image: "/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Noir-sideral_1759322561021.jpg",
+    category: "smartphones",
+    description: "From 256GB - Ultra-thin 5.6mm design",
+    features: [
+      "Apple A19 Pro chip",
+      "6.5\" LTPO OLED 120Hz",
+      "48MP camera",
+      "5.6mm thickness",
+      "Free shipping"
+    ],
     hasVariants: true,
     variants: [
-      { color: 'Space Black', capacity: '256GB', price: 937, originalPrice: 1129, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Noir-sideral_1759322561021.jpg' },
-      { color: 'Space Black', capacity: '512GB', price: 1161, originalPrice: 1399, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Noir-sideral_1759322561021.jpg' },
-      { color: 'Space Black', capacity: '1TB', price: 1410, originalPrice: 1699, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Noir-sideral_1759322561021.jpg' },
-      { color: 'Cloud White', capacity: '256GB', price: 937, originalPrice: 1129, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Blanc-nuage_1759322404982.jpg' },
-      { color: 'Cloud White', capacity: '512GB', price: 1161, originalPrice: 1399, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Blanc-nuage_1759322404982.jpg' },
-      { color: 'Cloud White', capacity: '1TB', price: 1410, originalPrice: 1699, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Blanc-nuage_1759322404982.jpg' },
-      { color: 'Light Gold', capacity: '256GB', price: 937, originalPrice: 1129, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Or-clair_1759322683006.jpg' },
-      { color: 'Light Gold', capacity: '512GB', price: 1161, originalPrice: 1399, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Or-clair_1759322683006.jpg' },
-      { color: 'Light Gold', capacity: '1TB', price: 1410, originalPrice: 1699, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Or-clair_1759322683006.jpg' },
-      { color: 'Sky Blue', capacity: '256GB', price: 937, originalPrice: 1129, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Bleu-ciel_1759318428193.jpg' },
-      { color: 'Sky Blue', capacity: '512GB', price: 1161, originalPrice: 1399, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Bleu-ciel_1759318428193.jpg' },
-      { color: 'Sky Blue', capacity: '1TB', price: 1410, originalPrice: 1699, image: '/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Bleu-ciel_1759318428193.jpg' },
+      {
+        color: "Space Black",
+        capacity: "256GB",
+        price: 914,
+        originalPrice: 1129,
+        image: "/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Noir-sideral_1759322561021.jpg"
+      },
+      {
+        color: "Space Black",
+        capacity: "512GB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Noir-sideral_1759322561021.jpg"
+      },
+      {
+        color: "Space Black",
+        capacity: "1TB",
+        price: 1376,
+        originalPrice: 1699,
+        image: "/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Noir-sideral_1759322561021.jpg"
+      },
+      {
+        color: "Cloud White",
+        capacity: "256GB",
+        price: 914,
+        originalPrice: 1129,
+        image: "/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Blanc-nuage_1759322404982.jpg"
+      },
+      {
+        color: "Cloud White",
+        capacity: "512GB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Blanc-nuage_1759322404982.jpg"
+      },
+      {
+        color: "Cloud White",
+        capacity: "1TB",
+        price: 1376,
+        originalPrice: 1699,
+        image: "/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Blanc-nuage_1759322404982.jpg"
+      },
+      {
+        color: "Light Gold",
+        capacity: "256GB",
+        price: 914,
+        originalPrice: 1129,
+        image: "/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Or-clair_1759322683006.jpg"
+      },
+      {
+        color: "Light Gold",
+        capacity: "512GB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Or-clair_1759322683006.jpg"
+      },
+      {
+        color: "Light Gold",
+        capacity: "1TB",
+        price: 1376,
+        originalPrice: 1699,
+        image: "/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Or-clair_1759322683006.jpg"
+      },
+      {
+        color: "Sky Blue",
+        capacity: "256GB",
+        price: 914,
+        originalPrice: 1129,
+        image: "/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Bleu-ciel_1759318428193.jpg"
+      },
+      {
+        color: "Sky Blue",
+        capacity: "512GB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Bleu-ciel_1759318428193.jpg"
+      },
+      {
+        color: "Sky Blue",
+        capacity: "1TB",
+        price: 1376,
+        originalPrice: 1699,
+        image: "/attached_assets/Apple-iPhone-Air-6-5-5G-e-SIM-256-Go-Bleu-ciel_1759318428193.jpg"
+      }
     ]
   },
-  // iPhone 17 with variants (Prix réel Apple: 969€ - Prix officiel France 2025)
   {
-    id: 'iphone-17',
-    name: 'iPhone 17',
+    id: "iphone-17",
+    name: "iPhone 17",
     price: 746,
     originalPrice: 969,
     discount: 23,
-    image: '/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Noir_1759324097779.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.3" Display',
-    features: ['Apple A19 chip', '6.3" LTPO OLED 120Hz', '48MP dual camera', 'All-day battery', 'Free shipping'],
+    image: "/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Noir_1759324097779.jpg",
+    category: "smartphones",
+    description: "From 256GB - 6.3\" Display",
+    features: [
+      "Apple A19 chip",
+      "6.3\" LTPO OLED 120Hz",
+      "48MP dual camera",
+      "All-day battery",
+      "Free shipping"
+    ],
     hasVariants: true,
     variants: [
-      { color: 'Black', capacity: '256GB', price: 746, originalPrice: 969, image: '/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Noir_1759324097779.jpg' },
-      { color: 'Black', capacity: '512GB', price: 962, originalPrice: 1249, image: '/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Noir_1759324097779.jpg' },
-      { color: 'White', capacity: '256GB', price: 746, originalPrice: 969, image: '/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Blanc_1759324113595.jpg' },
-      { color: 'White', capacity: '512GB', price: 962, originalPrice: 1249, image: '/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Blanc_1759324113595.jpg' },
-      { color: 'Mist Blue', capacity: '256GB', price: 746, originalPrice: 969, image: '/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Brume_1759324138609.jpg' },
-      { color: 'Mist Blue', capacity: '512GB', price: 962, originalPrice: 1249, image: '/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Brume_1759324138609.jpg' },
-      { color: 'Sage', capacity: '256GB', price: 746, originalPrice: 969, image: '/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Sauge_1759324153800.jpg' },
-      { color: 'Sage', capacity: '512GB', price: 962, originalPrice: 1249, image: '/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Sauge_1759324153800.jpg' },
-      { color: 'Lavender', capacity: '256GB', price: 746, originalPrice: 969, image: '/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Lavande_1759324169426.jpg' },
-      { color: 'Lavender', capacity: '512GB', price: 962, originalPrice: 1249, image: '/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Lavande_1759324169426.jpg' },
+      {
+        color: "Black",
+        capacity: "256GB",
+        price: 746,
+        originalPrice: 969,
+        image: "/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Noir_1759324097779.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "512GB",
+        price: 1012,
+        originalPrice: 1249,
+        image: "/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Noir_1759324097779.jpg"
+      },
+      {
+        color: "White",
+        capacity: "256GB",
+        price: 746,
+        originalPrice: 969,
+        image: "/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Blanc_1759324113595.jpg"
+      },
+      {
+        color: "White",
+        capacity: "512GB",
+        price: 1012,
+        originalPrice: 1249,
+        image: "/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Blanc_1759324113595.jpg"
+      },
+      {
+        color: "Mist Blue",
+        capacity: "256GB",
+        price: 746,
+        originalPrice: 969,
+        image: "/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Brume_1759324138609.jpg"
+      },
+      {
+        color: "Mist Blue",
+        capacity: "512GB",
+        price: 1012,
+        originalPrice: 1249,
+        image: "/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Brume_1759324138609.jpg"
+      },
+      {
+        color: "Sage",
+        capacity: "256GB",
+        price: 746,
+        originalPrice: 969,
+        image: "/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Sauge_1759324153800.jpg"
+      },
+      {
+        color: "Sage",
+        capacity: "512GB",
+        price: 1012,
+        originalPrice: 1249,
+        image: "/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Sauge_1759324153800.jpg"
+      },
+      {
+        color: "Lavender",
+        capacity: "256GB",
+        price: 746,
+        originalPrice: 969,
+        image: "/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Lavande_1759324169426.jpg"
+      },
+      {
+        color: "Lavender",
+        capacity: "512GB",
+        price: 1012,
+        originalPrice: 1249,
+        image: "/attached_assets/Apple-iPhone-17-6-3-5G-Double-SIM-256-Go-Lavande_1759324169426.jpg"
+      }
     ]
   },
-  // iPhone 16 Pro Max with variants (Prix réel: 1599€)
   {
-    id: 'iphone-16-pro-max',
-    name: 'iPhone 16 Pro Max',
-    price: 1257,
+    id: "iphone-16-pro-max",
+    name: "iPhone 16 Pro Max",
+    price: 1376,
     originalPrice: 1699,
-    discount: 26,
-    image: '/attached_assets/smartphones/iphone-16-pro-max.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Previous Gen Flagship',
-    features: ['Apple A18 Pro chip', '6.9" LTPO OLED 120Hz', '48MP triple camera', 'Titanium design', 'Free shipping'],
+    discount: 19,
+    image: "/attached_assets/smartphones/iphone-16-pro-max.jpg",
+    category: "smartphones",
+    description: "From 256GB - Previous Gen Flagship",
+    features: [
+      "Apple A18 Pro chip",
+      "6.9\" LTPO OLED 120Hz",
+      "48MP triple camera",
+      "Titanium design",
+      "Free shipping"
+    ],
     hasVariants: true,
     variants: [
-      { color: 'Black Titanium', capacity: '256GB', price: 1257, originalPrice: 1699, image: '/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Noir-Titane_1759324889065.jpg' },
-      { color: 'Black Titanium', capacity: '512GB', price: 1442, originalPrice: 1949, image: '/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Noir-Titane_1759324889065.jpg' },
-      { color: 'Black Titanium', capacity: '1TB', price: 1627, originalPrice: 2199, image: '/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Noir-Titane_1759324889065.jpg' },
-      { color: 'White Titanium', capacity: '256GB', price: 1257, originalPrice: 1699, image: '/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Blanc_1759324874203.jpg' },
-      { color: 'White Titanium', capacity: '512GB', price: 1442, originalPrice: 1949, image: '/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Blanc_1759324874203.jpg' },
-      { color: 'White Titanium', capacity: '1TB', price: 1627, originalPrice: 2199, image: '/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Blanc_1759324874203.jpg' },
-      { color: 'Natural Titanium', capacity: '256GB', price: 1257, originalPrice: 1699, image: '/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Naturel_1759324804335.jpg' },
-      { color: 'Natural Titanium', capacity: '512GB', price: 1442, originalPrice: 1949, image: '/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Naturel_1759324804335.jpg' },
-      { color: 'Natural Titanium', capacity: '1TB', price: 1627, originalPrice: 2199, image: '/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Naturel_1759324804335.jpg' },
-      { color: 'Desert Titanium', capacity: '256GB', price: 1257, originalPrice: 1699, image: '/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Sable_1759324903118.jpg' },
-      { color: 'Desert Titanium', capacity: '512GB', price: 1442, originalPrice: 1949, image: '/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Sable_1759324903118.jpg' },
-      { color: 'Desert Titanium', capacity: '1TB', price: 1627, originalPrice: 2199, image: '/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Sable_1759324903118.jpg' },
+      {
+        color: "Black Titanium",
+        capacity: "256GB",
+        price: 1376,
+        originalPrice: 1699,
+        image: "/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Noir-Titane_1759324889065.jpg"
+      },
+      {
+        color: "Black Titanium",
+        capacity: "512GB",
+        price: 1579,
+        originalPrice: 1949,
+        image: "/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Noir-Titane_1759324889065.jpg"
+      },
+      {
+        color: "Black Titanium",
+        capacity: "1TB",
+        price: 1781,
+        originalPrice: 2199,
+        image: "/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Noir-Titane_1759324889065.jpg"
+      },
+      {
+        color: "White Titanium",
+        capacity: "256GB",
+        price: 1376,
+        originalPrice: 1699,
+        image: "/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Blanc_1759324874203.jpg"
+      },
+      {
+        color: "White Titanium",
+        capacity: "512GB",
+        price: 1579,
+        originalPrice: 1949,
+        image: "/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Blanc_1759324874203.jpg"
+      },
+      {
+        color: "White Titanium",
+        capacity: "1TB",
+        price: 1781,
+        originalPrice: 2199,
+        image: "/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Blanc_1759324874203.jpg"
+      },
+      {
+        color: "Natural Titanium",
+        capacity: "256GB",
+        price: 1376,
+        originalPrice: 1699,
+        image: "/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Naturel_1759324804335.jpg"
+      },
+      {
+        color: "Natural Titanium",
+        capacity: "512GB",
+        price: 1579,
+        originalPrice: 1949,
+        image: "/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Naturel_1759324804335.jpg"
+      },
+      {
+        color: "Natural Titanium",
+        capacity: "1TB",
+        price: 1781,
+        originalPrice: 2199,
+        image: "/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Naturel_1759324804335.jpg"
+      },
+      {
+        color: "Desert Titanium",
+        capacity: "256GB",
+        price: 1376,
+        originalPrice: 1699,
+        image: "/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Sable_1759324903118.jpg"
+      },
+      {
+        color: "Desert Titanium",
+        capacity: "512GB",
+        price: 1579,
+        originalPrice: 1949,
+        image: "/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Sable_1759324903118.jpg"
+      },
+      {
+        color: "Desert Titanium",
+        capacity: "1TB",
+        price: 1781,
+        originalPrice: 2199,
+        image: "/attached_assets/Apple-iPhone-16-Pro-Max-6-9-5G-512-Go-Double-SIM-Titane-Sable_1759324903118.jpg"
+      }
     ]
   },
-  // Samsung Galaxy S25 Ultra with variants (Prix réel Europe: 1459€ - Prix officiel 2025)
   {
-    id: 'samsung-s25-ultra',
-    name: 'Samsung Galaxy S25 Ultra',
-    price: 1036,
+    id: "samsung-s25-ultra",
+    name: "Samsung Galaxy S25 Ultra",
+    price: 1182,
     originalPrice: 1459,
-    discount: 29,
-    image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Bleu-Titane_1759325465780.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - S Pen included',
-    features: ['Snapdragon 8 Elite', '6.9" Dynamic AMOLED 120Hz', '200MP quad camera', 'S Pen stylus', 'Free shipping'],
+    discount: 19,
+    image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Bleu-Titane_1759325465780.jpg",
+    category: "smartphones",
+    description: "From 256GB - S Pen included",
+    features: [
+      "Snapdragon 8 Elite",
+      "6.9\" Dynamic AMOLED 120Hz",
+      "200MP quad camera",
+      "S Pen stylus",
+      "Free shipping"
+    ],
     hasVariants: true,
     variants: [
-      { color: 'Titanium Blue', capacity: '256GB', price: 1036, originalPrice: 1459, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Bleu-Titane_1759325465780.jpg' },
-      { color: 'Titanium Blue', capacity: '512GB', price: 1171, originalPrice: 1649, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Bleu-Titane_1759325465780.jpg' },
-      { color: 'Titanium Blue', capacity: '1TB', price: 1320, originalPrice: 1859, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Bleu-Titane_1759325465780.jpg' },
-      { color: 'Titanium Black', capacity: '256GB', price: 1036, originalPrice: 1459, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Noir-Titane_1759325379132.jpg' },
-      { color: 'Titanium Black', capacity: '512GB', price: 1171, originalPrice: 1649, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Noir-Titane_1759325379132.jpg' },
-      { color: 'Titanium Black', capacity: '1TB', price: 1320, originalPrice: 1859, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Noir-Titane_1759325379132.jpg' },
-      { color: 'Titanium White Silver', capacity: '256GB', price: 1036, originalPrice: 1459, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Argent-Titane_1759325409731.jpg' },
-      { color: 'Titanium White Silver', capacity: '512GB', price: 1171, originalPrice: 1649, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Argent-Titane_1759325409731.jpg' },
-      { color: 'Titanium White Silver', capacity: '1TB', price: 1320, originalPrice: 1859, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Argent-Titane_1759325409731.jpg' },
-      { color: 'Titanium Gray', capacity: '256GB', price: 1036, originalPrice: 1459, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Gris-Titane_1759325395910.jpg' },
-      { color: 'Titanium Gray', capacity: '512GB', price: 1171, originalPrice: 1649, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Gris-Titane_1759325395910.jpg' },
-      { color: 'Titanium Gray', capacity: '1TB', price: 1320, originalPrice: 1859, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Gris-Titane_1759325395910.jpg' },
+      {
+        color: "Titanium Blue",
+        capacity: "256GB",
+        price: 1182,
+        originalPrice: 1459,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Bleu-Titane_1759325465780.jpg"
+      },
+      {
+        color: "Titanium Blue",
+        capacity: "512GB",
+        price: 1336,
+        originalPrice: 1649,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Bleu-Titane_1759325465780.jpg"
+      },
+      {
+        color: "Titanium Blue",
+        capacity: "1TB",
+        price: 1506,
+        originalPrice: 1859,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Bleu-Titane_1759325465780.jpg"
+      },
+      {
+        color: "Titanium Black",
+        capacity: "256GB",
+        price: 1182,
+        originalPrice: 1459,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Noir-Titane_1759325379132.jpg"
+      },
+      {
+        color: "Titanium Black",
+        capacity: "512GB",
+        price: 1336,
+        originalPrice: 1649,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Noir-Titane_1759325379132.jpg"
+      },
+      {
+        color: "Titanium Black",
+        capacity: "1TB",
+        price: 1506,
+        originalPrice: 1859,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Noir-Titane_1759325379132.jpg"
+      },
+      {
+        color: "Titanium White Silver",
+        capacity: "256GB",
+        price: 1182,
+        originalPrice: 1459,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Argent-Titane_1759325409731.jpg"
+      },
+      {
+        color: "Titanium White Silver",
+        capacity: "512GB",
+        price: 1336,
+        originalPrice: 1649,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Argent-Titane_1759325409731.jpg"
+      },
+      {
+        color: "Titanium White Silver",
+        capacity: "1TB",
+        price: 1506,
+        originalPrice: 1859,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Argent-Titane_1759325409731.jpg"
+      },
+      {
+        color: "Titanium Gray",
+        capacity: "256GB",
+        price: 1182,
+        originalPrice: 1459,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Gris-Titane_1759325395910.jpg"
+      },
+      {
+        color: "Titanium Gray",
+        capacity: "512GB",
+        price: 1336,
+        originalPrice: 1649,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Gris-Titane_1759325395910.jpg"
+      },
+      {
+        color: "Titanium Gray",
+        capacity: "1TB",
+        price: 1506,
+        originalPrice: 1859,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-Ultra-6-9-5G-Nano-SIM-256-Go-Gris-Titane_1759325395910.jpg"
+      }
     ]
   },
-  // Samsung Galaxy S25 with variants (Prix réel France 256GB: ~730-800€)
   {
-    id: 'samsung-s25',
-    name: 'Samsung Galaxy S25',
-    price: 603,
+    id: "samsung-s25",
+    name: "Samsung Galaxy S25",
+    price: 654,
     originalPrice: 849,
-    discount: 29,
-    image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Bleu-clair_1759326111013.jpg',
-    category: 'smartphones',
-    description: 'From 128GB - Compact flagship',
-    features: ['Snapdragon 8 Elite', '6.2" Dynamic AMOLED 120Hz', '50MP triple camera', 'Armor aluminum frame', 'Free shipping'],
+    discount: 23,
+    image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Bleu-clair_1759326111013.jpg",
+    category: "smartphones",
+    description: "From 128GB - Compact flagship",
+    features: [
+      "Snapdragon 8 Elite",
+      "6.2\" Dynamic AMOLED 120Hz",
+      "50MP triple camera",
+      "Armor aluminum frame",
+      "Free shipping"
+    ],
     hasVariants: true,
     variants: [
-      { color: 'Blue', capacity: '128GB', price: 532, originalPrice: 749, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Bleu-clair_1759326111013.jpg' },
-      { color: 'Blue', capacity: '256GB', price: 603, originalPrice: 849, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Bleu-clair_1759326111013.jpg' },
-      { color: 'Blue', capacity: '512GB', price: 709, originalPrice: 999, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Bleu-clair_1759326111013.jpg' },
-      { color: 'Mint', capacity: '128GB', price: 532, originalPrice: 749, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Vert-d-eau_1759326125556.jpg' },
-      { color: 'Mint', capacity: '256GB', price: 603, originalPrice: 849, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Vert-d-eau_1759326125556.jpg' },
-      { color: 'Mint', capacity: '512GB', price: 709, originalPrice: 999, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Vert-d-eau_1759326125556.jpg' },
-      { color: 'Navy', capacity: '128GB', price: 532, originalPrice: 749, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Bleu-nuit_1759326096205.jpg' },
-      { color: 'Navy', capacity: '256GB', price: 603, originalPrice: 849, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Bleu-nuit_1759326096205.jpg' },
-      { color: 'Navy', capacity: '512GB', price: 709, originalPrice: 999, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Bleu-nuit_1759326096205.jpg' },
-      { color: 'Silver', capacity: '128GB', price: 532, originalPrice: 749, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Gris_1759326139974.jpg' },
-      { color: 'Silver', capacity: '256GB', price: 603, originalPrice: 849, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Gris_1759326139974.jpg' },
-      { color: 'Silver', capacity: '512GB', price: 709, originalPrice: 999, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Gris_1759326139974.jpg' },
-      { color: 'Black', capacity: '128GB', price: 532, originalPrice: 749, image: '/attached_assets/1540-1_1759326201697.jpg' },
-      { color: 'Black', capacity: '256GB', price: 603, originalPrice: 849, image: '/attached_assets/1540-1_1759326201697.jpg' },
-      { color: 'Black', capacity: '512GB', price: 709, originalPrice: 999, image: '/attached_assets/1540-1_1759326201697.jpg' },
+      {
+        color: "Blue",
+        capacity: "128GB",
+        price: 577,
+        originalPrice: 749,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Bleu-clair_1759326111013.jpg"
+      },
+      {
+        color: "Blue",
+        capacity: "256GB",
+        price: 654,
+        originalPrice: 849,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Bleu-clair_1759326111013.jpg"
+      },
+      {
+        color: "Blue",
+        capacity: "512GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Bleu-clair_1759326111013.jpg"
+      },
+      {
+        color: "Mint",
+        capacity: "128GB",
+        price: 577,
+        originalPrice: 749,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Vert-d-eau_1759326125556.jpg"
+      },
+      {
+        color: "Mint",
+        capacity: "256GB",
+        price: 654,
+        originalPrice: 849,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Vert-d-eau_1759326125556.jpg"
+      },
+      {
+        color: "Mint",
+        capacity: "512GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Vert-d-eau_1759326125556.jpg"
+      },
+      {
+        color: "Navy",
+        capacity: "128GB",
+        price: 577,
+        originalPrice: 749,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Bleu-nuit_1759326096205.jpg"
+      },
+      {
+        color: "Navy",
+        capacity: "256GB",
+        price: 654,
+        originalPrice: 849,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Bleu-nuit_1759326096205.jpg"
+      },
+      {
+        color: "Navy",
+        capacity: "512GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Bleu-nuit_1759326096205.jpg"
+      },
+      {
+        color: "Silver",
+        capacity: "128GB",
+        price: 577,
+        originalPrice: 749,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Gris_1759326139974.jpg"
+      },
+      {
+        color: "Silver",
+        capacity: "256GB",
+        price: 654,
+        originalPrice: 849,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Gris_1759326139974.jpg"
+      },
+      {
+        color: "Silver",
+        capacity: "512GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-2-5G-Nano-SIM-128-Go-Gris_1759326139974.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "128GB",
+        price: 577,
+        originalPrice: 749,
+        image: "/attached_assets/1540-1_1759326201697.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "256GB",
+        price: 654,
+        originalPrice: 849,
+        image: "/attached_assets/1540-1_1759326201697.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "512GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/1540-1_1759326201697.jpg"
+      }
     ]
   },
-  // Samsung Galaxy Z Fold7 with variants (Prix réel France: 2099€)
   {
-    id: 'samsung-z-fold7',
-    name: 'Samsung Galaxy Z Fold7',
-    price: 1693,
+    id: "samsung-z-fold7",
+    name: "Samsung Galaxy Z Fold7",
+    price: 1781,
     originalPrice: 2199,
-    discount: 23,
-    image: '/attached_assets/Smartphone-Samsung-Galaxy-Z-Fold7-8-5G-Double-nano-SIM-512-Go-Bleu-nuit_1759326583198.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Foldable flagship',
-    features: ['Snapdragon 8 Elite', '8.0" foldable AMOLED', '200MP camera', 'Ultra-thin design', 'Free shipping'],
+    discount: 19,
+    image: "/attached_assets/Smartphone-Samsung-Galaxy-Z-Fold7-8-5G-Double-nano-SIM-512-Go-Bleu-nuit_1759326583198.jpg",
+    category: "smartphones",
+    description: "From 256GB - Foldable flagship",
+    features: [
+      "Snapdragon 8 Elite",
+      "8.0\" foldable AMOLED",
+      "200MP camera",
+      "Ultra-thin design",
+      "Free shipping"
+    ],
     hasVariants: true,
     variants: [
-      { color: 'Blue Shadow', capacity: '256GB', price: 1693, originalPrice: 2199, image: '/attached_assets/Smartphone-Samsung-Galaxy-Z-Fold7-8-5G-Double-nano-SIM-512-Go-Bleu-nuit_1759326583198.jpg' },
-      { color: 'Blue Shadow', capacity: '512GB', price: 1809, originalPrice: 2349, image: '/attached_assets/Smartphone-Samsung-Galaxy-Z-Fold7-8-5G-Double-nano-SIM-512-Go-Bleu-nuit_1759326583198.jpg' },
-      { color: 'Blue Shadow', capacity: '1TB', price: 2040, originalPrice: 2649, image: '/attached_assets/Smartphone-Samsung-Galaxy-Z-Fold7-8-5G-Double-nano-SIM-512-Go-Bleu-nuit_1759326583198.jpg' },
+      {
+        color: "Blue Shadow",
+        capacity: "256GB",
+        price: 1781,
+        originalPrice: 2199,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-Z-Fold7-8-5G-Double-nano-SIM-512-Go-Bleu-nuit_1759326583198.jpg"
+      },
+      {
+        color: "Blue Shadow",
+        capacity: "512GB",
+        price: 1903,
+        originalPrice: 2349,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-Z-Fold7-8-5G-Double-nano-SIM-512-Go-Bleu-nuit_1759326583198.jpg"
+      },
+      {
+        color: "Blue Shadow",
+        capacity: "1TB",
+        price: 2146,
+        originalPrice: 2649,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-Z-Fold7-8-5G-Double-nano-SIM-512-Go-Bleu-nuit_1759326583198.jpg"
+      }
     ]
   },
-  // Samsung Galaxy Z Flip7 with variants
   {
-    id: 'samsung-z-flip7',
-    name: 'Samsung Galaxy Z Flip7',
-    price: 881,
+    id: "samsung-z-flip7",
+    name: "Samsung Galaxy Z Flip7",
+    price: 850,
     originalPrice: 1049,
-    discount: 16,
-    image: '/attached_assets/Smartphone-Samsung-Galaxy-Z-Flip7-6-9-5G-Nano-SIM-256-Go-Bleu-nuit_1759328351454.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Compact foldable',
-    features: ['Exynos 2500', '6.9" foldable display', '50MP dual camera', 'Compact design', 'Free shipping'],
+    discount: 19,
+    image: "/attached_assets/Smartphone-Samsung-Galaxy-Z-Flip7-6-9-5G-Nano-SIM-256-Go-Bleu-nuit_1759328351454.jpg",
+    category: "smartphones",
+    description: "From 256GB - Compact foldable",
+    features: [
+      "Exynos 2500",
+      "6.9\" foldable display",
+      "50MP dual camera",
+      "Compact design",
+      "Free shipping"
+    ],
     hasVariants: true,
     variants: [
-      { color: 'Blue Shadow', capacity: '256GB', price: 881, originalPrice: 1049, image: '/attached_assets/Smartphone-Samsung-Galaxy-Z-Flip7-6-9-5G-Nano-SIM-256-Go-Bleu-nuit_1759328351454.jpg' },
-      { color: 'Blue Shadow', capacity: '512GB', price: 1049, originalPrice: 1249, image: '/attached_assets/Smartphone-Samsung-Galaxy-Z-Flip7-6-9-5G-Nano-SIM-256-Go-Bleu-nuit_1759328351454.jpg' },
+      {
+        color: "Blue Shadow",
+        capacity: "256GB",
+        price: 850,
+        originalPrice: 1049,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-Z-Flip7-6-9-5G-Nano-SIM-256-Go-Bleu-nuit_1759328351454.jpg"
+      },
+      {
+        color: "Blue Shadow",
+        capacity: "512GB",
+        price: 1012,
+        originalPrice: 1249,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-Z-Flip7-6-9-5G-Nano-SIM-256-Go-Bleu-nuit_1759328351454.jpg"
+      }
     ]
   },
-  // OnePlus 13 with variants (Prix réel Europe: 1029€ 256GB - Prix officiel 2025)
   {
-    id: 'oneplus-13',
-    name: 'OnePlus 13',
-    price: 720,
+    id: "oneplus-13",
+    name: "OnePlus 13",
+    price: 833,
     originalPrice: 1029,
-    discount: 30,
-    image: '/attached_assets/27735576-1505-3756-1_1759330494656.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.82" AMOLED Display',
-    features: ['Snapdragon 8 Elite', 'Triple 50MP cameras', '6000mAh + 100W charging', 'IP68/IP69', 'Free shipping'],
+    discount: 19,
+    image: "/attached_assets/27735576-1505-3756-1_1759330494656.jpg",
+    category: "smartphones",
+    description: "From 256GB - 6.82\" AMOLED Display",
+    features: [
+      "Snapdragon 8 Elite",
+      "Triple 50MP cameras",
+      "6000mAh + 100W charging",
+      "IP68/IP69",
+      "Free shipping"
+    ],
     hasVariants: true,
     variants: [
-      { color: 'Black Eclipse', capacity: '256GB', price: 720, originalPrice: 1029, image: '/attached_assets/27735576-1505-3756-1_1759330494656.jpg' },
-      { color: 'Black Eclipse', capacity: '512GB', price: 754, originalPrice: 1077, image: '/attached_assets/27735576-1505-3756-1_1759330494656.jpg' },
-      { color: 'Black Eclipse', capacity: '1TB', price: 839, originalPrice: 1199, image: '/attached_assets/27735576-1505-3756-1_1759330494656.jpg' },
-      { color: 'Arctic Dawn', capacity: '256GB', price: 720, originalPrice: 1029 },
-      { color: 'Arctic Dawn', capacity: '512GB', price: 754, originalPrice: 1077 },
-      { color: 'Arctic Dawn', capacity: '1TB', price: 839, originalPrice: 1199 },
-      { color: 'Midnight Ocean', capacity: '256GB', price: 720, originalPrice: 1029 },
-      { color: 'Midnight Ocean', capacity: '512GB', price: 754, originalPrice: 1077 },
-      { color: 'Midnight Ocean', capacity: '1TB', price: 839, originalPrice: 1199 },
+      {
+        color: "Black Eclipse",
+        capacity: "256GB",
+        price: 833,
+        originalPrice: 1029,
+        image: "/attached_assets/27735576-1505-3756-1_1759330494656.jpg"
+      },
+      {
+        color: "Black Eclipse",
+        capacity: "512GB",
+        price: 872,
+        originalPrice: 1077,
+        image: "/attached_assets/27735576-1505-3756-1_1759330494656.jpg"
+      },
+      {
+        color: "Black Eclipse",
+        capacity: "1TB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/27735576-1505-3756-1_1759330494656.jpg"
+      },
+      {
+        color: "Arctic Dawn",
+        capacity: "256GB",
+        price: 833,
+        originalPrice: 1029
+      },
+      {
+        color: "Arctic Dawn",
+        capacity: "512GB",
+        price: 872,
+        originalPrice: 1077
+      },
+      {
+        color: "Arctic Dawn",
+        capacity: "1TB",
+        price: 971,
+        originalPrice: 1199
+      },
+      {
+        color: "Midnight Ocean",
+        capacity: "256GB",
+        price: 833,
+        originalPrice: 1029
+      },
+      {
+        color: "Midnight Ocean",
+        capacity: "512GB",
+        price: 872,
+        originalPrice: 1077
+      },
+      {
+        color: "Midnight Ocean",
+        capacity: "1TB",
+        price: 971,
+        originalPrice: 1199
+      }
     ]
   },
-  // Xiaomi 15 with variants (Prix réel Europe 512GB: 1099€ - Prix officiel 2025)
   {
-    id: 'xiaomi-15',
-    name: 'Xiaomi 15',
-    price: 824,
+    id: "xiaomi-15",
+    name: "Xiaomi 15",
+    price: 890,
     originalPrice: 1099,
-    discount: 25,
-    image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Noir-concu-avec-Leica_1759354946925.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.36" LTPO AMOLED',
-    features: ['Snapdragon 8 Elite', 'Triple 50MP Leica', '5240mAh + 90W charging', 'IP68', 'Free shipping'],
+    discount: 19,
+    image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Noir-concu-avec-Leica_1759354946925.jpg",
+    category: "smartphones",
+    description: "From 256GB - 6.36\" LTPO AMOLED",
+    features: [
+      "Snapdragon 8 Elite",
+      "Triple 50MP Leica",
+      "5240mAh + 90W charging",
+      "IP68",
+      "Free shipping"
+    ],
     hasVariants: true,
     variants: [
-      { color: 'Black', capacity: '256GB', price: 704, originalPrice: 939, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Noir-concu-avec-Leica_1759354946925.jpg' },
-      { color: 'Black', capacity: '512GB', price: 824, originalPrice: 1099, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Noir-concu-avec-Leica_1759354946925.jpg' },
-      { color: 'Black', capacity: '1TB', price: 899, originalPrice: 1199, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Noir-concu-avec-Leica_1759354946925.jpg' },
-      { color: 'White', capacity: '256GB', price: 704, originalPrice: 939, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Blanc-concu-avec-Leica_1759354984244.jpg' },
-      { color: 'White', capacity: '512GB', price: 824, originalPrice: 1099, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Blanc-concu-avec-Leica_1759354984244.jpg' },
-      { color: 'White', capacity: '1TB', price: 899, originalPrice: 1199, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Blanc-concu-avec-Leica_1759354984244.jpg' },
-      { color: 'Green', capacity: '256GB', price: 704, originalPrice: 939, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Vert-concu-avec-Leica_1759354964947.jpg' },
-      { color: 'Green', capacity: '512GB', price: 824, originalPrice: 1099, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Vert-concu-avec-Leica_1759354964947.jpg' },
-      { color: 'Green', capacity: '1TB', price: 899, originalPrice: 1199, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Vert-concu-avec-Leica_1759354964947.jpg' },
+      {
+        color: "Black",
+        capacity: "256GB",
+        price: 723,
+        originalPrice: 939,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Noir-concu-avec-Leica_1759354946925.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "512GB",
+        price: 890,
+        originalPrice: 1099,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Noir-concu-avec-Leica_1759354946925.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "1TB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Noir-concu-avec-Leica_1759354946925.jpg"
+      },
+      {
+        color: "White",
+        capacity: "256GB",
+        price: 723,
+        originalPrice: 939,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Blanc-concu-avec-Leica_1759354984244.jpg"
+      },
+      {
+        color: "White",
+        capacity: "512GB",
+        price: 890,
+        originalPrice: 1099,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Blanc-concu-avec-Leica_1759354984244.jpg"
+      },
+      {
+        color: "White",
+        capacity: "1TB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Blanc-concu-avec-Leica_1759354984244.jpg"
+      },
+      {
+        color: "Green",
+        capacity: "256GB",
+        price: 723,
+        originalPrice: 939,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Vert-concu-avec-Leica_1759354964947.jpg"
+      },
+      {
+        color: "Green",
+        capacity: "512GB",
+        price: 890,
+        originalPrice: 1099,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Vert-concu-avec-Leica_1759354964947.jpg"
+      },
+      {
+        color: "Green",
+        capacity: "1TB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Vert-concu-avec-Leica_1759354964947.jpg"
+      }
     ]
   },
-  // Xiaomi 15 Ultra with variants
   {
-    id: 'xiaomi-15-ultra',
-    name: 'Xiaomi 15 Ultra',
-    price: 1349,
+    id: "xiaomi-15-ultra",
+    name: "Xiaomi 15 Ultra",
+    price: 1214,
     originalPrice: 1499,
-    discount: 10,
-    image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Noir-concu-avec-Leica_1759331432076.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.73" LTPO AMOLED',
-    features: ['Snapdragon 8 Elite', '200MP Leica telephoto', '6000mAh + 90W charging', 'IP68', 'Free shipping'],
+    discount: 19,
+    image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Noir-concu-avec-Leica_1759331432076.jpg",
+    category: "smartphones",
+    description: "From 256GB - 6.73\" LTPO AMOLED",
+    features: [
+      "Snapdragon 8 Elite",
+      "200MP Leica telephoto",
+      "6000mAh + 90W charging",
+      "IP68",
+      "Free shipping"
+    ],
     hasVariants: true,
     variants: [
-      { color: 'Black', capacity: '256GB', price: 1349, originalPrice: 1499, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Noir-concu-avec-Leica_1759331432076.jpg' },
-      { color: 'Black', capacity: '512GB', price: 1529, originalPrice: 1699, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Noir-concu-avec-Leica_1759331432076.jpg' },
-      { color: 'Black', capacity: '1TB', price: 1799, originalPrice: 1999, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Noir-concu-avec-Leica_1759331432076.jpg' },
-      { color: 'White', capacity: '256GB', price: 1349, originalPrice: 1499, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Blanc-concu-avec-Leica_1759331471829.jpg' },
-      { color: 'White', capacity: '512GB', price: 1529, originalPrice: 1699, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Blanc-concu-avec-Leica_1759331471829.jpg' },
-      { color: 'White', capacity: '1TB', price: 1799, originalPrice: 1999, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Blanc-concu-avec-Leica_1759331471829.jpg' },
-      { color: 'Green', capacity: '256GB', price: 1349, originalPrice: 1499, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Vert-concu-avec-Leica_1759331456210.jpg' },
-      { color: 'Green', capacity: '512GB', price: 1529, originalPrice: 1699, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Vert-concu-avec-Leica_1759331456210.jpg' },
-      { color: 'Green', capacity: '1TB', price: 1799, originalPrice: 1999, image: '/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Vert-concu-avec-Leica_1759331456210.jpg' },
+      {
+        color: "Black",
+        capacity: "256GB",
+        price: 1214,
+        originalPrice: 1499,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Noir-concu-avec-Leica_1759331432076.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "512GB",
+        price: 1376,
+        originalPrice: 1699,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Noir-concu-avec-Leica_1759331432076.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "1TB",
+        price: 1619,
+        originalPrice: 1999,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Noir-concu-avec-Leica_1759331432076.jpg"
+      },
+      {
+        color: "White",
+        capacity: "256GB",
+        price: 1214,
+        originalPrice: 1499,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Blanc-concu-avec-Leica_1759331471829.jpg"
+      },
+      {
+        color: "White",
+        capacity: "512GB",
+        price: 1376,
+        originalPrice: 1699,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Blanc-concu-avec-Leica_1759331471829.jpg"
+      },
+      {
+        color: "White",
+        capacity: "1TB",
+        price: 1619,
+        originalPrice: 1999,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Blanc-concu-avec-Leica_1759331471829.jpg"
+      },
+      {
+        color: "Green",
+        capacity: "256GB",
+        price: 1214,
+        originalPrice: 1499,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Vert-concu-avec-Leica_1759331456210.jpg"
+      },
+      {
+        color: "Green",
+        capacity: "512GB",
+        price: 1376,
+        originalPrice: 1699,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Vert-concu-avec-Leica_1759331456210.jpg"
+      },
+      {
+        color: "Green",
+        capacity: "1TB",
+        price: 1619,
+        originalPrice: 1999,
+        image: "/attached_assets/Smartphone-Xiaomi-15-6-36-5G-Double-Nano-SIM-512-Go-Vert-concu-avec-Leica_1759331456210.jpg"
+      }
     ]
   },
-  // Google Pixel 9 Pro XL with variants (Prix réel France 256GB: ~1216€)
   {
-    id: 'google-pixel-9-pro-xl',
-    name: 'Google Pixel 9 Pro XL',
-    price: 1169,
+    id: "google-pixel-9-pro-xl",
+    name: "Google Pixel 9 Pro XL",
+    price: 1052,
     originalPrice: 1299,
-    discount: 10,
-    image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Blanc-Porcelaine_1759331497802.jpg',
-    category: 'smartphones',
-    description: 'From 128GB - 6.8" Super Actua Display',
-    features: ['Google Tensor G4', '6.8" LTPO OLED 120Hz', '50MP triple camera', '7 years updates', 'Free shipping'],
+    discount: 19,
+    image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Blanc-Porcelaine_1759331497802.jpg",
+    category: "smartphones",
+    description: "From 128GB - 6.8\" Super Actua Display",
+    features: [
+      "Google Tensor G4",
+      "6.8\" LTPO OLED 120Hz",
+      "50MP triple camera",
+      "7 years updates",
+      "Free shipping"
+    ],
     hasVariants: true,
     variants: [
-      { color: 'Obsidian', capacity: '128GB', price: 989, originalPrice: 1099, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Noir-Obsidienne_1759331557774.jpg' },
-      { color: 'Obsidian', capacity: '256GB', price: 1079, originalPrice: 1199, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Noir-Obsidienne_1759331557774.jpg' },
-      { color: 'Obsidian', capacity: '512GB', price: 1259, originalPrice: 1399, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Noir-Obsidienne_1759331557774.jpg' },
-      { color: 'Obsidian', capacity: '1TB', price: 1529, originalPrice: 1699, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Noir-Obsidienne_1759331557774.jpg' },
-      { color: 'Porcelain', capacity: '128GB', price: 989, originalPrice: 1099, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Blanc-Porcelaine_1759331497802.jpg' },
-      { color: 'Porcelain', capacity: '256GB', price: 1079, originalPrice: 1199, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Blanc-Porcelaine_1759331497802.jpg' },
-      { color: 'Porcelain', capacity: '512GB', price: 1259, originalPrice: 1399, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Blanc-Porcelaine_1759331497802.jpg' },
-      { color: 'Porcelain', capacity: '1TB', price: 1529, originalPrice: 1699, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Blanc-Porcelaine_1759331497802.jpg' },
-      { color: 'Rose Quartz', capacity: '128GB', price: 989, originalPrice: 1099, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Rose-Qwartz_1759331524409.jpg' },
-      { color: 'Rose Quartz', capacity: '256GB', price: 1079, originalPrice: 1199, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Rose-Qwartz_1759331524409.jpg' },
-      { color: 'Rose Quartz', capacity: '512GB', price: 1259, originalPrice: 1399, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Rose-Qwartz_1759331524409.jpg' },
-      { color: 'Rose Quartz', capacity: '1TB', price: 1529, originalPrice: 1699, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Rose-Qwartz_1759331524409.jpg' },
-      { color: 'Sage', capacity: '128GB', price: 989, originalPrice: 1099, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Vert-Sauge_1759331544220.jpg' },
-      { color: 'Sage', capacity: '256GB', price: 1079, originalPrice: 1199, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Vert-Sauge_1759331544220.jpg' },
-      { color: 'Sage', capacity: '512GB', price: 1259, originalPrice: 1399, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Vert-Sauge_1759331544220.jpg' },
-      { color: 'Sage', capacity: '1TB', price: 1529, originalPrice: 1699, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Vert-Sauge_1759331544220.jpg' },
+      {
+        color: "Obsidian",
+        capacity: "128GB",
+        price: 890,
+        originalPrice: 1099,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Noir-Obsidienne_1759331557774.jpg"
+      },
+      {
+        color: "Obsidian",
+        capacity: "256GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Noir-Obsidienne_1759331557774.jpg"
+      },
+      {
+        color: "Obsidian",
+        capacity: "512GB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Noir-Obsidienne_1759331557774.jpg"
+      },
+      {
+        color: "Obsidian",
+        capacity: "1TB",
+        price: 1376,
+        originalPrice: 1699,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Noir-Obsidienne_1759331557774.jpg"
+      },
+      {
+        color: "Porcelain",
+        capacity: "128GB",
+        price: 890,
+        originalPrice: 1099,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Blanc-Porcelaine_1759331497802.jpg"
+      },
+      {
+        color: "Porcelain",
+        capacity: "256GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Blanc-Porcelaine_1759331497802.jpg"
+      },
+      {
+        color: "Porcelain",
+        capacity: "512GB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Blanc-Porcelaine_1759331497802.jpg"
+      },
+      {
+        color: "Porcelain",
+        capacity: "1TB",
+        price: 1376,
+        originalPrice: 1699,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Blanc-Porcelaine_1759331497802.jpg"
+      },
+      {
+        color: "Rose Quartz",
+        capacity: "128GB",
+        price: 890,
+        originalPrice: 1099,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Rose-Qwartz_1759331524409.jpg"
+      },
+      {
+        color: "Rose Quartz",
+        capacity: "256GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Rose-Qwartz_1759331524409.jpg"
+      },
+      {
+        color: "Rose Quartz",
+        capacity: "512GB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Rose-Qwartz_1759331524409.jpg"
+      },
+      {
+        color: "Rose Quartz",
+        capacity: "1TB",
+        price: 1376,
+        originalPrice: 1699,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Rose-Qwartz_1759331524409.jpg"
+      },
+      {
+        color: "Sage",
+        capacity: "128GB",
+        price: 890,
+        originalPrice: 1099,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Vert-Sauge_1759331544220.jpg"
+      },
+      {
+        color: "Sage",
+        capacity: "256GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Vert-Sauge_1759331544220.jpg"
+      },
+      {
+        color: "Sage",
+        capacity: "512GB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Vert-Sauge_1759331544220.jpg"
+      },
+      {
+        color: "Sage",
+        capacity: "1TB",
+        price: 1376,
+        originalPrice: 1699,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-XL-6-8-5G-Double-nano-SIM-256-Go-Vert-Sauge_1759331544220.jpg"
+      }
     ]
   },
-  // Motorola Razr 50 Ultra with variants (2024)
   {
-    id: 'motorola-razr-50-ultra',
-    name: 'Motorola Razr 50 Ultra',
-    price: 899,
+    id: "motorola-razr-50-ultra",
+    name: "Motorola Razr 50 Ultra",
+    price: 769,
     originalPrice: 999,
-    discount: 10,
-    image: '/attached_assets/Smartphone-Motorola-Razr50-Ultra-6-9-5G-Nano-SIM-512-Go-Bleu-Marine_1759335720194.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Flip Phone with 4.0" External Display',
-    features: ['Snapdragon 8s Gen 3', '6.9" Foldable AMOLED 165Hz', '50MP dual camera', 'IPX8 water resistance', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Midnight Blue', capacity: '256GB', price: 899, originalPrice: 999, image: '/attached_assets/Smartphone-Motorola-Razr50-Ultra-6-9-5G-Nano-SIM-512-Go-Bleu-Marine_1759335720194.jpg' },
-      { color: 'Midnight Blue', capacity: '512GB', price: 1034, originalPrice: 1149, image: '/attached_assets/Smartphone-Motorola-Razr50-Ultra-6-9-5G-Nano-SIM-512-Go-Bleu-Marine (1)_1759335734640.jpg' },
-      { color: 'Spring Green', capacity: '256GB', price: 899, originalPrice: 999 },
-      { color: 'Spring Green', capacity: '512GB', price: 1034, originalPrice: 1149 },
-      { color: 'Hot Pink', capacity: '256GB', price: 899, originalPrice: 999 },
-      { color: 'Hot Pink', capacity: '512GB', price: 1034, originalPrice: 1149 },
-      { color: 'Peach Fuzz', capacity: '256GB', price: 899, originalPrice: 999 },
-      { color: 'Peach Fuzz', capacity: '512GB', price: 1034, originalPrice: 1149 },
-    ]
-  },
-  // Motorola Razr 60 Ultra with variants (2025)
-  {
-    id: 'motorola-razr-60-ultra',
-    name: 'Motorola Razr 60 Ultra',
-    price: 1000,
-    originalPrice: 1099,
-    discount: 9,
-    image: '/attached_assets/Smartphone-Motorola-Razr-60-Ultra-7-5G-Double-SIM-512-Go-Pantone-Rio-red_1759466858775.jpg',
-    category: 'smartphones',
-    description: 'From 512GB - 7" Foldable Display',
-    features: ['Snapdragon 8 Elite', '7" Foldable AMOLED 185Hz', '50MP triple camera', 'IPX8 water resistance', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Pantone Rio Red', capacity: '512GB', price: 1000, originalPrice: 1099, image: '/attached_assets/Smartphone-Motorola-Razr-60-Ultra-7-5G-Double-SIM-512-Go-Pantone-Rio-red_1759466858775.jpg' },
-      { color: 'Pantone Rio Red', capacity: '1TB', price: 1181, originalPrice: 1299, image: '/attached_assets/Smartphone-Motorola-Razr-60-Ultra-7-5G-Double-SIM-512-Go-Pantone-Rio-red_1759466858775.jpg' },
-    ]
-  },
-  // Motorola Edge 60 Pro with variants (2025)
-  {
-    id: 'motorola-edge-60-pro',
-    name: 'Motorola Edge 60 Pro',
-    price: 719,
-    originalPrice: 799,
-    discount: 10,
-    image: '/attached_assets/Smartphone-Motorola-Edge-60-Pro-6-67-5G-Double-SIM-512-Go-Pantone-Dazzling-blue_1759466729446.jpg',
-    category: 'smartphones',
-    description: 'From 512GB - Quad-curved flagship',
-    features: ['Snapdragon 8 Elite', '6.7" pOLED 165Hz', 'Sony LYTIA 700C 50MP + quad camera', '6000mAh battery', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Pantone Dazzling Blue', capacity: '512GB', price: 719, originalPrice: 799, image: '/attached_assets/Smartphone-Motorola-Edge-60-Pro-6-67-5G-Double-SIM-512-Go-Pantone-Dazzling-blue_1759466729446.jpg' },
-      { color: 'Pantone Dazzling Blue', capacity: '1TB', price: 899, originalPrice: 999, image: '/attached_assets/Smartphone-Motorola-Edge-60-Pro-6-67-5G-Double-SIM-512-Go-Pantone-Dazzling-blue_1759466729446.jpg' },
-      { color: 'Sparking Grape', capacity: '512GB', price: 719, originalPrice: 799, image: '/attached_assets/Smartphone-Motorola-Edge-60-Pro-6-67-5G-Double-SIM-512-Go-Pantone-Sparking-grape_1759466741364.jpg' },
-      { color: 'Sparking Grape', capacity: '1TB', price: 899, originalPrice: 999, image: '/attached_assets/Smartphone-Motorola-Edge-60-Pro-6-67-5G-Double-SIM-512-Go-Pantone-Sparking-grape_1759466741364.jpg' },
-      { color: 'Pantone Shadow', capacity: '512GB', price: 719, originalPrice: 799, image: '/attached_assets/Smartphone-Motorola-Edge-60-Pro-6-67-5G-Double-SIM-512-Go-Pantone-Shadow_1759466770702.jpg' },
-      { color: 'Pantone Shadow', capacity: '1TB', price: 899, originalPrice: 999, image: '/attached_assets/Smartphone-Motorola-Edge-60-Pro-6-67-5G-Double-SIM-512-Go-Pantone-Shadow_1759466770702.jpg' },
-    ]
-  },
-  // Poco F6 Pro with variants (2024)
-  {
-    id: 'poco-f6-pro',
-    name: 'Poco F6 Pro',
-    price: 324,
-    originalPrice: 360,
-    discount: 10,
-    image: '/attached_assets/Smartphone-Xiaomi-POCO-F6-Pro-5G-6-67-12-Go-256-Go-Noir_1759335752253.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Flagship Killer',
-    features: ['Snapdragon 8 Gen 2', '6.67" WQHD+ AMOLED 120Hz', '50MP triple camera', '120W HyperCharge', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Black', capacity: '256GB', price: 324, originalPrice: 360, image: '/attached_assets/Smartphone-Xiaomi-POCO-F6-Pro-5G-6-67-12-Go-256-Go-Noir_1759335752253.jpg' },
-      { color: 'Black', capacity: '512GB', price: 414, originalPrice: 460, image: '/attached_assets/Smartphone-Xiaomi-POCO-F6-Pro-5G-6-67-12-Go-256-Go-Noir_1759335752253.jpg' },
-      { color: 'Black', capacity: '1TB', price: 540, originalPrice: 600, image: '/attached_assets/Smartphone-Xiaomi-POCO-F6-Pro-5G-6-67-12-Go-256-Go-Noir_1759335752253.jpg' },
-      { color: 'White', capacity: '256GB', price: 324, originalPrice: 360 },
-      { color: 'White', capacity: '512GB', price: 414, originalPrice: 460 },
-      { color: 'White', capacity: '1TB', price: 540, originalPrice: 600 },
-    ]
-  },
-  // Oppo Find X7 Ultra with variants (2024)
-  {
-    id: 'oppo-find-x7-ultra',
-    name: 'Oppo Find X7 Ultra',
-    price: 752,
-    originalPrice: 836,
-    discount: 10,
-    image: '/attached_assets/oppo-find-x7-ultra-1_1759355001580.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Quad Main Camera System',
-    features: ['Snapdragon 8 Gen 3', '6.82" LTPO AMOLED 120Hz', '50MP quad camera', 'Hasselblad tuning', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Ocean Blue', capacity: '256GB', price: 752, originalPrice: 836, image: '/attached_assets/oppo-find-x7-ultra-1_1759355001580.jpg' },
-      { color: 'Ocean Blue', capacity: '512GB', price: 896, originalPrice: 995, image: '/attached_assets/oppo-find-x7-ultra-1_1759355001580.jpg' },
-      { color: 'Sepia Brown', capacity: '256GB', price: 752, originalPrice: 836, image: '/attached_assets/oppo-find-x7-ultra-1_1759355001580.jpg' },
-      { color: 'Sepia Brown', capacity: '512GB', price: 896, originalPrice: 995, image: '/attached_assets/oppo-find-x7-ultra-1_1759355001580.jpg' },
-      { color: 'Tailored Black', capacity: '256GB', price: 752, originalPrice: 836, image: '/attached_assets/oppo-find-x7-ultra-1_1759355001580.jpg' },
-      { color: 'Tailored Black', capacity: '512GB', price: 896, originalPrice: 995, image: '/attached_assets/oppo-find-x7-ultra-1_1759355001580.jpg' },
-    ]
-  },
-  // Vivo X100 Pro with variants (2024)
-  {
-    id: 'vivo-x100-pro',
-    name: 'Vivo X100 Pro',
-    price: 810,
-    originalPrice: 900,
-    discount: 10,
-    image: '/attached_assets/vivo-x100-pro-1_1759355067920.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - ZEISS Optics',
-    features: ['Dimensity 9300', '6.78" LTPO AMOLED 120Hz', '50MP triple ZEISS', '100W fast charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Startrail Blue', capacity: '256GB', price: 810, originalPrice: 900, image: '/attached_assets/vivo-x100-pro-1_1759355067920.jpg' },
-      { color: 'Startrail Blue', capacity: '512GB', price: 945, originalPrice: 1050, image: '/attached_assets/vivo-x100-pro-1_1759355067920.jpg' },
-      { color: 'Startrail Blue', capacity: '1TB', price: 1080, originalPrice: 1200, image: '/attached_assets/vivo-x100-pro-1_1759355067920.jpg' },
-      { color: 'Sunset Orange', capacity: '256GB', price: 810, originalPrice: 900, image: '/attached_assets/vivo-x100-pro-1_1759355067920.jpg' },
-      { color: 'Sunset Orange', capacity: '512GB', price: 945, originalPrice: 1050, image: '/attached_assets/vivo-x100-pro-1_1759355067920.jpg' },
-      { color: 'Sunset Orange', capacity: '1TB', price: 1080, originalPrice: 1200, image: '/attached_assets/vivo-x100-pro-1_1759355067920.jpg' },
-      { color: 'Asteroid Black', capacity: '256GB', price: 810, originalPrice: 900, image: '/attached_assets/vivo-x100-pro-1_1759355067920.jpg' },
-      { color: 'Asteroid Black', capacity: '512GB', price: 945, originalPrice: 1050, image: '/attached_assets/vivo-x100-pro-1_1759355067920.jpg' },
-      { color: 'Asteroid Black', capacity: '1TB', price: 1080, originalPrice: 1200, image: '/attached_assets/vivo-x100-pro-1_1759355067920.jpg' },
-    ]
-  },
-  // Nothing Phone 3 with variants (2025)
-  {
-    id: 'nothing-phone-3',
-    name: 'Nothing Phone 3',
-    price: 719,
-    originalPrice: 799,
-    discount: 10,
-    image: '/attached_assets/Smartphone-Nothing-Phone-3-6-67-5G-Nano-SIM-512-Go-Blanc_1759335889250.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Glyph Matrix LED Display',
-    features: ['Snapdragon 8s Gen 4', '6.67" AMOLED 120Hz', 'Triple 50MP cameras', 'Glyph Matrix (489 LEDs)', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Black', capacity: '256GB', price: 719, originalPrice: 799, image: '/attached_assets/Smartphone-Nothing-Phone-3-6-67-5G-Nano-SIM-512-Go-Noir_1759466784376.jpg' },
-      { color: 'Black', capacity: '512GB', price: 809, originalPrice: 899, image: '/attached_assets/Smartphone-Nothing-Phone-3-6-67-5G-Nano-SIM-512-Go-Noir_1759466784376.jpg' },
-      { color: 'White', capacity: '256GB', price: 719, originalPrice: 799, image: '/attached_assets/Smartphone-Nothing-Phone-3-6-67-5G-Nano-SIM-512-Go-Blanc_1759335889250.jpg' },
-      { color: 'White', capacity: '512GB', price: 809, originalPrice: 899, image: '/attached_assets/Smartphone-Nothing-Phone-3-6-67-5G-Nano-SIM-512-Go-Blanc_1759335889250.jpg' },
-    ]
-  },
-  // Asus ROG Phone 8 Pro with variants (2024)
-  {
-    id: 'asus-rog-phone-8-pro',
-    name: 'Asus ROG Phone 8 Pro',
-    price: 1169,
-    originalPrice: 1299,
-    discount: 10,
-    image: '/attached_assets/Smartphone-Asus-Rog-Phone-8-Pro-6-78-5G-Double-nano-SIM-512-Go-Noir_1759335839764.jpg',
-    category: 'smartphones',
-    description: 'From 512GB - Ultimate Gaming Phone',
-    features: ['Snapdragon 8 Gen 3', '6.78" AMOLED 165Hz', '50MP gimbal camera', 'AirTrigger controls', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Phantom Black', capacity: '512GB', price: 1169, originalPrice: 1299, image: '/attached_assets/Smartphone-Asus-Rog-Phone-8-Pro-6-78-5G-Double-nano-SIM-512-Go-Noir_1759335839764.jpg' },
-      { color: 'Phantom Black', capacity: '1TB', price: 1439, originalPrice: 1599, image: '/attached_assets/Smartphone-Asus-Rog-Phone-8-Pro-6-78-5G-Double-nano-SIM-512-Go-Noir_1759335839764.jpg' },
-    ]
-  },
-  // Sony Xperia 1 VI with variants (2024)
-  {
-    id: 'sony-xperia-1-vi',
-    name: 'Sony Xperia 1 VI',
-    price: 1259,
-    originalPrice: 1399,
-    discount: 10,
-    image: '/attached_assets/sony-xperia-1-vi-1_1759355127608.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Pro Camera & Audio',
-    features: ['Snapdragon 8 Gen 3', '6.5" LTPO OLED 120Hz', '48MP Zeiss cameras', '3.5mm headphone jack', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Black', capacity: '256GB', price: 1259, originalPrice: 1399, image: '/attached_assets/sony-xperia-1-vi-1_1759355127608.jpg' },
-      { color: 'Black', capacity: '512GB', price: 1439, originalPrice: 1599, image: '/attached_assets/sony-xperia-1-vi-1_1759355127608.jpg' },
-      { color: 'Platinum Silver', capacity: '256GB', price: 1259, originalPrice: 1399, image: '/attached_assets/sony-xperia-1mvi-2_1759355161568.jpg' },
-      { color: 'Platinum Silver', capacity: '512GB', price: 1439, originalPrice: 1599, image: '/attached_assets/sony-xperia-1mvi-2_1759355161568.jpg' },
-      { color: 'Red', capacity: '256GB', price: 1259, originalPrice: 1399, image: '/attached_assets/sony-xperia-1-vi-3_1759355186921.jpg' },
-      { color: 'Red', capacity: '512GB', price: 1439, originalPrice: 1599, image: '/attached_assets/sony-xperia-1-vi-3_1759355186921.jpg' },
-    ]
-  },
-  // Oppo Find N2 Flip with variants (2023)
-  {
-    id: 'oppo-find-n2-flip',
-    name: 'Oppo Find N2 Flip',
-    price: 859,
-    originalPrice: 949,
-    discount: 9,
-    image: '/attached_assets/Smartphone-Oppo-Find-N2-Flip-6-8-5G-Double-nano-SIM-256-Go-Noir_1759335954597.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Flip Phone with 3.26" Cover Display',
-    features: ['MediaTek Dimensity 9000+', '6.8" AMOLED 120Hz', '50MP Sony IMX890 camera', 'Zero-gap hinge design', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Astral Black', capacity: '256GB', price: 859, originalPrice: 949, image: '/attached_assets/Smartphone-Oppo-Find-N2-Flip-6-8-5G-Double-nano-SIM-256-Go-Noir_1759335954597.jpg' },
-      { color: 'Astral Black', capacity: '512GB', price: 989, originalPrice: 1099, image: '/attached_assets/Smartphone-Oppo-Find-N2-Flip-6-8-5G-Double-nano-SIM-256-Go-Noir_1759335954597.jpg' },
-      { color: 'Moonlit Purple', capacity: '256GB', price: 859, originalPrice: 949 },
-      { color: 'Moonlit Purple', capacity: '512GB', price: 989, originalPrice: 1099 },
-    ]
-  },
-  // Vivo X80 Pro with variants (2022)
-  {
-    id: 'vivo-x80-pro',
-    name: 'Vivo X80 Pro',
-    price: 822,
-    originalPrice: 920,
-    discount: 11,
-    image: '/attached_assets/Smartphone-Vivo-X80-Pro-6-78-5G-Double-nano-SIM-256-Go-Noir-Cosmique_1759335994844.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - ZEISS Optics Flagship',
-    features: ['Snapdragon 8 Gen 1', '6.78" LTPO2 AMOLED', '50MP quad camera system', '80W fast charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Cosmic Black', capacity: '256GB', price: 822, originalPrice: 920, image: '/attached_assets/Smartphone-Vivo-X80-Pro-6-78-5G-Double-nano-SIM-256-Go-Noir-Cosmique_1759335994844.jpg' },
-      { color: 'Cosmic Black', capacity: '512GB', price: 952, originalPrice: 1070, image: '/attached_assets/Smartphone-Vivo-X80-Pro-6-78-5G-Double-nano-SIM-256-Go-Noir-Cosmique_1759335994844.jpg' },
-      { color: 'Urban Blue', capacity: '256GB', price: 822, originalPrice: 920 },
-      { color: 'Urban Blue', capacity: '512GB', price: 952, originalPrice: 1070 },
-      { color: 'Holiday Orange', capacity: '256GB', price: 822, originalPrice: 920 },
-      { color: 'Holiday Orange', capacity: '512GB', price: 952, originalPrice: 1070 },
-    ]
-  },
-  // Vivo X200 Pro - Global Version with variants (2025)
-  {
-    id: 'vivo-x200-pro',
-    name: 'Vivo X200 Pro - Global Version',
-    price: 1003,
-    originalPrice: 1149,
-    discount: 13,
-    image: '/attached_assets/27673398-3-1541-1_1759336034532.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 200MP ZEISS Telephoto',
-    features: ['Dimensity 9400', '6.78" OLED 120Hz', '200MP ZEISS telephoto', '6000mAh battery', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Gold', capacity: '256GB', price: 1003, originalPrice: 1149, image: '/attached_assets/27673398-3-1541-1_1759336034532.jpg' },
-      { color: 'Gold', capacity: '512GB', price: 1199, originalPrice: 1349, image: '/attached_assets/27673398-3-1541-1_1759336034532.jpg' },
-      { color: 'Gold', capacity: '1TB', price: 1449, originalPrice: 1649, image: '/attached_assets/27673398-3-1541-1_1759336034532.jpg' },
-      { color: 'Titanium Grey', capacity: '256GB', price: 1003, originalPrice: 1149 },
-      { color: 'Titanium Grey', capacity: '512GB', price: 1199, originalPrice: 1349 },
-      { color: 'Titanium Grey', capacity: '1TB', price: 1449, originalPrice: 1649 },
-      { color: 'Blue', capacity: '256GB', price: 1003, originalPrice: 1149 },
-      { color: 'Blue', capacity: '512GB', price: 1199, originalPrice: 1349 },
-      { color: 'Blue', capacity: '1TB', price: 1449, originalPrice: 1649 },
-    ]
-  },
-  // Samsung Galaxy A55 with variants (2024)
-  {
-    id: 'samsung-galaxy-a55',
-    name: 'Samsung Galaxy A55 5G',
-    price: 305,
-    originalPrice: 380,
-    discount: 20,
-    image: '/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Bleu_1759355204723.jpg',
-    category: 'smartphones',
-    description: 'From 128GB - Premium Mid-Range',
-    features: ['Exynos 1480', '6.6" Super AMOLED 120Hz', '50MP OIS camera', 'IP67 water resistance', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Awesome Iceblue', capacity: '128GB', price: 305, originalPrice: 380, image: '/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Bleu_1759355204723.jpg' },
-      { color: 'Awesome Iceblue', capacity: '256GB', price: 360, originalPrice: 450, image: '/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Bleu_1759355204723.jpg' },
-      { color: 'Awesome Navy', capacity: '128GB', price: 305, originalPrice: 380, image: '/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Bleu-nuit_1759355278369.jpg' },
-      { color: 'Awesome Navy', capacity: '256GB', price: 360, originalPrice: 450, image: '/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Bleu-nuit_1759355278369.jpg' },
-      { color: 'Awesome Lilac', capacity: '128GB', price: 305, originalPrice: 380, image: '/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Lilas_1759355219278.jpg' },
-      { color: 'Awesome Lilac', capacity: '256GB', price: 360, originalPrice: 450, image: '/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Lilas_1759355219278.jpg' },
-      { color: 'Awesome Lemon', capacity: '128GB', price: 305, originalPrice: 380, image: '/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Lime_1759355233291.jpg' },
-      { color: 'Awesome Lemon', capacity: '256GB', price: 360, originalPrice: 450, image: '/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Lime_1759355233291.jpg' },
-    ]
-  },
-  // Google Pixel 8a with variants (Prix réel France: 499€ - Prix officiel 2024)
-  {
-    id: 'google-pixel-8a',
-    name: 'Google Pixel 8a',
-    price: 449,
-    originalPrice: 499,
-    discount: 10,
-    image: '/attached_assets/Smartphone-Google-Pixel-8a-5G-Double-Sim-128Go-Obsidian-Noir_1759355332936.jpg',
-    category: 'smartphones',
-    description: 'From 128GB - AI-Powered Camera',
-    features: ['Google Tensor G3', '6.1" OLED 120Hz', '64MP camera', '7 years of updates', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Obsidian', capacity: '128GB', price: 449, originalPrice: 499, image: '/attached_assets/Smartphone-Google-Pixel-8a-5G-Double-Sim-128Go-Obsidian-Noir_1759355332936.jpg' },
-      { color: 'Obsidian', capacity: '256GB', price: 495, originalPrice: 549, image: '/attached_assets/Smartphone-Google-Pixel-8a-5G-Double-Sim-128Go-Obsidian-Noir_1759355332936.jpg' },
-      { color: 'Porcelain', capacity: '128GB', price: 449, originalPrice: 499, image: '/attached_assets/Smartphone-Google-Pixel-8a-5G-Double-Sim-128Go-Porcelaine-Blanc_1759355361366.jpg' },
-      { color: 'Porcelain', capacity: '256GB', price: 495, originalPrice: 549, image: '/attached_assets/Smartphone-Google-Pixel-8a-5G-Double-Sim-128Go-Porcelaine-Blanc_1759355361366.jpg' },
-      { color: 'Bay', capacity: '128GB', price: 449, originalPrice: 499, image: '/attached_assets/Smartphone-Google-Pixel-8a-5G-Double-Sim-128Go-Bay-Bleu (1)_1759355347423.jpg' },
-      { color: 'Bay', capacity: '256GB', price: 503, originalPrice: 559, image: '/attached_assets/Smartphone-Google-Pixel-8a-5G-Double-Sim-128Go-Bay-Bleu (1)_1759355347423.jpg' },
-      { color: 'Aloe', capacity: '128GB', price: 449, originalPrice: 499 },
-      { color: 'Aloe', capacity: '256GB', price: 503, originalPrice: 559 },
-    ]
-  },
-  // OnePlus 12R with variants (2024)
-  {
-    id: 'oneplus-12r',
-    name: 'OnePlus 12R',
-    price: 449,
-    originalPrice: 499,
-    discount: 10,
-    image: '/attached_assets/oneplus-12r-1_1759414905429.jpg',
-    category: 'smartphones',
-    description: 'From 128GB - Flagship Killer',
-    features: ['Snapdragon 8 Gen 2', '6.78" LTPO AMOLED 120Hz', 'Triple 50MP cameras', '5500mAh + 80W charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Cool Blue', capacity: '128GB', price: 449, originalPrice: 499, image: '/attached_assets/oneplus-12r-1_1759414905429.jpg' },
-      { color: 'Cool Blue', capacity: '256GB', price: 539, originalPrice: 599, image: '/attached_assets/oneplus-12r-1_1759414905429.jpg' },
-      { color: 'Iron Gray', capacity: '128GB', price: 449, originalPrice: 499, image: '/attached_assets/oneplus-12r-2_1759414919454.jpg' },
-      { color: 'Iron Gray', capacity: '256GB', price: 539, originalPrice: 599, image: '/attached_assets/oneplus-12r-2_1759414919454.jpg' },
-      { color: 'Genshin Impact Edition', capacity: '256GB', price: 549, originalPrice: 609, image: '/attached_assets/oneplus-12r-genshin-impact-edition_1759414941332.jpg' },
-    ]
-  },
-  // Realme GT 6 with variants (2024)
-  {
-    id: 'realme-gt-6',
-    name: 'Realme GT 6',
-    price: 378,
-    originalPrice: 420,
-    discount: 10,
-    image: '/attached_assets/realme-gt6-1_1759414965910.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Gaming Beast',
-    features: ['Snapdragon 8s Gen 3', '6.78" AMOLED 120Hz', '50MP Sony LYT-808 OIS', '5500mAh + 120W charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Fluid Silver', capacity: '256GB', price: 378, originalPrice: 420, image: '/attached_assets/realme-gt6-2_1759414985774.jpg' },
-      { color: 'Fluid Silver', capacity: '512GB', price: 450, originalPrice: 500, image: '/attached_assets/realme-gt6-2_1759414985774.jpg' },
-      { color: 'Razor Green', capacity: '256GB', price: 378, originalPrice: 420, image: '/attached_assets/realme-gt6-1_1759414965910.jpg' },
-      { color: 'Razor Green', capacity: '512GB', price: 450, originalPrice: 500, image: '/attached_assets/realme-gt6-1_1759414965910.jpg' },
-    ]
-  },
-  // Motorola Edge 50 Pro with variants (2024)
-  {
-    id: 'motorola-edge-50-pro',
-    name: 'Motorola Edge 50 Pro',
-    price: 305,
-    originalPrice: 335,
-    discount: 9,
-    image: '/attached_assets/motorola-edge50-pro-1_1759415003216.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Ultra-Fast Charging',
-    features: ['Snapdragon 7 Gen 3', '6.7" pOLED 144Hz', '50MP OIS camera', '125W fast charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Luxe Lavender', capacity: '256GB', price: 305, originalPrice: 335, image: '/attached_assets/motorola-edge50-pro-1_1759415003216.jpg' },
-      { color: 'Luxe Lavender', capacity: '512GB', price: 342, originalPrice: 380, image: '/attached_assets/motorola-edge50-pro-1_1759415003216.jpg' },
-      { color: 'Black Beauty', capacity: '256GB', price: 305, originalPrice: 335, image: '/attached_assets/Smartphone-Motorola-Moto-Edge-50-Pro-6-7-5G-Double-nano-SIM-512-Go-Noir-Carbone_1759415035339.jpg' },
-      { color: 'Black Beauty', capacity: '512GB', price: 342, originalPrice: 380, image: '/attached_assets/Smartphone-Motorola-Moto-Edge-50-Pro-6-7-5G-Double-nano-SIM-512-Go-Noir-Carbone_1759415035339.jpg' },
-      { color: 'Moonlight Pearl', capacity: '256GB', price: 305, originalPrice: 335, image: '/attached_assets/motorola-edge50-pro-2_1759415020093.jpg' },
-      { color: 'Moonlight Pearl', capacity: '512GB', price: 342, originalPrice: 380, image: '/attached_assets/motorola-edge50-pro-2_1759415020093.jpg' },
-    ]
-  },
-  // Samsung Galaxy S25+ with variants
-  {
-    id: 'samsung-s25-plus',
-    name: 'Samsung Galaxy S25+',
-    price: 899,
-    originalPrice: 999,
-    discount: 10,
-    image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Bleu-clair_1759415053147.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.7" QHD+ Display',
-    features: ['Snapdragon 8 Elite', '6.7" Dynamic AMOLED 120Hz', '50MP triple camera', 'Gorilla Glass Victus 2', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Navy', capacity: '256GB', price: 899, originalPrice: 999, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Bleu-nuit_1759415129305.jpg' },
-      { color: 'Navy', capacity: '512GB', price: 1099, originalPrice: 1199, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Bleu-nuit_1759415129305.jpg' },
-      { color: 'Icy Blue', capacity: '256GB', price: 899, originalPrice: 999, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Bleu-clair_1759415053147.jpg' },
-      { color: 'Icy Blue', capacity: '512GB', price: 1099, originalPrice: 1199, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Bleu-clair_1759415053147.jpg' },
-      { color: 'Mint', capacity: '256GB', price: 899, originalPrice: 999, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Vert-d-eau_1759415070675.jpg' },
-      { color: 'Mint', capacity: '512GB', price: 1099, originalPrice: 1199, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Vert-d-eau_1759415070675.jpg' },
-      { color: 'Silver Shadow', capacity: '256GB', price: 899, originalPrice: 999, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Gris_1759415087639.jpg' },
-      { color: 'Silver Shadow', capacity: '512GB', price: 1099, originalPrice: 1199, image: '/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Gris_1759415087639.jpg' },
-    ]
-  },
-  // iPhone 16 Pro with variants
-  {
-    id: 'iphone-16-pro',
-    name: 'iPhone 16 Pro',
-    price: 899,
-    originalPrice: 999,
-    discount: 10,
-    image: '/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Naturel_1759415145355.jpg',
-    category: 'smartphones',
-    description: 'From 128GB - 6.3" ProMotion Display',
-    features: ['Apple A18 Pro chip', '6.3" LTPO OLED 120Hz', '48MP triple camera', 'Titanium design', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Black Titanium', capacity: '128GB', price: 899, originalPrice: 999, image: '/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Noir-Titane_1759415181326.jpg' },
-      { color: 'Black Titanium', capacity: '256GB', price: 1049, originalPrice: 1149, image: '/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Noir-Titane_1759415181326.jpg' },
-      { color: 'Black Titanium', capacity: '512GB', price: 1249, originalPrice: 1349, image: '/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Noir-Titane_1759415181326.jpg' },
-      { color: 'White Titanium', capacity: '128GB', price: 899, originalPrice: 999, image: '/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Blanc_1759415162546.jpg' },
-      { color: 'White Titanium', capacity: '256GB', price: 1049, originalPrice: 1149, image: '/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Blanc_1759415162546.jpg' },
-      { color: 'White Titanium', capacity: '512GB', price: 1249, originalPrice: 1349, image: '/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Blanc_1759415162546.jpg' },
-      { color: 'Natural Titanium', capacity: '128GB', price: 899, originalPrice: 999, image: '/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Naturel_1759415145355.jpg' },
-      { color: 'Natural Titanium', capacity: '256GB', price: 1049, originalPrice: 1149, image: '/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Naturel_1759415145355.jpg' },
-      { color: 'Natural Titanium', capacity: '512GB', price: 1249, originalPrice: 1349, image: '/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Naturel_1759415145355.jpg' },
-      { color: 'Desert Titanium', capacity: '128GB', price: 899, originalPrice: 999, image: '/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Sable_1759415212732.jpg' },
-      { color: 'Desert Titanium', capacity: '256GB', price: 1049, originalPrice: 1149, image: '/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Sable_1759415212732.jpg' },
-      { color: 'Desert Titanium', capacity: '512GB', price: 1249, originalPrice: 1349, image: '/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Sable_1759415212732.jpg' },
-    ]
-  },
-  // iPhone 16 with variants
-  {
-    id: 'iphone-16',
-    name: 'iPhone 16',
-    price: 719,
-    originalPrice: 799,
-    discount: 10,
-    image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Noir_1759415228576.jpg',
-    category: 'smartphones',
-    description: 'From 128GB - 6.1" Display',
-    features: ['Apple A18 chip', '6.1" OLED 60Hz', '48MP dual camera', 'Ceramic Shield', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Black', capacity: '128GB', price: 719, originalPrice: 799, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Noir_1759415228576.jpg' },
-      { color: 'Black', capacity: '256GB', price: 809, originalPrice: 899, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Noir_1759415228576.jpg' },
-      { color: 'Black', capacity: '512GB', price: 989, originalPrice: 1099, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Noir_1759415228576.jpg' },
-      { color: 'White', capacity: '128GB', price: 719, originalPrice: 799, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Blanc_1759416598691.jpg' },
-      { color: 'White', capacity: '256GB', price: 809, originalPrice: 899, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Blanc_1759416598691.jpg' },
-      { color: 'White', capacity: '512GB', price: 989, originalPrice: 1099, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Blanc_1759416598691.jpg' },
-      { color: 'Pink', capacity: '128GB', price: 719, originalPrice: 799, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Rose_1759415277022.jpg' },
-      { color: 'Pink', capacity: '256GB', price: 809, originalPrice: 899, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Rose_1759415277022.jpg' },
-      { color: 'Pink', capacity: '512GB', price: 989, originalPrice: 1099, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Rose_1759415277022.jpg' },
-      { color: 'Teal', capacity: '128GB', price: 719, originalPrice: 799, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Sarcelle_1759415243542.jpg' },
-      { color: 'Teal', capacity: '256GB', price: 809, originalPrice: 899, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Sarcelle_1759415243542.jpg' },
-      { color: 'Teal', capacity: '512GB', price: 989, originalPrice: 1099, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Sarcelle_1759415243542.jpg' },
-      { color: 'Ultramarine', capacity: '128GB', price: 719, originalPrice: 799, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Outremer_1759415260297.jpg' },
-      { color: 'Ultramarine', capacity: '256GB', price: 809, originalPrice: 899, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Outremer_1759415260297.jpg' },
-      { color: 'Ultramarine', capacity: '512GB', price: 989, originalPrice: 1099, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Outremer_1759415260297.jpg' },
-    ]
-  },
-  // iPhone 16 Plus with variants
-  {
-    id: 'iphone-16-plus',
-    name: 'iPhone 16 Plus',
-    price: 809,
-    originalPrice: 899,
-    discount: 10,
-    image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Noir_1759415228576.jpg',
-    category: 'smartphones',
-    description: 'From 128GB - 6.7" Display',
-    features: ['Apple A18 chip', '6.7" OLED 60Hz', '48MP dual camera', 'All-day battery', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Black', capacity: '128GB', price: 809, originalPrice: 899, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Noir_1759415228576.jpg' },
-      { color: 'Black', capacity: '256GB', price: 899, originalPrice: 999, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Noir_1759415228576.jpg' },
-      { color: 'Black', capacity: '512GB', price: 1079, originalPrice: 1199, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Noir_1759415228576.jpg' },
-      { color: 'White', capacity: '128GB', price: 809, originalPrice: 899, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Blanc_1759416598691.jpg' },
-      { color: 'White', capacity: '256GB', price: 899, originalPrice: 999, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Blanc_1759416598691.jpg' },
-      { color: 'White', capacity: '512GB', price: 1079, originalPrice: 1199, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Blanc_1759416598691.jpg' },
-      { color: 'Pink', capacity: '128GB', price: 809, originalPrice: 899, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Rose_1759415277022.jpg' },
-      { color: 'Pink', capacity: '256GB', price: 899, originalPrice: 999, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Rose_1759415277022.jpg' },
-      { color: 'Pink', capacity: '512GB', price: 1079, originalPrice: 1199, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Rose_1759415277022.jpg' },
-      { color: 'Teal', capacity: '128GB', price: 809, originalPrice: 899, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Sarcelle_1759415243542.jpg' },
-      { color: 'Teal', capacity: '256GB', price: 899, originalPrice: 999, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Sarcelle_1759415243542.jpg' },
-      { color: 'Teal', capacity: '512GB', price: 1079, originalPrice: 1199, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Sarcelle_1759415243542.jpg' },
-      { color: 'Ultramarine', capacity: '128GB', price: 809, originalPrice: 899, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Outremer_1759415260297.jpg' },
-      { color: 'Ultramarine', capacity: '256GB', price: 899, originalPrice: 999, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Outremer_1759415260297.jpg' },
-      { color: 'Ultramarine', capacity: '512GB', price: 1079, originalPrice: 1199, image: '/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Outremer_1759415260297.jpg' },
-    ]
-  },
-  // Google Pixel 10 Pro XL with variants
-  {
-    id: 'google-pixel-10-pro-xl',
-    name: 'Google Pixel 10 Pro XL',
-    price: 1079, 
-    originalPrice: 1199,
-    discount: 10,
-    image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Jade_1759425513411.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.8" Super Actua Display',
-    features: ['Google Tensor G5', '6.8" LTPO OLED 120Hz', '50MP Pro Res Zoom 100x', '7 years updates', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Jade', capacity: '256GB', price: 1079, originalPrice: 1199, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Jade_1759425513411.jpg' },
-      { color: 'Jade', capacity: '512GB', price: 1259, originalPrice: 1399, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Jade_1759425513411.jpg' },
-      { color: 'Jade', capacity: '1TB', price: 1439, originalPrice: 1599, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Jade_1759425513411.jpg' },
-      { color: 'Porcelain', capacity: '256GB', price: 1079, originalPrice: 1199, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Porcelaine_1759425527419.jpg' },
-      { color: 'Porcelain', capacity: '512GB', price: 1259, originalPrice: 1399, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Porcelaine_1759425527419.jpg' },
-      { color: 'Porcelain', capacity: '1TB', price: 1439, originalPrice: 1599, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Porcelaine_1759425527419.jpg' },
-      { color: 'Volcanic Black', capacity: '256GB', price: 1079, originalPrice: 1199, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Noir-Volcanique_1759425542648.jpg' },
-      { color: 'Volcanic Black', capacity: '512GB', price: 1259, originalPrice: 1399, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Noir-Volcanique_1759425542648.jpg' },
-      { color: 'Volcanic Black', capacity: '1TB', price: 1439, originalPrice: 1599, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Noir-Volcanique_1759425542648.jpg' },
-      { color: 'Quartz Grey', capacity: '256GB', price: 1079, originalPrice: 1199, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Quartz-Gris_1759425556785.jpg' },
-      { color: 'Quartz Grey', capacity: '512GB', price: 1259, originalPrice: 1399, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Quartz-Gris_1759425556785.jpg' },
-      { color: 'Quartz Grey', capacity: '1TB', price: 1439, originalPrice: 1599, image: '/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Quartz-Gris_1759425556785.jpg' },
-    ]
-  },
-  // Google Pixel 9 Pro with variants
-  {
-    id: 'google-pixel-9-pro',
-    name: 'Google Pixel 9 Pro',
-    price: 899,
-    originalPrice: 999,
-    discount: 10,
-    image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Noir-Obsidienne_1759420393564.jpg',
-    category: 'smartphones',
-    description: 'From 128GB - 6.3" Super Actua Display',
-    features: ['Google Tensor G4', '6.3" LTPO OLED 120Hz', '48MP triple camera', '7 years updates', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Obsidian', capacity: '128GB', price: 899, originalPrice: 999, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Noir-Obsidienne_1759420393564.jpg' },
-      { color: 'Obsidian', capacity: '512GB', price: 1169, originalPrice: 1299, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Noir-Obsidienne_1759420393564.jpg' },
-      { color: 'Obsidian', capacity: '1TB', price: 1439, originalPrice: 1599, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Noir-Obsidienne_1759420393564.jpg' },
-      { color: 'Porcelain', capacity: '128GB', price: 899, originalPrice: 999, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Blanc-Porcelaine_1759420408121.jpg' },
-      { color: 'Porcelain', capacity: '512GB', price: 1169, originalPrice: 1299, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Blanc-Porcelaine_1759420408121.jpg' },
-      { color: 'Porcelain', capacity: '1TB', price: 1439, originalPrice: 1599, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Blanc-Porcelaine_1759420408121.jpg' },
-      { color: 'Rose Quartz', capacity: '128GB', price: 899, originalPrice: 999, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Rose-Qwartz_1759420423815.jpg' },
-      { color: 'Rose Quartz', capacity: '512GB', price: 1169, originalPrice: 1299, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Rose-Qwartz_1759420423815.jpg' },
-      { color: 'Rose Quartz', capacity: '1TB', price: 1439, originalPrice: 1599, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Rose-Qwartz_1759420423815.jpg' },
-      { color: 'Sage', capacity: '128GB', price: 899, originalPrice: 999, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Vert-Sauge_1759420439082.jpg' },
-      { color: 'Sage', capacity: '512GB', price: 1169, originalPrice: 1299, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Vert-Sauge_1759420439082.jpg' },
-      { color: 'Sage', capacity: '1TB', price: 1439, originalPrice: 1599, image: '/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Vert-Sauge_1759420439082.jpg' },
-    ]
-  },
-  // Honor Magic 7 Pro with variants
-  {
-    id: 'honor-magic-7-pro',
-    name: 'Honor Magic 7 Pro',
-    price: 1170,
-    originalPrice: 1300,
-    discount: 10,
-    image: '/attached_assets/Smartphone-Honor-Magic7-Pro-6-8-5G-Double-nano-SIM-512-Go-Gris-lunaire_1759420493729.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.8" LTPO OLED',
-    features: ['Snapdragon 8 Elite', '200MP telephoto', '5270mAh + 100W charging', 'IP68/IP69', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Lunar Shadow Gray', capacity: '256GB', price: 1170, originalPrice: 1300, image: '/attached_assets/Smartphone-Honor-Magic7-Pro-6-8-5G-Double-nano-SIM-512-Go-Gris-lunaire_1759420493729.jpg' },
-      { color: 'Lunar Shadow Gray', capacity: '512GB', price: 1350, originalPrice: 1500, image: '/attached_assets/Smartphone-Honor-Magic7-Pro-6-8-5G-Double-nano-SIM-512-Go-Gris-lunaire_1759420493729.jpg' },
-      { color: 'Lunar Shadow Gray', capacity: '1TB', price: 1530, originalPrice: 1700, image: '/attached_assets/Smartphone-Honor-Magic7-Pro-6-8-5G-Double-nano-SIM-512-Go-Gris-lunaire_1759420493729.jpg' },
-      { color: 'Breeze Blue', capacity: '256GB', price: 1170, originalPrice: 1300 },
-      { color: 'Breeze Blue', capacity: '512GB', price: 1350, originalPrice: 1500 },
-      { color: 'Breeze Blue', capacity: '1TB', price: 1530, originalPrice: 1700 },
-      { color: 'Black', capacity: '256GB', price: 1170, originalPrice: 1300, image: '/attached_assets/Smartphone-Honor-Magic7-Pro-6-8-5G-Double-nano-SIM-512-Go-Noir_1759420509430.jpg' },
-      { color: 'Black', capacity: '512GB', price: 1350, originalPrice: 1500, image: '/attached_assets/Smartphone-Honor-Magic7-Pro-6-8-5G-Double-nano-SIM-512-Go-Noir_1759420509430.jpg' },
-      { color: 'Black', capacity: '1TB', price: 1530, originalPrice: 1700, image: '/attached_assets/Smartphone-Honor-Magic7-Pro-6-8-5G-Double-nano-SIM-512-Go-Noir_1759420509430.jpg' },
-    ]
-  },
-  // Huawei Pura 80 Ultra with variants
-  {
-    id: 'huawei-pura-80-ultra',
-    name: 'Huawei Pura 80 Ultra',
-    price: 1125,
-    originalPrice: 1250,
-    discount: 10,
-    image: '/attached_assets/huawei-pura80-ultra-1_1759420525518.jpg',
-    category: 'smartphones',
-    description: 'From 512GB - Dual Telephoto System',
-    features: ['Kirin 9020', '50MP 1-inch sensor', 'Dual telephoto', '5700mAh + 100W charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Gold Glaze', capacity: '512GB', price: 1125, originalPrice: 1250, image: '/attached_assets/huawei-pura80-ultra-1_1759420525518.jpg' },
-      { color: 'Gold Glaze', capacity: '1TB', price: 1350, originalPrice: 1500, image: '/attached_assets/huawei-pura80-ultra-1_1759420525518.jpg' },
-      { color: 'White Glaze', capacity: '512GB', price: 1125, originalPrice: 1250 },
-      { color: 'White Glaze', capacity: '1TB', price: 1350, originalPrice: 1500 },
-      { color: 'Black Glaze', capacity: '512GB', price: 1125, originalPrice: 1250, image: '/attached_assets/huawei-pura80-ultra-4_1759420540124.jpg' },
-      { color: 'Black Glaze', capacity: '1TB', price: 1350, originalPrice: 1500, image: '/attached_assets/huawei-pura80-ultra-4_1759420540124.jpg' },
-    ]
-  },
-  // Huawei Pura 80 Pro+ with variants
-  {
-    id: 'huawei-pura-80-pro-plus',
-    name: 'Huawei Pura 80 Pro+',
-    price: 990,
-    originalPrice: 1100,
-    discount: 10,
-    image: '/attached_assets/huawei-pura80-pro-plus-2_1759466675407.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Premium Camera',
-    features: ['Kirin 9020', '50MP 1-inch main', 'Ultra telephoto', '5700mAh + 100W charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Red', capacity: '256GB', price: 990, originalPrice: 1100, image: '/attached_assets/huawei-pura80-pro-plus-2_1759466675407.jpg' },
-      { color: 'Red', capacity: '512GB', price: 1125, originalPrice: 1250, image: '/attached_assets/huawei-pura80-pro-plus-2_1759466675407.jpg' },
-      { color: 'Red', capacity: '1TB', price: 1350, originalPrice: 1500, image: '/attached_assets/huawei-pura80-pro-plus-2_1759466675407.jpg' },
-    ]
-  },
-  // Huawei Pura 80 Pro with variants
-  {
-    id: 'huawei-pura-80-pro',
-    name: 'Huawei Pura 80 Pro',
-    price: 900,
-    originalPrice: 1000,
-    discount: 10,
-    image: '/attached_assets/huawei-pura80-pro-1_1759466688174.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Advanced Photography',
-    features: ['Kirin 9020', '50MP variable aperture', 'Telephoto with OIS', '5700mAh + 100W charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'White Glaze', capacity: '256GB', price: 900, originalPrice: 1000, image: '/attached_assets/huawei-pura80-pro-1_1759466688174.jpg' },
-      { color: 'White Glaze', capacity: '512GB', price: 1035, originalPrice: 1150, image: '/attached_assets/huawei-pura80-pro-1_1759466688174.jpg' },
-      { color: 'White Glaze', capacity: '1TB', price: 1260, originalPrice: 1400, image: '/attached_assets/huawei-pura80-pro-1_1759466688174.jpg' },
-    ]
-  },
-  // Huawei Pura 70 with variants
-  {
-    id: 'huawei-pura-70',
-    name: 'Huawei Pura 70',
-    price: 674,
-    originalPrice: 749,
-    discount: 10,
-    image: '/attached_assets/23854575-1505-3756-1_1759466701786.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Ultra Lighting Camera',
-    features: ['Kirin 9010', '50MP Ultra Lighting', 'Variable aperture', '4900mAh + 66W charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'White', capacity: '256GB', price: 674, originalPrice: 749, image: '/attached_assets/23854575-1505-3756-1_1759466701786.jpg' },
-      { color: 'White', capacity: '512GB', price: 809, originalPrice: 899, image: '/attached_assets/23854575-1505-3756-1_1759466701786.jpg' },
-      { color: 'Black', capacity: '256GB', price: 674, originalPrice: 749, image: '/attached_assets/23854576-1505-3756-1_1759466714735.jpg' },
-      { color: 'Black', capacity: '512GB', price: 809, originalPrice: 899, image: '/attached_assets/23854576-1505-3756-1_1759466714735.jpg' },
-    ]
-  },
-  // Fairphone 6 with variants
-  {
-    id: 'fairphone-6',
-    name: 'Fairphone 6',
-    price: 449,
-    originalPrice: 499,
-    discount: 10,
-    image: '/attached_assets/Smartphone-Fairphone-Gen-6-6-31-5G-Double-SIM-256-Go-Vert-Foret_1759425451707.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Sustainable & Repairable',
-    features: ['Snapdragon 7s Gen 3', '50MP Sony Lytia-700C', '4415mAh battery', '8 OS updates + 5yr warranty', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Forest Green', capacity: '256GB', price: 449, originalPrice: 499, image: '/attached_assets/Smartphone-Fairphone-Gen-6-6-31-5G-Double-SIM-256-Go-Vert-Foret_1759425451707.jpg' },
-      { color: 'Horizon Black', capacity: '256GB', price: 449, originalPrice: 499, image: '/attached_assets/Smartphone-Fairphone-Gen-6-6-31-5G-Double-SIM-256-Go-Noir-Horizon_1759425468626.jpg' },
-      { color: 'Cloud White', capacity: '256GB', price: 449, originalPrice: 499, image: '/attached_assets/Smartphone-Fairphone-Gen-6-6-31-5G-Double-SIM-256-Go-Blanc-Nuage_1759425492385.jpg' },
-    ]
-  },
-  // Sony Xperia 1 VII with variants
-  {
-    id: 'sony-xperia-1-vii',
-    name: 'Sony Xperia 1 VII',
-    price: 1349,
-    originalPrice: 1499,
-    discount: 10,
-    image: '/attached_assets/sony-xperia-1-vii-1_1759473150341.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 4K 120Hz Display',
-    features: ['Snapdragon 8 Elite', '6.5" 4K HDR OLED 120Hz', '52MP triple ZEISS', 'Pro camera features', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Purple', capacity: '256GB', price: 1349, originalPrice: 1499, image: '/attached_assets/sony-xperia-1-vii-1_1759473150341.jpg' },
-      { color: 'Purple', capacity: '512GB', price: 1529, originalPrice: 1699, image: '/attached_assets/sony-xperia-1-vii-1_1759473150341.jpg' },
-      { color: 'Purple', capacity: '1TB', price: 1799, originalPrice: 1999, image: '/attached_assets/sony-xperia-1-vii-1_1759473150341.jpg' },
-      { color: 'Black', capacity: '256GB', price: 1349, originalPrice: 1499 },
-      { color: 'Black', capacity: '512GB', price: 1529, originalPrice: 1699 },
-      { color: 'Black', capacity: '1TB', price: 1799, originalPrice: 1999 },
-      { color: 'Khaki Green', capacity: '256GB', price: 1349, originalPrice: 1499 },
-      { color: 'Khaki Green', capacity: '512GB', price: 1529, originalPrice: 1699 },
-      { color: 'Khaki Green', capacity: '1TB', price: 1799, originalPrice: 1999 },
-      { color: 'Platinum Silver', capacity: '256GB', price: 1349, originalPrice: 1499 },
-      { color: 'Platinum Silver', capacity: '512GB', price: 1529, originalPrice: 1699 },
-    ]
-  },
-  // Realme GT 7 Pro with variants
-  {
-    id: 'realme-gt-7-pro',
-    name: 'Realme GT 7 Pro',
-    price: 899,
-    originalPrice: 999,
-    discount: 10,
-    image: '/attached_assets/3756-1_1759466821466.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Galaxy Snap Camera',
-    features: ['Snapdragon 8 Elite', '50MP Sony IMX906', '6.78" LTPO AMOLED 120Hz', '6500mAh + 120W charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Mars Orange', capacity: '256GB', price: 899, originalPrice: 999, image: '/attached_assets/3756-1_1759466821466.jpg' },
-      { color: 'Mars Orange', capacity: '512GB', price: 1079, originalPrice: 1199, image: '/attached_assets/3756-1_1759466821466.jpg' },
-      { color: 'Mars Orange', capacity: '1TB', price: 1259, originalPrice: 1399, image: '/attached_assets/3756-1_1759466821466.jpg' },
-      { color: 'Galaxy Grey', capacity: '256GB', price: 899, originalPrice: 999, image: '/attached_assets/3756-1 (1)_1759466833259.jpg' },
-      { color: 'Galaxy Grey', capacity: '512GB', price: 1079, originalPrice: 1199, image: '/attached_assets/3756-1 (1)_1759466833259.jpg' },
-      { color: 'Galaxy Grey', capacity: '1TB', price: 1259, originalPrice: 1399, image: '/attached_assets/3756-1 (1)_1759466833259.jpg' },
-    ]
-  },
-  // Realme GT 7T with variants
-  {
-    id: 'realme-gt-7t',
-    name: 'Realme GT 7T',
-    price: 539,
-    originalPrice: 599,
-    discount: 10,
-    image: '/attached_assets/28418236-1505-1540-1_1759420588660.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Performance Champion',
-    features: ['Snapdragon 8s Elite', '50MP Sony LYT-808', '6.78" LTPO AMOLED 144Hz', '5800mAh + 120W charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Yellow', capacity: '256GB', price: 539, originalPrice: 599, image: '/attached_assets/28418236-1505-1540-1_1759420588660.jpg' },
-      { color: 'Yellow', capacity: '512GB', price: 629, originalPrice: 699, image: '/attached_assets/28418236-1505-1540-1_1759420588660.jpg' },
-      { color: 'Yellow', capacity: '1TB', price: 809, originalPrice: 899, image: '/attached_assets/28418236-1505-1540-1_1759420588660.jpg' },
-      { color: 'Black', capacity: '256GB', price: 539, originalPrice: 599 },
-      { color: 'Black', capacity: '512GB', price: 629, originalPrice: 699 },
-      { color: 'Black', capacity: '1TB', price: 809, originalPrice: 899 },
-      { color: 'Silver', capacity: '256GB', price: 539, originalPrice: 599 },
-      { color: 'Silver', capacity: '512GB', price: 629, originalPrice: 699 },
-      { color: 'Silver', capacity: '1TB', price: 809, originalPrice: 899 },
-    ]
-  },
-  // === GAMING SMARTPHONES ===
-  // Asus ROG Phone 9 Pro with variants
-  {
-    id: 'asus-rog-phone-9-pro',
-    name: 'Asus ROG Phone 9 Pro',
-    price: 1169,
-    originalPrice: 1299,
-    discount: 10,
-    image: '/attached_assets/3756-1_1759425414050.jpg',
-    category: 'smartphones',
-    description: 'From 512GB - Elite Gaming Phone',
-    features: ['Snapdragon 8 Elite', 'AniMe Vision display', '6.78" LTPO 185Hz', '5800mAh battery', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Phantom Black', capacity: '512GB', price: 1169, originalPrice: 1299, image: '/attached_assets/3756-1_1759425414050.jpg' },
-      { color: 'Phantom Black', capacity: '1TB', price: 1439, originalPrice: 1599, image: '/attached_assets/3756-1_1759425414050.jpg' },
-    ]
-  },
-  // Asus ROG Phone 9 with variants
-  {
-    id: 'asus-rog-phone-9',
-    name: 'Asus ROG Phone 9',
-    price: 989,
-    originalPrice: 1099,
-    discount: 10,
-    image: '/attached_assets/27989829-1505-3756-1_1759425430264.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Gaming Performance',
-    features: ['Snapdragon 8 Elite', 'AirTrigger buttons', '6.78" LTPO 185Hz', '5800mAh battery', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Phantom Black', capacity: '256GB', price: 989, originalPrice: 1099, image: '/attached_assets/27989829-1505-3756-1_1759425430264.jpg' },
-      { color: 'Phantom Black', capacity: '512GB', price: 1169, originalPrice: 1299, image: '/attached_assets/27989829-1505-3756-1_1759425430264.jpg' },
-      { color: 'Storm White', capacity: '256GB', price: 989, originalPrice: 1099, image: '/attached_assets/27989829-1505-3756-1_1759425430264.jpg' },
-      { color: 'Storm White', capacity: '512GB', price: 1169, originalPrice: 1299, image: '/attached_assets/27989829-1505-3756-1_1759425430264.jpg' },
-    ]
-  },
-  // Nubia RedMagic 10 Pro with variants
-  {
-    id: 'nubia-redmagic-10-pro',
-    name: 'Nubia RedMagic 10 Pro',
-    price: 552,
-    originalPrice: 613,
-    discount: 10,
-    image: '/attached_assets/27746051-1505-3756-1_1759466796343.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - Active Cooling',
-    features: ['Snapdragon 8 Elite', 'Built-in cooling fan', '6.85" AMOLED 144Hz', '7050mAh + 100W charging', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Black', capacity: '256GB', price: 552, originalPrice: 613, image: '/attached_assets/27746051-1505-3756-1_1759466796343.jpg' },
-      { color: 'Black', capacity: '512GB', price: 675, originalPrice: 750, image: '/attached_assets/27746051-1505-3756-1_1759466796343.jpg' },
-      { color: 'Black', capacity: '1TB', price: 900, originalPrice: 1000, image: '/attached_assets/27746051-1505-3756-1_1759466796343.jpg' },
-      { color: 'White', capacity: '256GB', price: 552, originalPrice: 613, image: '/attached_assets/27744516-1505-3756-1_1759466809146.jpg' },
-      { color: 'White', capacity: '512GB', price: 675, originalPrice: 750, image: '/attached_assets/27744516-1505-3756-1_1759466809146.jpg' },
-      { color: 'White', capacity: '1TB', price: 900, originalPrice: 1000, image: '/attached_assets/27744516-1505-3756-1_1759466809146.jpg' },
-      { color: 'Snowfall', capacity: '256GB', price: 552, originalPrice: 613 },
-      { color: 'Snowfall', capacity: '512GB', price: 675, originalPrice: 750 },
-      { color: 'Snowfall', capacity: '1TB', price: 900, originalPrice: 1000 },
-      { color: 'Deuterium', capacity: '256GB', price: 552, originalPrice: 613 },
-      { color: 'Deuterium', capacity: '512GB', price: 675, originalPrice: 750 },
-      { color: 'Deuterium', capacity: '1TB', price: 900, originalPrice: 1000 },
-      { color: 'Shadowblade', capacity: '256GB', price: 552, originalPrice: 613 },
-      { color: 'Shadowblade', capacity: '512GB', price: 675, originalPrice: 750 },
-      { color: 'Shadowblade', capacity: '1TB', price: 900, originalPrice: 1000 },
-    ]
-  },
-  // Xiaomi 14 with variants
-  {
-    id: 'xiaomi-14',
-    name: 'Xiaomi 14',
-    price: 744,
-    originalPrice: 909,
-    discount: 18,
-    image: '/attached_assets/23709753-1505-1540-1_1759473163353.jpg',
-    category: 'smartphones',
-    description: 'From 256GB - 6.36" LTPO AMOLED',
-    features: ['Snapdragon 8 Gen 3', 'Triple 50MP Leica', '4610mAh + 90W charging', 'IP68', 'Free shipping'],
-    hasVariants: true,
-    variants: [
-      { color: 'Black', capacity: '256GB', price: 744, originalPrice: 909, image: '/attached_assets/23709753-1505-1540-1_1759473163353.jpg' },
-      { color: 'Black', capacity: '512GB', price: 827, originalPrice: 1009, image: '/attached_assets/23709753-1505-1540-1_1759473163353.jpg' },
-    ]
-  },
-
-  // === SMARTWATCHES (15 products) ===
-  {
-    id: 'apple-watch-ultra-2',
-    name: 'Apple Watch Ultra 2',
-    price: 749,
-    originalPrice: 999,
-    discount: 25,
-    image: '/attached_assets/Apple-Watch-Ultra-2-GPS-Cellular-49-mm-Boitier-en-Titane-Noir-avec-Boucle-Trail-Noir-M-L-version-2024_1759480201265.jpg',
-    category: 'watches',
-    description: '49mm, Ocean Band',
-    features: ['Titanium case', 'Extended battery', 'Action button', 'Free shipping']
-  },
-  {
-    id: 'galaxy-watch-6-classic',
-    name: 'Galaxy Watch 6 Classic',
-    price: 349,
-    originalPrice: 549,
-    discount: 36,
-    image: '/attached_assets/Montre-connectee-Samsung-Galaxy-Watch6-Claic-Bluetooth-47mm-Noir_1759480215243.jpg',
-    category: 'watches',
-    description: '47mm, Black',
-    features: ['Rotating bezel', 'Sleep tracking', 'Wear OS', 'Free shipping']
-  },
-  {
-    id: 'garmin-fenix-7x',
-    name: 'Garmin Fenix 7X',
-    price: 699,
-    originalPrice: 799,
-    discount: 13,
-    image: '/attached_assets/Montre-connectee-Garmin-Fenix-7X-Solar-Gray-avec-bracelet-silicone-Noir_1759480229118.jpg',
-    category: 'watches',
-    description: 'Solar, Sapphire',
-    features: ['Multi-sport GPS', 'Solar charging', 'Rugged design', 'Free shipping']
-  },
-  {
-    id: 'fitbit-sense-2',
-    name: 'Fitbit Sense 2',
-    price: 249,
-    originalPrice: 299,
-    discount: 17,
-    image: '/attached_assets/Montre-connectee-Fitbit-Sense-2-Noir-inclus-6-mois-a-Fitbit-Premium_1759480242060.jpg',
-    category: 'watches',
-    description: 'Health focused',
-    features: ['Stress management', 'ECG app', 'GPS built-in', 'Free shipping']
-  },
-  {
-    id: 'suunto-9-peak-pro',
-    name: 'Suunto 9 Peak Pro',
-    price: 549,
-    originalPrice: 649,
-    discount: 15,
-    image: '/attached_assets/Montre-connectee-Suunto-9-Peak-Pro-Noir_1759480257437.jpg',
-    category: 'watches',
-    description: 'Titanium, GPS',
-    features: ['Adventure ready', 'Long battery', 'Offline maps', 'Free shipping']
-  },
-  {
-    id: 'polar-grit-x2-pro',
-    name: 'Polar Grit X2 Pro',
-    price: 499,
-    originalPrice: 599,
-    discount: 17,
-    image: '/attached_assets/Montre-connectee-Polar-Grit-X2-Pro-35-3-mm-Noir-avec-bracelet-Noir-Taille-S-L_1759480270678.jpg',
-    category: 'watches',
-    description: 'Titan, Sapphire',
-    features: ['Military-grade durability', 'Training guidance', 'Recovery insights', 'Free shipping']
-  },
-  {
-    id: 'amazfit-t-rex-3',
-    name: 'Amazfit T-Rex 3',
-    price: 199,
-    originalPrice: 249,
-    discount: 20,
-    image: '/attached_assets/Montre-connectee-Amazfit-T-Rex-3-Onyx_1759480284605.jpg',
-    category: 'watches',
-    description: 'Rugged GPS',
-    features: ['Military standard', 'Long battery life', 'Health tracking', 'Free shipping']
-  },
-  {
-    id: 'huawei-watch-gt-4',
-    name: 'Huawei Watch GT 4',
-    price: 249,
-    originalPrice: 299,
-    discount: 17,
-    image: '/attached_assets/Montre-connectee-Huawei-Watch-GT-4-46-mm-Active-Noir_1759480298767.jpg',
-    category: 'watches',
-    description: '46mm, Sport',
-    features: ['2-week battery', 'Fitness tracking', 'Smart features', 'Free shipping']
-  },
-  {
-    id: 'fossil-gen-6-wellness',
-    name: 'Fossil Gen 6 Wellness',
-    price: 199,
-    originalPrice: 259,
     discount: 23,
-    image: '/attached_assets/18956137-1505-3756-1_1759480314555.jpg',
-    category: 'watches',
-    description: 'Wear OS 3',
-    features: ['Wellness focused', 'Google Assistant', 'Fast charging', 'Free shipping']
+    image: "/attached_assets/Smartphone-Motorola-Razr50-Ultra-6-9-5G-Nano-SIM-512-Go-Bleu-Marine_1759335720194.jpg",
+    category: "smartphones",
+    description: "From 256GB - Flip Phone with 4.0\" External Display",
+    features: [
+      "Snapdragon 8s Gen 3",
+      "6.9\" Foldable AMOLED 165Hz",
+      "50MP dual camera",
+      "IPX8 water resistance",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Midnight Blue",
+        capacity: "256GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Smartphone-Motorola-Razr50-Ultra-6-9-5G-Nano-SIM-512-Go-Bleu-Marine_1759335720194.jpg"
+      },
+      {
+        color: "Midnight Blue",
+        capacity: "512GB",
+        price: 931,
+        originalPrice: 1149,
+        image: "/attached_assets/Smartphone-Motorola-Razr50-Ultra-6-9-5G-Nano-SIM-512-Go-Bleu-Marine (1)_1759335734640.jpg"
+      },
+      {
+        color: "Spring Green",
+        capacity: "256GB",
+        price: 769,
+        originalPrice: 999
+      },
+      {
+        color: "Spring Green",
+        capacity: "512GB",
+        price: 931,
+        originalPrice: 1149
+      },
+      {
+        color: "Hot Pink",
+        capacity: "256GB",
+        price: 769,
+        originalPrice: 999
+      },
+      {
+        color: "Hot Pink",
+        capacity: "512GB",
+        price: 931,
+        originalPrice: 1149
+      },
+      {
+        color: "Peach Fuzz",
+        capacity: "256GB",
+        price: 769,
+        originalPrice: 999
+      },
+      {
+        color: "Peach Fuzz",
+        capacity: "512GB",
+        price: 931,
+        originalPrice: 1149
+      }
+    ]
   },
   {
-    id: 'ticwatch-pro-5',
-    name: 'TicWatch Pro 5',
-    price: 349,
-    originalPrice: 399,
-    discount: 13,
-    image: '/attached_assets/display-watch1.0_1759493221518.png',
-    category: 'watches',
-    description: 'Snapdragon W5',
-    features: ['Dual display', 'Wear OS 3', 'Long battery', 'Free shipping']
+    id: "motorola-razr-60-ultra",
+    name: "Motorola Razr 60 Ultra",
+    price: 890,
+    originalPrice: 1099,
+    discount: 19,
+    image: "/attached_assets/Smartphone-Motorola-Razr-60-Ultra-7-5G-Double-SIM-512-Go-Pantone-Rio-red_1759466858775.jpg",
+    category: "smartphones",
+    description: "From 512GB - 7\" Foldable Display",
+    features: [
+      "Snapdragon 8 Elite",
+      "7\" Foldable AMOLED 185Hz",
+      "50MP triple camera",
+      "IPX8 water resistance",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Pantone Rio Red",
+        capacity: "512GB",
+        price: 890,
+        originalPrice: 1099,
+        image: "/attached_assets/Smartphone-Motorola-Razr-60-Ultra-7-5G-Double-SIM-512-Go-Pantone-Rio-red_1759466858775.jpg"
+      },
+      {
+        color: "Pantone Rio Red",
+        capacity: "1TB",
+        price: 1052,
+        originalPrice: 1299,
+        image: "/attached_assets/Smartphone-Motorola-Razr-60-Ultra-7-5G-Double-SIM-512-Go-Pantone-Rio-red_1759466858775.jpg"
+      }
+    ]
   },
   {
-    id: 'withings-scanwatch-2',
-    name: 'Withings ScanWatch 2',
-    price: 349,
-    originalPrice: 399,
-    discount: 13,
-    image: '/attached_assets/Montre-connectee-Withings-ScanWatch-2-38-mm-Or-Rose-avec-bracelet-Beige_1759480342595.jpg',
-    category: 'watches',
-    description: 'Hybrid smartwatch',
-    features: ['Medical-grade sensors', 'Classic design', '30-day battery', 'Free shipping']
+    id: "motorola-edge-60-pro",
+    name: "Motorola Edge 60 Pro",
+    price: 615,
+    originalPrice: 799,
+    discount: 23,
+    image: "/attached_assets/Smartphone-Motorola-Edge-60-Pro-6-67-5G-Double-SIM-512-Go-Pantone-Dazzling-blue_1759466729446.jpg",
+    category: "smartphones",
+    description: "From 512GB - Quad-curved flagship",
+    features: [
+      "Snapdragon 8 Elite",
+      "6.7\" pOLED 165Hz",
+      "Sony LYTIA 700C 50MP + quad camera",
+      "6000mAh battery",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Pantone Dazzling Blue",
+        capacity: "512GB",
+        price: 615,
+        originalPrice: 799,
+        image: "/attached_assets/Smartphone-Motorola-Edge-60-Pro-6-67-5G-Double-SIM-512-Go-Pantone-Dazzling-blue_1759466729446.jpg"
+      },
+      {
+        color: "Pantone Dazzling Blue",
+        capacity: "1TB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Smartphone-Motorola-Edge-60-Pro-6-67-5G-Double-SIM-512-Go-Pantone-Dazzling-blue_1759466729446.jpg"
+      },
+      {
+        color: "Sparking Grape",
+        capacity: "512GB",
+        price: 615,
+        originalPrice: 799,
+        image: "/attached_assets/Smartphone-Motorola-Edge-60-Pro-6-67-5G-Double-SIM-512-Go-Pantone-Sparking-grape_1759466741364.jpg"
+      },
+      {
+        color: "Sparking Grape",
+        capacity: "1TB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Smartphone-Motorola-Edge-60-Pro-6-67-5G-Double-SIM-512-Go-Pantone-Sparking-grape_1759466741364.jpg"
+      },
+      {
+        color: "Pantone Shadow",
+        capacity: "512GB",
+        price: 615,
+        originalPrice: 799,
+        image: "/attached_assets/Smartphone-Motorola-Edge-60-Pro-6-67-5G-Double-SIM-512-Go-Pantone-Shadow_1759466770702.jpg"
+      },
+      {
+        color: "Pantone Shadow",
+        capacity: "1TB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Smartphone-Motorola-Edge-60-Pro-6-67-5G-Double-SIM-512-Go-Pantone-Shadow_1759466770702.jpg"
+      }
+    ]
   },
   {
-    id: 'casio-g-shock-gbx100',
-    name: 'Casio G-Shock GBX100',
-    price: 399,
-    originalPrice: 449,
-    discount: 11,
-    image: '/attached_assets/14887022_1759493201172.jpg',
-    category: 'watches',
-    description: 'Tough Solar',
-    features: ['G-Shock durability', 'Tide graph', 'Phone finder', 'Free shipping']
-  },
-  {
-    id: 'tag-heuer-connected',
-    name: 'TAG Heuer Connected',
-    price: 1799,
-    originalPrice: 1999,
-    discount: 10,
-    image: '/attached_assets/TAG-Heuer-Carrera_1759480389446.jpg',
-    category: 'watches',
-    description: 'Luxury smartwatch',
-    features: ['Swiss luxury', 'Titanium case', 'Premium materials', 'Free shipping']
-  },
-  {
-    id: 'xiaomi-watch-s3',
-    name: 'Xiaomi Watch S3',
-    price: 149,
-    originalPrice: 199,
-    discount: 25,
-    image: '/attached_assets/Montre-connectee-Xiaomi-Mi-Watch-S3-46-mm-Bluetooth-Argent_1759480405991.jpg',
-    category: 'watches',
-    description: 'AMOLED display',
-    features: ['12-day battery', 'Health monitoring', 'Always-on display', 'Free shipping']
-  },
-  {
-    id: 'xiaomi-watch-s4',
-    name: 'Xiaomi Watch S4',
-    price: 156,
-    originalPrice: 195,
-    discount: 20,
-    image: '/attached_assets/Montre-connectee-Xiaomi-Watch-S4-Bluetooth-Noir_1759483363254.jpg',
-    category: 'watches',
-    description: '46mm, Bluetooth',
-    features: ['15-day battery', 'Rotating crown', '150+ sports modes', 'Free shipping']
-  },
-  {
-    id: 'oura-ring-gen3',
-    name: 'Oura Ring Gen3',
+    id: "poco-f6-pro",
+    name: "Poco F6 Pro",
     price: 299,
-    originalPrice: 349,
-    discount: 14,
-    image: '/attached_assets/pop_highlights_ring_trimmed_1759480421094.png',
-    category: 'watches',
-    description: 'Smart ring',
-    features: ['Sleep tracking', 'Recovery insights', 'Discreet design', 'Free shipping']
-  },
-
-  // === SNEAKERS (12 products) ===
-  {
-    id: 'air-jordan-4-retro',
-    name: 'Air Jordan 4 Retro',
-    price: 219,
-    originalPrice: 259,
-    discount: 15,
-    image: '/attached_assets/stock_images/air_jordan_4_retro_w_ac3024a6.jpg',
-    category: 'sneakers',
-    description: 'White Cement',
-    features: ['Classic silhouette', 'Premium leather', 'Basketball heritage', 'Free shipping']
-  },
-  {
-    id: 'yeezy-boost-350-v2',
-    name: 'Yeezy Boost 350 V2',
-    price: 249,
-    originalPrice: 299,
+    originalPrice: 360,
     discount: 17,
-    image: '/attached_assets/m_wp_65a9b73087a2f5e132aa6f91_1759487962373.webp',
-    category: 'sneakers',
-    description: 'Bone',
-    features: ['Boost technology', 'Primeknit upper', 'Iconic design', 'Free shipping']
+    image: "/attached_assets/Smartphone-Xiaomi-POCO-F6-Pro-5G-6-67-12-Go-256-Go-Noir_1759335752253.jpg",
+    category: "smartphones",
+    description: "From 256GB - Flagship Killer",
+    features: [
+      "Snapdragon 8 Gen 2",
+      "6.67\" WQHD+ AMOLED 120Hz",
+      "50MP triple camera",
+      "120W HyperCharge",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Black",
+        capacity: "256GB",
+        price: 299,
+        originalPrice: 360,
+        image: "/attached_assets/Smartphone-Xiaomi-POCO-F6-Pro-5G-6-67-12-Go-256-Go-Noir_1759335752253.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "512GB",
+        price: 382,
+        originalPrice: 460,
+        image: "/attached_assets/Smartphone-Xiaomi-POCO-F6-Pro-5G-6-67-12-Go-256-Go-Noir_1759335752253.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "1TB",
+        price: 462,
+        originalPrice: 600,
+        image: "/attached_assets/Smartphone-Xiaomi-POCO-F6-Pro-5G-6-67-12-Go-256-Go-Noir_1759335752253.jpg"
+      },
+      {
+        color: "White",
+        capacity: "256GB",
+        price: 299,
+        originalPrice: 360
+      },
+      {
+        color: "White",
+        capacity: "512GB",
+        price: 382,
+        originalPrice: 460
+      },
+      {
+        color: "White",
+        capacity: "1TB",
+        price: 462,
+        originalPrice: 600
+      }
+    ]
   },
   {
-    id: 'nike-dunk-low',
-    name: 'Nike Dunk Low',
-    price: 119,
+    id: "oppo-find-x7-ultra",
+    name: "Oppo Find X7 Ultra",
+    price: 644,
+    originalPrice: 836,
+    discount: 23,
+    image: "/attached_assets/oppo-find-x7-ultra-1_1759355001580.jpg",
+    category: "smartphones",
+    description: "From 256GB - Quad Main Camera System",
+    features: [
+      "Snapdragon 8 Gen 3",
+      "6.82\" LTPO AMOLED 120Hz",
+      "50MP quad camera",
+      "Hasselblad tuning",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Ocean Blue",
+        capacity: "256GB",
+        price: 644,
+        originalPrice: 836,
+        image: "/attached_assets/oppo-find-x7-ultra-1_1759355001580.jpg"
+      },
+      {
+        color: "Ocean Blue",
+        capacity: "512GB",
+        price: 766,
+        originalPrice: 995,
+        image: "/attached_assets/oppo-find-x7-ultra-1_1759355001580.jpg"
+      },
+      {
+        color: "Sepia Brown",
+        capacity: "256GB",
+        price: 644,
+        originalPrice: 836,
+        image: "/attached_assets/oppo-find-x7-ultra-1_1759355001580.jpg"
+      },
+      {
+        color: "Sepia Brown",
+        capacity: "512GB",
+        price: 766,
+        originalPrice: 995,
+        image: "/attached_assets/oppo-find-x7-ultra-1_1759355001580.jpg"
+      },
+      {
+        color: "Tailored Black",
+        capacity: "256GB",
+        price: 644,
+        originalPrice: 836,
+        image: "/attached_assets/oppo-find-x7-ultra-1_1759355001580.jpg"
+      },
+      {
+        color: "Tailored Black",
+        capacity: "512GB",
+        price: 766,
+        originalPrice: 995,
+        image: "/attached_assets/oppo-find-x7-ultra-1_1759355001580.jpg"
+      }
+    ]
+  },
+  {
+    id: "vivo-x100-pro",
+    name: "Vivo X100 Pro",
+    price: 693,
+    originalPrice: 900,
+    discount: 23,
+    image: "/attached_assets/vivo-x100-pro-1_1759355067920.jpg",
+    category: "smartphones",
+    description: "From 256GB - ZEISS Optics",
+    features: [
+      "Dimensity 9300",
+      "6.78\" LTPO AMOLED 120Hz",
+      "50MP triple ZEISS",
+      "100W fast charging",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Startrail Blue",
+        capacity: "256GB",
+        price: 693,
+        originalPrice: 900,
+        image: "/attached_assets/vivo-x100-pro-1_1759355067920.jpg"
+      },
+      {
+        color: "Startrail Blue",
+        capacity: "512GB",
+        price: 851,
+        originalPrice: 1050,
+        image: "/attached_assets/vivo-x100-pro-1_1759355067920.jpg"
+      },
+      {
+        color: "Startrail Blue",
+        capacity: "1TB",
+        price: 972,
+        originalPrice: 1200,
+        image: "/attached_assets/vivo-x100-pro-1_1759355067920.jpg"
+      },
+      {
+        color: "Sunset Orange",
+        capacity: "256GB",
+        price: 693,
+        originalPrice: 900,
+        image: "/attached_assets/vivo-x100-pro-1_1759355067920.jpg"
+      },
+      {
+        color: "Sunset Orange",
+        capacity: "512GB",
+        price: 851,
+        originalPrice: 1050,
+        image: "/attached_assets/vivo-x100-pro-1_1759355067920.jpg"
+      },
+      {
+        color: "Sunset Orange",
+        capacity: "1TB",
+        price: 972,
+        originalPrice: 1200,
+        image: "/attached_assets/vivo-x100-pro-1_1759355067920.jpg"
+      },
+      {
+        color: "Asteroid Black",
+        capacity: "256GB",
+        price: 693,
+        originalPrice: 900,
+        image: "/attached_assets/vivo-x100-pro-1_1759355067920.jpg"
+      },
+      {
+        color: "Asteroid Black",
+        capacity: "512GB",
+        price: 851,
+        originalPrice: 1050,
+        image: "/attached_assets/vivo-x100-pro-1_1759355067920.jpg"
+      },
+      {
+        color: "Asteroid Black",
+        capacity: "1TB",
+        price: 972,
+        originalPrice: 1200,
+        image: "/attached_assets/vivo-x100-pro-1_1759355067920.jpg"
+      }
+    ]
+  },
+  {
+    id: "nothing-phone-3",
+    name: "Nothing Phone 3",
+    price: 615,
+    originalPrice: 799,
+    discount: 23,
+    image: "/attached_assets/Smartphone-Nothing-Phone-3-6-67-5G-Nano-SIM-512-Go-Blanc_1759335889250.jpg",
+    category: "smartphones",
+    description: "From 256GB - Glyph Matrix LED Display",
+    features: [
+      "Snapdragon 8s Gen 4",
+      "6.67\" AMOLED 120Hz",
+      "Triple 50MP cameras",
+      "Glyph Matrix (489 LEDs)",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Black",
+        capacity: "256GB",
+        price: 615,
+        originalPrice: 799,
+        image: "/attached_assets/Smartphone-Nothing-Phone-3-6-67-5G-Nano-SIM-512-Go-Noir_1759466784376.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "512GB",
+        price: 692,
+        originalPrice: 899,
+        image: "/attached_assets/Smartphone-Nothing-Phone-3-6-67-5G-Nano-SIM-512-Go-Noir_1759466784376.jpg"
+      },
+      {
+        color: "White",
+        capacity: "256GB",
+        price: 615,
+        originalPrice: 799,
+        image: "/attached_assets/Smartphone-Nothing-Phone-3-6-67-5G-Nano-SIM-512-Go-Blanc_1759335889250.jpg"
+      },
+      {
+        color: "White",
+        capacity: "512GB",
+        price: 692,
+        originalPrice: 899,
+        image: "/attached_assets/Smartphone-Nothing-Phone-3-6-67-5G-Nano-SIM-512-Go-Blanc_1759335889250.jpg"
+      }
+    ]
+  },
+  {
+    id: "asus-rog-phone-8-pro",
+    name: "Asus ROG Phone 8 Pro",
+    price: 1052,
+    originalPrice: 1299,
+    discount: 19,
+    image: "/attached_assets/Smartphone-Asus-Rog-Phone-8-Pro-6-78-5G-Double-nano-SIM-512-Go-Noir_1759335839764.jpg",
+    category: "smartphones",
+    description: "From 512GB - Ultimate Gaming Phone",
+    features: [
+      "Snapdragon 8 Gen 3",
+      "6.78\" AMOLED 165Hz",
+      "50MP gimbal camera",
+      "AirTrigger controls",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Phantom Black",
+        capacity: "512GB",
+        price: 1052,
+        originalPrice: 1299,
+        image: "/attached_assets/Smartphone-Asus-Rog-Phone-8-Pro-6-78-5G-Double-nano-SIM-512-Go-Noir_1759335839764.jpg"
+      },
+      {
+        color: "Phantom Black",
+        capacity: "1TB",
+        price: 1295,
+        originalPrice: 1599,
+        image: "/attached_assets/Smartphone-Asus-Rog-Phone-8-Pro-6-78-5G-Double-nano-SIM-512-Go-Noir_1759335839764.jpg"
+      }
+    ]
+  },
+  {
+    id: "sony-xperia-1-vi",
+    name: "Sony Xperia 1 VI",
+    price: 1133,
+    originalPrice: 1399,
+    discount: 19,
+    image: "/attached_assets/sony-xperia-1-vi-1_1759355127608.jpg",
+    category: "smartphones",
+    description: "From 256GB - Pro Camera & Audio",
+    features: [
+      "Snapdragon 8 Gen 3",
+      "6.5\" LTPO OLED 120Hz",
+      "48MP Zeiss cameras",
+      "3.5mm headphone jack",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Black",
+        capacity: "256GB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/sony-xperia-1-vi-1_1759355127608.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "512GB",
+        price: 1295,
+        originalPrice: 1599,
+        image: "/attached_assets/sony-xperia-1-vi-1_1759355127608.jpg"
+      },
+      {
+        color: "Platinum Silver",
+        capacity: "256GB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/sony-xperia-1mvi-2_1759355161568.jpg"
+      },
+      {
+        color: "Platinum Silver",
+        capacity: "512GB",
+        price: 1295,
+        originalPrice: 1599,
+        image: "/attached_assets/sony-xperia-1mvi-2_1759355161568.jpg"
+      },
+      {
+        color: "Red",
+        capacity: "256GB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/sony-xperia-1-vi-3_1759355186921.jpg"
+      },
+      {
+        color: "Red",
+        capacity: "512GB",
+        price: 1295,
+        originalPrice: 1599,
+        image: "/attached_assets/sony-xperia-1-vi-3_1759355186921.jpg"
+      }
+    ]
+  },
+  {
+    id: "oppo-find-n2-flip",
+    name: "Oppo Find N2 Flip",
+    price: 731,
+    originalPrice: 949,
+    discount: 23,
+    image: "/attached_assets/Smartphone-Oppo-Find-N2-Flip-6-8-5G-Double-nano-SIM-256-Go-Noir_1759335954597.jpg",
+    category: "smartphones",
+    description: "From 256GB - Flip Phone with 3.26\" Cover Display",
+    features: [
+      "MediaTek Dimensity 9000+",
+      "6.8\" AMOLED 120Hz",
+      "50MP Sony IMX890 camera",
+      "Zero-gap hinge design",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Astral Black",
+        capacity: "256GB",
+        price: 731,
+        originalPrice: 949,
+        image: "/attached_assets/Smartphone-Oppo-Find-N2-Flip-6-8-5G-Double-nano-SIM-256-Go-Noir_1759335954597.jpg"
+      },
+      {
+        color: "Astral Black",
+        capacity: "512GB",
+        price: 890,
+        originalPrice: 1099,
+        image: "/attached_assets/Smartphone-Oppo-Find-N2-Flip-6-8-5G-Double-nano-SIM-256-Go-Noir_1759335954597.jpg"
+      },
+      {
+        color: "Moonlit Purple",
+        capacity: "256GB",
+        price: 731,
+        originalPrice: 949
+      },
+      {
+        color: "Moonlit Purple",
+        capacity: "512GB",
+        price: 890,
+        originalPrice: 1099
+      }
+    ]
+  },
+  {
+    id: "vivo-x80-pro",
+    name: "Vivo X80 Pro",
+    price: 708,
+    originalPrice: 920,
+    discount: 23,
+    image: "/attached_assets/Smartphone-Vivo-X80-Pro-6-78-5G-Double-nano-SIM-256-Go-Noir-Cosmique_1759335994844.jpg",
+    category: "smartphones",
+    description: "From 256GB - ZEISS Optics Flagship",
+    features: [
+      "Snapdragon 8 Gen 1",
+      "6.78\" LTPO2 AMOLED",
+      "50MP quad camera system",
+      "80W fast charging",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Cosmic Black",
+        capacity: "256GB",
+        price: 708,
+        originalPrice: 920,
+        image: "/attached_assets/Smartphone-Vivo-X80-Pro-6-78-5G-Double-nano-SIM-256-Go-Noir-Cosmique_1759335994844.jpg"
+      },
+      {
+        color: "Cosmic Black",
+        capacity: "512GB",
+        price: 867,
+        originalPrice: 1070,
+        image: "/attached_assets/Smartphone-Vivo-X80-Pro-6-78-5G-Double-nano-SIM-256-Go-Noir-Cosmique_1759335994844.jpg"
+      },
+      {
+        color: "Urban Blue",
+        capacity: "256GB",
+        price: 708,
+        originalPrice: 920
+      },
+      {
+        color: "Urban Blue",
+        capacity: "512GB",
+        price: 867,
+        originalPrice: 1070
+      },
+      {
+        color: "Holiday Orange",
+        capacity: "256GB",
+        price: 708,
+        originalPrice: 920
+      },
+      {
+        color: "Holiday Orange",
+        capacity: "512GB",
+        price: 867,
+        originalPrice: 1070
+      }
+    ]
+  },
+  {
+    id: "vivo-x200-pro",
+    name: "Vivo X200 Pro - Global Version",
+    price: 931,
+    originalPrice: 1149,
+    discount: 19,
+    image: "/attached_assets/27673398-3-1541-1_1759336034532.jpg",
+    category: "smartphones",
+    description: "From 256GB - 200MP ZEISS Telephoto",
+    features: [
+      "Dimensity 9400",
+      "6.78\" OLED 120Hz",
+      "200MP ZEISS telephoto",
+      "6000mAh battery",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Gold",
+        capacity: "256GB",
+        price: 931,
+        originalPrice: 1149,
+        image: "/attached_assets/27673398-3-1541-1_1759336034532.jpg"
+      },
+      {
+        color: "Gold",
+        capacity: "512GB",
+        price: 1093,
+        originalPrice: 1349,
+        image: "/attached_assets/27673398-3-1541-1_1759336034532.jpg"
+      },
+      {
+        color: "Gold",
+        capacity: "1TB",
+        price: 1336,
+        originalPrice: 1649,
+        image: "/attached_assets/27673398-3-1541-1_1759336034532.jpg"
+      },
+      {
+        color: "Titanium Grey",
+        capacity: "256GB",
+        price: 931,
+        originalPrice: 1149
+      },
+      {
+        color: "Titanium Grey",
+        capacity: "512GB",
+        price: 1093,
+        originalPrice: 1349
+      },
+      {
+        color: "Titanium Grey",
+        capacity: "1TB",
+        price: 1336,
+        originalPrice: 1649
+      },
+      {
+        color: "Blue",
+        capacity: "256GB",
+        price: 931,
+        originalPrice: 1149
+      },
+      {
+        color: "Blue",
+        capacity: "512GB",
+        price: 1093,
+        originalPrice: 1349
+      },
+      {
+        color: "Blue",
+        capacity: "1TB",
+        price: 1336,
+        originalPrice: 1649
+      }
+    ]
+  },
+  {
+    id: "samsung-galaxy-a55",
+    name: "Samsung Galaxy A55 5G",
+    price: 315,
+    originalPrice: 380,
+    discount: 17,
+    image: "/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Bleu_1759355204723.jpg",
+    category: "smartphones",
+    description: "From 128GB - Premium Mid-Range",
+    features: [
+      "Exynos 1480",
+      "6.6\" Super AMOLED 120Hz",
+      "50MP OIS camera",
+      "IP67 water resistance",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Awesome Iceblue",
+        capacity: "128GB",
+        price: 315,
+        originalPrice: 380,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Bleu_1759355204723.jpg"
+      },
+      {
+        color: "Awesome Iceblue",
+        capacity: "256GB",
+        price: 374,
+        originalPrice: 450,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Bleu_1759355204723.jpg"
+      },
+      {
+        color: "Awesome Navy",
+        capacity: "128GB",
+        price: 315,
+        originalPrice: 380,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Bleu-nuit_1759355278369.jpg"
+      },
+      {
+        color: "Awesome Navy",
+        capacity: "256GB",
+        price: 374,
+        originalPrice: 450,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Bleu-nuit_1759355278369.jpg"
+      },
+      {
+        color: "Awesome Lilac",
+        capacity: "128GB",
+        price: 315,
+        originalPrice: 380,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Lilas_1759355219278.jpg"
+      },
+      {
+        color: "Awesome Lilac",
+        capacity: "256GB",
+        price: 374,
+        originalPrice: 450,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Lilas_1759355219278.jpg"
+      },
+      {
+        color: "Awesome Lemon",
+        capacity: "128GB",
+        price: 315,
+        originalPrice: 380,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Lime_1759355233291.jpg"
+      },
+      {
+        color: "Awesome Lemon",
+        capacity: "256GB",
+        price: 374,
+        originalPrice: 450,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-A55-6-6-5G-Nano-SIM-128-Go-Lime_1759355233291.jpg"
+      }
+    ]
+  },
+  {
+    id: "google-pixel-8a",
+    name: "Google Pixel 8a",
+    price: 414,
+    originalPrice: 499,
+    discount: 17,
+    image: "/attached_assets/Smartphone-Google-Pixel-8a-5G-Double-Sim-128Go-Obsidian-Noir_1759355332936.jpg",
+    category: "smartphones",
+    description: "From 128GB - AI-Powered Camera",
+    features: [
+      "Google Tensor G3",
+      "6.1\" OLED 120Hz",
+      "64MP camera",
+      "7 years of updates",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Obsidian",
+        capacity: "128GB",
+        price: 414,
+        originalPrice: 499,
+        image: "/attached_assets/Smartphone-Google-Pixel-8a-5G-Double-Sim-128Go-Obsidian-Noir_1759355332936.jpg"
+      },
+      {
+        color: "Obsidian",
+        capacity: "256GB",
+        price: 423,
+        originalPrice: 549,
+        image: "/attached_assets/Smartphone-Google-Pixel-8a-5G-Double-Sim-128Go-Obsidian-Noir_1759355332936.jpg"
+      },
+      {
+        color: "Porcelain",
+        capacity: "128GB",
+        price: 414,
+        originalPrice: 499,
+        image: "/attached_assets/Smartphone-Google-Pixel-8a-5G-Double-Sim-128Go-Porcelaine-Blanc_1759355361366.jpg"
+      },
+      {
+        color: "Porcelain",
+        capacity: "256GB",
+        price: 423,
+        originalPrice: 549,
+        image: "/attached_assets/Smartphone-Google-Pixel-8a-5G-Double-Sim-128Go-Porcelaine-Blanc_1759355361366.jpg"
+      },
+      {
+        color: "Bay",
+        capacity: "128GB",
+        price: 414,
+        originalPrice: 499,
+        image: "/attached_assets/Smartphone-Google-Pixel-8a-5G-Double-Sim-128Go-Bay-Bleu (1)_1759355347423.jpg"
+      },
+      {
+        color: "Bay",
+        capacity: "256GB",
+        price: 430,
+        originalPrice: 559,
+        image: "/attached_assets/Smartphone-Google-Pixel-8a-5G-Double-Sim-128Go-Bay-Bleu (1)_1759355347423.jpg"
+      },
+      {
+        color: "Aloe",
+        capacity: "128GB",
+        price: 414,
+        originalPrice: 499
+      },
+      {
+        color: "Aloe",
+        capacity: "256GB",
+        price: 430,
+        originalPrice: 559
+      }
+    ]
+  },
+  {
+    id: "oneplus-12r",
+    name: "OnePlus 12R",
+    price: 414,
+    originalPrice: 499,
+    discount: 17,
+    image: "/attached_assets/oneplus-12r-1_1759414905429.jpg",
+    category: "smartphones",
+    description: "From 128GB - Flagship Killer",
+    features: [
+      "Snapdragon 8 Gen 2",
+      "6.78\" LTPO AMOLED 120Hz",
+      "Triple 50MP cameras",
+      "5500mAh + 80W charging",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Cool Blue",
+        capacity: "128GB",
+        price: 414,
+        originalPrice: 499,
+        image: "/attached_assets/oneplus-12r-1_1759414905429.jpg"
+      },
+      {
+        color: "Cool Blue",
+        capacity: "256GB",
+        price: 461,
+        originalPrice: 599,
+        image: "/attached_assets/oneplus-12r-1_1759414905429.jpg"
+      },
+      {
+        color: "Iron Gray",
+        capacity: "128GB",
+        price: 414,
+        originalPrice: 499,
+        image: "/attached_assets/oneplus-12r-2_1759414919454.jpg"
+      },
+      {
+        color: "Iron Gray",
+        capacity: "256GB",
+        price: 461,
+        originalPrice: 599,
+        image: "/attached_assets/oneplus-12r-2_1759414919454.jpg"
+      },
+      {
+        color: "Genshin Impact Edition",
+        capacity: "256GB",
+        price: 469,
+        originalPrice: 609,
+        image: "/attached_assets/oneplus-12r-genshin-impact-edition_1759414941332.jpg"
+      }
+    ]
+  },
+  {
+    id: "realme-gt-6",
+    name: "Realme GT 6",
+    price: 349,
+    originalPrice: 420,
+    discount: 17,
+    image: "/attached_assets/realme-gt6-1_1759414965910.jpg",
+    category: "smartphones",
+    description: "From 256GB - Gaming Beast",
+    features: [
+      "Snapdragon 8s Gen 3",
+      "6.78\" AMOLED 120Hz",
+      "50MP Sony LYT-808 OIS",
+      "5500mAh + 120W charging",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Fluid Silver",
+        capacity: "256GB",
+        price: 349,
+        originalPrice: 420,
+        image: "/attached_assets/realme-gt6-2_1759414985774.jpg"
+      },
+      {
+        color: "Fluid Silver",
+        capacity: "512GB",
+        price: 385,
+        originalPrice: 500,
+        image: "/attached_assets/realme-gt6-2_1759414985774.jpg"
+      },
+      {
+        color: "Razor Green",
+        capacity: "256GB",
+        price: 349,
+        originalPrice: 420,
+        image: "/attached_assets/realme-gt6-1_1759414965910.jpg"
+      },
+      {
+        color: "Razor Green",
+        capacity: "512GB",
+        price: 385,
+        originalPrice: 500,
+        image: "/attached_assets/realme-gt6-1_1759414965910.jpg"
+      }
+    ]
+  },
+  {
+    id: "motorola-edge-50-pro",
+    name: "Motorola Edge 50 Pro",
+    price: 278,
+    originalPrice: 335,
+    discount: 17,
+    image: "/attached_assets/motorola-edge50-pro-1_1759415003216.jpg",
+    category: "smartphones",
+    description: "From 256GB - Ultra-Fast Charging",
+    features: [
+      "Snapdragon 7 Gen 3",
+      "6.7\" pOLED 144Hz",
+      "50MP OIS camera",
+      "125W fast charging",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Luxe Lavender",
+        capacity: "256GB",
+        price: 278,
+        originalPrice: 335,
+        image: "/attached_assets/motorola-edge50-pro-1_1759415003216.jpg"
+      },
+      {
+        color: "Luxe Lavender",
+        capacity: "512GB",
+        price: 315,
+        originalPrice: 380,
+        image: "/attached_assets/motorola-edge50-pro-1_1759415003216.jpg"
+      },
+      {
+        color: "Black Beauty",
+        capacity: "256GB",
+        price: 278,
+        originalPrice: 335,
+        image: "/attached_assets/Smartphone-Motorola-Moto-Edge-50-Pro-6-7-5G-Double-nano-SIM-512-Go-Noir-Carbone_1759415035339.jpg"
+      },
+      {
+        color: "Black Beauty",
+        capacity: "512GB",
+        price: 315,
+        originalPrice: 380,
+        image: "/attached_assets/Smartphone-Motorola-Moto-Edge-50-Pro-6-7-5G-Double-nano-SIM-512-Go-Noir-Carbone_1759415035339.jpg"
+      },
+      {
+        color: "Moonlight Pearl",
+        capacity: "256GB",
+        price: 278,
+        originalPrice: 335,
+        image: "/attached_assets/motorola-edge50-pro-2_1759415020093.jpg"
+      },
+      {
+        color: "Moonlight Pearl",
+        capacity: "512GB",
+        price: 315,
+        originalPrice: 380,
+        image: "/attached_assets/motorola-edge50-pro-2_1759415020093.jpg"
+      }
+    ]
+  },
+  {
+    id: "samsung-s25-plus",
+    name: "Samsung Galaxy S25+",
+    price: 769,
+    originalPrice: 999,
+    discount: 23,
+    image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Bleu-clair_1759415053147.jpg",
+    category: "smartphones",
+    description: "From 256GB - 6.7\" QHD+ Display",
+    features: [
+      "Snapdragon 8 Elite",
+      "6.7\" Dynamic AMOLED 120Hz",
+      "50MP triple camera",
+      "Gorilla Glass Victus 2",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Navy",
+        capacity: "256GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Bleu-nuit_1759415129305.jpg"
+      },
+      {
+        color: "Navy",
+        capacity: "512GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Bleu-nuit_1759415129305.jpg"
+      },
+      {
+        color: "Icy Blue",
+        capacity: "256GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Bleu-clair_1759415053147.jpg"
+      },
+      {
+        color: "Icy Blue",
+        capacity: "512GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Bleu-clair_1759415053147.jpg"
+      },
+      {
+        color: "Mint",
+        capacity: "256GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Vert-d-eau_1759415070675.jpg"
+      },
+      {
+        color: "Mint",
+        capacity: "512GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Vert-d-eau_1759415070675.jpg"
+      },
+      {
+        color: "Silver Shadow",
+        capacity: "256GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Gris_1759415087639.jpg"
+      },
+      {
+        color: "Silver Shadow",
+        capacity: "512GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Smartphone-Samsung-Galaxy-S25-6-7-5G-Nano-SIM-256-Go-Gris_1759415087639.jpg"
+      }
+    ]
+  },
+  {
+    id: "iphone-16-pro",
+    name: "iPhone 16 Pro",
+    price: 769,
+    originalPrice: 999,
+    discount: 23,
+    image: "/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Naturel_1759415145355.jpg",
+    category: "smartphones",
+    description: "From 128GB - 6.3\" ProMotion Display",
+    features: [
+      "Apple A18 Pro chip",
+      "6.3\" LTPO OLED 120Hz",
+      "48MP triple camera",
+      "Titanium design",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Black Titanium",
+        capacity: "128GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Noir-Titane_1759415181326.jpg"
+      },
+      {
+        color: "Black Titanium",
+        capacity: "256GB",
+        price: 931,
+        originalPrice: 1149,
+        image: "/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Noir-Titane_1759415181326.jpg"
+      },
+      {
+        color: "Black Titanium",
+        capacity: "512GB",
+        price: 1093,
+        originalPrice: 1349,
+        image: "/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Noir-Titane_1759415181326.jpg"
+      },
+      {
+        color: "White Titanium",
+        capacity: "128GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Blanc_1759415162546.jpg"
+      },
+      {
+        color: "White Titanium",
+        capacity: "256GB",
+        price: 931,
+        originalPrice: 1149,
+        image: "/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Blanc_1759415162546.jpg"
+      },
+      {
+        color: "White Titanium",
+        capacity: "512GB",
+        price: 1093,
+        originalPrice: 1349,
+        image: "/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Blanc_1759415162546.jpg"
+      },
+      {
+        color: "Natural Titanium",
+        capacity: "128GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Naturel_1759415145355.jpg"
+      },
+      {
+        color: "Natural Titanium",
+        capacity: "256GB",
+        price: 931,
+        originalPrice: 1149,
+        image: "/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Naturel_1759415145355.jpg"
+      },
+      {
+        color: "Natural Titanium",
+        capacity: "512GB",
+        price: 1093,
+        originalPrice: 1349,
+        image: "/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Naturel_1759415145355.jpg"
+      },
+      {
+        color: "Desert Titanium",
+        capacity: "128GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Sable_1759415212732.jpg"
+      },
+      {
+        color: "Desert Titanium",
+        capacity: "256GB",
+        price: 931,
+        originalPrice: 1149,
+        image: "/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Sable_1759415212732.jpg"
+      },
+      {
+        color: "Desert Titanium",
+        capacity: "512GB",
+        price: 1093,
+        originalPrice: 1349,
+        image: "/attached_assets/Apple-iPhone-16-Pro-6-3-5G-1-To-Double-SIM-Titane-Sable_1759415212732.jpg"
+      }
+    ]
+  },
+  {
+    id: "iphone-16",
+    name: "iPhone 16",
+    price: 615,
+    originalPrice: 799,
+    discount: 23,
+    image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Noir_1759415228576.jpg",
+    category: "smartphones",
+    description: "From 128GB - 6.1\" Display",
+    features: [
+      "Apple A18 chip",
+      "6.1\" OLED 60Hz",
+      "48MP dual camera",
+      "Ceramic Shield",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Black",
+        capacity: "128GB",
+        price: 615,
+        originalPrice: 799,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Noir_1759415228576.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "256GB",
+        price: 692,
+        originalPrice: 899,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Noir_1759415228576.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "512GB",
+        price: 890,
+        originalPrice: 1099,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Noir_1759415228576.jpg"
+      },
+      {
+        color: "White",
+        capacity: "128GB",
+        price: 615,
+        originalPrice: 799,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Blanc_1759416598691.jpg"
+      },
+      {
+        color: "White",
+        capacity: "256GB",
+        price: 692,
+        originalPrice: 899,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Blanc_1759416598691.jpg"
+      },
+      {
+        color: "White",
+        capacity: "512GB",
+        price: 890,
+        originalPrice: 1099,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Blanc_1759416598691.jpg"
+      },
+      {
+        color: "Pink",
+        capacity: "128GB",
+        price: 615,
+        originalPrice: 799,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Rose_1759415277022.jpg"
+      },
+      {
+        color: "Pink",
+        capacity: "256GB",
+        price: 692,
+        originalPrice: 899,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Rose_1759415277022.jpg"
+      },
+      {
+        color: "Pink",
+        capacity: "512GB",
+        price: 890,
+        originalPrice: 1099,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Rose_1759415277022.jpg"
+      },
+      {
+        color: "Teal",
+        capacity: "128GB",
+        price: 615,
+        originalPrice: 799,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Sarcelle_1759415243542.jpg"
+      },
+      {
+        color: "Teal",
+        capacity: "256GB",
+        price: 692,
+        originalPrice: 899,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Sarcelle_1759415243542.jpg"
+      },
+      {
+        color: "Teal",
+        capacity: "512GB",
+        price: 890,
+        originalPrice: 1099,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Sarcelle_1759415243542.jpg"
+      },
+      {
+        color: "Ultramarine",
+        capacity: "128GB",
+        price: 615,
+        originalPrice: 799,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Outremer_1759415260297.jpg"
+      },
+      {
+        color: "Ultramarine",
+        capacity: "256GB",
+        price: 692,
+        originalPrice: 899,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Outremer_1759415260297.jpg"
+      },
+      {
+        color: "Ultramarine",
+        capacity: "512GB",
+        price: 890,
+        originalPrice: 1099,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Outremer_1759415260297.jpg"
+      }
+    ]
+  },
+  {
+    id: "iphone-16-plus",
+    name: "iPhone 16 Plus",
+    price: 692,
+    originalPrice: 899,
+    discount: 23,
+    image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Noir_1759415228576.jpg",
+    category: "smartphones",
+    description: "From 128GB - 6.7\" Display",
+    features: [
+      "Apple A18 chip",
+      "6.7\" OLED 60Hz",
+      "48MP dual camera",
+      "All-day battery",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Black",
+        capacity: "128GB",
+        price: 692,
+        originalPrice: 899,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Noir_1759415228576.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "256GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Noir_1759415228576.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "512GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Noir_1759415228576.jpg"
+      },
+      {
+        color: "White",
+        capacity: "128GB",
+        price: 692,
+        originalPrice: 899,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Blanc_1759416598691.jpg"
+      },
+      {
+        color: "White",
+        capacity: "256GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Blanc_1759416598691.jpg"
+      },
+      {
+        color: "White",
+        capacity: "512GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Blanc_1759416598691.jpg"
+      },
+      {
+        color: "Pink",
+        capacity: "128GB",
+        price: 692,
+        originalPrice: 899,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Rose_1759415277022.jpg"
+      },
+      {
+        color: "Pink",
+        capacity: "256GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Rose_1759415277022.jpg"
+      },
+      {
+        color: "Pink",
+        capacity: "512GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Rose_1759415277022.jpg"
+      },
+      {
+        color: "Teal",
+        capacity: "128GB",
+        price: 692,
+        originalPrice: 899,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Sarcelle_1759415243542.jpg"
+      },
+      {
+        color: "Teal",
+        capacity: "256GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Sarcelle_1759415243542.jpg"
+      },
+      {
+        color: "Teal",
+        capacity: "512GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Sarcelle_1759415243542.jpg"
+      },
+      {
+        color: "Ultramarine",
+        capacity: "128GB",
+        price: 692,
+        originalPrice: 899,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Outremer_1759415260297.jpg"
+      },
+      {
+        color: "Ultramarine",
+        capacity: "256GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Outremer_1759415260297.jpg"
+      },
+      {
+        color: "Ultramarine",
+        capacity: "512GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Apple-iPhone-16-6-1-5G-128-Go-Double-SIM-Outremer_1759415260297.jpg"
+      }
+    ]
+  },
+  {
+    id: "google-pixel-10-pro-xl",
+    name: "Google Pixel 10 Pro XL",
+    price: 971,
+    originalPrice: 1199,
+    discount: 19,
+    image: "/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Jade_1759425513411.jpg",
+    category: "smartphones",
+    description: "From 256GB - 6.8\" Super Actua Display",
+    features: [
+      "Google Tensor G5",
+      "6.8\" LTPO OLED 120Hz",
+      "50MP Pro Res Zoom 100x",
+      "7 years updates",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Jade",
+        capacity: "256GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Jade_1759425513411.jpg"
+      },
+      {
+        color: "Jade",
+        capacity: "512GB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Jade_1759425513411.jpg"
+      },
+      {
+        color: "Jade",
+        capacity: "1TB",
+        price: 1295,
+        originalPrice: 1599,
+        image: "/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Jade_1759425513411.jpg"
+      },
+      {
+        color: "Porcelain",
+        capacity: "256GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Porcelaine_1759425527419.jpg"
+      },
+      {
+        color: "Porcelain",
+        capacity: "512GB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Porcelaine_1759425527419.jpg"
+      },
+      {
+        color: "Porcelain",
+        capacity: "1TB",
+        price: 1295,
+        originalPrice: 1599,
+        image: "/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Porcelaine_1759425527419.jpg"
+      },
+      {
+        color: "Volcanic Black",
+        capacity: "256GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Noir-Volcanique_1759425542648.jpg"
+      },
+      {
+        color: "Volcanic Black",
+        capacity: "512GB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Noir-Volcanique_1759425542648.jpg"
+      },
+      {
+        color: "Volcanic Black",
+        capacity: "1TB",
+        price: 1295,
+        originalPrice: 1599,
+        image: "/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Noir-Volcanique_1759425542648.jpg"
+      },
+      {
+        color: "Quartz Grey",
+        capacity: "256GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Quartz-Gris_1759425556785.jpg"
+      },
+      {
+        color: "Quartz Grey",
+        capacity: "512GB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Quartz-Gris_1759425556785.jpg"
+      },
+      {
+        color: "Quartz Grey",
+        capacity: "1TB",
+        price: 1295,
+        originalPrice: 1599,
+        image: "/attached_assets/Smartphone-Google-Pixel-10-Pro-XL-6-8-5G-Double-SIM-256-Go-Quartz-Gris_1759425556785.jpg"
+      }
+    ]
+  },
+  {
+    id: "google-pixel-9-pro",
+    name: "Google Pixel 9 Pro",
+    price: 769,
+    originalPrice: 999,
+    discount: 23,
+    image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Noir-Obsidienne_1759420393564.jpg",
+    category: "smartphones",
+    description: "From 128GB - 6.3\" Super Actua Display",
+    features: [
+      "Google Tensor G4",
+      "6.3\" LTPO OLED 120Hz",
+      "48MP triple camera",
+      "7 years updates",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Obsidian",
+        capacity: "128GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Noir-Obsidienne_1759420393564.jpg"
+      },
+      {
+        color: "Obsidian",
+        capacity: "512GB",
+        price: 1052,
+        originalPrice: 1299,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Noir-Obsidienne_1759420393564.jpg"
+      },
+      {
+        color: "Obsidian",
+        capacity: "1TB",
+        price: 1295,
+        originalPrice: 1599,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Noir-Obsidienne_1759420393564.jpg"
+      },
+      {
+        color: "Porcelain",
+        capacity: "128GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Blanc-Porcelaine_1759420408121.jpg"
+      },
+      {
+        color: "Porcelain",
+        capacity: "512GB",
+        price: 1052,
+        originalPrice: 1299,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Blanc-Porcelaine_1759420408121.jpg"
+      },
+      {
+        color: "Porcelain",
+        capacity: "1TB",
+        price: 1295,
+        originalPrice: 1599,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Blanc-Porcelaine_1759420408121.jpg"
+      },
+      {
+        color: "Rose Quartz",
+        capacity: "128GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Rose-Qwartz_1759420423815.jpg"
+      },
+      {
+        color: "Rose Quartz",
+        capacity: "512GB",
+        price: 1052,
+        originalPrice: 1299,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Rose-Qwartz_1759420423815.jpg"
+      },
+      {
+        color: "Rose Quartz",
+        capacity: "1TB",
+        price: 1295,
+        originalPrice: 1599,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Rose-Qwartz_1759420423815.jpg"
+      },
+      {
+        color: "Sage",
+        capacity: "128GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Vert-Sauge_1759420439082.jpg"
+      },
+      {
+        color: "Sage",
+        capacity: "512GB",
+        price: 1052,
+        originalPrice: 1299,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Vert-Sauge_1759420439082.jpg"
+      },
+      {
+        color: "Sage",
+        capacity: "1TB",
+        price: 1295,
+        originalPrice: 1599,
+        image: "/attached_assets/Smartphone-Google-Pixel-9-Pro-6-3-5G-Double-nano-SIM-128-Go-Vert-Sauge_1759420439082.jpg"
+      }
+    ]
+  },
+  {
+    id: "honor-magic-7-pro",
+    name: "Honor Magic 7 Pro",
+    price: 1053,
+    originalPrice: 1300,
+    discount: 19,
+    image: "/attached_assets/Smartphone-Honor-Magic7-Pro-6-8-5G-Double-nano-SIM-512-Go-Gris-lunaire_1759420493729.jpg",
+    category: "smartphones",
+    description: "From 256GB - 6.8\" LTPO OLED",
+    features: [
+      "Snapdragon 8 Elite",
+      "200MP telephoto",
+      "5270mAh + 100W charging",
+      "IP68/IP69",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Lunar Shadow Gray",
+        capacity: "256GB",
+        price: 1053,
+        originalPrice: 1300,
+        image: "/attached_assets/Smartphone-Honor-Magic7-Pro-6-8-5G-Double-nano-SIM-512-Go-Gris-lunaire_1759420493729.jpg"
+      },
+      {
+        color: "Lunar Shadow Gray",
+        capacity: "512GB",
+        price: 1215,
+        originalPrice: 1500,
+        image: "/attached_assets/Smartphone-Honor-Magic7-Pro-6-8-5G-Double-nano-SIM-512-Go-Gris-lunaire_1759420493729.jpg"
+      },
+      {
+        color: "Lunar Shadow Gray",
+        capacity: "1TB",
+        price: 1377,
+        originalPrice: 1700,
+        image: "/attached_assets/Smartphone-Honor-Magic7-Pro-6-8-5G-Double-nano-SIM-512-Go-Gris-lunaire_1759420493729.jpg"
+      },
+      {
+        color: "Breeze Blue",
+        capacity: "256GB",
+        price: 1053,
+        originalPrice: 1300
+      },
+      {
+        color: "Breeze Blue",
+        capacity: "512GB",
+        price: 1215,
+        originalPrice: 1500
+      },
+      {
+        color: "Breeze Blue",
+        capacity: "1TB",
+        price: 1377,
+        originalPrice: 1700
+      },
+      {
+        color: "Black",
+        capacity: "256GB",
+        price: 1053,
+        originalPrice: 1300,
+        image: "/attached_assets/Smartphone-Honor-Magic7-Pro-6-8-5G-Double-nano-SIM-512-Go-Noir_1759420509430.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "512GB",
+        price: 1215,
+        originalPrice: 1500,
+        image: "/attached_assets/Smartphone-Honor-Magic7-Pro-6-8-5G-Double-nano-SIM-512-Go-Noir_1759420509430.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "1TB",
+        price: 1377,
+        originalPrice: 1700,
+        image: "/attached_assets/Smartphone-Honor-Magic7-Pro-6-8-5G-Double-nano-SIM-512-Go-Noir_1759420509430.jpg"
+      }
+    ]
+  },
+  {
+    id: "huawei-pura-80-ultra",
+    name: "Huawei Pura 80 Ultra",
+    price: 1013,
+    originalPrice: 1250,
+    discount: 19,
+    image: "/attached_assets/huawei-pura80-ultra-1_1759420525518.jpg",
+    category: "smartphones",
+    description: "From 512GB - Dual Telephoto System",
+    features: [
+      "Kirin 9020",
+      "50MP 1-inch sensor",
+      "Dual telephoto",
+      "5700mAh + 100W charging",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Gold Glaze",
+        capacity: "512GB",
+        price: 1013,
+        originalPrice: 1250,
+        image: "/attached_assets/huawei-pura80-ultra-1_1759420525518.jpg"
+      },
+      {
+        color: "Gold Glaze",
+        capacity: "1TB",
+        price: 1215,
+        originalPrice: 1500,
+        image: "/attached_assets/huawei-pura80-ultra-1_1759420525518.jpg"
+      },
+      {
+        color: "White Glaze",
+        capacity: "512GB",
+        price: 1013,
+        originalPrice: 1250
+      },
+      {
+        color: "White Glaze",
+        capacity: "1TB",
+        price: 1215,
+        originalPrice: 1500
+      },
+      {
+        color: "Black Glaze",
+        capacity: "512GB",
+        price: 1013,
+        originalPrice: 1250,
+        image: "/attached_assets/huawei-pura80-ultra-4_1759420540124.jpg"
+      },
+      {
+        color: "Black Glaze",
+        capacity: "1TB",
+        price: 1215,
+        originalPrice: 1500,
+        image: "/attached_assets/huawei-pura80-ultra-4_1759420540124.jpg"
+      }
+    ]
+  },
+  {
+    id: "huawei-pura-80-pro-plus",
+    name: "Huawei Pura 80 Pro+",
+    price: 891,
+    originalPrice: 1100,
+    discount: 19,
+    image: "/attached_assets/huawei-pura80-pro-plus-2_1759466675407.jpg",
+    category: "smartphones",
+    description: "From 256GB - Premium Camera",
+    features: [
+      "Kirin 9020",
+      "50MP 1-inch main",
+      "Ultra telephoto",
+      "5700mAh + 100W charging",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Red",
+        capacity: "256GB",
+        price: 891,
+        originalPrice: 1100,
+        image: "/attached_assets/huawei-pura80-pro-plus-2_1759466675407.jpg"
+      },
+      {
+        color: "Red",
+        capacity: "512GB",
+        price: 1013,
+        originalPrice: 1250,
+        image: "/attached_assets/huawei-pura80-pro-plus-2_1759466675407.jpg"
+      },
+      {
+        color: "Red",
+        capacity: "1TB",
+        price: 1215,
+        originalPrice: 1500,
+        image: "/attached_assets/huawei-pura80-pro-plus-2_1759466675407.jpg"
+      }
+    ]
+  },
+  {
+    id: "huawei-pura-80-pro",
+    name: "Huawei Pura 80 Pro",
+    price: 810,
+    originalPrice: 1000,
+    discount: 19,
+    image: "/attached_assets/huawei-pura80-pro-1_1759466688174.jpg",
+    category: "smartphones",
+    description: "From 256GB - Advanced Photography",
+    features: [
+      "Kirin 9020",
+      "50MP variable aperture",
+      "Telephoto with OIS",
+      "5700mAh + 100W charging",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "White Glaze",
+        capacity: "256GB",
+        price: 810,
+        originalPrice: 1000,
+        image: "/attached_assets/huawei-pura80-pro-1_1759466688174.jpg"
+      },
+      {
+        color: "White Glaze",
+        capacity: "512GB",
+        price: 932,
+        originalPrice: 1150,
+        image: "/attached_assets/huawei-pura80-pro-1_1759466688174.jpg"
+      },
+      {
+        color: "White Glaze",
+        capacity: "1TB",
+        price: 1134,
+        originalPrice: 1400,
+        image: "/attached_assets/huawei-pura80-pro-1_1759466688174.jpg"
+      }
+    ]
+  },
+  {
+    id: "huawei-pura-70",
+    name: "Huawei Pura 70",
+    price: 577,
+    originalPrice: 749,
+    discount: 23,
+    image: "/attached_assets/23854575-1505-3756-1_1759466701786.jpg",
+    category: "smartphones",
+    description: "From 256GB - Ultra Lighting Camera",
+    features: [
+      "Kirin 9010",
+      "50MP Ultra Lighting",
+      "Variable aperture",
+      "4900mAh + 66W charging",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "White",
+        capacity: "256GB",
+        price: 577,
+        originalPrice: 749,
+        image: "/attached_assets/23854575-1505-3756-1_1759466701786.jpg"
+      },
+      {
+        color: "White",
+        capacity: "512GB",
+        price: 692,
+        originalPrice: 899,
+        image: "/attached_assets/23854575-1505-3756-1_1759466701786.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "256GB",
+        price: 577,
+        originalPrice: 749,
+        image: "/attached_assets/23854576-1505-3756-1_1759466714735.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "512GB",
+        price: 692,
+        originalPrice: 899,
+        image: "/attached_assets/23854576-1505-3756-1_1759466714735.jpg"
+      }
+    ]
+  },
+  {
+    id: "fairphone-6",
+    name: "Fairphone 6",
+    price: 414,
+    originalPrice: 499,
+    discount: 17,
+    image: "/attached_assets/Smartphone-Fairphone-Gen-6-6-31-5G-Double-SIM-256-Go-Vert-Foret_1759425451707.jpg",
+    category: "smartphones",
+    description: "From 256GB - Sustainable & Repairable",
+    features: [
+      "Snapdragon 7s Gen 3",
+      "50MP Sony Lytia-700C",
+      "4415mAh battery",
+      "8 OS updates + 5yr warranty",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Forest Green",
+        capacity: "256GB",
+        price: 414,
+        originalPrice: 499,
+        image: "/attached_assets/Smartphone-Fairphone-Gen-6-6-31-5G-Double-SIM-256-Go-Vert-Foret_1759425451707.jpg"
+      },
+      {
+        color: "Horizon Black",
+        capacity: "256GB",
+        price: 414,
+        originalPrice: 499,
+        image: "/attached_assets/Smartphone-Fairphone-Gen-6-6-31-5G-Double-SIM-256-Go-Noir-Horizon_1759425468626.jpg"
+      },
+      {
+        color: "Cloud White",
+        capacity: "256GB",
+        price: 414,
+        originalPrice: 499,
+        image: "/attached_assets/Smartphone-Fairphone-Gen-6-6-31-5G-Double-SIM-256-Go-Blanc-Nuage_1759425492385.jpg"
+      }
+    ]
+  },
+  {
+    id: "sony-xperia-1-vii",
+    name: "Sony Xperia 1 VII",
+    price: 1214,
+    originalPrice: 1499,
+    discount: 19,
+    image: "/attached_assets/sony-xperia-1-vii-1_1759473150341.jpg",
+    category: "smartphones",
+    description: "From 256GB - 4K 120Hz Display",
+    features: [
+      "Snapdragon 8 Elite",
+      "6.5\" 4K HDR OLED 120Hz",
+      "52MP triple ZEISS",
+      "Pro camera features",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Purple",
+        capacity: "256GB",
+        price: 1214,
+        originalPrice: 1499,
+        image: "/attached_assets/sony-xperia-1-vii-1_1759473150341.jpg"
+      },
+      {
+        color: "Purple",
+        capacity: "512GB",
+        price: 1376,
+        originalPrice: 1699,
+        image: "/attached_assets/sony-xperia-1-vii-1_1759473150341.jpg"
+      },
+      {
+        color: "Purple",
+        capacity: "1TB",
+        price: 1619,
+        originalPrice: 1999,
+        image: "/attached_assets/sony-xperia-1-vii-1_1759473150341.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "256GB",
+        price: 1214,
+        originalPrice: 1499
+      },
+      {
+        color: "Black",
+        capacity: "512GB",
+        price: 1376,
+        originalPrice: 1699
+      },
+      {
+        color: "Black",
+        capacity: "1TB",
+        price: 1619,
+        originalPrice: 1999
+      },
+      {
+        color: "Khaki Green",
+        capacity: "256GB",
+        price: 1214,
+        originalPrice: 1499
+      },
+      {
+        color: "Khaki Green",
+        capacity: "512GB",
+        price: 1376,
+        originalPrice: 1699
+      },
+      {
+        color: "Khaki Green",
+        capacity: "1TB",
+        price: 1619,
+        originalPrice: 1999
+      },
+      {
+        color: "Platinum Silver",
+        capacity: "256GB",
+        price: 1214,
+        originalPrice: 1499
+      },
+      {
+        color: "Platinum Silver",
+        capacity: "512GB",
+        price: 1376,
+        originalPrice: 1699
+      }
+    ]
+  },
+  {
+    id: "realme-gt-7-pro",
+    name: "Realme GT 7 Pro",
+    price: 769,
+    originalPrice: 999,
+    discount: 23,
+    image: "/attached_assets/3756-1_1759466821466.jpg",
+    category: "smartphones",
+    description: "From 256GB - Galaxy Snap Camera",
+    features: [
+      "Snapdragon 8 Elite",
+      "50MP Sony IMX906",
+      "6.78\" LTPO AMOLED 120Hz",
+      "6500mAh + 120W charging",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Mars Orange",
+        capacity: "256GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/3756-1_1759466821466.jpg"
+      },
+      {
+        color: "Mars Orange",
+        capacity: "512GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/3756-1_1759466821466.jpg"
+      },
+      {
+        color: "Mars Orange",
+        capacity: "1TB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/3756-1_1759466821466.jpg"
+      },
+      {
+        color: "Galaxy Grey",
+        capacity: "256GB",
+        price: 769,
+        originalPrice: 999,
+        image: "/attached_assets/3756-1 (1)_1759466833259.jpg"
+      },
+      {
+        color: "Galaxy Grey",
+        capacity: "512GB",
+        price: 971,
+        originalPrice: 1199,
+        image: "/attached_assets/3756-1 (1)_1759466833259.jpg"
+      },
+      {
+        color: "Galaxy Grey",
+        capacity: "1TB",
+        price: 1133,
+        originalPrice: 1399,
+        image: "/attached_assets/3756-1 (1)_1759466833259.jpg"
+      }
+    ]
+  },
+  {
+    id: "realme-gt-7t",
+    name: "Realme GT 7T",
+    price: 461,
+    originalPrice: 599,
+    discount: 23,
+    image: "/attached_assets/28418236-1505-1540-1_1759420588660.jpg",
+    category: "smartphones",
+    description: "From 256GB - Performance Champion",
+    features: [
+      "Snapdragon 8s Elite",
+      "50MP Sony LYT-808",
+      "6.78\" LTPO AMOLED 144Hz",
+      "5800mAh + 120W charging",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Yellow",
+        capacity: "256GB",
+        price: 461,
+        originalPrice: 599,
+        image: "/attached_assets/28418236-1505-1540-1_1759420588660.jpg"
+      },
+      {
+        color: "Yellow",
+        capacity: "512GB",
+        price: 538,
+        originalPrice: 699,
+        image: "/attached_assets/28418236-1505-1540-1_1759420588660.jpg"
+      },
+      {
+        color: "Yellow",
+        capacity: "1TB",
+        price: 692,
+        originalPrice: 899,
+        image: "/attached_assets/28418236-1505-1540-1_1759420588660.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "256GB",
+        price: 461,
+        originalPrice: 599
+      },
+      {
+        color: "Black",
+        capacity: "512GB",
+        price: 538,
+        originalPrice: 699
+      },
+      {
+        color: "Black",
+        capacity: "1TB",
+        price: 692,
+        originalPrice: 899
+      },
+      {
+        color: "Silver",
+        capacity: "256GB",
+        price: 461,
+        originalPrice: 599
+      },
+      {
+        color: "Silver",
+        capacity: "512GB",
+        price: 538,
+        originalPrice: 699
+      },
+      {
+        color: "Silver",
+        capacity: "1TB",
+        price: 692,
+        originalPrice: 899
+      }
+    ]
+  },
+  {
+    id: "asus-rog-phone-9-pro",
+    name: "Asus ROG Phone 9 Pro",
+    price: 1052,
+    originalPrice: 1299,
+    discount: 19,
+    image: "/attached_assets/3756-1_1759425414050.jpg",
+    category: "smartphones",
+    description: "From 512GB - Elite Gaming Phone",
+    features: [
+      "Snapdragon 8 Elite",
+      "AniMe Vision display",
+      "6.78\" LTPO 185Hz",
+      "5800mAh battery",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Phantom Black",
+        capacity: "512GB",
+        price: 1052,
+        originalPrice: 1299,
+        image: "/attached_assets/3756-1_1759425414050.jpg"
+      },
+      {
+        color: "Phantom Black",
+        capacity: "1TB",
+        price: 1295,
+        originalPrice: 1599,
+        image: "/attached_assets/3756-1_1759425414050.jpg"
+      }
+    ]
+  },
+  {
+    id: "asus-rog-phone-9",
+    name: "Asus ROG Phone 9",
+    price: 890,
+    originalPrice: 1099,
+    discount: 19,
+    image: "/attached_assets/27989829-1505-3756-1_1759425430264.jpg",
+    category: "smartphones",
+    description: "From 256GB - Gaming Performance",
+    features: [
+      "Snapdragon 8 Elite",
+      "AirTrigger buttons",
+      "6.78\" LTPO 185Hz",
+      "5800mAh battery",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Phantom Black",
+        capacity: "256GB",
+        price: 890,
+        originalPrice: 1099,
+        image: "/attached_assets/27989829-1505-3756-1_1759425430264.jpg"
+      },
+      {
+        color: "Phantom Black",
+        capacity: "512GB",
+        price: 1052,
+        originalPrice: 1299,
+        image: "/attached_assets/27989829-1505-3756-1_1759425430264.jpg"
+      },
+      {
+        color: "Storm White",
+        capacity: "256GB",
+        price: 890,
+        originalPrice: 1099,
+        image: "/attached_assets/27989829-1505-3756-1_1759425430264.jpg"
+      },
+      {
+        color: "Storm White",
+        capacity: "512GB",
+        price: 1052,
+        originalPrice: 1299,
+        image: "/attached_assets/27989829-1505-3756-1_1759425430264.jpg"
+      }
+    ]
+  },
+  {
+    id: "nubia-redmagic-10-pro",
+    name: "Nubia RedMagic 10 Pro",
+    price: 472,
+    originalPrice: 613,
+    discount: 23,
+    image: "/attached_assets/27746051-1505-3756-1_1759466796343.jpg",
+    category: "smartphones",
+    description: "From 256GB - Active Cooling",
+    features: [
+      "Snapdragon 8 Elite",
+      "Built-in cooling fan",
+      "6.85\" AMOLED 144Hz",
+      "7050mAh + 100W charging",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Black",
+        capacity: "256GB",
+        price: 472,
+        originalPrice: 613,
+        image: "/attached_assets/27746051-1505-3756-1_1759466796343.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "512GB",
+        price: 578,
+        originalPrice: 750,
+        image: "/attached_assets/27746051-1505-3756-1_1759466796343.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "1TB",
+        price: 810,
+        originalPrice: 1000,
+        image: "/attached_assets/27746051-1505-3756-1_1759466796343.jpg"
+      },
+      {
+        color: "White",
+        capacity: "256GB",
+        price: 472,
+        originalPrice: 613,
+        image: "/attached_assets/27744516-1505-3756-1_1759466809146.jpg"
+      },
+      {
+        color: "White",
+        capacity: "512GB",
+        price: 578,
+        originalPrice: 750,
+        image: "/attached_assets/27744516-1505-3756-1_1759466809146.jpg"
+      },
+      {
+        color: "White",
+        capacity: "1TB",
+        price: 810,
+        originalPrice: 1000,
+        image: "/attached_assets/27744516-1505-3756-1_1759466809146.jpg"
+      },
+      {
+        color: "Snowfall",
+        capacity: "256GB",
+        price: 472,
+        originalPrice: 613
+      },
+      {
+        color: "Snowfall",
+        capacity: "512GB",
+        price: 578,
+        originalPrice: 750
+      },
+      {
+        color: "Snowfall",
+        capacity: "1TB",
+        price: 810,
+        originalPrice: 1000
+      },
+      {
+        color: "Deuterium",
+        capacity: "256GB",
+        price: 472,
+        originalPrice: 613
+      },
+      {
+        color: "Deuterium",
+        capacity: "512GB",
+        price: 578,
+        originalPrice: 750
+      },
+      {
+        color: "Deuterium",
+        capacity: "1TB",
+        price: 810,
+        originalPrice: 1000
+      },
+      {
+        color: "Shadowblade",
+        capacity: "256GB",
+        price: 472,
+        originalPrice: 613
+      },
+      {
+        color: "Shadowblade",
+        capacity: "512GB",
+        price: 578,
+        originalPrice: 750
+      },
+      {
+        color: "Shadowblade",
+        capacity: "1TB",
+        price: 810,
+        originalPrice: 1000
+      }
+    ]
+  },
+  {
+    id: "xiaomi-14",
+    name: "Xiaomi 14",
+    price: 700,
+    originalPrice: 909,
+    discount: 23,
+    image: "/attached_assets/23709753-1505-1540-1_1759473163353.jpg",
+    category: "smartphones",
+    description: "From 256GB - 6.36\" LTPO AMOLED",
+    features: [
+      "Snapdragon 8 Gen 3",
+      "Triple 50MP Leica",
+      "4610mAh + 90W charging",
+      "IP68",
+      "Free shipping"
+    ],
+    hasVariants: true,
+    variants: [
+      {
+        color: "Black",
+        capacity: "256GB",
+        price: 700,
+        originalPrice: 909,
+        image: "/attached_assets/23709753-1505-1540-1_1759473163353.jpg"
+      },
+      {
+        color: "Black",
+        capacity: "512GB",
+        price: 817,
+        originalPrice: 1009,
+        image: "/attached_assets/23709753-1505-1540-1_1759473163353.jpg"
+      }
+    ]
+  },
+  {
+    id: "apple-watch-ultra-2",
+    name: "Apple Watch Ultra 2",
+    price: 719,
+    originalPrice: 999,
+    discount: 28,
+    image: "/attached_assets/Apple-Watch-Ultra-2-GPS-Cellular-49-mm-Boitier-en-Titane-Noir-avec-Boucle-Trail-Noir-M-L-version-2024_1759480201265.jpg",
+    category: "watches",
+    description: "49mm, Ocean Band",
+    features: [
+      "Titanium case",
+      "Extended battery",
+      "Action button",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "galaxy-watch-6-classic",
+    name: "Galaxy Watch 6 Classic",
+    price: 395,
+    originalPrice: 549,
+    discount: 28,
+    image: "/attached_assets/Montre-connectee-Samsung-Galaxy-Watch6-Claic-Bluetooth-47mm-Noir_1759480215243.jpg",
+    category: "watches",
+    description: "47mm, Black",
+    features: [
+      "Rotating bezel",
+      "Sleep tracking",
+      "Wear OS",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "garmin-fenix-7x",
+    name: "Garmin Fenix 7X",
+    price: 575,
+    originalPrice: 799,
+    discount: 28,
+    image: "/attached_assets/Montre-connectee-Garmin-Fenix-7X-Solar-Gray-avec-bracelet-silicone-Noir_1759480229118.jpg",
+    category: "watches",
+    description: "Solar, Sapphire",
+    features: [
+      "Multi-sport GPS",
+      "Solar charging",
+      "Rugged design",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "fitbit-sense-2",
+    name: "Fitbit Sense 2",
+    price: 227,
+    originalPrice: 299,
+    discount: 24,
+    image: "/attached_assets/Montre-connectee-Fitbit-Sense-2-Noir-inclus-6-mois-a-Fitbit-Premium_1759480242060.jpg",
+    category: "watches",
+    description: "Health focused",
+    features: [
+      "Stress management",
+      "ECG app",
+      "GPS built-in",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "suunto-9-peak-pro",
+    name: "Suunto 9 Peak Pro",
+    price: 467,
+    originalPrice: 649,
+    discount: 28,
+    image: "/attached_assets/Montre-connectee-Suunto-9-Peak-Pro-Noir_1759480257437.jpg",
+    category: "watches",
+    description: "Titanium, GPS",
+    features: [
+      "Adventure ready",
+      "Long battery",
+      "Offline maps",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "polar-grit-x2-pro",
+    name: "Polar Grit X2 Pro",
+    price: 431,
+    originalPrice: 599,
+    discount: 28,
+    image: "/attached_assets/Montre-connectee-Polar-Grit-X2-Pro-35-3-mm-Noir-avec-bracelet-Noir-Taille-S-L_1759480270678.jpg",
+    category: "watches",
+    description: "Titan, Sapphire",
+    features: [
+      "Military-grade durability",
+      "Training guidance",
+      "Recovery insights",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "amazfit-t-rex-3",
+    name: "Amazfit T-Rex 3",
+    price: 189,
+    originalPrice: 249,
+    discount: 24,
+    image: "/attached_assets/Montre-connectee-Amazfit-T-Rex-3-Onyx_1759480284605.jpg",
+    category: "watches",
+    description: "Rugged GPS",
+    features: [
+      "Military standard",
+      "Long battery life",
+      "Health tracking",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "huawei-watch-gt-4",
+    name: "Huawei Watch GT 4",
+    price: 227,
+    originalPrice: 299,
+    discount: 24,
+    image: "/attached_assets/Montre-connectee-Huawei-Watch-GT-4-46-mm-Active-Noir_1759480298767.jpg",
+    category: "watches",
+    description: "46mm, Sport",
+    features: [
+      "2-week battery",
+      "Fitness tracking",
+      "Smart features",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "fossil-gen-6-wellness",
+    name: "Fossil Gen 6 Wellness",
+    price: 197,
+    originalPrice: 259,
+    discount: 24,
+    image: "/attached_assets/18956137-1505-3756-1_1759480314555.jpg",
+    category: "watches",
+    description: "Wear OS 3",
+    features: [
+      "Wellness focused",
+      "Google Assistant",
+      "Fast charging",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "ticwatch-pro-5",
+    name: "TicWatch Pro 5",
+    price: 303,
+    originalPrice: 399,
+    discount: 24,
+    image: "/attached_assets/display-watch1.0_1759493221518.png",
+    category: "watches",
+    description: "Snapdragon W5",
+    features: [
+      "Dual display",
+      "Wear OS 3",
+      "Long battery",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "withings-scanwatch-2",
+    name: "Withings ScanWatch 2",
+    price: 303,
+    originalPrice: 399,
+    discount: 24,
+    image: "/attached_assets/Montre-connectee-Withings-ScanWatch-2-38-mm-Or-Rose-avec-bracelet-Beige_1759480342595.jpg",
+    category: "watches",
+    description: "Hybrid smartwatch",
+    features: [
+      "Medical-grade sensors",
+      "Classic design",
+      "30-day battery",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "casio-g-shock-gbx100",
+    name: "Casio G-Shock GBX100",
+    price: 341,
+    originalPrice: 449,
+    discount: 24,
+    image: "/attached_assets/14887022_1759493201172.jpg",
+    category: "watches",
+    description: "Tough Solar",
+    features: [
+      "G-Shock durability",
+      "Tide graph",
+      "Phone finder",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "tag-heuer-connected",
+    name: "TAG Heuer Connected",
+    price: 1439,
+    originalPrice: 1999,
+    discount: 28,
+    image: "/attached_assets/TAG-Heuer-Carrera_1759480389446.jpg",
+    category: "watches",
+    description: "Luxury smartwatch",
+    features: [
+      "Swiss luxury",
+      "Titanium case",
+      "Premium materials",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "xiaomi-watch-s3",
+    name: "Xiaomi Watch S3",
+    price: 163,
+    originalPrice: 199,
+    discount: 18,
+    image: "/attached_assets/Montre-connectee-Xiaomi-Mi-Watch-S3-46-mm-Bluetooth-Argent_1759480405991.jpg",
+    category: "watches",
+    description: "AMOLED display",
+    features: [
+      "12-day battery",
+      "Health monitoring",
+      "Always-on display",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "xiaomi-watch-s4",
+    name: "Xiaomi Watch S4",
+    price: 160,
+    originalPrice: 195,
+    discount: 18,
+    image: "/attached_assets/Montre-connectee-Xiaomi-Watch-S4-Bluetooth-Noir_1759483363254.jpg",
+    category: "watches",
+    description: "46mm, Bluetooth",
+    features: [
+      "15-day battery",
+      "Rotating crown",
+      "150+ sports modes",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "oura-ring-gen3",
+    name: "Oura Ring Gen3",
+    price: 265,
+    originalPrice: 349,
+    discount: 24,
+    image: "/attached_assets/pop_highlights_ring_trimmed_1759480421094.png",
+    category: "watches",
+    description: "Smart ring",
+    features: [
+      "Sleep tracking",
+      "Recovery insights",
+      "Discreet design",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "air-jordan-4-retro",
+    name: "Air Jordan 4 Retro",
+    price: 181,
+    originalPrice: 259,
+    discount: 30,
+    image: "/attached_assets/stock_images/air_jordan_4_retro_w_ac3024a6.jpg",
+    category: "sneakers",
+    description: "White Cement",
+    features: [
+      "Classic silhouette",
+      "Premium leather",
+      "Basketball heritage",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "yeezy-boost-350-v2",
+    name: "Yeezy Boost 350 V2",
+    price: 209,
+    originalPrice: 299,
+    discount: 30,
+    image: "/attached_assets/m_wp_65a9b73087a2f5e132aa6f91_1759487962373.webp",
+    category: "sneakers",
+    description: "Bone",
+    features: [
+      "Boost technology",
+      "Primeknit upper",
+      "Iconic design",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "nike-dunk-low",
+    name: "Nike Dunk Low",
+    price: 112,
     originalPrice: 149,
-    discount: 20,
-    image: '/attached_assets/NIKE+DUNK+LOW+RETRO_1759487487249.jpeg',
-    category: 'sneakers',
-    description: 'Panda',
-    features: ['Retro basketball', 'Versatile style', 'Premium materials', 'Free shipping']
+    discount: 25,
+    image: "/attached_assets/NIKE+DUNK+LOW+RETRO_1759487487249.jpeg",
+    category: "sneakers",
+    description: "Panda",
+    features: [
+      "Retro basketball",
+      "Versatile style",
+      "Premium materials",
+      "Free shipping"
+    ]
   },
   {
-    id: 'new-balance-990v6',
-    name: 'New Balance 990v6',
-    price: 199,
+    id: "new-balance-990v6",
+    name: "New Balance 990v6",
+    price: 160,
     originalPrice: 229,
-    discount: 13,
-    image: '/attached_assets/m990bk6_nb_02_i_1759487501879.webp',
-    category: 'sneakers',
-    description: 'Gray',
-    features: ['Made in USA', 'Premium comfort', 'Classic design', 'Free shipping']
+    discount: 30,
+    image: "/attached_assets/m990bk6_nb_02_i_1759487501879.webp",
+    category: "sneakers",
+    description: "Gray",
+    features: [
+      "Made in USA",
+      "Premium comfort",
+      "Classic design",
+      "Free shipping"
+    ]
   },
   {
-    id: 'adidas-ultraboost-22',
-    name: 'Adidas Ultraboost 22',
-    price: 179,
+    id: "adidas-ultraboost-22",
+    name: "Adidas Ultraboost 22",
+    price: 153,
     originalPrice: 219,
-    discount: 18,
-    image: '/attached_assets/stock_images/adidas_ultraboost_22_7434d8a4.jpg',
-    category: 'sneakers',
-    description: 'Core Black',
-    features: ['Boost midsole', 'Primeknit upper', 'Energy return', 'Free shipping']
+    discount: 30,
+    image: "/attached_assets/stock_images/adidas_ultraboost_22_7434d8a4.jpg",
+    category: "sneakers",
+    description: "Core Black",
+    features: [
+      "Boost midsole",
+      "Primeknit upper",
+      "Energy return",
+      "Free shipping"
+    ]
   },
   {
-    id: 'converse-chuck-70',
-    name: 'Converse Chuck 70',
-    price: 89,
+    id: "converse-chuck-70",
+    name: "Converse Chuck 70",
+    price: 82,
     originalPrice: 109,
-    discount: 18,
-    image: '/attached_assets/stock_images/converse_chuck_70_hi_1a9f5efc.jpg',
-    category: 'sneakers',
-    description: 'High Top',
-    features: ['Vintage style', 'Premium canvas', 'Timeless design', 'Free shipping']
+    discount: 25,
+    image: "/attached_assets/stock_images/converse_chuck_70_hi_1a9f5efc.jpg",
+    category: "sneakers",
+    description: "High Top",
+    features: [
+      "Vintage style",
+      "Premium canvas",
+      "Timeless design",
+      "Free shipping"
+    ]
   },
   {
-    id: 'vans-old-skool',
-    name: 'Vans Old Skool',
-    price: 69,
+    id: "vans-old-skool",
+    name: "Vans Old Skool",
+    price: 71,
     originalPrice: 89,
-    discount: 22,
-    image: '/attached_assets/Old-Skool-Shoes_1759487515282.jpg',
-    category: 'sneakers',
-    description: 'Black/White',
-    features: ['Skate heritage', 'Waffle outsole', 'Iconic stripe', 'Free shipping']
+    discount: 20,
+    image: "/attached_assets/Old-Skool-Shoes_1759487515282.jpg",
+    category: "sneakers",
+    description: "Black/White",
+    features: [
+      "Skate heritage",
+      "Waffle outsole",
+      "Iconic stripe",
+      "Free shipping"
+    ]
   },
   {
-    id: 'puma-suede-classic',
-    name: 'Puma Suede Classic',
+    id: "puma-suede-classic",
+    name: "Puma Suede Classic",
     price: 79,
     originalPrice: 99,
     discount: 20,
-    image: '/attached_assets/stock_images/puma_suede_classic_p_fa158a22.jpg',
-    category: 'sneakers',
-    description: 'Peacoat',
-    features: ['Suede upper', 'Classic formstrip', 'Retro style', 'Free shipping']
+    image: "/attached_assets/stock_images/puma_suede_classic_p_fa158a22.jpg",
+    category: "sneakers",
+    description: "Peacoat",
+    features: [
+      "Suede upper",
+      "Classic formstrip",
+      "Retro style",
+      "Free shipping"
+    ]
   },
   {
-    id: 'asics-gel-kayano-30',
-    name: 'ASICS Gel-Kayano 30',
-    price: 159,
+    id: "asics-gel-kayano-30",
+    name: "ASICS Gel-Kayano 30",
+    price: 142,
     originalPrice: 189,
-    discount: 16,
-    image: '/attached_assets/stock_images/asics_gel-kayano_30__156eae86.jpg',
-    category: 'sneakers',
-    description: 'Running shoe',
-    features: ['Stability running', 'Gel cushioning', 'FlyteFoam', 'Free shipping']
+    discount: 25,
+    image: "/attached_assets/stock_images/asics_gel-kayano_30__156eae86.jpg",
+    category: "sneakers",
+    description: "Running shoe",
+    features: [
+      "Stability running",
+      "Gel cushioning",
+      "FlyteFoam",
+      "Free shipping"
+    ]
   },
   {
-    id: 'on-cloudstratus-3',
-    name: 'On Cloudstratus 3',
-    price: 169,
-    originalPrice: 199,
-    discount: 15,
-    image: '/attached_assets/jd_759309_b_1759490336917.jpeg',
-    category: 'sneakers',
-    description: 'Maximalist running',
-    features: ['CloudTec cushioning', 'Swiss engineering', 'Premium comfort', 'Free shipping']
-  },
-  {
-    id: 'hoka-clifton-9',
-    name: 'Hoka Clifton 9',
-    price: 139,
-    originalPrice: 169,
-    discount: 18,
-    image: '/attached_assets/hoka-clifton-9-stardust-electric-cobalt_1759490355458.jpg',
-    category: 'sneakers',
-    description: 'Neutral running',
-    features: ['Maximum cushioning', 'Lightweight', 'Everyday comfort', 'Free shipping']
-  },
-  {
-    id: 'allbirds-tree-runners',
-    name: 'Allbirds Tree Runners',
-    price: 98,
-    originalPrice: 118,
-    discount: 17,
-    image: '/attached_assets/71HAeWiQ-wL._AC_SY395__1759487530132.jpg',
-    category: 'sneakers',
-    description: 'Natural White',
-    features: ['Sustainable materials', 'Tree fiber', 'Comfortable', 'Free shipping']
-  },
-
-  // === GADGETS (12 products) ===
-  {
-    id: 'roborock-s8-pro-ultra',
-    name: 'Roborock S8 Pro Ultra',
-    price: 1299,
-    originalPrice: 1599,
-    discount: 19,
-    image: 'https://m.media-amazon.com/images/I/61b-693nj5L._AC_SY355_.jpg',
-    category: 'gadgets',
-    description: 'Station auto-vidante, Lavage sonic',
-    features: ['Navigation LiDAR 3D', 'Aspiration 6000Pa', 'Station tout-en-un', 'Livraison gratuite']
-  },
-  {
-    id: 'dyson-air-purifier-tp07',
-    name: 'Dyson Air Purifier TP07',
-    price: 549,
-    originalPrice: 649,
-    discount: 15,
-    image: '/attached_assets/71sLiO+x53L._AC_SX425__1759493235848.jpg',
-    category: 'gadgets',
-    description: 'HEPA Filter, WiFi Enabled',
-    features: ['HEPA filtration', 'Real-time air quality', 'Dyson technology', 'Free delivery']
-  },
-  {
-    id: 'sonos-one-gen2',
-    name: 'Sonos One Gen2',
-    price: 199,
-    originalPrice: 249,
-    discount: 20,
-    image: '/attached_assets/sonos-one-gen-2-blanc_1759493250625.jpg',
-    category: 'gadgets',
-    description: 'Smart Speaker',
-    features: ['Voice control', 'Hi-Fi sound', 'Multi-room audio', 'Free delivery']
-  },
-  {
-    id: 'philips-hue-starter-kit',
-    name: 'Philips Hue Starter Kit',
+    id: "on-cloudstratus-3",
+    name: "On Cloudstratus 3",
     price: 149,
     originalPrice: 199,
     discount: 25,
-    image: '/attached_assets/407e189ac14e36f8d9d5fd5de4730899.w3248.h3248._CR0,0,3248,3248_SX960__1759493265749.jpeg',
-    category: 'gadgets',
-    description: 'Smart lighting',
-    features: ['16 million colors', 'Voice control', 'App control', 'Free delivery']
+    image: "/attached_assets/jd_759309_b_1759490336917.jpeg",
+    category: "sneakers",
+    description: "Maximalist running",
+    features: [
+      "CloudTec cushioning",
+      "Swiss engineering",
+      "Premium comfort",
+      "Free shipping"
+    ]
   },
   {
-    id: 'nest-thermostat',
-    name: 'Google Nest Thermostat',
-    price: 129,
+    id: "hoka-clifton-9",
+    name: "Hoka Clifton 9",
+    price: 127,
     originalPrice: 169,
-    discount: 24,
-    image: '/attached_assets/unnamed_1759493281821.jpg',
-    category: 'gadgets',
-    description: 'Smart home control',
-    features: ['Energy saving', 'Voice control', 'Remote access', 'Free delivery']
+    discount: 25,
+    image: "/attached_assets/hoka-clifton-9-stardust-electric-cobalt_1759490355458.jpg",
+    category: "sneakers",
+    description: "Neutral running",
+    features: [
+      "Maximum cushioning",
+      "Lightweight",
+      "Everyday comfort",
+      "Free shipping"
+    ]
   },
   {
-    id: 'ring-video-doorbell-pro',
-    name: 'Ring Video Doorbell Pro',
-    price: 179,
+    id: "allbirds-tree-runners",
+    name: "Allbirds Tree Runners",
+    price: 89,
+    originalPrice: 118,
+    discount: 25,
+    image: "/attached_assets/71HAeWiQ-wL._AC_SY395__1759487530132.jpg",
+    category: "sneakers",
+    description: "Natural White",
+    features: [
+      "Sustainable materials",
+      "Tree fiber",
+      "Comfortable",
+      "Free shipping"
+    ]
+  },
+  {
+    id: "roborock-s8-pro-ultra",
+    name: "Roborock S8 Pro Ultra",
+    price: 1279,
+    originalPrice: 1599,
+    discount: 20,
+    image: "https://m.media-amazon.com/images/I/61b-693nj5L._AC_SY355_.jpg",
+    category: "gadgets",
+    description: "Station auto-vidante, Lavage sonic",
+    features: [
+      "Navigation LiDAR 3D",
+      "Aspiration 6000Pa",
+      "Station tout-en-un",
+      "Livraison gratuite"
+    ]
+  },
+  {
+    id: "dyson-air-purifier-tp07",
+    name: "Dyson Air Purifier TP07",
+    price: 519,
+    originalPrice: 649,
+    discount: 20,
+    image: "/attached_assets/71sLiO+x53L._AC_SX425__1759493235848.jpg",
+    category: "gadgets",
+    description: "HEPA Filter, WiFi Enabled",
+    features: [
+      "HEPA filtration",
+      "Real-time air quality",
+      "Dyson technology",
+      "Free delivery"
+    ]
+  },
+  {
+    id: "sonos-one-gen2",
+    name: "Sonos One Gen2",
+    price: 212,
+    originalPrice: 249,
+    discount: 15,
+    image: "/attached_assets/sonos-one-gen-2-blanc_1759493250625.jpg",
+    category: "gadgets",
+    description: "Smart Speaker",
+    features: [
+      "Voice control",
+      "Hi-Fi sound",
+      "Multi-room audio",
+      "Free delivery"
+    ]
+  },
+  {
+    id: "philips-hue-starter-kit",
+    name: "Philips Hue Starter Kit",
+    price: 169,
+    originalPrice: 199,
+    discount: 15,
+    image: "/attached_assets/407e189ac14e36f8d9d5fd5de4730899.w3248.h3248._CR0,0,3248,3248_SX960__1759493265749.jpeg",
+    category: "gadgets",
+    description: "Smart lighting",
+    features: [
+      "16 million colors",
+      "Voice control",
+      "App control",
+      "Free delivery"
+    ]
+  },
+  {
+    id: "nest-thermostat",
+    name: "Google Nest Thermostat",
+    price: 144,
+    originalPrice: 169,
+    discount: 15,
+    image: "/attached_assets/unnamed_1759493281821.jpg",
+    category: "gadgets",
+    description: "Smart home control",
+    features: [
+      "Energy saving",
+      "Voice control",
+      "Remote access",
+      "Free delivery"
+    ]
+  },
+  {
+    id: "ring-video-doorbell-pro",
+    name: "Ring Video Doorbell Pro",
+    price: 195,
     originalPrice: 229,
-    discount: 22,
-    image: '/attached_assets/51eiekBal8L._SY355__1759493295901.jpg',
-    category: 'gadgets',
-    description: 'Home security',
-    features: ['1080p HD video', 'Two-way talk', 'Motion detection', 'Free delivery']
+    discount: 15,
+    image: "/attached_assets/51eiekBal8L._SY355__1759493295901.jpg",
+    category: "gadgets",
+    description: "Home security",
+    features: [
+      "1080p HD video",
+      "Two-way talk",
+      "Motion detection",
+      "Free delivery"
+    ]
   },
   {
-    id: 'anker-power-bank-737',
-    name: 'Anker Power Bank 737',
-    price: 149,
+    id: "anker-power-bank-737",
+    name: "Anker Power Bank 737",
+    price: 152,
     originalPrice: 179,
-    discount: 17,
-    image: '/attached_assets/anker-powercore-737-batterie-externe-24-k-24-0_1759493312807.jpg',
-    category: 'gadgets',
-    description: '24000mAh capacity',
-    features: ['140W output', 'Fast charging', 'Multiple ports', 'Free delivery']
+    discount: 15,
+    image: "/attached_assets/anker-powercore-737-batterie-externe-24-k-24-0_1759493312807.jpg",
+    category: "gadgets",
+    description: "24000mAh capacity",
+    features: [
+      "140W output",
+      "Fast charging",
+      "Multiple ports",
+      "Free delivery"
+    ]
   },
   {
-    id: 'bose-quietcomfort-45',
-    name: 'Bose QuietComfort 45',
-    price: 279,
+    id: "bose-quietcomfort-45",
+    name: "Bose QuietComfort 45",
+    price: 280,
     originalPrice: 329,
     discount: 15,
-    image: '/attached_assets/bose-quietcomfort-45-blanc-nuage_1759493326153.jpg',
-    category: 'gadgets',
-    description: 'Cloud White',
-    features: ['Active noise cancellation', 'Premium sound', '24h battery', 'Free delivery']
+    image: "/attached_assets/bose-quietcomfort-45-blanc-nuage_1759493326153.jpg",
+    category: "gadgets",
+    description: "Cloud White",
+    features: [
+      "Active noise cancellation",
+      "Premium sound",
+      "24h battery",
+      "Free delivery"
+    ]
   },
   {
-    id: 'sony-wh-1000xm5',
-    name: 'Sony WH-1000XM5',
-    price: 349,
+    id: "sony-wh-1000xm5",
+    name: "Sony WH-1000XM5",
+    price: 339,
     originalPrice: 399,
-    discount: 13,
-    image: '/attached_assets/sony-wh-1000xm5-noir_1759493340560.jpg',
-    category: 'gadgets',
-    description: 'Black',
-    features: ['Industry-leading ANC', 'LDAC codec', '30h battery', 'Free delivery']
+    discount: 15,
+    image: "/attached_assets/sony-wh-1000xm5-noir_1759493340560.jpg",
+    category: "gadgets",
+    description: "Black",
+    features: [
+      "Industry-leading ANC",
+      "LDAC codec",
+      "30h battery",
+      "Free delivery"
+    ]
   },
   {
-    id: 'amazon-echo-show-15',
-    name: 'Amazon Echo Show 15',
-    price: 249,
+    id: "amazon-echo-show-15",
+    name: "Amazon Echo Show 15",
+    price: 254,
     originalPrice: 299,
-    discount: 17,
-    image: '/attached_assets/amazon-echo-show-15-2024_1759493359207.jpg',
-    category: 'gadgets',
-    description: 'Smart display',
-    features: ['15.6" Full HD', 'Alexa built-in', 'Smart home hub', 'Free delivery']
+    discount: 15,
+    image: "/attached_assets/amazon-echo-show-15-2024_1759493359207.jpg",
+    category: "gadgets",
+    description: "Smart display",
+    features: [
+      "15.6\" Full HD",
+      "Alexa built-in",
+      "Smart home hub",
+      "Free delivery"
+    ]
   },
   {
-    id: 'dji-mini-3-pro',
-    name: 'DJI Mini 3 Pro',
-    price: 759,
+    id: "dji-mini-3-pro",
+    name: "DJI Mini 3 Pro",
+    price: 719,
     originalPrice: 899,
-    discount: 16,
-    image: '/attached_assets/dji-mini-3-pro-dji-rc_1759493371848.jpg',
-    category: 'gadgets',
-    description: 'Compact drone',
-    features: ['4K HDR video', 'Obstacle avoidance', 'Long flight time', 'Free delivery']
+    discount: 20,
+    image: "/attached_assets/dji-mini-3-pro-dji-rc_1759493371848.jpg",
+    category: "gadgets",
+    description: "Compact drone",
+    features: [
+      "4K HDR video",
+      "Obstacle avoidance",
+      "Long flight time",
+      "Free delivery"
+    ]
   },
   {
-    id: 'gopro-hero-12-black',
-    name: 'GoPro HERO12 Black',
-    price: 349,
+    id: "gopro-hero-12-black",
+    name: "GoPro HERO12 Black",
+    price: 339,
     originalPrice: 399,
-    discount: 13,
-    image: '/attached_assets/gopro-hero12-black-standard_1759493443152.jpg',
-    category: 'gadgets',
-    description: 'Action camera',
-    features: ['5.3K video', 'HyperSmooth 6.0', 'Waterproof', 'Free delivery']
+    discount: 15,
+    image: "/attached_assets/gopro-hero12-black-standard_1759493443152.jpg",
+    category: "gadgets",
+    description: "Action camera",
+    features: [
+      "5.3K video",
+      "HyperSmooth 6.0",
+      "Waterproof",
+      "Free delivery"
+    ]
   },
-
-  // === URBAN MOBILITY (12 products) ===
   {
-    id: 'xiaomi-electric-scooter-4-ultra',
-    name: 'Xiaomi Electric Scooter 4 Ultra',
-    price: 649,
+    id: "xiaomi-electric-scooter-4-ultra",
+    name: "Xiaomi Electric Scooter 4 Ultra",
+    price: 539,
     originalPrice: 749,
-    discount: 13,
-    image: '/attached_assets/xiaomi-electric-scooter-4-ultra-black_1759495926795.jpg',
-    category: 'mobility',
-    description: '70km range',
-    features: ['25 km/h max speed', '70km range', 'Dual braking system', 'Free shipping']
+    discount: 28,
+    image: "/attached_assets/xiaomi-electric-scooter-4-ultra-black_1759495926795.jpg",
+    category: "mobility",
+    description: "70km range",
+    features: [
+      "25 km/h max speed",
+      "70km range",
+      "Dual braking system",
+      "Free shipping"
+    ]
   },
   {
-    id: 'segway-ninebot-max-g2',
-    name: 'Segway Ninebot Max G2',
-    price: 799,
+    id: "segway-ninebot-max-g2",
+    name: "Segway Ninebot Max G2",
+    price: 647,
     originalPrice: 899,
-    discount: 11,
-    image: '/attached_assets/segway-ninebot-kickscooter-max-g2d_1759495940010.jpg',
-    category: 'mobility',
-    description: '70km range',
-    features: ['30 km/h max speed', '70km range', 'Self-healing tires', 'Free shipping']
+    discount: 28,
+    image: "/attached_assets/segway-ninebot-kickscooter-max-g2d_1759495940010.jpg",
+    category: "mobility",
+    description: "70km range",
+    features: [
+      "30 km/h max speed",
+      "70km range",
+      "Self-healing tires",
+      "Free shipping"
+    ]
   },
   {
-    id: 'electric-bike-vanmoof-s5',
-    name: 'VanMoof S5 E-Bike',
-    price: 2299,
+    id: "electric-bike-vanmoof-s5",
+    name: "VanMoof S5 E-Bike",
+    price: 1975,
     originalPrice: 2599,
-    discount: 12,
-    image: '/attached_assets/00c6793c-s5__w580_1759495952489.jpeg',
-    category: 'mobility',
-    description: '150km range',
-    features: ['32 km/h assisted', '150km range', 'Anti-theft tracking', 'Free shipping']
+    discount: 24,
+    image: "/attached_assets/00c6793c-s5__w580_1759495952489.jpeg",
+    category: "mobility",
+    description: "150km range",
+    features: [
+      "32 km/h assisted",
+      "150km range",
+      "Anti-theft tracking",
+      "Free shipping"
+    ]
   },
   {
-    id: 'cowboy-4-st-ebike',
-    name: 'Cowboy 4 ST E-Bike',
-    price: 2190,
+    id: "cowboy-4-st-ebike",
+    name: "Cowboy 4 ST E-Bike",
+    price: 1892,
     originalPrice: 2490,
-    discount: 12,
-    image: '/attached_assets/IMG_5160-Photoroom_610x_crop_center_1759495964426.jpg',
-    category: 'mobility',
-    description: '70km range',
-    features: ['25 km/h assisted', '70km range', 'Connected app', 'Free shipping']
+    discount: 24,
+    image: "/attached_assets/IMG_5160-Photoroom_610x_crop_center_1759495964426.jpg",
+    category: "mobility",
+    description: "70km range",
+    features: [
+      "25 km/h assisted",
+      "70km range",
+      "Connected app",
+      "Free shipping"
+    ]
   },
   {
-    id: 'ninebot-kickscooter-f2-pro',
-    name: 'Ninebot KickScooter F2 Pro',
-    price: 549,
+    id: "ninebot-kickscooter-f2-pro",
+    name: "Ninebot KickScooter F2 Pro",
+    price: 453,
     originalPrice: 629,
-    discount: 13,
-    image: '/attached_assets/ninebot-by-segway-kickscooter-f2-pro-e_1759495992398.jpg',
-    category: 'mobility',
-    description: '55km range',
-    features: ['25 km/h max speed', '55km range', 'IPX5 water resistant', 'Free shipping']
+    discount: 28,
+    image: "/attached_assets/ninebot-by-segway-kickscooter-f2-pro-e_1759495992398.jpg",
+    category: "mobility",
+    description: "55km range",
+    features: [
+      "25 km/h max speed",
+      "55km range",
+      "IPX5 water resistant",
+      "Free shipping"
+    ]
   },
   {
-    id: 'super73-s2-ebike',
-    name: 'Super73 S2 E-Bike',
-    price: 2495,
+    id: "super73-s2-ebike",
+    name: "Super73 S2 E-Bike",
+    price: 2124,
     originalPrice: 2795,
-    discount: 11,
-    image: '/attached_assets/Medium-691642YCL041000_A_1759496006225.jpg',
-    category: 'mobility',
-    description: '120km range',
-    features: ['32 km/h max speed', '120km range', 'Retro design', 'Free shipping']
+    discount: 24,
+    image: "/attached_assets/Medium-691642YCL041000_A_1759496006225.jpg",
+    category: "mobility",
+    description: "120km range",
+    features: [
+      "32 km/h max speed",
+      "120km range",
+      "Retro design",
+      "Free shipping"
+    ]
   },
   {
-    id: 'pure-air-pro-scooter',
-    name: 'Pure Air Pro Scooter',
-    price: 449,
+    id: "pure-air-pro-scooter",
+    name: "Pure Air Pro Scooter",
+    price: 389,
     originalPrice: 499,
-    discount: 10,
-    image: '/attached_assets/51-WW1QXfoL._AC_SY355__1759496021443.jpg',
-    category: 'mobility',
-    description: '50km range',
-    features: ['25 km/h max speed', '50km range', 'Foldable design', 'Free shipping']
+    discount: 22,
+    image: "/attached_assets/51-WW1QXfoL._AC_SY355__1759496021443.jpg",
+    category: "mobility",
+    description: "50km range",
+    features: [
+      "25 km/h max speed",
+      "50km range",
+      "Foldable design",
+      "Free shipping"
+    ]
   },
   {
-    id: 'rad-power-bikes-radrunner-3',
-    name: 'Rad Power RadRunner 3',
-    price: 1899,
+    id: "rad-power-bikes-radrunner-3",
+    name: "Rad Power RadRunner 3",
+    price: 1595,
     originalPrice: 2099,
-    discount: 10,
-    image: '/attached_assets/a53016_c3370a24d1204690bc66e82700c8fadb_mv2-600x400.jpeg_1759496036901.webp',
-    category: 'mobility',
-    description: '72km range',
-    features: ['32 km/h assisted', '72km range', 'Cargo ready', 'Free shipping']
+    discount: 24,
+    image: "/attached_assets/a53016_c3370a24d1204690bc66e82700c8fadb_mv2-600x400.jpeg_1759496036901.webp",
+    category: "mobility",
+    description: "72km range",
+    features: [
+      "32 km/h assisted",
+      "72km range",
+      "Cargo ready",
+      "Free shipping"
+    ]
   },
   {
-    id: 'xiaomi-mi-scooter-3-lite',
-    name: 'Xiaomi Mi Scooter 3 Lite',
-    price: 349,
+    id: "xiaomi-mi-scooter-3-lite",
+    name: "Xiaomi Mi Scooter 3 Lite",
+    price: 311,
     originalPrice: 399,
-    discount: 13,
-    image: '/attached_assets/3d776f686a0484865e4e07d7afdca55c~2_1759496055735.jpg',
-    category: 'mobility',
-    description: '20km range',
-    features: ['20 km/h max speed', '20km range', 'Lightweight 13kg', 'Free shipping']
+    discount: 22,
+    image: "/attached_assets/3d776f686a0484865e4e07d7afdca55c~2_1759496055735.jpg",
+    category: "mobility",
+    description: "20km range",
+    features: [
+      "20 km/h max speed",
+      "20km range",
+      "Lightweight 13kg",
+      "Free shipping"
+    ]
   },
   {
-    id: 'tern-vektron-q9-folding',
-    name: 'Tern Vektron Q9 Folding',
-    price: 3299,
+    id: "tern-vektron-q9-folding",
+    name: "Tern Vektron Q9 Folding",
+    price: 2811,
     originalPrice: 3699,
-    discount: 11,
-    image: '/attached_assets/velo-pliant-electrique-tern-vektron-q9_1759496068117.jpg',
-    category: 'mobility',
-    description: '100km range',
-    features: ['25 km/h assisted', '100km range', 'Folds compact', 'Free shipping']
+    discount: 24,
+    image: "/attached_assets/velo-pliant-electrique-tern-vektron-q9_1759496068117.jpg",
+    category: "mobility",
+    description: "100km range",
+    features: [
+      "25 km/h assisted",
+      "100km range",
+      "Folds compact",
+      "Free shipping"
+    ]
   },
   {
-    id: 'inokim-quick-4-super',
-    name: 'Inokim Quick 4 Super',
-    price: 1199,
+    id: "inokim-quick-4-super",
+    name: "Inokim Quick 4 Super",
+    price: 1025,
     originalPrice: 1349,
-    discount: 11,
-    image: '/attached_assets/trottinette_electrique_inokim_quick4_super_pas_cher-251437_1759496089194.jpg',
-    category: 'mobility',
-    description: '65km range',
-    features: ['30 km/h max speed', '65km range', 'Premium build', 'Free shipping']
+    discount: 24,
+    image: "/attached_assets/trottinette_electrique_inokim_quick4_super_pas_cher-251437_1759496089194.jpg",
+    category: "mobility",
+    description: "65km range",
+    features: [
+      "30 km/h max speed",
+      "65km range",
+      "Premium build",
+      "Free shipping"
+    ]
   },
   {
-    id: 'gogoro-eeyo-1s-ebike',
-    name: 'Gogoro Eeyo 1S E-Bike',
-    price: 4299,
+    id: "gogoro-eeyo-1s-ebike",
+    name: "Gogoro Eeyo 1S E-Bike",
+    price: 3647,
     originalPrice: 4799,
-    discount: 10,
-    image: '/attached_assets/4209557966_1759496101986.png',
-    category: 'mobility',
-    description: '90km range',
-    features: ['25 km/h assisted', '90km range', 'Carbon fiber frame', 'Free shipping']
-  },
+    discount: 24,
+    image: "/attached_assets/4209557966_1759496101986.png",
+    category: "mobility",
+    description: "90km range",
+    features: [
+      "25 km/h assisted",
+      "90km range",
+      "Carbon fiber frame",
+      "Free shipping"
+    ]
+  }
 ];
-
-export function getProductsByCategory(category: string): Product[] {
-  return products.filter(product => product.category === category);
-}
