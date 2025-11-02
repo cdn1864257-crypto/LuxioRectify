@@ -14,7 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-import { MapPin, ArrowRight, Package } from 'lucide-react';
+import { MapPin, ArrowRight, Package, ChevronLeft, AlertTriangle } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
 interface AddressForm {
@@ -35,6 +35,8 @@ export default function CheckoutAddress() {
 
   const [useRegistered, setUseRegistered] = useState(false);
   const [availableCities, setAvailableCities] = useState<{ en: string; fr: string; es: string }[]>([]);
+  const [addressValidated, setAddressValidated] = useState(false);
+  const [manualAddressConfirmed, setManualAddressConfirmed] = useState(false);
   const [formData, setFormData] = useState<AddressForm>({
     firstName: '',
     lastName: '',
@@ -105,6 +107,12 @@ export default function CheckoutAddress() {
       return;
     }
 
+    // Validation de la sélection d'adresse ou confirmation manuelle
+    if (!addressValidated && !manualAddressConfirmed && !useRegistered) {
+      showToast(t('pleaseSelectAddressFromSuggestions'), 'error');
+      return;
+    }
+
     // Validation stricte de l'adresse (doit contenir un numéro et des lettres)
     if (!isValidAddress(formData.address)) {
       showToast(t('invalidAddress'), 'error');
@@ -150,16 +158,21 @@ export default function CheckoutAddress() {
         ...prev, 
         country: selectedCountry.en, 
         city: "",
-        address: ""
+        address: "",
+        postalCode: ""
       }));
       setAvailableCities(selectedCountry.cities);
+      setAddressValidated(false);
+      setManualAddressConfirmed(false);
     }
   };
 
   const handleCityChange = (cityIndex: string) => {
     const cityIdx = parseInt(cityIndex);
     if (availableCities[cityIdx]) {
-      setFormData(prev => ({ ...prev, city: availableCities[cityIdx].en, address: "" }));
+      setFormData(prev => ({ ...prev, city: availableCities[cityIdx].en, address: "", postalCode: "" }));
+      setAddressValidated(false);
+      setManualAddressConfirmed(false);
     }
   };
 
@@ -180,6 +193,17 @@ export default function CheckoutAddress() {
 
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 py-12 px-4">
         <div className="max-w-2xl mx-auto">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setLocation(`/${language}/cart`)}
+            className="mb-4 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+            data-testid="button-back-to-cart"
+          >
+            <ChevronLeft className="h-4 w-4 mr-1" />
+            {t('back')}
+          </Button>
+          
           <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-8">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-3 bg-primary/10 rounded-lg">
@@ -347,7 +371,11 @@ export default function CheckoutAddress() {
                 </Label>
                 <AddressAutocomplete
                   value={formData.address}
-                  onChange={(value) => handleChange('address', value)}
+                  onChange={(value) => {
+                    handleChange('address', value);
+                    setAddressValidated(false);
+                    setManualAddressConfirmed(false);
+                  }}
                   city={formData.city}
                   countryCode={countriesCities.find(c => c.en === formData.country)?.code || ''}
                   onValidationError={(errorKey) => {
@@ -357,14 +385,50 @@ export default function CheckoutAddress() {
                       'addressMismatch': t('addressMismatch')
                     };
                     showToast(errorMessages[errorKey] || t('pleaseSelectValidAddress'), 'error');
+                    setAddressValidated(false);
+                    setManualAddressConfirmed(false);
                   }}
                   onAddressSelect={(suggestion) => {
                     const address = suggestion.address;
                     handleChange('postalCode', address.postcode || '');
+                    setAddressValidated(true);
+                    setManualAddressConfirmed(false);
                   }}
                   disabled={useRegistered}
                   data-testid="input-address"
                 />
+                
+                {!addressValidated && !useRegistered && formData.address && formData.address.length >= 5 && (
+                  <div className="mt-3 flex items-start gap-3 p-3 border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+                    <Checkbox 
+                      id="manual-address-confirm-checkout"
+                      checked={manualAddressConfirmed}
+                      onCheckedChange={(checked) => {
+                        setManualAddressConfirmed(checked as boolean);
+                      }}
+                      data-testid="checkbox-manual-address-confirm"
+                    />
+                    <div className="flex-1 space-y-1">
+                      <Label 
+                        htmlFor="manual-address-confirm-checkout" 
+                        className="text-sm font-medium cursor-pointer"
+                      >
+                        {t('addressNotListedConfirm')}
+                      </Label>
+                      <p className="text-xs text-muted-foreground">
+                        {t('confirmAddressNotListed')}
+                      </p>
+                      {manualAddressConfirmed && (
+                        <div className="flex items-start gap-2 mt-2 p-2 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded">
+                          <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+                          <p className="text-xs text-amber-700 dark:text-amber-300">
+                            {t('addressNotListedWarning')}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div>

@@ -180,6 +180,7 @@ export interface Translations {
   loginError: string;
   signupError: string;
   welcomeBack: string;
+  back: string;
   welcome: string;
   emailRequired: string;
   passwordRequired: string;
@@ -736,6 +737,7 @@ export const translations: Record<Language, Translations> = {
     signupError: 'Sign up error',
     invalidCredentials: 'Incorrect email or password',
     welcomeBack: 'Welcome back',
+    back: 'Back',
     welcome: 'Please check your email to verify your account and activate it.',
     emailRequired: 'Email is required',
     passwordRequired: 'Password is required',
@@ -1395,6 +1397,7 @@ export const translations: Record<Language, Translations> = {
     signupError: 'Erreur',
     invalidCredentials: 'Email ou mot de passe incorrect',
     welcomeBack: 'Bienvenue',
+    back: 'Retour',
     welcome: 'Veuillez vérifier votre email pour activer votre compte.',
     emailRequired: 'L\'email est obligatoire',
     passwordRequired: 'Le mot de passe est obligatoire',
@@ -2054,6 +2057,7 @@ export const translations: Record<Language, Translations> = {
     signupError: 'Error',
     invalidCredentials: 'Correo electrónico o contraseña incorrecta',
     welcomeBack: 'Bienvenido',
+    back: 'Volver',
     welcome: 'Por favor, verifique su correo electrónico para activar su cuenta.',
     emailRequired: 'El email es obligatorio',
     passwordRequired: 'La contraseña es obligatoria',
@@ -2713,6 +2717,7 @@ export const translations: Record<Language, Translations> = {
     signupError: 'Erro',
     invalidCredentials: 'Email ou senha incorretos',
     welcomeBack: 'Bem-vindo',
+    back: 'Voltar',
     welcome: 'Por favor, verifique seu email para ativar sua conta.',
     emailRequired: 'O email é obrigatório',
     passwordRequired: 'A palavra-passe é obrigatória',
@@ -3372,6 +3377,7 @@ export const translations: Record<Language, Translations> = {
     signupError: 'Błąd',
     invalidCredentials: 'Nieprawidłowy email lub hasło',
     welcomeBack: 'Witaj ponownie',
+    back: 'Wróć',
     welcome: 'Proszę sprawdzić e-mail, aby aktywować konto.',
     emailRequired: 'Email jest wymagany',
     passwordRequired: 'Hasło jest wymagane',
@@ -4031,6 +4037,7 @@ export const translations: Record<Language, Translations> = {
     signupError: 'Errore',
     invalidCredentials: 'Email o password non corretta',
     welcomeBack: 'Bentornato',
+    back: 'Indietro',
     welcome: 'Si prega di verificare la propria email per attivare l\'account.',
     emailRequired: 'L\'email è obbligatoria',
     passwordRequired: 'La password è obbligatoria',
@@ -4690,6 +4697,7 @@ export const translations: Record<Language, Translations> = {
     signupError: 'Hiba',
     invalidCredentials: 'Helytelen e-mail cím vagy jelszó',
     welcomeBack: 'Üdvözöljük újra',
+    back: 'Vissza',
     welcome: 'Kérjük, ellenőrizze e-mailjét a fiókja aktiválásához.',
     emailRequired: 'Az e-mail cím kötelező',
     passwordRequired: 'A jelszó kötelező',
