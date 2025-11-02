@@ -1,0 +1,338 @@
+Voici le rapporrt de securité que tu as précédemment fait. J'aimerais precisé que dans render, variable env. est stocké les clés suivants:
+
+
+Key	Value
+Key
+BACKEND_URL
+Value
+https://api.luxiomarket.shop
+
+Key
+CLIENT_URL
+Value
+https://luxiomarket.shop
+
+Key
+CLOUDINARY_URL
+Value
+• • • • • • • • • • • •
+
+Key
+COOKIE_DOMAIN
+Value
+luxiomarket.shop
+
+Key
+CSRF_SECRET
+Value
+• • • • • • • • • • • •
+
+
+Key
+ENCRYPTION_KEY
+Value
+• • • • • • • • • • • •
+
+Key
+FRONTEND_URL
+Value
+https://luxiomarket.shop
+
+Key
+JWT_SECRET
+Value
+• • • • • • • • • • • •
+
+
+Key
+MONGODB_URI
+Value
+mongodb+srv://replitprojet97_db_user:0DOT8bj0L29t34eV@cluster0.7fbxu65.mongodb.net/Luxio_market?retryWrites=true&w=majority&appName=Cluster0
+
+Key
+NODE_ENV
+Value
+production
+
+Key
+OXAPAY_API_KEY
+Value
+• • • • • • • • • • • •
+
+Key
+PORT
+Value
+10000
+
+Key
+RESET_PASSWORD_URL
+Value
+https://luxiomarket.shop/reset-password
+
+Key
+RESET_TOKEN_TTL_MINUTES
+Value
+60
+
+Key
+SENDGRID_API_KEY
+Value
+• • • • • • • • • • • •
+
+Key
+SENDGRID_FROM_EMAIL
+Value
+support@luxiomarket.shop
+
+Key
+SESSION_SECRET
+Value
+ESkdsCDjxtqwrpAg9XOiDppQlBHNUmYaMX9eXat3eNWvjGfnlhMmfTyUshf09EBRCFWPVHlcGqt9bRJxCQv0hhF5
+
+
+En fonction, tu me diras ce qu'il reste à faire suite à l'analyse faite précédemment donc une copie ci-dessous:
+
+
+
+
+Excellent, j'ai maintenant une vue complète de votre infrastructure de sécurité. Voici mon analyse de sécurité détaillée :
+🔴 FAILLES CRITIQUES
+1. Email Admin Exposé dans le Code Source (CRITIQUE)
+
+Fichiers concernés: utils/admin-auth.ts, api/upload/index.ts, api/products/*.ts, api/admin/*.ts (7+ fichiers)
+
+Problème:
+
+const ADMIN_EMAILS = [
+  'support@luxiomarket.shop',
+];
+
+Risque:
+
+    Votre email admin est visible publiquement sur GitHub/Vercel/Render
+    Un attaquant connaît exactement le compte à cibler pour le phishing
+    Facilite les attaques par force brute sur ce compte spécifique
+
+Impact:
+
+    Attaques ciblées sur le compte admin
+    Phishing personnalisé
+    Ingénierie sociale facilitée
+
+Solution recommandée:
+
+// Utiliser une variable d'environnement
+const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || '').split(',').map(e => e.trim());
+
+Puis dans Render:
+
+ADMIN_EMAILS=support@luxiomarket.shop,admin2@luxiomarket.shop
+
+2. Logs Verbeux en Production (CRITIQUE)
+
+Fichiers: api/payment/oxapay-webhook.ts, api/payment/stripe-webhook.ts, etc.
+
+Problème:
+
+console.log('[OxaPay Webhook] Received webhook:', JSON.stringify(req.body, null, 2));
+console.log(`[Stripe Webhook] Payment succeeded: ${paymentIntent.id}`);
+
+Risque:
+
+    Données sensibles (montants, emails, IDs) loggées en clair
+    Accessibles via les logs Render si mal configurés
+    Peuvent fuiter des informations business
+
+Solution:
+
+// Seulement en développement
+if (process.env.NODE_ENV !== 'production') {
+  console.log('[OxaPay Webhook] Received webhook:', JSON.stringify(req.body, null, 2));
+}
+// En production, logger uniquement les événements importants sans données sensibles
+console.log(`[OxaPay Webhook] Event processed: ${trackId} - Status: ${status}`);
+
+3. Encryption Fallback Dangereux (ÉLEVÉ)
+
+Fichier: utils/encryption.ts
+
+Problème:
+
+const key: string = ENCRYPTION_KEY || 'dev-only-key-please-set-encryption-key-in-production';
+
+Risque:
+
+    Si ENCRYPTION_KEY n'est pas configurée en production, utilise une clé connue publiquement
+    Tous les codes PCS/Transcash seraient chiffrés avec cette clé publique
+    Un attaquant ayant accès à la DB peut déchiffrer tous les codes
+
+Solution:
+
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
+
+if (!ENCRYPTION_KEY) {
+  throw new Error('⚠️ CRITICAL: ENCRYPTION_KEY must be set in production!');
+}
+
+const key: string = ENCRYPTION_KEY;
+
+🟠 FAILLES ÉLEVÉES
+4. Upload sans Validation de Fichiers (ÉLEVÉ)
+
+Fichier: api/upload/index.ts
+
+Problème:
+
+    Aucune validation du type MIME
+    Aucune limite de taille de fichier
+    Aucune vérification d'extension
+    Upload direct vers Cloudinary sans filtrage
+
+Risque:
+
+    Admin compromis peut uploader :
+        Binaires malveillants
+        Scripts HTML/JS pour defacement
+        Fichiers énormes (DoS)
+        Exécutables
+
+Solution:
+
+// Dans api/upload/index.ts
+const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+
+// Après parsing du form
+if (!imageFile) {
+  return res.status(400).json({ error: 'Aucune image fournie' });
+}
+
+// Vérifications de sécurité
+const file = imageFile as File;
+if (!ALLOWED_MIME_TYPES.includes(file.mimetype || '')) {
+  return res.status(400).json({ 
+    error: 'Type de fichier non autorisé. Formats acceptés: JPG, PNG, WebP, GIF' 
+  });
+}
+
+if (file.size > MAX_FILE_SIZE) {
+  return res.status(400).json({ 
+    error: `Fichier trop volumineux. Taille maximale: ${MAX_FILE_SIZE / 1024 / 1024}MB` 
+  });
+}
+
+// Upload avec validation Cloudinary
+const result = await cloudinary.uploader.upload(filePath, {
+  folder: 'luxio-products',
+  resource_type: 'image',
+  allowed_formats: ['jpg', 'png', 'webp', 'gif'],
+  transformation: [
+    { width: 2000, height: 2000, crop: 'limit' } // Limite résolution
+  ]
+});
+
+5. Configuration CORS Permissive en Dev (MOYEN-ÉLEVÉ)
+
+Fichier: server/index-render.ts
+
+Problème:
+
+} else if (!isProduction) {
+  // Autoriser tout en dev uniquement
+  res.header('Access-Control-Allow-Origin', origin || '*');
+  res.header('Access-Control-Allow-Credentials', 'true');
+}
+
+Risque:
+
+    Si NODE_ENV n'est pas correctement configuré en production, CORS est ouvert à tous
+    Permet des attaques CSRF cross-origin
+    Facilite le vol de cookies/tokens
+
+Solution:
+
+// Plus restrictif en dev aussi
+} else if (!isProduction) {
+  // Lister explicitement les origines dev autorisées
+  if (origin && developmentOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', 'true');
+  }
+  // Pas de wildcard '*' avec credentials
+}
+
+6. Pas de Rate Limiting sur les Webhooks (MOYEN)
+
+Fichiers: api/payment/oxapay-webhook.ts, api/payment/stripe-webhook.ts
+
+Problème:
+
+    Pas de limite de requêtes sur les webhooks
+    Un attaquant peut spammer des webhooks pour surcharger la DB
+
+Solution:
+
+// Dans server/index-render.ts
+import rateLimit from 'express-rate-limit';
+
+const webhookLimiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 100, // 100 requêtes par minute par IP
+  message: 'Trop de requêtes webhook, veuillez réessayer plus tard',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Appliquer aux webhooks
+app.post('/api/payment/oxapay-webhook', webhookLimiter, convertVercelHandler(oxapayWebhookHandler));
+app.post('/api/payment/stripe-webhook', webhookLimiter, convertVercelHandler(stripeWebhookHandler));
+
+🟡 FAILLES MOYENNES
+7. Session Secret par Défaut Faible (MOYEN)
+
+Fichier: server/index-render.ts:187
+
+Problème:
+
+secret: process.env.SESSION_SECRET || process.env.JWT_SECRET || 'default-secret-change-in-production',
+
+Solution: S'assurer que SESSION_SECRET est toujours configuré en production
+8. Pas de Validation Zod Systématique (MOYEN)
+
+Problème: Certains endpoints ne valident pas rigoureusement les inputs utilisateur
+
+Solution: Ajouter Zod validation sur tous les endpoints qui acceptent des données utilisateur
+✅ Points Positifs
+
+    ✅ JWT bien implémenté avec expiration de 7 jours
+    ✅ CSRF correctement configuré avec exemptions appropriées
+    ✅ HMAC signature vérifiée sur webhook OxaPay
+    ✅ Stripe signature vérifiée avec constructEvent
+    ✅ Helmet configuré avec HSTS, CSP, etc.
+    ✅ HTTPS forcé en production
+    ✅ Cookies httpOnly et secure
+    ✅ Déduplication des webhooks avec cache
+    ✅ Rate limiting sur auth et général
+    ✅ Bcrypt pour les mots de passe
+
+📋 Plan d'Action Prioritaire
+🔴 URGENT (Immédiat)
+
+    Déplacer ADMIN_EMAILS vers variables d'environnement
+    Désactiver les logs verbeux en production
+    Ajouter throw error si ENCRYPTION_KEY manquant
+
+🟠 Important (Cette semaine)
+
+    Ajouter validation de fichiers sur upload
+    Corriger CORS dev pour être plus restrictif
+    Ajouter rate limiting sur webhooks
+
+🟡 Améliorations (Ce mois)
+
+    Configurer SESSION_SECRET dédié
+    Ajouter Zod validation partout
+    Audit de sécurité complet avec outil externe
+
+
+
