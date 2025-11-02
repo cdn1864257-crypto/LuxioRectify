@@ -46,11 +46,11 @@ class WebhookCache {
 
   cleanup(): void {
     const now = Date.now();
-    for (const [key, timestamp] of this.cache.entries()) {
+    this.cache.forEach((timestamp, key) => {
       if (now - timestamp > this.TTL) {
         this.cache.delete(key);
       }
-    }
+    });
   }
 }
 
@@ -59,6 +59,13 @@ const webhookCache = new WebhookCache();
 setInterval(() => {
   webhookCache.cleanup();
 }, 600000);
+
+// Helper function to log only in development
+const debugLog = (...args: any[]) => {
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(...args);
+  }
+};
 
 function verifyOxaPaySignature(body: any, receivedSignature: string | undefined, apiKey: string): boolean {
   if (!receivedSignature) {
@@ -81,7 +88,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    console.log('[OxaPay Webhook] Received webhook:', JSON.stringify(req.body, null, 2));
+    // Only log sensitive data in development
+    debugLog('[OxaPay Webhook] Received webhook:', JSON.stringify(req.body, null, 2));
 
     const oxapayApiKey = process.env.OXAPAY_API_KEY;
     
@@ -101,7 +109,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
     
-    console.log('[OxaPay Webhook] HMAC signature verified successfully');
+    debugLog('[OxaPay Webhook] HMAC signature verified successfully');
 
     const {
       trackId,
@@ -132,7 +140,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     }
     
     webhookCache.markAsProcessed(eventId);
-    console.log(`[OxaPay Webhook] Event marked as processed: ${eventId}`);
+    debugLog(`[OxaPay Webhook] Event marked as processed: ${eventId}`);
 
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
@@ -242,12 +250,14 @@ async function handler(req: VercelRequest, res: VercelResponse) {
             sendOxaPayConfirmationToCustomer(oxaPayOrder),
             sendOxaPayNotificationToAdmin(oxaPayOrder)
           ]);
+          // Log email sending in production (important for monitoring)
           console.log(`[OxaPay Webhook] Confirmation emails sent for order ${orderId}`);
         } catch (error) {
           console.error('Erreur lors de l\'envoi des emails OxaPay:', error);
         }
       }
 
+      // Log order status updates (important for monitoring)
       console.log(`[OxaPay Webhook] Order ${orderId} updated to status: ${paymentStatus}`);
 
       return res.status(200).json({

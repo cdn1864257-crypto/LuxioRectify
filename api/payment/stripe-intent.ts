@@ -15,6 +15,13 @@ interface StripeIntentData {
   }>;
 }
 
+// Helper function to log only in development
+const debugLog = (...args: any[]) => {
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(...args);
+  }
+};
+
 // Helper function to find product and variant price
 function getProductPrice(productId: string, description?: string): number | null {
   const product = staticProducts.find((p: Product) => p.id === productId);
@@ -80,11 +87,11 @@ export default async function handler(
   req: VercelRequest,
   res: VercelResponse
 ) {
-  console.log('[Stripe Intent] Début de la requête');
+  debugLog('[Stripe Intent] Début de la requête');
   
   // Méthode POST uniquement
   if (req.method !== 'POST') {
-    console.log(`[Stripe Intent] Méthode non autorisée: ${req.method}`);
+    debugLog(`[Stripe Intent] Méthode non autorisée: ${req.method}`);
     return res.status(405).json({
       ok: false,
       error: 'Méthode non autorisée'
@@ -96,7 +103,7 @@ export default async function handler(
 
     // Validation des données
     if (!amount || amount <= 0) {
-      console.log('[Stripe Intent] Montant invalide');
+      debugLog('[Stripe Intent] Montant invalide');
       return res.status(400).json({
         ok: false,
         error: 'Montant invalide'
@@ -106,7 +113,7 @@ export default async function handler(
     // SECURITY: Whitelist accepted currencies
     const ALLOWED_CURRENCIES = ['EUR', 'USD', 'GBP'];
     if (!currency || !ALLOWED_CURRENCIES.includes(currency.toUpperCase())) {
-      console.log(`[Stripe Intent] Devise non autorisée: ${currency}`);
+      debugLog(`[Stripe Intent] Devise non autorisée: ${currency}`);
       return res.status(400).json({
         ok: false,
         error: 'Devise non autorisée'
@@ -114,7 +121,7 @@ export default async function handler(
     }
 
     if (!cart || cart.length === 0) {
-      console.log('[Stripe Intent] Panier vide');
+      debugLog('[Stripe Intent] Panier vide');
       return res.status(400).json({
         ok: false,
         error: 'Panier vide'
@@ -163,7 +170,7 @@ export default async function handler(
       apiVersion: '2025-09-30.clover',
     });
 
-    console.log(`[Stripe Intent] Création Payment Intent pour ${finalAmount / 100}€ (validé)`);
+    debugLog(`[Stripe Intent] Création Payment Intent pour ${finalAmount / 100}€ (validé)`);
 
     // Créer le Payment Intent avec le montant validé
     const paymentIntent = await stripe.paymentIntents.create({
@@ -183,6 +190,7 @@ export default async function handler(
       description: `Luxio Order - ${cart.length} item(s) - €${(finalAmount / 100).toFixed(2)}`,
     });
 
+    // Log payment intent creation (important for monitoring)
     console.log(`[Stripe Intent] Payment Intent créé: ${paymentIntent.id}`);
 
     // Retourner le client secret au frontend

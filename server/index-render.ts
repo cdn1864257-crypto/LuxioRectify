@@ -30,7 +30,7 @@ import getProductsHandler from '../api/products/index.js';
 import createProductHandler from '../api/products/create.js';
 import updateProductHandler from '../api/products/update.js';
 import deleteProductHandler from '../api/products/delete.js';
-import { hybridGeneralLimiter, hybridAuthLimiter } from '../utils/hybrid-rate-limiter.js';
+import { hybridGeneralLimiter, hybridAuthLimiter, hybridWebhookLimiter } from '../utils/hybrid-rate-limiter.js';
 import { initializeServices } from './bootstrap.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -68,15 +68,12 @@ app.use((req, res, next) => {
   // Toujours définir Vary pour éviter le cache d'origine incorrect
   res.header('Vary', 'Origin');
 
-  // Vérifier si l'origine est autorisée
+  // SECURITY: Vérifier si l'origine est autorisée (strict même en dev)
   if (origin && allowedOrigins.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', 'true');
-  } else if (!isProduction) {
-    // Autoriser tout en dev uniquement
-    res.header('Access-Control-Allow-Origin', origin || '*');
-    res.header('Access-Control-Allow-Credentials', 'true');
   }
+  // SECURITY: NO WILDCARD - reject unauthorized origins even in dev
 
   res.header(
     'Access-Control-Allow-Methods',
@@ -356,12 +353,14 @@ app.use('/api/payment/bank-transfer', convertVercelHandler(bankTransferHandler))
 // OxaPay crypto payment routes
 app.use('/api/payment/oxapay-init', convertVercelHandler(oxapayInitHandler));
 app.use('/api/payment/oxapay-return', convertVercelHandler(oxapayReturnHandler));
-app.post('/api/payment/oxapay-webhook', convertVercelHandler(oxapayWebhookHandler));
+// SECURITY: Rate limit webhook to prevent abuse (100 req/min per IP)
+app.post('/api/payment/oxapay-webhook', hybridWebhookLimiter.middleware(), convertVercelHandler(oxapayWebhookHandler));
 
 // Stripe payment routes
 app.use('/api/payment/stripe-intent', convertVercelHandler(stripeIntentHandler));
+// SECURITY: Rate limit webhook to prevent abuse (100 req/min per IP)
 // Stripe webhook : Requires raw body for signature verification
-app.post('/api/payment/stripe-webhook', express.raw({ type: 'application/json' }), convertVercelHandler(stripeWebhookHandler));
+app.post('/api/payment/stripe-webhook', hybridWebhookLimiter.middleware(), express.raw({ type: 'application/json' }), convertVercelHandler(stripeWebhookHandler));
 
 // Orders routes (CSRF protection applied globally via middleware)
 app.delete('/api/orders/:orderId', convertVercelHandler(deleteOrderHandler));

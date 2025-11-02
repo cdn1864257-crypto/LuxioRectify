@@ -11,6 +11,13 @@ interface StripeWebhookEvent {
   created: number;
 }
 
+// Helper function to log only in development
+const debugLog = (...args: any[]) => {
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(...args);
+  }
+};
+
 async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -55,7 +62,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         webhookSecret
       ) as StripeWebhookEvent;
       
-      console.log(`[Stripe Webhook] Signature verified for event: ${event.id}`);
+      debugLog(`[Stripe Webhook] Signature verified for event: ${event.id}`);
     } catch (err) {
       console.error('[Stripe Webhook] Signature verification failed:', err);
       return res.status(400).json({ 
@@ -78,7 +85,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
     const paymentIntent = event.data.object;
 
-    console.log(`[Stripe Webhook] Processing event type: ${event.type}`);
+    debugLog(`[Stripe Webhook] Processing event type: ${event.type}`);
 
     switch (event.type) {
       case 'payment_intent.succeeded':
@@ -90,11 +97,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         break;
       
       case 'payment_intent.canceled':
-        console.log(`[Stripe Webhook] Payment intent canceled: ${paymentIntent.id}`);
+        debugLog(`[Stripe Webhook] Payment intent canceled: ${paymentIntent.id}`);
         break;
       
       default:
-        console.log(`[Stripe Webhook] Unhandled event type: ${event.type}`);
+        debugLog(`[Stripe Webhook] Unhandled event type: ${event.type}`);
     }
 
     return res.status(200).json({ received: true });
@@ -109,8 +116,9 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 }
 
 async function handlePaymentSuccess(paymentIntent: any) {
+  // Log payment success (important for monitoring)
   console.log(`[Stripe Webhook] Payment succeeded: ${paymentIntent.id}`);
-  console.log(`[Stripe Webhook] Amount: ${paymentIntent.amount / 100} ${paymentIntent.currency.toUpperCase()}`);
+  debugLog(`[Stripe Webhook] Amount: ${paymentIntent.amount / 100} ${paymentIntent.currency.toUpperCase()}`);
 
   const mongoUri = process.env.MONGODB_URI;
   if (!mongoUri) {
@@ -140,7 +148,7 @@ async function handlePaymentSuccess(paymentIntent: any) {
       updatedAt: new Date()
     });
 
-    console.log(`[Stripe Webhook] Order saved for payment intent: ${paymentIntent.id}`);
+    debugLog(`[Stripe Webhook] Order saved for payment intent: ${paymentIntent.id}`);
 
   } catch (error) {
     console.error('[Stripe Webhook] Error saving order:', error);
@@ -150,8 +158,9 @@ async function handlePaymentSuccess(paymentIntent: any) {
 }
 
 async function handlePaymentFailure(paymentIntent: any) {
+  // Log payment failure (important for monitoring)
   console.log(`[Stripe Webhook] Payment failed: ${paymentIntent.id}`);
-  console.log(`[Stripe Webhook] Reason: ${paymentIntent.last_payment_error?.message || 'Unknown'}`);
+  debugLog(`[Stripe Webhook] Reason: ${paymentIntent.last_payment_error?.message || 'Unknown'}`);
 }
 
 export default handler;

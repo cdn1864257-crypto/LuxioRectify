@@ -32,6 +32,13 @@ interface OxaPayInitData {
   }>;
 }
 
+// Helper function to log only in development
+const debugLog = (...args: any[]) => {
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(...args);
+  }
+};
+
 // REMOVED: Old generateOrderReference() function
 // Now using centralized generatePaymentReference() from utils/payment-reference.ts
 // This ensures consistent format: "FirstName LastName + 4 digits" everywhere
@@ -144,10 +151,10 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const callbackUrl = `${backendUrl}/api/payment/oxapay-webhook`;
       const returnUrl = `${backendUrl}/api/payment/oxapay-return?lang=${userLanguage}`;
       
-      console.log(`[OxaPay] Backend URL: ${backendUrl}`);
-      console.log(`[OxaPay] Frontend URL: ${frontendUrl}`);
-      console.log(`[OxaPay] Callback URL: ${callbackUrl}`);
-      console.log(`[OxaPay] Return URL: ${returnUrl}`);
+      debugLog(`[OxaPay] Backend URL: ${backendUrl}`);
+      debugLog(`[OxaPay] Frontend URL: ${frontendUrl}`);
+      debugLog(`[OxaPay] Callback URL: ${callbackUrl}`);
+      debugLog(`[OxaPay] Return URL: ${returnUrl}`);
 
       const oxapayRequestData = {
         merchant: oxapayApiKey,
@@ -163,7 +170,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         email: customerEmail
       };
 
-      console.log('[OxaPay] Creating invoice with data:', JSON.stringify(oxapayRequestData, null, 2));
+      // Only log sensitive invoice data in development
+      debugLog('[OxaPay] Creating invoice with data:', JSON.stringify(oxapayRequestData, null, 2));
 
       const paymentResponse = await axios.post(
         'https://api.oxapay.com/merchants/request',
@@ -193,8 +201,10 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         }
       );
 
+      // Log payment creation (important for monitoring)
       console.log(`[OxaPay] Payment created: ${responseData.trackId} for order ${paymentReference}`);
-      console.log('[OxaPay] Payment response:', JSON.stringify(responseData, null, 2));
+      // Only log full response in development
+      debugLog('[OxaPay] Payment response:', JSON.stringify(responseData, null, 2));
 
       return res.status(200).json({
         success: true,

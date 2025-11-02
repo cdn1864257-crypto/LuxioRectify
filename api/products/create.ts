@@ -23,11 +23,17 @@ interface JWTPayload {
   email: string;
 }
 
-// Admin email whitelist
-const ADMIN_EMAILS = [
-  'support@luxiomarket.shop',
-  // Add more admin emails here
-];
+// Load admin emails from environment variable (semicolon-separated for security)
+const getAdminEmails = (): string[] => {
+  const adminEmailsEnv = process.env.ADMIN_EMAILS;
+  if (!adminEmailsEnv) {
+    console.error('⚠️  CRITICAL: ADMIN_EMAILS environment variable is not set!');
+    return [];
+  }
+  return adminEmailsEnv.split(';').map(email => email.trim().toLowerCase()).filter(email => email.length > 0);
+};
+
+const ADMIN_EMAILS = getAdminEmails();
 
 async function isAdmin(req: VercelRequest): Promise<{ isAdmin: boolean; userId?: string; error?: string }> {
   try {
