@@ -37,7 +37,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
       setShowLoginDialog(true);
     } else {
       onClose();
-      setLocation(`/${language}/payment`);
+      setLocation(`/${language}/checkout/address`);
     }
   };
 

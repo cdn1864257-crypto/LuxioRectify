@@ -16,6 +16,7 @@ import Home from "@/pages/Home";
 import Premium from "@/pages/Premium";
 import Dashboard from "@/pages/Dashboard";
 import Cart from "@/pages/Cart";
+import CheckoutAddress from "@/pages/CheckoutAddress";
 import NewPayment from "@/pages/NewPayment";
 import StripeCheckout from "@/pages/StripeCheckout";
 import ResetPassword from "@/pages/ResetPassword";
@@ -58,6 +59,13 @@ function Router() {
       <Route path="/fr/cart">
         <RouteWrapper lang="fr">
           <Cart />
+        </RouteWrapper>
+      </Route>
+      <Route path="/fr/checkout/address">
+        <RouteWrapper lang="fr">
+          <ProtectedRoute>
+            <CheckoutAddress />
+          </ProtectedRoute>
         </RouteWrapper>
       </Route>
       <Route path="/fr/payment">
@@ -120,6 +128,13 @@ function Router() {
           <Cart />
         </RouteWrapper>
       </Route>
+      <Route path="/en/checkout/address">
+        <RouteWrapper lang="en">
+          <ProtectedRoute>
+            <CheckoutAddress />
+          </ProtectedRoute>
+        </RouteWrapper>
+      </Route>
       <Route path="/en/payment">
         <RouteWrapper lang="en">
           <ProtectedRoute>
@@ -178,6 +193,13 @@ function Router() {
       <Route path="/pt/cart">
         <RouteWrapper lang="pt">
           <Cart />
+        </RouteWrapper>
+      </Route>
+      <Route path="/pt/checkout/address">
+        <RouteWrapper lang="pt">
+          <ProtectedRoute>
+            <CheckoutAddress />
+          </ProtectedRoute>
         </RouteWrapper>
       </Route>
       <Route path="/pt/payment">
@@ -240,6 +262,13 @@ function Router() {
           <Cart />
         </RouteWrapper>
       </Route>
+      <Route path="/es/checkout/address">
+        <RouteWrapper lang="es">
+          <ProtectedRoute>
+            <CheckoutAddress />
+          </ProtectedRoute>
+        </RouteWrapper>
+      </Route>
       <Route path="/es/payment">
         <RouteWrapper lang="es">
           <ProtectedRoute>
@@ -298,6 +327,13 @@ function Router() {
       <Route path="/it/cart">
         <RouteWrapper lang="it">
           <Cart />
+        </RouteWrapper>
+      </Route>
+      <Route path="/it/checkout/address">
+        <RouteWrapper lang="it">
+          <ProtectedRoute>
+            <CheckoutAddress />
+          </ProtectedRoute>
         </RouteWrapper>
       </Route>
       <Route path="/it/payment">
@@ -360,6 +396,13 @@ function Router() {
           <Cart />
         </RouteWrapper>
       </Route>
+      <Route path="/hu/checkout/address">
+        <RouteWrapper lang="hu">
+          <ProtectedRoute>
+            <CheckoutAddress />
+          </ProtectedRoute>
+        </RouteWrapper>
+      </Route>
       <Route path="/hu/payment">
         <RouteWrapper lang="hu">
           <ProtectedRoute>
@@ -418,6 +461,13 @@ function Router() {
       <Route path="/pl/cart">
         <RouteWrapper lang="pl">
           <Cart />
+        </RouteWrapper>
+      </Route>
+      <Route path="/pl/checkout/address">
+        <RouteWrapper lang="pl">
+          <ProtectedRoute>
+            <CheckoutAddress />
+          </ProtectedRoute>
         </RouteWrapper>
       </Route>
       <Route path="/pl/payment">

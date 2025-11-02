@@ -504,6 +504,16 @@ export interface Translations {
     verified: boolean;
   }>;
   
+  // Checkout Address
+  deliveryAddress: string;
+  checkoutAddressTitle: string;
+  checkoutAddressSubtitle: string;
+  useRegisteredAddress: string;
+  continueToPayment: string;
+  addressSaved: string;
+  postalCode: string;
+  enterNewAddress: string;
+  
   // SEO Meta Tags
   seoHomeTitle: string;
   seoHomeDescription: string;
@@ -517,6 +527,8 @@ export interface Translations {
   seoCartDescription: string;
   seoPaymentTitle: string;
   seoPaymentDescription: string;
+  seoCheckoutAddressTitle: string;
+  seoCheckoutAddressDescription: string;
   seoOgSiteName: string;
   seoImageAltLogo: string;
   seoImageAltProduct: string;
@@ -1151,6 +1163,16 @@ export const translations: Record<Language, Translations> = {
     seoCartDescription: 'Review your shopping cart and proceed to secure checkout. Free shipping on all orders.',
     seoPaymentTitle: 'Secure Payment - Complete Your Order | Luxio Market',
     seoPaymentDescription: 'Complete your order securely with crypto payment, bank transfer or prepaid cards. All transactions are encrypted and secure.',
+    seoCheckoutAddressTitle: 'Delivery Address - Checkout | Luxio Market',
+    seoCheckoutAddressDescription: 'Confirm your delivery address for secure and fast shipping. Edit or use your registered address.',
+    deliveryAddress: 'Delivery Address',
+    checkoutAddressTitle: 'Where should we deliver your order?',
+    checkoutAddressSubtitle: 'Please confirm or update your delivery address',
+    useRegisteredAddress: 'Use my registered address',
+    continueToPayment: 'Continue to Payment',
+    addressSaved: 'Address saved successfully',
+    postalCode: 'Postal Code',
+    enterNewAddress: 'Enter a new address',
     seoOgSiteName: 'Luxio Market',
     seoImageAltLogo: 'Luxio Market - Premium tech products',
     seoImageAltProduct: 'Premium product at discount price',
@@ -1784,6 +1806,16 @@ export const translations: Record<Language, Translations> = {
     seoCartDescription: 'Consultez votre panier et procédez au paiement sécurisé. Livraison gratuite sur toutes les commandes.',
     seoPaymentTitle: 'Paiement Sécurisé - Finalisez Votre Commande | Luxio Market',
     seoPaymentDescription: 'Finalisez votre commande en toute sécurité avec paiement crypto, virement bancaire ou cartes prépayées. Toutes les transactions sont chiffrées et sécurisées.',
+    seoCheckoutAddressTitle: 'Adresse de Livraison - Commande | Luxio Market',
+    seoCheckoutAddressDescription: 'Confirmez votre adresse de livraison pour une expédition sécurisée et rapide. Modifiez ou utilisez votre adresse enregistrée.',
+    deliveryAddress: 'Adresse de livraison',
+    checkoutAddressTitle: 'Où devons-nous livrer votre commande ?',
+    checkoutAddressSubtitle: 'Veuillez confirmer ou mettre à jour votre adresse de livraison',
+    useRegisteredAddress: 'Utiliser mon adresse enregistrée',
+    continueToPayment: 'Continuer vers le paiement',
+    addressSaved: 'Adresse enregistrée avec succès',
+    postalCode: 'Code postal',
+    enterNewAddress: 'Saisir une nouvelle adresse',
     seoOgSiteName: 'Luxio Market',
     seoImageAltLogo: 'Luxio Market - Produits tech premium',
     seoImageAltProduct: 'Produit premium à prix réduit',
@@ -2417,6 +2449,16 @@ export const translations: Record<Language, Translations> = {
     seoCartDescription: 'Consulta tu carrito y procede al pago seguro. Envío gratis en todos los pedidos.',
     seoPaymentTitle: 'Pago Seguro - Completa Tu Pedido | Luxio Market',
     seoPaymentDescription: 'Completa tu pedido de forma segura con pago crypto, transferencia bancaria o tarjetas prepagadas. Todas las transacciones están cifradas y son seguras.',
+    seoCheckoutAddressTitle: 'Dirección de Entrega - Pedido | Luxio Market',
+    seoCheckoutAddressDescription: 'Confirma tu dirección de entrega para un envío seguro y rápido. Edita o usa tu dirección registrada.',
+    deliveryAddress: 'Dirección de entrega',
+    checkoutAddressTitle: '¿Dónde debemos entregar tu pedido?',
+    checkoutAddressSubtitle: 'Por favor confirma o actualiza tu dirección de entrega',
+    useRegisteredAddress: 'Usar mi dirección registrada',
+    continueToPayment: 'Continuar al pago',
+    addressSaved: 'Dirección guardada con éxito',
+    postalCode: 'Código postal',
+    enterNewAddress: 'Ingresar una nueva dirección',
     seoOgSiteName: 'Luxio Market',
     seoImageAltLogo: 'Luxio Market - Productos tech premium',
     seoImageAltProduct: 'Producto premium a precio reducido',
@@ -3050,6 +3092,16 @@ export const translations: Record<Language, Translations> = {
     seoCartDescription: 'Consulte o seu carrinho e proceda ao pagamento seguro. Envio gratuito em todos os pedidos.',
     seoPaymentTitle: 'Pagamento Seguro - Complete o Seu Pedido | Luxio Market',
     seoPaymentDescription: 'Complete o seu pedido de forma segura com pagamento crypto, transferência bancária ou cartões pré-pagos. Todas as transações são encriptadas e seguras.',
+    seoCheckoutAddressTitle: 'Endereço de Entrega - Pedido | Luxio Market',
+    seoCheckoutAddressDescription: 'Confirme o seu endereço de entrega para um envio seguro e rápido. Edite ou use o seu endereço registado.',
+    deliveryAddress: 'Endereço de entrega',
+    checkoutAddressTitle: 'Onde devemos entregar o seu pedido?',
+    checkoutAddressSubtitle: 'Por favor confirme ou atualize o seu endereço de entrega',
+    useRegisteredAddress: 'Usar o meu endereço registado',
+    continueToPayment: 'Continuar para o pagamento',
+    addressSaved: 'Endereço guardado com sucesso',
+    postalCode: 'Código postal',
+    enterNewAddress: 'Inserir um novo endereço',
     seoOgSiteName: 'Luxio Market',
     seoImageAltLogo: 'Luxio Market - Produtos tech premium',
     seoImageAltProduct: 'Produto premium a preço reduzido',
@@ -3683,6 +3735,16 @@ export const translations: Record<Language, Translations> = {
     seoCartDescription: 'Sprawdź swój koszyk i przejdź do bezpiecznego płacenia. Darmowa dostawa na wszystkie zamówienia.',
     seoPaymentTitle: 'Bezpieczna Płatność - Dokończ Zamówienie | Luxio Market',
     seoPaymentDescription: 'Dokończ zamówienie bezpiecznie z płatnością crypto, przelewem bankowym lub kartami przedpłaconymi. Wszystkie transakcje są zaszyfrowane i bezpieczne.',
+    seoCheckoutAddressTitle: 'Adres Dostawy - Zamówienie | Luxio Market',
+    seoCheckoutAddressDescription: 'Potwierdź swój adres dostawy dla bezpiecznej i szybkiej wysyłki. Edytuj lub użyj zarejestrowanego adresu.',
+    deliveryAddress: 'Adres dostawy',
+    checkoutAddressTitle: 'Gdzie mamy dostarczyć zamówienie?',
+    checkoutAddressSubtitle: 'Proszę potwierdzić lub zaktualizować adres dostawy',
+    useRegisteredAddress: 'Użyj mojego zarejestrowanego adresu',
+    continueToPayment: 'Kontynuuj do płatności',
+    addressSaved: 'Adres zapisany pomyślnie',
+    postalCode: 'Kod pocztowy',
+    enterNewAddress: 'Wprowadź nowy adres',
     seoOgSiteName: 'Luxio Market',
     seoImageAltLogo: 'Luxio Market - Produkty tech premium',
     seoImageAltProduct: 'Produkt premium w obniżonej cenie',
@@ -4316,6 +4378,16 @@ export const translations: Record<Language, Translations> = {
     seoCartDescription: 'Consulta il tuo carrello e procedi al pagamento sicuro. Spedizione gratuita su tutti gli ordini.',
     seoPaymentTitle: 'Pagamento Sicuro - Completa il Tuo Ordine | Luxio Market',
     seoPaymentDescription: 'Completa il tuo ordine in sicurezza con pagamento crypto, bonifico bancario o carte prepagate. Tutte le transazioni sono crittografate e sicure.',
+    seoCheckoutAddressTitle: 'Indirizzo di Consegna - Ordine | Luxio Market',
+    seoCheckoutAddressDescription: 'Conferma il tuo indirizzo di consegna per una spedizione sicura e veloce. Modifica o usa il tuo indirizzo registrato.',
+    deliveryAddress: 'Indirizzo di consegna',
+    checkoutAddressTitle: 'Dove dobbiamo consegnare il tuo ordine?',
+    checkoutAddressSubtitle: 'Per favore conferma o aggiorna il tuo indirizzo di consegna',
+    useRegisteredAddress: 'Usa il mio indirizzo registrato',
+    continueToPayment: 'Continua al pagamento',
+    addressSaved: 'Indirizzo salvato con successo',
+    postalCode: 'Codice postale',
+    enterNewAddress: 'Inserisci un nuovo indirizzo',
     seoOgSiteName: 'Luxio Market',
     seoImageAltLogo: 'Luxio Market - Prodotti tech premium',
     seoImageAltProduct: 'Prodotto premium a prezzo scontato',
@@ -4949,6 +5021,16 @@ export const translations: Record<Language, Translations> = {
     seoCartDescription: 'Tekintse meg kosarát és lépjen tovább a biztonságos fizetéshez. Ingyenes szállítás minden rendelésnél.',
     seoPaymentTitle: 'Biztonságos Fizetés - Végezze El Rendelését | Luxio Market',
     seoPaymentDescription: 'Végezze el rendelését biztonságosan crypto fizetéssel, banki átutalással vagy előre fizetett kártyákkal. Minden tranzakció titkosított és biztonságos.',
+    seoCheckoutAddressTitle: 'Szállítási Cím - Rendelés | Luxio Market',
+    seoCheckoutAddressDescription: 'Erősítse meg szállítási címét a biztonságos és gyors kézbesítéshez. Szerkessze vagy használja a regisztrált címét.',
+    deliveryAddress: 'Szállítási cím',
+    checkoutAddressTitle: 'Hová szállítsuk rendelését?',
+    checkoutAddressSubtitle: 'Kérjük, erősítse meg vagy frissítse szállítási címét',
+    useRegisteredAddress: 'Regisztrált címem használata',
+    continueToPayment: 'Tovább a fizetéshez',
+    addressSaved: 'Cím sikeresen mentve',
+    postalCode: 'Irányítószám',
+    enterNewAddress: 'Új cím megadása',
     seoOgSiteName: 'Luxio Market',
     seoImageAltLogo: 'Luxio Market - Prémium tech termékek',
     seoImageAltProduct: 'Prémium termék kedvezményes áron',
