@@ -1,0 +1,207 @@
+
+🧩 Prompt complet Replit – Corrections & Optimisations Luxio
+
+⚙️ 1. Cohérence des identifiants de commande et de virement
+
+Problème actuel :
+
+Le tableau de bord affiche NomPrénom + 4 chiffres
+
+Le mail de confirmation aussi
+
+Le virement affiche Dépôt + NomPrénom
+
+
+✅ Solution harmonisée :
+Utiliser un seul identifiant unique NomPrénomXXXX (où XXXX = 4 chiffres aléatoires) pour tout le parcours.
+
+Élément	Nouveau format cohérent
+
+Tableau de bord → N° commande	NomPrénomXXXX
+Page de paiement → Référence de commande	NomPrénomXXXX
+Email de confirmation → N° commande	NomPrénomXXXX
+Motif de virement	Dépôt + NomPrénomXXXX (ou traduit selon la langue)
+
+
+🔧 Implémentation technique (backend)
+
+import i18next from 'i18next';
+
+const randomDigits = Math.floor(1000 + Math.random() * 9000);
+const reference = `${user.firstName}${user.lastName}${randomDigits}`.replace(/\s+/g, '');
+
+const depositWord = i18next.t('payment.deposit', { lng: user.language });
+
+order.reference = reference;
+order.depositMotif = `${depositWord} ${reference}`;
+
+🔠 Ajout des traductions :
+
+{
+  "payment": {
+    "deposit": {
+      "fr": "Dépôt",
+      "en": "Deposit",
+      "es": "Depósito",
+      "pt": "Depósito",
+      "de": "Einzahlung",
+      "it": "Deposito"
+    },
+    "useReferenceInstruction": {
+      "fr": "Utilisez cette référence comme motif de virement :",
+      "en": "Use this reference as the payment reason:",
+      "es": "Utiliza esta referencia como motivo del pago:",
+      "pt": "Use esta referência como motivo do pagamento:",
+      "de": "Verwenden Sie diese Referenz als Zahlungsgrund:",
+      "it": "Usa questo riferimento come causale del pagamento:"
+    }
+  }
+}
+
+➡️ Ainsi, le même code est utilisé sur tout le site et le motif est traduit selon la langue de l’utilisateur.
+
+
+---
+
+🌐 2. Traduction complète des instructions OxaPay
+
+Problème :
+Le texte "Voir les instructions" n’est traduit qu’en anglais et français.
+
+✅ Solution : Ajouter toutes les traductions manquantes dans le fichier i18n.
+
+{
+  "cryptoInstructions": {
+    "fr": "Suivez les instructions ci-dessous pour finaliser votre paiement crypto via OxaPay.",
+    "en": "Follow the steps below to complete your crypto payment via OxaPay.",
+    "es": "Sigue las instrucciones a continuación para completar tu pago con criptomonedas a través de OxaPay.",
+    "pt": "Siga as instruções abaixo para concluir o pagamento em criptomoeda via OxaPay.",
+    "de": "Befolgen Sie die untenstehenden Anweisungen, um Ihre Krypto-Zahlung über OxaPay abzuschließen.",
+    "it": "Segui le istruzioni qui sotto per completare il pagamento in criptovaluta tramite OxaPay."
+  }
+}
+
+Et vérifier que le composant appelle bien :
+
+t('cryptoInstructions')
+
+
+---
+
+🛒 3. Variantes d’images dans le panier
+
+Problème :
+Les images des variantes ne s’affichent pas.
+
+✅ Correction : Remplacer dans le code du panier :
+
+<img src={product.image} />
+
+par :
+
+<img src={item.variant?.image || product.image} />
+
+➡️ Cela garantit que si la variante possède une image spécifique, c’est celle-ci qui est affichée.
+
+
+---
+
+🏠 4. Nouvelle page “Adresse de livraison”
+
+Objectif :
+Ajouter une étape avant le paiement pour confirmer ou modifier l’adresse de livraison.
+
+Flux utilisateur :
+
+1. Le client clique sur “Commander” → redirigé vers /checkout/address
+
+
+2. Il peut :
+
+Saisir une nouvelle adresse
+
+Ou cocher “Utiliser l’adresse enregistrée à l’inscription”
+
+
+
+3. Si coché → auto-remplissage depuis user.address + champs verrouillés
+
+
+4. Puis passage à /checkout/payment
+
+
+
+Implémentation :
+
+Créer un composant CheckoutAddressPage
+
+Utiliser une checkbox :
+
+
+<Checkbox
+  label={t('useRegisteredAddress')}
+  checked={useRegisteredAddress}
+  onChange={() => setUseRegisteredAddress(!useRegisteredAddress)}
+/>
+
+Si true → préremplir et désactiver les inputs.
+
+
+
+---
+
+📱 5. Format de téléphone selon le pays
+
+Objectif :
+Empêcher la saisie d’un numéro invalide.
+
+✅ Solution : Utiliser la librairie react-phone-number-input :
+
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+
+<PhoneInput
+  international
+  defaultCountry={selectedCountryCode}
+  value={phone}
+  onChange={setPhone}
+/>
+
+➡️ La longueur et le format sont automatiquement adaptés selon le pays sélectionné.
+
+
+---
+
+🗺️ 6. Suggestion d’adresse automatique
+
+Objectif :
+Proposer des suggestions lors de la saisie d’adresse.
+
+✅ Solution (Google Places API ou Mapbox) :
+
+const autocomplete = new google.maps.places.Autocomplete(inputRef.current, {
+  types: ['address'],
+  componentRestrictions: { country: selectedCountryCode },
+});
+
+autocomplete.addListener('place_changed', () => {
+  const place = autocomplete.getPlace();
+  setAddress(place.formatted_address);
+});
+
+➡️ Cela donne une expérience utilisateur fluide, multilingue et professionnelle (comme sur Amazon).
+
+
+---
+
+🧠 Résumé global
+
+Thème	Action principale
+
+Identifiants	Format uniforme NomPrénomXXXX
+Virement	Motif traduit automatiquement
+OxaPay	Traductions multilingues complètes
+Panier	Variantes d’images affichées
+Livraison	Nouvelle étape avec adresse auto-remplie
+Téléphone	Format automatique selon pays
+Adresse	Suggestions via API géolocalisée
