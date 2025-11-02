@@ -5,6 +5,7 @@ import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { showToast } from '../components/ToastNotifications';
 import { AddressAutocomplete } from '../components/AddressAutocomplete';
+import { isValidCountry, isValidCity, isValidAddress } from '../lib/validation';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
@@ -79,9 +80,52 @@ export default function CheckoutAddress() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.firstName || !formData.lastName || !formData.phone || 
-        !formData.address || !formData.city || !formData.country) {
-      showToast(t('fillRequiredFields'), 'error');
+    // Validation des champs obligatoires
+    if (!formData.firstName.trim()) {
+      showToast(t('firstNameRequired'), 'error');
+      return;
+    }
+
+    if (!formData.lastName.trim()) {
+      showToast(t('lastNameRequired'), 'error');
+      return;
+    }
+
+    if (!formData.phone.trim()) {
+      showToast(t('phoneRequired'), 'error');
+      return;
+    }
+
+    if (!formData.address.trim()) {
+      showToast(t('addressRequired'), 'error');
+      return;
+    }
+
+    // Validation stricte de l'adresse (doit contenir un numéro et des lettres)
+    if (!isValidAddress(formData.address)) {
+      showToast(t('invalidAddress'), 'error');
+      return;
+    }
+
+    if (!formData.city.trim()) {
+      showToast(t('cityRequired'), 'error');
+      return;
+    }
+
+    // Validation stricte de la ville (doit être dans la liste)
+    if (!isValidCity(formData.city)) {
+      showToast(t('invalidCity'), 'error');
+      return;
+    }
+
+    if (!formData.country.trim()) {
+      showToast(t('countryRequired'), 'error');
+      return;
+    }
+
+    // Validation stricte du pays (doit être dans la liste)
+    if (!isValidCountry(formData.country)) {
+      showToast(t('invalidCountry'), 'error');
       return;
     }
 

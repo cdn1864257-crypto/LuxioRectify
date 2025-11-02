@@ -22,14 +22,24 @@ export function getProductPrice(productId: string, description?: string): number
     return null;
   }
 
-  if (!description || !product.hasVariants) {
+  // Si le produit n'a pas de variantes, retourner le prix de base
+  if (!product.hasVariants || !product.variants || product.variants.length === 0) {
     return product.price;
   }
 
-  const variant = product.variants?.find((v: ProductVariant) => 
-    description.includes(v.color || '') && description.includes(v.capacity || '')
-  );
+  // Si pas de description fournie, retourner le prix de base du produit
+  if (!description) {
+    return product.price;
+  }
 
+  // Essayer de trouver la variante correspondante
+  const variant = product.variants.find((v: ProductVariant) => {
+    const matchesColor = v.color ? description.includes(v.color) : true;
+    const matchesCapacity = v.capacity ? description.includes(v.capacity) : true;
+    return matchesColor && matchesCapacity;
+  });
+
+  // Si une variante est trouvée, retourner son prix, sinon le prix de base
   return variant ? variant.price : product.price;
 }
 
