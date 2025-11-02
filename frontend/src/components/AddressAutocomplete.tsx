@@ -192,7 +192,10 @@ export function AddressAutocomplete({
             <button
               key={index}
               type="button"
-              onClick={() => handleSelectSuggestion(suggestion)}
+              onMouseDown={(e) => {
+                e.preventDefault();
+                handleSelectSuggestion(suggestion);
+              }}
               className="w-full px-4 py-3 text-left hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors border-b border-slate-100 dark:border-slate-700 last:border-b-0"
               data-testid={`suggestion-${index}`}
             >
