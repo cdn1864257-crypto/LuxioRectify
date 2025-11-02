@@ -169,7 +169,8 @@ export default function NewPayment() {
             id: item.id,
             name: item.name,
             price: item.price,
-            quantity: item.quantity
+            quantity: item.quantity,
+            description: item.description
           }))
         })
       });
@@ -220,7 +221,8 @@ export default function NewPayment() {
             id: item.id,
             name: item.name,
             price: item.price,
-            quantity: item.quantity
+            quantity: item.quantity,
+            description: item.description
           }))
         })
       });
