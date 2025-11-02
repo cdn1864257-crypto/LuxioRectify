@@ -9,7 +9,9 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Loader2, Check, X, Eye, EyeOff } from "lucide-react";
 import { validatePasswordStrength, isPasswordValid, type PasswordStrength } from "@/lib/password-strength";
 import { isValidCountry, isValidCity, isValidAddress, isValidRealEmail, isValidPhone } from "@/lib/validation";
-import { countriesCities, PHONE_PREFIXES } from "@/lib/countries-cities";
+import { countriesCities } from "@/lib/countries-cities";
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 
 interface SignupFormData {
   firstName: string;
@@ -93,20 +95,22 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     }
   };
 
+  const handlePhoneChange = (value: string | undefined) => {
+    setFormData(prev => ({ ...prev, phone: value || '' }));
+    if (errors.phone) {
+      setErrors(prev => ({ ...prev, phone: undefined }));
+    }
+  };
+
   const handleCountryChange = (countryCode: string) => {
     const selectedCountry = countriesCities.find(c => c.code === countryCode);
     
     if (selectedCountry) {
-      // Stocker le nom EN canonique pour les validateurs
-      const phonePrefix = PHONE_PREFIXES[countryCode] || "";
-      const currentPhone = formData.phone.replace(/^\+\d+\s*/, '').trim();
-      const newPhone = currentPhone ? `${phonePrefix} ${currentPhone}` : phonePrefix + " ";
-      
       setFormData(prev => ({ 
         ...prev, 
         country: selectedCountry.en, 
         city: "",
-        phone: newPhone
+        phone: ""
       }));
       setAvailableCities(selectedCountry.cities);
     }
@@ -374,17 +378,14 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
 
       <div className="space-y-2">
         <Label htmlFor="phone">{t('phone')} *</Label>
-        <Input
-          id="phone"
-          name="phone"
-          type="tel"
+        <PhoneInput
+          international
+          defaultCountry={formData.country ? countriesCities.find(c => c.en === formData.country)?.code as any : undefined}
           value={formData.phone}
-          onChange={handleChange}
-          placeholder={t('phonePlaceholder')}
+          onChange={handlePhoneChange}
           disabled={isLoading}
-          required
           data-testid="input-phone"
-          className={errors.phone ? "border-red-500" : ""}
+          className={errors.phone ? "border-red-500 rounded-md border px-3 py-2" : "rounded-md border px-3 py-2"}
         />
         {errors.phone && (
           <p className="text-sm text-red-500">{errors.phone}</p>

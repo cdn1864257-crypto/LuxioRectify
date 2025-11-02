@@ -86,6 +86,7 @@ export interface Translations {
   prepaidTickets: string;
   oxaPay: string;
   oxaPayDescription: string;
+  oxaPayInstructions: string;
   selectPaymentMethod: string;
   bankTransferTitle: string;
   bankTransferDescription: string;
@@ -93,6 +94,8 @@ export interface Translations {
   bicLabel: string;
   transferReference: string;
   transferInstructions: string;
+  paymentDeposit: string;
+  useReferenceInstruction: string;
   prepaidTicketsTitle: string;
   prepaidTicketsDescription: string;
   ticketCode: string;
@@ -610,6 +613,7 @@ export const translations: Record<Language, Translations> = {
     prepaidTickets: 'Prepaid Tickets',
     oxaPay: 'Crypto Payment via OxaPay',
     oxaPayDescription: 'Secure payment with cryptocurrency (Bitcoin, USDT, Ethereum, etc.)',
+    oxaPayInstructions: 'Follow the steps below to complete your crypto payment via OxaPay.',
     selectPaymentMethod: 'Select Payment Method',
     bankTransferTitle: 'Bank Transfer',
     bankTransferDescription: 'Transfer the amount to our bank account',
@@ -617,6 +621,8 @@ export const translations: Record<Language, Translations> = {
     bicLabel: 'BIC',
     transferReference: 'Transfer Reference',
     transferInstructions: 'Use your order number as transfer reference',
+    paymentDeposit: 'Deposit',
+    useReferenceInstruction: 'Use this reference as the payment reason:',
     prepaidTicketsTitle: 'Prepaid Tickets (Transcash & PCS)',
     prepaidTicketsDescription: 'Send us your prepaid ticket codes',
     ticketCode: 'Ticket Code',
@@ -1240,6 +1246,7 @@ export const translations: Record<Language, Translations> = {
     prepaidTickets: 'Tickets prépayés',
     oxaPay: 'Paiement via Crypto OxaPay',
     oxaPayDescription: 'Paiement sécurisé par cryptomonnaie (Bitcoin, USDT, Ethereum, etc.)',
+    oxaPayInstructions: 'Suivez les instructions ci-dessous pour finaliser votre paiement crypto via OxaPay.',
     selectPaymentMethod: 'Choisir le mode de paiement',
     bankTransferTitle: 'Virement bancaire',
     bankTransferDescription: 'Transférez le montant sur notre compte bancaire',
@@ -1247,6 +1254,8 @@ export const translations: Record<Language, Translations> = {
     bicLabel: 'BIC',
     transferReference: 'Référence du virement',
     transferInstructions: 'Utilisez votre numéro de commande comme référence',
+    paymentDeposit: 'Dépôt',
+    useReferenceInstruction: 'Utilisez cette référence comme motif de virement :',
     prepaidTicketsTitle: 'Tickets prépayés (Transcash & PCS)',
     prepaidTicketsDescription: 'Envoyez-nous vos codes de tickets prépayés',
     ticketCode: 'Code ticket',
@@ -1870,6 +1879,7 @@ export const translations: Record<Language, Translations> = {
     prepaidTickets: 'Tickets prepagados',
     oxaPay: 'Pago con Cripto via OxaPay',
     oxaPayDescription: 'Pago seguro con criptomoneda (Bitcoin, USDT, Ethereum, etc.)',
+    oxaPayInstructions: 'Sigue las instrucciones a continuación para completar tu pago con criptomonedas a través de OxaPay.',
     selectPaymentMethod: 'Seleccionar método de pago',
     bankTransferTitle: 'Transferencia bancaria',
     bankTransferDescription: 'Transfiere el importe a nuestra cuenta bancaria',
@@ -1877,6 +1887,8 @@ export const translations: Record<Language, Translations> = {
     bicLabel: 'BIC',
     transferReference: 'Referencia de transferencia',
     transferInstructions: 'Usa tu número de pedido como referencia',
+    paymentDeposit: 'Depósito',
+    useReferenceInstruction: 'Utiliza esta referencia como motivo del pago:',
     prepaidTicketsTitle: 'Tickets prepagados (Transcash & PCS)',
     prepaidTicketsDescription: 'Envíanos tus códigos de tickets prepagados',
     ticketCode: 'Código de ticket',
@@ -2500,6 +2512,7 @@ export const translations: Record<Language, Translations> = {
     prepaidTickets: 'Tickets pré-pagos',
     oxaPay: 'Pagamento via Cripto OxaPay',
     oxaPayDescription: 'Pagamento seguro com criptomoeda (Bitcoin, USDT, Ethereum, etc.)',
+    oxaPayInstructions: 'Siga as instruções abaixo para concluir o pagamento em criptomoeda via OxaPay.',
     selectPaymentMethod: 'Selecionar método de pagamento',
     bankTransferTitle: 'Transferência bancária',
     bankTransferDescription: 'Transfira o valor para a nossa conta bancária',
@@ -2507,6 +2520,8 @@ export const translations: Record<Language, Translations> = {
     bicLabel: 'BIC',
     transferReference: 'Referência da transferência',
     transferInstructions: 'Use o seu número de pedido como referência',
+    paymentDeposit: 'Depósito',
+    useReferenceInstruction: 'Use esta referência como motivo do pagamento:',
     prepaidTicketsTitle: 'Tickets pré-pagos (Transcash & PCS)',
     prepaidTicketsDescription: 'Envie-nos os seus códigos de tickets pré-pagos',
     ticketCode: 'Código do ticket',
@@ -3130,6 +3145,7 @@ export const translations: Record<Language, Translations> = {
     prepaidTickets: 'Karty przedpłacone',
     oxaPay: 'Płatność Krypto przez OxaPay',
     oxaPayDescription: 'Bezpieczna płatność kryptowalutą (Bitcoin, USDT, Ethereum, itp.)',
+    oxaPayInstructions: 'Postępuj zgodnie z poniższymi instrukcjami, aby ukończyć płatność kryptowalutą przez OxaPay.',
     selectPaymentMethod: 'Wybierz metodę płatności',
     bankTransferTitle: 'Przelew bankowy',
     bankTransferDescription: 'Przelej kwotę na nasze konto bankowe',
@@ -3137,6 +3153,8 @@ export const translations: Record<Language, Translations> = {
     bicLabel: 'BIC',
     transferReference: 'Tytuł przelewu',
     transferInstructions: 'Użyj numeru zamówienia jako tytułu przelewu',
+    paymentDeposit: 'Wpłata',
+    useReferenceInstruction: 'Użyj tego odniesienia jako tytułu płatności:',
     prepaidTicketsTitle: 'Karty przedpłacone (Transcash & PCS)',
     prepaidTicketsDescription: 'Prześlij nam kody swoich kart przedpłaconych',
     ticketCode: 'Kod karty',
@@ -3760,6 +3778,7 @@ export const translations: Record<Language, Translations> = {
     prepaidTickets: 'Ticket prepagati',
     oxaPay: 'Pagamento Cripto tramite OxaPay',
     oxaPayDescription: 'Pagamento sicuro con criptovaluta (Bitcoin, USDT, Ethereum, ecc.)',
+    oxaPayInstructions: 'Segui le istruzioni qui sotto per completare il pagamento in criptovaluta tramite OxaPay.',
     selectPaymentMethod: 'Seleziona metodo di pagamento',
     bankTransferTitle: 'Bonifico bancario',
     bankTransferDescription: 'Trasferisci l\'importo sul nostro conto bancario',
@@ -3767,6 +3786,8 @@ export const translations: Record<Language, Translations> = {
     bicLabel: 'BIC',
     transferReference: 'Riferimento bonifico',
     transferInstructions: 'Usa il tuo numero ordine come riferimento',
+    paymentDeposit: 'Deposito',
+    useReferenceInstruction: 'Usa questo riferimento come causale del pagamento:',
     prepaidTicketsTitle: 'Ticket prepagati (Transcash & PCS)',
     prepaidTicketsDescription: 'Inviaci i tuoi codici di ticket prepagati',
     ticketCode: 'Codice ticket',
@@ -4390,6 +4411,7 @@ export const translations: Record<Language, Translations> = {
     prepaidTickets: 'Feltöltőkártyák',
     oxaPay: 'Kripto Fizetés OxaPay-en keresztül',
     oxaPayDescription: 'Biztonságos fizetés kriptovalutával (Bitcoin, USDT, Ethereum, stb.)',
+    oxaPayInstructions: 'Kövesse az alábbi utasításokat a kriptovaluta fizetés befejezéséhez az OxaPay-en keresztül.',
     selectPaymentMethod: 'Fizetési mód kiválasztása',
     bankTransferTitle: 'Banki átutalás',
     bankTransferDescription: 'Utalja át az összeget a bankszámlánkra',
@@ -4397,6 +4419,8 @@ export const translations: Record<Language, Translations> = {
     bicLabel: 'BIC',
     transferReference: 'Átutalás hivatkozása',
     transferInstructions: 'Használja rendelésszámát hivatkozásként',
+    paymentDeposit: 'Befizetés',
+    useReferenceInstruction: 'Használd ezt a hivatkozást fizetési megjegyzésként:',
     prepaidTicketsTitle: 'Feltöltőkártyák (Transcash & PCS)',
     prepaidTicketsDescription: 'Küldje el nekünk feltöltőkártya kódjait',
     ticketCode: 'Kártya kód',
