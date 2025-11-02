@@ -1,6 +1,8 @@
 // Configuration de l'API backend
 // En développement, utiliser le backend local sur le port 3001
 // En production, utiliser l'URL du backend déployé sur Render (api.luxiomarket.shop)
+import { logger } from './logger';
+
 const isDevelopment = import.meta.env.DEV;
 const DEFAULT_BACKEND_URL = isDevelopment ? 'http://localhost:3001' : 'https://api.luxiomarket.shop';
 
@@ -49,7 +51,7 @@ function saveTokenToStorage(token: string, timestamp: number): void {
     localStorage.setItem(CSRF_STORAGE_KEY, token);
     localStorage.setItem(CSRF_TIMESTAMP_KEY, timestamp.toString());
   } catch (e) {
-    console.warn('Failed to save CSRF token to localStorage:', e);
+    logger.warn('Failed to save CSRF token to localStorage:', e);
   }
 }
 
@@ -93,7 +95,7 @@ export async function getCsrfToken(forceRefresh: boolean = false): Promise<strin
     
     return csrfToken;
   } catch (error) {
-    console.error('Error fetching CSRF token:', error);
+    logger.error('Error fetching CSRF token:', error);
     throw error;
   }
 }
@@ -125,7 +127,7 @@ export async function fetchWithCsrf(url: string, options: RequestInit = {}, retr
     try {
       const errorData = await response.clone().json();
       if (errorData.error === 'Invalid CSRF token' || errorData.error?.includes('CSRF')) {
-        console.warn(`CSRF token invalid, refreshing... (attempt ${retryCount + 1}/${MAX_CSRF_RETRIES})`);
+        logger.warn(`CSRF token invalid, refreshing... (attempt ${retryCount + 1}/${MAX_CSRF_RETRIES})`);
         
         const newToken = await getCsrfToken(true);
         headers.set('X-CSRF-Token', newToken);
@@ -133,7 +135,7 @@ export async function fetchWithCsrf(url: string, options: RequestInit = {}, retr
         return fetchWithCsrf(url, { ...options, headers }, retryCount + 1);
       }
     } catch (e) {
-      console.error('Failed to parse CSRF error response:', e);
+      logger.error('Failed to parse CSRF error response:', e);
     }
   }
   

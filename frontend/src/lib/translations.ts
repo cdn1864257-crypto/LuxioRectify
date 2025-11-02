@@ -53,6 +53,12 @@ export interface Translations {
   smartHomeGadgets: string;
   urbanMobility: string;
   viewAllSmartphones: string;
+  smartphonesSubtitle: string;
+  watchesSubtitle: string;
+  sneakersSubtitle: string;
+  gadgetsSubtitle: string;
+  mobilitySubtitle: string;
+  loadingProducts: string;
   
   // Cart
   shoppingCart: string;
@@ -592,6 +598,12 @@ export const translations: Record<Language, Translations> = {
     smartHomeGadgets: 'Smart Home Gadgets',
     urbanMobility: 'Urban Mobility Solutions',
     viewAllSmartphones: 'View All Smartphones',
+    smartphonesSubtitle: 'Premium devices with up to 22% off',
+    watchesSubtitle: 'Track your health with discounts up to 37%',
+    sneakersSubtitle: 'Step up your style with 17% off + free shipping',
+    gadgetsSubtitle: 'Upgrade your home with 13% off + free delivery',
+    mobilitySubtitle: 'Electric scooters & bikes with 13% off + free shipping',
+    loadingProducts: 'Loading products...',
     
     // Cart
     shoppingCart: 'Shopping Cart',
@@ -1235,6 +1247,12 @@ export const translations: Record<Language, Translations> = {
     smartHomeGadgets: 'Objets connectés maison',
     urbanMobility: 'Solutions de mobilité urbaine',
     viewAllSmartphones: 'Voir tous les smartphones',
+    smartphonesSubtitle: 'Appareils premium avec jusqu\'à 22% de réduction',
+    watchesSubtitle: 'Suivez votre santé avec jusqu\'à 37% de réduction',
+    sneakersSubtitle: 'Sublimez votre style avec 17% de réduction + livraison gratuite',
+    gadgetsSubtitle: 'Modernisez votre maison avec 13% de réduction + livraison gratuite',
+    mobilitySubtitle: 'Trottinettes et vélos électriques avec 13% de réduction + livraison gratuite',
+    loadingProducts: 'Chargement des produits...',
     
     // Cart
     shoppingCart: 'Panier',
@@ -1878,6 +1896,12 @@ export const translations: Record<Language, Translations> = {
     smartHomeGadgets: 'Gadgets inteligentes para el hogar',
     urbanMobility: 'Soluciones de movilidad urbana',
     viewAllSmartphones: 'Ver todos los smartphones',
+    smartphonesSubtitle: 'Dispositivos premium con hasta 22% de descuento',
+    watchesSubtitle: 'Cuida tu salud con hasta 37% de descuento',
+    sneakersSubtitle: 'Mejora tu estilo con 17% de descuento + envío gratis',
+    gadgetsSubtitle: 'Moderniza tu hogar con 13% de descuento + envío gratis',
+    mobilitySubtitle: 'Patinetes y bicicletas eléctricas con 13% de descuento + envío gratis',
+    loadingProducts: 'Cargando productos...',
     
     // Cart
     shoppingCart: 'Carrito de compras',
@@ -2521,6 +2545,12 @@ export const translations: Record<Language, Translations> = {
     smartHomeGadgets: 'Gadgets inteligentes para casa',
     urbanMobility: 'Soluções de mobilidade urbana',
     viewAllSmartphones: 'Ver todos os smartphones',
+    smartphonesSubtitle: 'Dispositivos premium com até 22% de desconto',
+    watchesSubtitle: 'Monitore sua saúde com até 37% de desconto',
+    sneakersSubtitle: 'Melhore seu estilo com 17% de desconto + frete grátis',
+    gadgetsSubtitle: 'Modernize sua casa com 13% de desconto + entrega grátis',
+    mobilitySubtitle: 'Scooters e bicicletas elétricas com 13% de desconto + frete grátis',
+    loadingProducts: 'Carregando produtos...',
     
     // Cart
     shoppingCart: 'Carrinho de compras',
@@ -3164,6 +3194,12 @@ export const translations: Record<Language, Translations> = {
     smartHomeGadgets: 'Inteligentne gadżety domowe',
     urbanMobility: 'Rozwiązania mobilności miejskiej',
     viewAllSmartphones: 'Zobacz wszystkie smartfony',
+    smartphonesSubtitle: 'Urządzenia premium z rabatem do 22%',
+    watchesSubtitle: 'Monitoruj swoje zdrowie z rabatem do 37%',
+    sneakersSubtitle: 'Podnieś swój styl z 17% zniżki + darmowa wysyłka',
+    gadgetsSubtitle: 'Unowocześnij swój dom z 13% zniżki + darmowa dostawa',
+    mobilitySubtitle: 'Hulajnogi i rowery elektryczne z 13% zniżki + darmowa wysyłka',
+    loadingProducts: 'Ładowanie produktów...',
     
     // Cart
     shoppingCart: 'Koszyk',
@@ -3807,6 +3843,12 @@ export const translations: Record<Language, Translations> = {
     smartHomeGadgets: 'Gadget per casa intelligente',
     urbanMobility: 'Soluzioni di mobilità urbana',
     viewAllSmartphones: 'Vedi tutti gli smartphone',
+    smartphonesSubtitle: 'Dispositivi premium con sconti fino al 22%',
+    watchesSubtitle: 'Monitora la tua salute con sconti fino al 37%',
+    sneakersSubtitle: 'Migliora il tuo stile con 17% di sconto + spedizione gratuita',
+    gadgetsSubtitle: 'Modernizza la tua casa con 13% di sconto + consegna gratuita',
+    mobilitySubtitle: 'Monopattini e bici elettriche con 13% di sconto + spedizione gratuita',
+    loadingProducts: 'Caricamento prodotti...',
     
     // Cart
     shoppingCart: 'Carrello',
@@ -4450,6 +4492,12 @@ export const translations: Record<Language, Translations> = {
     smartHomeGadgets: 'Okos otthon kütyük',
     urbanMobility: 'Városi mobilitási megoldások',
     viewAllSmartphones: 'Összes okostelefon megtekintése',
+    smartphonesSubtitle: 'Prémium eszközök akár 22% kedvezménnyel',
+    watchesSubtitle: 'Kövesse nyomon egészségét akár 37% kedvezménnyel',
+    sneakersSubtitle: 'Emelje stílusát 17% kedvezménnyel + ingyenes szállítás',
+    gadgetsSubtitle: 'Modernizálja otthonát 13% kedvezménnyel + ingyenes kiszállítás',
+    mobilitySubtitle: 'Elektromos rollerek és kerékpárok 13% kedvezménnyel + ingyenes szállítás',
+    loadingProducts: 'Termékek betöltése...',
     
     // Cart
     shoppingCart: 'Kosár',

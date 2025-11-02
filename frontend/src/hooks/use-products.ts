@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Product } from '@/lib/products';
+import { logger } from '@/lib/logger';
 
 interface UseProductsResult {
   products: Product[];
@@ -18,17 +19,17 @@ export function useProducts(): UseProductsResult {
     setError(null);
 
     // Always use static products (both development and production)
-    console.log('📦 Loading static products...');
+    logger.log('📦 Loading static products...');
     try {
       const { products: staticProducts } = await import('@/lib/products');
       if (staticProducts && staticProducts.length > 0) {
         setProducts(staticProducts);
-        console.log(`✅ Loaded ${staticProducts.length} static products`);
+        logger.log(`✅ Loaded ${staticProducts.length} static products`);
       } else {
         setError('No products available');
       }
     } catch (importErr) {
-      console.error('Failed to load static products:', importErr);
+      logger.error('Failed to load static products:', importErr);
       setError('Unable to load products');
     } finally {
       setLoading(false);
