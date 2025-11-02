@@ -244,6 +244,9 @@ export interface Translations {
   addressNotInSelectedCity: string;
   addressNotInSelectedCountry: string;
   pleaseSelectValidAddress: string;
+  pleaseSelectAddressFromSuggestions: string;
+  selectAddressFromSuggestions: string;
+  selectCountryAndCity: string;
   ticketCodeSent: string;
   enterTicketCode: string;
   orderFailed: string;
@@ -793,6 +796,9 @@ export const translations: Record<Language, Translations> = {
     addressNotInSelectedCity: 'The address must be in the selected city',
     addressNotInSelectedCountry: 'The address must be in the selected country',
     pleaseSelectValidAddress: 'Please select a valid address from the suggestions',
+    pleaseSelectAddressFromSuggestions: 'Please select an address from the suggestions',
+    selectAddressFromSuggestions: 'Please select an address from the suggestions below',
+    selectCountryAndCity: 'Please select country and city first',
     ticketCodeSent: 'Ticket codes sent successfully',
     enterTicketCode: 'Please enter at least one ticket code',
     orderFailed: 'Order failed. Please try again.',
@@ -1446,6 +1452,9 @@ export const translations: Record<Language, Translations> = {
     addressNotInSelectedCity: 'L\'adresse doit être dans la ville sélectionnée',
     addressNotInSelectedCountry: 'L\'adresse doit être dans le pays sélectionné',
     pleaseSelectValidAddress: 'Veuillez sélectionner une adresse valide parmi les suggestions',
+    pleaseSelectAddressFromSuggestions: 'Veuillez sélectionner une adresse parmi les suggestions',
+    selectAddressFromSuggestions: 'Veuillez sélectionner une adresse parmi les suggestions ci-dessous',
+    selectCountryAndCity: 'Veuillez d\'abord sélectionner le pays et la ville',
     ticketCodeSent: 'Codes tickets envoyés avec succès',
     enterTicketCode: 'Veuillez entrer au moins un code ticket',
     orderFailed: 'Commande échouée. Veuillez réessayer.',
@@ -2099,6 +2108,9 @@ export const translations: Record<Language, Translations> = {
     addressNotInSelectedCity: 'La dirección debe estar en la ciudad seleccionada',
     addressNotInSelectedCountry: 'La dirección debe estar en el país seleccionado',
     pleaseSelectValidAddress: 'Por favor, seleccione una dirección válida de las sugerencias',
+    pleaseSelectAddressFromSuggestions: 'Por favor, seleccione una dirección de las sugerencias',
+    selectAddressFromSuggestions: 'Por favor, seleccione una dirección de las sugerencias a continuación',
+    selectCountryAndCity: 'Por favor, seleccione primero el país y la ciudad',
     ticketCodeSent: 'Códigos de tickets enviados correctamente',
     enterTicketCode: 'Por favor, introduce al menos un código de ticket',
     orderFailed: 'Pedido fallido. Por favor, inténtalo de nuevo.',
@@ -2752,6 +2764,9 @@ export const translations: Record<Language, Translations> = {
     addressNotInSelectedCity: 'O endereço deve estar na cidade selecionada',
     addressNotInSelectedCountry: 'O endereço deve estar no país selecionado',
     pleaseSelectValidAddress: 'Por favor, selecione um endereço válido das sugestões',
+    pleaseSelectAddressFromSuggestions: 'Por favor, selecione um endereço das sugestões',
+    selectAddressFromSuggestions: 'Por favor, selecione um endereço das sugestões abaixo',
+    selectCountryAndCity: 'Por favor, selecione primeiro o país e a cidade',
     ticketCodeSent: 'Códigos de tickets enviados com sucesso',
     enterTicketCode: 'Por favor, insira pelo menos um código de ticket',
     orderFailed: 'Pedido falhou. Por favor, tente novamente.',
@@ -3405,6 +3420,9 @@ export const translations: Record<Language, Translations> = {
     addressNotInSelectedCity: 'Adres musi być w wybranym mieście',
     addressNotInSelectedCountry: 'Adres musi być w wybranym kraju',
     pleaseSelectValidAddress: 'Proszę wybrać prawidłowy adres z sugestii',
+    pleaseSelectAddressFromSuggestions: 'Proszę wybrać adres z sugestii',
+    selectAddressFromSuggestions: 'Proszę wybrać adres z poniższych sugestii',
+    selectCountryAndCity: 'Proszę najpierw wybrać kraj i miasto',
     ticketCodeSent: 'Kody kart wysłane pomyślnie',
     enterTicketCode: 'Proszę wprowadzić co najmniej jeden kod karty',
     orderFailed: 'Zamówienie nie powiodło się. Spróbuj ponownie.',
@@ -4058,6 +4076,9 @@ export const translations: Record<Language, Translations> = {
     addressNotInSelectedCity: 'L\'indirizzo deve essere nella città selezionata',
     addressNotInSelectedCountry: 'L\'indirizzo deve essere nel paese selezionato',
     pleaseSelectValidAddress: 'Si prega di selezionare un indirizzo valido dai suggerimenti',
+    pleaseSelectAddressFromSuggestions: 'Si prega di selezionare un indirizzo dai suggerimenti',
+    selectAddressFromSuggestions: 'Si prega di selezionare un indirizzo dai suggerimenti qui sotto',
+    selectCountryAndCity: 'Si prega di selezionare prima il paese e la città',
     ticketCodeSent: 'Codici ticket inviati con successo',
     enterTicketCode: 'Inserisci almeno un codice ticket',
     orderFailed: 'Ordine fallito. Riprova.',
@@ -4711,6 +4732,9 @@ export const translations: Record<Language, Translations> = {
     addressNotInSelectedCity: 'A címnek a kiválasztott városban kell lennie',
     addressNotInSelectedCountry: 'A címnek a kiválasztott országban kell lennie',
     pleaseSelectValidAddress: 'Kérjük, válasszon érvényes címet a javaslatokból',
+    pleaseSelectAddressFromSuggestions: 'Kérjük, válasszon címet a javaslatokból',
+    selectAddressFromSuggestions: 'Kérjük, válasszon címet az alábbi javaslatokból',
+    selectCountryAndCity: 'Kérjük, először válassza ki az országot és a várost',
     ticketCodeSent: 'Kártya kódok sikeresen elküldve',
     enterTicketCode: 'Kérjük, adjon meg legalább egy kártya kódot',
     orderFailed: 'Rendelés sikertelen. Kérjük, próbálja újra.',

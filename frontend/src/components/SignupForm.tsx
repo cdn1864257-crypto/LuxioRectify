@@ -12,6 +12,7 @@ import { isValidCountry, isValidCity, isValidAddress, isValidRealEmail, isValidP
 import { countriesCities } from "@/lib/countries-cities";
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
+import { AddressAutocomplete } from "@/components/AddressAutocomplete";
 
 interface SignupFormData {
   firstName: string;
@@ -53,6 +54,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
   const [availableCities, setAvailableCities] = useState<{ en: string; fr: string; es: string }[]>([]);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [addressValidated, setAddressValidated] = useState(false);
 
   // Set custom validation messages in the current language
   useEffect(() => {
@@ -110,9 +112,11 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
         ...prev, 
         country: selectedCountry.en, 
         city: "",
-        phone: ""
+        phone: "",
+        address: ""
       }));
       setAvailableCities(selectedCountry.cities);
+      setAddressValidated(false);
     }
     
     if (errors.country) {
@@ -124,7 +128,8 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     // Récupérer le nom EN canonique de la ville
     const cityIdx = parseInt(cityIndex);
     if (availableCities[cityIdx]) {
-      setFormData(prev => ({ ...prev, city: availableCities[cityIdx].en }));
+      setFormData(prev => ({ ...prev, city: availableCities[cityIdx].en, address: "" }));
+      setAddressValidated(false);
     }
     
     if (errors.city) {
@@ -152,6 +157,8 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     
     if (!formData.address.trim()) {
       newErrors.address = t('addressRequired');
+    } else if (!addressValidated) {
+      newErrors.address = t('pleaseSelectAddressFromSuggestions');
     } else if (!isValidAddress(formData.address)) {
       newErrors.address = t('invalidAddress');
     }
@@ -359,20 +366,38 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
 
       <div className="space-y-2">
         <Label htmlFor="address">{t('address')} *</Label>
-        <Input
-          id="address"
-          name="address"
-          type="text"
+        <AddressAutocomplete
           value={formData.address}
-          onChange={handleChange}
-          placeholder={t('addressPlaceholder')}
-          disabled={isLoading}
-          required
+          onChange={(value) => {
+            setFormData(prev => ({ ...prev, address: value }));
+            setAddressValidated(false);
+            if (errors.address) {
+              setErrors(prev => ({ ...prev, address: undefined }));
+            }
+          }}
+          onAddressSelect={() => {
+            setAddressValidated(true);
+            if (errors.address) {
+              setErrors(prev => ({ ...prev, address: undefined }));
+            }
+          }}
+          onValidationError={(error) => {
+            setErrors(prev => ({ ...prev, address: t(error as keyof typeof t) }));
+            setAddressValidated(false);
+          }}
+          disabled={isLoading || !formData.country || !formData.city}
+          placeholder={!formData.country || !formData.city ? t('selectCountryAndCity') : t('addressPlaceholder')}
+          countryCode={countriesCities.find(c => c.en === formData.country)?.code}
+          city={formData.city}
           data-testid="input-address"
-          className={errors.address ? "border-red-500" : ""}
         />
         {errors.address && (
           <p className="text-sm text-red-500">{errors.address}</p>
+        )}
+        {!addressValidated && formData.address && !errors.address && (
+          <p className="text-sm text-amber-600 dark:text-amber-400">
+            {t('selectAddressFromSuggestions')}
+          </p>
         )}
       </div>
 
