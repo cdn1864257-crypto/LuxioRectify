@@ -263,7 +263,11 @@ export default function CheckoutAddress() {
                     handleChange('city', address.city || address.town || address.village || '');
                     handleChange('postalCode', address.postcode || '');
                     handleChange('country', address.country || '');
-                    setCountryCode(address.country_code?.toUpperCase() || '');
+                    // country_code n'est pas toujours disponible dans le type address
+                    const countryCodeValue = (address as any).country_code;
+                    if (countryCodeValue) {
+                      setCountryCode(countryCodeValue.toUpperCase());
+                    }
                   }}
                   disabled={useRegistered}
                   placeholder="123 Rue de la Paix"
