@@ -1,0 +1,56 @@
+09:20:07.443 Running build in Washington, D.C., USA (East) – iad1
+09:20:07.443 Build machine configuration: 2 cores, 8 GB
+09:20:07.453 Cloning github.com/cdn1864257-crypto/LuxioRectify (Branch: main, Commit: 38843b2)
+09:20:07.454 Skipping build cache, deployment was triggered without cache.
+09:20:09.661 Cloning completed: 2.208s
+09:20:09.837 Found .vercelignore (repository root)
+09:20:09.871 Removed 187 ignored files defined in .vercelignore
+09:20:09.871   /.git/config
+09:20:09.871   /.git/description
+09:20:09.871   /.git/FETCH_HEAD
+09:20:09.871   /.git/HEAD
+09:20:09.872   /.git/hooks/applypatch-msg.sample
+09:20:09.872   /.git/hooks/commit-msg.sample
+09:20:09.872   /.git/hooks/fsmonitor-watchman.sample
+09:20:09.872   /.git/hooks/post-update.sample
+09:20:09.872   /.git/hooks/pre-applypatch.sample
+09:20:09.872   /.git/hooks/pre-commit.sample
+09:20:10.224 Running "vercel build"
+09:20:10.613 Vercel CLI 48.8.0
+09:20:11.252 Running "install" command: npm install...
+09:20:19.499
+09:20:19.500 added 361 packages, and audited 362 packages in 8s
+09:20:19.501
+09:20:19.501 53 packages are looking for funding
+09:20:19.502   run npm fund for details
+09:20:19.517
+09:20:19.517 3 moderate severity vulnerabilities
+09:20:19.517
+09:20:19.517 To address all issues, run:
+09:20:19.517   npm audit fix
+09:20:19.517
+09:20:19.517 Run npm audit for details.
+09:20:19.850
+09:20:19.850 > luxio-frontend@1.0.0 build
+09:20:19.851 > vite build
+09:20:19.851
+09:20:20.112 [36mvite v5.4.20 [32mbuilding for production...[36m[39m
+09:20:20.172 transforming...
+09:20:25.119 [32m✓[39m 2576 modules transformed.
+09:20:25.126 [31mx[39m Build failed in 4.99s
+09:20:25.127 [31merror during build:
+09:20:25.127 [31m[vite]: Rollup failed to resolve import "react-phone-number-input" from "/vercel/path0/frontend/src/components/SignupForm.tsx".
+09:20:25.127 This is most likely unintended because it can break your application at runtime.
+09:20:25.127 If you do want to externalize this module explicitly add it to
+09:20:25.127 build.rollupOptions.external[31m
+09:20:25.127     at viteWarn (file:///vercel/path0/frontend/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:65854:17)
+09:20:25.127     at onwarn (file:///vercel/path0/frontend/node_modules/@vitejs/plugin-react/dist/index.js:90:7)
+09:20:25.128     at onRollupWarning (file:///vercel/path0/frontend/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:65884:5)
+09:20:25.128     at onwarn (file:///vercel/path0/frontend/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:65549:7)
+09:20:25.128     at file:///vercel/path0/frontend/node_modules/rollup/dist/es/shared/node-entry.js:20950:13
+09:20:25.128     at Object.logger [as onLog] (file:///vercel/path0/frontend/node_modules/rollup/dist/es/shared/node-entry.js:22822:9)
+09:20:25.128     at ModuleLoader.handleInvalidResolvedId (file:///vercel/path0/frontend/node_modules/rollup/dist/es/shared/node-entry.js:21566:26)
+09:20:25.128     at file:///vercel/path0/frontend/node_modules/rollup/dist/es/shared/node-entry.js:21524:26[39m
+09:20:25.161 Error: Command "npm run build" exited with 1
+
+Pourquoi cet erreur?
