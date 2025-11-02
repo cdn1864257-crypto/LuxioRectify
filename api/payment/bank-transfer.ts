@@ -2,6 +2,7 @@ import { MongoClient } from 'mongodb';
 import { sendBankTransferEmail, sendBankTransferNotificationToAdmin } from '../../utils/email.js';
 import { generatePaymentReference } from '../../utils/payment-reference.js';
 import { getUserStatus, formatSuspensionEndDate, getSuspensionEndDate, autoReactivateExpiredSuspensions } from '../../utils/account-suspension.js';
+import { validateCartTotal, validateTotalAmount } from '../lib/price-validation';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -66,6 +67,30 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: 'Format email invalide' });
     }
 
+    // SECURITY: Validate cart prices against server-side product catalog
+    const validation = validateCartTotal(cartItems);
+    
+    if (!validation.valid) {
+      console.error(`[Bank Transfer Security] Cart validation failed: ${validation.error}`);
+      return res.status(400).json({
+        error: validation.error || 'Validation du panier échouée',
+        details: validation.details
+      });
+    }
+
+    // SECURITY: Validate that client total matches server calculation
+    if (!validateTotalAmount(totalAmount, validation.serverTotal)) {
+      console.error(`[Bank Transfer Security] Amount mismatch - Server: ${validation.serverTotal}€, Client: ${totalAmount}€`);
+      return res.status(400).json({
+        error: `Montant invalide. Montant calculé: ${validation.serverTotal}€`,
+        serverTotal: validation.serverTotal,
+        clientTotal: totalAmount
+      });
+    }
+
+    // Use server-calculated amount (never trust client)
+    const validatedAmount = validation.serverTotal;
+
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
       return res.status(500).json({ error: 'Configuration MongoDB manquante' });
@@ -118,7 +143,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const newOrder = {
         customerEmail: customerEmail.toLowerCase(),
         customerName,
-        totalAmount,
+        totalAmount: validatedAmount,
         cartItems,
         orderReference: paymentReference,  // Use the standardized reference
         paymentMethod: 'bank_transfer',
@@ -136,7 +161,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         orderReference: paymentReference,  // Same reference everywhere
         customerEmail: customerEmail.toLowerCase(),
         customerName,
-        totalAmount,
+        totalAmount: validatedAmount,
         bankName: 'Matt Luxio',
         iban: 'ES6115632626383268707364',
         bic: 'NTSBESM1XXX',

@@ -18,7 +18,8 @@ export function useProducts(): UseProductsResult {
     setLoading(true);
     setError(null);
 
-    // Always use static products (both development and production)
+    // Always use static products (API endpoint doesn't exist yet)
+    // TODO: When API is ready, uncomment the API fetch code below
     logger.log('📦 Loading static products...');
     try {
       const { products: staticProducts } = await import('@/lib/products');

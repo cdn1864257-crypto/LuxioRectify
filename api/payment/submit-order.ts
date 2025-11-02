@@ -1,6 +1,7 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import { sendTicketConfirmationToCustomer, sendTicketNotificationToSupport } from '../../utils/email.js';
 import { encryptCodes } from '../../utils/encryption.js';
+import { getProductPrice } from '../lib/price-validation';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -86,6 +87,38 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: 'Format email invalide' });
     }
 
+    // SECURITY: Validate product price against server-side catalog
+    const serverPrice = getProductPrice(productId, productModel);
+    
+    if (serverPrice === null) {
+      console.error(`[Ticket Security] Invalid product: ${productId}`);
+      return res.status(400).json({
+        error: `Produit invalide: ${productId}`,
+        details: `Le produit "${productName}" n'existe pas dans le catalogue serveur`
+      });
+    }
+
+    // SECURITY: Check if client-provided price matches server price
+    if (Math.abs(productPrice - serverPrice) > 0.01) {
+      console.error(`[Ticket Security] Price mismatch for ${productName} - Server: ${serverPrice}€, Client: ${productPrice}€`);
+      return res.status(400).json({
+        error: `Prix invalide pour ${productName}`,
+        details: `Prix attendu: ${serverPrice}€, reçu: ${productPrice}€`
+      });
+    }
+
+    // SECURITY: Validate total amount matches product price
+    if (Math.abs(totalAmount - serverPrice) > 0.01) {
+      console.error(`[Ticket Security] Total amount mismatch - Expected: ${serverPrice}€, Received: ${totalAmount}€`);
+      return res.status(400).json({
+        error: 'Montant total invalide',
+        details: `Montant attendu: ${serverPrice}€, reçu: ${totalAmount}€`
+      });
+    }
+
+    // Use server-calculated price (never trust client)
+    const validatedPrice = serverPrice;
+
     // Connexion à MongoDB
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
@@ -141,8 +174,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         productId,
         productName,
         productModel: productModel || '',
-        productPrice,
-        totalAmount,
+        productPrice: validatedPrice,
+        totalAmount: validatedPrice,
         codeType,
         codes: encryptedCodes,
         status: 'pending',
@@ -159,7 +192,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         orderReference: orderId,
         customerEmail: customerEmail.toLowerCase(),
         customerName,
-        totalAmount,
+        totalAmount: validatedPrice,
         ticketType: codeType,
         ticketCodes: codes,
         language: userLanguage

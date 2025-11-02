@@ -2,6 +2,7 @@ import { MongoClient } from 'mongodb';
 import axios from 'axios';
 import { generatePaymentReference } from '../../utils/payment-reference.js';
 import { getUserStatus, formatSuspensionEndDate, getSuspensionEndDate, autoReactivateExpiredSuspensions } from '../../utils/account-suspension.js';
+import { validateCartTotal, validateTotalAmount } from '../lib/price-validation';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -69,6 +70,30 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         }
       });
     }
+
+    // SECURITY: Validate cart prices against server-side product catalog
+    const validation = validateCartTotal(cartItems);
+    
+    if (!validation.valid) {
+      console.error(`[OxaPay Security] Cart validation failed: ${validation.error}`);
+      return res.status(400).json({
+        error: validation.error || 'Validation du panier échouée',
+        details: validation.details
+      });
+    }
+
+    // SECURITY: Validate that client total matches server calculation
+    if (!validateTotalAmount(totalAmount, validation.serverTotal)) {
+      console.error(`[OxaPay Security] Amount mismatch - Server: ${validation.serverTotal}€, Client: ${totalAmount}€`);
+      return res.status(400).json({
+        error: `Montant invalide. Montant calculé: ${validation.serverTotal}€`,
+        serverTotal: validation.serverTotal,
+        clientTotal: totalAmount
+      });
+    }
+
+    // Use server-calculated amount (never trust client)
+    const validatedAmount = validation.serverTotal;
 
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
@@ -158,7 +183,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
       const oxapayRequestData = {
         merchant: oxapayApiKey,
-        amount: totalAmount,
+        amount: validatedAmount,
         currency: 'EUR',
         lifeTime: 30,
         feePaidByPayer: 0,

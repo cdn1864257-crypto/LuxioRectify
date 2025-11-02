@@ -47,13 +47,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const checkAuth = async () => {
     try {
-      // Initialize CSRF token first
+      // Initialize CSRF token with retry logic
+      let csrfInitialized = false;
       try {
         await getCsrfToken();
         console.log('CSRF token initialized successfully');
+        csrfInitialized = true;
       } catch (csrfError) {
         console.error('Failed to initialize CSRF token:', csrfError);
-        // Continue anyway - CSRF will be fetched on first protected request
+        // Try one more time after a brief delay
+        try {
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          await getCsrfToken(true);
+          console.log('CSRF token initialized on retry');
+          csrfInitialized = true;
+        } catch (retryError) {
+          console.error('CSRF token retry also failed:', retryError);
+          // Continue anyway - CSRF will be fetched on first protected request
+        }
+      }
+
+      if (!csrfInitialized) {
+        console.warn('Proceeding without CSRF token - will fetch on first protected request');
       }
 
       const response = await fetch(getApiUrl('/api/auth/me'), {

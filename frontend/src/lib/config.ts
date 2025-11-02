@@ -62,6 +62,54 @@ function clearTokenFromStorage(): void {
   } catch (e) {}
 }
 
+async function fetchCsrfTokenWithRetry(retries: number = 3, timeoutMs: number = 5000): Promise<string> {
+  for (let attempt = 0; attempt < retries; attempt++) {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+      const response = await fetch(getApiUrl('/api/csrf-token'), {
+        credentials: 'include',
+        signal: controller.signal
+      });
+
+      clearTimeout(timeout);
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: Failed to fetch CSRF token`);
+      }
+
+      const data = await response.json();
+      
+      if (!data.csrfToken) {
+        throw new Error('Invalid CSRF token received from server');
+      }
+
+      return data.csrfToken;
+
+    } catch (error: any) {
+      const isLastAttempt = attempt === retries - 1;
+      
+      if (error.name === 'AbortError') {
+        logger.warn(`CSRF token fetch timeout (attempt ${attempt + 1}/${retries})`);
+      } else {
+        logger.warn(`CSRF token fetch failed (attempt ${attempt + 1}/${retries}):`, error.message);
+      }
+
+      if (isLastAttempt) {
+        logger.error('All CSRF token fetch attempts failed');
+        throw new Error(`Failed to fetch CSRF token after ${retries} attempts: ${error.message}`);
+      }
+
+      const backoffDelay = Math.min(1000 * Math.pow(2, attempt), 5000);
+      logger.log(`Retrying in ${backoffDelay}ms...`);
+      await new Promise(resolve => setTimeout(resolve, backoffDelay));
+    }
+  }
+
+  throw new Error('Failed to fetch CSRF token');
+}
+
 export async function getCsrfToken(forceRefresh: boolean = false): Promise<string> {
   if (!forceRefresh && csrfToken && !shouldRotateToken()) {
     return csrfToken;
@@ -75,27 +123,14 @@ export async function getCsrfToken(forceRefresh: boolean = false): Promise<strin
   }
 
   try {
-    const response = await fetch(getApiUrl('/api/csrf-token'), {
-      credentials: 'include'
-    });
-    
-    if (!response.ok) {
-      throw new Error('Failed to fetch CSRF token');
-    }
-
-    const data = await response.json();
-    csrfToken = data.csrfToken;
+    const token = await fetchCsrfTokenWithRetry(3, 5000);
+    csrfToken = token;
     csrfTokenTimestamp = Date.now();
-    
-    if (!csrfToken) {
-      throw new Error('Invalid CSRF token received');
-    }
-    
     saveTokenToStorage(csrfToken, csrfTokenTimestamp);
-    
     return csrfToken;
   } catch (error) {
     logger.error('Error fetching CSRF token:', error);
+    clearTokenFromStorage();
     throw error;
   }
 }

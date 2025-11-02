@@ -1,7 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-
-// Import static products for server-side validation
-import { products as staticProducts, type Product, type ProductVariant } from '../lib/products';
+import { validateCartTotal, validateTotalAmount } from '../lib/price-validation';
 
 interface StripeIntentData {
   amount: number; // en centimes
@@ -21,67 +19,6 @@ const debugLog = (...args: any[]) => {
     console.log(...args);
   }
 };
-
-// Helper function to find product and variant price
-function getProductPrice(productId: string, description?: string): number | null {
-  const product = staticProducts.find((p: Product) => p.id === productId);
-  
-  if (!product) {
-    return null;
-  }
-
-  // If no description (variant), return base price
-  if (!description || !product.hasVariants) {
-    return product.price;
-  }
-
-  // Find variant price based on description
-  const variant = product.variants?.find((v: ProductVariant) => 
-    description.includes(v.color || '') && description.includes(v.capacity || '')
-  );
-
-  return variant ? variant.price : product.price;
-}
-
-// Validate cart total against server-side prices
-function validateCartTotal(cart: StripeIntentData['cart']): { valid: boolean; serverTotal: number; error?: string } {
-  let serverTotal = 0;
-
-  for (const item of cart) {
-    // SECURITY: Validate quantity is a positive integer with reasonable max
-    const MAX_QUANTITY = 999;
-    if (!Number.isInteger(item.quantity) || item.quantity <= 0 || item.quantity > MAX_QUANTITY) {
-      return {
-        valid: false,
-        serverTotal: 0,
-        error: `Quantité invalide pour ${item.name}`
-      };
-    }
-
-    const serverPrice = getProductPrice(item.id, item.description);
-    
-    if (serverPrice === null) {
-      return {
-        valid: false,
-        serverTotal: 0,
-        error: `Produit invalide: ${item.id}`
-      };
-    }
-
-    // Check if client-provided price matches server price
-    if (Math.abs(item.price - serverPrice) > 0.01) {
-      return {
-        valid: false,
-        serverTotal: 0,
-        error: `Prix invalide pour ${item.name}. Prix attendu: ${serverPrice}€, reçu: ${item.price}€`
-      };
-    }
-
-    serverTotal += serverPrice * item.quantity;
-  }
-
-  return { valid: true, serverTotal };
-}
 
 export default async function handler(
   req: VercelRequest,
