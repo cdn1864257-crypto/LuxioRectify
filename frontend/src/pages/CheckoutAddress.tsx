@@ -6,10 +6,14 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { showToast } from '../components/ToastNotifications';
 import { AddressAutocomplete } from '../components/AddressAutocomplete';
 import { isValidCountry, isValidCity, isValidAddress } from '../lib/validation';
+import { countriesCities } from '../lib/countries-cities';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 import { MapPin, ArrowRight, Package } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
@@ -30,6 +34,7 @@ export default function CheckoutAddress() {
   const [, setLocation] = useLocation();
 
   const [useRegistered, setUseRegistered] = useState(false);
+  const [availableCities, setAvailableCities] = useState<{ en: string; fr: string; es: string }[]>([]);
   const [formData, setFormData] = useState<AddressForm>({
     firstName: '',
     lastName: '',
@@ -137,6 +142,31 @@ export default function CheckoutAddress() {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const handleCountryChange = (countryCode: string) => {
+    const selectedCountry = countriesCities.find(c => c.code === countryCode);
+    
+    if (selectedCountry) {
+      setFormData(prev => ({ 
+        ...prev, 
+        country: selectedCountry.en, 
+        city: "",
+        address: ""
+      }));
+      setAvailableCities(selectedCountry.cities);
+    }
+  };
+
+  const handleCityChange = (cityIndex: string) => {
+    const cityIdx = parseInt(cityIndex);
+    if (availableCities[cityIdx]) {
+      setFormData(prev => ({ ...prev, city: availableCities[cityIdx].en, address: "" }));
+    }
+  };
+
+  const handlePhoneChange = (value: string | undefined) => {
+    setFormData(prev => ({ ...prev, phone: value || '' }));
+  };
+
   if (!user || cart.length === 0) {
     return null;
   }
@@ -237,16 +267,78 @@ export default function CheckoutAddress() {
                 <Label htmlFor="phone" className="text-sm font-medium mb-2 block">
                   {t('phone')} <span className="text-red-500">*</span>
                 </Label>
-                <Input
+                <PhoneInput
                   id="phone"
-                  type="tel"
                   value={formData.phone}
-                  onChange={(e) => handleChange('phone', e.target.value)}
+                  onChange={handlePhoneChange}
                   disabled={useRegistered}
-                  required
+                  international
+                  defaultCountry={countriesCities.find(c => c.en === formData.country)?.code as any || undefined}
                   data-testid="input-phone"
-                  className="w-full"
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="country" className="text-sm font-medium mb-2 block">
+                    {t('country')} <span className="text-red-500">*</span>
+                  </Label>
+                  <Select 
+                    value={countriesCities.find(c => c.en === formData.country)?.code || ""} 
+                    onValueChange={handleCountryChange}
+                    disabled={useRegistered}
+                  >
+                    <SelectTrigger 
+                      id="country"
+                      data-testid="select-country"
+                      className="w-full"
+                    >
+                      <SelectValue placeholder={t('selectCountry') || t('countryPlaceholder')} />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-[300px] overflow-y-auto">
+                      {countriesCities.map(country => {
+                        const langKey = language as 'en' | 'fr' | 'es';
+                        const countryName = country[langKey] || country.en;
+                        return (
+                          <SelectItem key={country.code} value={country.code}>
+                            {countryName}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label htmlFor="city" className="text-sm font-medium mb-2 block">
+                    {t('city')} <span className="text-red-500">*</span>
+                  </Label>
+                  <Select 
+                    value={availableCities.findIndex(c => c.en === formData.city).toString()} 
+                    onValueChange={handleCityChange}
+                    disabled={useRegistered || availableCities.length === 0}
+                  >
+                    <SelectTrigger 
+                      id="city"
+                      data-testid="select-city"
+                      className="w-full"
+                    >
+                      <SelectValue placeholder={availableCities.length === 0 ? t('countryPlaceholder') : t('cityPlaceholder')} />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-[300px] overflow-y-auto">
+                      {availableCities.map((city, index) => {
+                        const langKey = language as 'en' | 'fr' | 'es';
+                        const cityName = city[langKey] || city.en;
+                        return (
+                          <SelectItem key={index} value={index.toString()}>
+                            {cityName}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
 
               <div>
@@ -257,7 +349,7 @@ export default function CheckoutAddress() {
                   value={formData.address}
                   onChange={(value) => handleChange('address', value)}
                   city={formData.city}
-                  countryCode={(formData.country as any)?.country_code || ''}
+                  countryCode={countriesCities.find(c => c.en === formData.country)?.code || ''}
                   onValidationError={(errorKey) => {
                     const errorMessages: Record<string, string> = {
                       'addressNotInSelectedCity': t('addressNotInSelectedCity'),
@@ -268,57 +360,23 @@ export default function CheckoutAddress() {
                   }}
                   onAddressSelect={(suggestion) => {
                     const address = suggestion.address;
-                    handleChange('city', address.city || address.town || address.village || '');
                     handleChange('postalCode', address.postcode || '');
-                    handleChange('country', address.country || '');
                   }}
                   disabled={useRegistered}
                   data-testid="input-address"
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="city" className="text-sm font-medium mb-2 block">
-                    {t('city')} <span className="text-red-500">*</span>
-                  </Label>
-                  <Input
-                    id="city"
-                    value={formData.city}
-                    onChange={(e) => handleChange('city', e.target.value)}
-                    disabled={useRegistered}
-                    required
-                    data-testid="input-city"
-                    className="w-full"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="postalCode" className="text-sm font-medium mb-2 block">
-                    {t('postalCode')}
-                  </Label>
-                  <Input
-                    id="postalCode"
-                    value={formData.postalCode}
-                    onChange={(e) => handleChange('postalCode', e.target.value)}
-                    disabled={useRegistered}
-                    data-testid="input-postal-code"
-                    className="w-full"
-                  />
-                </div>
-              </div>
-
               <div>
-                <Label htmlFor="country" className="text-sm font-medium mb-2 block">
-                  {t('country')} <span className="text-red-500">*</span>
+                <Label htmlFor="postalCode" className="text-sm font-medium mb-2 block">
+                  {t('postalCode')}
                 </Label>
                 <Input
-                  id="country"
-                  value={formData.country}
-                  onChange={(e) => handleChange('country', e.target.value)}
+                  id="postalCode"
+                  value={formData.postalCode}
+                  onChange={(e) => handleChange('postalCode', e.target.value)}
                   disabled={useRegistered}
-                  required
-                  data-testid="input-country"
+                  data-testid="input-postal-code"
                   className="w-full"
                 />
               </div>
