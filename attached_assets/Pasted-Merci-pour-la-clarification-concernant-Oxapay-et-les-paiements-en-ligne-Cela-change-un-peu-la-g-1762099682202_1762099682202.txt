@@ -1,0 +1,82 @@
+Merci pour la clarification concernant **Oxapay** et les paiements en ligne. Cela change un peu la gestion du paiement et l'intégration. Voici un ajustement du prompt pour mieux correspondre à cette spécificité. On va mettre à jour le processus pour prendre en compte **Oxapay**, où le paiement se fait en ligne avec confirmation directe, ainsi que la gestion du **virement bancaire**, qui affiche uniquement les informations nécessaires pour effectuer le paiement externe.
+
+---
+
+### **Problème 1 : Validation d'adresse (Signup et Page d'adresse de livraison)**
+
+1. **Problème** : Lors de l'inscription (signup), l'utilisateur peut choisir un pays et une ville, mais entrer n'importe quelle adresse. Ce comportement se répète également sur la page d'adresse de livraison.
+
+2. **Solution** :
+
+   * **Google Places API** : Utilise **Google Places API** pour l'autocomplétion de l'adresse, et valide que l'adresse saisie correspond à la ville et au pays choisis. En cas d'erreur, le formulaire ne doit pas être soumis et un message d'erreur doit être affiché. Exemple : "L'adresse saisie ne correspond pas à la ville et au pays sélectionnés."
+   * **Multilingue pour les messages d'erreur** : Implémenter une solution de localisation multilingue (i18n ou fichiers JSON pour les traductions) afin d'afficher les messages dans plusieurs langues (ex : anglais, français, espagnol, etc.).
+
+### **Problème 2 : Erreur de paiement et gestion des systèmes de paiement (Oxapay et virement bancaire)**
+
+1. **Problème** :
+
+   * **Oxapay** : Le paiement se fait en ligne avec une **confirmation directe**. Une erreur "prix invalide pour l'article" apparaît, ce qui empêche la redirection vers la page de confirmation.
+   * **Virement bancaire** : Affiche simplement les informations nécessaires pour effectuer un virement. Aucune transaction directe n'est faite ici, mais un problème persiste concernant l'affichage ou la gestion des informations de paiement.
+
+2. **Solution** :
+
+   * **Oxapay** :
+
+     * Le paiement via **Oxapay** doit être traité en ligne avec une confirmation immédiate. L'erreur "prix invalide" peut être liée à un problème dans l'intégration de l'API d'Oxapay, notamment un **format incorrect** des données envoyées (prix, devise, quantité, etc.).
+     * **Vérification des données envoyées à Oxapay** : Assurez-vous que tous les paramètres (prix, devise, etc.) sont bien formatés et envoyés correctement. Le message d'erreur "prix invalide" pourrait apparaître si les données sont envoyées dans un format non attendu ou manquant un paramètre essentiel.
+     * **Confirmation immédiate** : Après le paiement réussi, l'utilisateur doit être redirigé automatiquement vers la page de confirmation de paiement. Assurez-vous que la redirection est bien configurée après la réussite du paiement.
+   * **Virement bancaire** :
+
+     * **Affichage des informations de paiement** : Le virement bancaire ne traite pas le paiement directement sur le site, mais affiche les informations nécessaires que l'utilisateur doit utiliser pour effectuer le paiement. Assurez-vous que ces informations (IBAN, montant, référence de virement, etc.) sont correctement récupérées et affichées.
+     * **Aucun traitement de paiement direct** : Assurez-vous qu'il n'y a pas de tentative de validation ou de paiement lié à cette section, car ce n'est pas un paiement direct.
+
+---
+
+### **Prompt détaillé à envoyer à Replit ou à l'équipe de développement :**
+
+---
+
+**Objet** : Demande de corrections concernant la validation des adresses, la gestion des paiements (Oxapay et Virement Bancaire) et les messages d'erreur multilingues
+
+**Bonjour,**
+
+Je rencontre plusieurs problèmes sur le projet que je souhaiterais que vous corrigiez. Voici les détails pour chaque point :
+
+### **1. Problème de validation d'adresse (Signup et Page d'adresse de livraison)**
+
+1. **Problème** : Lors de l'inscription (signup), l'utilisateur peut sélectionner un pays et une ville, mais peut entrer une adresse incorrecte, ce qui n'est pas souhaité. Ce comportement se répète également sur la page d'adresse de livraison.
+2. **Solution** :
+
+   * **Google Places API** : Utiliser **Google Places API** pour l'autocomplétion de l'adresse. Le système doit s'assurer que l'adresse saisie correspond à la ville et au pays choisis. Si ce n'est pas le cas, un message d'erreur doit s'afficher.
+   * **Messages d'erreur multilingues** : Les messages d'erreur doivent être multilingues et non codés en dur en français. Utiliser une bibliothèque comme **i18n** ou un fichier JSON pour gérer les traductions et afficher les messages d'erreur dans différentes langues.
+
+### **2. Problème de paiement (Oxapay et Virement Bancaire)**
+
+1. **Problème** :
+
+   * **Oxapay** : Le paiement se fait en ligne avec une confirmation directe, mais une erreur "prix invalide pour l'article" apparaît, ce qui empêche la redirection vers la page de confirmation de paiement.
+   * **Virement bancaire** : Le virement bancaire ne traite pas le paiement directement, mais affiche les informations nécessaires que l'utilisateur doit utiliser pour effectuer un virement. Cependant, il semble y avoir un problème avec l'affichage ou la gestion des informations de paiement.
+2. **Solution** :
+
+   * **Oxapay** :
+
+     * Vérifiez que tous les paramètres envoyés à l'API Oxapay (prix, devise, quantité, etc.) sont correctement formatés et envoyés dans le bon format attendu par Oxapay.
+     * L'erreur "prix invalide" peut être causée par un mauvais formatage des données (par exemple, un prix mal formé ou une devise incorrecte). Vérifiez que toutes les données envoyées sont cohérentes avec ce que Oxapay attend.
+     * Assurez-vous que, après un paiement réussi, l'utilisateur soit redirigé automatiquement vers la page de confirmation de paiement.
+   * **Virement bancaire** :
+
+     * Le virement bancaire ne traite pas le paiement directement, il affiche uniquement les informations nécessaires pour effectuer le paiement externe. Vérifiez que les informations affichées (IBAN, montant, etc.) sont correctes et qu'aucun traitement de paiement n'est fait dans cette section. Cette section doit simplement afficher les informations de paiement.
+
+---
+
+**Merci de bien vouloir examiner ces problèmes et de mettre en œuvre les solutions proposées pour corriger les erreurs. Si vous avez besoin de plus de détails ou de précisions sur l'un des points, n'hésitez pas à me contacter.**
+
+---
+
+### **Conclusion** :
+
+1. **Oxapay** doit gérer les paiements en ligne avec confirmation directe. Il faut s'assurer que tous les paramètres sont envoyés correctement et que la redirection vers la page de confirmation se fait après un paiement réussi.
+2. **Virement bancaire** doit simplement afficher les informations nécessaires pour que l'utilisateur effectue le paiement de manière externe, sans tenter de valider ou traiter le paiement dans le système.
+3. **Validation de l'adresse** via Google Places API et gestion des messages d'erreur multilingues doivent être implémentées pour améliorer l'expérience utilisateur.
+
+N'hésite pas à me faire savoir si tu as besoin d'ajustements ou d'aide supplémentaire dans l'implémentation de ces changements ! 😊
