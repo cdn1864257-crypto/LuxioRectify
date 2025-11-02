@@ -247,6 +247,9 @@ export interface Translations {
   pleaseSelectAddressFromSuggestions: string;
   selectAddressFromSuggestions: string;
   selectCountryAndCity: string;
+  addressNotListedConfirm: string;
+  confirmAddressNotListed: string;
+  addressNotListedWarning: string;
   ticketCodeSent: string;
   enterTicketCode: string;
   orderFailed: string;
@@ -799,6 +802,9 @@ export const translations: Record<Language, Translations> = {
     pleaseSelectAddressFromSuggestions: 'Please select an address from the suggestions',
     selectAddressFromSuggestions: 'Please select an address from the suggestions below',
     selectCountryAndCity: 'Please select country and city first',
+    addressNotListedConfirm: 'My address is not listed',
+    confirmAddressNotListed: 'I confirm that my address is correct even if it is not in the suggestions',
+    addressNotListedWarning: 'Please make sure your address is correct as it cannot be validated automatically',
     ticketCodeSent: 'Ticket codes sent successfully',
     enterTicketCode: 'Please enter at least one ticket code',
     orderFailed: 'Order failed. Please try again.',
@@ -1455,6 +1461,9 @@ export const translations: Record<Language, Translations> = {
     pleaseSelectAddressFromSuggestions: 'Veuillez sélectionner une adresse parmi les suggestions',
     selectAddressFromSuggestions: 'Veuillez sélectionner une adresse parmi les suggestions ci-dessous',
     selectCountryAndCity: 'Veuillez d\'abord sélectionner le pays et la ville',
+    addressNotListedConfirm: 'Mon adresse n\'est pas répertoriée',
+    confirmAddressNotListed: 'Je confirme que mon adresse est correcte même si elle ne figure pas dans les suggestions',
+    addressNotListedWarning: 'Veuillez vous assurer que votre adresse est correcte car elle ne peut pas être validée automatiquement',
     ticketCodeSent: 'Codes tickets envoyés avec succès',
     enterTicketCode: 'Veuillez entrer au moins un code ticket',
     orderFailed: 'Commande échouée. Veuillez réessayer.',
@@ -2111,6 +2120,9 @@ export const translations: Record<Language, Translations> = {
     pleaseSelectAddressFromSuggestions: 'Por favor, seleccione una dirección de las sugerencias',
     selectAddressFromSuggestions: 'Por favor, seleccione una dirección de las sugerencias a continuación',
     selectCountryAndCity: 'Por favor, seleccione primero el país y la ciudad',
+    addressNotListedConfirm: 'Mi dirección no está listada',
+    confirmAddressNotListed: 'Confirmo que mi dirección es correcta aunque no aparezca en las sugerencias',
+    addressNotListedWarning: 'Por favor, asegúrese de que su dirección es correcta ya que no se puede validar automáticamente',
     ticketCodeSent: 'Códigos de tickets enviados correctamente',
     enterTicketCode: 'Por favor, introduce al menos un código de ticket',
     orderFailed: 'Pedido fallido. Por favor, inténtalo de nuevo.',
@@ -2767,6 +2779,9 @@ export const translations: Record<Language, Translations> = {
     pleaseSelectAddressFromSuggestions: 'Por favor, selecione um endereço das sugestões',
     selectAddressFromSuggestions: 'Por favor, selecione um endereço das sugestões abaixo',
     selectCountryAndCity: 'Por favor, selecione primeiro o país e a cidade',
+    addressNotListedConfirm: 'Meu endereço não está listado',
+    confirmAddressNotListed: 'Confirmo que meu endereço está correto mesmo que não esteja nas sugestões',
+    addressNotListedWarning: 'Por favor, certifique-se de que seu endereço está correto, pois não pode ser validado automaticamente',
     ticketCodeSent: 'Códigos de tickets enviados com sucesso',
     enterTicketCode: 'Por favor, insira pelo menos um código de ticket',
     orderFailed: 'Pedido falhou. Por favor, tente novamente.',
@@ -3423,6 +3438,9 @@ export const translations: Record<Language, Translations> = {
     pleaseSelectAddressFromSuggestions: 'Proszę wybrać adres z sugestii',
     selectAddressFromSuggestions: 'Proszę wybrać adres z poniższych sugestii',
     selectCountryAndCity: 'Proszę najpierw wybrać kraj i miasto',
+    addressNotListedConfirm: 'Mój adres nie znajduje się na liście',
+    confirmAddressNotListed: 'Potwierdzam, że mój adres jest prawidłowy, nawet jeśli nie znajduje się w sugestiach',
+    addressNotListedWarning: 'Proszę upewnić się, że adres jest poprawny, ponieważ nie można go automatycznie zweryfikować',
     ticketCodeSent: 'Kody kart wysłane pomyślnie',
     enterTicketCode: 'Proszę wprowadzić co najmniej jeden kod karty',
     orderFailed: 'Zamówienie nie powiodło się. Spróbuj ponownie.',
@@ -4079,6 +4097,9 @@ export const translations: Record<Language, Translations> = {
     pleaseSelectAddressFromSuggestions: 'Si prega di selezionare un indirizzo dai suggerimenti',
     selectAddressFromSuggestions: 'Si prega di selezionare un indirizzo dai suggerimenti qui sotto',
     selectCountryAndCity: 'Si prega di selezionare prima il paese e la città',
+    addressNotListedConfirm: 'Il mio indirizzo non è elencato',
+    confirmAddressNotListed: 'Confermo che il mio indirizzo è corretto anche se non compare nei suggerimenti',
+    addressNotListedWarning: 'Si prega di assicurarsi che l\'indirizzo sia corretto poiché non può essere convalidato automaticamente',
     ticketCodeSent: 'Codici ticket inviati con successo',
     enterTicketCode: 'Inserisci almeno un codice ticket',
     orderFailed: 'Ordine fallito. Riprova.',
@@ -4735,6 +4756,9 @@ export const translations: Record<Language, Translations> = {
     pleaseSelectAddressFromSuggestions: 'Kérjük, válasszon címet a javaslatokból',
     selectAddressFromSuggestions: 'Kérjük, válasszon címet az alábbi javaslatokból',
     selectCountryAndCity: 'Kérjük, először válassza ki az országot és a várost',
+    addressNotListedConfirm: 'A címem nincs felsorolva',
+    confirmAddressNotListed: 'Megerősítem, hogy a címem helyes, még akkor is, ha nem szerepel a javaslatokban',
+    addressNotListedWarning: 'Kérjük, győződjön meg arról, hogy a címe helyes, mivel nem lehet automatikusan ellenőrizni',
     ticketCodeSent: 'Kártya kódok sikeresen elküldve',
     enterTicketCode: 'Kérjük, adjon meg legalább egy kártya kódot',
     orderFailed: 'Rendelés sikertelen. Kérjük, próbálja újra.',

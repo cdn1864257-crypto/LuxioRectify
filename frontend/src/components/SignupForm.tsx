@@ -3,10 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Loader2, Check, X, Eye, EyeOff } from "lucide-react";
+import { Loader2, Check, X, Eye, EyeOff, AlertTriangle } from "lucide-react";
 import { validatePasswordStrength, isPasswordValid, type PasswordStrength } from "@/lib/password-strength";
 import { isValidCountry, isValidCity, isValidAddress, isValidRealEmail, isValidPhone } from "@/lib/validation";
 import { countriesCities } from "@/lib/countries-cities";
@@ -55,6 +56,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [addressValidated, setAddressValidated] = useState(false);
+  const [manualAddressConfirmed, setManualAddressConfirmed] = useState(false);
 
   // Set custom validation messages in the current language
   useEffect(() => {
@@ -117,6 +119,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
       }));
       setAvailableCities(selectedCountry.cities);
       setAddressValidated(false);
+      setManualAddressConfirmed(false);
     }
     
     if (errors.country) {
@@ -130,6 +133,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     if (availableCities[cityIdx]) {
       setFormData(prev => ({ ...prev, city: availableCities[cityIdx].en, address: "" }));
       setAddressValidated(false);
+      setManualAddressConfirmed(false);
     }
     
     if (errors.city) {
@@ -157,7 +161,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     
     if (!formData.address.trim()) {
       newErrors.address = t('addressRequired');
-    } else if (!addressValidated) {
+    } else if (!addressValidated && !manualAddressConfirmed) {
       newErrors.address = t('pleaseSelectAddressFromSuggestions');
     } else if (!isValidAddress(formData.address)) {
       newErrors.address = t('invalidAddress');
@@ -371,12 +375,14 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
           onChange={(value) => {
             setFormData(prev => ({ ...prev, address: value }));
             setAddressValidated(false);
+            setManualAddressConfirmed(false);
             if (errors.address) {
               setErrors(prev => ({ ...prev, address: undefined }));
             }
           }}
           onAddressSelect={() => {
             setAddressValidated(true);
+            setManualAddressConfirmed(false);
             if (errors.address) {
               setErrors(prev => ({ ...prev, address: undefined }));
             }
@@ -384,6 +390,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
           onValidationError={(error) => {
             setErrors(prev => ({ ...prev, address: t(error as keyof typeof t) }));
             setAddressValidated(false);
+            setManualAddressConfirmed(false);
           }}
           disabled={isLoading || !formData.country || !formData.city}
           placeholder={!formData.country || !formData.city ? t('selectCountryAndCity') : t('addressPlaceholder')}
@@ -394,10 +401,45 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
         {errors.address && (
           <p className="text-sm text-red-500">{errors.address}</p>
         )}
-        {!addressValidated && formData.address && !errors.address && (
+        {!addressValidated && formData.address && !errors.address && !manualAddressConfirmed && (
           <p className="text-sm text-amber-600 dark:text-amber-400">
             {t('selectAddressFromSuggestions')}
           </p>
+        )}
+        {!addressValidated && formData.address && formData.address.length >= 5 && (
+          <div className="flex items-start gap-3 p-3 border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+            <Checkbox 
+              id="manual-address-confirm"
+              checked={manualAddressConfirmed}
+              onCheckedChange={(checked) => {
+                setManualAddressConfirmed(checked as boolean);
+                if (checked && errors.address) {
+                  setErrors(prev => ({ ...prev, address: undefined }));
+                }
+              }}
+              disabled={isLoading}
+              data-testid="checkbox-manual-address-confirm"
+            />
+            <div className="flex-1 space-y-1">
+              <Label 
+                htmlFor="manual-address-confirm" 
+                className="text-sm font-medium cursor-pointer"
+              >
+                {t('addressNotListedConfirm')}
+              </Label>
+              <p className="text-xs text-muted-foreground">
+                {t('confirmAddressNotListed')}
+              </p>
+              {manualAddressConfirmed && (
+                <div className="flex items-start gap-2 mt-2 p-2 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded">
+                  <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+                  <p className="text-xs text-amber-700 dark:text-amber-300">
+                    {t('addressNotListedWarning')}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
         )}
       </div>
 
