@@ -101,9 +101,37 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const ordersCollection = db.collection('orders');
       const usersCollection = db.collection('users');
 
-      // Récupérer la langue de l'utilisateur
+      // Récupérer la langue de l'utilisateur et vérifier la suspension
       const user = await usersCollection.findOne({ email: customerEmail.toLowerCase() });
       const userLanguage = user?.language || 'fr';
+
+      // Vérifier si l'utilisateur est suspendu
+      if (user && user.status === 'suspended' && user.suspendedUntil) {
+        const suspensionDate = new Date(user.suspendedUntil);
+        const now = new Date();
+        
+        if (suspensionDate > now) {
+          // Compte toujours suspendu
+          const { formatSuspensionEndDate } = await import('../../utils/account-suspension.js');
+          const formattedDate = formatSuspensionEndDate(suspensionDate, userLanguage);
+          
+          return res.status(403).json({
+            error: userLanguage === 'fr' 
+              ? `Votre compte est temporairement suspendu suite à plusieurs commandes non payées. Réactivation automatique prévue le ${formattedDate}.`
+              : userLanguage === 'en'
+              ? `Your account is temporarily suspended due to multiple unpaid orders. Automatic reactivation scheduled for ${formattedDate}.`
+              : userLanguage === 'es'
+              ? `Su cuenta está temporalmente suspendida debido a múltiples pedidos no pagados. Reactivación automática prevista para ${formattedDate}.`
+              : userLanguage === 'pt'
+              ? `Sua conta está temporariamente suspensa devido a vários pedidos não pagos. Reativação automática prevista para ${formattedDate}.`
+              : userLanguage === 'pl'
+              ? `Twoje konto jest tymczasowo zawieszone z powodu wielu niezapłaconych zamówień. Automatyczna reaktywacja zaplanowana na ${formattedDate}.`
+              : `Fiókját ideiglenesen felfüggesztettük több fizetetlen rendelés miatt. Automatikus újraaktiválás tervezett időpontja: ${formattedDate}.`,
+            suspended: true,
+            suspendedUntil: suspensionDate.toISOString()
+          });
+        }
+      }
 
       const encryptedCodes = encryptCodes(codes);
       

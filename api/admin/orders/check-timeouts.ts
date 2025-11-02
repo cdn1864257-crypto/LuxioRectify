@@ -153,12 +153,73 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         }
       );
 
+      // Vérifier et appliquer les suspensions pour les commandes expirées
+      const { addUnpaidOrder, checkAndApplySuspension } = await import('../../../utils/account-suspension.js');
+      const { sendSuspensionEmail } = await import('../../../utils/suspension-emails.js');
+      
+      const usersCollection = db.collection('users');
+      
+      // Récupérer toutes les commandes qui viennent d'expirer
+      const expiredOxapayOrders = await oxapayCollection.find({
+        status: 'expired',
+        updatedAt: now
+      }).toArray();
+
+      const expiredBankTransferOrders = await bankTransferCollection.find({
+        status: 'expired',
+        updatedAt: now
+      }).toArray();
+
+      const allExpiredOrders = [...expiredOxapayOrders, ...expiredBankTransferOrders];
+      const processedEmails = new Set();
+
+      for (const order of allExpiredOrders) {
+        if (!order.customerEmail || processedEmails.has(order.customerEmail)) {
+          continue;
+        }
+
+        try {
+          // Ajouter la commande non payée à l'historique
+          await addUnpaidOrder(
+            usersCollection,
+            order.customerEmail,
+            order.orderReference || order._id.toString(),
+            order.totalAmount || 0,
+            'expired'
+          );
+
+          // Vérifier et appliquer la suspension si nécessaire
+          const suspensionResult = await checkAndApplySuspension(
+            usersCollection,
+            order.customerEmail
+          );
+
+          if (suspensionResult.suspended) {
+            // Envoyer l'email de suspension
+            const user = await usersCollection.findOne({ email: order.customerEmail.toLowerCase() });
+            if (user && user.suspendedUntil) {
+              await sendSuspensionEmail(
+                user.email,
+                user.firstName || 'Client',
+                new Date(user.suspendedUntil),
+                user.language || 'fr'
+              );
+            }
+          }
+
+          processedEmails.add(order.customerEmail);
+        } catch (error) {
+          console.error(`Error processing suspension for ${order.customerEmail}:`, error);
+        }
+      }
+
       return res.status(200).json({
         success: true,
         message: 'Vérification des timeouts effectuée',
         oxapayExpired: oxapayResult.modifiedCount,
         bankTransferExpired: bankTransferResult.modifiedCount,
-        totalExpired: oxapayResult.modifiedCount + bankTransferResult.modifiedCount
+        totalExpired: oxapayResult.modifiedCount + bankTransferResult.modifiedCount,
+        suspensionsProcessed: processedEmails.size
       });
     } finally {
       await client.close();

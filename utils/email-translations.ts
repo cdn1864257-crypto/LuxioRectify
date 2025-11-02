@@ -158,6 +158,8 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     subject_ticket_confirm: 'Order Confirmation – Luxio',
     subject_crypto_confirm: 'Order Confirmation – Luxio',
     subject_admin_new_order: 'New Order Received',
+    subject_account_suspended: 'Account Temporarily Suspended – Luxio',
+    subject_account_reactivated: 'Your Account Has Been Reactivated – Luxio',
     
     // Common
     hello: 'Hello',
@@ -230,6 +232,8 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     subject_ticket_confirm: 'Confirmación de pedido – Luxio',
     subject_crypto_confirm: 'Confirmación de pedido – Luxio',
     subject_admin_new_order: 'Nuevo pedido recibido',
+    subject_account_suspended: 'Cuenta Temporalmente Suspendida – Luxio',
+    subject_account_reactivated: 'Su Cuenta Ha Sido Reactivada – Luxio',
     
     // Common
     hello: 'Hola',
@@ -302,6 +306,8 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     subject_ticket_confirm: 'Confirmação de pedido – Luxio',
     subject_crypto_confirm: 'Confirmação de pedido – Luxio',
     subject_admin_new_order: 'Novo pedido recebido',
+    subject_account_suspended: 'Conta Temporariamente Suspensa – Luxio',
+    subject_account_reactivated: 'Sua Conta Foi Reactivada – Luxio',
     
     // Common
     hello: 'Olá',
@@ -374,6 +380,8 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     subject_ticket_confirm: 'Potwierdzenie zamówienia – Luxio',
     subject_crypto_confirm: 'Potwierdzenie zamówienia – Luxio',
     subject_admin_new_order: 'Otrzymano nowe zamówienie',
+    subject_account_suspended: 'Konto Tymczasowo Zawieszone – Luxio',
+    subject_account_reactivated: 'Twoje Konto Zostało Reaktywowane – Luxio',
     
     // Common
     hello: 'Cześć',
@@ -446,6 +454,8 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     subject_ticket_confirm: 'Rendelés megerősítése – Luxio',
     subject_crypto_confirm: 'Rendelés megerősítése – Luxio',
     subject_admin_new_order: 'Új rendelés érkezett',
+    subject_account_suspended: 'Fiók Ideiglenesen Felfüggesztve – Luxio',
+    subject_account_reactivated: 'Fiókját Újraaktiváltuk – Luxio',
     
     // Common
     hello: 'Helló',

@@ -1,6 +1,7 @@
 import { MongoClient } from 'mongodb';
 import jwt from 'jsonwebtoken';
 import { getUserStatus, liftSuspension } from '../../utils/account-suspension.js';
+import { verifyAdminAuth } from '../../utils/admin-auth.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -19,6 +20,12 @@ interface VercelResponse {
 }
 
 async function handler(req: VercelRequest, res: VercelResponse) {
+  // Vérifier l'authentification admin
+  const isAdmin = await verifyAdminAuth(req);
+  if (!isAdmin) {
+    return res.status(403).json({ error: 'Accès interdit - Admin uniquement' });
+  }
+
   const mongoUri = process.env.MONGODB_URI;
   if (!mongoUri) {
     return res.status(500).json({ error: 'Configuration MongoDB manquante' });
@@ -71,7 +78,25 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       }
 
       if (action === 'reactivate') {
+        const user = await usersCollection.findOne({ email: email.toLowerCase() });
+        
+        if (!user) {
+          return res.status(404).json({ error: 'Utilisateur non trouvé' });
+        }
+        
         await liftSuspension(usersCollection, email);
+        
+        // Envoyer l'email de réactivation
+        try {
+          const { sendReactivationEmail } = await import('../../utils/suspension-emails.js');
+          await sendReactivationEmail(
+            user.email,
+            user.firstName || 'Client',
+            user.language || 'fr'
+          );
+        } catch (emailError) {
+          console.error('Failed to send reactivation email:', emailError);
+        }
         
         return res.status(200).json({
           message: 'Compte réactivé avec succès',
