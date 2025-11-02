@@ -29,6 +29,7 @@ export default function CheckoutAddress() {
   const [, setLocation] = useLocation();
 
   const [useRegistered, setUseRegistered] = useState(false);
+  const [countryCode, setCountryCode] = useState('');
   const [formData, setFormData] = useState<AddressForm>({
     firstName: '',
     lastName: '',
@@ -218,10 +219,11 @@ export default function CheckoutAddress() {
                     handleChange('city', address.city || address.town || address.village || '');
                     handleChange('postalCode', address.postcode || '');
                     handleChange('country', address.country || '');
+                    setCountryCode(address.country_code?.toUpperCase() || '');
                   }}
                   disabled={useRegistered}
                   placeholder="123 Rue de la Paix"
-                  countryCode={formData.country}
+                  countryCode={countryCode}
                   data-testid="input-address"
                 />
               </div>

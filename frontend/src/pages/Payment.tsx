@@ -23,7 +23,7 @@ import type { Language } from '@/lib/translations';
 export default function Payment() {
   const { user } = useAuth();
   const { cart, total, clearCart } = useCart();
-  const { language, changeLanguage } = useLanguage();
+  const { language, changeLanguage, t } = useLanguage();
   const [, navigate] = useLocation();
   const [cartOpen, setCartOpen] = useState(false);
   const { toast } = useToast();
@@ -571,15 +571,15 @@ export default function Payment() {
                   </div>
 
                   <div className="flex flex-col gap-1">
-                    <span className="text-blue-100 text-xs sm:text-sm">Référence de commande</span>
+                    <span className="text-blue-100 text-xs sm:text-sm">{t('orderReference')}</span>
                     <div className="flex items-center gap-1.5 sm:gap-2 bg-white/10 rounded px-2 py-1.5 sm:px-3 sm:py-2">
                       <span className="font-mono font-bold text-xs sm:text-sm text-white break-all flex-1">
-                        {bankTransferData.orderReference}
+                        {t('paymentDeposit')} {bankTransferData.orderReference}
                       </span>
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => copyToClipboard(bankTransferData.orderReference, 'Référence de commande')}
+                        onClick={() => copyToClipboard(`${t('paymentDeposit')} ${bankTransferData.orderReference}`, t('orderReference'))}
                         className="flex-shrink-0 text-white hover:bg-white/20 h-7 w-7 p-0"
                       >
                         <Copy className="h-3.5 w-3.5" />
@@ -610,7 +610,7 @@ export default function Payment() {
                   </li>
                   <li className="flex items-start gap-1.5 sm:gap-2">
                     <span className="text-primary mt-0.5 flex-shrink-0">•</span>
-                    <span>Veillez à indiquer la référence : <strong className="text-primary break-all">{bankTransferData.orderReference}</strong></span>
+                    <span>Veillez à indiquer la référence : <strong className="text-primary break-all">{t('paymentDeposit')} {bankTransferData.orderReference}</strong></span>
                   </li>
                   <li className="flex items-start gap-1.5 sm:gap-2">
                     <span className="text-primary mt-0.5 flex-shrink-0">•</span>
