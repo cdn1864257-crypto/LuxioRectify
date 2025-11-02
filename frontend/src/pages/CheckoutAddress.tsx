@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { showToast } from '../components/ToastNotifications';
+import { AddressAutocomplete } from '../components/AddressAutocomplete';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
@@ -209,15 +210,19 @@ export default function CheckoutAddress() {
                 <Label htmlFor="address" className="text-sm font-medium mb-2 block">
                   {t('completeAddress')} <span className="text-red-500">*</span>
                 </Label>
-                <Input
-                  id="address"
+                <AddressAutocomplete
                   value={formData.address}
-                  onChange={(e) => handleChange('address', e.target.value)}
+                  onChange={(value) => handleChange('address', value)}
+                  onAddressSelect={(suggestion) => {
+                    const address = suggestion.address;
+                    handleChange('city', address.city || address.town || address.village || '');
+                    handleChange('postalCode', address.postcode || '');
+                    handleChange('country', address.country || '');
+                  }}
                   disabled={useRegistered}
-                  required
-                  data-testid="input-address"
                   placeholder="123 Rue de la Paix"
-                  className="w-full"
+                  countryCode={formData.country}
+                  data-testid="input-address"
                 />
               </div>
 
