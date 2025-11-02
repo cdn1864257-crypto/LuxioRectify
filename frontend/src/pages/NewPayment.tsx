@@ -35,7 +35,7 @@ export default function NewPayment() {
   const { toast } = useToast();
   const { language } = useLanguage();
   const t = translations[language] || translations.en;
-  const { suspensionStatus, loading: suspensionLoading } = useSuspensionStatus();
+  const { suspensionStatus } = useSuspensionStatus();
 
   // Check for OxaPay return
   const urlParams = new URLSearchParams(window.location.search);

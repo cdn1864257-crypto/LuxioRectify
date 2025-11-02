@@ -258,6 +258,16 @@ export default function CheckoutAddress() {
                 <AddressAutocomplete
                   value={formData.address}
                   onChange={(value) => handleChange('address', value)}
+                  city={formData.city}
+                  countryCode={(formData.country as any)?.country_code || ''}
+                  onValidationError={(errorKey) => {
+                    const errorMessages: Record<string, string> = {
+                      'addressNotInSelectedCity': t('addressNotInSelectedCity'),
+                      'addressNotInSelectedCountry': t('addressNotInSelectedCountry'),
+                      'addressMismatch': t('addressMismatch')
+                    };
+                    showToast(errorMessages[errorKey] || t('pleaseSelectValidAddress'), 'error');
+                  }}
                   onAddressSelect={(suggestion) => {
                     const address = suggestion.address;
                     handleChange('city', address.city || address.town || address.village || '');
@@ -271,7 +281,6 @@ export default function CheckoutAddress() {
                   }}
                   disabled={useRegistered}
                   placeholder="123 Rue de la Paix"
-                  countryCode={countryCode}
                   data-testid="input-address"
                 />
               </div>

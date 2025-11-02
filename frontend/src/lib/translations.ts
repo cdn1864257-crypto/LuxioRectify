@@ -240,6 +240,10 @@ export interface Translations {
   invalidCountry: string;
   invalidCity: string;
   invalidAddress: string;
+  addressMismatch: string;
+  addressNotInSelectedCity: string;
+  addressNotInSelectedCountry: string;
+  pleaseSelectValidAddress: string;
   ticketCodeSent: string;
   enterTicketCode: string;
   orderFailed: string;
@@ -785,6 +789,10 @@ export const translations: Record<Language, Translations> = {
     invalidCountry: 'Please enter a valid country',
     invalidCity: 'Please enter a valid city',
     invalidAddress: 'Address must contain a number and street name',
+    addressMismatch: 'The address does not match the selected city and country',
+    addressNotInSelectedCity: 'The address must be in the selected city',
+    addressNotInSelectedCountry: 'The address must be in the selected country',
+    pleaseSelectValidAddress: 'Please select a valid address from the suggestions',
     ticketCodeSent: 'Ticket codes sent successfully',
     enterTicketCode: 'Please enter at least one ticket code',
     orderFailed: 'Order failed. Please try again.',
@@ -1434,6 +1442,10 @@ export const translations: Record<Language, Translations> = {
     invalidCountry: 'Veuillez entrer un pays valide',
     invalidCity: 'Veuillez entrer une ville valide',
     invalidAddress: 'L\'adresse doit contenir un numéro et un nom de rue',
+    addressMismatch: 'L\'adresse ne correspond pas à la ville et au pays sélectionnés',
+    addressNotInSelectedCity: 'L\'adresse doit être dans la ville sélectionnée',
+    addressNotInSelectedCountry: 'L\'adresse doit être dans le pays sélectionné',
+    pleaseSelectValidAddress: 'Veuillez sélectionner une adresse valide parmi les suggestions',
     ticketCodeSent: 'Codes tickets envoyés avec succès',
     enterTicketCode: 'Veuillez entrer au moins un code ticket',
     orderFailed: 'Commande échouée. Veuillez réessayer.',
@@ -2083,6 +2095,10 @@ export const translations: Record<Language, Translations> = {
     invalidCountry: 'Por favor, introduce un país válido',
     invalidCity: 'Por favor, introduce una ciudad válida',
     invalidAddress: 'La dirección debe contener un número y el nombre de la calle',
+    addressMismatch: 'La dirección no coincide con la ciudad y el país seleccionados',
+    addressNotInSelectedCity: 'La dirección debe estar en la ciudad seleccionada',
+    addressNotInSelectedCountry: 'La dirección debe estar en el país seleccionado',
+    pleaseSelectValidAddress: 'Por favor, seleccione una dirección válida de las sugerencias',
     ticketCodeSent: 'Códigos de tickets enviados correctamente',
     enterTicketCode: 'Por favor, introduce al menos un código de ticket',
     orderFailed: 'Pedido fallido. Por favor, inténtalo de nuevo.',
@@ -2732,6 +2748,10 @@ export const translations: Record<Language, Translations> = {
     invalidCountry: 'Por favor, introduza um país válido',
     invalidCity: 'Por favor, introduza uma cidade válida',
     invalidAddress: 'O endereço deve conter um número e o nome da rua',
+    addressMismatch: 'O endereço não corresponde à cidade e ao país selecionados',
+    addressNotInSelectedCity: 'O endereço deve estar na cidade selecionada',
+    addressNotInSelectedCountry: 'O endereço deve estar no país selecionado',
+    pleaseSelectValidAddress: 'Por favor, selecione um endereço válido das sugestões',
     ticketCodeSent: 'Códigos de tickets enviados com sucesso',
     enterTicketCode: 'Por favor, insira pelo menos um código de ticket',
     orderFailed: 'Pedido falhou. Por favor, tente novamente.',
@@ -3381,6 +3401,10 @@ export const translations: Record<Language, Translations> = {
     invalidCountry: 'Proszę wprowadzić prawidłowy kraj',
     invalidCity: 'Proszę wprowadzić prawidłowe miasto',
     invalidAddress: 'Adres musi zawierać numer i nazwę ulicy',
+    addressMismatch: 'Adres nie pasuje do wybranego miasta i kraju',
+    addressNotInSelectedCity: 'Adres musi być w wybranym mieście',
+    addressNotInSelectedCountry: 'Adres musi być w wybranym kraju',
+    pleaseSelectValidAddress: 'Proszę wybrać prawidłowy adres z sugestii',
     ticketCodeSent: 'Kody kart wysłane pomyślnie',
     enterTicketCode: 'Proszę wprowadzić co najmniej jeden kod karty',
     orderFailed: 'Zamówienie nie powiodło się. Spróbuj ponownie.',
@@ -4030,6 +4054,10 @@ export const translations: Record<Language, Translations> = {
     invalidCountry: 'Inserisci un paese valido',
     invalidCity: 'Inserisci una città valida',
     invalidAddress: 'L\'indirizzo deve contenere un numero e il nome della via',
+    addressMismatch: 'L\'indirizzo non corrisponde alla città e al paese selezionati',
+    addressNotInSelectedCity: 'L\'indirizzo deve essere nella città selezionata',
+    addressNotInSelectedCountry: 'L\'indirizzo deve essere nel paese selezionato',
+    pleaseSelectValidAddress: 'Si prega di selezionare un indirizzo valido dai suggerimenti',
     ticketCodeSent: 'Codici ticket inviati con successo',
     enterTicketCode: 'Inserisci almeno un codice ticket',
     orderFailed: 'Ordine fallito. Riprova.',
@@ -4679,6 +4707,10 @@ export const translations: Record<Language, Translations> = {
     invalidCountry: 'Adjon meg érvényes országot',
     invalidCity: 'Adjon meg érvényes várost',
     invalidAddress: 'A címnek tartalmaznia kell egy házszámot és utcanevet',
+    addressMismatch: 'A cím nem egyezik a kiválasztott várossal és országgal',
+    addressNotInSelectedCity: 'A címnek a kiválasztott városban kell lennie',
+    addressNotInSelectedCountry: 'A címnek a kiválasztott országban kell lennie',
+    pleaseSelectValidAddress: 'Kérjük, válasszon érvényes címet a javaslatokból',
     ticketCodeSent: 'Kártya kódok sikeresen elküldve',
     enterTicketCode: 'Kérjük, adjon meg legalább egy kártya kódot',
     orderFailed: 'Rendelés sikertelen. Kérjük, próbálja újra.',

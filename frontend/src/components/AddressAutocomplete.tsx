@@ -24,6 +24,8 @@ interface AddressAutocompleteProps {
   disabled?: boolean;
   placeholder?: string;
   countryCode?: string;
+  city?: string;
+  onValidationError?: (error: string) => void;
   'data-testid'?: string;
 }
 
@@ -34,6 +36,8 @@ export function AddressAutocomplete({
   disabled = false,
   placeholder,
   countryCode = '',
+  city = '',
+  onValidationError,
   'data-testid': testId
 }: AddressAutocompleteProps) {
   const [suggestions, setSuggestions] = useState<AddressSuggestion[]>([]);
@@ -97,7 +101,52 @@ export function AddressAutocomplete({
     };
   }, [value, countryCode]);
 
+  const validateAddress = (suggestion: AddressSuggestion): string | null => {
+    const address = suggestion.address;
+    const suggestionCity = (address.city || address.town || address.village || '').toLowerCase().trim();
+    const suggestionCountry = (address.country || '').toLowerCase().trim();
+    
+    if (city && suggestionCity && !suggestionCity.includes(city.toLowerCase().trim()) && !city.toLowerCase().trim().includes(suggestionCity)) {
+      return 'addressNotInSelectedCity';
+    }
+    
+    if (countryCode) {
+      const countryMap: Record<string, string[]> = {
+        'fr': ['france', 'frança', 'francia'],
+        'es': ['spain', 'españa', 'espagne', 'espanha'],
+        'de': ['germany', 'allemagne', 'alemania', 'deutschland'],
+        'it': ['italy', 'italie', 'italia'],
+        'pt': ['portugal'],
+        'pl': ['poland', 'pologne', 'polonia', 'polska'],
+        'hu': ['hungary', 'hongrie', 'hungría', 'magyarország'],
+        'us': ['united states', 'usa', 'états-unis', 'estados unidos'],
+        'gb': ['united kingdom', 'uk', 'royaume-uni', 'reino unido'],
+        'cn': ['china', 'chine'],
+        'jp': ['japan', 'japon', 'japón'],
+        'kr': ['korea', 'corée', 'corea']
+      };
+      
+      const expectedCountries = countryMap[countryCode.toLowerCase()] || [];
+      const matchesCountry = expectedCountries.some(country => 
+        suggestionCountry.includes(country) || country.includes(suggestionCountry)
+      );
+      
+      if (expectedCountries.length > 0 && !matchesCountry) {
+        return 'addressNotInSelectedCountry';
+      }
+    }
+    
+    return null;
+  };
+
   const handleSelectSuggestion = (suggestion: AddressSuggestion) => {
+    const validationError = validateAddress(suggestion);
+    
+    if (validationError && onValidationError) {
+      onValidationError(validationError);
+      return;
+    }
+    
     const address = suggestion.address;
     const formattedAddress = [
       address.house_number,
