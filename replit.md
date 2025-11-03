@@ -33,7 +33,7 @@ A complete and secure payment system offers multiple methods: Stripe (credit/deb
 All automated emails (verification, welcome, password reset, order confirmations, admin notifications) are sent via SendGrid with full multilingual support. Email links default to the official domain, and sensitive data is handled securely.
 
 ### Cart & Checkout UX
-Non-authenticated users attempting to checkout are prompted with a multilingual login dialog and automatically redirected to the login page after a short timeout.
+Non-authenticated users attempting to checkout are prompted with a multilingual login dialog and automatically redirected to the login page after a short timeout. The checkout address page supports automatic address autocomplete from OpenStreetMap Nominatim API and includes postal code validation. User registration includes postal code field which automatically fills in the checkout when using registered address.
 
 ### Technical Implementations
 The project is configured for Replit development, running both backend (Express on port 3001) and frontend (Vite on port 5000) with API proxying. Environment variables are utilized for sensitive configurations.
