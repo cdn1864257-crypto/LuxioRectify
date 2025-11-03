@@ -7,6 +7,9 @@ import { showToast } from '../components/ToastNotifications';
 import { AddressAutocomplete } from '../components/AddressAutocomplete';
 import { isValidCountry, isValidCity, isValidAddress } from '../lib/validation';
 import { countriesCities } from '../lib/countries-cities';
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
+import { CartSidebar } from '@/components/CartSidebar';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
@@ -32,6 +35,7 @@ export default function CheckoutAddress() {
   const { cart } = useCart();
   const { t, language } = useLanguage();
   const [, setLocation] = useLocation();
+  const [cartOpen, setCartOpen] = useState(false);
 
   const [useRegistered, setUseRegistered] = useState(false);
   const [availableCities, setAvailableCities] = useState<{ en: string; fr: string; es: string }[]>([]);
@@ -185,14 +189,16 @@ export default function CheckoutAddress() {
   }
 
   return (
-    <>
+    <div className="min-h-screen bg-background flex flex-col">
       <Helmet>
         <title>{t('seoCheckoutAddressTitle')}</title>
         <meta name="description" content={t('seoCheckoutAddressDescription')} />
       </Helmet>
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 py-12 px-4">
-        <div className="max-w-2xl mx-auto">
+      <Header onToggleCart={() => setCartOpen(!cartOpen)} />
+      
+      <main className="flex-1 py-8 md:py-12">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <Button
             variant="ghost"
             size="sm"
@@ -457,7 +463,10 @@ export default function CheckoutAddress() {
             </form>
           </div>
         </div>
-      </div>
-    </>
+      </main>
+
+      <Footer />
+      <CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+    </div>
   );
 }
