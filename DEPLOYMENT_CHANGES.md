@@ -1,11 +1,11 @@
 # Luxio Market - Payment Provider Migration & Deployment Guide
 
-**Date:** October 31, 2025  
-**Status:** ✅ Complete - NowPayments & MaxelPay Fully Removed
+**Date:** November 3, 2025  
+**Status:** ✅ Complete - All Legacy Payment Methods Removed (Only Bank Transfer & OxaPay Remain)
 
 ## Overview
 
-This document details the complete removal of NowPayments and MaxelPay payment providers from the Luxio e-commerce platform while maintaining OxaPay (crypto), Stripe (cards), bank transfer, and ticket payment methods.
+This document details the complete removal of NowPayments, MaxelPay, Stripe, and PCS/Transcash ticket payment providers from the Luxio e-commerce platform while maintaining only OxaPay (crypto) and bank transfer payment methods.
 
 ## Deployment Architecture
 
@@ -23,8 +23,8 @@ This document details the complete removal of NowPayments and MaxelPay payment p
 
 ### 2. Payment Providers Retained ✅
 
-- **OxaPay** - Cryptocurrency payments
-- **Bank Transfer** - Manual bank transfer
+- **OxaPay** - Cryptocurrency payments (Bitcoin, Ethereum, USDT, BNB, etc.)
+- **Bank Transfer** - Manual SEPA bank transfer
 
 ## Code Changes by File
 
@@ -40,7 +40,7 @@ This document details the complete removal of NowPayments and MaxelPay payment p
 **Added:**
 - OxaPay handler imports
 - OxaPay route handlers
-- Updated CSRF exemptions for OxaPay and Stripe webhooks
+- Updated CSRF exemptions for OxaPay webhooks
 
 **Key Updates:**
 ```typescript
@@ -59,7 +59,7 @@ import oxapayReturnHandler from '../api/payment/oxapay-return.js';
 **Changed:**
 - Updated `NormalizedOrder` interface payment method type:
   - From: `'bank_transfer' | 'nowpayments' | 'pcs_transcash'`
-  - To: `'bank_transfer' | 'oxapay' | 'pcs_transcash' | 'stripe'`
+  - To: `'bank_transfer' | 'oxapay'`
 - Replaced `nowpayments_orders` collection with `oxapay_orders` in aggregation pipeline
 
 #### `api/orders/[orderId].ts`
@@ -99,10 +99,6 @@ import oxapayReturnHandler from '../api/payment/oxapay-return.js';
 ```yaml
 - key: OXAPAY_API_KEY
   sync: false
-- key: STRIPE_SECRET_KEY
-  sync: false
-- key: STRIPE_WEBHOOK_SECRET
-  sync: false
 ```
 
 **Existing Variables:**
@@ -118,7 +114,6 @@ import oxapayReturnHandler from '../api/payment/oxapay-return.js';
 ### Updated Collections
 - `oxapay_orders` - Crypto payment orders (replaces nowpayments_orders)
 - `bank_transfer_orders` - Bank transfer orders
-- `orders` - Standard orders (Stripe, tickets, etc.)
 
 ### Collection Structure Consistency
 All payment-specific collections maintain the same schema structure for:
@@ -140,7 +135,6 @@ All payment-specific collections maintain the same schema structure for:
 - `/api/auth/*` - Authentication endpoints
 - `/api/payment/oxapay-webhook` - OxaPay webhook handler
 - `/api/payment/oxapay-return` - OxaPay return handler
-- `/api/payment/stripe-webhook` - Stripe webhook handler
 
 ### Content Security Policy (CSP)
 **Removed:**
@@ -175,8 +169,6 @@ SENDGRID_FROM_EMAIL=noreply@luxiomarket.shop
 
 # Payment Providers
 OXAPAY_API_KEY=<your-oxapay-key>
-STRIPE_SECRET_KEY=sk_live_xxx
-STRIPE_WEBHOOK_SECRET=whsec_xxx
 
 # CORS
 FRONTEND_URL=https://luxiomarket.shop
@@ -192,7 +184,6 @@ VITE_API_URL=https://api.luxiomarket.shop
 
 # Feature Flags (if any)
 VITE_ENABLE_CRYPTO_PAYMENTS=true
-VITE_ENABLE_STRIPE=true
 ```
 
 ## Testing Checklist
@@ -212,9 +203,7 @@ VITE_ENABLE_STRIPE=true
 - [ ] Test password reset flow
 - [ ] Test email verification
 - [ ] Test OxaPay crypto payments
-- [ ] Test Stripe card payments
 - [ ] Test bank transfer flow
-- [ ] Test ticket payment flow
 - [ ] Verify order tracking
 - [ ] Test GDPR data export
 - [ ] Test account deletion
@@ -248,8 +237,6 @@ VITE_ENABLE_STRIPE=true
 # - SENDGRID_API_KEY
 # - SENDGRID_FROM_EMAIL
 # - OXAPAY_API_KEY
-# - STRIPE_SECRET_KEY
-# - STRIPE_WEBHOOK_SECRET
 # - FRONTEND_URL
 ```
 
@@ -277,9 +264,7 @@ VITE_ENABLE_STRIPE=true
 
 3. **Test Payment Methods:**
    - OxaPay crypto payment
-   - Stripe card payment
    - Bank transfer submission
-   - Ticket payment flow
 
 4. **SendGrid Email:**
    - Test registration email
@@ -309,8 +294,6 @@ db.oxapay_orders.updateMany(
 1. Remove `NOWPAYMENTS_API_KEY` from Render
 2. Remove `NOWPAYMENTS_IPN_SECRET` from Render
 3. Add `OXAPAY_API_KEY` to Render
-4. Add `STRIPE_SECRET_KEY` to Render
-5. Add `STRIPE_WEBHOOK_SECRET` to Render
 
 ## Rollback Plan
 
@@ -341,13 +324,11 @@ If issues occur after deployment:
 
 ## Conclusion
 
-All NowPayments and MaxelPay references have been successfully removed from the Luxio e-commerce platform. The system now supports:
-- ✅ OxaPay (cryptocurrency)
-- ✅ Stripe (cards)
-- ✅ Bank Transfer
-- ✅ PCS/Transcash tickets
+All NowPayments, MaxelPay, Stripe, and PCS/Transcash ticket payment references have been successfully removed from the Luxio e-commerce platform. The system now supports only 2 payment methods:
+- ✅ OxaPay (cryptocurrency - Bitcoin, Ethereum, USDT, BNB, etc.)
+- ✅ Bank Transfer (SEPA manual transfer)
 
-The backend server runs successfully without errors, and all payment methods are properly configured for production deployment.
+The backend server runs successfully without errors, and both payment methods are properly configured for production deployment.
 
 **Next Steps:**
 1. Deploy to production (Render + Vercel)
