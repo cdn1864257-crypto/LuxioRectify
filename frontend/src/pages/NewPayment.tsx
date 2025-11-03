@@ -12,10 +12,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, ShoppingBag, CreditCard, Zap, Copy, Check, DollarSign, Building2, Shield, Lock, ChevronDown, ChevronUp, Mail } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Zap, Copy, Check, Building2, Shield, Lock } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/lib/translations';
-import { SiPaypal, SiWise, SiBinance, SiWesternunion, SiMoneygram } from 'react-icons/si';
 import { useSuspensionStatus } from '@/hooks/useSuspensionStatus';
 import { SuspensionWarning } from '@/components/SuspensionWarning';
 
@@ -31,7 +30,6 @@ export default function NewPayment() {
   const [bankDetails, setBankDetails] = useState<any>(null);
   const [copied, setCopied] = useState(false);
   const [isConfirmingOrder, setIsConfirmingOrder] = useState(false);
-  const [showAlternativeMethods, setShowAlternativeMethods] = useState(false);
   const { toast } = useToast();
   const { language } = useLanguage();
   const t = translations[language] || translations.en;
@@ -117,28 +115,6 @@ export default function NewPayment() {
     const fullName = `${firstName} ${lastName}`.trim();
     // Fallback to "User" if name is empty after trimming
     return generatePaymentReference(fullName || 'User');
-  };
-
-  const generateEmailBody = (methodName: string, orderReference: string) => {
-    const customerName = `${user?.firstName || ''} ${user?.lastName || ''}`.trim();
-    
-    let emailBody = `${t.hello || 'Bonjour'},\n\n`;
-    emailBody += `${t.emailBodyIntro || 'Je souhaite finaliser ma commande avec le moyen de paiement suivant'} : ${methodName}\n\n`;
-    emailBody += `--- ${t.orderDetails || 'Détails de la commande'} ---\n`;
-    emailBody += `${t.orderReference || 'Référence'} : ${orderReference}\n`;
-    emailBody += `${t.customerName || 'Nom complet'} : ${customerName}\n`;
-    emailBody += `${t.email || 'Email'} : ${user?.email || ''}\n\n`;
-    emailBody += `${t.orderSummary || 'Récapitulatif de la commande'} :\n`;
-    
-    cart.forEach((item, index) => {
-      emailBody += `${index + 1}. ${item.name} - ${t.quantity || 'Quantité'}: ${item.quantity} - ${(item.price * item.quantity).toFixed(2)} €\n`;
-    });
-    
-    emailBody += `\n${t.total || 'Total'} : ${total.toFixed(2)} €\n\n`;
-    emailBody += `${t.emailBodyClosing || 'Merci de me fournir les instructions de paiement pour finaliser cette commande.'}\n\n`;
-    emailBody += `${t.regards || 'Cordialement'},\n${customerName}`;
-    
-    return emailBody;
   };
 
   const handleBankTransferClick = () => {
@@ -251,24 +227,6 @@ export default function NewPayment() {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-
-  // Get translated email subject
-  const getEmailSubject = (methodName: string) => {
-    return t.alternativePaymentEmailSubject?.replace('{method}', methodName).replace('{amount}', total.toFixed(2)) 
-      || `Paiement via ${methodName} - Commande ${total.toFixed(2)}€`;
-  };
-
-  const alternativePaymentMethods = [
-    { name: 'PayPal', icon: SiPaypal, key: 'paypal', color: '#003087' },
-    { name: 'Wise', icon: SiWise, key: 'wise', color: '#37517E' },
-    { name: 'Binance', icon: SiBinance, key: 'binance', color: '#F3BA2F' },
-    { name: 'Western Union', icon: SiWesternunion, key: 'western-union', color: '#FFCC00' },
-    { name: 'MoneyGram', icon: SiMoneygram, key: 'moneygram', color: '#E2231A' },
-    { name: 'Worldremit', icon: DollarSign, key: 'worldremit', color: '#813FD6' },
-    { name: 'Ria', icon: DollarSign, key: 'ria', color: '#ED1C24' },
-    { name: 'Transcash', icon: CreditCard, key: 'transcash', color: '#0066CC' },
-    { name: 'PCS', icon: CreditCard, key: 'pcs', color: '#00A99D' }
-  ];
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -400,52 +358,6 @@ export default function NewPayment() {
                   </div>
                 </div>
 
-                {/* Stripe Method */}
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-sm sm:text-base font-semibold flex items-center gap-2">
-                      <CreditCard className="h-5 w-5 text-primary flex-shrink-0" />
-                      {t.cardPayment}
-                    </h3>
-                    <span className="text-xs bg-red-600 text-white px-2 py-1 rounded whitespace-nowrap">
-                      {t.stripeUnavailable}
-                    </span>
-                  </div>
-                  <button
-                    type="button"
-                    className="w-full p-3 sm:p-4 border-2 border-muted rounded-lg bg-muted/50 cursor-not-allowed opacity-60"
-                    disabled
-                    onClick={() => {
-                      toast({
-                        title: t.stripeUnavailable,
-                        description: t.stripeUnavailableMessage,
-                        variant: 'destructive'
-                      });
-                    }}
-                    data-testid="button-stripe"
-                  >
-                    <div className="flex items-center justify-start gap-3 sm:gap-4">
-                      <CreditCard className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground flex-shrink-0" />
-                      <div className="text-left flex-1 min-w-0">
-                        <div className="font-semibold text-base sm:text-lg text-muted-foreground">{t.stripe}</div>
-                        <div className="text-xs sm:text-sm text-muted-foreground">{t.stripeDescription}</div>
-                      </div>
-                    </div>
-                  </button>
-                </div>
-
-                {/* Payment Method Separator */}
-                <div className="relative py-4 sm:py-5">
-                  <div className="absolute inset-0 flex items-center" aria-hidden="true">
-                    <div className="w-full border-t border-border"></div>
-                  </div>
-                  <div className="relative flex justify-center text-xs sm:text-sm uppercase">
-                    <span className="bg-background px-3 sm:px-4 text-muted-foreground font-medium">
-                      {t.or || 'ou'}
-                    </span>
-                  </div>
-                </div>
-
                 {/* OxaPay Method */}
                 <div>
                   <div className="flex items-center justify-between mb-3">
@@ -474,90 +386,6 @@ export default function NewPayment() {
                   </button>
                 </div>
 
-                {/* Payment Method Separator */}
-                <div className="relative py-4 sm:py-5">
-                  <div className="absolute inset-0 flex items-center" aria-hidden="true">
-                    <div className="w-full border-t border-border"></div>
-                  </div>
-                  <div className="relative flex justify-center text-xs sm:text-sm uppercase">
-                    <span className="bg-background px-3 sm:px-4 text-muted-foreground font-medium">
-                      {t.or || 'ou'}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Alternative Payment Methods - Collapsible */}
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => setShowAlternativeMethods(!showAlternativeMethods)}
-                    className="w-full flex items-center justify-between gap-2 mb-3"
-                    data-testid="button-toggle-alternative-methods"
-                  >
-                    <h3 className="text-sm sm:text-base font-semibold flex items-center gap-2">
-                      <DollarSign className="h-5 w-5 text-primary flex-shrink-0" />
-                      {t.alternativePaymentMethods}
-                    </h3>
-                    {showAlternativeMethods ? (
-                      <ChevronUp className="h-5 w-5 text-primary flex-shrink-0" />
-                    ) : (
-                      <ChevronDown className="h-5 w-5 text-primary flex-shrink-0" />
-                    )}
-                  </button>
-                  
-                  {showAlternativeMethods && (
-                    <>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 mb-4">
-                        {alternativePaymentMethods.map((method) => {
-                          const IconComponent = method.icon;
-                          return (
-                            <button
-                              key={method.key}
-                              type="button"
-                              className="p-3 sm:p-4 border-2 border-muted rounded-lg bg-background hover:bg-accent transition-colors text-center group"
-                              onClick={() => {
-                                const orderReference = generateOrderReference();
-                                const emailSubject = getEmailSubject(method.name);
-                                const emailBody = generateEmailBody(method.name, orderReference);
-                                window.location.href = `mailto:support@luxiomarket.shop?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-                              }}
-                              data-testid={`button-${method.key}`}
-                            >
-                              <div className="flex flex-col items-center gap-2">
-                                <div 
-                                  className="text-2xl sm:text-3xl transition-transform group-hover:scale-110"
-                                  style={{ color: method.color }}
-                                >
-                                  <IconComponent />
-                                </div>
-                                <div className="text-xs sm:text-sm font-medium break-words w-full">{method.name}</div>
-                              </div>
-                            </button>
-                          );
-                        })}
-                      </div>
-                      <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 p-3 sm:p-4 rounded-lg">
-                        <div className="flex items-start gap-2 sm:gap-3">
-                          <Mail className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
-                          <div className="flex-1 min-w-0">
-                            <p className="text-xs sm:text-sm text-blue-800 dark:text-blue-200 font-medium mb-2">
-                              {t.alternativePaymentInstructionsTitle || 'Comment procéder ?'}
-                            </p>
-                            <p className="text-xs sm:text-sm text-blue-700 dark:text-blue-300">
-                              {t.alternativePaymentInstructions || 'Cliquez sur le moyen de paiement de votre choix ci-dessus. Cela ouvrira votre application email avec un message pré-rempli. Envoyez ce message à notre service pour finaliser votre commande. Notre équipe vous répondra dans les plus brefs délais avec les instructions de paiement détaillées.'}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                  
-                  {!showAlternativeMethods && (
-                    <p className="text-xs sm:text-sm text-muted-foreground text-center">
-                      {t.clickToViewAlternativeMethods || 'Cliquez pour voir les autres moyens de paiement disponibles'}
-                    </p>
-                  )}
-                </div>
               </div>
             </CardContent>
           </Card>
