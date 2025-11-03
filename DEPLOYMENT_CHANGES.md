@@ -24,9 +24,7 @@ This document details the complete removal of NowPayments and MaxelPay payment p
 ### 2. Payment Providers Retained ✅
 
 - **OxaPay** - Cryptocurrency payments
-- **Stripe** - Card payments
 - **Bank Transfer** - Manual bank transfer
-- **PCS/Transcash** - Ticket-based payments
 
 ## Code Changes by File
 

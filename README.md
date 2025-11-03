@@ -58,18 +58,10 @@ EMAIL_FROM=support@luxiomarket.shop
 ADMIN_EMAIL=support@luxiomarket.shop
 ```
 
-#### Maxelpay (Paiement en ligne)
+#### OxaPay (Paiement crypto)
 ```bash
-MAXELPAY_MERCHANT_ID=votre_merchant_id_maxelpay
-MAXELPAY_API_KEY=votre_api_key_maxelpay
+OXAPAY_API_KEY=votre_api_key_oxapay
 ```
-
-#### Sécurité
-```bash
-ENCRYPTION_KEY=votre_cle_de_chiffrement_minimum_32_caracteres
-```
-
-⚠️ **Important** : La clé de chiffrement `ENCRYPTION_KEY` est utilisée pour sécuriser les codes de paiement PCS/Transcash stockés en base de données. Utilisez une clé forte et ne la partagez jamais.
 
 ### 2. Configuration SendGrid SMTP
 
@@ -132,18 +124,16 @@ Envoyé automatiquement après une inscription réussie :
 - CTA : Bouton "Découvrir nos offres"
 
 #### Email de confirmation de commande (Client)
-Envoyé après soumission du formulaire de paiement :
-- Récapitulatif du produit commandé
-- Montant total payé
-- Type de code de paiement (TransCash ou PCS)
-- Liste des codes fournis
-- Statut : En attente de validation
+Envoyé après soumission d'une commande :
+- Récapitulatif des produits commandés
+- Montant total
+- Méthode de paiement utilisée
+- Statut de la commande
 
 #### Email de notification (Admin)
 Envoyé en parallèle à l'administrateur :
 - Détails complets de la commande
 - Informations du client
-- Codes de paiement à valider
 - ID de commande pour suivi
 
 ### API Endpoints
@@ -158,15 +148,15 @@ GET  /api/auth/me           # Récupérer l'utilisateur connecté
 
 #### Paiements
 ```bash
-POST /api/payment/submit-order       # Soumettre une commande avec codes de paiement (PCS/TransCash)
 POST /api/payment/bank-transfer      # Créer une commande par virement bancaire
-POST /api/payment/maxelpay-init      # Initialiser un paiement Maxelpay
-POST /api/payment/maxelpay-return    # Callback de retour Maxelpay
+POST /api/payment/oxapay-init        # Initialiser un paiement OxaPay (crypto)
+POST /api/payment/oxapay-webhook     # Webhook OxaPay pour notifications
+POST /api/payment/oxapay-return      # Callback de retour OxaPay
 ```
 
 ## 💳 Méthodes de paiement
 
-Luxio propose **3 méthodes de paiement** sécurisées :
+Luxio propose **2 méthodes de paiement** sécurisées :
 
 ### 1. 🏦 Virement bancaire
 
@@ -178,7 +168,7 @@ Luxio propose **3 méthodes de paiement** sécurisées :
 
 **Processus** :
 1. Le client sélectionne "Virement bancaire"
-2. Un numéro de commande unique est généré (ex: LX-1730673481234-ABC123)
+2. Un numéro de commande unique est généré
 3. La commande est enregistrée avec le statut "En attente de virement"
 4. Le client reçoit un email avec les détails du virement
 5. L'administrateur reçoit une notification de la nouvelle commande
@@ -187,63 +177,43 @@ Luxio propose **3 méthodes de paiement** sécurisées :
 - ✅ **Client** : Confirmation avec détails bancaires et numéro de référence
 - ✅ **Admin** : Notification avec détails de la commande à vérifier
 
-### 2. 💳 Maxelpay (Recommandé)
+### 2. 💰 OxaPay - Paiements Crypto (Recommandé)
 
 **Configuration** :
 ```bash
-MAXELPAY_MERCHANT_ID=votre_merchant_id
-MAXELPAY_API_KEY=votre_api_key
+OXAPAY_API_KEY=votre_api_key_oxapay
 ```
 
+**Cryptomonnaies acceptées** :
+- Bitcoin (BTC)
+- Ethereum (ETH)
+- USDT (Tether)
+- BNB (Binance Coin)
+- Et plus encore...
+
 **Processus** :
-1. Le client clique sur "Payer avec Maxelpay"
+1. Le client clique sur "Payer avec OxaPay"
 2. La commande est créée avec un `orderReference` unique
-3. Le client est redirigé vers la plateforme sécurisée Maxelpay
-4. Après paiement, Maxelpay redirige vers `/api/payment/maxelpay-return`
-5. Le statut de la commande est mis à jour automatiquement
+3. Le client est redirigé vers la plateforme sécurisée OxaPay
+4. Le client choisit sa cryptomonnaie et effectue le paiement
+5. OxaPay envoie une notification webhook à notre serveur
+6. Le statut de la commande est mis à jour automatiquement
 
 **Sécurité** :
-- API Key incluse dans chaque requête
-- Matching des commandes par `orderReference` (pas par ID)
-- Webhook de retour sécurisé
-
-### 3. 🎫 Tickets PCS/Transcash
-
-**Sécurité** :
-```bash
-ENCRYPTION_KEY=votre_cle_minimum_32_caracteres_aleatoire
-```
-
-⚠️ **Important** : Les codes PCS/Transcash sont **chiffrés avec AES-256** avant stockage en base de données. La clé `ENCRYPTION_KEY` est **obligatoire** et doit être :
-- Au minimum 32 caractères
-- Générée aléatoirement
-- Gardée secrète (jamais commitée dans Git)
-
-**Processus** :
-1. Le client sélectionne le type de ticket (PCS ou Transcash)
-2. Le montant total est calculé automatiquement
-3. Le client saisit les codes de paiement
-4. Les codes sont **chiffrés** avant stockage en base de données
-5. La commande est créée avec le statut "En attente de validation"
+- API Key sécurisée
+- Webhook signatures pour vérifier l'authenticité des notifications
+- Matching des commandes par `orderReference`
+- Redirections sécurisées après paiement
 
 **Emails envoyés** :
-- ✅ **Client** : Confirmation de soumission avec récapitulatif
-- ✅ **Support** : Notification avec codes chiffrés à valider
-
-**Chiffrement** :
-```typescript
-// Les codes sont automatiquement chiffrés
-import { encryptCode, decryptCode } from './utils/encryption';
-
-const encrypted = encryptCode('CODE123456'); // Stocké en base
-const original = decryptCode(encrypted);      // Récupéré pour validation
-```
+- ✅ **Client** : Confirmation de commande avec lien de paiement
+- ✅ **Admin** : Notification de nouvelle commande
 
 ### Exemple d'utilisation de l'API de paiement
 
 ```typescript
-// Frontend - Soumettre une commande
-const response = await fetch('/api/payment/submit-order', {
+// Frontend - Créer une commande par virement bancaire
+const response = await fetch('/api/payment/bank-transfer', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -251,41 +221,48 @@ const response = await fetch('/api/payment/submit-order', {
   body: JSON.stringify({
     customerEmail: 'client@example.com',
     customerName: 'Jean Dupont',
-    productId: 'iphone-17-pro',
-    productName: 'iPhone 17 Pro',
-    productModel: '256GB Titanium',
-    productPrice: 1299.99,
     totalAmount: 1299.99,
-    codeType: 'TransCash', // ou 'PCS'
-    codes: ['CODE123456', 'CODE789012']
+    cartItems: [
+      {
+        id: 'iphone-17-pro',
+        name: 'iPhone 17 Pro',
+        price: 1299.99,
+        quantity: 1
+      }
+    ]
   })
 });
 
 const data = await response.json();
-console.log('Commande créée:', data.orderId);
+console.log('Commande créée:', data.orderReference);
 ```
 
-### Tester l'envoi d'emails localement
-
 ```typescript
-// Exemple dans un fichier de test
-import { sendWelcomeEmail, sendOrderConfirmationToCustomer } from './utils/email';
-
-// Test email de bienvenue
-await sendWelcomeEmail('test@example.com', 'Jean');
-
-// Test email de commande
-await sendOrderConfirmationToCustomer({
-  orderId: 'TEST-001',
-  customerEmail: 'test@example.com',
-  customerName: 'Jean Dupont',
-  productName: 'iPhone 17 Pro',
-  productModel: '256GB',
-  productPrice: 1299.99,
-  totalAmount: 1299.99,
-  codeType: 'TransCash',
-  codes: ['CODE123', 'CODE456']
+// Frontend - Initialiser un paiement OxaPay
+const response = await fetch('/api/payment/oxapay-init', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    customerEmail: 'client@example.com',
+    customerName: 'Jean Dupont',
+    totalAmount: 1299.99,
+    language: 'fr',
+    cartItems: [
+      {
+        id: 'iphone-17-pro',
+        name: 'iPhone 17 Pro',
+        price: 1299.99,
+        quantity: 1
+      }
+    ]
+  })
 });
+
+const data = await response.json();
+// Rediriger l'utilisateur vers l'URL de paiement OxaPay
+window.location.href = data.redirectUrl;
 ```
 
 ## 📧 Fonctions d'envoi d'emails disponibles
