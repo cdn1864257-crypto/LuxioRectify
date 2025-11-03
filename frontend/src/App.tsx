@@ -18,7 +18,6 @@ import Dashboard from "@/pages/Dashboard";
 import Cart from "@/pages/Cart";
 import CheckoutAddress from "@/pages/CheckoutAddress";
 import NewPayment from "@/pages/NewPayment";
-import StripeCheckout from "@/pages/StripeCheckout";
 import ResetPassword from "@/pages/ResetPassword";
 import VerifyEmailPage from "@/pages/VerifyEmailPage";
 import VerifySuccess from "@/pages/VerifySuccess";
@@ -72,13 +71,6 @@ function Router() {
         <RouteWrapper lang="fr">
           <ProtectedRoute>
             <NewPayment />
-          </ProtectedRoute>
-        </RouteWrapper>
-      </Route>
-      <Route path="/fr/payment/stripe">
-        <RouteWrapper lang="fr">
-          <ProtectedRoute>
-            <StripeCheckout />
           </ProtectedRoute>
         </RouteWrapper>
       </Route>
@@ -142,13 +134,6 @@ function Router() {
           </ProtectedRoute>
         </RouteWrapper>
       </Route>
-      <Route path="/en/payment/stripe">
-        <RouteWrapper lang="en">
-          <ProtectedRoute>
-            <StripeCheckout />
-          </ProtectedRoute>
-        </RouteWrapper>
-      </Route>
       <Route path="/en/legal-notice">
         <RouteWrapper lang="en">
           <LegalNotice />
@@ -206,13 +191,6 @@ function Router() {
         <RouteWrapper lang="pt">
           <ProtectedRoute>
             <NewPayment />
-          </ProtectedRoute>
-        </RouteWrapper>
-      </Route>
-      <Route path="/pt/payment/stripe">
-        <RouteWrapper lang="pt">
-          <ProtectedRoute>
-            <StripeCheckout />
           </ProtectedRoute>
         </RouteWrapper>
       </Route>
@@ -276,13 +254,6 @@ function Router() {
           </ProtectedRoute>
         </RouteWrapper>
       </Route>
-      <Route path="/es/payment/stripe">
-        <RouteWrapper lang="es">
-          <ProtectedRoute>
-            <StripeCheckout />
-          </ProtectedRoute>
-        </RouteWrapper>
-      </Route>
       <Route path="/es/legal-notice">
         <RouteWrapper lang="es">
           <LegalNotice />
@@ -340,13 +311,6 @@ function Router() {
         <RouteWrapper lang="it">
           <ProtectedRoute>
             <NewPayment />
-          </ProtectedRoute>
-        </RouteWrapper>
-      </Route>
-      <Route path="/it/payment/stripe">
-        <RouteWrapper lang="it">
-          <ProtectedRoute>
-            <StripeCheckout />
           </ProtectedRoute>
         </RouteWrapper>
       </Route>
@@ -410,13 +374,6 @@ function Router() {
           </ProtectedRoute>
         </RouteWrapper>
       </Route>
-      <Route path="/hu/payment/stripe">
-        <RouteWrapper lang="hu">
-          <ProtectedRoute>
-            <StripeCheckout />
-          </ProtectedRoute>
-        </RouteWrapper>
-      </Route>
       <Route path="/hu/legal-notice">
         <RouteWrapper lang="hu">
           <LegalNotice />
@@ -474,13 +431,6 @@ function Router() {
         <RouteWrapper lang="pl">
           <ProtectedRoute>
             <NewPayment />
-          </ProtectedRoute>
-        </RouteWrapper>
-      </Route>
-      <Route path="/pl/payment/stripe">
-        <RouteWrapper lang="pl">
-          <ProtectedRoute>
-            <StripeCheckout />
           </ProtectedRoute>
         </RouteWrapper>
       </Route>

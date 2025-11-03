@@ -27,7 +27,7 @@ Comprehensive multilingual SEO is implemented for Google indexing and social med
 Product and order data are managed client-side using a static product database with extensive smartphone data and variant matrices. Local storage persists cart data and order history. Image assets are optimized and stored locally.
 
 ### Payment Processing
-A complete and secure payment system offers multiple methods: Stripe (credit/debit cards), Bank Transfer, Maxelpay, and PCS/Transcash Tickets (with AES-256 encryption). NowPayments is integrated for cryptocurrency. All payment methods are protected, require authentication, and trigger email notifications. Payment references are standardized across the platform. Server-side validation is implemented for all payment methods to prevent price manipulation and ensure security.
+A complete and secure payment system offers multiple methods: Bank Transfer, Maxelpay, and PCS/Transcash Tickets (with AES-256 encryption). NowPayments is integrated for cryptocurrency. All payment methods are protected, require authentication, and trigger email notifications. Payment references are standardized across the platform. Server-side validation is implemented for all payment methods to prevent price manipulation and ensure security.
 
 ### Email System
 All automated emails (verification, welcome, password reset, order confirmations, admin notifications) are sent via SendGrid with full multilingual support. Email links default to the official domain, and sensitive data is handled securely.
@@ -52,7 +52,6 @@ Key environment variables include `MONGODB_URI`, `JWT_SECRET`, `BACKEND_URL`, `F
 -   **MaxelPay**: Payment gateway.
 -   **SendGrid SMTP**: Email services.
 -   **NowPayments**: Cryptocurrency payments.
--   **Stripe**: Credit/debit card payments.
 
 ### Development & Core Technologies
 -   **Vite**: Build tool.
