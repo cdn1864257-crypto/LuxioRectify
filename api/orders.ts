@@ -27,7 +27,7 @@ interface JWTPayload {
 interface NormalizedOrder {
   orderId: string;
   orderReference: string;
-  paymentMethod: 'bank_transfer' | 'oxapay' | 'pcs_transcash' | 'stripe';
+  paymentMethod: 'bank_transfer' | 'oxapay';
   status: string;
   totalAmount: number;
   createdAt: Date;
@@ -162,39 +162,6 @@ async function handler(req: VercelRequest, res: VercelResponse) {
                   },
                   productInfo: null,
                   payLink: { $ifNull: ['$payLink', null] }
-                }
-              }
-            ]
-          }
-        },
-        {
-          $unionWith: {
-            coll: 'orders',
-            pipeline: [
-              {
-                $match: { customerEmail: normalizedEmail }
-              },
-              {
-                $addFields: {
-                  orderId: { $toString: '$_id' },
-                  orderReference: { $toString: '$_id' },
-                  paymentMethod: 'pcs_transcash',
-                  status: { $ifNull: ['$status', 'pending'] },
-                  totalAmount: { $ifNull: ['$totalAmount', 0] },
-                  createdAt: { $ifNull: ['$createdAt', '$$NOW'] },
-                  items: [],
-                  itemCount: 1,
-                  productInfo: {
-                    $trim: {
-                      input: {
-                        $concat: [
-                          { $ifNull: ['$productName', ''] },
-                          ' - ',
-                          { $ifNull: ['$productModel', ''] }
-                        ]
-                      }
-                    }
-                  }
                 }
               }
             ]

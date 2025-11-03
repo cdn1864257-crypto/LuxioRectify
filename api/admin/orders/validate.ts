@@ -149,8 +149,6 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         collectionName = 'bank_transfer_orders';
       } else if (paymentMethod === 'oxapay') {
         collectionName = 'oxapay_orders';
-      } else if (paymentMethod === 'pcs_transcash') {
-        collectionName = 'orders';
       } else {
         return res.status(400).json({
           success: false,

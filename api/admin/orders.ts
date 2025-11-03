@@ -154,19 +154,6 @@ async function handler(req: VercelRequest, res: VercelResponse) {
                 }
               ]
             }
-          },
-          {
-            $unionWith: {
-              coll: 'orders',
-              pipeline: [
-                {
-                  $addFields: {
-                    paymentMethod: { $ifNull: ['$paymentMethod', 'pcs_transcash'] },
-                    orderId: { $toString: '$_id' }
-                  }
-                }
-              ]
-            }
           }
         ];
 
