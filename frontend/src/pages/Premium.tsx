@@ -232,11 +232,17 @@ export default function Premium() {
         v => v.capacity === selection.capacity && v.color === selection.color
       );
       if (variant) {
+        const currentDiscount = variant.originalPrice && variant.price
+          ? Math.round(((variant.originalPrice - variant.price) / variant.originalPrice) * 100)
+          : phone.discount;
+        
         productToAdd = {
           ...phone,
           price: variant.price,
           originalPrice: variant.originalPrice,
-          name: `${phone.name} (${selection.capacity}, ${selection.color})`
+          discount: currentDiscount,
+          image: variant.image || phone.image,
+          description: `${selection.capacity}, ${selection.color}`
         };
       }
     }
@@ -253,7 +259,7 @@ export default function Premium() {
       });
     }, 2000);
 
-    showToast(`${productToAdd.name} - ${t('itemAddedToCart')}`, 'success');
+    showToast(`${phone.name}${selection?.color ? ` (${selection.color})` : ''} - ${t('itemAddedToCart')}`, 'success');
   };
 
   const handlePageChange = (page: number) => {
