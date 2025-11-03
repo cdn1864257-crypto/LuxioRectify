@@ -11,6 +11,7 @@ export interface AuthUser {
   country?: string;
   city?: string;
   address?: string;
+  postalCode?: string;
   phone?: string;
 }
 
@@ -29,6 +30,7 @@ interface SignupData {
   country: string;
   city: string;
   address: string;
+  postalCode?: string;
   phone: string;
   email: string;
   password: string;
@@ -92,6 +94,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           country: userData.country,
           city: userData.city,
           address: userData.address,
+          postalCode: userData.postalCode,
           phone: userData.phone,
         });
       } else {
@@ -140,6 +143,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         country: userData.country,
         city: userData.city,
         address: userData.address,
+        postalCode: userData.postalCode,
         phone: userData.phone,
       });
 

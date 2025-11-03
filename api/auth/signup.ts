@@ -28,6 +28,7 @@ interface SignupData {
   country: string;
   city: string;
   address: string;
+  postalCode?: string;
   phone: string;
   email: string;
   password: string;
@@ -41,7 +42,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { firstName, lastName, country, city, address, phone, email, password, language }: SignupData = req.body;
+    const { firstName, lastName, country, city, address, postalCode, phone, email, password, language }: SignupData = req.body;
 
     // Vérification que les champs obligatoires sont remplis
     if (!firstName || !lastName || !email || !password) {
@@ -120,6 +121,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         country: country || '',
         city: city || '',
         address: address || '',
+        postalCode: postalCode || '',
         phone: phone || '',
         email: email.toLowerCase(),
         password: hashedPassword,
@@ -141,6 +143,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         country,
         city,
         address,
+        postalCode,
         phone,
         email: email.toLowerCase(),
         createdAt: newUser.createdAt

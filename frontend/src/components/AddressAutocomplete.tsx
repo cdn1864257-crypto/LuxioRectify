@@ -58,8 +58,10 @@ export function AddressAutocomplete({
   }, []);
 
   useEffect(() => {
-    if (value.length < 3) {
-      setSuggestions([]);
+    if (value.length < 3 || !showSuggestions) {
+      if (value.length < 3) {
+        setSuggestions([]);
+      }
       return;
     }
 
@@ -99,7 +101,7 @@ export function AddressAutocomplete({
         clearTimeout(debounceRef.current);
       }
     };
-  }, [value, countryCode]);
+  }, [value, countryCode, showSuggestions]);
 
   const validateAddress = (suggestion: AddressSuggestion): string | null => {
     const address = suggestion.address;
@@ -168,7 +170,12 @@ export function AddressAutocomplete({
         <Input
           type="text"
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => {
+            onChange(e.target.value);
+            if (!showSuggestions) {
+              setShowSuggestions(true);
+            }
+          }}
           disabled={disabled}
           placeholder={placeholder}
           data-testid={testId}

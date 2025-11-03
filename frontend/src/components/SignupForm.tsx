@@ -21,6 +21,7 @@ interface SignupFormData {
   country: string;
   city: string;
   address: string;
+  postalCode: string;
   phone: string;
   email: string;
   password: string;
@@ -44,6 +45,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     country: "",
     city: "",
     address: "",
+    postalCode: "",
     phone: "",
     email: "",
     password: "",
@@ -115,7 +117,8 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
         country: selectedCountry.en, 
         city: "",
         phone: "",
-        address: ""
+        address: "",
+        postalCode: ""
       }));
       setAvailableCities(selectedCountry.cities);
       setAddressValidated(false);
@@ -131,7 +134,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     // Récupérer le nom EN canonique de la ville
     const cityIdx = parseInt(cityIndex);
     if (availableCities[cityIdx]) {
-      setFormData(prev => ({ ...prev, city: availableCities[cityIdx].en, address: "" }));
+      setFormData(prev => ({ ...prev, city: availableCities[cityIdx].en, address: "", postalCode: "" }));
       setAddressValidated(false);
       setManualAddressConfirmed(false);
     }
@@ -218,6 +221,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
         country: formData.country,
         city: formData.city,
         address: formData.address,
+        postalCode: formData.postalCode,
         phone: formData.phone,
         email: formData.email,
         password: formData.password,
@@ -241,6 +245,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
         country: "",
         city: "",
         address: "",
+        postalCode: "",
         phone: "",
         email: "",
         password: "",
@@ -380,7 +385,9 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
               setErrors(prev => ({ ...prev, address: undefined }));
             }
           }}
-          onAddressSelect={() => {
+          onAddressSelect={(suggestion) => {
+            const address = suggestion.address;
+            setFormData(prev => ({ ...prev, postalCode: address.postcode || '' }));
             setAddressValidated(true);
             setManualAddressConfirmed(false);
             if (errors.address) {
@@ -440,6 +447,24 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
               )}
             </div>
           </div>
+        )}
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="postalCode">{t('postalCode')}</Label>
+        <Input
+          id="postalCode"
+          name="postalCode"
+          type="text"
+          value={formData.postalCode}
+          onChange={handleChange}
+          placeholder={t('postalCode')}
+          disabled={isLoading}
+          data-testid="input-postalCode"
+          className={errors.postalCode ? "border-red-500" : ""}
+        />
+        {errors.postalCode && (
+          <p className="text-sm text-red-500">{errors.postalCode}</p>
         )}
       </div>
 

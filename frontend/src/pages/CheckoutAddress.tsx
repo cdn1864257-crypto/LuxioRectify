@@ -71,9 +71,11 @@ export default function CheckoutAddress() {
         phone: user.phone || '',
         address: user.address || '',
         city: user.city || '',
-        postalCode: '',
+        postalCode: user.postalCode || '',
         country: user.country || ''
       });
+      setAddressValidated(true);
+      setManualAddressConfirmed(false);
     } else if (user && !useRegistered) {
       setFormData({
         firstName: user.firstName || '',
@@ -84,6 +86,8 @@ export default function CheckoutAddress() {
         postalCode: '',
         country: ''
       });
+      setAddressValidated(false);
+      setManualAddressConfirmed(false);
     }
   }, [useRegistered, user]);
 
