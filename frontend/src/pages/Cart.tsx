@@ -39,7 +39,7 @@ export default function Cart() {
     if (!user) {
       setShowLoginDialog(true);
     } else {
-      setLocation(`/${language}/payment`);
+      setLocation(`/${language}/checkout/address`);
     }
   };
 
