@@ -12,7 +12,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, ShoppingBag, Zap, Copy, Check, Building2, Shield, Lock } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, CreditCard, Zap, Copy, Check, Building2, Shield, Lock } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/lib/translations';
 import { useSuspensionStatus } from '@/hooks/useSuspensionStatus';

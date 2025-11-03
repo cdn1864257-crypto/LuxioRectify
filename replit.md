@@ -27,7 +27,7 @@ Comprehensive multilingual SEO is implemented for Google indexing and social med
 Product and order data are managed client-side using a static product database with extensive smartphone data and variant matrices. Local storage persists cart data and order history. Image assets are optimized and stored locally.
 
 ### Payment Processing
-A complete and secure payment system offers multiple methods: Bank Transfer, Maxelpay, and PCS/Transcash Tickets (with AES-256 encryption). NowPayments is integrated for cryptocurrency. All payment methods are protected, require authentication, and trigger email notifications. Payment references are standardized across the platform. Server-side validation is implemented for all payment methods to prevent price manipulation and ensure security.
+A complete and secure payment system offers two payment methods: Bank Transfer and Oxapay (cryptocurrency payments). All payment methods are protected, require authentication, and trigger email notifications. Payment references are standardized across the platform. Server-side validation is implemented for all payment methods to prevent price manipulation and ensure security.
 
 ### Email System
 All automated emails (verification, welcome, password reset, order confirmations, admin notifications) are sent via SendGrid with full multilingual support. Email links default to the official domain, and sensitive data is handled securely.
@@ -39,7 +39,7 @@ Non-authenticated users attempting to checkout are prompted with a multilingual 
 The project is configured for Replit development, running both backend (Express on port 3001) and frontend (Vite on port 5000) with API proxying. Environment variables are utilized for sensitive configurations.
 
 ### Environment Variables
-Key environment variables include `MONGODB_URI`, `JWT_SECRET`, `BACKEND_URL`, `FRONTEND_URL`, `NOWPAYMENTS_API_KEY`, `SENDGRID_API_KEY`, `SENDGRID_FROM_EMAIL`, and `CSRF_SECRET`.
+Key environment variables include `MONGODB_URI`, `JWT_SECRET`, `BACKEND_URL`, `FRONTEND_URL`, `OXAPAY_API_KEY`, `OXAPAY_MERCHANT_ID`, `SENDGRID_API_KEY`, `SENDGRID_FROM_EMAIL`, and `CSRF_SECRET`.
 
 ## External Dependencies
 
@@ -49,9 +49,8 @@ Key environment variables include `MONGODB_URI`, `JWT_SECRET`, `BACKEND_URL`, `F
 -   **bcrypt**: Password hashing.
 
 ### Payment & Communication
--   **MaxelPay**: Payment gateway.
+-   **Oxapay**: Cryptocurrency payment gateway.
 -   **SendGrid SMTP**: Email services.
--   **NowPayments**: Cryptocurrency payments.
 
 ### Development & Core Technologies
 -   **Vite**: Build tool.
