@@ -16,10 +16,7 @@ import verifyEmailHandler from '../api/auth/verify-email.js';
 import changePasswordHandler from '../api/auth/change-password.js';
 import forgotPasswordHandler from '../api/auth/forgot-password.js';
 import resetPasswordHandler from '../api/auth/reset-password.js';
-import submitOrderHandler from '../api/payment/submit-order.js';
 import bankTransferHandler from '../api/payment/bank-transfer.js';
-import stripeIntentHandler from '../api/payment/stripe-intent.js';
-import stripeWebhookHandler from '../api/payment/stripe-webhook.js';
 import oxapayInitHandler from '../api/payment/oxapay-init.js';
 import oxapayWebhookHandler from '../api/payment/oxapay-webhook.js';
 import oxapayReturnHandler from '../api/payment/oxapay-return.js';
@@ -347,7 +344,6 @@ app.use('/api/auth/forgot-password', hybridAuthLimiter.middleware(), convertVerc
 app.use('/api/auth/reset-password', hybridAuthLimiter.middleware(), convertVercelHandler(resetPasswordHandler));
 
 // Payment routes (CSRF protection applied globally except for webhook and return)
-app.use('/api/payment/submit-order', convertVercelHandler(submitOrderHandler));
 app.use('/api/payment/bank-transfer', convertVercelHandler(bankTransferHandler));
 
 // OxaPay crypto payment routes
@@ -355,12 +351,6 @@ app.use('/api/payment/oxapay-init', convertVercelHandler(oxapayInitHandler));
 app.use('/api/payment/oxapay-return', convertVercelHandler(oxapayReturnHandler));
 // SECURITY: Rate limit webhook to prevent abuse (100 req/min per IP)
 app.post('/api/payment/oxapay-webhook', hybridWebhookLimiter.middleware(), convertVercelHandler(oxapayWebhookHandler));
-
-// Stripe payment routes
-app.use('/api/payment/stripe-intent', convertVercelHandler(stripeIntentHandler));
-// SECURITY: Rate limit webhook to prevent abuse (100 req/min per IP)
-// Stripe webhook : Requires raw body for signature verification
-app.post('/api/payment/stripe-webhook', hybridWebhookLimiter.middleware(), express.raw({ type: 'application/json' }), convertVercelHandler(stripeWebhookHandler));
 
 // Orders routes (CSRF protection applied globally via middleware)
 app.delete('/api/orders/:orderId', convertVercelHandler(deleteOrderHandler));

@@ -14,7 +14,6 @@ import logoutHandler from '../api/auth/logout';
 import changePasswordHandler from '../api/auth/change-password';
 import forgotPasswordHandler from '../api/auth/forgot-password';
 import resetPasswordHandler from '../api/auth/reset-password';
-import submitOrderHandler from '../api/payment/submit-order';
 import bankTransferHandler from '../api/payment/bank-transfer';
 import oxapayReturnHandler from '../api/payment/oxapay-return';
 import oxapayInitHandler from '../api/payment/oxapay-init';
@@ -283,7 +282,6 @@ app.use('/api/auth/forgot-password', convertVercelHandler(forgotPasswordHandler)
 app.use('/api/auth/reset-password', convertVercelHandler(resetPasswordHandler));
 
 // Payment routes
-app.use('/api/payment/submit-order', convertVercelHandler(submitOrderHandler));
 app.use('/api/payment/bank-transfer', convertVercelHandler(bankTransferHandler));
 app.use('/api/payment/oxapay-init', convertVercelHandler(oxapayInitHandler));
 app.use('/api/payment/oxapay-return', convertVercelHandler(oxapayReturnHandler));
