@@ -22,6 +22,23 @@ export interface Product {
 
 export const products: Product[] = [
   {
+    id: "test-crypto-payment",
+    name: "Test Paiement Crypto",
+    price: 0.20,
+    originalPrice: 0.50,
+    discount: 60,
+    image: "/attached_assets/display-watch1.0_1759493221518.png",
+    category: "home-gadgets",
+    description: "Article de test pour vérifier le paiement crypto - 0,20€",
+    features: [
+      "Test de paiement",
+      "Prix: 0,20€",
+      "Pour test OxaPay",
+      "Livraison gratuite"
+    ],
+    hasVariants: false
+  },
+  {
     id: "iphone-17-pro-max",
     name: "iPhone 17 Pro Max",
     price: 1198,
