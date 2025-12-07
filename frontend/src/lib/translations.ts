@@ -738,7 +738,7 @@ export const translations: Record<Language, Translations> = {
     invalidCredentials: 'Incorrect email or password',
     welcomeBack: 'Welcome back',
     back: 'Back',
-    welcome: 'Please check your email to verify your account and activate it.',
+    welcome: 'Please check your email (including spam/junk folder) to verify your account. Add noreply@luxiomarket.shop to your contacts.',
     emailRequired: 'Email is required',
     passwordRequired: 'Password is required',
     emailInvalid: 'Invalid email format',
