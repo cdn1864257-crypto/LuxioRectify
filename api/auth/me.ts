@@ -1,7 +1,7 @@
 import { MongoClient, ObjectId } from 'mongodb';
-import jwt from 'jsonwebtoken';
 import { parse } from 'cookie';
 import { getErrorMessage, getLanguageFromRequest } from '../../server/utils/multilingual-messages.js';
+import { validateSession } from '../../server/session-service.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -19,11 +19,6 @@ interface VercelResponse {
   end: (chunk?: any) => void;
 }
 
-interface JWTPayload {
-  userId: string;
-  email: string;
-}
-
 async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') {
     res.setHeader('Allow', ['GET']);
@@ -31,57 +26,34 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    // Récupérer le token depuis le cookie ou le header Authorization
-    let token: string | undefined;
+    let sessionToken: string | undefined;
     
-    // Vérifier d'abord le cookie
     const cookieHeader = req.headers.cookie;
     if (cookieHeader) {
       const cookies = parse(cookieHeader);
-      token = cookies.auth_token;
-    }
-    
-    // Si pas de cookie, vérifier le header Authorization
-    if (!token && req.headers.authorization) {
-      const authHeader = req.headers.authorization;
-      if (authHeader.startsWith('Bearer ')) {
-        token = authHeader.substring(7);
-      }
+      sessionToken = cookies.session_token;
     }
 
-    if (!token) {
+    if (!sessionToken) {
       const lang = getLanguageFromRequest(req);
       return res.status(401).json({ 
         success: false,
-        error: 'TOKEN_MISSING',
+        error: 'SESSION_MISSING',
         message: getErrorMessage('TOKEN_MISSING', lang)
       });
     }
 
-    // Vérifier le JWT
-    const jwtSecret = process.env.JWT_SECRET;
-    if (!jwtSecret) {
-      const lang = getLanguageFromRequest(req);
-      return res.status(500).json({ 
-        success: false,
-        error: 'INTERNAL_SERVER_ERROR',
-        message: getErrorMessage('INTERNAL_SERVER_ERROR', lang)
-      });
-    }
-
-    let decoded: JWTPayload;
-    try {
-      decoded = jwt.verify(token, jwtSecret) as JWTPayload;
-    } catch (error) {
+    const session = await validateSession(sessionToken);
+    
+    if (!session) {
       const lang = getLanguageFromRequest(req);
       return res.status(401).json({ 
         success: false,
-        error: 'TOKEN_INVALID',
+        error: 'SESSION_INVALID',
         message: getErrorMessage('TOKEN_INVALID', lang)
       });
     }
 
-    // Connexion à MongoDB
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
       const lang = getLanguageFromRequest(req);
@@ -100,8 +72,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const db = client.db('luxio');
       const usersCollection = db.collection('users');
 
-      // Récupérer l'utilisateur depuis la base de données
-      const user = await usersCollection.findOne({ _id: new ObjectId(decoded.userId) });
+      const user = await usersCollection.findOne({ _id: new ObjectId(session.userId) });
 
       if (!user) {
         const lang = getLanguageFromRequest(req);
@@ -112,7 +83,6 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         });
       }
 
-      // Retourner les infos utilisateur sans le mot de passe
       const userResponse = {
         id: user._id.toString(),
         firstName: user.firstName,

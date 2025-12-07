@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import csrf from 'csurf';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { parse } from 'cookie';
 import healthHandler from '../api/health.js';
 import usersHandler from '../api/users.js';
 import signupHandler from '../api/auth/signup.js';
@@ -14,6 +15,7 @@ import meHandler from '../api/auth/me.js';
 import logoutHandler from '../api/auth/logout.js';
 import verifyEmailHandler from '../api/auth/verify-email.js';
 import changePasswordHandler from '../api/auth/change-password.js';
+import { ensureSessionIndexes, deleteSession } from './session-service.js';
 import forgotPasswordHandler from '../api/auth/forgot-password.js';
 import resetPasswordHandler from '../api/auth/reset-password.js';
 import bankTransferHandler from '../api/payment/bank-transfer.js';
@@ -293,41 +295,58 @@ app.use('/api/auth/verify-email', convertVercelHandler(verifyEmailHandler));
 app.use('/api/auth/login', hybridAuthLimiter.middleware(), convertVercelHandler(loginHandler));
 
 // Logout route - native Express to handle session destruction
-app.post('/api/auth/logout', (req: any, res) => {
+app.post('/api/auth/logout', async (req: any, res) => {
   try {
-    // Détruire la session MongoDB
-    req.session.destroy((err: any) => {
-      if (err) {
-        console.error('Erreur destruction session:', err);
-        return res.status(500).json({ 
-          ok: false,
-          error: 'Erreur lors de la déconnexion' 
-        });
+    const isProduction = process.env.NODE_ENV === 'production';
+    const cookieDomain = isProduction ? COOKIE_DOMAIN : undefined;
+    
+    // Delete custom session from MongoDB if exists
+    const cookieHeader = req.headers.cookie;
+    if (cookieHeader) {
+      const cookies = parse(cookieHeader);
+      const sessionToken = cookies.session_token;
+      if (sessionToken) {
+        await deleteSession(sessionToken);
       }
-
-      // Supprimer le cookie de session avec les bons paramètres
-      const isProduction = process.env.NODE_ENV === 'production';
-      res.clearCookie('connect.sid', {
-        domain: isProduction ? COOKIE_DOMAIN : undefined,
-        path: '/',
-        httpOnly: true,
-        secure: isProduction,
-        sameSite: 'lax',
+    }
+    
+    // Destroy express-session if exists
+    if (req.session) {
+      req.session.destroy((err: any) => {
+        if (err) {
+          console.error('Erreur destruction session express:', err);
+        }
       });
+    }
 
-      // Supprimer aussi le cookie auth_token s'il existe
-      res.clearCookie('auth_token', {
-        domain: isProduction ? COOKIE_DOMAIN : undefined,
-        path: '/',
-        httpOnly: true,
-        secure: isProduction,
-        sameSite: 'lax',
-      });
+    // Clear all auth-related cookies
+    res.clearCookie('session_token', {
+      domain: cookieDomain,
+      path: '/',
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: 'lax',
+    });
+    
+    res.clearCookie('connect.sid', {
+      domain: cookieDomain,
+      path: '/',
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: 'lax',
+    });
 
-      return res.status(200).json({
-        ok: true,
-        message: 'Déconnexion réussie'
-      });
+    res.clearCookie('auth_token', {
+      domain: cookieDomain,
+      path: '/',
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: 'lax',
+    });
+
+    return res.status(200).json({
+      ok: true,
+      message: 'Déconnexion réussie'
     });
   } catch (error) {
     console.error('Erreur lors de la déconnexion:', error);

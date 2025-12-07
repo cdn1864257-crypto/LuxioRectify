@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import csrf from 'csurf';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { parse } from 'cookie';
 import healthHandler from '../api/health';
 import usersHandler from '../api/users';
 import signupHandler from '../api/auth/signup';
@@ -12,6 +13,7 @@ import loginHandler from '../api/auth/login';
 import meHandler from '../api/auth/me';
 import logoutHandler from '../api/auth/logout';
 import changePasswordHandler from '../api/auth/change-password';
+import { ensureSessionIndexes, deleteSession } from './session-service.js';
 import forgotPasswordHandler from '../api/auth/forgot-password';
 import resetPasswordHandler from '../api/auth/reset-password';
 import bankTransferHandler from '../api/payment/bank-transfer';
@@ -164,40 +166,51 @@ app.use((req, res, next) => {
 
 // Convert Vercel handlers to Express middleware
 const convertVercelHandler = (handler: any) => {
-  return (req: express.Request, res: express.Response) => {
-    // Convert Express req/res to Vercel format
-    const vercelReq = {
-      query: { ...req.query, ...req.params },
-      body: req.body,
-      cookies: req.cookies || {},
-      method: req.method,
-      url: req.url,
-      headers: req.headers as { [key: string]: string }
-    };
+  return async (req: express.Request, res: express.Response) => {
+    try {
+      const vercelReq = {
+        query: { ...req.query, ...req.params },
+        body: req.body,
+        cookies: req.cookies || {},
+        method: req.method,
+        url: req.url,
+        headers: req.headers as { [key: string]: string }
+      };
 
-    const vercelRes = {
-      status: (code: number) => {
-        res.status(code);
-        return vercelRes;
-      },
-      json: (object: any) => {
-        res.json(object);
-        return vercelRes;
-      },
-      setHeader: (name: string, value: string | string[]) => {
-        res.setHeader(name, value);
-        return vercelRes;
-      },
-      end: (chunk?: any) => {
-        if (chunk) {
-          res.send(chunk);
-        } else {
-          res.end();
+      const vercelRes = {
+        status: (code: number) => {
+          res.status(code);
+          return vercelRes;
+        },
+        json: (object: any) => {
+          res.json(object);
+          return vercelRes;
+        },
+        setHeader: (name: string, value: string | string[]) => {
+          res.setHeader(name, value);
+          return vercelRes;
+        },
+        end: (chunk?: any) => {
+          if (chunk) {
+            res.send(chunk);
+          } else {
+            res.end();
+          }
         }
-      }
-    };
+      };
 
-    handler(vercelReq, vercelRes);
+      await handler(vercelReq, vercelRes);
+    } catch (error) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.error('[convertVercelHandler] Uncaught error in handler:', error);
+      }
+      if (!res.headersSent) {
+        res.status(500).json({
+          error: 'Internal Server Error',
+          details: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : 'Unknown error') : undefined
+        });
+      }
+    }
   };
 };
 
@@ -210,63 +223,59 @@ app.use('/api/auth/signup', convertVercelHandler(signupHandler));
 app.use('/api/auth/login', convertVercelHandler(loginHandler));
 
 // Logout route - native Express to handle session destruction
-app.post('/api/auth/logout', (req: any, res) => {
+app.post('/api/auth/logout', async (req: any, res) => {
   try {
-    // Détruire la session MongoDB (si elle existe)
+    const isProduction = process.env.NODE_ENV === 'production';
+    const cookieDomain = isProduction ? (process.env.COOKIE_DOMAIN || '.luxiomarket.shop') : undefined;
+    
+    // Delete custom session from MongoDB if exists
+    const cookieHeader = req.headers.cookie;
+    if (cookieHeader) {
+      const cookies = parse(cookieHeader);
+      const sessionToken = cookies.session_token;
+      if (sessionToken) {
+        await deleteSession(sessionToken);
+      }
+    }
+    
+    // Destroy express-session if exists
     if (req.session) {
       req.session.destroy((err: any) => {
         if (err) {
-          console.error('Erreur destruction session:', err);
-          return res.status(500).json({ 
-            ok: false,
-            error: 'Erreur lors de la déconnexion' 
-          });
+          console.error('Erreur destruction session express:', err);
         }
-
-        // Supprimer le cookie de session avec les bons paramètres
-        const isProduction = process.env.NODE_ENV === 'production';
-        res.clearCookie('connect.sid', {
-          path: '/',
-          httpOnly: true,
-          secure: isProduction,
-          sameSite: isProduction ? 'none' : 'lax',
-        });
-
-        // Supprimer aussi le cookie auth_token s'il existe
-        res.clearCookie('auth_token', {
-          path: '/',
-          httpOnly: true,
-          secure: isProduction,
-          sameSite: isProduction ? 'none' : 'lax',
-        });
-
-        return res.status(200).json({
-          ok: true,
-          message: 'Déconnexion réussie'
-        });
-      });
-    } else {
-      // Pas de session, juste supprimer les cookies
-      const isProduction = process.env.NODE_ENV === 'production';
-      res.clearCookie('connect.sid', {
-        path: '/',
-        httpOnly: true,
-        secure: isProduction,
-        sameSite: isProduction ? 'none' : 'lax',
-      });
-
-      res.clearCookie('auth_token', {
-        path: '/',
-        httpOnly: true,
-        secure: isProduction,
-        sameSite: isProduction ? 'none' : 'lax',
-      });
-
-      return res.status(200).json({
-        ok: true,
-        message: 'Déconnexion réussie'
       });
     }
+
+    // Clear all auth-related cookies with domain for cross-domain support
+    res.clearCookie('session_token', {
+      domain: cookieDomain,
+      path: '/',
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: 'lax',
+    });
+    
+    res.clearCookie('connect.sid', {
+      domain: cookieDomain,
+      path: '/',
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: 'lax',
+    });
+
+    res.clearCookie('auth_token', {
+      domain: cookieDomain,
+      path: '/',
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: 'lax',
+    });
+
+    return res.status(200).json({
+      ok: true,
+      message: 'Déconnexion réussie'
+    });
   } catch (error) {
     console.error('Erreur lors de la déconnexion:', error);
     return res.status(500).json({

@@ -1,8 +1,8 @@
 import { MongoClient } from 'mongodb';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import { serialize } from 'cookie';
 import { getErrorMessage, getLanguageFromRequest } from '../../server/utils/multilingual-messages.js';
+import { createSession, getSessionCookieOptions } from '../../server/session-service.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -34,7 +34,6 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const { email, password }: LoginData = req.body;
 
-    // Vérification des champs
     if (!email || !password) {
       const lang = getLanguageFromRequest(req);
       return res.status(400).json({ 
@@ -44,7 +43,6 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
-    // Connexion à MongoDB
     const mongoUri = process.env.MONGODB_URI;
     if (!mongoUri) {
       const lang = getLanguageFromRequest(req);
@@ -64,7 +62,6 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const db = client.db('luxio');
       const usersCollection = db.collection('users');
 
-      // Rechercher l'utilisateur par email
       user = await usersCollection.findOne({ email: email.toLowerCase() });
       
       if (!user) {
@@ -76,8 +73,6 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         });
       }
 
-      // Vérifier si l'email est vérifié (pour les nouveaux comptes uniquement)
-      // Les anciens comptes sans le champ isEmailVerified sont traités comme vérifiés (backward compatibility)
       if (user.isEmailVerified === false) {
         const lang = getLanguageFromRequest(req);
         return res.status(403).json({ 
@@ -87,7 +82,6 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         });
       }
 
-      // Vérifier le mot de passe
       const isPasswordValid = await bcrypt.compare(password, user.password);
       
       if (!isPasswordValid) {
@@ -102,41 +96,21 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       await client.close();
     }
 
-    // Générer le JWT
-    const jwtSecret = process.env.JWT_SECRET;
-    if (!jwtSecret) {
-      const lang = getLanguageFromRequest(req);
-      return res.status(500).json({ 
-        success: false,
-        error: 'INTERNAL_SERVER_ERROR',
-        message: getErrorMessage('INTERNAL_SERVER_ERROR', lang)
-      });
-    }
-
-    const token = jwt.sign(
-      {
-        userId: user._id.toString(),
-        email: user.email
-      },
-      jwtSecret,
-      { expiresIn: '7d' } // Token valide 7 jours
+    const ipAddress = req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || undefined;
+    const userAgent = req.headers['user-agent'] || undefined;
+    
+    const session = await createSession(
+      user._id.toString(),
+      typeof ipAddress === 'string' ? ipAddress : ipAddress?.[0],
+      userAgent
     );
 
-    // Créer le cookie httpOnly et secure
     const isProduction = process.env.NODE_ENV === 'production';
-    const cookieDomain = isProduction ? (process.env.COOKIE_DOMAIN || '.luxiomarket.shop') : undefined;
-    const cookie = serialize('auth_token', token, {
-      domain: cookieDomain,
-      httpOnly: true,
-      secure: isProduction,
-      sameSite: 'lax',
-      maxAge: 60 * 60 * 24 * 7, // 7 jours en secondes
-      path: '/'
-    });
+    const cookieOptions = getSessionCookieOptions(isProduction);
+    const cookie = serialize('session_token', session.sessionId, cookieOptions);
 
     res.setHeader('Set-Cookie', cookie);
 
-    // Retourner les infos utilisateur sans le mot de passe
     const userResponse = {
       id: user._id.toString(),
       firstName: user.firstName,

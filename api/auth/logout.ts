@@ -1,4 +1,5 @@
-import { serialize } from 'cookie';
+import { serialize, parse } from 'cookie';
+import { deleteSession } from '../../server/session-service.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -24,26 +25,45 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const isProduction = process.env.NODE_ENV === 'production';
+    const cookieDomain = isProduction ? (process.env.COOKIE_DOMAIN || '.luxiomarket.shop') : undefined;
     
-    // Clear auth_token cookie
-    const authCookie = serialize('auth_token', '', {
+    const cookieHeader = req.headers.cookie;
+    if (cookieHeader) {
+      const cookies = parse(cookieHeader);
+      const sessionToken = cookies.session_token;
+      
+      if (sessionToken) {
+        await deleteSession(sessionToken);
+      }
+    }
+
+    const sessionCookieClear = serialize('session_token', '', {
+      domain: cookieDomain,
       httpOnly: true,
       secure: isProduction,
-      sameSite: isProduction ? 'none' : 'lax',
+      sameSite: 'lax',
       maxAge: 0,
       path: '/'
     });
 
-    // Clear session cookie (connect.sid)
-    const sessionCookie = serialize('connect.sid', '', {
+    const authCookieClear = serialize('auth_token', '', {
+      domain: cookieDomain,
       httpOnly: true,
       secure: isProduction,
-      sameSite: isProduction ? 'none' : 'lax',
+      sameSite: 'lax',
       maxAge: 0,
       path: '/'
     });
 
-    res.setHeader('Set-Cookie', [authCookie, sessionCookie]);
+    const connectSidClear = serialize('connect.sid', '', {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: 'lax',
+      maxAge: 0,
+      path: '/'
+    });
+
+    res.setHeader('Set-Cookie', [sessionCookieClear, authCookieClear, connectSidClear]);
 
     return res.status(200).json({
       ok: true,
