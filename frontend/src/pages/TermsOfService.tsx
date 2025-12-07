@@ -70,7 +70,7 @@ const TermsOfService = () => {
           content: [
             "La collecte et le traitement de vos données personnelles sont effectués conformément à notre Politique de Confidentialité et au Règlement Général sur la Protection des Données (RGPD).",
             "Vous disposez d'un droit d'accès, de rectification, de suppression et de portabilité de vos données personnelles.",
-            "Pour exercer ces droits, veuillez consulter notre page de gestion des données ou nous contacter à contact@luxio.com."
+            "Pour exercer ces droits, veuillez consulter notre page de gestion des données ou nous contacter à Contact@luxiomarket.shop."
           ]
         },
         liability: {
@@ -101,7 +101,7 @@ const TermsOfService = () => {
           title: "11. Contact",
           content: [
             "Pour toute question concernant ces conditions générales d'utilisation, veuillez nous contacter :",
-            "Email: contact@luxio.com",
+            "Email: Contact@luxiomarket.shop",
             "Adresse: 123 Avenue des Champs-Élysées, 75008 Paris, France",
             "Téléphone: +33 1 23 45 67 89"
           ]
@@ -168,7 +168,7 @@ const TermsOfService = () => {
           content: [
             "The collection and processing of your personal data is carried out in accordance with our Privacy Policy and the General Data Protection Regulation (GDPR).",
             "You have the right to access, rectify, delete and port your personal data.",
-            "To exercise these rights, please consult our data management page or contact us at contact@luxio.com."
+            "To exercise these rights, please consult our data management page or contact us at Contact@luxiomarket.shop."
           ]
         },
         liability: {
@@ -199,7 +199,7 @@ const TermsOfService = () => {
           title: "11. Contact",
           content: [
             "For any questions regarding these terms of service, please contact us:",
-            "Email: contact@luxio.com",
+            "Email: Contact@luxiomarket.shop",
             "Address: 123 Avenue des Champs-Élysées, 75008 Paris, France",
             "Phone: +33 1 23 45 67 89"
           ]
@@ -266,7 +266,7 @@ const TermsOfService = () => {
           content: [
             "La recopilación y el procesamiento de sus datos personales se llevan a cabo de acuerdo con nuestra Política de Privacidad y el Reglamento General de Protección de Datos (RGPD).",
             "Tiene derecho a acceder, rectificar, eliminar y portar sus datos personales.",
-            "Para ejercer estos derechos, consulte nuestra página de gestión de datos o contáctenos en contact@luxio.com."
+            "Para ejercer estos derechos, consulte nuestra página de gestión de datos o contáctenos en Contact@luxiomarket.shop."
           ]
         },
         liability: {
@@ -297,7 +297,7 @@ const TermsOfService = () => {
           title: "11. Contacto",
           content: [
             "Para cualquier pregunta sobre estos términos de servicio, contáctenos:",
-            "Email: contact@luxio.com",
+            "Email: Contact@luxiomarket.shop",
             "Dirección: 123 Avenue des Champs-Élysées, 75008 París, Francia",
             "Teléfono: +33 1 23 45 67 89"
           ]
@@ -364,7 +364,7 @@ const TermsOfService = () => {
           content: [
             "A coleta e o processamento de seus dados pessoais são realizados de acordo com nossa Política de Privacidade e o Regulamento Geral de Proteção de Dados (RGPD).",
             "Você tem o direito de acessar, retificar, excluir e portar seus dados pessoais.",
-            "Para exercer esses direitos, consulte nossa página de gerenciamento de dados ou entre em contato conosco em contact@luxio.com."
+            "Para exercer esses direitos, consulte nossa página de gerenciamento de dados ou entre em contato conosco em Contact@luxiomarket.shop."
           ]
         },
         liability: {
@@ -395,7 +395,7 @@ const TermsOfService = () => {
           title: "11. Contato",
           content: [
             "Para quaisquer perguntas sobre estes termos de serviço, entre em contato conosco:",
-            "Email: contact@luxio.com",
+            "Email: Contact@luxiomarket.shop",
             "Endereço: 123 Avenue des Champs-Élysées, 75008 Paris, França",
             "Telefone: +33 1 23 45 67 89"
           ]
@@ -462,7 +462,7 @@ const TermsOfService = () => {
           content: [
             "La raccolta e il trattamento dei tuoi dati personali vengono effettuati in conformità con la nostra Informativa sulla Privacy e il Regolamento Generale sulla Protezione dei Dati (GDPR).",
             "Hai il diritto di accedere, rettificare, cancellare e portare i tuoi dati personali.",
-            "Per esercitare questi diritti, consulta la nostra pagina di gestione dati o contattaci a contact@luxio.com."
+            "Per esercitare questi diritti, consulta la nostra pagina di gestione dati o contattaci a Contact@luxiomarket.shop."
           ]
         },
         liability: {
@@ -493,7 +493,7 @@ const TermsOfService = () => {
           title: "11. Contatto",
           content: [
             "Per qualsiasi domanda riguardo a questi termini di servizio, contattaci:",
-            "Email: contact@luxio.com",
+            "Email: Contact@luxiomarket.shop",
             "Indirizzo: 123 Avenue des Champs-Élysées, 75008 Parigi, Francia",
             "Telefono: +33 1 23 45 67 89"
           ]
@@ -560,7 +560,7 @@ const TermsOfService = () => {
           content: [
             "Az Ön személyes adatainak gyűjtése és feldolgozása Adatvédelmi Irányelvünk és az Általános Adatvédelmi Rendelet (GDPR) szerint történik.",
             "Jogában áll hozzáférni, javítani, törölni és hordozni személyes adatait.",
-            "Ezen jogok gyakorlásához látogassa meg adatkezelési oldalunkat vagy lépjen kapcsolatba velünk a contact@luxio.com címen."
+            "Ezen jogok gyakorlásához látogassa meg adatkezelési oldalunkat vagy lépjen kapcsolatba velünk a Contact@luxiomarket.shop címen."
           ]
         },
         liability: {
@@ -591,7 +591,7 @@ const TermsOfService = () => {
           title: "11. Kapcsolat",
           content: [
             "A szolgáltatási feltételekkel kapcsolatos kérdésekért lépjen kapcsolatba velünk:",
-            "Email: contact@luxio.com",
+            "Email: Contact@luxiomarket.shop",
             "Cím: 123 Avenue des Champs-Élysées, 75008 Párizs, Franciaország",
             "Telefon: +33 1 23 45 67 89"
           ]
@@ -658,7 +658,7 @@ const TermsOfService = () => {
           content: [
             "Gromadzenie i przetwarzanie Twoich danych osobowych odbywa się zgodnie z naszą Polityką Prywatności i Ogólnym Rozporządzeniem o Ochronie Danych (RODO).",
             "Masz prawo dostępu, poprawiania, usuwania i przenoszenia swoich danych osobowych.",
-            "Aby skorzystać z tych praw, zapoznaj się z naszą stroną zarządzania danymi lub skontaktuj się z nami pod adresem contact@luxio.com."
+            "Aby skorzystać z tych praw, zapoznaj się z naszą stroną zarządzania danymi lub skontaktuj się z nami pod adresem Contact@luxiomarket.shop."
           ]
         },
         liability: {
@@ -689,7 +689,7 @@ const TermsOfService = () => {
           title: "11. Kontakt",
           content: [
             "W przypadku pytań dotyczących tych warunków świadczenia usług, skontaktuj się z nami:",
-            "Email: contact@luxio.com",
+            "Email: Contact@luxiomarket.shop",
             "Adres: 123 Avenue des Champs-Élysées, 75008 Paryż, Francja",
             "Telefon: +33 1 23 45 67 89"
           ]

@@ -26,7 +26,7 @@ const LegalNotice = () => {
         phone: "Téléphone",
         phoneValue: "+33 1 23 45 67 89",
         email: "Email",
-        emailValue: "contact@luxio.com"
+        emailValue: "Contact@luxiomarket.shop"
       },
       publication: {
         title: "Directeur de la publication",
@@ -84,7 +84,7 @@ const LegalNotice = () => {
         phone: "Phone",
         phoneValue: "+33 1 23 45 67 89",
         email: "Email",
-        emailValue: "contact@luxio.com"
+        emailValue: "Contact@luxiomarket.shop"
       },
       publication: {
         title: "Publication Director",
@@ -142,7 +142,7 @@ const LegalNotice = () => {
         phone: "Teléfono",
         phoneValue: "+33 1 23 45 67 89",
         email: "Correo electrónico",
-        emailValue: "contact@luxio.com"
+        emailValue: "Contact@luxiomarket.shop"
       },
       publication: {
         title: "Director de Publicación",
@@ -200,7 +200,7 @@ const LegalNotice = () => {
         phone: "Telefone",
         phoneValue: "+33 1 23 45 67 89",
         email: "Email",
-        emailValue: "contact@luxio.com"
+        emailValue: "Contact@luxiomarket.shop"
       },
       publication: {
         title: "Diretor de Publicação",
@@ -258,7 +258,7 @@ const LegalNotice = () => {
         phone: "Telefono",
         phoneValue: "+33 1 23 45 67 89",
         email: "Email",
-        emailValue: "contact@luxio.com"
+        emailValue: "Contact@luxiomarket.shop"
       },
       publication: {
         title: "Direttore della Pubblicazione",
@@ -316,7 +316,7 @@ const LegalNotice = () => {
         phone: "Telefon",
         phoneValue: "+33 1 23 45 67 89",
         email: "Email",
-        emailValue: "contact@luxio.com"
+        emailValue: "Contact@luxiomarket.shop"
       },
       publication: {
         title: "Kiadási Igazgató",
@@ -374,7 +374,7 @@ const LegalNotice = () => {
         phone: "Telefon",
         phoneValue: "+33 1 23 45 67 89",
         email: "Email",
-        emailValue: "contact@luxio.com"
+        emailValue: "Contact@luxiomarket.shop"
       },
       publication: {
         title: "Dyrektor Publikacji",
