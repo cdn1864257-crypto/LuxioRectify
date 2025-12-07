@@ -8,6 +8,7 @@ import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { CartSidebar } from '../components/CartSidebar';
 import { CheckoutModal } from '../components/CheckoutModal';
+import { ProductDetailModal } from '../components/ProductDetailModal';
 import { showToast } from '../components/ToastNotifications';
 import { SEO } from '../components/SEO';
 import { Button } from '@/components/ui/button';
@@ -36,6 +37,7 @@ export default function Premium() {
   const [cartOpen, setCartOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [addedToCart, setAddedToCart] = useState<Set<string>>(new Set());
+  const [selectedProductForModal, setSelectedProductForModal] = useState<Product | null>(null);
 
   // Filters
   const [searchQuery, setSearchQuery] = useState('');
@@ -394,7 +396,10 @@ export default function Premium() {
                     <Card key={phone.id} className="group hover:shadow-xl transition-all duration-300 flex flex-col" data-testid={`card-product-${phone.id}`}>
                       <CardContent className="p-4 flex-1">
                         {/* Product Image */}
-                        <div className="relative aspect-square mb-4 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800">
+                        <div 
+                          className="relative aspect-square mb-4 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800 cursor-pointer"
+                          onClick={() => setSelectedProductForModal(phone)}
+                        >
                           <img
                             src={currentImage}
                             alt={phone.name}
@@ -585,6 +590,20 @@ export default function Premium() {
         isOpen={checkoutOpen}
         onClose={() => setCheckoutOpen(false)}
       />
+      
+      {selectedProductForModal && (
+        <ProductDetailModal 
+          product={selectedProductForModal}
+          isOpen={!!selectedProductForModal}
+          onClose={() => setSelectedProductForModal(null)}
+          initialVariant={
+            selectedProductForModal.variants?.find(
+              v => v.capacity === variantSelections[selectedProductForModal.id]?.capacity && 
+                   v.color === variantSelections[selectedProductForModal.id]?.color
+            ) || null
+          }
+        />
+      )}
     </div>
   );
 }
