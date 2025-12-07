@@ -726,7 +726,7 @@ export const translations: Record<Language, Translations> = {
     westernUnion: 'Western Union',
     moneyGram: 'MoneyGram',
     ria: 'Ria',
-    alternativePaymentMessage: 'To use this payment method, please contact our customer service at: support@luxiomarket.shop. We will respond promptly.',
+    alternativePaymentMessage: 'To use this payment method, please contact our customer service at: Contact@luxiomarket.shop. We will respond promptly.',
     recommendedMethod: 'Recommended Method',
     alternativePaymentInstructionsTitle: 'How to Proceed?',
     alternativePaymentInstructions: 'Click on your preferred payment method above. This will open your email application with a pre-filled message. Send this message to our service to finalize your order. Our team will respond as soon as possible with detailed payment instructions.',
@@ -757,7 +757,7 @@ export const translations: Record<Language, Translations> = {
     paymentModalBankInstructions: 'Please make a bank transfer to the following account with your order reference:',
     paymentModalOtherMethodsTitle: 'Other Payment Methods',
     paymentModalOtherMethodsMessage: 'For PayPal, Western Union, MoneyGram, or Ria payments, please contact our customer service at:',
-    paymentModalContactEmail: 'support@luxiomarket.shop',
+    paymentModalContactEmail: 'Contact@luxiomarket.shop',
     viewPaymentInstructions: 'View Payment Instructions',
     
     // Order Confirmation
@@ -928,7 +928,7 @@ export const translations: Record<Language, Translations> = {
     termsOfServiceTitle: 'Terms of Service',
     termsOfServiceContent: 'Prices are in euros including VAT. Accepted payments: SEPA bank transfer, Crypto via OxaPay. Orders are shipped within 24 hours after immediate payment confirmation, except for regular bank transfer (24-72h depending on banks). For complaints, please contact us via email.',
     contactTitle: 'Contact',
-    contactContent: 'For any questions: support@luxiomarket.shop',
+    contactContent: 'For any questions: Contact@luxiomarket.shop',
     
     // Product Details
     productDetails: 'Product Details',
@@ -1431,7 +1431,7 @@ export const translations: Record<Language, Translations> = {
     westernUnion: 'Western Union',
     moneyGram: 'MoneyGram',
     ria: 'Ria',
-    alternativePaymentMessage: 'Pour utiliser ce moyen de paiement, veuillez contacter notre service client à : support@luxiomarket.shop. Nous vous répondrons rapidement.',
+    alternativePaymentMessage: 'Pour utiliser ce moyen de paiement, veuillez contacter notre service client à : Contact@luxiomarket.shop. Nous vous répondrons rapidement.',
     recommendedMethod: 'Méthode Recommandée',
     alternativePaymentInstructionsTitle: 'Comment procéder ?',
     alternativePaymentInstructions: 'Cliquez sur le moyen de paiement de votre choix ci-dessus. Cela ouvrira votre application email avec un message pré-rempli. Envoyez ce message à notre service pour finaliser votre commande. Notre équipe vous répondra dans les plus brefs délais avec les instructions de paiement détaillées.',
@@ -1462,7 +1462,7 @@ export const translations: Record<Language, Translations> = {
     paymentModalBankInstructions: 'Veuillez effectuer un virement bancaire sur le compte suivant avec votre référence de commande :',
     paymentModalOtherMethodsTitle: 'Autres moyens de paiement',
     paymentModalOtherMethodsMessage: 'Pour les paiements PayPal, Western Union, MoneyGram ou Ria, veuillez contacter notre service client à :',
-    paymentModalContactEmail: 'support@luxiomarket.shop',
+    paymentModalContactEmail: 'Contact@luxiomarket.shop',
     viewPaymentInstructions: 'Voir les instructions de paiement',
     
     // Order Confirmation
@@ -1633,7 +1633,7 @@ export const translations: Record<Language, Translations> = {
     termsOfServiceTitle: 'Conditions générales de vente',
     termsOfServiceContent: 'Les prix sont en euros TTC. Paiements acceptés : Virement bancaire SEPA, Crypto via OxaPay. Les commandes sont expédiées sous 24h après confirmation du paiement immédiat, sauf virement ordinaire (24-72h selon banques). Réclamations → email de contact.',
     contactTitle: 'Contact',
-    contactContent: 'Pour toute question : support@luxiomarket.shop',
+    contactContent: 'Pour toute question : Contact@luxiomarket.shop',
     
     // Product Details
     productDetails: 'Détails du produit',
@@ -2136,7 +2136,7 @@ export const translations: Record<Language, Translations> = {
     westernUnion: 'Western Union',
     moneyGram: 'MoneyGram',
     ria: 'Ria',
-    alternativePaymentMessage: 'Para utilizar este método de pago, por favor contacte a nuestro servicio de atención al cliente en: support@luxiomarket.shop. Le responderemos rápidamente.',
+    alternativePaymentMessage: 'Para utilizar este método de pago, por favor contacte a nuestro servicio de atención al cliente en: Contact@luxiomarket.shop. Le responderemos rápidamente.',
     recommendedMethod: 'Método Recomendado',
     alternativePaymentInstructionsTitle: '¿Cómo proceder?',
     alternativePaymentInstructions: 'Haga clic en su método de pago preferido arriba. Esto abrirá su aplicación de correo electrónico con un mensaje prellenado. Envíe este mensaje a nuestro servicio para finalizar su pedido. Nuestro equipo responderá lo antes posible con instrucciones de pago detalladas.',
@@ -2167,7 +2167,7 @@ export const translations: Record<Language, Translations> = {
     paymentModalBankInstructions: 'Por favor realice una transferencia bancaria a la siguiente cuenta con su referencia de pedido:',
     paymentModalOtherMethodsTitle: 'Otros métodos de pago',
     paymentModalOtherMethodsMessage: 'Para pagos con PayPal, Western Union, MoneyGram o Ria, por favor contacte a nuestro servicio al cliente en:',
-    paymentModalContactEmail: 'support@luxiomarket.shop',
+    paymentModalContactEmail: 'Contact@luxiomarket.shop',
     viewPaymentInstructions: 'Ver instrucciones de pago',
     
     // Order Confirmation
@@ -2338,7 +2338,7 @@ export const translations: Record<Language, Translations> = {
     termsOfServiceTitle: 'Términos de servicio',
     termsOfServiceContent: 'Los precios están en euros con IVA incluido. Pagos aceptados: Transferencia bancaria SEPA, Cripto vía OxaPay. Los pedidos se envían en 24 horas tras confirmación del pago inmediato, excepto transferencia ordinaria (24-72h según bancos). Reclamaciones → email de contacto.',
     contactTitle: 'Contacto',
-    contactContent: 'Para cualquier pregunta: support@luxiomarket.shop',
+    contactContent: 'Para cualquier pregunta: Contact@luxiomarket.shop',
     
     // Product Details
     productDetails: 'Detalles del producto',
@@ -2841,7 +2841,7 @@ export const translations: Record<Language, Translations> = {
     westernUnion: 'Western Union',
     moneyGram: 'MoneyGram',
     ria: 'Ria',
-    alternativePaymentMessage: 'Para utilizar este método de pagamento, por favor contacte o nosso serviço de apoio ao cliente em: support@luxiomarket.shop. Responderemos rapidamente.',
+    alternativePaymentMessage: 'Para utilizar este método de pagamento, por favor contacte o nosso serviço de apoio ao cliente em: Contact@luxiomarket.shop. Responderemos rapidamente.',
     recommendedMethod: 'Método Recomendado',
     alternativePaymentInstructionsTitle: 'Como proceder?',
     alternativePaymentInstructions: 'Clique no seu método de pagamento preferido acima. Isso abrirá seu aplicativo de e-mail com uma mensagem pré-preenchida. Envie esta mensagem ao nosso serviço para finalizar seu pedido. Nossa equipe responderá o mais rápido possível com instruções de pagamento detalhadas.',
@@ -2872,7 +2872,7 @@ export const translations: Record<Language, Translations> = {
     paymentModalBankInstructions: 'Por favor efetue uma transferência bancária para a seguinte conta com a sua referência de pedido:',
     paymentModalOtherMethodsTitle: 'Outros métodos de pagamento',
     paymentModalOtherMethodsMessage: 'Para pagamentos PayPal, Western Union, MoneyGram ou Ria, por favor contacte o nosso serviço de apoio ao cliente em:',
-    paymentModalContactEmail: 'support@luxiomarket.shop',
+    paymentModalContactEmail: 'Contact@luxiomarket.shop',
     viewPaymentInstructions: 'Ver instruções de pagamento',
     
     // Order Confirmation
@@ -3043,7 +3043,7 @@ export const translations: Record<Language, Translations> = {
     termsOfServiceTitle: 'Termos de serviço',
     termsOfServiceContent: 'Os preços estão em euros com IVA incluído. Pagamentos aceites: Transferência bancária SEPA, Cripto via OxaPay. Os pedidos são enviados em 24 horas após confirmação do pagamento imediato, exceto transferência ordinária (24-72h conforme bancos). Reclamações → email de contacto.',
     contactTitle: 'Contacto',
-    contactContent: 'Para qualquer questão: support@luxiomarket.shop',
+    contactContent: 'Para qualquer questão: Contact@luxiomarket.shop',
     
     // Product Details
     productDetails: 'Detalhes do produto',
@@ -3546,7 +3546,7 @@ export const translations: Record<Language, Translations> = {
     westernUnion: 'Western Union',
     moneyGram: 'MoneyGram',
     ria: 'Ria',
-    alternativePaymentMessage: 'Aby skorzystać z tej metody płatności, skontaktuj się z naszą obsługą klienta pod adresem: support@luxiomarket.shop. Odpowiemy szybko.',
+    alternativePaymentMessage: 'Aby skorzystać z tej metody płatności, skontaktuj się z naszą obsługą klienta pod adresem: Contact@luxiomarket.shop. Odpowiemy szybko.',
     recommendedMethod: 'Zalecana metoda',
     alternativePaymentInstructionsTitle: 'Jak postępować?',
     alternativePaymentInstructions: 'Kliknij preferowaną metodę płatności powyżej. Spowoduje to otwarcie aplikacji e-mail z wstępnie wypełnioną wiadomością. Wyślij tę wiadomość do naszego serwisu, aby sfinalizować zamówienie. Nasz zespół odpowie jak najszybciej ze szczegółowymi instrukcjami płatności.',
@@ -3577,7 +3577,7 @@ export const translations: Record<Language, Translations> = {
     paymentModalBankInstructions: 'Proszę dokonać przelewu bankowego na następujące konto z numerem zamówienia jako tytułem:',
     paymentModalOtherMethodsTitle: 'Inne metody płatności',
     paymentModalOtherMethodsMessage: 'W przypadku płatności PayPal, Western Union, MoneyGram lub Ria prosimy o kontakt z naszą obsługą klienta pod adresem:',
-    paymentModalContactEmail: 'support@luxiomarket.shop',
+    paymentModalContactEmail: 'Contact@luxiomarket.shop',
     viewPaymentInstructions: 'Zobacz instrukcje płatności',
     
     // Order Confirmation
@@ -3748,7 +3748,7 @@ export const translations: Record<Language, Translations> = {
     termsOfServiceTitle: 'Warunki usługi',
     termsOfServiceContent: 'Ceny podane są w euro z VAT. Akceptowane płatności: Przelew bankowy SEPA, Kryptowaluty przez OxaPay. Zamówienia są wysyłane w ciągu 24 godzin po natychmiastowym potwierdzeniu płatności, z wyjątkiem zwykłego przelewu (24-72h w zależności od banków). Reklamacje → email kontaktowy.',
     contactTitle: 'Kontakt',
-    contactContent: 'W przypadku pytań: support@luxiomarket.shop',
+    contactContent: 'W przypadku pytań: Contact@luxiomarket.shop',
     
     // Product Details
     productDetails: 'Szczegóły produktu',
@@ -4251,7 +4251,7 @@ export const translations: Record<Language, Translations> = {
     westernUnion: 'Western Union',
     moneyGram: 'MoneyGram',
     ria: 'Ria',
-    alternativePaymentMessage: 'Per utilizzare questo metodo di pagamento, contatta il nostro servizio clienti a: support@luxiomarket.shop. Risponderemo prontamente.',
+    alternativePaymentMessage: 'Per utilizzare questo metodo di pagamento, contatta il nostro servizio clienti a: Contact@luxiomarket.shop. Risponderemo prontamente.',
     recommendedMethod: 'Metodo Consigliato',
     alternativePaymentInstructionsTitle: 'Come procedere?',
     alternativePaymentInstructions: 'Clicca sul tuo metodo di pagamento preferito sopra. Questo aprirà la tua applicazione email con un messaggio precompilato. Invia questo messaggio al nostro servizio per finalizzare il tuo ordine. Il nostro team risponderà il prima possibile con istruzioni di pagamento dettagliate.',
@@ -4282,7 +4282,7 @@ export const translations: Record<Language, Translations> = {
     paymentModalBankInstructions: 'Si prega di effettuare un bonifico bancario sul seguente conto con il riferimento dell\'ordine:',
     paymentModalOtherMethodsTitle: 'Altri metodi di pagamento',
     paymentModalOtherMethodsMessage: 'Per i pagamenti PayPal, Western Union, MoneyGram o Ria, si prega di contattare il nostro servizio clienti a:',
-    paymentModalContactEmail: 'support@luxiomarket.shop',
+    paymentModalContactEmail: 'Contact@luxiomarket.shop',
     viewPaymentInstructions: 'Visualizza istruzioni di pagamento',
     
     // Order Confirmation
@@ -4453,7 +4453,7 @@ export const translations: Record<Language, Translations> = {
     termsOfServiceTitle: 'Termini di servizio',
     termsOfServiceContent: 'I prezzi sono in euro IVA inclusa. Pagamenti accettati: Bonifico bancario SEPA, Cripto tramite OxaPay. Gli ordini vengono spediti entro 24 ore dopo la conferma del pagamento immediato, tranne bonifico ordinario (24-72h a seconda delle banche). Reclami → email di contatto.',
     contactTitle: 'Contatti',
-    contactContent: 'Per qualsiasi domanda: support@luxiomarket.shop',
+    contactContent: 'Per qualsiasi domanda: Contact@luxiomarket.shop',
     
     // Product Details
     productDetails: 'Dettagli prodotto',
@@ -4956,7 +4956,7 @@ export const translations: Record<Language, Translations> = {
     westernUnion: 'Western Union',
     moneyGram: 'MoneyGram',
     ria: 'Ria',
-    alternativePaymentMessage: 'A fizetési mód használatához kérjük, lépjen kapcsolatba ügyfélszolgálatunkkal: support@luxiomarket.shop. Gyorsan válaszolunk.',
+    alternativePaymentMessage: 'A fizetési mód használatához kérjük, lépjen kapcsolatba ügyfélszolgálatunkkal: Contact@luxiomarket.shop. Gyorsan válaszolunk.',
     recommendedMethod: 'Ajánlott módszer',
     alternativePaymentInstructionsTitle: 'Hogyan kell eljárni?',
     alternativePaymentInstructions: 'Kattintson a fenti preferált fizetési módra. Ez megnyitja az e-mail alkalmazást egy előre kitöltött üzenettel. Küldje el ezt az üzenetet szolgáltatásunknak a rendelés véglegesítéséhez. Csapatunk a lehető leghamarabb válaszol részletes fizetési utasításokkal.',
@@ -4987,7 +4987,7 @@ export const translations: Record<Language, Translations> = {
     paymentModalBankInstructions: 'Kérjük, utalja át az összeget a következő bankszámlára a rendelésszámával együtt:',
     paymentModalOtherMethodsTitle: 'Egyéb fizetési módok',
     paymentModalOtherMethodsMessage: 'PayPal, Western Union, MoneyGram vagy Ria fizetéshez kérjük, lépjen kapcsolatba ügyfélszolgálatunkkal:',
-    paymentModalContactEmail: 'support@luxiomarket.shop',
+    paymentModalContactEmail: 'Contact@luxiomarket.shop',
     viewPaymentInstructions: 'Fizetési útmutató megtekintése',
     
     // Order Confirmation
@@ -5158,7 +5158,7 @@ export const translations: Record<Language, Translations> = {
     termsOfServiceTitle: 'Szolgáltatási feltételek',
     termsOfServiceContent: 'Az árak euróban vannak ÁFA-val. Elfogadott fizetések: SEPA banki átutalás, Kripto OxaPay-en keresztül. A rendeléseket 24 órán belül szállítjuk ki az azonnali fizetés megerősítése után, kivéve rendes átutalást (24-72h bankoktól függően). Panaszok → kapcsolati e-mail.',
     contactTitle: 'Kapcsolat',
-    contactContent: 'Bármilyen kérdés esetén: support@luxiomarket.shop',
+    contactContent: 'Bármilyen kérdés esetén: Contact@luxiomarket.shop',
     
     // Product Details
     productDetails: 'Termék részletek',

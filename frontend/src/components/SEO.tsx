@@ -72,7 +72,7 @@ export function SEO({
     ],
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "support@luxiomarket.shop",
+      "email": "Contact@luxiomarket.shop",
       "contactType": "Customer Service"
     }
   };
