@@ -100,7 +100,7 @@ export function CookieConsent() {
       className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-md z-50 animate-in slide-in-from-bottom-5 fade-in duration-500"
       data-testid="cookie-consent-banner"
     >
-      <div className="relative bg-background/95 backdrop-blur-md border border-border/50 rounded-xl shadow-lg p-5">
+      <div className="relative bg-background border border-border rounded-xl shadow-xl p-5">
         <div className="flex items-start gap-3">
           <div className="flex-shrink-0 p-2 bg-primary/10 rounded-lg">
             <Cookie className="h-5 w-5 text-primary" aria-hidden="true" />
