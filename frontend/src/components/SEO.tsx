@@ -18,7 +18,7 @@ interface SEOProps {
   };
 }
 
-const SITE_URL = 'https://luxiomarket.shop';
+const SITE_URL = 'https://www.luxiomarket.shop';
 
 const languageLocales: Record<Language, string> = {
   en: 'en_US',
