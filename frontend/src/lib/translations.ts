@@ -903,7 +903,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Privacy Policy',
     privacyPolicyContent: 'We only collect data necessary for order processing (name, address, email, phone). This information is never resold and can be deleted upon request via our contact email.',
     termsOfServiceTitle: 'Terms of Service',
-    termsOfServiceContent: 'Prices are in euros including VAT. Accepted payments: SEPA bank transfer, Crypto via OxaPay, and alternative methods like PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, and prepaid tickets Transcash/PCS. Orders are shipped within 24 hours after immediate payment confirmation, except for regular bank transfer (24-72h depending on banks). For complaints, please contact us via email.',
+    termsOfServiceContent: 'Prices are in euros including VAT. Accepted payments: SEPA bank transfer, Crypto via OxaPay. Orders are shipped within 24 hours after immediate payment confirmation, except for regular bank transfer (24-72h depending on banks). For complaints, please contact us via email.',
     contactTitle: 'Contact',
     contactContent: 'For any questions: support@luxiomarket.shop',
     
@@ -1596,7 +1596,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Politique de confidentialité',
     privacyPolicyContent: 'Nous collectons uniquement les données nécessaires au traitement des commandes (nom, adresse, email, téléphone). Ces informations ne sont jamais revendues et peuvent être supprimées sur demande via notre email de contact.',
     termsOfServiceTitle: 'Conditions générales de vente',
-    termsOfServiceContent: 'Les prix sont en euros TTC. Paiements acceptés : Virement bancaire SEPA, Crypto via OxaPay, et moyens alternatifs comme PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, et tickets prépayés Transcash/PCS. Les commandes sont expédiées sous 24h après confirmation du paiement immédiat, sauf virement ordinaire (24-72h selon banques). Réclamations → email de contact.',
+    termsOfServiceContent: 'Les prix sont en euros TTC. Paiements acceptés : Virement bancaire SEPA, Crypto via OxaPay. Les commandes sont expédiées sous 24h après confirmation du paiement immédiat, sauf virement ordinaire (24-72h selon banques). Réclamations → email de contact.',
     contactTitle: 'Contact',
     contactContent: 'Pour toute question : support@luxiomarket.shop',
     
@@ -2289,7 +2289,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Política de privacidad',
     privacyPolicyContent: 'Solo recopilamos los datos necesarios para el procesamiento de pedidos (nombre, dirección, email, teléfono). Esta información nunca se revende y puede ser eliminada bajo petición a través de nuestro email de contacto.',
     termsOfServiceTitle: 'Términos de servicio',
-    termsOfServiceContent: 'Los precios están en euros con IVA incluido. Pagos aceptados: Transferencia bancaria SEPA, Cripto vía OxaPay, y métodos alternativos como PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, y tickets prepagados Transcash/PCS. Los pedidos se envían en 24 horas tras confirmación del pago inmediato, excepto transferencia ordinaria (24-72h según bancos). Reclamaciones → email de contacto.',
+    termsOfServiceContent: 'Los precios están en euros con IVA incluido. Pagos aceptados: Transferencia bancaria SEPA, Cripto vía OxaPay. Los pedidos se envían en 24 horas tras confirmación del pago inmediato, excepto transferencia ordinaria (24-72h según bancos). Reclamaciones → email de contacto.',
     contactTitle: 'Contacto',
     contactContent: 'Para cualquier pregunta: support@luxiomarket.shop',
     
@@ -2982,7 +2982,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Política de privacidade',
     privacyPolicyContent: 'Recolhemos apenas os dados necessários para o processamento de pedidos (nome, morada, email, telefone). Esta informação nunca é revendida e pode ser eliminada mediante pedido através do nosso email de contacto.',
     termsOfServiceTitle: 'Termos de serviço',
-    termsOfServiceContent: 'Os preços estão em euros com IVA incluído. Pagamentos aceites: Transferência bancária SEPA, Cripto via OxaPay, e métodos alternativos como PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, e tickets pré-pagos Transcash/PCS. Os pedidos são enviados em 24 horas após confirmação do pagamento imediato, exceto transferência ordinária (24-72h conforme bancos). Reclamações → email de contacto.',
+    termsOfServiceContent: 'Os preços estão em euros com IVA incluído. Pagamentos aceites: Transferência bancária SEPA, Cripto via OxaPay. Os pedidos são enviados em 24 horas após confirmação do pagamento imediato, exceto transferência ordinária (24-72h conforme bancos). Reclamações → email de contacto.',
     contactTitle: 'Contacto',
     contactContent: 'Para qualquer questão: support@luxiomarket.shop',
     
@@ -3675,7 +3675,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Polityka prywatności',
     privacyPolicyContent: 'Zbieramy tylko dane niezbędne do realizacji zamówień (imię, adres, email, telefon). Te informacje nigdy nie są odsprzedawane i mogą być usunięte na żądanie przez nasz email kontaktowy.',
     termsOfServiceTitle: 'Warunki usługi',
-    termsOfServiceContent: 'Ceny podane są w euro z VAT. Akceptowane płatności: Przelew bankowy SEPA, Kryptowaluty przez OxaPay, i metody alternatywne jak PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, i karty przedpłacone Transcash/PCS. Zamówienia są wysyłane w ciągu 24 godzin po natychmiastowym potwierdzeniu płatności, z wyjątkiem zwykłego przelewu (24-72h w zależności od banków). Reklamacje → email kontaktowy.',
+    termsOfServiceContent: 'Ceny podane są w euro z VAT. Akceptowane płatności: Przelew bankowy SEPA, Kryptowaluty przez OxaPay. Zamówienia są wysyłane w ciągu 24 godzin po natychmiastowym potwierdzeniu płatności, z wyjątkiem zwykłego przelewu (24-72h w zależności od banków). Reklamacje → email kontaktowy.',
     contactTitle: 'Kontakt',
     contactContent: 'W przypadku pytań: support@luxiomarket.shop',
     
@@ -4368,7 +4368,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Privacy policy',
     privacyPolicyContent: 'Raccogliamo solo i dati necessari per elaborare gli ordini (nome, indirizzo, email, telefono). Queste informazioni non vengono mai rivendute e possono essere cancellate su richiesta tramite la nostra email di contatto.',
     termsOfServiceTitle: 'Termini di servizio',
-    termsOfServiceContent: 'I prezzi sono in euro IVA inclusa. Pagamenti accettati: Bonifico bancario SEPA, Cripto tramite OxaPay, e metodi alternativi come PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, e ticket prepagati Transcash/PCS. Gli ordini vengono spediti entro 24 ore dopo la conferma del pagamento immediato, tranne bonifico ordinario (24-72h a seconda delle banche). Reclami → email di contatto.',
+    termsOfServiceContent: 'I prezzi sono in euro IVA inclusa. Pagamenti accettati: Bonifico bancario SEPA, Cripto tramite OxaPay. Gli ordini vengono spediti entro 24 ore dopo la conferma del pagamento immediato, tranne bonifico ordinario (24-72h a seconda delle banche). Reclami → email di contatto.',
     contactTitle: 'Contatti',
     contactContent: 'Per qualsiasi domanda: support@luxiomarket.shop',
     
@@ -5061,7 +5061,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicyTitle: 'Adatvédelmi szabályzat',
     privacyPolicyContent: 'Csak a rendelések feldolgozásához szükséges adatokat gyűjtjük (név, cím, e-mail, telefon). Ezeket az információkat soha nem adjuk el, és kérésre törölhetők kapcsolati e-mailünkön keresztül.',
     termsOfServiceTitle: 'Szolgáltatási feltételek',
-    termsOfServiceContent: 'Az árak euróban vannak ÁFA-val. Elfogadott fizetések: SEPA banki átutalás, Kripto OxaPay-en keresztül, és alternatív módszerek mint PayPal, Western Union, MoneyGram, Ria, Wise, Binance, Worldremit, és Transcash/PCS feltöltőkártyák. A rendeléseket 24 órán belül szállítjuk ki az azonnali fizetés megerősítése után, kivéve rendes átutalást (24-72h bankoktól függően). Panaszok → kapcsolati e-mail.',
+    termsOfServiceContent: 'Az árak euróban vannak ÁFA-val. Elfogadott fizetések: SEPA banki átutalás, Kripto OxaPay-en keresztül. A rendeléseket 24 órán belül szállítjuk ki az azonnali fizetés megerősítése után, kivéve rendes átutalást (24-72h bankoktól függően). Panaszok → kapcsolati e-mail.',
     contactTitle: 'Kapcsolat',
     contactContent: 'Bármilyen kérdés esetén: support@luxiomarket.shop',
     
