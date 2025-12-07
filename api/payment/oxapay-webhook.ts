@@ -1,8 +1,7 @@
 import { MongoClient } from 'mongodb';
 import crypto from 'crypto';
-import { sendOxaPayConfirmationToCustomer, sendOxaPayNotificationToAdmin } from '../../utils/email.js';
+import { sendOxaPayConfirmationToCustomer, sendOxaPayNotificationToAdmin, sendSuspensionEmail, sendCouponEmail } from '../../utils/email.js';
 import { addUnpaidOrder, checkAndApplySuspension } from '../../utils/account-suspension.js';
-import { sendSuspensionEmail } from '../../utils/email.js';
 import { shouldGenerateCoupon, createCoupon } from '../../utils/coupon-generator';
 
 interface VercelRequest {
@@ -266,6 +265,17 @@ async function handler(req: VercelRequest, res: VercelResponse) {
               30
             );
             console.log(`[Coupon] Generated coupon ${generatedCoupon.code} for OxaPay order ${orderId}`);
+            
+            sendCouponEmail({
+              customerEmail: order.customerEmail.toLowerCase(),
+              customerName: order.customerName,
+              couponCode: generatedCoupon.code,
+              discountPercent: generatedCoupon.discount,
+              expirationDate: generatedCoupon.expirationDate,
+              language: order.language || 'fr'
+            }).catch((emailError) => {
+              console.error('[Coupon] Error sending coupon email for OxaPay order:', emailError);
+            });
           } catch (couponError) {
             console.error('[Coupon] Error generating coupon for OxaPay order:', couponError);
           }

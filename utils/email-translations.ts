@@ -73,6 +73,16 @@ export interface EmailTranslations {
   account_reactivated_title: string;
   account_reactivated_message: string;
   account_reactivated_welcome: string;
+  
+  // Coupon
+  subject_coupon: string;
+  coupon_title: string;
+  coupon_message: string;
+  coupon_code_label: string;
+  coupon_discount_label: string;
+  coupon_expires_label: string;
+  coupon_how_to_use: string;
+  coupon_shop_now: string;
 }
 
 export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
@@ -148,7 +158,17 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     account_suspended_actions: 'Pendant cette période :\n• Vous pouvez toujours consulter votre historique de commandes\n• Vous ne pouvez pas passer de nouvelles commandes\n• Votre compte sera automatiquement réactivé après 7 jours\n\nSi vous pensez qu\'il s\'agit d\'une erreur, n\'hésitez pas à contacter notre service client.',
     account_reactivated_title: 'Votre compte a été réactivé ! ✅',
     account_reactivated_message: 'Bonne nouvelle ! Votre compte Luxio a été réactivé avec succès.\n\nVous pouvez à nouveau profiter de notre catalogue complet et passer de nouvelles commandes sans restriction.',
-    account_reactivated_welcome: 'Nous sommes ravis de vous revoir parmi nous. N\'hésitez pas à découvrir nos derniers produits premium.'
+    account_reactivated_welcome: 'Nous sommes ravis de vous revoir parmi nous. N\'hésitez pas à découvrir nos derniers produits premium.',
+    
+    // Coupon
+    subject_coupon: 'Votre code promo exclusif - Luxio',
+    coupon_title: 'Vous avez reçu un code promo exclusif !',
+    coupon_message: 'Merci pour votre commande ! En récompense de votre fidélité, nous vous offrons un code promo exclusif pour votre prochaine commande.',
+    coupon_code_label: 'Votre code promo',
+    coupon_discount_label: 'Réduction',
+    coupon_expires_label: 'Valable jusqu\'au',
+    coupon_how_to_use: 'Pour utiliser votre code, entrez-le lors du paiement dans le champ "Code promo".',
+    coupon_shop_now: 'Faire du shopping maintenant'
   },
   en: {
     // Subjects
@@ -222,7 +242,17 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     account_suspended_actions: 'During this period:\n• You can still view your order history\n• You cannot place new orders\n• Your account will be automatically reactivated after 7 days\n\nIf you believe this is an error, please contact our customer service.',
     account_reactivated_title: 'Your Account Has Been Reactivated! ✅',
     account_reactivated_message: 'Good news! Your Luxio account has been successfully reactivated.\n\nYou can now enjoy our full catalog again and place new orders without restrictions.',
-    account_reactivated_welcome: 'We\'re happy to have you back with us. Feel free to discover our latest premium products.'
+    account_reactivated_welcome: 'We\'re happy to have you back with us. Feel free to discover our latest premium products.',
+    
+    // Coupon
+    subject_coupon: 'Your exclusive promo code - Luxio',
+    coupon_title: 'You\'ve received an exclusive promo code!',
+    coupon_message: 'Thank you for your order! As a reward for your loyalty, we\'re giving you an exclusive promo code for your next order.',
+    coupon_code_label: 'Your promo code',
+    coupon_discount_label: 'Discount',
+    coupon_expires_label: 'Valid until',
+    coupon_how_to_use: 'To use your code, enter it at checkout in the "Promo code" field.',
+    coupon_shop_now: 'Shop now'
   },
   es: {
     // Subjects
@@ -296,7 +326,17 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     account_suspended_actions: 'Durante este período:\n• Puede consultar su historial de pedidos\n• No puede realizar nuevos pedidos\n• Su cuenta será reactivada automáticamente después de 7 días\n\nSi cree que esto es un error, no dude en contactar nuestro servicio al cliente.',
     account_reactivated_title: '¡Su Cuenta Ha Sido Reactivada! ✅',
     account_reactivated_message: '¡Buenas noticias! Su cuenta de Luxio ha sido reactivada con éxito.\n\nPuede volver a disfrutar de nuestro catálogo completo y realizar nuevos pedidos sin restricciones.',
-    account_reactivated_welcome: 'Estamos encantados de tenerle de vuelta. No dude en descubrir nuestros últimos productos premium.'
+    account_reactivated_welcome: 'Estamos encantados de tenerle de vuelta. No dude en descubrir nuestros últimos productos premium.',
+    
+    // Coupon
+    subject_coupon: 'Tu código promocional exclusivo - Luxio',
+    coupon_title: '¡Has recibido un código promocional exclusivo!',
+    coupon_message: '¡Gracias por tu pedido! Como recompensa por tu fidelidad, te regalamos un código promocional exclusivo para tu próximo pedido.',
+    coupon_code_label: 'Tu código promocional',
+    coupon_discount_label: 'Descuento',
+    coupon_expires_label: 'Válido hasta',
+    coupon_how_to_use: 'Para usar tu código, ingrésalo en el campo "Código promocional" durante el pago.',
+    coupon_shop_now: 'Comprar ahora'
   },
   pt: {
     // Subjects
@@ -370,7 +410,17 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     account_suspended_actions: 'Durante este período:\n• Você ainda pode visualizar seu histórico de pedidos\n• Você não pode fazer novos pedidos\n• Sua conta será reativada automaticamente após 7 dias\n\nSe você acha que isso é um erro, entre em contato com nosso atendimento ao cliente.',
     account_reactivated_title: 'Sua Conta Foi Reativada! ✅',
     account_reactivated_message: 'Boas notícias! Sua conta Luxio foi reativada com sucesso.\n\nVocê pode novamente desfrutar do nosso catálogo completo e fazer novos pedidos sem restrições.',
-    account_reactivated_welcome: 'Estamos felizes em tê-lo de volta. Sinta-se à vontade para descobrir nossos produtos premium mais recentes.'
+    account_reactivated_welcome: 'Estamos felizes em tê-lo de volta. Sinta-se à vontade para descobrir nossos produtos premium mais recentes.',
+    
+    // Coupon
+    subject_coupon: 'Seu código promocional exclusivo - Luxio',
+    coupon_title: 'Você recebeu um código promocional exclusivo!',
+    coupon_message: 'Obrigado pelo seu pedido! Como recompensa pela sua fidelidade, oferecemos um código promocional exclusivo para seu próximo pedido.',
+    coupon_code_label: 'Seu código promocional',
+    coupon_discount_label: 'Desconto',
+    coupon_expires_label: 'Válido até',
+    coupon_how_to_use: 'Para usar seu código, insira-o no campo "Código promocional" durante o pagamento.',
+    coupon_shop_now: 'Comprar agora'
   },
   pl: {
     // Subjects
@@ -444,7 +494,17 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     account_suspended_actions: 'W tym okresie:\n• Nadal możesz przeglądać historię zamówień\n• Nie możesz składać nowych zamówień\n• Twoje konto zostanie automatycznie reaktywowane po 7 dniach\n\nJeśli uważasz, że to błąd, skontaktuj się z naszą obsługą klienta.',
     account_reactivated_title: 'Twoje Konto Zostało Reaktywowane! ✅',
     account_reactivated_message: 'Dobre wieści! Twoje konto Luxio zostało pomyślnie reaktywowane.\n\nMożesz ponownie cieszyć się pełnym katalogiem i składać nowe zamówienia bez ograniczeń.',
-    account_reactivated_welcome: 'Cieszymy się, że jesteś z nami z powrotem. Zapraszamy do odkrywania naszych najnowszych produktów premium.'
+    account_reactivated_welcome: 'Cieszymy się, że jesteś z nami z powrotem. Zapraszamy do odkrywania naszych najnowszych produktów premium.',
+    
+    // Coupon
+    subject_coupon: 'Twój ekskluzywny kod promocyjny - Luxio',
+    coupon_title: 'Otrzymałeś ekskluzywny kod promocyjny!',
+    coupon_message: 'Dziękujemy za zamówienie! W nagrodę za Twoją lojalność, oferujemy Ci ekskluzywny kod promocyjny na następne zamówienie.',
+    coupon_code_label: 'Twój kod promocyjny',
+    coupon_discount_label: 'Rabat',
+    coupon_expires_label: 'Ważny do',
+    coupon_how_to_use: 'Aby użyć kodu, wpisz go w polu "Kod promocyjny" podczas płatności.',
+    coupon_shop_now: 'Kup teraz'
   },
   hu: {
     // Subjects
@@ -518,7 +578,17 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     account_suspended_actions: 'Ebben az időszakban:\n• Továbbra is megtekintheti rendelési előzményeit\n• Nem adhat le új rendeléseket\n• Fiókját 7 nap után automatikusan újraaktiváljuk\n\nHa úgy gondolja, hogy ez hiba, kérjük, lépjen kapcsolatba ügyfélszolgálatunkkal.',
     account_reactivated_title: 'Fiókját Újraaktiváltuk! ✅',
     account_reactivated_message: 'Jó hír! Luxio fiókját sikeresen újraaktiváltuk.\n\nÚjra élvezheti teljes katalógusunkat és korlátozások nélkül adhat le új rendeléseket.',
-    account_reactivated_welcome: 'Örülünk, hogy visszatért hozzánk. Fedezze fel legújabb prémium termékeinket.'
+    account_reactivated_welcome: 'Örülünk, hogy visszatért hozzánk. Fedezze fel legújabb prémium termékeinket.',
+    
+    // Coupon
+    subject_coupon: 'Exkluzív promóciós kódod - Luxio',
+    coupon_title: 'Exkluzív promóciós kódot kaptál!',
+    coupon_message: 'Köszönjük a rendelésed! Hűséged jutalmaként exkluzív promóciós kódot kapsz a következő rendelésedhez.',
+    coupon_code_label: 'A promóciós kódod',
+    coupon_discount_label: 'Kedvezmény',
+    coupon_expires_label: 'Érvényes',
+    coupon_how_to_use: 'A kód használatához írd be a "Promóciós kód" mezőbe a fizetés során.',
+    coupon_shop_now: 'Vásárolj most'
   }
 };
 

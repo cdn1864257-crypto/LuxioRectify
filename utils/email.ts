@@ -977,3 +977,98 @@ ${t.team_signature}
   });
 }
 
+// ==================== COUPON EMAIL ====================
+
+export interface CouponEmailData {
+  customerEmail: string;
+  customerName: string;
+  couponCode: string;
+  discountPercent: number;
+  expirationDate: Date;
+  language?: string;
+}
+
+export async function sendCouponEmail(data: CouponEmailData): Promise<boolean> {
+  const lang = data.language?.toLowerCase() || 'fr';
+  const validLanguages = ['fr', 'en', 'es', 'pt', 'pl', 'hu'];
+  const emailLang = validLanguages.includes(lang) ? lang as EmailLanguage : 'fr';
+  const t = getTranslation(emailLang);
+  
+  const firstName = data.customerName.split(' ')[0] || data.customerName;
+  const formattedDate = new Date(data.expirationDate).toLocaleDateString(emailLang === 'en' ? 'en-US' : emailLang === 'fr' ? 'fr-FR' : emailLang === 'es' ? 'es-ES' : emailLang === 'pt' ? 'pt-BR' : emailLang === 'pl' ? 'pl-PL' : 'hu-HU', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+  const frontendUrl = process.env.FRONTEND_URL || 'https://luxiomarket.shop';
+
+  const html = getEmailLayout(`
+    <h2>${t.coupon_title}</h2>
+    <p><strong>${t.hello} ${firstName},</strong></p>
+    <p>${t.coupon_message}</p>
+    
+    <div class="details" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); padding: 24px; border-radius: 12px; text-align: center; margin: 24px 0; border: 2px dashed #f59e0b;">
+      <p style="margin: 0 0 8px 0; color: #78350f; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">${t.coupon_code_label}</p>
+      <p style="margin: 0; font-size: 28px; font-weight: 700; color: #92400e; font-family: monospace; letter-spacing: 2px;">${data.couponCode}</p>
+    </div>
+    
+    <div class="details" style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin: 24px 0;">
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="padding: 8px 0; color: #6b7280; font-size: 14px;">${t.coupon_discount_label}</td>
+          <td style="padding: 8px 0; color: #059669; font-weight: 700; text-align: right; font-size: 18px;">-${data.discountPercent}%</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0; color: #6b7280; font-size: 14px;">${t.coupon_expires_label}</td>
+          <td style="padding: 8px 0; color: #111827; font-weight: 500; text-align: right;">${formattedDate}</td>
+        </tr>
+      </table>
+    </div>
+    
+    <p style="color: #6b7280; font-size: 14px; background-color: #f3f4f6; padding: 12px 16px; border-radius: 6px;">${t.coupon_how_to_use}</p>
+    
+    <div style="text-align: center; margin: 32px 0;">
+      <a href="${frontendUrl}" class="button" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; display: inline-block; box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);">${t.coupon_shop_now}</a>
+    </div>
+    
+    <p style="margin-top: 24px; color: #6b7280;">${t.team_signature.replace(/\n/g, '<br>')}</p>
+  `, emailLang);
+
+  const text = `
+${t.coupon_title}
+
+${t.hello} ${firstName},
+
+${t.coupon_message}
+
+${t.coupon_code_label}: ${data.couponCode}
+${t.coupon_discount_label}: -${data.discountPercent}%
+${t.coupon_expires_label}: ${formattedDate}
+
+${t.coupon_how_to_use}
+
+${t.coupon_shop_now}: ${frontendUrl}
+
+${t.team_signature}
+  `.trim();
+
+  try {
+    const result = await sendEmail({
+      to: data.customerEmail,
+      subject: t.subject_coupon,
+      html,
+      text,
+      from: DEFAULT_FROM
+    });
+    
+    if (result) {
+      console.log(`[Coupon Email] Successfully sent coupon email to ${data.customerEmail} with code ${data.couponCode}`);
+    }
+    
+    return result;
+  } catch (error) {
+    console.error(`[Coupon Email] Error sending coupon email to ${data.customerEmail}:`, error);
+    return false;
+  }
+}
+

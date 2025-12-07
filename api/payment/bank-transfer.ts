@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import { sendBankTransferEmail, sendBankTransferNotificationToAdmin } from '../../utils/email.js';
+import { sendBankTransferEmail, sendBankTransferNotificationToAdmin, sendCouponEmail } from '../../utils/email.js';
 import { generatePaymentReference } from '../../utils/payment-reference.js';
 import { getUserStatus, formatSuspensionEndDate, getSuspensionEndDate, autoReactivateExpiredSuspensions } from '../../utils/account-suspension.js';
 import { validateCartTotal, validateTotalAmount } from '../lib/price-validation';
@@ -189,6 +189,17 @@ async function handler(req: VercelRequest, res: VercelResponse) {
             30
           );
           console.log(`[Coupon] Generated coupon ${generatedCoupon.code} for order ${orderId}`);
+          
+          sendCouponEmail({
+            customerEmail: customerEmail.toLowerCase(),
+            customerName: customerName,
+            couponCode: generatedCoupon.code,
+            discountPercent: generatedCoupon.discount,
+            expirationDate: generatedCoupon.expirationDate,
+            language: userLanguage
+          }).catch((emailError) => {
+            console.error('[Coupon] Error sending coupon email:', emailError);
+          });
         } catch (couponError) {
           console.error('[Coupon] Error generating coupon:', couponError);
         }
