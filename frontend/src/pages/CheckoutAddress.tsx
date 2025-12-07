@@ -38,7 +38,6 @@ export default function CheckoutAddress() {
   const [cartOpen, setCartOpen] = useState(false);
 
   const [useRegistered, setUseRegistered] = useState(false);
-  const [availableCities, setAvailableCities] = useState<{ en: string; fr: string; es: string }[]>([]);
   const [addressValidated, setAddressValidated] = useState(false);
   const [manualAddressConfirmed, setManualAddressConfirmed] = useState(false);
   const [formData, setFormData] = useState<AddressForm>({
@@ -169,19 +168,15 @@ export default function CheckoutAddress() {
         address: "",
         postalCode: ""
       }));
-      setAvailableCities(selectedCountry.cities);
       setAddressValidated(false);
       setManualAddressConfirmed(false);
     }
   };
 
-  const handleCityChange = (cityIndex: string) => {
-    const cityIdx = parseInt(cityIndex);
-    if (availableCities[cityIdx]) {
-      setFormData(prev => ({ ...prev, city: availableCities[cityIdx].en, address: "", postalCode: "" }));
-      setAddressValidated(false);
-      setManualAddressConfirmed(false);
-    }
+  const handleCityChange = (value: string) => {
+    setFormData(prev => ({ ...prev, city: value, address: "", postalCode: "" }));
+    setAddressValidated(false);
+    setManualAddressConfirmed(false);
   };
 
   const handlePhoneChange = (value: string | undefined) => {
@@ -348,30 +343,16 @@ export default function CheckoutAddress() {
                   <Label htmlFor="city" className="text-sm font-medium mb-2 block">
                     {t('city')} <span className="text-red-500">*</span>
                   </Label>
-                  <Select 
-                    value={availableCities.findIndex(c => c.en === formData.city).toString()} 
-                    onValueChange={handleCityChange}
-                    disabled={useRegistered || availableCities.length === 0}
-                  >
-                    <SelectTrigger 
-                      id="city"
-                      data-testid="select-city"
-                      className="w-full"
-                    >
-                      <SelectValue placeholder={availableCities.length === 0 ? t('countryPlaceholder') : t('cityPlaceholder')} />
-                    </SelectTrigger>
-                    <SelectContent className="max-h-[300px] overflow-y-auto">
-                      {availableCities.map((city, index) => {
-                        const langKey = language as 'en' | 'fr' | 'es';
-                        const cityName = city[langKey] || city.en;
-                        return (
-                          <SelectItem key={index} value={index.toString()}>
-                            {cityName}
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectContent>
-                  </Select>
+                  <Input
+                    id="city"
+                    value={formData.city}
+                    onChange={(e) => handleCityChange(e.target.value)}
+                    placeholder={!formData.country ? t('selectCountry') : t('cityPlaceholder')}
+                    disabled={useRegistered || !formData.country}
+                    required
+                    data-testid="input-city"
+                    className="w-full"
+                  />
                 </div>
               </div>
 
