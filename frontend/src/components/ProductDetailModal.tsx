@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ShoppingCart, Check } from 'lucide-react';
 import { Product, ProductVariant } from '../lib/products';
 import { useCart } from '../contexts/CartContext';
@@ -18,15 +18,23 @@ interface ProductDetailModalProps {
   product: Product;
   isOpen: boolean;
   onClose: () => void;
+  initialVariant?: ProductVariant | null;
 }
 
-export function ProductDetailModal({ product, isOpen, onClose }: ProductDetailModalProps) {
+export function ProductDetailModal({ product, isOpen, onClose, initialVariant }: ProductDetailModalProps) {
   const { addToCart } = useCart();
   const { t } = useLanguage();
   const [addedToCart, setAddedToCart] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
-    product.hasVariants && product.variants ? product.variants[0] : null
+    initialVariant ?? (product.hasVariants && product.variants ? product.variants[0] : null)
   );
+  
+  // Update selectedVariant when modal opens with a different initial variant
+  useEffect(() => {
+    if (isOpen && initialVariant) {
+      setSelectedVariant(initialVariant);
+    }
+  }, [isOpen, initialVariant]);
 
   const currentPrice = selectedVariant ? selectedVariant.price : product.price;
   const currentOriginalPrice = selectedVariant ? selectedVariant.originalPrice : product.originalPrice;

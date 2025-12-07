@@ -203,6 +203,7 @@ function ProductCard({ product }: { product: Product }) {
         product={product}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        initialVariant={selectedVariant}
       />
     </div>
   );
