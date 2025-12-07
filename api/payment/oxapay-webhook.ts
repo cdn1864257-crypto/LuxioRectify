@@ -168,6 +168,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       
       switch(status) {
         case 'Paid':
+        case 'Completed':
           paymentStatus = 'success';
           break;
         case 'Expired':
@@ -181,6 +182,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         default:
           paymentStatus = 'unknown';
       }
+      
+      console.log(`[OxaPay Webhook] Received status: "${status}" -> mapped to paymentStatus: "${paymentStatus}"`)
 
       await ordersCollection.updateOne(
         { orderReference: orderId },

@@ -1,0 +1,77 @@
+PROMPT COMPLET À ENVOYER À REPLIT
+Je veux corriger le webhook OxaPay dans mon backend Node.js (Express). 
+Actuellement, OxaPay reçoit bien un code 200 mais ma commande reste "En attente". 
+Je veux que quand le webhook envoie "status": "Completed", la commande passe automatiquement en "paid".
+
+Merci de générer un code COMPLET, prêt à être collé dans mon projet Express, avec :
+
+1. Le middleware Express pour lire le JSON : app.use(express.json())
+2. Une route POST /api/oxapay/webhook
+3. Lecture du JSON envoyé par OxaPay
+4. Vérification : si data.status === "Completed"
+5. Récupération de : data.invoice_id
+6. Appel d’une fonction async updateOrderStatus(invoiceId, "paid")
+7. Un modèle de fonction updateOrderStatus(invoiceId, status) à personnaliser selon ma base de données
+8. Des logs pour voir ce que j’ai reçu
+9. Toujours renvoyer res.sendStatus(200)
+
+Voici le code à générer :
+
+// ------------------ Middleware JSON ------------------
+app.use(express.json());
+
+// ------------------ Route Webhook OxaPay ------------------
+app.post("/api/oxapay/webhook", async (req, res) => {
+  try {
+    const data = req.body;
+
+    console.log("Webhook OxaPay reçu :", data);
+
+    // Vérifier que le paiement est complété
+    if (data.status === "Completed") {
+
+      const invoiceId = data.invoice_id;
+
+      console.log("Paiement confirmé pour la facture :", invoiceId);
+
+      // Mettre à jour la commande
+      await updateOrderStatus(invoiceId, "paid");
+
+      console.log(`Commande mise à jour : ${invoiceId} => paid`);
+    } else {
+      console.log("Webhook reçu avec un statut non final :", data.status);
+    }
+
+    // Toujours renvoyer 200
+    res.sendStatus(200);
+
+  } catch (error) {
+    console.error("Erreur Webhook OxaPay :", error);
+    res.sendStatus(500);
+  }
+});
+
+
+// ------------------ Fonction à adapter ------------------
+async function updateOrderStatus(invoiceId, status) {
+  /*
+    💡 MODIFIER CETTE PARTIE SELON TA BASE DE DONNÉES
+
+    Exemple MongoDB :
+      await Orders.updateOne({ oxapay_invoice_id: invoiceId }, { status });
+
+    Exemple JSON file :
+      const orders = JSON.parse(fs.readFileSync("./orders.json"));
+      orders[invoiceId].status = status;
+      fs.writeFileSync("./orders.json", JSON.stringify(orders));
+
+    Exemple SQL :
+      await db.query("UPDATE orders SET status=? WHERE oxapay_invoice_id=?", [status, invoiceId]);
+
+    Pour l’instant on met juste un console.log :
+  */
+
+  console.log(`[updateOrderStatus] Mise à jour simulée : ${invoiceId} => ${status}`);
+}
+
+Merci de me générer le fichier complet dans un style propre.
