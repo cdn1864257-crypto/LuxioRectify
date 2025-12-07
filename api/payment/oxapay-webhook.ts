@@ -88,8 +88,9 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    // Only log sensitive data in development
-    debugLog('[OxaPay Webhook] Received webhook:', JSON.stringify(req.body, null, 2));
+    // Log raw payload structure for debugging (always log this in production for troubleshooting)
+    console.log('[OxaPay Webhook] Received webhook - raw body keys:', Object.keys(req.body));
+    debugLog('[OxaPay Webhook] Full payload:', JSON.stringify(req.body, null, 2));
 
     const oxapayApiKey = process.env.OXAPAY_API_KEY;
     
@@ -109,23 +110,34 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
     
-    debugLog('[OxaPay Webhook] HMAC signature verified successfully');
+    console.log('[OxaPay Webhook] HMAC signature verified successfully');
 
-    const {
-      trackId,
-      orderId,
-      status,
-      amount,
-      currency,
-      payAmount,
-      payCurrency,
-      email
-    } = req.body;
+    // OxaPay can send data in different formats:
+    // 1. Flat with snake_case: { track_id, order_id, status, ... }
+    // 2. Nested in data object: { data: { ... } }
+    // 3. Flat with camelCase (legacy): { trackId, orderId, status, ... }
+    const payload = req.body.data ?? req.body;
+    
+    console.log('[OxaPay Webhook] Using payload source:', req.body.data ? 'req.body.data (nested)' : 'req.body (flat)');
+    console.log('[OxaPay Webhook] Payload keys:', Object.keys(payload));
+
+    // Handle both snake_case (official) and camelCase (legacy) field names
+    const trackId = payload.track_id || payload.trackId;
+    const orderId = payload.order_id || payload.orderId;
+    const status = payload.status;
+    const amount = payload.amount;
+    const currency = payload.currency;
+    const payAmount = payload.pay_amount || payload.payAmount;
+    const payCurrency = payload.pay_currency || payload.payCurrency;
+    const email = payload.email;
+
+    console.log(`[OxaPay Webhook] Extracted values - trackId: ${trackId}, orderId: ${orderId}, status: "${status}"`);
 
     if (!trackId || !orderId || !status) {
-      console.error('[OxaPay Webhook] Missing required fields');
+      console.error('[OxaPay Webhook] Missing required fields - trackId:', trackId, 'orderId:', orderId, 'status:', status);
       return res.status(400).json({
-        error: 'Données webhook invalides'
+        error: 'Données webhook invalides',
+        debug: { trackId: !!trackId, orderId: !!orderId, status: !!status }
       });
     }
 
@@ -166,24 +178,35 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
       let paymentStatus = 'pending';
       
-      switch(status) {
-        case 'Paid':
-        case 'Completed':
+      // Normalize status to lowercase for case-insensitive comparison
+      // OxaPay docs show lowercase "paid" but some implementations use "Paid"
+      const normalizedStatus = status.toLowerCase();
+      
+      switch(normalizedStatus) {
+        case 'paid':
+        case 'completed':
           paymentStatus = 'success';
           break;
-        case 'Expired':
-        case 'Canceled':
+        case 'expired':
+        case 'canceled':
+        case 'failed':
           paymentStatus = 'failed';
           break;
-        case 'Waiting':
-        case 'Confirming':
+        case 'waiting':
+        case 'confirming':
+        case 'paying':
+        case 'new':
           paymentStatus = 'pending';
           break;
+        case 'underpaid':
+          paymentStatus = 'underpaid';
+          break;
         default:
+          console.warn(`[OxaPay Webhook] Unknown status received: "${status}" (normalized: "${normalizedStatus}")`);
           paymentStatus = 'unknown';
       }
       
-      console.log(`[OxaPay Webhook] Received status: "${status}" -> mapped to paymentStatus: "${paymentStatus}"`)
+      console.log(`[OxaPay Webhook] Received status: "${status}" (normalized: "${normalizedStatus}") -> mapped to paymentStatus: "${paymentStatus}"`)
 
       await ordersCollection.updateOne(
         { orderReference: orderId },
@@ -200,7 +223,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         }
       );
 
-      if (status === 'Expired' || status === 'Canceled') {
+      if (normalizedStatus === 'expired' || normalizedStatus === 'canceled' || normalizedStatus === 'failed') {
         const usersCollection = db.collection('users');
         const customerEmail = order.customerEmail;
         
@@ -211,7 +234,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
               customerEmail,
               orderId,
               order.totalAmount || 0,
-              status === 'Expired' ? 'expired' : 'cancelled'
+              normalizedStatus === 'expired' ? 'expired' : 'cancelled'
             );
             
             const suspensionResult = await checkAndApplySuspension(usersCollection, customerEmail);
