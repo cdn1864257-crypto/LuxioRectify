@@ -255,7 +255,15 @@ async function handler(req: VercelRequest, res: VercelResponse) {
           console.error('Erreur lors de l\'envoi des emails OxaPay:', error);
         }
 
-        if (shouldGenerateCoupon(order.cartItems || [], order.totalAmount || 0)) {
+        // Check if order has required data for coupon generation
+        const cartItems = order.cartItems || [];
+        const totalAmount = order.totalAmount || 0;
+        
+        if (!order.cartItems || !order.totalAmount) {
+          console.warn(`[Coupon] Order ${orderId} missing cartItems or totalAmount - cannot evaluate coupon eligibility`);
+        }
+        
+        if (shouldGenerateCoupon(cartItems, totalAmount)) {
           try {
             const generatedCoupon = await createCoupon(
               db,

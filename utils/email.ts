@@ -1063,11 +1063,19 @@ ${t.team_signature}
     
     if (result) {
       console.log(`[Coupon Email] Successfully sent coupon email to ${data.customerEmail} with code ${data.couponCode}`);
+    } else {
+      console.error(`[Coupon Email] Failed to send coupon email to ${data.customerEmail} - sendEmail returned false`);
     }
     
     return result;
   } catch (error) {
-    console.error(`[Coupon Email] Error sending coupon email to ${data.customerEmail}:`, error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorStack = error instanceof Error ? error.stack : '';
+    console.error(`[Coupon Email] Error sending coupon email to ${data.customerEmail}:`, {
+      couponCode: data.couponCode,
+      error: errorMessage,
+      stack: errorStack
+    });
     return false;
   }
 }
