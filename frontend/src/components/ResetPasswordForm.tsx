@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Loader2, CheckCircle } from "lucide-react";
 import { getApiUrl } from "@/lib/config";
 
@@ -13,6 +14,7 @@ interface ResetPasswordFormProps {
 
 export function ResetPasswordForm({ token, onSuccess }: ResetPasswordFormProps) {
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -23,8 +25,8 @@ export function ResetPasswordForm({ token, onSuccess }: ResetPasswordFormProps) 
 
     if (!password || !confirmPassword) {
       toast({
-        title: "Erreur",
-        description: "Veuillez remplir tous les champs",
+        title: t('error'),
+        description: t('fillAllFieldsError'),
         variant: "destructive"
       });
       return;
@@ -32,8 +34,8 @@ export function ResetPasswordForm({ token, onSuccess }: ResetPasswordFormProps) 
 
     if (password.length < 8) {
       toast({
-        title: "Erreur",
-        description: "Le mot de passe doit contenir au moins 8 caractères",
+        title: t('error'),
+        description: t('passwordMinLength8'),
         variant: "destructive"
       });
       return;
@@ -41,8 +43,8 @@ export function ResetPasswordForm({ token, onSuccess }: ResetPasswordFormProps) 
 
     if (password !== confirmPassword) {
       toast({
-        title: "Erreur",
-        description: "Les mots de passe ne correspondent pas",
+        title: t('error'),
+        description: t('passwordsDontMatch'),
         variant: "destructive"
       });
       return;
@@ -62,15 +64,15 @@ export function ResetPasswordForm({ token, onSuccess }: ResetPasswordFormProps) 
 
       if (!response.ok) {
         if (data.error === 'INVALID_OR_EXPIRED_TOKEN') {
-          throw new Error('Le lien de réinitialisation est invalide ou expiré');
+          throw new Error(t('resetLinkInvalidOrExpired'));
         }
-        throw new Error(data.error || 'Erreur lors de la réinitialisation');
+        throw new Error(data.error || t('errorOccurred'));
       }
 
       setSuccess(true);
       toast({
-        title: "Mot de passe réinitialisé",
-        description: "Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter.",
+        title: t('passwordResetSuccess'),
+        description: t('passwordResetSuccessMessage'),
       });
 
       setTimeout(() => {
@@ -83,8 +85,8 @@ export function ResetPasswordForm({ token, onSuccess }: ResetPasswordFormProps) 
 
     } catch (error) {
       toast({
-        title: "Erreur",
-        description: error instanceof Error ? error.message : "Une erreur est survenue",
+        title: t('error'),
+        description: error instanceof Error ? error.message : t('errorOccurred'),
         variant: "destructive"
       });
     } finally {
@@ -96,9 +98,9 @@ export function ResetPasswordForm({ token, onSuccess }: ResetPasswordFormProps) 
     return (
       <div className="text-center space-y-4">
         <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
-        <h3 className="text-lg font-semibold">Mot de passe réinitialisé !</h3>
+        <h3 className="text-lg font-semibold">{t('passwordResetSuccess')}</h3>
         <p className="text-gray-600">
-          Votre mot de passe a été modifié avec succès. Redirection en cours...
+          {t('passwordResetSuccessMessage')}
         </p>
       </div>
     );
@@ -107,14 +109,14 @@ export function ResetPasswordForm({ token, onSuccess }: ResetPasswordFormProps) 
   return (
     <form onSubmit={handleSubmit} className="space-y-4" data-testid="form-reset-password">
       <div className="text-center mb-6">
-        <h3 className="text-lg font-semibold mb-2">Nouveau mot de passe</h3>
+        <h3 className="text-lg font-semibold mb-2">{t('newPassword')}</h3>
         <p className="text-gray-600 text-sm">
-          Entrez votre nouveau mot de passe ci-dessous
+          {t('enterNewPasswordBelow')}
         </p>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="new-password">Nouveau mot de passe</Label>
+        <Label htmlFor="new-password">{t('newPassword')}</Label>
         <Input
           id="new-password"
           type="password"
@@ -125,12 +127,12 @@ export function ResetPasswordForm({ token, onSuccess }: ResetPasswordFormProps) 
           data-testid="input-new-password"
         />
         <p className="text-xs text-gray-500">
-          Minimum 8 caractères
+          {t('passwordMinLength8')}
         </p>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="confirm-new-password">Confirmer le mot de passe</Label>
+        <Label htmlFor="confirm-new-password">{t('confirmNewPassword')}</Label>
         <Input
           id="confirm-new-password"
           type="password"
@@ -151,10 +153,10 @@ export function ResetPasswordForm({ token, onSuccess }: ResetPasswordFormProps) 
         {isLoading ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Réinitialisation...
+            {t('resettingPassword')}
           </>
         ) : (
-          "Réinitialiser le mot de passe"
+          t('resetPasswordButton')
         )}
       </Button>
     </form>

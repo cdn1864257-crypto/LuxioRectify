@@ -227,6 +227,17 @@ export interface Translations {
   passwordTooWeak: string;
   invalidCredentials: string;
   
+  // Reset Password Page
+  invalidResetLink: string;
+  resetLinkInvalidOrExpired: string;
+  passwordResetSuccess: string;
+  passwordResetSuccessMessage: string;
+  redirectingToHome: string;
+  enterNewPasswordBelow: string;
+  fillAllFieldsError: string;
+  resettingPassword: string;
+  resetPasswordButton: string;
+  
   // Product Page
   productNotFound: string;
   backToProducts: string;
@@ -769,6 +780,18 @@ export const translations: Record<Language, Translations> = {
     loginError: 'Login error',
     signupError: 'Sign up error',
     invalidCredentials: 'Incorrect email or password',
+    
+    // Reset Password Page
+    invalidResetLink: 'Invalid link',
+    resetLinkInvalidOrExpired: 'The reset link is invalid or has expired.',
+    passwordResetSuccess: 'Password reset!',
+    passwordResetSuccessMessage: 'Your password has been successfully changed. Redirecting...',
+    redirectingToHome: 'Redirecting to home...',
+    enterNewPasswordBelow: 'Enter your new password below',
+    fillAllFieldsError: 'Please fill in all fields',
+    resettingPassword: 'Resetting...',
+    resetPasswordButton: 'Reset password',
+    
     welcomeBack: 'Welcome back',
     back: 'Back',
     welcome: 'Please check your email (including spam/junk folder) to verify your account. Add noreply@luxiomarket.shop to your contacts.',
@@ -1462,6 +1485,18 @@ export const translations: Record<Language, Translations> = {
     loginError: 'Erreur de connexion',
     signupError: 'Erreur',
     invalidCredentials: 'Email ou mot de passe incorrect',
+    
+    // Reset Password Page
+    invalidResetLink: 'Lien invalide',
+    resetLinkInvalidOrExpired: 'Le lien de réinitialisation est invalide ou a expiré.',
+    passwordResetSuccess: 'Mot de passe réinitialisé !',
+    passwordResetSuccessMessage: 'Votre mot de passe a été modifié avec succès. Redirection en cours...',
+    redirectingToHome: 'Redirection vers l\'accueil...',
+    enterNewPasswordBelow: 'Entrez votre nouveau mot de passe ci-dessous',
+    fillAllFieldsError: 'Veuillez remplir tous les champs',
+    resettingPassword: 'Réinitialisation...',
+    resetPasswordButton: 'Réinitialiser le mot de passe',
+    
     welcomeBack: 'Bienvenue',
     back: 'Retour',
     welcome: 'Veuillez vérifier votre email (y compris le dossier spam/courrier indésirable) pour activer votre compte. Ajoutez noreply@luxiomarket.shop à vos contacts.',
@@ -2155,6 +2190,18 @@ export const translations: Record<Language, Translations> = {
     loginError: 'Error de inicio de sesión',
     signupError: 'Error',
     invalidCredentials: 'Correo electrónico o contraseña incorrecta',
+    
+    // Reset Password Page
+    invalidResetLink: 'Enlace inválido',
+    resetLinkInvalidOrExpired: 'El enlace de restablecimiento es inválido o ha expirado.',
+    passwordResetSuccess: '¡Contraseña restablecida!',
+    passwordResetSuccessMessage: 'Tu contraseña ha sido cambiada con éxito. Redirigiendo...',
+    redirectingToHome: 'Redirigiendo al inicio...',
+    enterNewPasswordBelow: 'Ingresa tu nueva contraseña a continuación',
+    fillAllFieldsError: 'Por favor completa todos los campos',
+    resettingPassword: 'Restableciendo...',
+    resetPasswordButton: 'Restablecer contraseña',
+    
     welcomeBack: 'Bienvenido',
     back: 'Volver',
     welcome: 'Por favor, verifique su correo electrónico (incluyendo la carpeta de spam/correo no deseado) para activar su cuenta. Añada noreply@luxiomarket.shop a sus contactos.',
@@ -2848,6 +2895,18 @@ export const translations: Record<Language, Translations> = {
     loginError: 'Erro de login',
     signupError: 'Erro',
     invalidCredentials: 'Email ou senha incorretos',
+    
+    // Reset Password Page
+    invalidResetLink: 'Link inválido',
+    resetLinkInvalidOrExpired: 'O link de redefinição é inválido ou expirou.',
+    passwordResetSuccess: 'Senha redefinida!',
+    passwordResetSuccessMessage: 'Sua senha foi alterada com sucesso. Redirecionando...',
+    redirectingToHome: 'Redirecionando para o início...',
+    enterNewPasswordBelow: 'Digite sua nova senha abaixo',
+    fillAllFieldsError: 'Por favor, preencha todos os campos',
+    resettingPassword: 'Redefinindo...',
+    resetPasswordButton: 'Redefinir senha',
+    
     welcomeBack: 'Bem-vindo',
     back: 'Voltar',
     welcome: 'Por favor, verifique seu email (incluindo a pasta de spam/lixo eletrônico) para ativar sua conta. Adicione noreply@luxiomarket.shop aos seus contatos.',
@@ -3541,6 +3600,18 @@ export const translations: Record<Language, Translations> = {
     loginError: 'Błąd logowania',
     signupError: 'Błąd',
     invalidCredentials: 'Nieprawidłowy email lub hasło',
+    
+    // Reset Password Page
+    invalidResetLink: 'Nieprawidłowy link',
+    resetLinkInvalidOrExpired: 'Link resetujący jest nieprawidłowy lub wygasł.',
+    passwordResetSuccess: 'Hasło zresetowane!',
+    passwordResetSuccessMessage: 'Twoje hasło zostało pomyślnie zmienione. Przekierowywanie...',
+    redirectingToHome: 'Przekierowywanie do strony głównej...',
+    enterNewPasswordBelow: 'Wprowadź nowe hasło poniżej',
+    fillAllFieldsError: 'Proszę wypełnić wszystkie pola',
+    resettingPassword: 'Resetowanie...',
+    resetPasswordButton: 'Zresetuj hasło',
+    
     welcomeBack: 'Witaj ponownie',
     back: 'Wróć',
     welcome: 'Proszę sprawdzić e-mail (w tym folder spam/niechciana poczta), aby aktywować konto. Dodaj noreply@luxiomarket.shop do kontaktów.',
@@ -4234,6 +4305,18 @@ export const translations: Record<Language, Translations> = {
     loginError: 'Errore di accesso',
     signupError: 'Errore',
     invalidCredentials: 'Email o password non corretta',
+    
+    // Reset Password Page
+    invalidResetLink: 'Link non valido',
+    resetLinkInvalidOrExpired: 'Il link di reimpostazione non è valido o è scaduto.',
+    passwordResetSuccess: 'Password reimpostata!',
+    passwordResetSuccessMessage: 'La tua password è stata modificata con successo. Reindirizzamento...',
+    redirectingToHome: 'Reindirizzamento alla home...',
+    enterNewPasswordBelow: 'Inserisci la tua nuova password qui sotto',
+    fillAllFieldsError: 'Si prega di compilare tutti i campi',
+    resettingPassword: 'Reimpostazione...',
+    resetPasswordButton: 'Reimposta password',
+    
     welcomeBack: 'Bentornato',
     back: 'Indietro',
     welcome: 'Si prega di verificare la propria email (inclusa la cartella spam/posta indesiderata) per attivare l\'account. Aggiunga noreply@luxiomarket.shop ai suoi contatti.',
@@ -4927,6 +5010,18 @@ export const translations: Record<Language, Translations> = {
     loginError: 'Bejelentkezési hiba',
     signupError: 'Hiba',
     invalidCredentials: 'Helytelen e-mail cím vagy jelszó',
+    
+    // Reset Password Page
+    invalidResetLink: 'Érvénytelen link',
+    resetLinkInvalidOrExpired: 'A visszaállítási link érvénytelen vagy lejárt.',
+    passwordResetSuccess: 'Jelszó visszaállítva!',
+    passwordResetSuccessMessage: 'Jelszava sikeresen megváltoztatva. Átirányítás...',
+    redirectingToHome: 'Átirányítás a főoldalra...',
+    enterNewPasswordBelow: 'Adja meg új jelszavát alább',
+    fillAllFieldsError: 'Kérjük, töltse ki az összes mezőt',
+    resettingPassword: 'Visszaállítás...',
+    resetPasswordButton: 'Jelszó visszaállítása',
+    
     welcomeBack: 'Üdvözöljük újra',
     back: 'Vissza',
     welcome: 'Kérjük, ellenőrizze e-mailjét (beleértve a spam/levélszemét mappát) a fiókja aktiválásához. Adja hozzá a noreply@luxiomarket.shop címet a névjegyeihez.',
