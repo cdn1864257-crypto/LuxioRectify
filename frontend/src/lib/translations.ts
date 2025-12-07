@@ -227,6 +227,15 @@ export interface Translations {
   passwordTooWeak: string;
   invalidCredentials: string;
   
+  // Product Page
+  productNotFound: string;
+  backToProducts: string;
+  addedToWishlist: string;
+  removedFromWishlist: string;
+  linkCopied: string;
+  warranty2Years: string;
+  returns30Days: string;
+  
   // Messages
   itemAddedToCart: string;
   itemRemovedFromCart: string;
@@ -808,6 +817,15 @@ export const translations: Record<Language, Translations> = {
     passwordTooWeak: 'Password too weak. Add special characters to improve security.',
     
     // Messages
+    // Product Page
+    productNotFound: 'Product not found',
+    backToProducts: 'Back to products',
+    addedToWishlist: 'Added to wishlist',
+    removedFromWishlist: 'Removed from wishlist',
+    linkCopied: 'Link copied to clipboard',
+    warranty2Years: '2 Year Warranty',
+    returns30Days: '30 Day Returns',
+    
     itemAddedToCart: 'Item added to cart!',
     itemRemovedFromCart: 'Item removed from cart',
     orderPlaced: 'Order placed successfully!',
@@ -1492,6 +1510,15 @@ export const translations: Record<Language, Translations> = {
     passwordTooWeak: 'Mot de passe trop faible. Ajoutez des caractères spéciaux pour renforcer la sécurité.',
     
     // Messages
+    // Product Page
+    productNotFound: 'Produit non trouvé',
+    backToProducts: 'Retour aux produits',
+    addedToWishlist: 'Ajouté aux favoris',
+    removedFromWishlist: 'Retiré des favoris',
+    linkCopied: 'Lien copié dans le presse-papier',
+    warranty2Years: 'Garantie 2 ans',
+    returns30Days: 'Retours 30 jours',
+    
     itemAddedToCart: 'Article ajouté au panier!',
     itemRemovedFromCart: 'Article retiré du panier',
     orderPlaced: 'Commande passée avec succès!',
@@ -2176,6 +2203,15 @@ export const translations: Record<Language, Translations> = {
     passwordTooWeak: 'Contraseña demasiado débil. Agrega caracteres especiales para mejorar la seguridad.',
     
     // Messages
+    // Product Page
+    productNotFound: 'Producto no encontrado',
+    backToProducts: 'Volver a productos',
+    addedToWishlist: 'Añadido a favoritos',
+    removedFromWishlist: 'Eliminado de favoritos',
+    linkCopied: 'Enlace copiado al portapapeles',
+    warranty2Years: 'Garantía 2 años',
+    returns30Days: 'Devoluciones 30 días',
+    
     itemAddedToCart: '¡Producto añadido al carrito!',
     itemRemovedFromCart: 'Producto eliminado del carrito',
     orderPlaced: '¡Pedido realizado con éxito!',
@@ -2860,6 +2896,15 @@ export const translations: Record<Language, Translations> = {
     passwordTooWeak: 'Senha muito fraca. Adicione caracteres especiais para melhorar a segurança.',
     
     // Messages
+    // Product Page
+    productNotFound: 'Produto não encontrado',
+    backToProducts: 'Voltar aos produtos',
+    addedToWishlist: 'Adicionado aos favoritos',
+    removedFromWishlist: 'Removido dos favoritos',
+    linkCopied: 'Link copiado para a área de transferência',
+    warranty2Years: 'Garantia 2 anos',
+    returns30Days: 'Devoluções 30 dias',
+    
     itemAddedToCart: 'Item adicionado ao carrinho!',
     itemRemovedFromCart: 'Item removido do carrinho',
     orderPlaced: 'Pedido realizado com sucesso!',
@@ -3544,6 +3589,15 @@ export const translations: Record<Language, Translations> = {
     passwordTooWeak: 'Hasło zbyt słabe. Dodaj znaki specjalne, aby zwiększyć bezpieczeństwo.',
     
     // Messages
+    // Product Page
+    productNotFound: 'Produkt nie znaleziony',
+    backToProducts: 'Powrót do produktów',
+    addedToWishlist: 'Dodano do listy życzeń',
+    removedFromWishlist: 'Usunięto z listy życzeń',
+    linkCopied: 'Link skopiowany do schowka',
+    warranty2Years: 'Gwarancja 2 lata',
+    returns30Days: 'Zwroty 30 dni',
+    
     itemAddedToCart: 'Dodano do koszyka!',
     itemRemovedFromCart: 'Usunięto z koszyka',
     orderPlaced: 'Zamówienie złożone pomyślnie!',
@@ -4228,6 +4282,15 @@ export const translations: Record<Language, Translations> = {
     passwordTooWeak: 'Password troppo debole. Aggiungi caratteri speciali per migliorare la sicurezza.',
     
     // Messages
+    // Product Page
+    productNotFound: 'Prodotto non trovato',
+    backToProducts: 'Torna ai prodotti',
+    addedToWishlist: 'Aggiunto ai preferiti',
+    removedFromWishlist: 'Rimosso dai preferiti',
+    linkCopied: 'Link copiato negli appunti',
+    warranty2Years: 'Garanzia 2 anni',
+    returns30Days: 'Resi 30 giorni',
+    
     itemAddedToCart: 'Articolo aggiunto al carrello!',
     itemRemovedFromCart: 'Articolo rimosso dal carrello',
     orderPlaced: 'Ordine effettuato con successo!',
@@ -4912,6 +4975,15 @@ export const translations: Record<Language, Translations> = {
     passwordTooWeak: 'A jelszó túl gyenge. Adjon hozzá speciális karaktereket a biztonság növelése érdekében.',
     
     // Messages
+    // Product Page
+    productNotFound: 'Termék nem található',
+    backToProducts: 'Vissza a termékekhez',
+    addedToWishlist: 'Hozzáadva a kívánságlistához',
+    removedFromWishlist: 'Eltávolítva a kívánságlistáról',
+    linkCopied: 'Link másolva a vágólapra',
+    warranty2Years: '2 év garancia',
+    returns30Days: '30 napos visszatérítés',
+    
     itemAddedToCart: 'Termék hozzáadva a kosárhoz!',
     itemRemovedFromCart: 'Termék eltávolítva a kosárból',
     orderPlaced: 'Rendelés sikeresen leadva!',

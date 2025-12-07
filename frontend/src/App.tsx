@@ -27,6 +27,7 @@ import TermsOfService from "@/pages/TermsOfService";
 import GdprDashboard from "@/pages/GdprDashboard";
 import AdminProducts from "@/pages/AdminProducts";
 import AdminOrders from "@/pages/AdminOrders";
+import ProductPage from "@/pages/ProductPage";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -41,6 +42,11 @@ function Router() {
       <Route path="/fr/premium">
         <RouteWrapper lang="fr">
           <Premium />
+        </RouteWrapper>
+      </Route>
+      <Route path="/fr/product/:id">
+        <RouteWrapper lang="fr">
+          <ProductPage />
         </RouteWrapper>
       </Route>
       <Route path="/fr/reset-password">
@@ -103,6 +109,11 @@ function Router() {
           <Premium />
         </RouteWrapper>
       </Route>
+      <Route path="/en/product/:id">
+        <RouteWrapper lang="en">
+          <ProductPage />
+        </RouteWrapper>
+      </Route>
       <Route path="/en/reset-password">
         <RouteWrapper lang="en">
           <ResetPassword />
@@ -161,6 +172,11 @@ function Router() {
       <Route path="/pt/premium">
         <RouteWrapper lang="pt">
           <Premium />
+        </RouteWrapper>
+      </Route>
+      <Route path="/pt/product/:id">
+        <RouteWrapper lang="pt">
+          <ProductPage />
         </RouteWrapper>
       </Route>
       <Route path="/pt/reset-password">
@@ -223,6 +239,11 @@ function Router() {
           <Premium />
         </RouteWrapper>
       </Route>
+      <Route path="/es/product/:id">
+        <RouteWrapper lang="es">
+          <ProductPage />
+        </RouteWrapper>
+      </Route>
       <Route path="/es/reset-password">
         <RouteWrapper lang="es">
           <ResetPassword />
@@ -281,6 +302,11 @@ function Router() {
       <Route path="/it/premium">
         <RouteWrapper lang="it">
           <Premium />
+        </RouteWrapper>
+      </Route>
+      <Route path="/it/product/:id">
+        <RouteWrapper lang="it">
+          <ProductPage />
         </RouteWrapper>
       </Route>
       <Route path="/it/reset-password">
@@ -343,6 +369,11 @@ function Router() {
           <Premium />
         </RouteWrapper>
       </Route>
+      <Route path="/hu/product/:id">
+        <RouteWrapper lang="hu">
+          <ProductPage />
+        </RouteWrapper>
+      </Route>
       <Route path="/hu/reset-password">
         <RouteWrapper lang="hu">
           <ResetPassword />
@@ -401,6 +432,11 @@ function Router() {
       <Route path="/pl/premium">
         <RouteWrapper lang="pl">
           <Premium />
+        </RouteWrapper>
+      </Route>
+      <Route path="/pl/product/:id">
+        <RouteWrapper lang="pl">
+          <ProductPage />
         </RouteWrapper>
       </Route>
       <Route path="/pl/reset-password">

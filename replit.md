@@ -21,7 +21,12 @@ The system employs JWT-based session management with email/password registration
 The platform supports 7 languages (English, French, Polish, Spanish, Portuguese, Italian, Hungarian) with automatic IP-based language detection, country-to-language mapping, and full internationalization of UI and emails. URL parameters are used for language routing, with session caching for detection.
 
 ### SEO Optimization
-Comprehensive multilingual SEO is implemented for Google indexing and social media sharing. This includes optimized title tags, meta descriptions, keywords, Open Graph data, dynamic `hreflang` tag generation, and localized Open Graph images across primary languages. An optimized `sitemap.xml` and `robots.txt` are also included.
+Comprehensive multilingual SEO is implemented for Google indexing and social media sharing. This includes:
+- **Individual Product Pages**: Dedicated URLs for each product (`/:lang/product/:id`) with full SEO metadata
+- Optimized title tags, meta descriptions, keywords, and Open Graph data
+- Dynamic `hreflang` tag generation and localized Open Graph images across all 7 languages
+- An optimized `sitemap.xml` and `robots.txt`
+- Product pages feature variant selectors (capacity/color), pricing with discounts, add-to-cart, and wishlist/share functionality
 
 ### Data Management
 Product and order data are managed client-side using a static product database with extensive smartphone data and variant matrices. Local storage persists cart data and order history. Image assets are optimized and stored locally.

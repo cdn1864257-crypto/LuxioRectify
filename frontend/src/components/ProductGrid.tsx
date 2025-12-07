@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'wouter';
 import { ShoppingCart, Check } from 'lucide-react';
 import { Product, ProductVariant } from '../lib/products';
 import { useCart } from '../contexts/CartContext';
@@ -19,7 +20,7 @@ interface ProductGridProps {
 
 function ProductCard({ product }: { product: Product }) {
   const { addToCart } = useCart();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [addedToCart, setAddedToCart] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
@@ -81,9 +82,9 @@ function ProductCard({ product }: { product: Product }) {
     >
       <div className="p-4 flex-1">
         {/* Product Image */}
-        <div 
-          className="relative aspect-square mb-4 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800 cursor-pointer"
-          onClick={() => setIsModalOpen(true)}
+        <Link 
+          href={`/${language}/product/${product.id}`}
+          className="relative aspect-square mb-4 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800 cursor-pointer block"
           data-testid={`product-image-container-${product.id}`}
         >
           <LazyImage 
@@ -97,13 +98,15 @@ function ProductCard({ product }: { product: Product }) {
               -{currentDiscount}%
             </Badge>
           )}
-        </div>
+        </Link>
 
         {/* Product Info */}
         <div className="space-y-2">
-          <h3 className="font-bold text-lg text-slate-900 dark:text-white line-clamp-2" data-testid={`product-name-${product.id}`}>
-            {product.name}
-          </h3>
+          <Link href={`/${language}/product/${product.id}`}>
+            <h3 className="font-bold text-lg text-slate-900 dark:text-white line-clamp-2 hover:text-primary transition-colors" data-testid={`product-name-${product.id}`}>
+              {product.name}
+            </h3>
+          </Link>
           <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2" data-testid={`product-description-${product.id}`}>
             {product.description}
           </p>
