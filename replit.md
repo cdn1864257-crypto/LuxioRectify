@@ -17,6 +17,14 @@ State is managed using React Query for server data, dedicated contexts for authe
 ### Authentication System
 The system employs JWT-based session management with email/password registration and login, secure password hashing, and httpOnly cookies for JWT storage. It includes a comprehensive email verification flow with auto-login and multilingual support. Security features include CSRF protection, rate limiting, and secure data handling.
 
+**JWT Auto-Logout System (December 2025)**:
+- **JWT Middleware**: Server-side middleware (`server/middleware/auth-jwt.ts`) validates JWT tokens and handles `TokenExpiredError` with specific error codes (`JWT_EXPIRED`, `JWT_INVALID`, `JWT_MISSING`)
+- **JWT Service**: Token generation service (`server/services/jwt-service.ts`) creates access tokens with configurable expiration
+- **Idle Timeout Detection**: React hook (`frontend/src/hooks/useAutoLogout.ts`) monitors user activity and triggers logout after 30 minutes of inactivity, with 5-minute warning toast
+- **Axios Interceptor**: Global 401 response handler (`frontend/src/lib/axiosConfig.ts`) intercepts unauthorized responses and triggers automatic logout with session cleanup
+- **AutoLogoutWrapper**: Component (`frontend/src/components/AutoLogoutWrapper.tsx`) integrates idle timeout and displays multilingual session expiration messages
+- **Dual-Mode Authentication**: JWT tokens are issued alongside session-based auth for backward compatibility; frontend stores JWT in localStorage for API requests
+
 ### Internationalization
 The platform supports 7 languages (English, French, Polish, Spanish, Portuguese, Italian, Hungarian) with automatic IP-based language detection, country-to-language mapping, and full internationalization of UI and emails. URL parameters are used for language routing, with session caching for detection.
 

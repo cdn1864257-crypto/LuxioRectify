@@ -1,0 +1,145 @@
+Je veux que tu m’implémentes un système complet de déconnexion automatique dans mon site full-stack JavaScript (React + Node.js + Express + JWT).
+
+🎯 OBJECTIFS DU SYSTÈME
+
+Implémenter deux types de déconnexion automatique :
+
+1. Déconnexion automatique quand le JWT expire
+Règles :
+
+Au login, générer un JWT avec une expiration configurable (ex : "1h").
+
+Le backend doit renvoyer 401 Unauthorized quand le token est expiré.
+
+Le frontend doit :
+
+intercepter les réponses 401,
+
+supprimer le token du localStorage,
+
+rediriger vers /login.
+
+Backend :
+
+Je veux :
+
+un middleware Express verifyToken complètement codé
+
+gestion propre de l’erreur TokenExpiredError
+
+réponse JSON standardisée
+
+2. Déconnexion automatique pour inactivité (Idle Timeout)
+Règles :
+
+Après X minutes sans interaction : déconnexion automatique.
+
+Activités considérées :
+
+mousemove
+
+keydown
+
+click
+
+Le timer doit se réinitialiser à chaque action.
+
+À l’expiration :
+
+supprimer le token
+
+rediriger vers /login.
+
+Frontend :
+
+Je veux :
+
+un hook React useAutoLogout(timeout)
+
+fichier complet et fonctionnel
+
+utilisation dans App.jsx
+
+timer propre + cleanup
+
+compatible axios interceptors
+
+3. Intercepteur Axios global
+
+Je veux un fichier axiosConfig.js qui :
+
+intercepte les réponses 401
+
+déclenche le logout
+
+redirige automatiquement vers /login
+
+4. Intégration complète
+
+Je veux que tu me fournes :
+
+✔ Backend (Express + JWT)
+
+authController.js avec génération de token expirant
+
+verifyToken.js middleware complet
+
+exemple de route protégée
+
+messages d’erreur clairs
+
+✔ Frontend (React)
+
+useAutoLogout.js hook complet
+
+configuration axios avec interceptors
+
+exemple d’intégration dans App.jsx
+
+exemple de page Login.jsx utilisant le token
+
+exemple de déconnexion manuelle (logout())
+
+5. Livrables attendus
+
+Je veux que tu me donnes :
+
+🔹 Le code complet et prêt à intégrer :
+
+backend : tous les fichiers nécessaires
+
+frontend : tous les fichiers nécessaires
+
+structure des dossiers
+
+instructions d’installation et d’intégration
+
+🔹 Le workflow final :
+
+connexion → token avec expiration
+
+activité → timer reset
+
+inactivité → auto logout
+
+token expiré → auto logout via axios
+
+redirection automatique vers /login
+
+🔹 Aucune donnée fictive
+
+Code réel et fonctionnel.
+
+6. Style attendu
+
+Code commenté et compréhensible
+
+Pas de pseudo-code
+
+Entièrement exécutable
+
+Modern JS (ESModules)
+
+Bonne organisation du projet
+
+Merci de générer tout le code complet, propre, bien structuré, prêt à être copié dans mon projet full-stack JavaScript.

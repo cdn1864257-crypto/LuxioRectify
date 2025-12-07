@@ -12,6 +12,7 @@ import { RouteWrapper } from "./components/RouteWrapper";
 import { LanguageRedirect } from "./components/LanguageRedirect";
 import { ToastNotifications } from "./components/ToastNotifications";
 import { CookieConsent } from "./components/CookieConsent";
+import { AutoLogoutWrapper } from "./components/AutoLogoutWrapper";
 import Home from "@/pages/Home";
 import Premium from "@/pages/Premium";
 import Dashboard from "@/pages/Dashboard";
@@ -555,10 +556,12 @@ function App() {
           <LanguageProvider>
             <CartProvider>
               <TooltipProvider>
-                <Toaster />
-                <ToastNotifications />
-                <CookieConsent />
-                <Router />
+                <AutoLogoutWrapper>
+                  <Toaster />
+                  <ToastNotifications />
+                  <CookieConsent />
+                  <Router />
+                </AutoLogoutWrapper>
               </TooltipProvider>
             </CartProvider>
           </LanguageProvider>

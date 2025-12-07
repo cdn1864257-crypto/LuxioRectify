@@ -1,5 +1,13 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
+import { useLocation } from 'wouter';
 import { getApiUrl, getCsrfToken, resetCsrfToken } from '@/lib/config';
+import { 
+  setGlobalLogoutHandler, 
+  setGlobalNavigateHandler, 
+  saveAuthToken, 
+  clearAuthToken,
+  getStoredAuthToken 
+} from '@/lib/axiosConfig';
 
 export interface AuthUser {
   id: string;
@@ -22,6 +30,9 @@ interface AuthContextType {
   signup: (userData: SignupData) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<{ success: boolean; error?: string }>;
   refreshUser: () => Promise<void>;
+  isAuthenticated: boolean;
+  sessionExpired: boolean;
+  clearSessionExpired: () => void;
 }
 
 interface SignupData {
@@ -39,17 +50,59 @@ interface SignupData {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const IDLE_TIMEOUT = 30 * 60 * 1000;
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const [sessionExpired, setSessionExpired] = useState(false);
+  const [, setLocation] = useLocation();
+
+  const clearSessionExpired = useCallback(() => {
+    setSessionExpired(false);
+  }, []);
+
+  const performLogout = useCallback(async (showExpiredMessage: boolean = false) => {
+    try {
+      await fetch(getApiUrl('/api/auth/logout'), {
+        method: 'POST',
+        credentials: 'include',
+      });
+    } catch (error) {
+      console.error('Error during logout request:', error);
+    }
+
+    clearAuthToken();
+    localStorage.removeItem('luxio_csrf_token');
+    localStorage.removeItem('luxio_csrf_timestamp');
+    sessionStorage.clear();
+    
+    resetCsrfToken();
+    
+    setUser(null);
+    
+    if (showExpiredMessage) {
+      setSessionExpired(true);
+    }
+  }, []);
+
+  const handleGlobalLogout = useCallback(() => {
+    console.log('[AuthContext] Global logout triggered (401 response)');
+    performLogout(true);
+  }, [performLogout]);
+
+  const handleGlobalNavigate = useCallback((path: string) => {
+    console.log('[AuthContext] Global navigate to:', path);
+    setLocation(path);
+  }, [setLocation]);
 
   useEffect(() => {
-    checkAuth();
-  }, []);
+    setGlobalLogoutHandler(handleGlobalLogout);
+    setGlobalNavigateHandler(handleGlobalNavigate);
+  }, [handleGlobalLogout, handleGlobalNavigate]);
 
   const checkAuth = async () => {
     try {
-      // Initialize CSRF token with retry logic
       let csrfInitialized = false;
       try {
         await getCsrfToken();
@@ -57,7 +110,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         csrfInitialized = true;
       } catch (csrfError) {
         console.error('Failed to initialize CSRF token:', csrfError);
-        // Try one more time after a brief delay
         try {
           await new Promise(resolve => setTimeout(resolve, 1000));
           await getCsrfToken(true);
@@ -65,7 +117,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           csrfInitialized = true;
         } catch (retryError) {
           console.error('CSRF token retry also failed:', retryError);
-          // Continue anyway - CSRF will be fetched on first protected request
         }
       }
 
@@ -73,8 +124,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         console.warn('Proceeding without CSRF token - will fetch on first protected request');
       }
 
+      const storedToken = getStoredAuthToken();
+      const headers: HeadersInit = {};
+      
+      if (storedToken) {
+        headers['Authorization'] = `Bearer ${storedToken}`;
+      }
+
       const response = await fetch(getApiUrl('/api/auth/me'), {
         credentials: 'include',
+        headers,
       });
 
       if (response.ok) {
@@ -97,7 +156,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           postalCode: userData.postalCode,
           phone: userData.phone,
         });
+
+        if (data.token) {
+          saveAuthToken(data.token, data.expiresIn);
+        }
       } else {
+        if (response.status === 401) {
+          clearAuthToken();
+        }
         setUser(null);
       }
     } catch (error) {
@@ -107,6 +173,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   const refreshUser = async () => {
     await checkAuth();
@@ -147,9 +217,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         phone: userData.phone,
       });
 
-      // Refresh CSRF token for new session
+      if (data.token) {
+        saveAuthToken(data.token, data.expiresIn);
+        console.log('[Auth] JWT token saved, expires in:', data.expiresIn, 'seconds');
+      }
+
+      setSessionExpired(false);
+
       try {
-        await getCsrfToken();
+        await getCsrfToken(true);
         console.log('CSRF token refreshed after login');
       } catch (csrfError) {
         console.error('Failed to refresh CSRF token after login:', csrfError);
@@ -163,7 +239,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signup = async (userData: SignupData) => {
     try {
-      console.log('🚀 Tentative d\'inscription:', { email: userData.email, firstName: userData.firstName });
+      console.log('Tentative d\'inscription:', { email: userData.email, firstName: userData.firstName });
       
       const response = await fetch(getApiUrl('/api/auth/signup'), {
         method: 'POST',
@@ -174,55 +250,43 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         body: JSON.stringify(userData),
       });
 
-      console.log('📡 Réponse reçue:', response.status, response.statusText);
+      console.log('Réponse reçue:', response.status, response.statusText);
 
       const data = await response.json();
-      console.log('📦 Données:', data);
+      console.log('Données:', data);
 
       if (!response.ok) {
-        console.error('❌ Erreur d\'inscription:', data.error);
+        console.error('Erreur d\'inscription:', data.error);
         return { success: false, error: data.error || "Erreur lors de l'inscription" };
       }
 
-      console.log('✅ Inscription réussie!');
+      console.log('Inscription réussie!');
       return { success: true };
     } catch (error: any) {
-      console.error('❌ Erreur fetch inscription:', error);
+      console.error('Erreur fetch inscription:', error);
       return { success: false, error: error.message || "Erreur de connexion au serveur" };
     }
   };
 
   const logout = async () => {
-    try {
-      await fetch(getApiUrl('/api/auth/logout'), {
-        method: 'POST',
-        credentials: 'include',
-      });
-
-      // Vider le cache local et session storage
-      localStorage.clear();
-      sessionStorage.clear();
-      
-      // Reset CSRF token since session is destroyed
-      resetCsrfToken();
-      
-      setUser(null);
-      return { success: true };
-    } catch (error: any) {
-      // Vider le cache même en cas d'erreur
-      localStorage.clear();
-      sessionStorage.clear();
-      
-      // Reset CSRF token
-      resetCsrfToken();
-      
-      setUser(null);
-      return { success: false, error: error.message || 'Erreur lors de la déconnexion' };
-    }
+    await performLogout(false);
+    return { success: true };
   };
 
+  const isAuthenticated = !!user;
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, signup, logout, refreshUser }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      loading, 
+      login, 
+      signup, 
+      logout, 
+      refreshUser,
+      isAuthenticated,
+      sessionExpired,
+      clearSessionExpired
+    }}>
       {children}
     </AuthContext.Provider>
   );
@@ -235,3 +299,5 @@ export function useAuth() {
   }
   return context;
 }
+
+export { IDLE_TIMEOUT };

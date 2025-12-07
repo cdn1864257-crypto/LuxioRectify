@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import { serialize } from 'cookie';
 import { getErrorMessage, getLanguageFromRequest } from '../../server/utils/multilingual-messages.js';
 import { createSession, getSessionCookieOptions } from '../../server/session-service.js';
+import { generateAccessToken } from '../../server/services/jwt-service.js';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -111,6 +112,13 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
     res.setHeader('Set-Cookie', cookie);
 
+    const jwtResult = generateAccessToken({
+      userId: user._id.toString(),
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName
+    });
+
     const userResponse = {
       id: user._id.toString(),
       firstName: user.firstName,
@@ -125,7 +133,9 @@ async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).json({
       success: true,
       message: 'Connexion réussie',
-      user: userResponse
+      user: userResponse,
+      token: jwtResult.success ? jwtResult.token : undefined,
+      expiresIn: jwtResult.success ? jwtResult.expiresIn : undefined
     });
 
   } catch (error) {
