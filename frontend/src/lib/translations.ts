@@ -457,6 +457,10 @@ export interface Translations {
   createdDaysAgo: string;
   createdHoursAgo: string;
   createdMinutesAgo: string;
+  timeRemainingMinutes: string;
+  timeRemainingHoursMinutes: string;
+  expiring: string;
+  timeRemaining: string;
   reserveStock: string;
   
   // Order Actions
@@ -1033,6 +1037,10 @@ export const translations: Record<Language, Translations> = {
     createdDaysAgo: 'Created {days} day(s) ago',
     createdHoursAgo: 'Created {hours} hour(s) ago',
     createdMinutesAgo: 'Created {minutes} minute(s) ago',
+    timeRemainingMinutes: '{minutes} min remaining',
+    timeRemainingHoursMinutes: '{hours}h {minutes}min remaining',
+    expiring: 'Expiring...',
+    timeRemaining: 'Time remaining:',
     reserveStock: 'Reserve stock',
     
     // Order Actions
@@ -1713,6 +1721,10 @@ export const translations: Record<Language, Translations> = {
     createdDaysAgo: 'Créée il y a {days} jour(s)',
     createdHoursAgo: 'Créée il y a {hours} heure(s)',
     createdMinutesAgo: 'Créée il y a {minutes} minute(s)',
+    timeRemainingMinutes: '{minutes} min restantes',
+    timeRemainingHoursMinutes: '{hours}h {minutes}min restantes',
+    expiring: 'Expiration...',
+    timeRemaining: 'Temps restant :',
     reserveStock: 'Réserver le stock',
     
     // Order Actions
@@ -2393,6 +2405,10 @@ export const translations: Record<Language, Translations> = {
     createdDaysAgo: 'Creado hace {days} día(s)',
     createdHoursAgo: 'Creado hace {hours} hora(s)',
     createdMinutesAgo: 'Creado hace {minutes} minuto(s)',
+    timeRemainingMinutes: '{minutes} min restantes',
+    timeRemainingHoursMinutes: '{hours}h {minutes}min restantes',
+    expiring: 'Expirando...',
+    timeRemaining: 'Tiempo restante:',
     reserveStock: 'Reservar stock',
     
     // Order Actions
@@ -3073,6 +3089,10 @@ export const translations: Record<Language, Translations> = {
     createdDaysAgo: 'Criado há {days} dia(s)',
     createdHoursAgo: 'Criado há {hours} hora(s)',
     createdMinutesAgo: 'Criado há {minutes} minuto(s)',
+    timeRemainingMinutes: '{minutes} min restantes',
+    timeRemainingHoursMinutes: '{hours}h {minutes}min restantes',
+    expiring: 'A expirar...',
+    timeRemaining: 'Tempo restante:',
     reserveStock: 'Reservar stock',
     
     // Order Actions
@@ -3753,6 +3773,10 @@ export const translations: Record<Language, Translations> = {
     createdDaysAgo: 'Utworzono {days} dzień (dni) temu',
     createdHoursAgo: 'Utworzono {hours} godzinę (y) temu',
     createdMinutesAgo: 'Utworzono {minutes} minutę (y) temu',
+    timeRemainingMinutes: 'pozostało {minutes} min',
+    timeRemainingHoursMinutes: 'pozostało {hours}h {minutes}min',
+    expiring: 'Wygasa...',
+    timeRemaining: 'Pozostały czas:',
     reserveStock: 'Zarezerwuj zapasy',
     
     // Order Actions
@@ -4433,6 +4457,10 @@ export const translations: Record<Language, Translations> = {
     createdDaysAgo: 'Creato {days} giorno/i fa',
     createdHoursAgo: 'Creato {hours} ora/e fa',
     createdMinutesAgo: 'Creato {minutes} minuto/i fa',
+    timeRemainingMinutes: '{minutes} min rimanenti',
+    timeRemainingHoursMinutes: '{hours}h {minutes}min rimanenti',
+    expiring: 'In scadenza...',
+    timeRemaining: 'Tempo rimanente:',
     reserveStock: 'Riserva scorte',
     
     // Order Actions
@@ -5113,6 +5141,10 @@ export const translations: Record<Language, Translations> = {
     createdDaysAgo: 'Létrehozva {days} napja',
     createdHoursAgo: 'Létrehozva {hours} órája',
     createdMinutesAgo: 'Létrehozva {minutes} perce',
+    timeRemainingMinutes: '{minutes} perc van hátra',
+    timeRemainingHoursMinutes: '{hours}ó {minutes}p van hátra',
+    expiring: 'Lejár...',
+    timeRemaining: 'Hátralévő idő:',
     reserveStock: 'Készlet lefoglalása',
     
     // Order Actions

@@ -185,7 +185,9 @@ export default function Dashboard() {
       if (remaining <= 0) return null;
       return {
         minutes: Math.floor(remaining),
-        label: remaining < 1 ? 'Expirant...' : `${Math.floor(remaining)} min restantes`
+        label: remaining < 1 
+          ? t('expiring') 
+          : t('timeRemainingMinutes').replace('{minutes}', Math.floor(remaining).toString())
       };
     } else if (order.paymentMethod === 'bank_transfer' && isUnpaidStatus) {
       const remaining = 1440 - minutesElapsed;
@@ -194,7 +196,9 @@ export default function Dashboard() {
       const mins = Math.floor(remaining % 60);
       return {
         minutes: remaining,
-        label: hours > 0 ? `${hours}h ${mins}min restantes` : `${mins} min restantes`
+        label: hours > 0 
+          ? t('timeRemainingHoursMinutes').replace('{hours}', hours.toString()).replace('{minutes}', mins.toString())
+          : t('timeRemainingMinutes').replace('{minutes}', mins.toString())
       };
     }
     return null;
@@ -870,9 +874,7 @@ export default function Dashboard() {
                                 <div className="flex items-center gap-2">
                                   <Clock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
                                   <p className="text-orange-900 dark:text-orange-100 font-medium">
-                                    {language === 'fr' 
-                                      ? `Temps restant : ${timeRemaining.label}`
-                                      : `Time remaining: ${timeRemaining.label}`}
+                                    {`${t('timeRemaining')} ${timeRemaining.label}`}
                                   </p>
                                 </div>
                               </div>
@@ -938,9 +940,7 @@ export default function Dashboard() {
                               <div className="flex items-center gap-2">
                                 <Clock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
                                 <p className="text-orange-900 dark:text-orange-100 font-medium">
-                                  {language === 'fr' 
-                                    ? `Temps restant : ${timeRemaining.label}`
-                                    : `Time remaining: ${timeRemaining.label}`}
+                                  {`${t('timeRemaining')} ${timeRemaining.label}`}
                                 </p>
                               </div>
                             </div>
