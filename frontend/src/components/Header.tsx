@@ -6,6 +6,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { AuthModal } from './AuthModal';
 import { LanguageSelector } from './LanguageSelector';
 import { SearchAutocomplete } from './SearchAutocomplete';
+import { ThemeToggle } from './ThemeToggle';
 import { ShoppingCart as ShoppingCartIcon, Menu, LayoutDashboard, LogOut, Package } from 'lucide-react';
 import { Button } from './ui/button';
 import {
@@ -107,8 +108,9 @@ export function Header({ onToggleCart }: HeaderProps) {
                     </SheetDescription>
                   </SheetHeader>
                   
-                  {/* Language Selector at top */}
-                  <div className="mt-6 pb-4 border-b border-border">
+                  {/* Theme Toggle and Language Selector at top */}
+                  <div className="mt-6 pb-4 border-b border-border flex items-center gap-2">
+                    <ThemeToggle />
                     <LanguageSelector />
                   </div>
                   
@@ -319,6 +321,11 @@ export function Header({ onToggleCart }: HeaderProps) {
             
             {/* Right Section: Actions */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+              {/* Theme Toggle - Hidden on mobile and tablet, visible from lg breakpoint */}
+              <div className="hidden lg:block">
+                <ThemeToggle />
+              </div>
+              
               {/* Language Selector - Hidden on mobile and tablet, visible from lg breakpoint */}
               <div className="hidden lg:block">
                 <LanguageSelector />

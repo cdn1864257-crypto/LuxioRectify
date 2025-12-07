@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { CartProvider } from "./contexts/CartContext";
 import { AuthProvider } from "./contexts/AuthContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { RouteWrapper } from "./components/RouteWrapper";
 import { LanguageRedirect } from "./components/LanguageRedirect";
@@ -551,22 +552,24 @@ function Router() {
 function App() {
   return (
     <HelmetProvider>
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <LanguageProvider>
-            <CartProvider>
-              <TooltipProvider>
-                <AutoLogoutWrapper>
-                  <Toaster />
-                  <ToastNotifications />
-                  <CookieConsent />
-                  <Router />
-                </AutoLogoutWrapper>
-              </TooltipProvider>
-            </CartProvider>
-          </LanguageProvider>
-        </AuthProvider>
-      </QueryClientProvider>
+      <ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
+            <LanguageProvider>
+              <CartProvider>
+                <TooltipProvider>
+                  <AutoLogoutWrapper>
+                    <Toaster />
+                    <ToastNotifications />
+                    <CookieConsent />
+                    <Router />
+                  </AutoLogoutWrapper>
+                </TooltipProvider>
+              </CartProvider>
+            </LanguageProvider>
+          </AuthProvider>
+        </QueryClientProvider>
+      </ThemeProvider>
     </HelmetProvider>
   );
 }
