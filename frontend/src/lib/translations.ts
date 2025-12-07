@@ -1233,7 +1233,27 @@ export const translations: Record<Language, Translations> = {
     seoImageAltSmartphone: 'Latest generation smartphone',
     seoImageAltWatch: 'Premium smartwatch',
     seoImageAltSneaker: 'Designer premium sneakers',
-    seoImageAltGadget: 'Smart home gadget'
+    seoImageAltGadget: 'Smart home gadget',
+    
+    // Coupons
+    couponCode: 'Coupon Code',
+    applyCoupon: 'Apply Coupon',
+    enterCouponCode: 'Enter coupon code',
+    couponApplied: 'Coupon applied successfully',
+    couponInvalid: 'Invalid coupon code',
+    couponExpired: 'This coupon has expired',
+    couponAlreadyUsed: 'This coupon has already been used',
+    removeCoupon: 'Remove coupon',
+    myCoupons: 'My Coupons',
+    noCoupons: 'No coupons available',
+    noCouponsDescription: 'You don\'t have any coupons yet. Earn coupons by ordering more than 2 phones or spending 3000€ or more.',
+    couponDiscount: 'off',
+    couponExpires: 'Expires',
+    couponValid: 'Valid',
+    couponUsed: 'Used',
+    copyCode: 'Copy code',
+    codeCopied: 'Code copied!',
+    validatingCoupon: 'Validating...'
   },
   
   fr: {
@@ -1893,7 +1913,27 @@ export const translations: Record<Language, Translations> = {
     seoImageAltSmartphone: 'Smartphone dernière génération',
     seoImageAltWatch: 'Montre connectée premium',
     seoImageAltSneaker: 'Baskets premium de créateur',
-    seoImageAltGadget: 'Gadget maison connectée'
+    seoImageAltGadget: 'Gadget maison connectée',
+    
+    // Coupons
+    couponCode: 'Code promo',
+    applyCoupon: 'Appliquer le coupon',
+    enterCouponCode: 'Entrez le code promo',
+    couponApplied: 'Coupon appliqué avec succès',
+    couponInvalid: 'Code promo invalide',
+    couponExpired: 'Ce coupon a expiré',
+    couponAlreadyUsed: 'Ce coupon a déjà été utilisé',
+    removeCoupon: 'Supprimer le coupon',
+    myCoupons: 'Mes Coupons',
+    noCoupons: 'Aucun coupon disponible',
+    noCouponsDescription: 'Vous n\'avez pas encore de coupons. Gagnez des coupons en commandant plus de 2 téléphones ou en dépensant 3000€ ou plus.',
+    couponDiscount: 'de réduction',
+    couponExpires: 'Expire le',
+    couponValid: 'Valide',
+    couponUsed: 'Utilisé',
+    copyCode: 'Copier le code',
+    codeCopied: 'Code copié !',
+    validatingCoupon: 'Validation...'
   },
   
   es: {
@@ -2553,7 +2593,27 @@ export const translations: Record<Language, Translations> = {
     seoImageAltSmartphone: 'Smartphone de última generación',
     seoImageAltWatch: 'Reloj inteligente premium',
     seoImageAltSneaker: 'Zapatillas premium de diseñador',
-    seoImageAltGadget: 'Gadget para casa inteligente'
+    seoImageAltGadget: 'Gadget para casa inteligente',
+    
+    // Coupons
+    couponCode: 'Código de cupón',
+    applyCoupon: 'Aplicar cupón',
+    enterCouponCode: 'Ingresa el código de cupón',
+    couponApplied: 'Cupón aplicado con éxito',
+    couponInvalid: 'Código de cupón inválido',
+    couponExpired: 'Este cupón ha expirado',
+    couponAlreadyUsed: 'Este cupón ya ha sido utilizado',
+    removeCoupon: 'Eliminar cupón',
+    myCoupons: 'Mis Cupones',
+    noCoupons: 'No hay cupones disponibles',
+    noCouponsDescription: 'Aún no tienes cupones. Gana cupones pidiendo más de 2 teléfonos o gastando 3000€ o más.',
+    couponDiscount: 'de descuento',
+    couponExpires: 'Expira',
+    couponValid: 'Válido',
+    couponUsed: 'Usado',
+    copyCode: 'Copiar código',
+    codeCopied: '¡Código copiado!',
+    validatingCoupon: 'Validando...'
   },
   
   pt: {
@@ -3213,7 +3273,27 @@ export const translations: Record<Language, Translations> = {
     seoImageAltSmartphone: 'Smartphone de última geração',
     seoImageAltWatch: 'Relógio inteligente premium',
     seoImageAltSneaker: 'Ténis premium de designer',
-    seoImageAltGadget: 'Gadget para casa inteligente'
+    seoImageAltGadget: 'Gadget para casa inteligente',
+    
+    // Coupons
+    couponCode: 'Código do cupom',
+    applyCoupon: 'Aplicar cupom',
+    enterCouponCode: 'Digite o código do cupom',
+    couponApplied: 'Cupom aplicado com sucesso',
+    couponInvalid: 'Código de cupom inválido',
+    couponExpired: 'Este cupom expirou',
+    couponAlreadyUsed: 'Este cupom já foi utilizado',
+    removeCoupon: 'Remover cupom',
+    myCoupons: 'Meus Cupons',
+    noCoupons: 'Nenhum cupom disponível',
+    noCouponsDescription: 'Você ainda não tem cupons. Ganhe cupons pedindo mais de 2 telefones ou gastando 3000€ ou mais.',
+    couponDiscount: 'de desconto',
+    couponExpires: 'Expira em',
+    couponValid: 'Válido',
+    couponUsed: 'Usado',
+    copyCode: 'Copiar código',
+    codeCopied: 'Código copiado!',
+    validatingCoupon: 'Validando...'
   },
   
   pl: {
@@ -3873,7 +3953,27 @@ export const translations: Record<Language, Translations> = {
     seoImageAltSmartphone: 'Smartfon najnowszej generacji',
     seoImageAltWatch: 'Inteligentny zegarek premium',
     seoImageAltSneaker: 'Markowe buty premium',
-    seoImageAltGadget: 'Gadżet dla inteligentnego domu'
+    seoImageAltGadget: 'Gadżet dla inteligentnego domu',
+    
+    // Coupons
+    couponCode: 'Kod kuponu',
+    applyCoupon: 'Zastosuj kupon',
+    enterCouponCode: 'Wprowadź kod kuponu',
+    couponApplied: 'Kupon zastosowany pomyślnie',
+    couponInvalid: 'Nieprawidłowy kod kuponu',
+    couponExpired: 'Ten kupon wygasł',
+    couponAlreadyUsed: 'Ten kupon został już wykorzystany',
+    removeCoupon: 'Usuń kupon',
+    myCoupons: 'Moje Kupony',
+    noCoupons: 'Brak dostępnych kuponów',
+    noCouponsDescription: 'Nie masz jeszcze żadnych kuponów. Zdobądź kupony zamawiając więcej niż 2 telefony lub wydając 3000€ lub więcej.',
+    couponDiscount: 'zniżki',
+    couponExpires: 'Wygasa',
+    couponValid: 'Ważny',
+    couponUsed: 'Wykorzystany',
+    copyCode: 'Kopiuj kod',
+    codeCopied: 'Kod skopiowany!',
+    validatingCoupon: 'Weryfikacja...'
   },
   
   it: {
@@ -4533,7 +4633,27 @@ export const translations: Record<Language, Translations> = {
     seoImageAltSmartphone: 'Smartphone di ultima generazione',
     seoImageAltWatch: 'Smartwatch premium',
     seoImageAltSneaker: 'Sneakers premium di design',
-    seoImageAltGadget: 'Gadget per casa intelligente'
+    seoImageAltGadget: 'Gadget per casa intelligente',
+    
+    // Coupons
+    couponCode: 'Codice coupon',
+    applyCoupon: 'Applica coupon',
+    enterCouponCode: 'Inserisci il codice coupon',
+    couponApplied: 'Coupon applicato con successo',
+    couponInvalid: 'Codice coupon non valido',
+    couponExpired: 'Questo coupon è scaduto',
+    couponAlreadyUsed: 'Questo coupon è già stato utilizzato',
+    removeCoupon: 'Rimuovi coupon',
+    myCoupons: 'I Miei Coupon',
+    noCoupons: 'Nessun coupon disponibile',
+    noCouponsDescription: 'Non hai ancora coupon. Guadagna coupon ordinando più di 2 telefoni o spendendo 3000€ o più.',
+    couponDiscount: 'di sconto',
+    couponExpires: 'Scade il',
+    couponValid: 'Valido',
+    couponUsed: 'Usato',
+    copyCode: 'Copia codice',
+    codeCopied: 'Codice copiato!',
+    validatingCoupon: 'Validazione...'
   },
   
   hu: {
@@ -5193,7 +5313,27 @@ export const translations: Record<Language, Translations> = {
     seoImageAltSmartphone: 'Legújabb generációs okostelefon',
     seoImageAltWatch: 'Prémium okosóra',
     seoImageAltSneaker: 'Designer prémium cipők',
-    seoImageAltGadget: 'Okos otthon kütyü'
+    seoImageAltGadget: 'Okos otthon kütyü',
+    
+    // Coupons
+    couponCode: 'Kuponkód',
+    applyCoupon: 'Kupon alkalmazása',
+    enterCouponCode: 'Add meg a kuponkódot',
+    couponApplied: 'Kupon sikeresen alkalmazva',
+    couponInvalid: 'Érvénytelen kuponkód',
+    couponExpired: 'Ez a kupon lejárt',
+    couponAlreadyUsed: 'Ez a kupon már felhasználásra került',
+    removeCoupon: 'Kupon eltávolítása',
+    myCoupons: 'Kuponjaim',
+    noCoupons: 'Nincs elérhető kupon',
+    noCouponsDescription: 'Még nincsenek kuponjaid. Szerezz kuponokat 2-nél több telefon rendelésével vagy 3000€ vagy annál nagyobb összeg elköltésével.',
+    couponDiscount: 'kedvezmény',
+    couponExpires: 'Lejár',
+    couponValid: 'Érvényes',
+    couponUsed: 'Felhasznált',
+    copyCode: 'Kód másolása',
+    codeCopied: 'Kód másolva!',
+    validatingCoupon: 'Ellenőrzés...'
   }
 };
 

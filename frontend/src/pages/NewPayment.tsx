@@ -7,12 +7,13 @@ import { generatePaymentReference } from '@/lib/payment-reference';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CartSidebar } from '@/components/CartSidebar';
+import { ApplyCoupon } from '@/components/ApplyCoupon';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, ShoppingBag, CreditCard, Zap, Copy, Check, Building2, Shield, Lock } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, CreditCard, Zap, Copy, Check, Building2, Shield, Lock, Tag } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/lib/translations';
 import { useSuspensionStatus } from '@/hooks/useSuspensionStatus';
@@ -30,10 +31,15 @@ export default function NewPayment() {
   const [bankDetails, setBankDetails] = useState<any>(null);
   const [copied, setCopied] = useState(false);
   const [isConfirmingOrder, setIsConfirmingOrder] = useState(false);
+  const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; discountPercent: number } | null>(null);
   const { toast } = useToast();
   const { language } = useLanguage();
   const t = translations[language] || translations.en;
   const { suspensionStatus } = useSuspensionStatus();
+
+  // Calculate discounted total
+  const discountAmount = appliedCoupon ? (total * appliedCoupon.discountPercent) / 100 : 0;
+  const finalTotal = total - discountAmount;
 
   // Check for OxaPay return
   const urlParams = new URLSearchParams(window.location.search);
@@ -125,7 +131,10 @@ export default function NewPayment() {
       bic: 'NTSBESM1XXX',
       reference: orderReference,
       orderReference: orderReference,
-      amount: total
+      amount: finalTotal,
+      originalAmount: total,
+      discountAmount: discountAmount,
+      couponCode: appliedCoupon?.code || null
     });
     setShowBankConfirmModal(true);
   };
@@ -140,7 +149,10 @@ export default function NewPayment() {
         body: JSON.stringify({
           customerEmail: user.email,
           customerName: `${user.firstName} ${user.lastName}`,
-          totalAmount: total,
+          totalAmount: finalTotal,
+          originalAmount: total,
+          discountAmount: discountAmount,
+          couponCode: appliedCoupon?.code || null,
           cartItems: cart.map(item => ({
             id: item.id,
             name: item.name,
@@ -191,7 +203,10 @@ export default function NewPayment() {
         body: JSON.stringify({
           customerEmail: user.email,
           customerName: `${user.firstName} ${user.lastName}`,
-          totalAmount: total,
+          totalAmount: finalTotal,
+          originalAmount: total,
+          discountAmount: discountAmount,
+          couponCode: appliedCoupon?.code || null,
           language: language,
           cartItems: cart.map(item => ({
             id: item.id,
@@ -284,12 +299,39 @@ export default function NewPayment() {
                 ))}
               </div>
 
-              <div className="pt-4 border-t space-y-2">
-                <div className="flex justify-between text-lg font-bold">
-                  <span>{t.total}</span>
-                  <span className="text-primary" data-testid="text-total-amount">
-                    {total.toFixed(2)} €
-                  </span>
+              <div className="pt-4 border-t space-y-3">
+                <ApplyCoupon
+                  customerEmail={user.email}
+                  onCouponApplied={(discountPercent, couponCode) => {
+                    setAppliedCoupon({ code: couponCode, discountPercent });
+                  }}
+                  onCouponRemoved={() => setAppliedCoupon(null)}
+                  appliedCoupon={appliedCoupon}
+                  disabled={isProcessing}
+                />
+                
+                <div className="space-y-2 pt-3 border-t">
+                  <div className="flex justify-between text-sm text-muted-foreground">
+                    <span>{t.subtotal || 'Subtotal'}</span>
+                    <span>{total.toFixed(2)} €</span>
+                  </div>
+                  
+                  {appliedCoupon && (
+                    <div className="flex justify-between text-sm text-green-600 dark:text-green-400">
+                      <span className="flex items-center gap-1">
+                        <Tag className="w-3 h-3" />
+                        {t.couponDiscount || 'Discount'} ({appliedCoupon.discountPercent}%)
+                      </span>
+                      <span>-{discountAmount.toFixed(2)} €</span>
+                    </div>
+                  )}
+                  
+                  <div className="flex justify-between text-lg font-bold pt-2 border-t">
+                    <span>{t.total}</span>
+                    <span className="text-primary" data-testid="text-total-amount">
+                      {finalTotal.toFixed(2)} €
+                    </span>
+                  </div>
                 </div>
               </div>
             </CardContent>
