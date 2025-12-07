@@ -1,0 +1,111 @@
+Je veux que tu implémentes dans mon projet full-stack JavaScript un système complet de coupons promotionnels selon les règles suivantes :
+
+🎯 Règles du coupon
+
+Le coupon doit être automatiquement généré après une commande si :
+
+l’utilisateur achète plus de 2 téléphones,
+
+et que le montant total de la commande est d’au moins 3000 €.
+
+Le coupon donne une réduction supplémentaire de 15 % sur une future commande.
+
+Le coupon doit être :
+
+unique,
+
+utilisable une seule fois,
+
+avec une date d'expiration configurable (par défaut 30 jours).
+
+Le client doit recevoir automatiquement le code du coupon (par email ou via son compte utilisateur).
+
+🗂 Ce que je veux comme implémentation complète
+
+Merci de générer toute la structure du système, incluant :
+
+1. Backend : Node.js / Express / MongoDB
+
+Modèle MongoDB Coupon avec les champs :
+
+code: String,
+discount: Number,   // 15
+userId: ObjectId,
+orderId: ObjectId,
+expirationDate: Date,
+used: Boolean
+
+
+Modifications dans le modèle ou le contrôleur Order pour :
+
+détecter si la commande dépasse les critères,
+
+générer un coupon unique au format :
+PROMO15-[orderId]-[8 caractères aléatoires]
+
+Function helper generateCouponCode()
+
+Route API :
+
+POST /api/coupons/validate
+→ Vérifie la validité du coupon (existe, non utilisé, non expiré)
+
+POST /api/coupons/apply
+→ Applique la réduction de 15 % sur le montant d’une commande
+
+GET /api/coupons/my-coupons
+→ Renvoie les coupons du client connecté
+
+2. Frontend : React
+
+Composant ApplyCoupon.jsx permettant au client :
+
+d’entrer un code promo
+
+de vérifier sa validité
+
+de voir le nouveau total après réduction
+
+Composant MyCoupons.jsx affichant les coupons générés
+
+Intégration dans la page Checkout :
+
+champ "Code promo"
+
+bouton "Appliquer"
+
+affichage du montant final après réduction
+
+3. Fonctionnalités supplémentaires
+
+Envoyer automatiquement un email avec le coupon juste après la commande (utilise nodemailer ou autre).
+
+Sécuriser l’usage des coupons :
+
+impossible à réutiliser
+
+impossible d’utiliser un coupon expiré
+
+impossible d’utiliser un coupon appartenant à un autre utilisateur
+
+Ajout de tests unitaires ou d’intégration si possible.
+
+📌 Objectif final
+
+À la fin, je veux que tu me fournis :
+
+les fichiers complets (backend + frontend)
+
+tout le code prêt à coller dans mon projet
+
+les explications d’intégration
+
+les endpoints API
+
+les modèles MongoDB
+
+tout le système de génération + validation + utilisation des coupons
+
+le workflow complet du checkout avec coupon.
+
+Merci de produire le code final, structuré et prêt à l’emploi pour un projet full-stack JavaScript.
