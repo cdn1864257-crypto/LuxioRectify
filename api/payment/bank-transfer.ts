@@ -3,6 +3,7 @@ import { sendBankTransferEmail, sendBankTransferNotificationToAdmin } from '../.
 import { generatePaymentReference } from '../../utils/payment-reference.js';
 import { getUserStatus, formatSuspensionEndDate, getSuspensionEndDate, autoReactivateExpiredSuspensions } from '../../utils/account-suspension.js';
 import { validateCartTotal, validateTotalAmount } from '../lib/price-validation';
+import { shouldGenerateCoupon, createCoupon } from '../../utils/coupon-generator';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -177,19 +178,40 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         console.error('Erreur lors de l\'envoi des emails de virement:', error);
       });
 
+      let generatedCoupon = null;
+      if (shouldGenerateCoupon(cartItems, validatedAmount)) {
+        try {
+          generatedCoupon = await createCoupon(
+            db,
+            customerEmail.toLowerCase(),
+            orderId,
+            15,
+            30
+          );
+          console.log(`[Coupon] Generated coupon ${generatedCoupon.code} for order ${orderId}`);
+        } catch (couponError) {
+          console.error('[Coupon] Error generating coupon:', couponError);
+        }
+      }
+
       return res.status(201).json({
         success: true,
         message: 'Commande enregistrée avec succès',
         orderId,
-        orderReference: paymentReference,  // Consistent reference
+        orderReference: paymentReference,
         status: 'pending',
         bankDetails: {
           bankName: bankDetails.bankName,
           iban: bankDetails.iban,
           bic: bankDetails.bic,
-          reference: paymentReference,  // ✅ Standardized format everywhere
+          reference: paymentReference,
           amount: totalAmount
-        }
+        },
+        coupon: generatedCoupon ? {
+          code: generatedCoupon.code,
+          discount: generatedCoupon.discount,
+          expirationDate: generatedCoupon.expirationDate
+        } : null
       });
     } finally {
       await client.close();

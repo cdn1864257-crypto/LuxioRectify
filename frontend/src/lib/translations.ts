@@ -553,6 +553,26 @@ export interface Translations {
   seoImageAltWatch: string;
   seoImageAltSneaker: string;
   seoImageAltGadget: string;
+  
+  // Coupons
+  couponCode: string;
+  applyCoupon: string;
+  enterCouponCode: string;
+  couponApplied: string;
+  couponInvalid: string;
+  couponExpired: string;
+  couponAlreadyUsed: string;
+  removeCoupon: string;
+  myCoupons: string;
+  noCoupons: string;
+  noCouponsDescription: string;
+  couponDiscount: string;
+  couponExpires: string;
+  couponValid: string;
+  couponUsed: string;
+  copyCode: string;
+  codeCopied: string;
+  validatingCoupon: string;
 }
 
 export const translations: Record<Language, Translations> = {

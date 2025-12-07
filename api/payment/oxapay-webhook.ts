@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import { sendOxaPayConfirmationToCustomer, sendOxaPayNotificationToAdmin } from '../../utils/email.js';
 import { addUnpaidOrder, checkAndApplySuspension } from '../../utils/account-suspension.js';
 import { sendSuspensionEmail } from '../../utils/email.js';
+import { shouldGenerateCoupon, createCoupon } from '../../utils/coupon-generator';
 
 interface VercelRequest {
   query: { [key: string]: string | string[] | undefined };
@@ -250,10 +251,24 @@ async function handler(req: VercelRequest, res: VercelResponse) {
             sendOxaPayConfirmationToCustomer(oxaPayOrder),
             sendOxaPayNotificationToAdmin(oxaPayOrder)
           ]);
-          // Log email sending in production (important for monitoring)
           console.log(`[OxaPay Webhook] Confirmation emails sent for order ${orderId}`);
         } catch (error) {
           console.error('Erreur lors de l\'envoi des emails OxaPay:', error);
+        }
+
+        if (shouldGenerateCoupon(order.cartItems || [], order.totalAmount || 0)) {
+          try {
+            const generatedCoupon = await createCoupon(
+              db,
+              order.customerEmail.toLowerCase(),
+              order._id.toString(),
+              15,
+              30
+            );
+            console.log(`[Coupon] Generated coupon ${generatedCoupon.code} for OxaPay order ${orderId}`);
+          } catch (couponError) {
+            console.error('[Coupon] Error generating coupon for OxaPay order:', couponError);
+          }
         }
       }
 
