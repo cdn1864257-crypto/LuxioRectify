@@ -31,6 +31,7 @@ import updateProductHandler from '../api/products/update.js';
 import deleteProductHandler from '../api/products/delete.js';
 import { hybridGeneralLimiter, hybridAuthLimiter, hybridWebhookLimiter } from '../utils/hybrid-rate-limiter.js';
 import { initializeServices } from './bootstrap.js';
+import { startKeepAlive } from './keepAlive.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -391,6 +392,11 @@ app.get('/', (req, res) => {
   });
 });
 
+// Ultra-lightweight ping route for keep-alive (cron jobs, UptimeRobot, etc.)
+app.get('/ping', (req, res) => {
+  res.json({ ok: true });
+});
+
 // 404 Handler - Catch all unmatched routes and return JSON instead of HTML
 app.use((req, res) => {
   const lang = getLanguageFromRequest(req);
@@ -440,6 +446,9 @@ initializeServices().then(() => {
     console.log(`   JWT Secret configured: ${process.env.JWT_SECRET ? 'Yes' : 'No'}`);
     console.log(`   SendGrid configured: ${process.env.SENDGRID_API_KEY ? 'Yes' : 'No'}`);
     console.log(`   NowPayments configured: ${process.env.NOWPAYMENTS_API_KEY ? 'Yes' : 'No'}`);
+    
+    // Start keep-alive service to prevent Render from sleeping
+    startKeepAlive();
   });
 }).catch(error => {
   console.error('[Server] Fatal error during initialization:', error);
