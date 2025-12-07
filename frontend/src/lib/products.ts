@@ -28,7 +28,7 @@ export const products: Product[] = [
     originalPrice: 0.50,
     discount: 60,
     image: "/attached_assets/display-watch1.0_1759493221518.png",
-    category: "home-gadgets",
+    category: "gadgets",
     description: "Article de test pour vérifier le paiement crypto - 0,20€",
     features: [
       "Test de paiement",
