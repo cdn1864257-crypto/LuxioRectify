@@ -8,9 +8,15 @@ const __dirname = path.dirname(__filename);
 export type EmailLanguage = 'fr' | 'en' | 'es' | 'pt' | 'pl' | 'hu' | 'it';
 
 const LOGO_URL = 'https://luxiomarket.shop/Luxio_logo_dark_version_6197255a.png';
-const PRIMARY_COLOR = '#1a2e44';
-const ACCENT_COLOR = '#ff6b35';
+const PRIMARY_COLOR = '#0f172a';
+const PRIMARY_LIGHT = '#1e293b';
+const ACCENT_COLOR = '#f97316';
+const ACCENT_GRADIENT = 'linear-gradient(135deg, #f97316 0%, #ea580c 100%)';
+const SUCCESS_COLOR = '#10b981';
+const WARNING_COLOR = '#f59e0b';
+const INFO_COLOR = '#3b82f6';
 const SITE_URL = 'https://luxiomarket.shop';
+const CONTACT_EMAIL = 'Contact@luxiomarket.shop';
 
 // Load i18n translations
 let translations: any = {};
@@ -87,7 +93,7 @@ function getBaseTemplate(content: string, preheader: string = '', language: Emai
   <style type="text/css">
     body, table, td, a { font-family: Arial, Helvetica, sans-serif !important; }
     table { border-collapse: collapse; }
-    .button { mso-padding-alt: 16px 40px; }
+    .button { mso-padding-alt: 18px 48px; }
   </style>
   <noscript>
     <xml>
@@ -99,6 +105,8 @@ function getBaseTemplate(content: string, preheader: string = '', language: Emai
   </noscript>
   <![endif]-->
   <style type="text/css">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
     /* Client-specific Styles */
     body { margin: 0 !important; padding: 0 !important; width: 100% !important; }
     img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
@@ -107,47 +115,50 @@ function getBaseTemplate(content: string, preheader: string = '', language: Emai
     /* Responsive Styles */
     @media only screen and (max-width: 600px) {
       .wrapper { width: 100% !important; }
-      .content { padding: 20px !important; }
-      .button { width: 100% !important; display: block !important; padding: 14px 20px !important; }
-      .mobile-padding { padding: 10px !important; }
+      .content { padding: 24px 16px !important; }
+      .button { width: 100% !important; display: block !important; padding: 16px 24px !important; }
+      .mobile-padding { padding: 16px !important; }
       .mobile-hide { display: none !important; }
       .mobile-full { width: 100% !important; max-width: 100% !important; }
+      .header-padding { padding: 32px 16px !important; }
     }
     
     /* Dark Mode Support */
     @media (prefers-color-scheme: dark) {
-      .dark-mode-bg { background-color: #1a1a1a !important; }
-      .dark-mode-text { color: #ffffff !important; }
-      .dark-mode-card { background-color: #2d2d2d !important; }
+      .dark-mode-bg { background-color: #0f172a !important; }
+      .dark-mode-text { color: #f1f5f9 !important; }
+      .dark-mode-card { background-color: #1e293b !important; }
     }
+    
   </style>
 </head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f4f6f8; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;" bgcolor="#f4f6f8">
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f8fafc; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;" bgcolor="#f8fafc">
   <!-- Preheader (hidden text) -->
-  ${preheader ? `<div style="display: none; max-height: 0px; overflow: hidden; font-size: 1px; line-height: 1px; color: #f4f6f8; mso-hide: all;">${preheader}</div>` : ''}
+  ${preheader ? `<div style="display: none; max-height: 0px; overflow: hidden; font-size: 1px; line-height: 1px; color: #f8fafc; mso-hide: all;">${preheader}</div>` : ''}
   
   <!-- Spacer for preheader -->
-  <div style="display: none; max-height: 0px; overflow: hidden; font-size: 1px; line-height: 1px; color: #f4f6f8; mso-hide: all;">
+  <div style="display: none; max-height: 0px; overflow: hidden; font-size: 1px; line-height: 1px; color: #f8fafc; mso-hide: all;">
     &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
   </div>
   
   <!-- Main Container -->
-  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f4f6f8;" bgcolor="#f4f6f8">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f8fafc;" bgcolor="#f8fafc">
     <tr>
-      <td align="center" style="padding: 40px 10px;" class="mobile-padding">
+      <td align="center" style="padding: 48px 16px;" class="mobile-padding">
         
         <!-- Email Wrapper -->
-        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" class="wrapper" style="max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden;" bgcolor="#ffffff">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" class="wrapper" style="max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05); overflow: hidden;" bgcolor="#ffffff">
           
-          <!-- Header with Gradient Background -->
+          <!-- Header with Modern Gradient Background -->
           <tr>
-            <td align="center" style="background: linear-gradient(135deg, ${PRIMARY_COLOR} 0%, #2a4560 100%); padding: 40px 20px;" bgcolor="${PRIMARY_COLOR}">
+            <td align="center" class="header-padding" style="background-color: ${PRIMARY_COLOR}; padding: 48px 24px;" bgcolor="${PRIMARY_COLOR}">
               <!--[if mso]>
-              <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fillcolor="${PRIMARY_COLOR}" stroke="f" style="width:600px; height:120px;">
+              <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fillcolor="${PRIMARY_COLOR}" stroke="f" style="width:600px; height:140px;">
               <v:textbox inset="0,0,0,0">
               <![endif]-->
-              <div>
-                <img src="${LOGO_URL}" alt="Luxio" width="140" height="auto" style="display: block; margin: 0 auto; max-width: 140px; height: auto;" />
+              <div style="position: relative; z-index: 1;">
+                <img src="${LOGO_URL}" alt="Luxio" width="160" height="auto" style="display: block; margin: 0 auto; max-width: 160px; height: auto; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));" />
+                <p style="margin: 16px 0 0 0; font-size: 13px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 2px; font-weight: 500;">Premium Tech Marketplace</p>
               </div>
               <!--[if mso]>
               </v:textbox>
@@ -156,48 +167,65 @@ function getBaseTemplate(content: string, preheader: string = '', language: Emai
             </td>
           </tr>
           
+          <!-- Accent Stripe -->
+          <tr>
+            <td style="height: 4px; background: linear-gradient(90deg, ${ACCENT_COLOR} 0%, #fb923c 50%, ${ACCENT_COLOR} 100%);" bgcolor="${ACCENT_COLOR}"></td>
+          </tr>
+          
           <!-- Main Content -->
           <tr>
-            <td class="content" style="padding: 40px 30px;" bgcolor="#ffffff">
+            <td class="content" style="padding: 48px 40px;" bgcolor="#ffffff">
               ${content}
             </td>
           </tr>
           
           <!-- Footer -->
           <tr>
-            <td style="background-color: #f9fafb; padding: 30px 20px; text-align: center; border-top: 1px solid #e5e7eb;" bgcolor="#f9fafb" align="center">
+            <td style="background-color: #f8fafc; padding: 40px 24px; text-align: center; border-top: 1px solid #e2e8f0;" bgcolor="#f8fafc" align="center">
               <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <!-- Tagline -->
                 <tr>
-                  <td align="center" style="padding-bottom: 15px;">
-                    <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #6b7280; font-weight: 500;">
+                  <td align="center" style="padding-bottom: 20px;">
+                    <p style="margin: 0; font-size: 15px; line-height: 1.5; color: #475569; font-weight: 600; letter-spacing: 0.5px;">
                       ${t(language, 'common.premium_tech')}
                     </p>
                   </td>
                 </tr>
+                
+                <!-- Navigation Links -->
                 <tr>
-                  <td align="center" style="padding-bottom: 15px;">
+                  <td align="center" style="padding-bottom: 24px;">
                     <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto;">
                       <tr>
-                        <td>
-                          <a href="${SITE_URL}" style="display: inline-block; margin: 0 10px; color: ${PRIMARY_COLOR}; text-decoration: none; font-size: 13px; font-weight: 500;">${t(language, 'common.shop')}</a>
+                        <td style="padding: 0 12px;">
+                          <a href="${SITE_URL}" style="display: inline-block; padding: 8px 16px; background-color: #e2e8f0; color: ${PRIMARY_COLOR}; text-decoration: none; font-size: 13px; font-weight: 600; border-radius: 20px;">${t(language, 'common.shop')}</a>
                         </td>
-                        <td style="color: #d1d5db;">|</td>
-                        <td>
-                          <a href="${SITE_URL}/support" style="display: inline-block; margin: 0 10px; color: ${PRIMARY_COLOR}; text-decoration: none; font-size: 13px; font-weight: 500;">${t(language, 'common.support')}</a>
+                        <td style="padding: 0 12px;">
+                          <a href="${SITE_URL}/support" style="display: inline-block; padding: 8px 16px; background-color: #e2e8f0; color: ${PRIMARY_COLOR}; text-decoration: none; font-size: 13px; font-weight: 600; border-radius: 20px;">${t(language, 'common.support')}</a>
                         </td>
-                        <td style="color: #d1d5db;">|</td>
-                        <td>
-                          <a href="${SITE_URL}/contact" style="display: inline-block; margin: 0 10px; color: ${PRIMARY_COLOR}; text-decoration: none; font-size: 13px; font-weight: 500;">${t(language, 'common.contact')}</a>
+                        <td style="padding: 0 12px;">
+                          <a href="mailto:${CONTACT_EMAIL}" style="display: inline-block; padding: 8px 16px; background-color: #e2e8f0; color: ${PRIMARY_COLOR}; text-decoration: none; font-size: 13px; font-weight: 600; border-radius: 20px;">${t(language, 'common.contact')}</a>
                         </td>
                       </tr>
                     </table>
                   </td>
                 </tr>
+                
+                <!-- Contact Email -->
                 <tr>
-                  <td align="center" style="padding-top: 10px;">
-                    <p style="margin: 0; font-size: 12px; line-height: 1.5; color: #9ca3af;">
+                  <td align="center" style="padding-bottom: 16px;">
+                    <p style="margin: 0; font-size: 13px; color: #64748b;">
+                      <a href="mailto:${CONTACT_EMAIL}" style="color: ${ACCENT_COLOR}; text-decoration: none; font-weight: 500;">${CONTACT_EMAIL}</a>
+                    </p>
+                  </td>
+                </tr>
+                
+                <!-- Copyright -->
+                <tr>
+                  <td align="center">
+                    <p style="margin: 0; font-size: 12px; line-height: 1.6; color: #94a3b8;">
                       ${t(language, 'common.all_rights')}<br>
-                      ${t(language, 'common.need_help')} <a href="${SITE_URL}/contact" style="color: ${PRIMARY_COLOR}; text-decoration: none;">${t(language, 'common.contact_support')}</a>
+                      <span style="color: #cbd5e1;">Luxio Market - Your Premium Tech Partner</span>
                     </p>
                   </td>
                 </tr>
@@ -205,6 +233,15 @@ function getBaseTemplate(content: string, preheader: string = '', language: Emai
             </td>
           </tr>
           
+        </table>
+        
+        <!-- Bottom Spacer with subtle branding -->
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" class="wrapper" style="max-width: 600px; width: 100%;">
+          <tr>
+            <td align="center" style="padding: 24px 0;">
+              <p style="margin: 0; font-size: 11px; color: #94a3b8; letter-spacing: 1px;">LUXIO 2025</p>
+            </td>
+          </tr>
         </table>
         
       </td>
@@ -221,28 +258,42 @@ function getBaseTemplate(content: string, preheader: string = '', language: Emai
  */
 export function getVerificationEmailTemplate(data: EmailTemplateData): string {
   const lang = data.language;
-  const greeting = data.firstName ? `${t(lang, 'email_verification.greeting')} ${data.firstName},` : `${t(lang, 'email_verification.greeting')},`;
+  const greeting = data.firstName ? `${t(lang, 'email_verification.greeting')} ${data.firstName}` : `${t(lang, 'email_verification.greeting')}`;
   
   const content = `
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+      <!-- Welcome Icon -->
       <tr>
-        <td>
-          <h1 style="color: #111827; font-size: 28px; font-weight: 700; margin: 0 0 20px 0; line-height: 1.3; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <td align="center" style="padding-bottom: 24px;">
+          <div style="width: 80px; height: 80px; background-color: ${ACCENT_COLOR}; border-radius: 50%; display: inline-block; text-align: center; line-height: 80px;">
+            <span style="font-size: 36px; color: #ffffff;">&#9993;</span>
+          </div>
+        </td>
+      </tr>
+      
+      <!-- Greeting -->
+      <tr>
+        <td align="center">
+          <h1 style="color: ${PRIMARY_COLOR}; font-size: 32px; font-weight: 700; margin: 0 0 8px 0; line-height: 1.2; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;">
             ${greeting}
           </h1>
         </td>
       </tr>
+      
+      <!-- Message -->
       <tr>
-        <td style="padding-bottom: 24px;">
-          <p style="color: #4b5563; font-size: 16px; line-height: 1.6; margin: 0;">
+        <td align="center" style="padding: 16px 0 32px 0;">
+          <p style="color: #64748b; font-size: 17px; line-height: 1.7; margin: 0; max-width: 440px;">
             ${t(lang, 'email_verification.message')}
           </p>
         </td>
       </tr>
+      
+      <!-- CTA Button -->
       <tr>
-        <td align="center" style="padding: 30px 0;">
+        <td align="center" style="padding: 8px 0 40px 0;">
           <!--[if mso]>
-          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${data.verificationLink}" style="height:50px; width:200px; v-text-anchor:middle;" arcsize="16%" fillcolor="${PRIMARY_COLOR}">
+          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${data.verificationLink}" style="height:56px; width:280px; v-text-anchor:middle;" arcsize="50%" fillcolor="${ACCENT_COLOR}">
             <w:anchorlock/>
             <center style="color:#ffffff; font-family:Arial,sans-serif; font-size:16px; font-weight:bold;">
               ${t(lang, 'email_verification.button')}
@@ -250,31 +301,49 @@ export function getVerificationEmailTemplate(data: EmailTemplateData): string {
           </v:roundrect>
           <![endif]-->
           <!--[if !mso]><!-->
-          <a href="${data.verificationLink}" class="button" style="display: inline-block; padding: 16px 40px; background-color: ${PRIMARY_COLOR}; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; box-shadow: 0 4px 6px rgba(26,46,68,0.2); mso-padding-alt: 16px 40px;">
+          <a href="${data.verificationLink}" class="button" style="display: inline-block; padding: 18px 48px; background-color: ${ACCENT_COLOR}; background: linear-gradient(135deg, ${ACCENT_COLOR} 0%, #ea580c 100%); color: #ffffff; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; box-shadow: 0 8px 30px rgba(249, 115, 22, 0.35); text-transform: uppercase; letter-spacing: 1px; mso-padding-alt: 18px 48px;">
             ${t(lang, 'email_verification.button')}
           </a>
           <!--<![endif]-->
         </td>
       </tr>
+      
+      <!-- Info Card -->
       <tr>
-        <td style="padding: 24px 0 0 0;">
-          <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f9fafb; border-left: 4px solid ${ACCENT_COLOR}; border-radius: 4px;" bgcolor="#f9fafb">
+        <td>
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f8fafc; border-radius: 16px; border: 1px solid #e2e8f0;" bgcolor="#f8fafc">
             <tr>
-              <td style="padding: 16px;">
-                <p style="color: #6b7280; font-size: 14px; line-height: 1.6; margin: 0;">
-                  <strong style="color: #374151;">⏱️ ${t(lang, 'email_verification.important')} :</strong> ${t(lang, 'email_verification.validity')}<br>
-                  ${t(lang, 'email_verification.not_you')}
-                </p>
+              <td style="padding: 24px;">
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                  <tr>
+                    <td style="width: 48px; vertical-align: top;">
+                      <div style="width: 40px; height: 40px; background-color: ${WARNING_COLOR}; border-radius: 12px; text-align: center; line-height: 40px;">
+                        <span style="font-size: 18px;">&#9200;</span>
+                      </div>
+                    </td>
+                    <td style="vertical-align: top; padding-left: 16px;">
+                      <p style="color: ${PRIMARY_COLOR}; font-size: 15px; font-weight: 600; margin: 0 0 6px 0;">
+                        ${t(lang, 'email_verification.important')}
+                      </p>
+                      <p style="color: #64748b; font-size: 14px; line-height: 1.6; margin: 0;">
+                        ${t(lang, 'email_verification.validity')}<br>
+                        <span style="color: #94a3b8; font-size: 13px;">${t(lang, 'email_verification.not_you')}</span>
+                      </p>
+                    </td>
+                  </tr>
+                </table>
               </td>
             </tr>
           </table>
         </td>
       </tr>
+      
+      <!-- Footer Signature -->
       <tr>
-        <td style="padding-top: 30px;">
-          <p style="color: #4b5563; font-size: 15px; line-height: 1.6; margin: 0;">
+        <td align="center" style="padding-top: 40px;">
+          <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">
             ${t(lang, 'email_verification.footer_greeting')}<br>
-            <strong style="color: ${PRIMARY_COLOR};">${t(lang, 'email_verification.team')}</strong>
+            <strong style="color: ${PRIMARY_COLOR}; font-size: 16px;">${t(lang, 'email_verification.team')}</strong>
           </p>
         </td>
       </tr>
