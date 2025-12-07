@@ -23,13 +23,11 @@ export function isValidCountry(country: string): boolean {
   );
 }
 
-// Vérifier si une ville est valide (doit être dans la liste countriesCities)
+// Vérifier si une ville est valide (non-vide et longueur raisonnable)
 export function isValidCity(city: string): boolean {
-  if (!city || city.length < 2) return false;
-  const normalized = normalizeText(city);
-  return VALID_CITIES.some(validCity => 
-    normalizeText(validCity) === normalized
-  );
+  if (!city || city.trim().length < 2) return false;
+  // Just check that the city name has a reasonable length
+  return city.trim().length <= 100;
 }
 
 // Vérifier si une adresse semble réelle

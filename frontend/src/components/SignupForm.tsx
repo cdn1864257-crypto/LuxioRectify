@@ -54,7 +54,6 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
 
   const [errors, setErrors] = useState<Partial<Record<keyof SignupFormData, string>>>({});
   const [passwordStrength, setPasswordStrength] = useState<PasswordStrength | null>(null);
-  const [availableCities, setAvailableCities] = useState<{ en: string; fr: string; es: string }[]>([]);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [addressValidated, setAddressValidated] = useState(false);
@@ -120,7 +119,6 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
         address: "",
         postalCode: ""
       }));
-      setAvailableCities(selectedCountry.cities);
       setAddressValidated(false);
       setManualAddressConfirmed(false);
     }
@@ -130,14 +128,11 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     }
   };
 
-  const handleCityChange = (cityIndex: string) => {
-    // Récupérer le nom EN canonique de la ville
-    const cityIdx = parseInt(cityIndex);
-    if (availableCities[cityIdx]) {
-      setFormData(prev => ({ ...prev, city: availableCities[cityIdx].en, address: "", postalCode: "" }));
-      setAddressValidated(false);
-      setManualAddressConfirmed(false);
-    }
+  const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFormData(prev => ({ ...prev, city: value, address: "", postalCode: "" }));
+    setAddressValidated(false);
+    setManualAddressConfirmed(false);
     
     if (errors.city) {
       setErrors(prev => ({ ...prev, city: undefined }));
@@ -343,30 +338,18 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
 
         <div className="space-y-2">
           <Label htmlFor="city">{t('city')} *</Label>
-          <Select 
-            value={availableCities.findIndex(c => c.en === formData.city).toString()} 
-            onValueChange={handleCityChange}
-            disabled={isLoading || availableCities.length === 0}
-          >
-            <SelectTrigger 
-              id="city"
-              data-testid="select-city"
-              className={errors.city ? "border-red-500" : ""}
-            >
-              <SelectValue placeholder={availableCities.length === 0 ? t('selectCountry') : t('cityPlaceholder')} />
-            </SelectTrigger>
-            <SelectContent>
-              {availableCities.map((city, index) => {
-                const langKey = language as 'en' | 'fr' | 'es';
-                const cityName = city[langKey] || city.en;
-                return (
-                  <SelectItem key={`${city.en}-${index}`} value={index.toString()}>
-                    {cityName}
-                  </SelectItem>
-                );
-              })}
-            </SelectContent>
-          </Select>
+          <Input
+            id="city"
+            name="city"
+            type="text"
+            value={formData.city}
+            onChange={handleCityChange}
+            placeholder={!formData.country ? t('selectCountry') : t('cityPlaceholder')}
+            disabled={isLoading || !formData.country}
+            required
+            data-testid="input-city"
+            className={errors.city ? "border-red-500" : ""}
+          />
           {errors.city && (
             <p className="text-sm text-red-500">{errors.city}</p>
           )}
