@@ -794,7 +794,7 @@ export const translations: Record<Language, Translations> = {
     
     welcomeBack: 'Welcome back',
     back: 'Back',
-    welcome: 'Please check your email (including spam/junk folder) to verify your account. Add noreply@luxiomarket.shop to your contacts.',
+    welcome: 'Please check your email (including spam/junk folder) to verify your account.',
     emailRequired: 'Email is required',
     passwordRequired: 'Password is required',
     emailInvalid: 'Invalid email format',
@@ -1499,7 +1499,7 @@ export const translations: Record<Language, Translations> = {
     
     welcomeBack: 'Bienvenue',
     back: 'Retour',
-    welcome: 'Veuillez vérifier votre email (y compris le dossier spam/courrier indésirable) pour activer votre compte. Ajoutez noreply@luxiomarket.shop à vos contacts.',
+    welcome: 'Veuillez vérifier votre email (y compris le dossier spam/courrier indésirable) pour activer votre compte.',
     emailRequired: 'L\'email est obligatoire',
     passwordRequired: 'Le mot de passe est obligatoire',
     emailInvalid: 'Format email invalide',
@@ -2204,7 +2204,7 @@ export const translations: Record<Language, Translations> = {
     
     welcomeBack: 'Bienvenido',
     back: 'Volver',
-    welcome: 'Por favor, verifique su correo electrónico (incluyendo la carpeta de spam/correo no deseado) para activar su cuenta. Añada noreply@luxiomarket.shop a sus contactos.',
+    welcome: 'Por favor, verifique su correo electrónico (incluyendo la carpeta de spam/correo no deseado) para activar su cuenta.',
     emailRequired: 'El email es obligatorio',
     passwordRequired: 'La contraseña es obligatoria',
     emailInvalid: 'Formato de email inválido',
@@ -2909,7 +2909,7 @@ export const translations: Record<Language, Translations> = {
     
     welcomeBack: 'Bem-vindo',
     back: 'Voltar',
-    welcome: 'Por favor, verifique seu email (incluindo a pasta de spam/lixo eletrônico) para ativar sua conta. Adicione noreply@luxiomarket.shop aos seus contatos.',
+    welcome: 'Por favor, verifique seu email (incluindo a pasta de spam/lixo eletrônico) para ativar sua conta.',
     emailRequired: 'O email é obrigatório',
     passwordRequired: 'A palavra-passe é obrigatória',
     emailInvalid: 'Formato de email inválido',
@@ -3614,7 +3614,7 @@ export const translations: Record<Language, Translations> = {
     
     welcomeBack: 'Witaj ponownie',
     back: 'Wróć',
-    welcome: 'Proszę sprawdzić e-mail (w tym folder spam/niechciana poczta), aby aktywować konto. Dodaj noreply@luxiomarket.shop do kontaktów.',
+    welcome: 'Proszę sprawdzić e-mail (w tym folder spam/niechciana poczta), aby aktywować konto.',
     emailRequired: 'Email jest wymagany',
     passwordRequired: 'Hasło jest wymagane',
     emailInvalid: 'Nieprawidłowy format email',
@@ -4319,7 +4319,7 @@ export const translations: Record<Language, Translations> = {
     
     welcomeBack: 'Bentornato',
     back: 'Indietro',
-    welcome: 'Si prega di verificare la propria email (inclusa la cartella spam/posta indesiderata) per attivare l\'account. Aggiunga noreply@luxiomarket.shop ai suoi contatti.',
+    welcome: 'Si prega di verificare la propria email (inclusa la cartella spam/posta indesiderata) per attivare l\'account.',
     emailRequired: 'L\'email è obbligatoria',
     passwordRequired: 'La password è obbligatoria',
     emailInvalid: 'Formato email non valido',
@@ -5024,7 +5024,7 @@ export const translations: Record<Language, Translations> = {
     
     welcomeBack: 'Üdvözöljük újra',
     back: 'Vissza',
-    welcome: 'Kérjük, ellenőrizze e-mailjét (beleértve a spam/levélszemét mappát) a fiókja aktiválásához. Adja hozzá a noreply@luxiomarket.shop címet a névjegyeihez.',
+    welcome: 'Kérjük, ellenőrizze e-mailjét (beleértve a spam/levélszemét mappát) a fiókja aktiválásához.',
     emailRequired: 'Az e-mail cím kötelező',
     passwordRequired: 'A jelszó kötelező',
     emailInvalid: 'Érvénytelen e-mail formátum',
