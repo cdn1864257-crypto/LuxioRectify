@@ -335,13 +335,15 @@ export default function Dashboard() {
     setCancellingOrder(true);
     try {
       const { getCsrfToken } = await import('@/lib/config');
-      const token = await getCsrfToken();
+      const csrfToken = await getCsrfToken();
+      const authToken = localStorage.getItem('auth_token');
       
       const response = await fetch(getApiUrl(`/api/orders/${orderId}`), {
         method: 'DELETE',
         credentials: 'include',
         headers: {
-          'X-CSRF-Token': token,
+          'X-CSRF-Token': csrfToken,
+          ...(authToken && { 'Authorization': `Bearer ${authToken}` }),
         },
       });
 
