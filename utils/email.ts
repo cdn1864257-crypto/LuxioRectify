@@ -1,7 +1,6 @@
-import { sendEmail as sendEmailViaSMTP } from './mailer.js';
+import { sendEmail as sendEmailViaSMTP } from './email.service.js';
 import { getTranslation, type EmailLanguage } from './email-translations.js';
 import crypto from 'crypto';
-import { sendEmailWithMailerSend } from './mailersend-service.js';
 import type { Db } from 'mongodb';
 import { getPasswordResetMessage } from '../server/utils/multilingual-messages.js';
 
@@ -9,34 +8,16 @@ interface EmailOptions {
   to: string | string[];
   subject: string;
   html: string;
-  text: string;
+  text?: string;
   from?: string;
   fromName?: string;
 }
 
 export async function sendEmail(options: EmailOptions): Promise<boolean> {
-  // On utilise MailerSend comme service principal
-  const mailerOptions = {
-    to: Array.isArray(options.to) ? options.to[0] : options.to,
-    subject: options.subject,
-    html: options.html,
-    text: options.text,
-    from: options.from,
-    fromName: options.fromName
-  };
-
-  const success = await sendEmailWithMailerSend(mailerOptions);
-  
-  // Fallback vers SMTP si MailerSend échoue (optionnel, selon votre besoin)
-  if (!success) {
-    console.warn('MailerSend failed, falling back to SMTP');
-    return sendEmailViaSMTP(options);
-  }
-  
-  return success;
+  return sendEmailViaSMTP(options);
 }
 
-export const DEFAULT_FROM = process.env.MAILERSEND_FROM_EMAIL || 'support@luxiomarket.shop';
+export const DEFAULT_FROM = process.env.MAIL_FROM || 'support@luxiomarket.shop';
 const DEFAULT_ADMIN = process.env.ADMIN_EMAILS?.split(',')[0] || 'support@luxiomarket.shop';
 
 function getEmailLayout(content: string, language: EmailLanguage = 'fr'): string {
