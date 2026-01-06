@@ -1,4 +1,4 @@
-import { sendEmailWithSendGrid } from './sendgrid-service.js';
+import { sendEmailWithMailerSend } from './mailersend-service.js';
 
 interface EmailOptions {
   to: string | string[];
@@ -9,5 +9,5 @@ interface EmailOptions {
 }
 
 export async function sendEmail(options: EmailOptions): Promise<boolean> {
-  return sendEmailWithSendGrid(options);
+  return sendEmailWithMailerSend(options);
 }

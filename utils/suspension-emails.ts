@@ -43,7 +43,7 @@ export async function sendSuspensionEmail(
     to: userEmail,
     subject: emailSubject,
     html: emailHtml,
-    from: process.env.SENDGRID_FROM_EMAIL || 'noreply@luxiomarket.shop',
+    from: process.env.MAILERSEND_FROM_EMAIL || 'noreply@luxiomarket.shop',
     maxAttempts: 3
   });
 
@@ -79,7 +79,7 @@ export async function sendReactivationEmail(
     to: userEmail,
     subject: emailSubject,
     html: emailHtml,
-    from: process.env.SENDGRID_FROM_EMAIL || 'noreply@luxiomarket.shop',
+    from: process.env.MAILERSEND_FROM_EMAIL || 'noreply@luxiomarket.shop',
     maxAttempts: 3
   });
 

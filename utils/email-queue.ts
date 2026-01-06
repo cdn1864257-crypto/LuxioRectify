@@ -84,9 +84,9 @@ class EmailQueue {
   }
 
   private async sendEmail(job: EmailJob): Promise<void> {
-    const { sendEmailWithSendGrid } = await import('./sendgrid-service.js');
+    const { sendEmailWithMailerSend } = await import('./mailersend-service.js');
     
-    await sendEmailWithSendGrid({
+    await sendEmailWithMailerSend({
       to: job.to,
       from: job.from,
       subject: job.subject,

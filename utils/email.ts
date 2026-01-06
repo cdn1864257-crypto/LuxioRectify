@@ -1,7 +1,7 @@
 import { sendEmail as sendEmailViaSMTP } from './mailer.js';
 import { getTranslation, type EmailLanguage } from './email-translations.js';
 import crypto from 'crypto';
-import { sendMailerSendEmail } from './mailersend-service';
+import { sendEmailWithMailerSend } from './mailersend-service.js';
 import type { Db } from 'mongodb';
 import { getPasswordResetMessage } from '../server/utils/multilingual-messages.js';
 
@@ -25,7 +25,7 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
     fromName: options.fromName
   };
 
-  const success = await sendMailerSendEmail(mailerOptions);
+  const success = await sendEmailWithMailerSend(mailerOptions);
   
   // Fallback vers SMTP si MailerSend échoue (optionnel, selon votre besoin)
   if (!success) {
@@ -182,7 +182,7 @@ export async function sendVerificationEmail(
   const validLanguages = ['fr', 'en', 'es', 'pt', 'pl', 'hu'];
   const emailLang = validLanguages.includes(lang) ? lang as EmailLanguage : 'fr';
   const t = getTranslation(emailLang);
-  const backendUrl = process.env.BACKEND_URL || 'https://api.luxiomarket.shop';
+  const backendUrl = process.env.BACKEND_URL || 'https://luxiomarket.shop';
   const verificationUrl = `${backendUrl}/api/auth/verify-email?token=${verificationToken}`;
   
   const htmlContent = getEmailLayout(`

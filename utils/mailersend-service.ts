@@ -23,7 +23,7 @@ export interface MailerSendOptions {
 /**
  * Envoi d'email générique via MailerSend
  */
-export async function sendMailerSendEmail(options: MailerSendOptions): Promise<boolean> {
+export async function sendEmailWithMailerSend(options: MailerSendOptions): Promise<boolean> {
   if (!MAILERSEND_API_KEY) {
     console.error('MAILERSEND_API_KEY non configurée');
     return false;
@@ -52,8 +52,9 @@ export async function sendMailerSendEmail(options: MailerSendOptions): Promise<b
 
     const response = await mailerSend.email.send(emailParams);
     
-    // @ts-ignore - Response headers might not be typed strictly in all versions
-    console.log(`✅ Email envoyé via MailerSend à ${options.to}. Message ID: ${response.headers?.['x-message-id'] || 'N/A'}`);
+    // @ts-ignore
+    const messageId = response.headers?.['x-message-id'] || response.body?.id || 'N/A';
+    console.log(`✅ Email envoyé via MailerSend à ${options.to}. Message ID: ${messageId}`);
     return true;
   } catch (error) {
     console.error('❌ Erreur MailerSend:', error);
