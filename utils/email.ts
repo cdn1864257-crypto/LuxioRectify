@@ -1,7 +1,7 @@
 import { sendEmail as sendEmailViaSMTP } from './mailer.js';
 import { getTranslation, type EmailLanguage } from './email-translations.js';
 import crypto from 'crypto';
-import sgMail from '@sendgrid/mail';
+import { sendMailerSendEmail } from './mailersend-service';
 import type { Db } from 'mongodb';
 import { getPasswordResetMessage } from '../server/utils/multilingual-messages.js';
 
@@ -11,14 +11,33 @@ interface EmailOptions {
   html: string;
   text: string;
   from?: string;
+  fromName?: string;
 }
 
 export async function sendEmail(options: EmailOptions): Promise<boolean> {
-  return sendEmailViaSMTP(options);
+  // On utilise MailerSend comme service principal
+  const mailerOptions = {
+    to: Array.isArray(options.to) ? options.to[0] : options.to,
+    subject: options.subject,
+    html: options.html,
+    text: options.text,
+    from: options.from,
+    fromName: options.fromName
+  };
+
+  const success = await sendMailerSendEmail(mailerOptions);
+  
+  // Fallback vers SMTP si MailerSend échoue (optionnel, selon votre besoin)
+  if (!success) {
+    console.warn('MailerSend failed, falling back to SMTP');
+    return sendEmailViaSMTP(options);
+  }
+  
+  return success;
 }
 
-export const DEFAULT_FROM = 'support@luxiomarket.shop';
-const DEFAULT_ADMIN = 'support@luxiomarket.shop';
+export const DEFAULT_FROM = process.env.MAILERSEND_FROM_EMAIL || 'support@luxiomarket.shop';
+const DEFAULT_ADMIN = process.env.ADMIN_EMAILS?.split(',')[0] || 'support@luxiomarket.shop';
 
 function getEmailLayout(content: string, language: EmailLanguage = 'fr'): string {
   const t = getTranslation(language);
@@ -258,18 +277,9 @@ ${t.team_signature}
 
 // ==================== PASSWORD RESET EMAIL ====================
 
-const FROM_EMAIL = process.env.SENDGRID_FROM_EMAIL || DEFAULT_FROM;
-const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY as string;
+const FROM_EMAIL = process.env.MAILERSEND_FROM_EMAIL || DEFAULT_FROM;
 const FRONTEND_URL = (process.env.CLIENT_URL || process.env.FRONTEND_URL || 'https://luxiomarket.shop').replace(/\/$/, '');
 const TOKEN_TTL_MINUTES = Number(process.env.RESET_TOKEN_TTL_MINUTES || '60');
-
-if (!FROM_EMAIL || !SENDGRID_API_KEY) {
-  console.warn('Warning: SENDGRID_FROM_EMAIL or SENDGRID_API_KEY not set. Email sending will fail.');
-}
-
-if (SENDGRID_API_KEY) {
-  sgMail.setApiKey(SENDGRID_API_KEY);
-}
 
 function generateUrlSafeToken(bytes = 32) {
   const raw = crypto.randomBytes(bytes).toString('base64');
@@ -356,17 +366,17 @@ export async function sendPasswordResetEmail(
       from: FROM_EMAIL, 
       subject, 
       text: plainText, 
-      html,
-      trackingSettings: { 
-        clickTracking: { enable: false, enable_text: false }, 
-        openTracking: { enable: true } 
-      } 
+      html
     };
 
     console.log('RESET EMAIL MSG:', msg);
-    await sgMail.send(msg);
-    console.info('[sendPasswordResetEmail] Email sent successfully to:', userEmail);
-    return true;
+    const sent = await sendEmail(msg);
+    if (sent) {
+      console.info('[sendPasswordResetEmail] Email sent successfully to:', userEmail);
+    } else {
+      console.error('[sendPasswordResetEmail] Failed to send email to:', userEmail);
+    }
+    return sent;
 
   } catch (err: any) {
     console.error('[sendPasswordResetEmail] Error:', err);
