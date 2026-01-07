@@ -35,21 +35,21 @@ async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const success = await sendEmail({
       to: testEmailTo,
-      subject: "Test Zoho SMTP – Luxio",
+      subject: "Test SendPulse API – Luxio",
       html: `
-        <h2>Zoho SMTP fonctionne</h2>
-        <p>Email envoyé depuis l’API Render.</p>
+        <h2>SendPulse API fonctionne</h2>
+        <p>Email envoyé depuis l’API SendPulse (OAuth2).</p>
         <p>Destinataire : ${testEmailTo}</p>
         <p>Date : ${new Date().toISOString()}</p>
       `,
-      text: `Zoho SMTP fonctionne. Email envoyé depuis l’API Render. Destinataire : ${testEmailTo}`
+      text: `SendPulse API fonctionne. Email envoyé depuis l’API SendPulse. Destinataire : ${testEmailTo}`
     });
 
     if (success) {
-      console.log('Test email sent successfully');
+      console.log('Test email sent successfully via SendPulse');
       return res.status(200).json({
         success: true,
-        message: "Email envoyé avec succès via Zoho SMTP"
+        message: "Email envoyé avec succès via SendPulse API"
       });
     } else {
       throw new Error('sendEmail returned false');
