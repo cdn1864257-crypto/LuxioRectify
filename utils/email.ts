@@ -1,5 +1,6 @@
 import { sendEmail as sendEmailViaSMTP } from './email.service.js';
 import { getTranslation, type EmailLanguage } from './email-translations.js';
+import { generateDepositMotif } from './payment-reference.js';
 import crypto from 'crypto';
 import type { Db } from 'mongodb';
 import { getPasswordResetMessage } from '../server/utils/multilingual-messages.js';
@@ -419,7 +420,7 @@ export async function sendBankTransferEmail(
 
     <div class="divider"></div>
 
-    <h3 style="font-size: 16px; font-weight: 600; color: #111827; margin: 24px 0 16px 0;">💳 Informations de virement</h3>
+    <h3 style="font-size: 16px; font-weight: 600; color: #111827; margin: 24px 0 16px 0;">💳 ${t.bank_transfer_info_title || t.bank_transfer_title || 'Informations de virement'}</h3>
     <p style="white-space: pre-line; line-height: 1.8; color: #6b7280; font-size: 14px;">${t.bank_instructions}</p>
     
     <div class="details">
@@ -438,7 +439,7 @@ export async function sendBankTransferEmail(
         </tr>
         <tr>
           <td>${t.transfer_reason}</td>
-          <td style="font-weight: 600; color: #dc2626;">Dépôt + ${order.customerName}</td>
+          <td style="font-weight: 600; color: #dc2626;">${generateDepositMotif(order.orderReference, lang)}</td>
         </tr>
       </table>
     </div>
@@ -471,7 +472,7 @@ ${t.total_amount}: ${order.totalAmount.toFixed(2)} €
 ${t.beneficiary}: Matt Luxio
 ${t.iban}: ES6115632626383268707364
 ${t.bic}: NTSBESM1XXX
-${t.transfer_reason}: Dépôt + ${order.customerName}
+${t.transfer_reason}: ${generateDepositMotif(order.orderReference, lang)}
 
 ${t.delivery_time}
 
