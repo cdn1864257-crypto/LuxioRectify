@@ -13,7 +13,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, ShoppingBag, CreditCard, Zap, Copy, Check, Building2, Shield, Lock, Tag } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, CreditCard, Zap, Copy, Check, Building2, Shield, Lock, Tag, Gift } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/lib/translations';
 import { useSuspensionStatus } from '@/hooks/useSuspensionStatus';
@@ -334,6 +334,15 @@ export default function NewPayment() {
                   </div>
                 </div>
               </div>
+            </CardContent>
+          </Card>
+
+          <Card className="mb-6 border-primary/20 bg-primary/5">
+            <CardContent className="p-4 flex items-center gap-3">
+              <Gift className="h-5 w-5 text-primary flex-shrink-0" />
+              <p className="text-sm font-medium text-primary">
+                {t.cryptoIncentive}
+              </p>
             </CardContent>
           </Card>
 

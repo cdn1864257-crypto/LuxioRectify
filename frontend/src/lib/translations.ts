@@ -597,6 +597,7 @@ export interface Translations {
   copyCode: string;
   codeCopied: string;
   validatingCoupon: string;
+  cryptoIncentive: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -1302,7 +1303,8 @@ export const translations: Record<Language, Translations> = {
     couponUsed: 'Used',
     copyCode: 'Copy code',
     codeCopied: 'Code copied!',
-    validatingCoupon: 'Validating...'
+    validatingCoupon: 'Validating...',
+    cryptoIncentive: '🎁 Special Crypto Offer: Pay with cryptocurrency and automatically receive a 10% discount coupon for your next order!',
   },
   
   fr: {
@@ -2007,7 +2009,8 @@ export const translations: Record<Language, Translations> = {
     couponUsed: 'Utilisé',
     copyCode: 'Copier le code',
     codeCopied: 'Code copié !',
-    validatingCoupon: 'Validation...'
+    validatingCoupon: 'Validation...',
+    cryptoIncentive: '🎁 Offre Spéciale Crypto : Payez en cryptomonnaie et recevez automatiquement un coupon de réduction de 10% pour votre prochaine commande !',
   },
   
   es: {
