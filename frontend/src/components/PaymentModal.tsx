@@ -65,7 +65,7 @@ export function PaymentModal({ open, onOpenChange, bankDetails }: PaymentModalPr
             </p>
 
             {bankDetails && (
-              <div className="p-4 bg-accent rounded-lg space-y-3">
+              <div className="p-4 bg-background border-2 border-muted rounded-lg space-y-3">
                 <div>
                   <Label className="text-xs text-muted-foreground">{t.beneficiary || t.name}</Label>
                   <p className="font-semibold break-words" data-testid="text-bank-name">{bankDetails.bankName}</p>

@@ -447,7 +447,7 @@ export default function NewPayment() {
           </DialogHeader>
           {bankDetails && (
             <div className="space-y-4">
-              <div className="p-3 sm:p-4 bg-accent rounded-lg space-y-3">
+              <div className="p-3 sm:p-4 bg-background border-2 border-muted rounded-lg space-y-3">
                 <div>
                   <Label className="text-xs sm:text-sm text-muted-foreground">{t.beneficiary}</Label>
                   <p className="font-semibold text-sm sm:text-base break-words">{bankDetails.bankName}</p>
