@@ -97,7 +97,7 @@ export function CookieConsent() {
 
   return (
     <div 
-      className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-md z-50 animate-in slide-in-from-bottom-5 fade-in duration-500"
+      className="fixed bottom-4 left-4 right-4 md:right-auto md:left-6 md:max-w-md z-50 animate-in slide-in-from-bottom-5 fade-in duration-500"
       data-testid="cookie-consent-banner"
     >
       <div className="relative bg-background border border-border rounded-xl shadow-xl p-5">
