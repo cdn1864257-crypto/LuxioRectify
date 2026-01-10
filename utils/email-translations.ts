@@ -61,6 +61,7 @@ export interface EmailTranslations {
   customer_name: string;
   customer_email: string;
   bank_transfer: string;
+  bank_transfer_info_title: string;
   ticket_payment: string;
   crypto_payment: string;
   
@@ -147,6 +148,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     customer_name: 'Client',
     customer_email: 'Email',
     bank_transfer: 'Virement bancaire',
+    bank_transfer_info_title: 'Informations de virement',
     ticket_payment: 'Paiement par tickets',
     crypto_payment: 'Paiement crypto',
     
@@ -231,6 +233,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     customer_name: 'Customer',
     customer_email: 'Email',
     bank_transfer: 'Bank Transfer',
+    bank_transfer_info_title: 'Bank Transfer Information',
     ticket_payment: 'Ticket Payment',
     crypto_payment: 'Crypto Payment',
     
@@ -315,6 +318,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     customer_name: 'Cliente',
     customer_email: 'Email',
     bank_transfer: 'Transferencia Bancaria',
+    bank_transfer_info_title: 'Información de transferencia',
     ticket_payment: 'Pago con Tickets',
     crypto_payment: 'Pago Crypto',
     
@@ -399,6 +403,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     customer_name: 'Cliente',
     customer_email: 'Email',
     bank_transfer: 'Transferência Bancária',
+    bank_transfer_info_title: 'Informações de transferência',
     ticket_payment: 'Pagamento por Tickets',
     crypto_payment: 'Pagamento Crypto',
     
@@ -483,6 +488,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     customer_name: 'Klient',
     customer_email: 'Email',
     bank_transfer: 'Przelew Bankowy',
+    bank_transfer_info_title: 'Informacje o przelewie',
     ticket_payment: 'Płatność Biletami',
     crypto_payment: 'Płatność Crypto',
     
