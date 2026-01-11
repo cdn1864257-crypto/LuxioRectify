@@ -122,6 +122,9 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
       await autoReactivateExpiredSuspensions(usersCollection);
 
+      const backendUrl = process.env.BACKEND_URL || 'https://luxio.onrender.com';
+      const frontendUrl = process.env.FRONTEND_URL || 'https://luxios.vercel.app';
+
       const user = await usersCollection.findOne({ email: customerEmail.toLowerCase() });
       const userLanguage = language || user?.language || 'fr';
 
@@ -174,11 +177,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const result = await ordersCollection.insertOne(newOrder);
       const orderId = result.insertedId.toString();
 
-      const backendUrl = process.env.BACKEND_URL || 'https://luxio.onrender.com';
-      const frontendUrl = process.env.FRONTEND_URL || 'https://luxios.vercel.app';
-      
       const callbackUrl = `${backendUrl}/api/payment/oxapay-webhook`;
-      const oxaPayReturnUrl = `${backendUrl}/api/payment/oxapay-return?lang=${userLanguage}`;
+      const oxaPayReturnUrl = userLanguageReturnUrl;
       
       debugLog(`[OxaPay] Backend URL: ${backendUrl}`);
       debugLog(`[OxaPay] Frontend URL: ${frontendUrl}`);
