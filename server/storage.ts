@@ -18,7 +18,8 @@ export interface User {
 
 export interface Order {
   id: string;
-  userId: string;
+  userId: string | null;
+  guestEmail?: string;
   items: any[];
   total: number;
   status: string;

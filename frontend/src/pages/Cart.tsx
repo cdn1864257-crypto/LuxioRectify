@@ -36,11 +36,7 @@ export default function Cart() {
   };
 
   const handleCheckout = () => {
-    if (!user) {
-      setShowLoginDialog(true);
-    } else {
-      setLocation(`/${language}/checkout/address`);
-    }
+    setLocation(`/${language}/checkout/address`);
   };
 
   const handleCloseDialog = () => {
@@ -223,22 +219,6 @@ export default function Cart() {
 
       <Footer />
       <CartSidebar isOpen={cartOpen} onClose={() => setCartOpen(false)} />
-      
-      <AlertDialog open={showLoginDialog} onOpenChange={handleCloseDialog}>
-        <AlertDialogContent data-testid="dialog-login-required">
-          <AlertDialogHeader>
-            <AlertDialogTitle>{t('loginRequiredToCheckout')}</AlertDialogTitle>
-            <AlertDialogDescription>
-              {t('pleaseLoginOrSignupToCheckout')}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction onClick={handleCloseDialog} data-testid="button-ok-login">
-              OK
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </div>
   );
 }
