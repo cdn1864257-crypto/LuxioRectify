@@ -144,6 +144,7 @@ export default function NewPayment() {
           originalAmount: total,
           discountAmount: discountAmount,
           couponCode: appliedCoupon?.code || null,
+          language: language,
           cartItems: cart.map(item => ({
             id: item.id,
             name: item.name,
