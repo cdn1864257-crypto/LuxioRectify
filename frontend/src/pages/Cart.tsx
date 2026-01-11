@@ -10,15 +10,6 @@ import { CartSidebar } from '@/components/CartSidebar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
 import { showToast } from '@/components/ToastNotifications';
 
@@ -28,7 +19,6 @@ export default function Cart() {
   const { t, language } = useLanguage();
   const [, setLocation] = useLocation();
   const [cartOpen, setCartOpen] = useState(false);
-  const [showLoginDialog, setShowLoginDialog] = useState(false);
 
   const handleRemoveItem = (productId: string, description: string) => {
     removeFromCart(productId, description);

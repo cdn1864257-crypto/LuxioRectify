@@ -51,16 +51,11 @@ export default function CheckoutAddress() {
   });
 
   useEffect(() => {
-    if (!user) {
-      setLocation(`/${language}`);
-      return;
-    }
-
     if (cart.length === 0) {
       setLocation(`/${language}/cart`);
       return;
     }
-  }, [user, cart, language, setLocation]);
+  }, [cart, language, setLocation]);
 
   useEffect(() => {
     if (user && useRegistered) {
@@ -183,7 +178,7 @@ export default function CheckoutAddress() {
     setFormData(prev => ({ ...prev, phone: value || '' }));
   };
 
-  if (!user || cart.length === 0) {
+  if (cart.length === 0) {
     return null;
   }
 
@@ -233,7 +228,7 @@ export default function CheckoutAddress() {
               </div>
             </div>
 
-            {user.address && (
+            {user && user.address && (
               <div className="mb-6 p-4 bg-slate-50 dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700">
                 <div className="flex items-start gap-3">
                   <Checkbox
