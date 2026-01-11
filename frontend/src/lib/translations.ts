@@ -2715,7 +2715,8 @@ export const translations: Record<Language, Translations> = {
     couponUsed: 'Usado',
     copyCode: 'Copiar código',
     codeCopied: '¡Código copiado!',
-    validatingCoupon: 'Validando...'
+    validatingCoupon: 'Validando...',
+    cryptoIncentive: '🎁 Oferta Especial Crypto: ¡Pague con criptomonedas y reciba automáticamente un cupón de descuento del 10% para su próximo pedido!',
   },
   
   pt: {
@@ -3420,7 +3421,8 @@ export const translations: Record<Language, Translations> = {
     couponUsed: 'Usado',
     copyCode: 'Copiar código',
     codeCopied: 'Código copiado!',
-    validatingCoupon: 'Validando...'
+    validatingCoupon: 'Validando...',
+    cryptoIncentive: '🎁 Oferta Especial Crypto: Pague com criptomoeda e receba automaticamente um cupão de desconto de 10% para a sua próxima encomenda!',
   },
   
   pl: {
@@ -4125,7 +4127,8 @@ export const translations: Record<Language, Translations> = {
     couponUsed: 'Wykorzystany',
     copyCode: 'Kopiuj kod',
     codeCopied: 'Kod skopiowany!',
-    validatingCoupon: 'Weryfikacja...'
+    validatingCoupon: 'Weryfikacja...',
+    cryptoIncentive: '🎁 Specjalna Oferta Crypto: Zapłać kryptowalutą i automatycznie otrzymaj kupon rabatowy 10% na kolejne zamówienie!',
   },
   
   it: {
@@ -4830,7 +4833,8 @@ export const translations: Record<Language, Translations> = {
     couponUsed: 'Usato',
     copyCode: 'Copia codice',
     codeCopied: 'Codice copiato!',
-    validatingCoupon: 'Validazione...'
+    validatingCoupon: 'Validazione...',
+    cryptoIncentive: '🎁 Offerta Speciale Crypto: Paga con criptovaluta e ricevi automaticamente un coupon di sconto del 10% per il tuo prossimo ordine!',
   },
   
   hu: {
@@ -5535,7 +5539,8 @@ export const translations: Record<Language, Translations> = {
     couponUsed: 'Felhasznált',
     copyCode: 'Kód másolása',
     codeCopied: 'Kód másolva!',
-    validatingCoupon: 'Ellenőrzés...'
+    validatingCoupon: 'Ellenőrzés...',
+    cryptoIncentive: '🎁 Speciális Crypto Ajánlat: Fizessen kriptovalutával, és automatikusan kap egy 10%-os kedvezménykupont a következő rendeléséhez!',
   }
 };
 

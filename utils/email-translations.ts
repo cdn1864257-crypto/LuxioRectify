@@ -1,4 +1,4 @@
-export type EmailLanguage = 'fr' | 'en' | 'es' | 'pt' | 'pl' | 'hu';
+export type EmailLanguage = 'fr' | 'en' | 'es' | 'pt' | 'pl' | 'hu' | 'it';
 
 export interface EmailTranslations {
   // Subjects
@@ -573,6 +573,7 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     customer_name: 'Ügyfél',
     customer_email: 'Email',
     bank_transfer: 'Banki Átutalás',
+    bank_transfer_info_title: 'Átutalási információk',
     ticket_payment: 'Jegyes Fizetés',
     crypto_payment: 'Kripto Fizetés',
     
@@ -595,6 +596,91 @@ export const emailTranslations: Record<EmailLanguage, EmailTranslations> = {
     coupon_expires_label: 'Érvényes',
     coupon_how_to_use: 'A kód használatához írd be a "Promóciós kód" mezőbe a fizetés során.',
     coupon_shop_now: 'Vásárolj most'
+  },
+  it: {
+    // Subjects
+    subject_welcome: 'Benvenuto in Luxio – Il tuo account è stato creato con successo',
+    subject_verify_email: 'Verifica il tuo indirizzo email – Luxio',
+    subject_order_confirm: 'Conferma dell\'ordine – Luxio',
+    subject_ticket_confirm: 'Conferma dell\'ordine – Luxio',
+    subject_crypto_confirm: 'Conferma dell\'ordine – Luxio',
+    subject_admin_new_order: 'Nuovo ordine ricevuto',
+    subject_account_suspended: 'Account temporaneamente sospeso – Luxio',
+    subject_account_reactivated: 'Il tuo account è stato riattivato – Luxio',
+    
+    // Common
+    hello: 'Ciao',
+    team_signature: 'Cordiali saluti,\nIl team di Luxio\nIl tuo partner di fiducia per prodotti premium',
+    footer_note: 'Questa email è stata inviata automaticamente. Per qualsiasi domanda, il nostro team è disponibile 7 giorni su 7.',
+    access_dashboard: 'Accedi alla mia area clienti',
+    
+    // Email Verification
+    verify_email_title: 'Conferma il tuo indirizzo email',
+    verify_email_message: 'Grazie per esserti registrato su Luxio!\n\nPer attivare il tuo account e accedere al nostro catalogo esclusivo di prodotti premium, conferma il tuo indirizzo email cliccando sul pulsante qui sotto.',
+    verify_email_button: 'Verifica la mia email',
+    verify_email_expiration: 'Questo link di verifica scadrà tra 24 ore. Se il pulsante non funziona, copia e incolla questo link nel tuo browser:',
+    
+    // Welcome Email
+    welcome_title: 'Benvenuto nell\'universo Luxio! 🎉',
+    welcome_message: 'Grazie per esserti unito a Luxio, la tua destinazione preferita per prodotti tecnologici premium di alta qualità.\n\nIl tuo account è stato creato con successo e ora puoi goderti il nostro catalogo esclusivo di smartphone, smartwatch, sneakers e gadget high-tech.\n\nIn Luxio, ci impegniamo a fornirti:\n• Una selezione rigorosa di prodotti premium autentici\n• Consegna rapida e sicura in 24-72 ore\n• Servizio clienti reattivo disponibile 7 giorni su 7\n• Garanzie del produttore di 2 anni su tutti i nostri prodotti',
+    discover_products: 'Scopri il nostro catalogo',
+    
+    // Order Confirmation
+    order_confirmed: 'Il tuo ordine è stato confermato con successo! ✓',
+    order_received: 'Confermiamo la ricezione del tuo ordine. Il nostro team sta già preparando con cura il tuo pacco.\n\nRiceverai un\'email di tracciamento non appena i tuoi articoli saranno spediti.',
+    order_number: 'Numero d\'ordine',
+    total_amount: 'Importo totale',
+    payment_method: 'Metodo di pagamento',
+    status: 'Stato dell\'ordine',
+    
+    // Bank Transfer
+    bank_instructions: 'Per finalizzare il tuo ordine, effettua un bonifico bancario utilizzando i dettagli qui sotto.\n\nIMPORTANTE: includi il riferimento esatto del bonifico per una rapida elaborazione del tuo ordine.',
+    beneficiary: 'Beneficiario',
+    iban: 'IBAN',
+    bic: 'BIC / SWIFT',
+    transfer_reason: 'Causale del bonifico (obbligatoria)',
+    delivery_time: '📦 Consegna espressa in 24-72 ore dopo la convalida del pagamento\n🔒 Imballaggio sicuro e discreto\n📍 Tracciamento del pacco in tempo reale',
+    proof_instruction: '⚡ SUGGERIMENTO: Per un\'elaborazione prioritaria, inviaci la prova di pagamento a Contact@luxiomarket.shop. Questo ci permetterà di elaborare il tuo ordine fino a 48 ore più velocemente.',
+    
+    // Ticket Payment
+    ticket_type: 'Tipo di ticket prepagato',
+    codes_submitted: 'Codici inviati',
+    pending_validation: 'In attesa di convalida',
+    validation_time: '⏱️ Convalida in corso: Il tuo ordine sarà confermato entro 24-48 ore dalla verifica del codice.\n\nIl nostro team verifica manualmente ogni ticket per garantire la sicurezza della tua transazione.\n\nRiceverai un\'email di conferma dopo la convalida.',
+    
+    // Crypto Payment
+    transaction_id: 'ID transazione blockchain',
+    payment_received: 'Eccellente! Il tuo pagamento in criptovaluta è stato rilevato con successo sulla blockchain.',
+    verification_message: '🔐 Sicurezza blockchain: stiamo attendendo le necessarie conferme di rete prima di spedire il tuo ordine.\n\n⏱️ Tempo stimato: 1-6 conferme blockchain (solitamente entro 60 minuti)\n📦 Spedizione immediata dopo la convalida completa',
+    
+    // Admin Notifications
+    new_order_received: 'Nuovo ordine ricevuto',
+    customer_name: 'Cliente',
+    customer_email: 'Email',
+    bank_transfer: 'Bonifico bancario',
+    bank_transfer_info_title: 'Informazioni sul bonifico',
+    ticket_payment: 'Pagamento con ticket',
+    crypto_payment: 'Pagamento crypto',
+    
+    // Account Suspension
+    account_suspended_title: 'Account temporaneamente sospeso ⚠️',
+    account_suspended_message: 'Il tuo account Luxio è stato temporaneamente sospeso a causa di diversi ordini non pagati.\n\nAbbiamo rilevato che molti dei tuoi ordini sono scaduti o sono stati annullati senza pagamento negli ultimi 30 giorni. Per mantenere un servizio di qualità per tutti i nostri clienti, abbiamo temporaneamente sospeso la tua possibilità di effettuare nuovi ordini.',
+    account_suspended_reason: 'Motivo della sospensione: 3 o più ordini non pagati negli ultimi 30 giorni',
+    account_suspended_until: 'Il tuo account verrà riattivato automaticamente il',
+    account_suspended_actions: 'Durante questo periodo:\n• Puoi ancora visualizzare la cronologia degli ordini\n• Non puoi effettuare nuovi ordini\n• Il tuo account verrà riattivato automaticamente dopo 7 giorni\n\nSe ritieni che si tratti di un errore, non esitare a contattare il nostro servizio clienti.',
+    account_reactivated_title: 'Il tuo account è stato riattivato! ✅',
+    account_reactivated_message: 'Buone notizie! Il tuo account Luxio è stato riattivato con successo.\n\nPuoi goderti di nuovo il nostro catalogo completo ed effettuare nuovi ordini senza restrizioni.',
+    account_reactivated_welcome: 'Siamo felici di riaverti con noi. Sentiti libero di scoprire i nostri ultimi prodotti premium.',
+    
+    // Coupon
+    subject_coupon: 'Il tuo codice promozionale esclusivo - Luxio',
+    coupon_title: 'Hai ricevuto un codice promozionale esclusivo!',
+    coupon_message: 'Grazie per il tuo ordine! Come premio per la tua fedeltà, ti offriamo un codice promozionale esclusivo per il tuo prossimo ordine.',
+    coupon_code_label: 'Il tuo codice promozionale',
+    coupon_discount_label: 'Sconto',
+    coupon_expires_label: 'Valido fino al',
+    coupon_how_to_use: 'Per utilizzare il tuo codice, inseriscilo al momento del pagamento nel campo "Codice promozionale".',
+    coupon_shop_now: 'Fai shopping ora'
   }
 };
 

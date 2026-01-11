@@ -420,7 +420,7 @@ export async function sendBankTransferEmail(
 
     <div class="divider"></div>
 
-    <h3 style="font-size: 16px; font-weight: 600; color: #111827; margin: 24px 0 16px 0;">💳 ${t.bank_transfer_info_title || t.bank_transfer_title || 'Informations de virement'}</h3>
+    <h3 style="font-size: 16px; font-weight: 600; color: #111827; margin: 24px 0 16px 0;">💳 ${t.bank_transfer_info_title || t.bank_transfer || 'Informations de virement'}</h3>
     <p style="white-space: pre-line; line-height: 1.8; color: #6b7280; font-size: 14px;">${t.bank_instructions}</p>
     
     <div class="details">
