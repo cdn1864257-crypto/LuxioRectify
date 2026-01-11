@@ -1,19 +1,9 @@
 import { useState } from 'react';
 import { X, ShoppingCart, Minus, Plus, Trash2 } from 'lucide-react';
 import { useLocation } from 'wouter';
-import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { showToast } from './ToastNotifications';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "./ui/alert-dialog";
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -21,11 +11,9 @@ interface CartSidebarProps {
 }
 
 export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
-  const { user } = useAuth();
   const { cart, updateQuantity, removeFromCart, total } = useCart();
   const { t, language } = useLanguage();
   const [, setLocation] = useLocation();
-  const [showLoginDialog, setShowLoginDialog] = useState(false);
 
   const handleRemoveItem = (productId: string, description: string) => {
     removeFromCart(productId, description);
@@ -33,16 +21,8 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   };
 
   const handleCheckout = () => {
-    if (!user) {
-      setShowLoginDialog(true);
-    } else {
-      onClose();
-      setLocation(`/${language}/checkout/address`);
-    }
-  };
-
-  const handleCloseDialog = () => {
-    setShowLoginDialog(false);
+    onClose();
+    setLocation(`/${language}/checkout/address`);
   };
 
   return (
@@ -229,22 +209,6 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
           )}
         </div>
       </div>
-      
-      <AlertDialog open={showLoginDialog} onOpenChange={handleCloseDialog}>
-        <AlertDialogContent data-testid="dialog-login-required-sidebar">
-          <AlertDialogHeader>
-            <AlertDialogTitle>{t('loginRequiredToCheckout')}</AlertDialogTitle>
-            <AlertDialogDescription>
-              {t('pleaseLoginOrSignupToCheckout')}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction onClick={handleCloseDialog} data-testid="button-ok-login-sidebar">
-              OK
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </>
   );
 }
