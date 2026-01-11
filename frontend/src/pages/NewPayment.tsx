@@ -51,11 +51,6 @@ export default function NewPayment() {
   const fromOxaPay = paymentSuccess || paymentCancelled || paymentPending || paymentError;
 
   useEffect(() => {
-    if (!user) {
-      navigate('/?login=true');
-      return;
-    }
-
     // If returning from OxaPay with success, clear cart and show success message
     if (paymentSuccess) {
       if (cart.length > 0) {
@@ -65,7 +60,7 @@ export default function NewPayment() {
         title: t.paymentSuccessTitle,
         description: orderRef ? `${t.orderConfirmed} ${orderRef}` : t.paymentSuccessDescription,
       });
-      setTimeout(() => navigate('/dashboard'), 3000);
+      setTimeout(() => navigate(user ? '/dashboard' : '/'), 3000);
       return;
     }
 
@@ -105,9 +100,9 @@ export default function NewPayment() {
     }
   }, [user, cart, navigate, isConfirmingOrder, showBankModal, paymentSuccess, paymentCancelled, paymentPending, paymentError, orderRef, clearCart, toast, fromOxaPay, t]);
 
-  if (!user) {
-    return null;
-  }
+  const deliveryAddress = JSON.parse(sessionStorage.getItem('deliveryAddress') || '{}');
+  const customerEmail = user?.email || deliveryAddress.email || '';
+  const customerName = user ? `${user.firstName} ${user.lastName}` : `${deliveryAddress.firstName} ${deliveryAddress.lastName}`;
 
   // Allow rendering if cart has items OR if returning from OxaPay OR if confirming order
   if (cart.length === 0 && !isConfirmingOrder && !showBankModal && !fromOxaPay) {
@@ -116,11 +111,7 @@ export default function NewPayment() {
 
   // Generate standardized payment reference using centralized function
   const generateOrderReference = () => {
-    const firstName = user?.firstName || 'User';
-    const lastName = user?.lastName || '';
-    const fullName = `${firstName} ${lastName}`.trim();
-    // Fallback to "User" if name is empty after trimming
-    return generatePaymentReference(fullName || 'User');
+    return generatePaymentReference(customerName || 'Guest');
   };
 
   const handleBankTransferClick = () => {
@@ -147,8 +138,8 @@ export default function NewPayment() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          customerEmail: user.email,
-          customerName: `${user.firstName} ${user.lastName}`,
+          customerEmail: customerEmail,
+          customerName: customerName,
           totalAmount: finalTotal,
           originalAmount: total,
           discountAmount: discountAmount,
@@ -201,8 +192,8 @@ export default function NewPayment() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          customerEmail: user.email,
-          customerName: `${user.firstName} ${user.lastName}`,
+          customerEmail: customerEmail,
+          customerName: customerName,
           totalAmount: finalTotal,
           originalAmount: total,
           discountAmount: discountAmount,
@@ -301,7 +292,7 @@ export default function NewPayment() {
 
               <div className="pt-4 border-t space-y-3">
                 <ApplyCoupon
-                  customerEmail={user.email}
+                  customerEmail={customerEmail}
                   onCouponApplied={(discountPercent, couponCode) => {
                     setAppliedCoupon({ code: couponCode, discountPercent });
                   }}
@@ -535,7 +526,7 @@ export default function NewPayment() {
         if (!open) {
           setShowBankModal(false);
           setIsConfirmingOrder(false);
-          navigate('/dashboard');
+          navigate(user ? '/dashboard' : '/');
         }
       }}>
         <DialogContent className="max-h-[90vh] overflow-y-auto w-[95vw] max-w-lg mx-4 sm:mx-auto" data-testid="dialog-bank-transfer">

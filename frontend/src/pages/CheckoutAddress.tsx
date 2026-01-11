@@ -34,7 +34,7 @@ export default function CheckoutAddress() {
   const { user } = useAuth();
   const { cart } = useCart();
   const { t, language } = useLanguage();
-  const [, setLocation] = useLocation();
+  const [, navigate] = useLocation();
   const [cartOpen, setCartOpen] = useState(false);
 
   const [useRegistered, setUseRegistered] = useState(false);
@@ -52,10 +52,10 @@ export default function CheckoutAddress() {
 
   useEffect(() => {
     if (cart.length === 0) {
-      setLocation(`/${language}/cart`);
+      navigate(`/${language}/cart`);
       return;
     }
-  }, [cart, language, setLocation]);
+  }, [cart, language, navigate]);
 
   useEffect(() => {
     if (user && useRegistered) {
@@ -145,7 +145,7 @@ export default function CheckoutAddress() {
 
     sessionStorage.setItem('deliveryAddress', JSON.stringify(formData));
     showToast(t('addressSaved'), 'success');
-    setLocation(`/${language}/payment`);
+    navigate(`/${language}/payment`);
   };
 
   const handleChange = (field: keyof AddressForm, value: string) => {
@@ -196,7 +196,7 @@ export default function CheckoutAddress() {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => setLocation(`/${language}/cart`)}
+            onClick={() => navigate(`/${language}/cart`)}
             className="mb-4 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
             data-testid="button-back-to-cart"
           >
