@@ -117,7 +117,7 @@ app.use(cookieParser());
 // Session configuration (in-memory for development)
 app.use(
   session({
-    secret: 'dev-secret-change-in-production',
+    secret: process.env.SESSION_SECRET || 'dev-secret-change-in-production',
     resave: false,
     saveUninitialized: false,
     cookie: {
