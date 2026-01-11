@@ -125,6 +125,10 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const user = await usersCollection.findOne({ email: customerEmail.toLowerCase() });
       const userLanguage = language || user?.language || 'fr';
 
+      // Ensure language is passed to OxaPay return URL
+      const returnUrl = `${backendUrl}/api/payment/oxapay-return?lang=${userLanguage}`;
+
+
       if (user) {
         const userStatus = getUserStatus(user);
         if (userStatus === 'suspended') {

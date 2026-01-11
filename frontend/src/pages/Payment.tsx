@@ -161,6 +161,7 @@ export default function Payment() {
           customerEmail: user.email,
           customerName: user.firstName + ' ' + user.lastName,
           totalAmount: total,
+          language: language,
           cartItems: cart.map(item => ({
             id: item.id,
             name: item.name,
@@ -278,6 +279,7 @@ export default function Payment() {
           productModel: '',
           productPrice: firstItem.price,
           totalAmount: total,
+          language: language,
           codeType: ticketType,
           codes: validCodes,
         }),

@@ -48,8 +48,9 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       customerEmail,
       customerName,
       totalAmount,
+      language,
       cartItems
-    }: BankTransferData = req.body;
+    }: BankTransferData & { language?: string } = req.body;
 
     if (!customerEmail || !customerName || !totalAmount || !cartItems || cartItems.length === 0) {
       return res.status(400).json({
@@ -110,7 +111,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
 
       // Récupérer la langue de l'utilisateur
       const user = await usersCollection.findOne({ email: customerEmail.toLowerCase() });
-      const userLanguage = user?.language || 'fr';
+      const userLanguage = language || user?.language || 'fr';
 
       if (user) {
         const userStatus = getUserStatus(user);
