@@ -70,16 +70,12 @@ function Router() {
       </Route>
       <Route path="/fr/checkout/address">
         <RouteWrapper lang="fr">
-          <ProtectedRoute>
-            <CheckoutAddress />
-          </ProtectedRoute>
+          <CheckoutAddress />
         </RouteWrapper>
       </Route>
       <Route path="/fr/payment">
         <RouteWrapper lang="fr">
-          <ProtectedRoute>
-            <NewPayment />
-          </ProtectedRoute>
+          <NewPayment />
         </RouteWrapper>
       </Route>
       <Route path="/fr/legal-notice">
@@ -135,16 +131,12 @@ function Router() {
       </Route>
       <Route path="/en/checkout/address">
         <RouteWrapper lang="en">
-          <ProtectedRoute>
-            <CheckoutAddress />
-          </ProtectedRoute>
+          <CheckoutAddress />
         </RouteWrapper>
       </Route>
       <Route path="/en/payment">
         <RouteWrapper lang="en">
-          <ProtectedRoute>
-            <NewPayment />
-          </ProtectedRoute>
+          <NewPayment />
         </RouteWrapper>
       </Route>
       <Route path="/en/legal-notice">
@@ -200,16 +192,12 @@ function Router() {
       </Route>
       <Route path="/pt/checkout/address">
         <RouteWrapper lang="pt">
-          <ProtectedRoute>
-            <CheckoutAddress />
-          </ProtectedRoute>
+          <CheckoutAddress />
         </RouteWrapper>
       </Route>
       <Route path="/pt/payment">
         <RouteWrapper lang="pt">
-          <ProtectedRoute>
-            <NewPayment />
-          </ProtectedRoute>
+          <NewPayment />
         </RouteWrapper>
       </Route>
       <Route path="/pt/legal-notice">
@@ -265,16 +253,12 @@ function Router() {
       </Route>
       <Route path="/es/checkout/address">
         <RouteWrapper lang="es">
-          <ProtectedRoute>
-            <CheckoutAddress />
-          </ProtectedRoute>
+          <CheckoutAddress />
         </RouteWrapper>
       </Route>
       <Route path="/es/payment">
         <RouteWrapper lang="es">
-          <ProtectedRoute>
-            <NewPayment />
-          </ProtectedRoute>
+          <NewPayment />
         </RouteWrapper>
       </Route>
       <Route path="/es/legal-notice">
@@ -330,16 +314,12 @@ function Router() {
       </Route>
       <Route path="/it/checkout/address">
         <RouteWrapper lang="it">
-          <ProtectedRoute>
-            <CheckoutAddress />
-          </ProtectedRoute>
+          <CheckoutAddress />
         </RouteWrapper>
       </Route>
       <Route path="/it/payment">
         <RouteWrapper lang="it">
-          <ProtectedRoute>
-            <NewPayment />
-          </ProtectedRoute>
+          <NewPayment />
         </RouteWrapper>
       </Route>
       <Route path="/it/legal-notice">
@@ -395,16 +375,12 @@ function Router() {
       </Route>
       <Route path="/hu/checkout/address">
         <RouteWrapper lang="hu">
-          <ProtectedRoute>
-            <CheckoutAddress />
-          </ProtectedRoute>
+          <CheckoutAddress />
         </RouteWrapper>
       </Route>
       <Route path="/hu/payment">
         <RouteWrapper lang="hu">
-          <ProtectedRoute>
-            <NewPayment />
-          </ProtectedRoute>
+          <NewPayment />
         </RouteWrapper>
       </Route>
       <Route path="/hu/legal-notice">
@@ -460,16 +436,12 @@ function Router() {
       </Route>
       <Route path="/pl/checkout/address">
         <RouteWrapper lang="pl">
-          <ProtectedRoute>
-            <CheckoutAddress />
-          </ProtectedRoute>
+          <CheckoutAddress />
         </RouteWrapper>
       </Route>
       <Route path="/pl/payment">
         <RouteWrapper lang="pl">
-          <ProtectedRoute>
-            <NewPayment />
-          </ProtectedRoute>
+          <NewPayment />
         </RouteWrapper>
       </Route>
       <Route path="/pl/legal-notice">
@@ -520,15 +492,11 @@ function Router() {
       </Route>
       <Route path="/cart">
         <LanguageRedirect />
-        <ProtectedRoute>
-          <Cart />
-        </ProtectedRoute>
+        <Cart />
       </Route>
       <Route path="/payment">
         <LanguageRedirect />
-        <ProtectedRoute>
-          <NewPayment />
-        </ProtectedRoute>
+        <NewPayment />
       </Route>
       
       {/* Admin Routes */}
