@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { X, ShoppingCart, Minus, Plus, Trash2 } from 'lucide-react';
 import { useLocation } from 'wouter';
 import { useCart } from '../contexts/CartContext';
