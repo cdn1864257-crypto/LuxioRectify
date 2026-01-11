@@ -23,6 +23,7 @@ import { Helmet } from 'react-helmet-async';
 interface AddressForm {
   firstName: string;
   lastName: string;
+  email: string;
   phone: string;
   address: string;
   city: string;
@@ -43,6 +44,7 @@ export default function CheckoutAddress() {
   const [formData, setFormData] = useState<AddressForm>({
     firstName: '',
     lastName: '',
+    email: '',
     phone: '',
     address: '',
     city: '',
@@ -62,6 +64,7 @@ export default function CheckoutAddress() {
       setFormData({
         firstName: user.firstName || '',
         lastName: user.lastName || '',
+        email: user.email || '',
         phone: user.phone || '',
         address: user.address || '',
         city: user.city || '',
@@ -74,6 +77,7 @@ export default function CheckoutAddress() {
       setFormData({
         firstName: user.firstName || '',
         lastName: user.lastName || '',
+        email: user.email || '',
         phone: '',
         address: '',
         city: '',
@@ -96,6 +100,11 @@ export default function CheckoutAddress() {
 
     if (!formData.lastName.trim()) {
       showToast(t('lastNameRequired'), 'error');
+      return;
+    }
+
+    if (!user && !formData.email.trim()) {
+      showToast(t('emailRequired'), 'error');
       return;
     }
 
@@ -286,6 +295,24 @@ export default function CheckoutAddress() {
                   />
                 </div>
               </div>
+
+              {!user && (
+                <div>
+                  <Label htmlFor="email" className="text-sm font-medium mb-2 block">
+                    {t('email')} <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => handleChange('email', e.target.value)}
+                    required
+                    data-testid="input-email"
+                    placeholder="example@mail.com"
+                    className="w-full"
+                  />
+                </div>
+              )}
 
               <div>
                 <Label htmlFor="phone" className="text-sm font-medium mb-2 block">
