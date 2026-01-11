@@ -14,7 +14,6 @@ import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
 import { showToast } from '@/components/ToastNotifications';
 
 export default function Cart() {
-  const { user } = useAuth();
   const { cart, updateQuantity, removeFromCart, total} = useCart();
   const { t, language } = useLanguage();
   const [, setLocation] = useLocation();
@@ -27,10 +26,6 @@ export default function Cart() {
 
   const handleCheckout = () => {
     setLocation(`/${language}/checkout/address`);
-  };
-
-  const handleCloseDialog = () => {
-    setShowLoginDialog(false);
   };
 
   return (
