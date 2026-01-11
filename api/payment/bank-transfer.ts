@@ -179,33 +179,6 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         console.error('Erreur lors de l\'envoi des emails de virement:', error);
       });
 
-      let generatedCoupon = null;
-      if (shouldGenerateCoupon(cartItems, validatedAmount)) {
-        try {
-          generatedCoupon = await createCoupon(
-            db,
-            customerEmail.toLowerCase(),
-            orderId,
-            15,
-            30
-          );
-          console.log(`[Coupon] Generated coupon ${generatedCoupon.code} for order ${orderId}`);
-          
-          sendCouponEmail({
-            customerEmail: customerEmail.toLowerCase(),
-            customerName: customerName,
-            couponCode: generatedCoupon.code,
-            discountPercent: generatedCoupon.discount,
-            expirationDate: generatedCoupon.expirationDate,
-            language: userLanguage
-          }).catch((emailError) => {
-            console.error('[Coupon] Error sending coupon email:', emailError);
-          });
-        } catch (couponError) {
-          console.error('[Coupon] Error generating coupon:', couponError);
-        }
-      }
-
       return res.status(201).json({
         success: true,
         message: 'Commande enregistrée avec succès',
@@ -218,12 +191,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
           bic: bankDetails.bic,
           reference: paymentReference,
           amount: totalAmount
-        },
-        coupon: generatedCoupon ? {
-          code: generatedCoupon.code,
-          discount: generatedCoupon.discount,
-          expirationDate: generatedCoupon.expirationDate
-        } : null
+        }
       });
     } finally {
       await client.close();
