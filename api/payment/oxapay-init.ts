@@ -126,7 +126,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const userLanguage = language || user?.language || 'fr';
 
       // Ensure language is passed to OxaPay return URL
-      const returnUrl = `${backendUrl}/api/payment/oxapay-return?lang=${userLanguage}`;
+      const userLanguageReturnUrl = `${backendUrl}/api/payment/oxapay-return?lang=${userLanguage}`;
 
 
       if (user) {
@@ -178,12 +178,12 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       const frontendUrl = process.env.FRONTEND_URL || 'https://luxios.vercel.app';
       
       const callbackUrl = `${backendUrl}/api/payment/oxapay-webhook`;
-      const returnUrl = `${backendUrl}/api/payment/oxapay-return?lang=${userLanguage}`;
+      const oxaPayReturnUrl = `${backendUrl}/api/payment/oxapay-return?lang=${userLanguage}`;
       
       debugLog(`[OxaPay] Backend URL: ${backendUrl}`);
       debugLog(`[OxaPay] Frontend URL: ${frontendUrl}`);
       debugLog(`[OxaPay] Callback URL: ${callbackUrl}`);
-      debugLog(`[OxaPay] Return URL: ${returnUrl}`);
+      debugLog(`[OxaPay] Return URL: ${oxaPayReturnUrl}`);
 
       const oxapayRequestData = {
         merchant: oxapayApiKey,
@@ -193,7 +193,7 @@ async function handler(req: VercelRequest, res: VercelResponse) {
         feePaidByPayer: 0,
         underPaidCover: 2.5,
         callbackUrl: callbackUrl,
-        returnUrl: returnUrl,
+        returnUrl: oxaPayReturnUrl,
         description: `Luxio Order - ${paymentReference}`,
         orderId: paymentReference,  // ✅ Standardized reference
         email: customerEmail
